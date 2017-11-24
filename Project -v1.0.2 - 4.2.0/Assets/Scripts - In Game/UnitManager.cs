@@ -1,0 +1,926 @@
+﻿using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+
+
+//this class extends RTSObject through the Unit class
+public class UnitManager : Unit,IOrderable{
+
+	//AbilityList<Ability> is in the Unit Class
+	public string UnitName;
+
+	public int PlayerOwner; // 1 = active player, 2 = enemies, 3 = nuetral
+	public int formationOrder;
+	public Animator myAnim;
+
+	private float chaseRange;  // how far an enemy can come into vision before I chase after him.
+	public IMover cMover;      // Pathing Interface. Classes to use here : AirMover(Flying Units), cMover (ground, uses Global Astar) , RVOMover(ground, Uses Astar and unit collisions, still in testing)
+	public List<IWeapon> myWeapon;   // IWeapon is not actually an interface but a base class with required parameters for all weapons.
+	public bool MultiWeaponAttack;
+	public UnitStats myStats; // Contains Unit health, regen, armor, supply, cost, etc
+
+	public Iinteract interactor; // Passes commands to this to determine how to interact (Right click on a friendly could be a follow command or a cast spell command, based on the Unit/)
+
+	public float visionRange;
+	SphereCollider visionSphere; // Trigger Collider that respresents vision radius. Size is set in the start function based on visionRange
+	// When Enemies enter the visionsphere, it puts them into one of these categories. They are removed when they move away or die.
+	public List<UnitManager> enemies = new List<UnitManager>();
+	public List<UnitManager> allies = new List<UnitManager>();
+	public List<GameObject> neutrals = new List<GameObject> ();
+
+
+	private LinkedList<UnitState> queuedStates = new LinkedList<UnitState> (); // Used to queue commands to be executed in succession.
+
+	private UnitState myState;     // used for StateMachine
+
+	private List<Object> stunSources = new List<Object> ();     // Used to keep track of stun lengths and duration, to ensure the strongest one is always applied.
+	private List<Object> silenceSources = new List<Object> ();
+
+	public voiceResponse myVoices;
+
+	//List of weapons modifiers that need to be applied to weapons as they are put on this guy
+	private List<Notify> potentialNotify = new List<Notify>();
+
+
+
+
+
+	public CharacterController CharController;
+	public FogOfWarUnit fogger;
+	[System.Serializable]
+	public struct voiceResponse
+	{ 
+		public List<AudioClip> moving;
+		public List<AudioClip> attacking;
+
+	}
+
+	private bool isStunned;
+	private bool isSilenced;
+
+	public List<StartCommand> startingCommand;
+	[Tooltip("Use this if you do not put anything in Starting COmmand List")]
+
+	public UnitState.StateType startingState;
+	new void Awake()
+	{
+		
+		if(interactor == null)
+		{
+			interactor = (Iinteract)gameObject.GetComponent(typeof(Iinteract));
+			//Debug.Log ("Found Interactor " + interactor);
+		}
+
+		if (visionSphere == null) {
+			foreach (SphereCollider sphere in gameObject.GetComponents<SphereCollider>()) {
+				if (sphere.isTrigger) {
+					visionSphere = this.gameObject.GetComponent<SphereCollider>();
+					break;
+				}
+			}
+		}
+
+
+
+		if (cMover == null) {
+			cMover = gameObject.GetComponent<customMover>();
+			if(cMover == null)
+				cMover = gameObject.GetComponent<airmover>();
+		}
+
+
+		if (myWeapon.Count == 0) {
+			foreach (IWeapon w in GetComponents<IWeapon>()) {
+				if (!myWeapon.Contains (w)) {
+					myWeapon.Add (w);
+				}
+			}
+		}
+
+		if (!CharController) {
+			CharController = GetComponent<CharacterController> ();
+		}
+
+		if (myStats == null) {
+			myStats = gameObject.GetComponent<UnitStats>();
+		}
+
+	
+		GameManager man = 	GameManager.getInstance ();//GameObject.FindObjectOfType<GameManager> ();
+		if (PlayerOwner == man.playerNumber) {
+				this.gameObject.tag = "Player";
+			} 
+
+			//man.initialize (); // Initializes data, if this is the first unit to wake up.
+			myStats.Initialize();
+
+
+
+
+
+		if (!fogger) {
+			fogger = GetComponent<FogOfWarUnit> ();
+		}
+
+		if (gameObject.GetComponent<CharacterController> () && visionSphere != null) {
+			float distance = visionRange + gameObject.GetComponent<CharacterController> ().radius;
+			visionSphere.radius = distance;
+
+
+			if(fogger){
+				fogger.radius = distance +3;
+			}
+		}
+		 else {
+			visionSphere.radius = visionRange;
+			if (fogger) {
+				fogger.radius = visionRange +3;
+			}
+		}
+
+		if(startingState == UnitState.StateType.HoldGround) {
+
+			changeState (new HoldState (this));
+		}
+		else if (cMover != null) {
+			//Debug.Log (this.gameObject + " state is default");
+			changeState (new DefaultState ());
+		} else if (startingState == UnitState.StateType.Turret)
+			//myStats.isUnitType (UnitTypes.UnitTypeTag.Turret)
+		         //  && this.gameObject.gameObject.GetComponent<UnitManager> ().UnitName == "Manticore"
+ {		         //  && ((StandardInteract)this.gameObject.gameObject.GetComponent<UnitManager> ().interactor).attackWhileMoving) 
+
+			changeState (new turretState (this));
+		} 
+
+		// else if( myStats.isUnitType (UnitTypes.UnitTypeTag.Static_Defense) ){
+			
+			//changeState (new turretState (this));
+		//}
+
+
+
+	
+			chaseRange = visionRange;
+
+	
+	}
+
+
+	bool hasStarted = false;
+	protected void Start()
+	{
+		if (!hasStarted) {
+			if (startingCommand.Count > 0) {
+
+				Invoke ("GiveStartCommand", .3f);
+			}
+
+
+			if (!Clock.main || Clock.main.getTotalSecond () < 1 || !myStats.isUnitType (UnitTypes.UnitTypeTag.Structure) || UnitName == "Augmentor") {
+				//	Debug.Log (" manager " + man.playerList.Length + "   " + (PlayerOwner - 1) +"  " + this.gameObject);
+				GameManager.getInstance ().playerList [PlayerOwner - 1].addUnit (this);
+			}
+
+			if (myStats.isUnitType (UnitTypes.UnitTypeTag.Structure) && UnitName != "Augmentor") {
+				GameManager.getInstance ().playerList [PlayerOwner - 1].applyUpgrade (this);
+			}
+			hasStarted = true;
+		}
+	}
+
+
+
+
+	void GiveStartCommand()
+	{
+		foreach (StartCommand command in startingCommand) {
+
+			RaycastHit hit;
+			Vector3 newLocation = transform.position;
+			if (Physics.Raycast (command.location + transform.position, Vector3.down, out hit, 1000, 1 << 8)) {
+
+				newLocation = hit.point;
+			}
+
+
+			if (command.myCommand == StartCommand.CommandType.AttackMove) {
+				GiveOrder (Orders.CreateAttackMove (newLocation, startingCommand.Count > 1));
+
+			} else if (command.myCommand == StartCommand.CommandType.Move) {
+				GiveOrder (Orders.CreateMoveOrder (newLocation, startingCommand.Count > 1));
+
+			} else {
+				GiveOrder (Orders.CreatePatrol (newLocation, startingCommand.Count > 1));
+			}
+		}
+	}
+
+
+
+	//Elsewhere this command is called on the RTSObject class, which is not a monobehavior, and cannot access its gameobject.
+	public new GameObject getObject()
+	{return this.gameObject;}
+
+
+
+	
+	// Update is called once per frame
+	new void Update () {
+		if (myState != null && !isStunned) {
+
+			myState.Update ();
+		} 
+	}
+
+
+	/// <summary>
+	/// Adds the listeners for a weapon Attack.
+	/// </summary>
+	/// <param name="toAdd">To add.</param>
+	public void addNotify(Notify toAdd)
+	{
+		if (!potentialNotify.Contains (toAdd)) {
+			potentialNotify.Add (toAdd);
+		}
+
+		foreach (IWeapon weap in myWeapon) {
+		
+			if (!weap.triggers.Contains (toAdd)) {
+				weap.triggers.Add (toAdd);
+			}
+		}
+	}
+
+
+	void OnDrawGizmos()
+	{
+		Gizmos.color = Color.green;
+
+		foreach (StartCommand command in startingCommand) {
+			Gizmos.DrawSphere (transform.position +  command.location, 1);
+		}
+	}
+
+
+	override
+	public bool UseAbility(int n, bool queue)
+	{
+		if (!isStunned && !isSilenced) {
+
+			continueOrder order = null;
+			if (abilityList [n] != null) {
+				order = abilityList [n].canActivate (true);
+
+				if (order.canCast) {
+
+					changeState (new CastAbilityState (abilityList [n]),false,queue);
+
+				}
+
+			}
+			return order.nextUnitCast;
+		}
+		return true;
+	}
+
+
+	override
+	public bool UseTargetAbility(GameObject obj, Vector3 loc, int n, bool queue) // Either the obj - target or the location can be null.
+	{continueOrder order = new continueOrder();
+		if (!isStunned && !isSilenced) {
+			if (abilityList [n] != null) {
+	
+				order = abilityList [n].canActivate (true);
+		
+				if (order.canCast) {
+					if (abilityList [n] is TargetAbility) {
+						
+						changeState (new AbilityFollowState (obj, loc, (TargetAbility)abilityList [n]), false, queue);
+					} else if (abilityList [n] is Morph || abilityList [n] is BuildStructure) {
+						changeState (new PlaceBuildingState (obj,loc, abilityList [n]), false, queue);
+					}
+
+				}
+
+			}
+		} 
+		return order.nextUnitCast;
+	}
+
+
+
+	override
+	public void autoCast(int n, bool offOn) // Program in how it is autocast in a custom UnitState, which should be accessed/created from the interactor class
+	{
+		if (abilityList [n] != null) {
+			
+			abilityList [n].setAutoCast(offOn);
+
+		}
+	}
+
+
+
+	public void setInteractor()
+	{
+		if(interactor == null)
+		{
+			interactor = (Iinteract)gameObject.GetComponent(typeof(Iinteract));
+			//Debug.Log ("Found Interactor " + interactor);
+		}
+
+		Start (); // in the parent class
+
+	}
+
+
+	public new void GiveOrder (Order order)
+	{
+		if (myState is  ChannelState) {
+			//order.queued = true;
+			foreach (UnitState s in queuedStates) {
+
+				if (s is PlaceBuildingState) {
+					//Debug.Log ("Cenceling");
+					((PlaceBuildingState)s).cancel ();
+				}
+			}
+			if (!order.queued) {
+				queuedStates.Clear ();
+			}
+			//return;
+		}
+
+
+		if (interactor != null) {
+			interactor.computeInteractions (order);
+
+		}
+	}
+
+
+	public void removeAbility(Ability abil)
+	{abilityList.Remove (abil);
+		abilityList.RemoveAll(item => item == null);}
+
+
+	//Other Units have entered vision
+	void OnTriggerEnter(Collider other)
+	{
+		//need to set up calls to listener components
+		//this will need to be refactored for team games
+
+		if (!other.isTrigger) {
+
+			if (other.gameObject.layer == 15) { // Its a projectile, the most common kind of trigger
+				return;
+			}
+
+			if (other.gameObject.layer == 13) {
+				neutrals.Add (other.gameObject);
+				return;
+			}
+			//Debug.Log (this.gameObject + " hit " + other.gameObject);
+			UnitManager manage = other.gameObject.GetComponent<UnitManager>();
+
+			if (manage) {
+				if (manage.PlayerOwner == 3) {
+					neutrals.Add (other.gameObject);
+					return;
+				}
+
+				if (manage.PlayerOwner != PlayerOwner) {
+					enemies.Add (manage);
+				} else {
+					allies.Add (manage);
+				}
+			}
+		}
+	}
+
+	// Other units have left the vision
+	void OnTriggerExit(Collider other)
+	{
+		if (other.isTrigger) {
+			return;
+		}
+		if (other.gameObject.layer == 15) { // Its a projectile, the most common kind of trigger
+			return;
+		}
+
+		if (neutrals.Contains (other.gameObject)) {
+			neutrals.Remove (other.gameObject);
+		}
+
+		UnitManager manage = other.gameObject.GetComponent<UnitManager>();
+
+		if (manage) {
+			if (enemies.Contains (manage)) {
+				enemies.Remove (manage);
+			} else if (allies.Contains (manage)) {
+				allies.Remove (manage);
+				//Debug.Log ( this.gameObject + "  Removing " + other.gameObject);
+			} 
+		}
+	
+	}
+
+
+	// Called from some of the states (ie, DefaultState, AttackMoveState)
+	public UnitManager findClosestEnemy()
+	{
+
+		enemies.RemoveAll(item => item == null);
+		UnitManager best = null;
+
+		float distance = float.MaxValue;
+	
+		
+		for (int i = 0; i < enemies.Count; i ++) {
+			if (enemies[i] != null) {
+				
+				float currDistance = Vector3.Distance(enemies[i].transform.position, this.gameObject.transform.position);
+				if(currDistance < distance)
+				{best = enemies[i];
+					
+					distance = currDistance;
+				}
+				
+			}
+		}
+		return best;
+
+	}
+	
+	public UnitManager findBestEnemy() // Similar to above method but takes into account attack priority (enemy soldiers should be attacked before buildings)
+	{enemies.RemoveAll(item => item == null);
+		UnitManager best = null;
+
+
+		float distance = float.MaxValue;
+		float bestPriority = -1;
+
+		for (int i = 0; i < enemies.Count; i ++) {
+			if (enemies[i] != null) {
+				if (!isValidTarget (enemies [i])) {
+					continue;
+				}
+				if (enemies[i].myStats.attackPriority < bestPriority) {
+						
+					continue;
+					}
+				else if (enemies[i].myStats.attackPriority > bestPriority)
+					{best = enemies[i];
+					bestPriority = enemies[i].myStats.attackPriority;
+					}
+			
+				
+				float currDistance = Vector3.Distance(enemies[i].transform.position, this.gameObject.transform.position);
+				if(currDistance < distance)
+				      {best = enemies[i];
+
+					distance = currDistance;
+				}
+
+			}
+		}
+
+		return best;
+	}
+
+	public void setInteractor(Iinteract inter)
+	{interactor = inter;
+		//Start ();
+	}
+
+
+
+	private UnitState popLastState()
+	{
+		
+		UnitState us = queuedStates.Last.Value;
+		queuedStates.RemoveLast ();
+		return us;
+	}
+
+	public UnitState popFirstState()
+	{UnitState us = queuedStates.First.Value;
+		queuedStates.RemoveFirst ();
+		return us;
+	}
+
+	public void nextState() // Used when executing queued commands
+	{
+		if (myState is CastAbilityState) {
+			if (queuedStates.Count > 0) {
+				myState = popFirstState();
+				if (myState != null) {
+					myState.myManager = this;
+					myState.initialize ();
+				}
+			} else {
+				changeState (new DefaultState ());
+			}
+		} 
+	}
+
+	public void changeState(UnitState nextState)
+	{
+		changeState (nextState, false, false);
+	}
+
+
+	public void Dying()
+	{
+		foreach(UnitState states in queuedStates)
+		{
+			states.endState ();
+		}
+	}
+	// make sure that Queue front and queueback are never both true
+	public void changeState(UnitState nextState, bool Queuefront, bool QueueBack)
+	{//Debug.Log ("Next state is " + nextState + "    " + queuedStates.Count);
+		if (myState is  ChannelState && !(nextState is DefaultState)) {
+			queuedStates.AddLast (nextState);
+			//Debug.Log ("Queuing " + nextState + "   " + queuedStates.Count);
+			return;
+			}
+
+		//Debug.Log ("# of states  " +QueueBack + "    " + queuedStates.Count + "    " + nextState + "    " + myState);
+		if (Queuefront && (!(nextState is DefaultState) && (queuedStates.Count > 0 || !(myState is DefaultState)))) {
+
+			//Debug.Log ("Queing + " +nextState);
+			queuedStates.AddFirst (myState);
+			myState =interactor.computeState (nextState);
+			myState.initialize ();
+
+
+			return;
+		
+		}
+		else if (QueueBack && (!(nextState is DefaultState) && (queuedStates.Count > 0 || !(myState is DefaultState)))){
+
+			queuedStates.AddLast (nextState);
+
+			return;
+
+		}
+
+		else if (nextState is DefaultState) {
+			if (queuedStates.Count > 0) {
+				if (myState != null) {
+					myState.endState ();
+				}
+			
+				myState = interactor.computeState(popFirstState());
+			
+				if (myState == null) {
+					return;
+				}
+			
+				myState.myManager = this;
+				myState.initialize ();
+				return;
+
+			}  
+		} else if (myState is PlaceBuildingState) {
+			((PlaceBuildingState)myState).cancel ();
+		}
+
+	
+		else if (nextState is AttackMoveState ) {
+			((AttackMoveState)nextState).setHome (this.gameObject.transform.position);
+		}
+			
+
+		nextState.myManager = this;
+	
+		foreach (UnitState s in queuedStates) {
+
+			if (s is PlaceBuildingState) {
+				//Debug.Log ("Cenceling");
+				((PlaceBuildingState)s).cancel ();
+			}
+		}
+			queuedStates.Clear ();
+
+
+		if (nextState is CastAbilityState && ((CastAbilityState)nextState).myAbility.continueMoving) {
+
+			queuedStates.AddLast (myState);
+		}
+		if (myState != null) {
+			myState.endState ();
+		}
+
+		myState =interactor.computeState (nextState);
+
+		if (myState!= null) {
+			myState.initialize ();
+		}
+	
+
+	}
+
+
+
+	public void cancel()
+	{
+		//Debug.Log ("Here somehow");
+		foreach (UnitState s in queuedStates) {
+
+			if (s is PlaceBuildingState) {
+
+				((PlaceBuildingState)s).cancel ();
+			}
+		}
+		queuedStates.Clear ();
+	}
+
+
+	public void animMove()
+	{if (myAnim ) {
+			foreach (AnimatorControllerParameter parem in myAnim.parameters) {
+				if (parem.name == "State") {
+					myAnim.SetInteger ("State", 2);
+				}
+			}
+		}
+	}
+
+	public void animAttack()
+	{
+		if (myAnim ) {
+			foreach (AnimatorControllerParameter parem in myAnim.parameters) {
+				if (parem.name == "State") {
+					myAnim.SetInteger ("State", 3);
+				}
+			}
+		}
+	}
+
+	public void animStop()
+	{if (myAnim) {
+				foreach (AnimatorControllerParameter parem in myAnim.parameters) {
+					if (parem.name == "State") {
+						myAnim.SetInteger ("State", 1);
+					}
+				}
+		}
+	}
+
+	public override UnitStats getUnitStats ()
+	{
+		return myStats;
+	}
+
+	public override UnitManager getUnitManager ()
+	{
+		return this;
+	}
+
+
+
+	// return -1 if it is not in range, else pass back the index of the weapon that is in range
+	public IWeapon inRange(UnitManager obj)
+	{
+		float min= 100000000;
+		IWeapon best = null;
+		foreach (IWeapon weap in myWeapon) {
+			if (weap.inRange (obj)) {
+				if (weap.range < min) {
+					best = weap;
+					min = weap.range;
+				}
+			}
+
+		}
+		return best;
+
+	}
+
+
+	public IWeapon isValidTarget(UnitManager obj)
+	{IWeapon best = null;
+		float min= 100000000;
+		foreach (IWeapon weap in myWeapon) {
+			if( weap.isValidTarget(obj)){
+				if (weap.range < min) {
+					best = weap;
+					min = weap.range;
+				}
+			}
+
+		}
+		return best;
+	}
+
+	public IWeapon canAttack(UnitManager obj)
+	{IWeapon best = null;
+		float min= 100000000;
+		foreach (IWeapon weap in myWeapon) {
+		//	Debug.Log ("Checking " + weap.Title);
+			if(weap.canAttack(obj)){
+				//Debug.Log (weap.Title + " can attack");
+				if (weap.range < min) {
+				//	Debug.Log (weap.Title + " best range");
+					best = weap;
+					min = weap.range;
+				}
+			}
+		}
+		return best;
+	}
+
+
+
+
+	public void enQueueState(UnitState nextState)
+	{queuedStates.AddLast (nextState);
+	
+	}
+
+
+	public void cleanEnemy()
+	{
+		enemies.RemoveAll(item => item == null);
+	
+	}
+
+
+	public void setStun(bool StunOrNot, Object source,bool  showIcon)
+	{
+
+		//Debug.Log ("getting stunned " + this.gameObject);
+		if (StunOrNot) {
+			stunSources.Add (source);
+		} else {
+			if (stunSources.Contains (source)) {
+			
+				stunSources.Remove (source);
+			} else {stunSources.RemoveAll (item => item == null);
+			}
+		}
+
+			isStunned = (stunSources.Count > 0);
+
+		//Debug.Log ("Is stunned ");
+		if (isStunned && StunRun == null && showIcon ) {
+			StunRun = StartCoroutine (stunnedIcon());
+		}
+		
+	}
+
+	Coroutine StunRun;
+
+	IEnumerator stunnedIcon()
+	{
+	//	Debug.Log ("Starting stun");
+		if (cMover) {
+			cMover.stop ();
+		}
+		GameObject icon =  PopUpMaker.CreateStunIcon (this.gameObject);
+		while (isStunned) {
+		
+			yield return null;
+		}
+
+		Destroy (icon);
+		StunRun = null;
+	}
+
+	public void StunForTime(Object source, float duration)
+	{
+
+		StartCoroutine (stunOverTime (source, duration));
+		if (isStunned && StunRun == null) {
+			StunRun = StartCoroutine (stunnedIcon());
+		}
+
+	}
+
+	IEnumerator stunOverTime(Object source, float duration)
+	{
+		if (cMover) {
+			cMover.stop ();
+		}
+		stunSources.Add (source);
+		isStunned = (stunSources.Count > 0);
+
+		yield return new WaitForSeconds (duration);
+		if (stunSources.Contains (source)) {
+			stunSources.Remove (source);
+		} else {
+			stunSources.RemoveAll (item => item == null);
+		}
+
+	isStunned = (stunSources.Count > 0);
+
+		
+	}
+
+
+	public void setSilence(bool input, Object source)
+	{
+		if (input) {
+			silenceSources.Add (source);
+		} else {
+			if (silenceSources.Contains (source)) {
+
+				silenceSources.Remove (source);}
+		}
+
+		isSilenced= (silenceSources.Count > 0);
+	}
+
+
+	public bool Silenced()
+	{return isSilenced;
+	}
+
+	public bool Stunned()
+	{return isStunned;
+	}
+
+
+	public void setWeapon(IWeapon weap)
+	{if (weap) {
+			if (!myWeapon.Contains (weap)) {
+				myWeapon.Add (weap);
+				foreach (Notify not in potentialNotify) {
+					if (!weap.triggers.Contains (not)) {
+						weap.triggers.Add (not);
+					}
+				}
+			}
+		}
+	}
+
+	public void removeWeapon(IWeapon weap)
+	{if (!weap) {
+			return;}
+		
+		if (myWeapon.Contains (weap)) {
+			myWeapon.Remove(weap);
+		}
+		foreach (Notify not in potentialNotify) {
+
+			if (weap.triggers.Contains (not)) {
+				weap.triggers.Remove (not);
+			}
+		}
+
+
+	}
+
+
+
+	public bool isIdle()
+		{ // will need to be refactored if units require a custom default state
+		if(myState.GetType() == typeof(DefaultState))
+		{return true;	}
+		return false;
+	}
+
+	public void Attacked(UnitManager src) //I have been attacked, what do i do?
+	{
+	//	Debug.Log (this.gameObject + " attacked by " + src + " state is " + myState);
+		if (myState != null) {
+
+			myState.attackResponse (src, 5);
+		}
+	}
+
+	public SphereCollider getVisionSphere()
+	{
+		return visionSphere;
+	}
+
+	public UnitState getState()
+	{return myState;}
+
+	public int getStateCount()
+	{return queuedStates.Count;
+	}
+
+	public UnitState checkNextState()
+	{if (queuedStates.Count > 0) {
+			return queuedStates.First.Value;
+		} else {
+		return null;}
+	}
+
+	public float getChaseRange()
+	{return chaseRange;}
+
+}
+
+[System.Serializable]
+public class StartCommand
+{
+	public enum CommandType{Move, AttackMove, Patrol}
+	public CommandType myCommand;
+	public Vector3 location;
+
+}
