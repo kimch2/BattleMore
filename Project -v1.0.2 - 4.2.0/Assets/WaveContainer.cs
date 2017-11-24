@@ -72,6 +72,7 @@ public class WaveContainer : MonoBehaviour {
 		public String name;
 		public List<WaveSpawner.attackWave> waveRampUp;
 		public waveWarningType warningType;
+		public Sprite WaveSymbol;
 	}
 
 }

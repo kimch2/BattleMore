@@ -46,7 +46,7 @@ public class MiniMapIconer : MonoBehaviour, Modifier {
 	IEnumerator waitASec()
 	{
 		if (!alreadyAdded) {
-			Debug.Log ("adding from " + this.gameObject);
+			//Debug.Log ("adding from " + this.gameObject);
 			yield return null;
 			foreach (MiniMapUIController mini in GameManager.main.MiniMaps) {
 

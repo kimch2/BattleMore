@@ -24,7 +24,19 @@ public class stunZone : VisionTrigger {
 
 	public override void UnitExitTrigger(UnitManager manager)
 	{
+		if (manager.cMover) {
+			manager.cMover.removeSpeedBuff (this);
+		}
+	}
 
+	void OnDestroy()
+	{
+		foreach (UnitManager manage in InVision) {
+			if (manage) {
+				
+				manage.cMover.removeSpeedBuff ( this);
+			}
+		}
 	}
 
 }

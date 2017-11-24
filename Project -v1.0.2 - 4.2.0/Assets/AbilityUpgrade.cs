@@ -31,8 +31,10 @@ public class AbilityUpgrade : SpecificUpgrade {
 
 					if (ca.Name.Contains("[X]")) {
 
-						ca.myAmmo = SuperPenetrator;
-						ca.Descripton = "Deals Line Damage.";
+						//ca.myAmmo = SuperPenetrator;
+						ca.numOfShots = 3;
+						ca.AnimationName = "ChimeraTripleAttack";
+						ca.Descripton = "Basic Attack fires three shots that deal Line Damage.";
 					}
 				
 				}

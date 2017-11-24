@@ -16,11 +16,13 @@ public class IWeapon : MonoBehaviour {
 	public AudioClip attackSoundEffect;
 	protected AudioSource audioSrc;
 	public Animator myAnimator;
+	public string AnimationName = "Attack";
 
 	public float attackPeriod;
 	private float baseAttackPeriod;
 	public int numOfAttacks = 1;
-
+	[Tooltip("Amount of time between each bullet when numOfAttacks is more than 1")]
+	public float RepeatDelay = .06f;
 	int upgradeLevel = 0;
 
 	//private float myRadius;
@@ -271,7 +273,7 @@ public class IWeapon : MonoBehaviour {
 			PointSource = toStun;
 		}
 		for (int i = 0; i < numOfAttacks; i++) {
-			StartCoroutine( Fire ((i * .05f + AttackDelay), target));
+			StartCoroutine( Fire ((i * RepeatDelay + AttackDelay), target));
 		
 		}
 		StartCoroutine (ComeOffCooldown (attackPeriod));
@@ -280,8 +282,7 @@ public class IWeapon : MonoBehaviour {
 
 	IEnumerator Fire (float time, UnitManager target)
 	{if (myAnimator) {
-			//Debug.Log ("Settign state to one");
-			myAnimator.Play ("Attack");
+			myAnimator.Play (AnimationName);
 		}
 
 		if (myManager) {

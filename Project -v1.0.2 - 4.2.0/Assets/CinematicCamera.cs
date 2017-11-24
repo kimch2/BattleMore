@@ -102,6 +102,8 @@ public class CinematicCamera : SceneEventTrigger {
 			nextDialogue = Time.time + myScenes [currentScene].myShots [currentShot].dialogueStartDelay * GameSettings.gameSpeed;
 		}
 
+		updateStun (true);
+
 		if(myScenes[currentScene].myShots.Count > 1){
 			//lookPosition = myScenes [currentScene].myShots [1] - myScenes [currentScene].myShots [0];
 		}
@@ -126,14 +128,30 @@ public class CinematicCamera : SceneEventTrigger {
 			}
 			myScenes [currentScene].onComplete.Invoke ();
 			StartCoroutine (TweenFromScene (myScenes [currentScene].tweenFromScene));
+			updateStun (false);
 			currentScene = -1;
 	
 			MainCamera.main.gameObject.transform.position = previousCamPos;
 			currentShot = 0;
+
+
 		}
 	}
 
+	public void updateStun(bool active)
+	{
+		foreach (int n in myScenes[currentScene].playersToStun) {
+			foreach (KeyValuePair<string, List<UnitManager>> pairs in  GameManager.main.playerList[n-1].getFastUnitList()) {
+				foreach (UnitManager manage in pairs.Value) {
+					if (manage) {
+						//Debug.Log ("Stunning " + manage.gameObject);
+						manage.setStun (active, this, false);
+					}
+				}
+			}
+		}
 
+	}
 
 	IEnumerator TweenFromScene(float duration)
 	{
@@ -164,7 +182,7 @@ public class CinematicCamera : SceneEventTrigger {
 		public List<SceneEventTrigger> nextTrig;
 		public UnityEngine.Events.UnityEvent onComplete;
 		public float tweenFromScene;
-
+		public List<int> playersToStun;
 
 	}
 	[System.Serializable]
@@ -185,6 +203,7 @@ public class CinematicCamera : SceneEventTrigger {
 		public string DialogueText;
 		[Tooltip("This will trigger on the same time delay as the text")]
 		public UnityEngine.Events.UnityEvent toTrigger;
+	
 
 	}
 

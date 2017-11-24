@@ -20,7 +20,6 @@ public class SquareDamageZone : VisionTrigger {
 
 			InVision.RemoveAll (item => item == null);
 			foreach (UnitManager s in InVision) {
-				Debug.Log ("Taking " + Mathf.Sqrt( s.myStats.Maxhealth));
 				s.myStats.TakeDamage (Mathf.Sqrt( s.myStats.Maxhealth), this.gameObject.gameObject.gameObject, myType);
 			}
 		}

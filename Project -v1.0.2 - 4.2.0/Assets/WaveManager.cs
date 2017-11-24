@@ -18,6 +18,7 @@ public class WaveManager : MonoBehaviour {
 	List<WaveSpawner.attackWave> CurrentWaves;
 	public List<waveSetting> myWaves;
 	public Vector3 firstRallyPoint;
+	public List<Vector3> alternateRallyPoints;
 
 
 	int currentWaveIndex;
@@ -42,6 +43,8 @@ public class WaveManager : MonoBehaviour {
 		public bool MustBeHere;
 		public List<CustomWarning> CustomWarnings = new List< CustomWarning>();
 		public List<SceneEventTrigger> CustomTriggers = new List<SceneEventTrigger> ();
+		[Tooltip("-1 means its set to the regular point, phase these out as much as possible.")]
+		public int RallyPointIndex = -1;
 	}
 
 	[System.Serializable]
@@ -152,7 +155,7 @@ public class WaveManager : MonoBehaviour {
 
 			foreach (MiniMapUIController mini in GameManager.main.MiniMaps) {
 				if (mini) {
-					mini.showWarning (spawner.transform.position);
+					mini.showWarning (spawner.transform.position,waveOption.WaveSymbol);
 				}
 			}
 
@@ -164,7 +167,7 @@ public class WaveManager : MonoBehaviour {
 
 			foreach (GameObject obj in CurrentWaves[currentWaveIndex].waveType) {
 
-				StartCoroutine (MyCoroutine (delay, obj, spawner));
+				StartCoroutine (MyCoroutine (delay, obj, spawner, myWaves [currentWaveIndex].RallyPointIndex == -1 ? firstRallyPoint : alternateRallyPoints[myWaves [currentWaveIndex].RallyPointIndex]));
 				delay += .2f;
 
 			}
@@ -172,9 +175,9 @@ public class WaveManager : MonoBehaviour {
 
 
 			if (LevelData.getDifficulty () >= 2) {
-				SpawnExtra (CurrentWaves [currentWaveIndex], spawner);
+				SpawnExtra (CurrentWaves [currentWaveIndex], spawner , myWaves [currentWaveIndex].RallyPointIndex == -1 ? firstRallyPoint : alternateRallyPoints[myWaves [currentWaveIndex].RallyPointIndex]);
 				foreach (GameObject obj in CurrentWaves[currentWaveIndex].mediumExtra) {
-					StartCoroutine (MyCoroutine (delay, obj, spawner));
+					StartCoroutine (MyCoroutine (delay, obj, spawner, myWaves [currentWaveIndex].RallyPointIndex == -1 ? firstRallyPoint : alternateRallyPoints[myWaves [currentWaveIndex].RallyPointIndex]));
 					delay += .2f;
 
 				}
@@ -184,7 +187,7 @@ public class WaveManager : MonoBehaviour {
 				foreach (GameObject obj in CurrentWaves[currentWaveIndex].HardExtra) {
 
 
-					StartCoroutine (MyCoroutine (delay, obj, spawner));
+					StartCoroutine (MyCoroutine (delay, obj, spawner,  myWaves [currentWaveIndex].RallyPointIndex == -1 ? firstRallyPoint : alternateRallyPoints[myWaves [currentWaveIndex].RallyPointIndex]));
 					delay += .2f;
 
 				}
@@ -212,14 +215,14 @@ public class WaveManager : MonoBehaviour {
 
 
 	//autobalancing based on how many units the player has
-	void SpawnExtra(WaveSpawner.attackWave myWave, GameObject Spawner)
+	void SpawnExtra(WaveSpawner.attackWave myWave, GameObject Spawner, Vector3 spawnSpot)
 	{float delay = .1f;
 		
 			
 		if (raceMan.getArmyCount () * .50 >  myWave.waveType.Count + myWave.HardExtra.Count + myWave.mediumExtra.Count) {
 			foreach (GameObject obj in myWave.HardExtra) {
 
-				StartCoroutine(MyCoroutine(delay, obj,Spawner));
+				StartCoroutine(MyCoroutine(delay, obj,Spawner,spawnSpot));
 				delay += .2f;
 
 			}
@@ -227,7 +230,7 @@ public class WaveManager : MonoBehaviour {
 	}
 
 
-	IEnumerator MyCoroutine (float amount, GameObject obj, GameObject spawnObject)
+	IEnumerator MyCoroutine (float amount, GameObject obj, GameObject spawnObject, Vector3 spawnSpot)
 	{
 		yield return new WaitForSeconds(amount);
 
@@ -250,7 +253,10 @@ public class WaveManager : MonoBehaviour {
 		//Debug.Log ("Making new guys! " + nextActionTime);
 		yield return new WaitForSeconds(.1f);
 
-		Vector3 attackzone = firstRallyPoint;
+
+		Vector3 attackzone = spawnSpot;
+
+
 		float radiusA = Random.Range(0, 50);
 		float angleA = Random.Range(0, 360);
 
@@ -265,6 +271,12 @@ public class WaveManager : MonoBehaviour {
 	}
 
 
+	public void SetRallyIndexes(int n)
+	{
+		foreach (waveSetting setting in myWaves) {
+			setting.RallyPointIndex = n;
+		}
+	}
 
 
 
@@ -276,6 +288,10 @@ public class WaveManager : MonoBehaviour {
 
 				Gizmos.DrawLine (obj.transform.position, firstRallyPoint);
 			}
+		}
+
+		foreach (Vector3 alter in alternateRallyPoints) {
+			Gizmos.DrawCube (alter, Vector3.one *10);
 		}
 		Gizmos.color = Color.red;
 		Gizmos.DrawLine (EmergencySpawnLocation.transform.position, firstRallyPoint);

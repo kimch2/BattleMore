@@ -21,7 +21,7 @@ public class PenetratingShot : Projectile {
 
 	new void OnSpawn()
 	{
-		currentDistance = 0;
+		currentDistance = -3;
 		NumGuysHit = 0;
 		hitGuys.Clear ();
 	}
@@ -84,7 +84,7 @@ public class PenetratingShot : Projectile {
 
 	public void OnDespawn()
 	{
-		currentDistance = 0;
+		currentDistance = -3;
 		NumGuysHit = 0;
 		hitGuys.Clear ();
 	

@@ -755,6 +755,9 @@ public class UnitManager : Unit,IOrderable{
 		//Debug.Log ("getting stunned " + this.gameObject);
 		if (StunOrNot) {
 			stunSources.Add (source);
+			if (cMover) {
+				cMover.stop ();
+			}
 		} else {
 			if (stunSources.Contains (source)) {
 			
@@ -777,9 +780,7 @@ public class UnitManager : Unit,IOrderable{
 	IEnumerator stunnedIcon()
 	{
 	//	Debug.Log ("Starting stun");
-		if (cMover) {
-			cMover.stop ();
-		}
+
 		GameObject icon =  PopUpMaker.CreateStunIcon (this.gameObject);
 		while (isStunned) {
 		

@@ -14,6 +14,8 @@ public class ChangeAmmo : Ability {
 	public float range;
 	public float attackPeriod;
 	public float attackDamage;
+	public int numOfShots =1;
+	public string AnimationName;
 	public List<IWeapon.bonusDamage> bonus = new List<IWeapon.bonusDamage>();
 	// Use this for initialization
 	public List<UnitTypes.UnitTypeTag> cantAttackTypes = new List<UnitTypes.UnitTypeTag> ();
@@ -72,11 +74,12 @@ public class ChangeAmmo : Ability {
 		autocast = true;
 		myWeapon.projectile = myAmmo;
 		myWeapon.baseDamage = attackDamage + myWeapon.getUpgradeLevel()*5;
-
+		myWeapon.AnimationName = AnimationName;
 		myWeapon.range = range;
 		myWeapon.setBulletPool (myBulletPool);
 		myWeapon.extraDamage = bonus;
 		myWeapon.cantAttackTypes = cantAttackTypes;
+		myWeapon.numOfAttacks = numOfShots;
 		foreach (ChangeAmmo ca in GetComponents<ChangeAmmo>()) {
 			if (ca != this) {
 				ca.autocast = false;
