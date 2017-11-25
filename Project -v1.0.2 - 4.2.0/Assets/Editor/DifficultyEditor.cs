@@ -215,7 +215,7 @@ public class DifficultyEditor : EditorWindow {
 		}
 
 
-		replaceUnit = EditorGUILayout.TextField("Replace Unit Name" , replaceUnit);
+		replaceUnit = EditorGUILayout.TextField("Select a Prefab Replace Unit with Name" , replaceUnit);
 		if (GUILayout.Button ("Replace Unit")) {
 			if (Selection.objects.Length > 0) {
 

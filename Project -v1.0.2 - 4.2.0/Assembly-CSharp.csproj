@@ -73,6 +73,7 @@
      <Compile Include="Assets\APMAchieve.cs" />
      <Compile Include="Assets\APMCounter.cs" />
      <Compile Include="Assets\AreaDamage.cs" />
+     <Compile Include="Assets\ArmorBackHeal.cs" />
      <Compile Include="Assets\ArmoryInteractor.cs" />
      <Compile Include="Assets\ArmyOfOneAch.cs" />
      <Compile Include="Assets\ArmyUIManager.cs" />
