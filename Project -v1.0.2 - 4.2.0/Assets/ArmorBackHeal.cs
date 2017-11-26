@@ -10,7 +10,7 @@ public class ArmorBackHeal : Ability,Modifier {
 	public Animator myAnimator;
 	bool IsArmored;
 	float lastArmorTime;
-
+	public float percentageHealSecond = .15f;
 	void Awake()
 	{audioSrc = GetComponent<AudioSource> ();
 		myType = type.passive;
@@ -51,10 +51,10 @@ public class ArmorBackHeal : Ability,Modifier {
 	IEnumerator HealUp()
 	{
 		float totalTime = 10;
-		myStats.heal (myStats.Maxhealth/ 18);
+		myStats.heal (myStats.Maxhealth * percentageHealSecond /3);
 		while (totalTime > 0 && !myStats.atFullHealth ()) {
 			yield return new WaitForSeconds (.333f);
-			myStats.heal (myStats.Maxhealth/ 18);
+			myStats.heal (myStats.Maxhealth* percentageHealSecond/3);
 			totalTime -= .333f;
 		}
 

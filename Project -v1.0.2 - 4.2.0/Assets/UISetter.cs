@@ -14,6 +14,12 @@ public class UISetter : MonoBehaviour {
 	public List<Image> minimapPics;
 	public Text LevelTitle;
 
+	public CanvasGroup canGroup;
+	public static UISetter main;
+	void Awake()
+	{main = this;
+		
+	}
 	// Use this for initialization
 	void Start () {
 
@@ -74,6 +80,35 @@ public class UISetter : MonoBehaviour {
 
 
 		LevelTitle.text = comp.MyLevels [LevelNum].LevelName;
+		startFade (1, true);
+	}
+
+
+	Coroutine fading;
+
+	public void startFade(float duration, bool active)
+	{
+		if(fading != null)
+		{StopCoroutine(fading);
+			}
+		fading = StartCoroutine (fadeUI( duration, active));
+	}
+
+	IEnumerator fadeUI(float duration, bool active)
+	{
+		if (active) {
+			for (float i = 0; i < duration; i += Time.deltaTime) {
+				canGroup.alpha = i / duration;
+				yield return null;
+			}
+			canGroup.alpha = 1;
+		} else {
+			for (float i = 0; i < duration; i += Time.deltaTime) {
+				canGroup.alpha = 1-( i / duration);
+				yield return null;
+			}
+			canGroup.alpha = 0;
+		}
 	}
 
 }

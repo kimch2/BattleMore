@@ -103,7 +103,7 @@ public class CinematicCamera : SceneEventTrigger {
 		}
 
 		updateStun (true);
-
+		UISetter.main.startFade (1, false);
 		if(myScenes[currentScene].myShots.Count > 1){
 			//lookPosition = myScenes [currentScene].myShots [1] - myScenes [currentScene].myShots [0];
 		}
@@ -134,7 +134,7 @@ public class CinematicCamera : SceneEventTrigger {
 			MainCamera.main.gameObject.transform.position = previousCamPos;
 			currentShot = 0;
 
-
+			UISetter.main.startFade (1, true);
 		}
 	}
 

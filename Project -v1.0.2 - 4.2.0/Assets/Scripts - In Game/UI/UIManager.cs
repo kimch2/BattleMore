@@ -271,7 +271,7 @@ public class UIManager : MonoBehaviour, IUIManager {
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			RaycastHit hit;		
 
-		if (Physics.Raycast (ray, out hit, Mathf.Infinity, ~(5 << 12) & ~(1 << 20))) {
+		if (Physics.Raycast (ray, out hit, Mathf.Infinity, ~(5 << 12) & ~(1 << 20) )) {
 		//	Debug.Log ("hit something " + hit.collider.gameObject + "   "+this.gameObject.name);
 			currentObject = hit.collider.gameObject;
 

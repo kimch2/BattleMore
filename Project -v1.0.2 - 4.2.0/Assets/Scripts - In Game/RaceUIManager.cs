@@ -12,7 +12,7 @@ public class RaceUIManager : MonoBehaviour , ManagerWatcher{
 
 	public Text resourceOne;
 	public Text resourceTwo;
-	Text supply;
+	public Text supply;
 	string OneName;
 	string TwoName;
 	public bool runTabs;
@@ -48,8 +48,8 @@ public class RaceUIManager : MonoBehaviour , ManagerWatcher{
 
 		
 			//resourceOne = this.gameObject.transform.Find ("Resources").Find ("ResourceOne").GetComponent<Text> ();
-			resourceTwo = this.gameObject.transform.Find ("Resources").Find ("ResourceTwo").GetComponent<Text> ();
-			supply = this.gameObject.transform.Find ("Resources").Find ("Supply").GetComponent<Text> ();
+			//resourceTwo = this.gameObject.transform.Find ("Resources").Find ("ResourceTwo").GetComponent<Text> ();
+			//supply = this.gameObject.transform.Find ("Resources").Find ("Supply").GetComponent<Text> ();
 
 			if (OneName != "") {
 				resourceOne.text = "" + ((int)raceManager.ResourceOne);

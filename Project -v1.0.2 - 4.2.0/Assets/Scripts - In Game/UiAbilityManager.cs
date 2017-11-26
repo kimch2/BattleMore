@@ -477,7 +477,7 @@ public class UiAbilityManager : MonoBehaviour {
 						unit.transform.localScale = this.transform.localScale;
 					
 						unit.transform.rotation = this.transform.rotation;
-						unit.transform.SetParent (this.gameObject.transform);
+						unit.transform.SetParent (topDividerBar.transform.parent);
 
 						unit.transform.position = pos;
 

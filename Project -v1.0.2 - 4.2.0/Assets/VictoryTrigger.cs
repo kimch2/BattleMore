@@ -133,7 +133,7 @@ public class VictoryTrigger : MonoBehaviour {
 			}
 			GameObject.FindObjectOfType<MainCamera> ().DisableScrolling ();
 			GetComponent<AchievementChecker> ().EndLevel ();
-
+			UISetter.main.startFade (1.5f, false);
 			StartCoroutine (WinLevel ());
 		}
 	}
@@ -146,6 +146,7 @@ public class VictoryTrigger : MonoBehaviour {
 			DefeatScreen.enabled = true;
 			GameObject.FindObjectOfType<MainCamera> ().DisableScrolling ();
 			StartCoroutine (LoseLevel ());
+			UISetter.main.startFade (1.5f, false);
 		}
 	}
 
