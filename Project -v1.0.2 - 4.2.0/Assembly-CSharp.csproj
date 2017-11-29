@@ -72,6 +72,7 @@
      <Compile Include="Assets\animate.cs" />
      <Compile Include="Assets\APMAchieve.cs" />
      <Compile Include="Assets\APMCounter.cs" />
+     <Compile Include="Assets\ApplyBuffUpgrade.cs" />
      <Compile Include="Assets\AreaDamage.cs" />
      <Compile Include="Assets\ArmorBackHeal.cs" />
      <Compile Include="Assets\ArmoryInteractor.cs" />
@@ -525,6 +526,7 @@
      <Compile Include="Assets\Scripts - In Game\WeaponScripts\MortarWeapon.cs" />
      <Compile Include="Assets\SelectionNotifier.cs" />
      <Compile Include="Assets\selfDestructTimer.cs" />
+     <Compile Include="Assets\ShieldExplosion.cs" />
      <Compile Include="Assets\ShieldGlobe.cs" />
      <Compile Include="Assets\ShieldSpeedBoost.cs" />
      <Compile Include="Assets\ShieldSpeedUpgrade.cs" />
@@ -593,6 +595,7 @@
      <Compile Include="Assets\TurretUIPanel.cs" />
      <Compile Include="Assets\TutorialManager.cs" />
      <Compile Include="Assets\TutorialPage.cs" />
+     <Compile Include="Assets\Tweener.cs" />
      <Compile Include="Assets\UIHighLight.cs" />
      <Compile Include="Assets\UISetter.cs" />
      <Compile Include="Assets\UltCooldown.cs" />
@@ -732,6 +735,7 @@
      <None Include="Assets\Plugins\AstarPathfindingProject\ExampleScenes\Materials\DiffuseAlwaysVisible.shader" />
      <None Include="Assets\PostProcessing\Resources\Shaders\AmbientOcclusion.shader" />
      <None Include="Assets\Materials\Bit2Good\SFS\Shaders\Mobile\SFS_M_D.shader" />
+     <None Include="Assets\PrefabBrush\Editor\Data\SaveData.txt" />
      <None Include="Assets\ArtResources\Fonts\caracas2\Licence - Licencia.txt" />
      <None Include="Assets\Effects\BasicBeamShot\HowToUse_JP.txt" />
      <None Include="Assets\Plugins\AstarPathfindingProject\Plugins\dependencies.txt" />
@@ -756,6 +760,7 @@
      <None Include="Assets\PostProcessing\Resources\Bluenoise64\COPYING.txt" />
      <None Include="Assets\Materials\Bit2Good\SFS\Shaders\Terrain\SFS_TeA_S.shader" />
      <None Include="Assets\Materials\Bit2Good\SFS\Shaders\SFS_St_D_S.shader" />
+     <None Include="Assets\PrefabBrush\README.txt" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\CreaseApply.shader" />
      <None Include="Assets\Materials\Bit2Good\SFS\Shaders\SFS_St_N_S_S.shader" />
      <None Include="Assets\Materials\Bit2Good\SFS\Shaders\SFS_St_D_S_ST.shader" />

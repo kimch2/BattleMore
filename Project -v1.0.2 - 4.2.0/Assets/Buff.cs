@@ -9,7 +9,7 @@ public class Buff : MonoBehaviour {
 	public string toolDescription;
 	public bool stacks;
 
-	private UnitManager myManager;
+	protected UnitManager myManager;
 	public GameObject source;
 
 	void Awake()

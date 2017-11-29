@@ -1,20 +1,21 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\VictoryTrigger.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Tweener.cs">
     <Files>
       <File FileName="Assets\Scripts - In Game\UnitManager.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts - In Game\RaceManager.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts - In Game\GameManager.cs" Line="1" Column="1" />
       <File FileName="Assets\AbilityUpgrade.cs" Line="1" Column="1" />
       <File FileName="Assets\ChangeAmmo.cs" Line="1" Column="1" />
-      <File FileName="Assets\SquareDamageZone.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts - In Game\IWeapon.cs" Line="1" Column="1" />
-      <File FileName="Assets\stunZone.cs" Line="1" Column="1" />
-      <File FileName="Assets\PenetratingShot.cs" Line="1" Column="1" />
-      <File FileName="Assets\CinematicCamera.cs" Line="61" Column="5" />
-      <File FileName="Assets\UISetter.cs" Line="84" Column="3" />
-      <File FileName="Assets\Scripts - In Game\UiAbilityManager.cs" Line="478" Column="6" />
-      <File FileName="Assets\VictoryTrigger.cs" Line="146" Column="32" />
+      <File FileName="Assets\ShieldExplosion.cs" Line="1" Column="1" />
+      <File FileName="Assets\Buff.cs" Line="1" Column="1" />
+      <File FileName="Assets\ApplyBuffUpgrade.cs" Line="1" Column="1" />
+      <File FileName="Assets\explosion.cs" Line="26" Column="17" />
+      <File FileName="Assets\CinematicCamera.cs" Line="1" Column="1" />
+      <File FileName="Assets\UISetter.cs" Line="1" Column="1" />
+      <File FileName="Assets\FadeOut.cs" Line="1" Column="1" />
+      <File FileName="Assets\Tweener.cs" Line="13" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

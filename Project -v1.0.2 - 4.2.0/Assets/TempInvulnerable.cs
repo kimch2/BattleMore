@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using DigitalRuby.SoundManagerNamespace;
 public class TempInvulnerable : MonoBehaviour, Modifier {
 
 
@@ -9,11 +9,14 @@ public class TempInvulnerable : MonoBehaviour, Modifier {
 	private UnitStats mystats;
 	public float TimeBetween;
 	public float TimeInvulnerable;
+	public AudioClip soundEffect;
+	AudioSource src;
 
 	public GameObject Effect;
 
 	// Use this for initialization
 	void Start () {
+		src = GetComponent<AudioSource> ();
 		nextActionTime = -10;
 		mystats = GetComponent<UnitStats> ();
 		mystats.addModifier (this);
@@ -41,6 +44,7 @@ public class TempInvulnerable : MonoBehaviour, Modifier {
 		if (Effect) {
 			Effect.SetActive (true);
 		}
+		SoundManager.PlayOneShotSound (src, soundEffect);
 		mystats.otherTags.Add (UnitTypes.UnitTypeTag.Invulnerable);
 		mystats.SetTags ();
 		nextActionTime = Time.time + TimeBetween + TimeInvulnerable;
