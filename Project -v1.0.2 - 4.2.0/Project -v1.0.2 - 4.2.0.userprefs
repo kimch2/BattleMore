@@ -8,14 +8,8 @@
       <File FileName="Assets\AbilityUpgrade.cs" Line="1" Column="1" />
       <File FileName="Assets\ChangeAmmo.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts - In Game\IWeapon.cs" Line="1" Column="1" />
-      <File FileName="Assets\ShieldExplosion.cs" Line="1" Column="1" />
-      <File FileName="Assets\Buff.cs" Line="1" Column="1" />
-      <File FileName="Assets\ApplyBuffUpgrade.cs" Line="1" Column="1" />
-      <File FileName="Assets\explosion.cs" Line="26" Column="17" />
-      <File FileName="Assets\CinematicCamera.cs" Line="1" Column="1" />
-      <File FileName="Assets\UISetter.cs" Line="1" Column="1" />
-      <File FileName="Assets\FadeOut.cs" Line="1" Column="1" />
-      <File FileName="Assets\Tweener.cs" Line="13" Column="3" />
+      <File FileName="Assets\Tweener.cs" Line="153" Column="7" />
+      <File FileName="Assets\Editor\TextTrigEditor.cs" Line="6" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
