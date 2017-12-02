@@ -23,11 +23,11 @@ public class LevelManager : MonoBehaviour {
 
 	public Button techButton;
 	public Button UltButton;
-	public Canvas Vehicles;
-	public Canvas Turrets;
-	public Canvas Structures;
+	public List<Canvas> Vehicles;
+	public List<Canvas> Turrets;
+	public List<Canvas> Structures;
 
-	private Canvas currentTech;
+	private List<Canvas> currentTech;
 	public GameObject LevelSelector;
 
 	public GameObject defaultStructure;
@@ -69,10 +69,10 @@ public class LevelManager : MonoBehaviour {
 		
 
 		
+		setActive (Turrets, false);
+		setActive (Structures, false);
+		setActive (Vehicles, false);
 
-		Turrets.enabled = false;
-		Structures.enabled = false;
-		Vehicles.enabled = false;
 
 		difficultyBars.value = LevelData.getDifficulty () - 1;
 	
@@ -97,7 +97,7 @@ public class LevelManager : MonoBehaviour {
 		levelIntros.GetComponent<Canvas> ().enabled = false;// .SetActive (false);
 		//MainScreen.SetActive (true);
 
-		GameObject.FindObjectOfType<MissionMapManager> ().toggleMissionMap (true);
+		//GameObject.FindObjectOfType<MissionMapManager> ().toggleMissionMap (true);
 
 		foreach (ToolTip tt in GameObject.FindObjectsOfType<ToolTip>()) {
 			if (tt.toolbox) {
@@ -119,39 +119,43 @@ public class LevelManager : MonoBehaviour {
 	
 	}
 
+	public void setActive(List<Canvas> canvases, bool setActive)
+	{
+		foreach (Canvas c in canvases) {
+			c.enabled = setActive;		}
+	}
 
 	public void ToggleVehicle()
 	{
-		if (currentTech) {
-			currentTech.enabled = false;
+		if (currentTech != null) {
+			setActive (currentTech,false);
+		
 		}
 
 		currentTech = Vehicles;
-		Vehicles.enabled = true;
-
+		setActive (Vehicles, true);
 		GameObject.FindObjectOfType<CampTechCamManager> ().loadTech (defaultVehicle);
 	}
 
 	public void ToggleStruct()
 	{
-		if (currentTech) {
-			currentTech.enabled = false;
+		if (currentTech != null) {
+			setActive (currentTech,false);
 		}
 
 		currentTech = Structures;
-		Structures.enabled = true;
-
+		setActive (Structures, true);
 		GameObject.FindObjectOfType<CampTechCamManager> ().loadTech (defaultStructure);
 
 	}
 
 	public void ToggleTurret()
 	{
-		if (currentTech) {
-			currentTech.enabled = false;
+		if (currentTech != null) {
+			setActive (currentTech,false);
 		}
 		currentTech = Turrets;
-		Turrets.enabled = true;
+		setActive (Turrets, true);
 
 		GameObject.FindObjectOfType<CampTechCamManager> ().loadTech (defaultTurret);
 	}
@@ -170,10 +174,11 @@ public class LevelManager : MonoBehaviour {
 
 
 	public void ToggleTech()
-	{	mySource.PlayOneShot (buttonPress);
-		Technology.enabled = (!Technology.enabled);//.enabled = !Technology.enabled;'
+	{	
+		mySource.PlayOneShot (buttonPress);
+		//Technology.enabled = (!Technology.enabled);//.enabled = !Technology.enabled;'
 
-		currentTech.enabled = Technology.enabled;
+		//currentTech.enabled = Technology.enabled;
 		LevelSelector.GetComponent<Canvas>().enabled = !LevelSelector.GetComponent<Canvas>().enabled;
 
 		if (LevelSelector.GetComponent<Canvas> ().enabled) {

@@ -6,9 +6,16 @@ using UnityEditor;
 #endif
 public class Tweener : MonoBehaviour {
 
+	public int startingStateIndex;
+	public List<TweenState> MyStates;
+	TweenState currenState;
+
 	void Start()
 	{
-		GoToPose (myPoses[0].PoseName, 5);
+		//GoToPose (myPoses[0].PoseName, 5);
+		if (MyStates.Count > 0) {
+			currenState = MyStates [0];
+		}
 	}
 
 	public enum TweenScope
@@ -24,15 +31,33 @@ public class Tweener : MonoBehaviour {
 	public List<transition> myTransitions;
 	Dictionary<string,Coroutine> currentTweens = new Dictionary<string,Coroutine> ();
 
+	public void TriggerTweenState(string input)
+	{
+		if (currenState != null) {
+			TweenPath toMove = currenState.myPaths.Find (itemB => itemB.Input == input);
+			string nextStateName = toMove.nextState;
+			currenState = MyStates.Find (ii => ii.StateName == nextStateName);
+			GoToPose (nextStateName, toMove.transitionTime);
+		} else {
+			GoToPose(input,.6f);
+		}
+		// MyStates.Find(item => item == nextStateName);
 
-	public void GoToPose(string nextPoseName,float tweenTime)
+
+
+	}
+
+
+
+
+	public void GoToPose(string nextPoseName,float tweenTime =2)
 	{
 		foreach (AnimationPose pose in myPoses) {
-			Debug.Log ("Checking ");
 			if (pose.PoseName == nextPoseName) {
-				stopTween (nextPoseName);
+				StopAllTweens ();
 
 				Coroutine myCorout = StartCoroutine (Tween(pose, tweenTime));
+				//Debug.Log ("adding " + nextPoseName);
 				currentTweens.Add (nextPoseName, myCorout);
 			}	
 		}
@@ -42,9 +67,9 @@ public class Tweener : MonoBehaviour {
 	public void playTransition(string TransitionName,float tweenTime)
 	{
 		foreach (transition trans in myTransitions) {
-			Debug.Log ("Checking " );
+			//Debug.Log ("Checking " );
 			if (trans.TransitionName == TransitionName) {
-				//stopTween (TransitionName);
+				stopTween (TransitionName);
 
 				//Coroutine myCorout = StartCoroutine (Tween(pose, tweenTime));
 				//currentTweens.Add (nextPoseName, myCorout);
@@ -52,14 +77,26 @@ public class Tweener : MonoBehaviour {
 		}
 	}
 
-
+	public void StopAllTweens()
+	{
+		foreach (KeyValuePair<string,Coroutine> pair in currentTweens) {
+			Coroutine temp = pair.Value;
+			StopCoroutine (temp);
+			//StopCoroutine (pair.value);
+			//Debug.Log ("Removing " + name);
+		
+		}
+		currentTweens.Clear ();
+	}
 
 	public void stopTween(string name)
 	{
 		if (currentTweens.ContainsKey (name)) {
 			StopCoroutine (currentTweens [name]);
+			//Debug.Log ("Removing " + name);
+			currentTweens.Remove (name);
 		}
-		currentTweens.Remove (name);
+	
 	}
 
 	IEnumerator Tween(AnimationPose pose, float tweenTime)
@@ -70,6 +107,8 @@ public class Tweener : MonoBehaviour {
 			yield return null;
 		}
 		pose.updateTween (1);
+		//Debug.Log ("Ending tween " + pose.PoseName);
+		stopTween (pose.PoseName);
 	}
 
 
@@ -202,6 +241,9 @@ public class TweenerEditor : Editor {
 			if (GUILayout.Button ("Add New ObjectPose", GUILayout.Width(200))) {
 				pose.objPoses.Add (new ObjectPose(((Tweener) target).transform));
 			}
+			if (GUILayout.Button ("Go To Pose", GUILayout.Width(200))) {
+				pose.GoToPose ();
+			}
 			if (GUILayout.Button ("Delete Animation", GUILayout.Width(200))) {
 				poseList.Remove (pose);
 			}
@@ -268,6 +310,62 @@ public class AnimationPose
 		}
 	}
 
+	public void GoToPose()
+	{
+		switch(myScope){
+		case Tweener.TweenScope.Local:
+			for (int i = 0; i < objPoses.Count; i++) {
+				if (objPoses [i].usesScale) {
+					objPoses [i].myObject.localScale = objPoses [i].scale;
+				}	
+				if (objPoses [i].usesRotation) {
+					objPoses [i].myObject.localEulerAngles = objPoses [i].rotation;
+				}
+				if (objPoses [i].usesPosition) {
+					objPoses [i].myObject.localPosition = objPoses [i].position;
+				}
+			}
+
+			break;
+
+		case Tweener.TweenScope.LocalStart:
+			for (int i = 0; i < objPoses.Count; i++) {
+				if (objPoses [i].usesScale) {
+					objPoses [i].myObject.localScale +=  objPoses [i].scale;
+				}
+				if (objPoses [i].usesRotation) {
+					objPoses [i].myObject.localEulerAngles +=  objPoses [i].rotation;
+				}
+				if (objPoses [i].usesPosition) {
+					objPoses [i].myObject.localPosition += objPoses [i].position;
+				}
+			}
+			break;
+
+		case Tweener.TweenScope.World:
+			for (int i = 0; i < objPoses.Count; i++) {
+				if (objPoses [i].usesRotation) {
+					objPoses [i].myObject.eulerAngles = objPoses [i].rotation;
+				}
+				if (objPoses [i].usesPosition) {
+					objPoses [i].myObject.position = objPoses [i].position;
+				}
+			}
+			break;
+
+		case Tweener.TweenScope.WorldStart:
+			for (int i = 0; i < objPoses.Count; i++) {
+
+				if (objPoses [i].usesRotation) {
+					objPoses [i].myObject.eulerAngles += objPoses [i].rotation;
+				}
+				if (objPoses [i].usesPosition) {
+					objPoses [i].myObject.position += objPoses [i].position;
+				}
+			}
+			break;
+		}
+	}
 
 	public void updateTween(float lerpPosition)
 	{
@@ -278,7 +376,7 @@ public class AnimationPose
 					objPoses [i].myObject.localScale = Vector3.Lerp (startPoses [i].scale, objPoses [i].scale, lerpPosition);
 				}	
 				if (objPoses [i].usesRotation) {
-					objPoses [i].myObject.localRotation = Quaternion.Lerp (Quaternion.Euler (startPoses [i].rotation), Quaternion.Euler (objPoses [i].rotation), lerpPosition);
+					objPoses [i].myObject.localEulerAngles = Vector3.Lerp(startPoses [i].rotation, objPoses [i].rotation, lerpPosition);
 				}
 				if (objPoses [i].usesPosition) {
 					objPoses [i].myObject.localPosition = Vector3.Lerp (startPoses [i].position, objPoses [i].position, lerpPosition);
@@ -364,8 +462,8 @@ public class ObjectPose
 	public Vector3 rotation;	
 	public Vector3 scale = Vector3.one;
 
-	public bool usesPosition;
-	public bool usesRotation;
+	public bool usesPosition = true;
+	public bool usesRotation = true;
 	public bool usesScale;
 
 }
@@ -374,7 +472,20 @@ public class ObjectPose
 
 
 //=====================================================================================
+[System.Serializable]
+public class TweenState
+{public string StateName;
+	public List<TweenPath> myPaths;
 
+}
+
+[System.Serializable]
+public class TweenPath
+{
+	public string Input;
+	public string nextState;
+	public float transitionTime;
+}
 
 
 [System.Serializable]
