@@ -67,11 +67,11 @@ public class LevelManager : MonoBehaviour {
 			UltButton.interactable = true;
 		}
 		
+		currentTech = Structures;
 
-		
-		setActive (Turrets, false);
-		setActive (Structures, false);
-		setActive (Vehicles, false);
+		//setActive (Turrets, false);
+		//setActive (Structures, false);
+		//setActive (Vehicles, false);
 
 
 		difficultyBars.value = LevelData.getDifficulty () - 1;
@@ -134,7 +134,7 @@ public class LevelManager : MonoBehaviour {
 
 		currentTech = Vehicles;
 		setActive (Vehicles, true);
-		GameObject.FindObjectOfType<CampTechCamManager> ().loadTech (defaultVehicle);
+		GameObject.FindObjectOfType<CampTechCamManager> ().loadTech ("Manticore");
 	}
 
 	public void ToggleStruct()
@@ -145,7 +145,7 @@ public class LevelManager : MonoBehaviour {
 
 		currentTech = Structures;
 		setActive (Structures, true);
-		GameObject.FindObjectOfType<CampTechCamManager> ().loadTech (defaultStructure);
+		GameObject.FindObjectOfType<CampTechCamManager> ().loadTech ("Armory");
 
 	}
 
@@ -157,7 +157,7 @@ public class LevelManager : MonoBehaviour {
 		currentTech = Turrets;
 		setActive (Turrets, true);
 
-		GameObject.FindObjectOfType<CampTechCamManager> ().loadTech (defaultTurret);
+		GameObject.FindObjectOfType<CampTechCamManager> ().loadTech ("Minigun");
 	}
 
 
@@ -174,22 +174,23 @@ public class LevelManager : MonoBehaviour {
 
 
 	public void ToggleTech()
-	{	
+	{	Debug.Log ("Toggling " + LevelSelector);
 		mySource.PlayOneShot (buttonPress);
 		//Technology.enabled = (!Technology.enabled);//.enabled = !Technology.enabled;'
 
 		//currentTech.enabled = Technology.enabled;
 		LevelSelector.GetComponent<Canvas>().enabled = !LevelSelector.GetComponent<Canvas>().enabled;
 
-		if (LevelSelector.GetComponent<Canvas> ().enabled) {
-			GameObject.FindObjectOfType<CampTechCamManager> ().returnToStart ();
-		} 
+		//if (LevelSelector.GetComponent<Canvas> ().enabled) {
+		//	GameObject.FindObjectOfType<CampTechCamManager> ().returnToStart ();
+		//} 
 
 	}
 
 	public void toggleTechTree()
 	{mySource.PlayOneShot (buttonPress);
 		//Technology.enabled = !Technology.enabled;
+		Debug.Log("TogglingA " + TechTree);
 		TechTree.enabled = !TechTree.enabled;
 	}
 

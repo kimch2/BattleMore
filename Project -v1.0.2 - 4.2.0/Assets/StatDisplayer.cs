@@ -14,7 +14,7 @@ public class StatDisplayer : MonoBehaviour {
 
 	// Used inthe campaign menu to show a units stats before and after upgrades are applied.
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 		myText = GetComponent<Text> ();
 
 		stats = sourceUnit.GetComponent<UnitStats> ();
@@ -29,8 +29,8 @@ public class StatDisplayer : MonoBehaviour {
 
 
 	public void SetText()
-	{
-
+	{if(!stats)
+		stats = sourceUnit.GetComponent<UnitStats> ();
 		foreach (Transform t in myText.transform) {
 			Destroy(t.gameObject);
 		}
@@ -38,7 +38,7 @@ public class StatDisplayer : MonoBehaviour {
 		foreach (Transform t in secondText.transform) {
 			Destroy(t.gameObject);
 		}
-
+	
 		float f = setValue( stats.Maxhealth,"Health");
 		bool b = f != stats.Maxhealth;
 		addText ("Health: " + f, myText,b);
@@ -136,13 +136,14 @@ public class StatDisplayer : MonoBehaviour {
 		newChild.transform.SetParent (column.transform);
 		Text textComp = newChild.AddComponent<Text> ();
 
-		((RectTransform)newChild.transform).sizeDelta = new Vector2 (250, 19);
+		((RectTransform)newChild.transform).sizeDelta = new Vector2 (250, 31);
 		newChild.transform.localScale = Vector3.one;
+		((RectTransform)newChild.transform).localPosition = new Vector3 (0,0,0);
 		textComp.font = myText.font;
 		textComp.text = s;
 		textComp.fontStyle = FontStyle.Bold;
 		textComp.text = s;
-		textComp.fontSize = 16;
+		textComp.fontSize = 24;
 		newChild.AddComponent<Shadow> ();
 		if (yellow) {
 			textComp.color = Color.yellow;

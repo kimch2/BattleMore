@@ -50,10 +50,12 @@ public class Tweener : MonoBehaviour {
 
 
 
-	public void GoToPose(string nextPoseName,float tweenTime =2)
-	{
+	public void GoToPose(string nextPoseName,float tweenTime =1)
+	{//Debug.Log ("Going to pose " + nextPoseName + "  " + this.gameObject + "  " + currentTweens.Count);
 		foreach (AnimationPose pose in myPoses) {
+			
 			if (pose.PoseName == nextPoseName) {
+				
 				StopAllTweens ();
 
 				Coroutine myCorout = StartCoroutine (Tween(pose, tweenTime));
@@ -128,7 +130,7 @@ public class Tweener : MonoBehaviour {
 
 #if UNITY_EDITOR
 
-[CustomEditor(typeof(Tweener))]
+[CustomEditor(typeof(Tweener)),CanEditMultipleObjects]
 public class TweenerEditor : Editor {
 
 	bool ShowAnimations;
@@ -142,6 +144,7 @@ public class TweenerEditor : Editor {
 			AnimationPose newPose = new AnimationPose ();
 			foreach (Transform t in targ.quickList) {
 				ObjectPose newObj = new ObjectPose (targ.transform);
+				newObj.myObject = t;
 				newObj.setCurrentVectors (newPose.myScope);
 				newPose.objPoses.Add (newObj);
 				newObj.PoseName = t.gameObject.name;
@@ -376,9 +379,11 @@ public class AnimationPose
 					objPoses [i].myObject.localScale = Vector3.Lerp (startPoses [i].scale, objPoses [i].scale, lerpPosition);
 				}	
 				if (objPoses [i].usesRotation) {
-					objPoses [i].myObject.localEulerAngles = Vector3.Lerp(startPoses [i].rotation, objPoses [i].rotation, lerpPosition);
+					//Debug.Log ("Changing Rotation  " +objPoses[i].myObject+ " : "  + startPoses [i].rotation +"    "+ objPoses [i].rotation + "   " +WrapEnd(startPoses [i].rotation,  objPoses [i].rotation) );
+					objPoses [i].myObject.localEulerAngles = Vector3.Lerp(startPoses [i].rotation,  WrapEnd(startPoses [i].rotation,  objPoses [i].rotation), lerpPosition);
 				}
 				if (objPoses [i].usesPosition) {
+			
 					objPoses [i].myObject.localPosition = Vector3.Lerp (startPoses [i].position, objPoses [i].position, lerpPosition);
 				}
 			}
@@ -391,7 +396,7 @@ public class AnimationPose
 					objPoses [i].myObject.localScale = startPoses [i].scale + Vector3.Lerp (Vector3.zero, objPoses [i].scale, lerpPosition);
 				}
 				if (objPoses [i].usesRotation) {
-						objPoses [i].myObject.localEulerAngles = startPoses [i].rotation + Vector3.Lerp (Vector3.zero, objPoses [i].rotation, lerpPosition);
+					objPoses [i].myObject.localEulerAngles = startPoses [i].rotation + Vector3.Lerp (Vector3.zero, WrapEnd(Vector3.zero,  objPoses [i].rotation), lerpPosition);
 					}
 				if (objPoses [i].usesPosition) {
 							objPoses [i].myObject.localPosition = startPoses [i].position + Vector3.Lerp (Vector3.zero, objPoses [i].position, lerpPosition);
@@ -405,7 +410,7 @@ public class AnimationPose
 					objPoses [i].myObject.localScale = Vector3.Lerp (startPoses [i].scale, objPoses [i].scale, lerpPosition);
 				}
 				if (objPoses [i].usesRotation) {
-					objPoses [i].myObject.rotation = Quaternion.Lerp (Quaternion.Euler (startPoses [i].rotation), Quaternion.Euler (objPoses [i].rotation), lerpPosition);
+					objPoses [i].myObject.eulerAngles = Vector3.Lerp(startPoses [i].rotation, WrapEnd(startPoses [i].rotation,  objPoses [i].rotation), lerpPosition);
 				}
 				if (objPoses [i].usesPosition) {
 					objPoses [i].myObject.position = Vector3.Lerp (startPoses [i].position, objPoses [i].position, lerpPosition);
@@ -419,7 +424,7 @@ public class AnimationPose
 					objPoses [i].myObject.localScale = startPoses [i].scale + Vector3.Lerp (Vector3.zero, objPoses [i].scale, lerpPosition);
 				}
 				if (objPoses [i].usesRotation) {
-					objPoses [i].myObject.eulerAngles = startPoses [i].rotation + Vector3.Lerp (Vector3.zero, objPoses [i].rotation, lerpPosition);
+					objPoses [i].myObject.eulerAngles = startPoses [i].rotation + Vector3.Lerp (Vector3.zero, WrapEnd(Vector3.zero,  objPoses [i].rotation), lerpPosition);
 				}
 				if (objPoses [i].usesPosition) {
 					objPoses [i].myObject.position = startPoses [i].position + Vector3.Lerp (Vector3.zero, objPoses [i].position, lerpPosition);
@@ -429,6 +434,31 @@ public class AnimationPose
 		}
 	}
 
+	public Vector3 WrapEnd(Vector3 start, Vector3 end)
+	{
+		if (Mathf.Abs (start.x - end.x) > 180) {
+			if (end.x > end.x) {
+				end.x += 360;
+			} else {
+				end.x -= 360;
+			}
+		}
+		if (Mathf.Abs (start.y - end.y) > 180) {
+			if (start.y > end.y) {
+				end.y += 360;
+			} else {
+				end.y -= 360;
+			}
+		}
+		if (Mathf.Abs (start.z - end.z) > 180) {
+			if (start.z > end.z) {
+				end.z += 360;
+			} else {
+				end.z -= 360;
+			}
+		}
+		return end;
+	}
 }
 
 //====================================================================================================

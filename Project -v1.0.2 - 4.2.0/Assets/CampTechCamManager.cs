@@ -9,7 +9,6 @@ public class CampTechCamManager : MonoBehaviour {
 	AudioSource mySource;
 	public AudioClip buttonPress;
 
-	GameObject currentHud;
 	TechOption currentTech;
 
 	public GameObject MainCam;
@@ -30,7 +29,7 @@ public class CampTechCamManager : MonoBehaviour {
 		public Vector3 CameraPos;
 		public GameObject openButton;
 		public GameObject CamFocus;
-		public GameObject HUD;
+		public List<GameObject> HUDObjects;
 		public int levelAcquired;
 		public MultiShotParticle effect;
 	}
@@ -69,13 +68,16 @@ public class CampTechCamManager : MonoBehaviour {
 			if (to.levelAcquired > n) {
 				//to.HUD.SetActive (false);
 				to.openButton.SetActive (false);
-				to.HUD.GetComponent<CampaignUpgrade> ().unlocked = false;
-				to.openButton.GetComponent<Button> ().enabled = false;
+				foreach (GameObject obj in to.HUDObjects) {
+					if (obj.GetComponent<CampaignUpgrade> ()) {
+						obj.GetComponent<CampaignUpgrade> ().unlocked = false;
+					}
+					to.openButton.GetComponent<Button> ().enabled = false;
 
-				foreach(Transform t in to.HUD.transform)
-				{
-					if (t.GetComponent<CampaignUpgrade> ()) {
-						t.GetComponent<CampaignUpgrade> ().unlocked = false;
+					foreach (Transform t in obj.transform) {
+						if (t.GetComponent<CampaignUpgrade> ()) {
+							t.GetComponent<CampaignUpgrade> ().unlocked = false;
+						}
 					}
 				}
 				to.openButton.GetComponent<Button> ().enabled = false;
@@ -129,7 +131,8 @@ public class CampTechCamManager : MonoBehaviour {
 
 	public void returnToStart()
 	{
-		currentHud = null;
+		
+		//currentHud = null;
 		currentTech = null;
 		if (CameraFlight != null) {
 			StopCoroutine (CameraFlight);
@@ -139,13 +142,23 @@ public class CampTechCamManager : MonoBehaviour {
 
 	}
 
-	public void loadTech(GameObject obj)
+	public void loadTech(string nameOfThing)
 	{
-
+		if (currentTech != null) {
+			currentTech.CamFocus.GetComponent<Tweener> ().StopAllTweens ();
+		}
 	
 		foreach (TechOption to in TechChoices) {
-			if (obj == to.HUD) {
+			if (nameOfThing == to.name) {
+				if (currentTech != null) {
+					foreach (GameObject obj in currentTech.HUDObjects) {
+						obj.SetActive (false);
+					}
+				}
 				currentTech = to;
+				foreach (GameObject obj in currentTech.HUDObjects) {
+					obj.SetActive (true);
+				}
 				break;
 			}
 		}
@@ -153,17 +166,11 @@ public class CampTechCamManager : MonoBehaviour {
 		if (CameraFlight != null) {
 			StopCoroutine (CameraFlight);
 		}
-		CameraFlight = StartCoroutine (FocusOnObject(currentTech));
+		//CameraFlight = StartCoroutine (FocusOnObject(currentTech));
+		Debug.Log("Going to the thing " + currentTech.CamFocus);
+		currentTech.CamFocus.GetComponent<Tweener> ().GoToPose ("Poser");
+		mySource.PlayOneShot (buttonPress);
 
-
-		if (currentHud && currentHud != obj) {
-
-			currentHud.SetActive (false);
-
-		}
-
-		currentHud = obj;
-		currentHud.SetActive (true);
 	}
 
 
