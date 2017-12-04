@@ -67,7 +67,7 @@ public class LevelManager : MonoBehaviour {
 			UltButton.interactable = true;
 		}
 		
-		currentTech = Structures;
+		currentTech = Vehicles;
 
 		//setActive (Turrets, false);
 		//setActive (Structures, false);

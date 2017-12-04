@@ -110,6 +110,7 @@ public class StatDisplayer : MonoBehaviour {
 	float setValue(float value, string m)
 	{
 		foreach (CampaignUpgrade upgrade in myCampaigns) {
+			
 			value = upgrade.changeText (m, value);
 		}
 		return value;
@@ -136,14 +137,14 @@ public class StatDisplayer : MonoBehaviour {
 		newChild.transform.SetParent (column.transform);
 		Text textComp = newChild.AddComponent<Text> ();
 
-		((RectTransform)newChild.transform).sizeDelta = new Vector2 (250, 31);
+		((RectTransform)newChild.transform).sizeDelta = new Vector2 (300, 31);
 		newChild.transform.localScale = Vector3.one;
 		((RectTransform)newChild.transform).localPosition = new Vector3 (0,0,0);
 		textComp.font = myText.font;
 		textComp.text = s;
 		textComp.fontStyle = FontStyle.Bold;
 		textComp.text = s;
-		textComp.fontSize = 24;
+		textComp.fontSize = 23;
 		newChild.AddComponent<Shadow> ();
 		if (yellow) {
 			textComp.color = Color.yellow;

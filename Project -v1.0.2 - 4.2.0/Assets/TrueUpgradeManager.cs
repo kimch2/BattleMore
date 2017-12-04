@@ -25,7 +25,7 @@ public class TrueUpgradeManager : MonoBehaviour {
 		bool unUsed = false;
 
 		foreach (CampaignUpgrade upgrade in CampUpRef) {
-			if (upgrade.myUpgrades.Count > 1 && upgrade.currentIndex == 0 && upgrade.unlocked) {
+			if (upgrade && upgrade.myUpgrades.Count > 1 && upgrade.currentIndex == 0 && upgrade.unlocked) {
 		
 				unUsed = true;
 				break;
