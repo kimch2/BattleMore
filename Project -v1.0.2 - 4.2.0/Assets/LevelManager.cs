@@ -94,7 +94,7 @@ public class LevelManager : MonoBehaviour {
 
 	public void closeLevelIntro()
 	{
-		levelIntros.GetComponent<Canvas> ().enabled = false;// .SetActive (false);
+		//levelIntros.GetComponent<Canvas> ().enabled = false;// .SetActive (false);
 		//MainScreen.SetActive (true);
 
 		//GameObject.FindObjectOfType<MissionMapManager> ().toggleMissionMap (true);
@@ -112,10 +112,10 @@ public class LevelManager : MonoBehaviour {
 
 	public void openLevelIntro(int n)
 	{
-		levelIntros.GetComponent<Canvas> ().enabled = true; //.SetActive (true);
+	//	levelIntros.GetComponent<Canvas> ().enabled = true; //.SetActive (true);
 		LevelCompilation comp = Resources.Load<GameObject> ("LevelEditor").GetComponent<LevelCompilation> ();
 		IntroMaker.LoadLevel (comp.MyLevels[n]);
-		MainScreen.SetActive (false);
+	//	MainScreen.SetActive (false);
 	
 	}
 

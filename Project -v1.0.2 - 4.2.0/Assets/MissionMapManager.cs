@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class MissionMapManager : MonoBehaviour {
 
 
-	LevelManager levelman;
+	public LevelManager levelman;
 
 
 	public List<Button> missionButtons;
@@ -56,8 +56,8 @@ public class MissionMapManager : MonoBehaviour {
 	public void loadMissionIntro(int num)
 	{
 		levelman.openLevelIntro (num);
-		toggleMissionMap (false);
-		MainScreen.SetActive (false);
+		//toggleMissionMap (false);
+		//MainScreen.SetActive (false);
 
 	}
 
