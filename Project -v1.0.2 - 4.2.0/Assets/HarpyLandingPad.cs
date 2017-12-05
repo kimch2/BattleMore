@@ -44,7 +44,7 @@ public class HarpyLandingPad : MonoBehaviour {
 	{
 		if (rightPadInUse == incoming) {
 
-			myAnim.Play ("BallisticsLabRight");
+		//	myAnim.Play ("BallisticsLabRight");
 
 
 		}
@@ -53,7 +53,7 @@ public class HarpyLandingPad : MonoBehaviour {
 		if (leftPadInUse == incoming) {
 
 		
-			myAnim.Play ("BallisticLeftOut");
+			//myAnim.Play ("BallisticLeftOut");
 
 		}
 		return landingTime;
@@ -72,7 +72,7 @@ public class HarpyLandingPad : MonoBehaviour {
 		if (rightPadInUse == outgoing) {
 			rightPadInUse =null;
 			yield return new WaitForSeconds (.2f);
-			myAnim.Play ("BallisticRightIn");
+			//myAnim.Play ("BallisticRightIn");
 
 
 
@@ -81,7 +81,7 @@ public class HarpyLandingPad : MonoBehaviour {
 			leftPadInUse = null;
 
 			yield return new WaitForSeconds (.2f);
-			myAnim.Play ("BallisticLeftIn");
+			//myAnim.Play ("BallisticLeftIn");
 
 		}
 

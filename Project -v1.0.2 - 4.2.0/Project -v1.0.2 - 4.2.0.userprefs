@@ -1,15 +1,20 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\UISetter.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\BuildingInteractor.cs">
     <Files>
       <File FileName="Assets\Tweener.cs" Line="1" Column="1" />
-      <File FileName="Assets\LevelManager.cs" Line="118" Column="35" />
+      <File FileName="Assets\LevelManager.cs" Line="1" Column="1" />
       <File FileName="Assets\TrueUpgradeManager.cs" Line="1" Column="1" />
       <File FileName="Assets\CampaignUpgrade.cs" Line="1" Column="1" />
-      <File FileName="Assets\LevelIntroMaker.cs" Line="79" Column="57" />
-      <File FileName="Assets\MissionMapManager.cs" Line="58" Column="20" />
-      <File FileName="Assets\MissionManager.cs" Line="53" Column="12" />
-      <File FileName="Assets\UISetter.cs" Line="59" Column="4" />
+      <File FileName="Assets\LevelIntroMaker.cs" Line="1" Column="1" />
+      <File FileName="Assets\MissionMapManager.cs" Line="1" Column="1" />
+      <File FileName="Assets\MissionManager.cs" Line="1" Column="1" />
+      <File FileName="Assets\UISetter.cs" Line="1" Column="1" />
+      <File FileName="Assets\CampTechCamManager.cs" Line="64" Column="40" />
+      <File FileName="Assets\Augmentor.cs" Line="81" Column="3" />
+      <File FileName="Assets\HarpyLandingPad.cs" Line="20" Column="29" />
+      <File FileName="Assets\BuildStructure.cs" Line="192" Column="17" />
+      <File FileName="Assets\BuildingInteractor.cs" Line="72" Column="25" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

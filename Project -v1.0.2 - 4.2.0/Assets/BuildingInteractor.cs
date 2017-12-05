@@ -72,7 +72,8 @@ public class BuildingInteractor : MonoBehaviour, Iinteract {
 			//ab.enabled = false;
 		}
 		if(myAnim)
-		{animSpeed = animationRate;
+		{myAnim.Play ("Construct");
+			animSpeed = animationRate;
 			myAnim.speed = animationRate;
 		}
 	}
