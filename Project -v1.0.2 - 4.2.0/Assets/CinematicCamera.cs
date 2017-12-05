@@ -86,7 +86,10 @@ public class CinematicCamera : SceneEventTrigger {
 
 	
 	}
-
+	public void playScene(int sceneNumber)
+	{
+		trigger (sceneNumber, 0, Vector3.zero, null, true);
+	}
 
 	public override void trigger (int index, float input, Vector3 location, GameObject target, bool doIt){
 		previousGameSpeed = Time.timeScale;
@@ -127,6 +130,7 @@ public class CinematicCamera : SceneEventTrigger {
 				trig.trigger (0, 0, Vector3.zero, null, false);
 			}
 			myScenes [currentScene].onComplete.Invoke ();
+		
 			StartCoroutine (TweenFromScene (myScenes [currentScene].tweenFromScene));
 			updateStun (false);
 			currentScene = -1;
@@ -175,6 +179,48 @@ public class CinematicCamera : SceneEventTrigger {
 			GameMenu.main.EnableInput();}
 	}
 
+	public void simpleShake (float duration)
+	{
+		ShakeCamera (duration,10,.08f);
+	}
+
+	public void ShakeCamera(float Duration, float Intensity, float amplitude)
+	{
+		StartCoroutine(CameraShake(Duration, Intensity, amplitude));
+	}
+
+	IEnumerator CameraShake(float duration, float intensity, float amplitude)
+	{
+
+		float elapsed = 0.0f;
+		Vector3 totalMovement = Vector3.zero;
+
+		while (elapsed < duration) {
+
+
+
+			float MiniShake = 0;
+
+			Vector3 toMove = new Vector3(Random.value  - .5f, Random.value  - .5f,Random.value - .5f) * intensity;
+
+
+			while(MiniShake < amplitude)
+			{MiniShake += Time.deltaTime;
+				transform.Translate (toMove * Time.deltaTime);
+				totalMovement += toMove * Time.deltaTime;
+				yield return null;
+			}
+			elapsed += MiniShake;
+
+		}
+
+		float ReturnTime = 0.0f;
+		while (ReturnTime< .1f) {
+			ReturnTime += Time.deltaTime;
+			transform.Translate ((totalMovement * -1) * Time.deltaTime/ .1f);
+			yield return null;
+		}
+	}
 
 	[System.Serializable]
 	public struct scene{
@@ -220,6 +266,7 @@ public class CinematicCamera : SceneEventTrigger {
 					Gizmos.color = Color.red;
 					Gizmos.DrawSphere (curr.endLocation, 2);
 					Gizmos.DrawLine (curr.endLocation, curr.endTarget);
+
 				
 				}
 			

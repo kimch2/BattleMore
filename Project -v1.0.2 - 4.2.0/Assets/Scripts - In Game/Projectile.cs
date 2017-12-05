@@ -106,6 +106,7 @@ public  class Projectile : MonoBehaviour {
 			lastLocation = target.transform.position + randomOffset;
 			distance = Vector3.Distance (this.gameObject.transform.position, lastLocation);
 
+		
 			InvokeRepeating ("lookAtTarget", .05f, .05f);
 		}
 		lookAtTarget ();
@@ -271,6 +272,7 @@ public  class Projectile : MonoBehaviour {
 		} 
 
 		onHit ();
+		CancelInvoke ("lookAtTarget");
 		myBulletPool.FastDespawn (this.gameObject, 0);
 	
 		//Destroy (this.gameObject);

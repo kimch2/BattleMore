@@ -177,7 +177,7 @@ public class UnitManager : Unit,IOrderable{
 			}
 
 
-			if (!Clock.main || Clock.main.getTotalSecond () < 1 || !myStats.isUnitType (UnitTypes.UnitTypeTag.Structure) || UnitName == "Augmentor") {
+			if (Time.timeSinceLevelLoad < 1 || !myStats.isUnitType (UnitTypes.UnitTypeTag.Structure) || UnitName == "Augmentor") {
 				//	Debug.Log (" manager " + man.playerList.Length + "   " + (PlayerOwner - 1) +"  " + this.gameObject);
 				GameManager.getInstance ().playerList [PlayerOwner - 1].addUnit (this);
 			}

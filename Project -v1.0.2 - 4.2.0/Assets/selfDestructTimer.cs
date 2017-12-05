@@ -6,6 +6,8 @@ public class selfDestructTimer : MonoBehaviour {
 	public bool showTimer;
 	private float deathTime;
 
+	float originalTime;
+
 	private Selected hd;
 	// Use this for initialization
 	void Start () {
@@ -16,7 +18,6 @@ public class selfDestructTimer : MonoBehaviour {
 		} else {
 			StartCoroutine (checkForDeath());
 		}
-
 		deathTime = Time.time + timer;
 
 
@@ -25,10 +26,10 @@ public class selfDestructTimer : MonoBehaviour {
 
 	IEnumerator checkForDeath()
 	{
-		yield return null;
-		while (Time.time < deathTime) {
-			yield return new WaitForSeconds (.07f);
-		}
+		yield return new WaitForSeconds (timer);
+		//while (Time.time < deathTime) {
+			//yield return new WaitForSeconds (.07f);
+		//}
 
 		if (GetComponent<UnitStats> ()) {
 			GetComponent<UnitStats> ().kill (null);

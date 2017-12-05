@@ -55,26 +55,40 @@ public class Tweener : MonoBehaviour {
 		foreach (AnimationPose pose in myPoses) {
 			
 			if (pose.PoseName == nextPoseName) {
-				
-				StopAllTweens ();
 
-				Coroutine myCorout = StartCoroutine (Tween(pose, tweenTime));
-				//Debug.Log ("adding " + nextPoseName);
-				currentTweens.Add (nextPoseName, myCorout);
+				ShiftToPose (pose,tweenTime);
 			}	
 		}
 	}
 
+	void ShiftToPose(AnimationPose pose, float tweenTime)
+	{
+		StopAllTweens ();
+
+		Coroutine myCorout = StartCoroutine (Tween(pose, tweenTime));
+		//Debug.Log ("adding " + nextPoseName);
+		currentTweens.Add (pose.PoseName, myCorout);
+	}
+
+	public void playTransition(string TransitionName)
+	{
+		foreach (transition trans in myTransitions) {
+
+			if (trans.TransitionName == TransitionName) {
+				playTransition (TransitionName, trans.TweenTime);
+			}	
+		}
+	}
 
 	public void playTransition(string TransitionName,float tweenTime)
 	{
 		foreach (transition trans in myTransitions) {
-			//Debug.Log ("Checking " );
+			
 			if (trans.TransitionName == TransitionName) {
-				stopTween (TransitionName);
-
-				//Coroutine myCorout = StartCoroutine (Tween(pose, tweenTime));
-				//currentTweens.Add (nextPoseName, myCorout);
+				StopAllTweens ();
+				myPoses [trans.StartPosIndex].GoToPose ();
+				Debug.Log ("Went to pose");
+				ShiftToPose (myPoses [trans.EndPosIndex], tweenTime);
 			}	
 		}
 	}
@@ -106,6 +120,7 @@ public class Tweener : MonoBehaviour {
 		pose.setStartPoses ();
 		for (float i = 0; i < tweenTime; i += Time.deltaTime) {
 			pose.updateTween (i / tweenTime);
+		
 			yield return null;
 		}
 		pose.updateTween (1);
@@ -272,13 +287,13 @@ public class TweenerEditor : Editor {
 			pose.usesScale = EditorGUILayout.ToggleLeft ("Scale", pose.usesScale,GUILayout.Width(109));
 			GUILayout.EndHorizontal ();
 			if (pose.usesPosition) {
-				EditorGUILayout.Vector3Field ("Position: ", pose.position);
+				pose.position = EditorGUILayout.Vector3Field ("Position: ", pose.position);
 			}
 			if (pose.usesRotation) {
-				EditorGUILayout.Vector3Field ("Rotation: ", pose.rotation);
+				pose.rotation = EditorGUILayout.Vector3Field ("Rotation: ", pose.rotation);
 			}
 			if (pose.usesScale) {
-				EditorGUILayout.Vector3Field ("Scale: ", pose.scale);
+				pose.scale = EditorGUILayout.Vector3Field ("Scale: ", pose.scale);
 			}
 				
 

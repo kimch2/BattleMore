@@ -160,7 +160,7 @@ public class MiniMapUIController : MonoBehaviour, IPointerDownHandler , IPointer
 		HeightScale = textureHeight / WorldHeight;
    
 		InvokeRepeating ("updateScreenRect", .1f, minimapUpdateRate);
-		InvokeRepeating ("setFog", .06f, minimapUpdateRate);
+		InvokeRepeating ("setFog", .08f, minimapUpdateRate);
 		InvokeRepeating ("UpdateMiniMapA", .7f, minimapUpdateRate);
 
 		transform.parent.gameObject.SetActive (wasOn);
@@ -534,9 +534,15 @@ public class MiniMapUIController : MonoBehaviour, IPointerDownHandler , IPointer
 	Color32 transParent = new Color32 (0, 0, 0, 0);
 	Color32 blackColor = new Color32 (0, 0, 0, 255);
 
+	int lastFrame;
 	public void setFog ()
 	{
 
+		if (lastFrame == Time.frameCount) {
+			return;
+		}
+		lastFrame = Time.frameCount;
+		//Debug.Log ("Setting fog " + Time.frameCount);
 		//if (_texture == null) {
 		//	_texture = new Texture2D (fog.texture.width, fog.texture.height);
 		//	_texture.wrapMode = TextureWrapMode.Clamp;
@@ -545,21 +551,31 @@ public class MiniMapUIController : MonoBehaviour, IPointerDownHandler , IPointer
 		if (!fog.HasUnFogged) {
 			return;
 		}
-
+		System.Diagnostics.Stopwatch watch = new System.Diagnostics.Stopwatch ();
+		watch.Start ();
 		//Debug.Log ("Size is " + fog.texture.width);
+
 		byte[] original = fog.getTexture ().GetRawTextureData ();
+		_texture = fog.getTexture ();
+		_texture.Apply ();/*
+
+		Debug.Log ("Get Texture is " + watch.ElapsedMilliseconds);
 		if (pixelsArray == null) {
 			pixelsArray = new Color32[original.Length];
 		}
-			
+		Debug.Log ("Get Texture is X " + watch.ElapsedMilliseconds);
 		for (int i = 0; i < pixelsArray.Length; i++) {
 			
 			pixelsArray [i] = original [i] < 255 ? transParent : blackColor;
 		
 		}
+		Debug.Log ("Get Texture is B " + watch.ElapsedMilliseconds);
 		_texture.SetPixels32 (pixelsArray);
+		Debug.Log ("Get Texture is C" + watch.ElapsedMilliseconds);
 		_texture.Apply ();
-	
+		Debug.Log ("Get Texture is D" + watch.ElapsedMilliseconds);
+		watch.Stop ();
+	*/
 
 	}
 
