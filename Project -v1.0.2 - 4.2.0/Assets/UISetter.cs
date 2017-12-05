@@ -46,25 +46,25 @@ public class UISetter : MonoBehaviour {
 		racer.ResourceOne = comp.MyLevels [LevelNum].startingMoney;
 
 		int NumOfUlts = 4;
-		if (!comp.MyLevels [LevelNum].UIBarsNUlts.UltOneActivated) {
+		if (!comp.MyLevels [LevelNum].UIBarsNUlts.UltOneActivated && PlayerPrefs.GetInt("AllTech") == 0) {
 			racer.UltOne.active = false;
 			racer.ultBOne.gameObject.SetActive (false);
 			NumOfUlts--;
 		}
 
-		if (!comp.MyLevels [LevelNum].UIBarsNUlts.UltTwoActivated) {
+		if (!comp.MyLevels [LevelNum].UIBarsNUlts.UltTwoActivated&& PlayerPrefs.GetInt("AllTech") == 0) {
 			racer.UltTwo.active = false;
 			racer.ultBTwo.gameObject.SetActive (false);
 			NumOfUlts--;
 		}
 
-		if (!comp.MyLevels [LevelNum].UIBarsNUlts.UltThreeActivated) {
+		if (!comp.MyLevels [LevelNum].UIBarsNUlts.UltThreeActivated&& PlayerPrefs.GetInt("AllTech") == 0) {
 			racer.UltThree.active = false;
 			racer.ultBThree.gameObject.SetActive (false);
 			NumOfUlts--;
 		}
 
-		if (!comp.MyLevels [LevelNum].UIBarsNUlts.UltFourActivated) {
+		if (!comp.MyLevels [LevelNum].UIBarsNUlts.UltFourActivated&& PlayerPrefs.GetInt("AllTech") == 0) {
 			racer.UltFour.active = false;
 			racer.ultBFour.gameObject.SetActive (false);
 			NumOfUlts--;

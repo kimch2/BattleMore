@@ -56,6 +56,9 @@ public class MissionMapManager : MonoBehaviour {
 	public void loadMissionIntro(int num)
 	{
 		levelman.openLevelIntro (num);
+	
+
+
 		//toggleMissionMap (false);
 		//MainScreen.SetActive (false);
 

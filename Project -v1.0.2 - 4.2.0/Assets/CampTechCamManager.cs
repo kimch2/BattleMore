@@ -26,7 +26,6 @@ public class CampTechCamManager : MonoBehaviour {
 	public class TechOption{
 		public string name;
 		public bool showPos;
-		public Vector3 CameraPos;
 		public GameObject openButton;
 		public GameObject CamFocus;
 		public List<GameObject> HUDObjects;
@@ -88,24 +87,7 @@ public class CampTechCamManager : MonoBehaviour {
 
 	}
 
-	IEnumerator FocusOnObject(TechOption newOb)
-	{
-		mySource.PlayOneShot (buttonPress);
-		Vector3 offset = new Vector3 (-5,0,0);
-		Vector3 BeginCam = MainCam.transform.position;
-		Vector3 BeginLookAt= MainCam.transform.position + MainCam.transform.forward* 5;
-	
-		float currentTime = 0;
-		while (currentTime <= 1) {
-		
-			currentTime += Time.deltaTime;
 
-			MainCam.transform.position = Vector3.Lerp (BeginCam, newOb.CameraPos, currentTime);
-			MainCam.transform.LookAt (Vector3.Lerp (BeginLookAt, newOb.CamFocus.transform.position +offset, currentTime));
-			yield return 0;
-		}
-
-	}
 
 	IEnumerator returnToOrigin(TechOption OldOb)
 	{mySource.PlayOneShot (buttonPress);
@@ -174,16 +156,4 @@ public class CampTechCamManager : MonoBehaviour {
 	}
 
 
-
-
-	void OnDrawGizmos()
-	{
-		foreach (TechOption to in TechChoices) {
-			if (to.showPos) {
-				Gizmos.DrawSphere (to.CameraPos, 2f);
-			}
-		
-		}
-
-	}
 }

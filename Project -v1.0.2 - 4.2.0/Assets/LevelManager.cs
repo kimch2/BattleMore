@@ -36,7 +36,7 @@ public class LevelManager : MonoBehaviour {
 
 	public VoiceContainer voicePacks;
 	public Text ReplayButtonText;
-
+	public GameObject AllTechToggle;
 	public LevelIntroMaker IntroMaker;
 
 	public static LevelManager main;
@@ -110,8 +110,16 @@ public class LevelManager : MonoBehaviour {
 
 	}
 
+	public void setAllTech(Toggle  myToggle)
+	{
+		PlayerPrefs.SetInt("AllTech", myToggle.isOn? 1:0);
+	}
+
 	public void openLevelIntro(int n)
 	{
+		AllTechToggle.SetActive (LevelData.getHighestLevel () > 6 && n < 6 && n != 0); // n!=0 because we dont have full tech tree on first level no matter what
+		AllTechToggle.GetComponent<Toggle>().isOn = PlayerPrefs.GetInt ("AllTech",0) == 1;
+
 	//	levelIntros.GetComponent<Canvas> ().enabled = true; //.SetActive (true);
 		LevelCompilation comp = Resources.Load<GameObject> ("LevelEditor").GetComponent<LevelCompilation> ();
 		IntroMaker.LoadLevel (comp.MyLevels[n]);

@@ -24,6 +24,9 @@ public class LevelIntroMaker : MonoBehaviour {
 
 	public void LoadLevel(LevelInfo info)
 	{
+
+	
+
 		currentInfo = info;
 		GeneralSprite.sprite = info.GeneralPic;
 		LevelScenery.sprite = info.ScenaryPic;

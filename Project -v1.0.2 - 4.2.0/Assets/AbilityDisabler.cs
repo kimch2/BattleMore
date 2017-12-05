@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class AbilityDisabler : Upgrade {
 
+	bool AllTech = false;
+	bool Initialized = false;
+
+
 	public List<unitToAffect> ToDisable;
 	public List<unitToReplace> ToReplace;
 	[System.Serializable]
@@ -30,38 +34,42 @@ public class AbilityDisabler : Upgrade {
 	override
 	public void applyUpgrade (GameObject obj){
 
+		if (!Initialized) {
+			Initialized = true;
+			AllTech = PlayerPrefs.GetInt ("AllTech",0) == 1;
+		}
+		if (!AllTech) {
+			UnitManager manager = obj.GetComponent<UnitManager> ();
 
-	UnitManager manager = obj.GetComponent<UnitManager>();
+			foreach (unitToAffect affect in ToDisable) {
+				if (affect.Unit.GetComponent<UnitManager> ().UnitName == manager.UnitName) {
+					foreach (int i in affect.index) {
+						if (i < manager.abilityList.Count && manager.abilityList [i]) {
+							manager.abilityList [i].enabled = false;
+							manager.abilityList [i] = null;
 
-		foreach (unitToAffect affect in ToDisable) {
-			if (affect.Unit.GetComponent<UnitManager> ().UnitName == manager.UnitName) {
-				foreach(int i in affect.index){
-					if (i < manager.abilityList.Count && manager.abilityList [i]) {
-						manager.abilityList [i].enabled = false;
-						manager.abilityList [i] = null;
-
+						}
+					}
+					if (affect.clearNull) {
+						manager.abilityList.RemoveAll (item => item == null);
 					}
 				}
-				if (affect.clearNull) {
-					manager.abilityList.RemoveAll (item => item == null);
-				}
-			}
 			
 		
-		}
+			}
 
-		foreach (unitToReplace affect in ToReplace) {
-			if (affect.Unit.GetComponent<UnitManager> ().UnitName == manager.UnitName) {
+			foreach (unitToReplace affect in ToReplace) {
+				if (affect.Unit.GetComponent<UnitManager> ().UnitName == manager.UnitName) {
 
-				if(manager.abilityList [affect.index]){
-					BuildUnit builder = (BuildUnit)manager.abilityList [affect.index];
-					builder.unitToBuild = affect.ReplaceWith;
+					if (manager.abilityList [affect.index]) {
+						BuildUnit builder = (BuildUnit)manager.abilityList [affect.index];
+						builder.unitToBuild = affect.ReplaceWith;
+					}
 				}
 			}
+
+
 		}
-
-
-
 
 	}
 
