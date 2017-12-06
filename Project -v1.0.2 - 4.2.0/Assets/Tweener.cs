@@ -39,7 +39,7 @@ public class Tweener : MonoBehaviour {
 			currenState = MyStates.Find (ii => ii.StateName == nextStateName);
 			GoToPose (nextStateName, toMove.transitionTime);
 		} else {
-			GoToPose(input,.6f);
+			GoToPose(input,.85f);
 		}
 		// MyStates.Find(item => item == nextStateName);
 

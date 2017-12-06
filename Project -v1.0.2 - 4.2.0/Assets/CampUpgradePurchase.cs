@@ -9,7 +9,7 @@ public class CampUpgradePurchase : MonoBehaviour {
 	public GameObject Costobject;
 	public int myCost;
 	public bool purchased;
-
+	public Sprite BlueOutline;
 	private LevelManager manager;
 	public CampaignUpgrade.upgradeType myType;
 	public List<CampUpgradePurchase> enables = new List<CampUpgradePurchase>();
@@ -48,11 +48,13 @@ public class CampUpgradePurchase : MonoBehaviour {
 	{
 		if (myCost <= LevelData.getMoney()) {
 			manager.changeMoney (-myCost);
-			GetComponent<Image> ().color = Color.green;
+			GetComponent<Image> ().color = Color.cyan;
 			GetComponent<Button> ().interactable = false;
 			LevelData.addUpgrade (myUpgrade);
 
-			Costobject.SetActive (false);
+			updateCostObject ();
+		
+
 			foreach (CampUpgradePurchase up in enables) {
 				up.activate ();
 			}
@@ -76,19 +78,33 @@ public class CampUpgradePurchase : MonoBehaviour {
 			GameObject.FindObjectOfType<TrueUpgradeManager> ().upgradeBought (myUpgrade, myType);
 		}
 
-		GetComponent<Image> ().color = Color.green;
+		GetComponent<Image> ().color = Color.blue;
 		GetComponent<Button> ().interactable = false;
-		Costobject.SetActive (false);
+		updateCostObject ();
 
+	}
+
+	public void updateCostObject()
+	{
+		Costobject.GetComponentInChildren<Text>().text = "Purchased";//.SetActive (false);
+		Costobject.GetComponentInChildren<Text>().fontSize = 24;
+		Costobject.transform.Find ("Image (1)").gameObject.SetActive (false);
+
+		Costobject.GetComponent<Image> ().sprite = BlueOutline;
+		GetComponent<Image> ().sprite = BlueOutline;
+
+		Costobject.GetComponent<Image> ().material = null;
+		GetComponent<Image> ().material = null;
 	}
 
 
 	public void activate()
 	{if (!purchased) {
 			purchased = true;
-			Costobject.GetComponent<Image> ().color = Color.blue;
+			Costobject.GetComponent<Image> ().material = null;
 			GetComponent<Button> ().interactable = true;
-			GetComponent<Image> ().color = Color.blue;
+			GetComponent<Image> ().material = null;
+			//GetComponent<Image> ().sprite = BlueOutline;//.color = Color.blue;
 		}
 	}
 }
