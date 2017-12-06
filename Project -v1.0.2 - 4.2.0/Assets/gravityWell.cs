@@ -29,6 +29,8 @@ public class gravityWell : MonoBehaviour, Modifier {
 		}
 	}
 
+	List<AreaDamage> toCleanUp = new List<AreaDamage>();
+
 	public float modify (float amount, GameObject source, DamageTypes.DamageType theType){
 	//	Debug.Log ("Modifying damage " + theType);
 		if (theType == DamageTypes.DamageType.Energy) {
@@ -54,9 +56,35 @@ public class gravityWell : MonoBehaviour, Modifier {
 		}
 
 		AreaDamage area = other.GetComponent<AreaDamage> ();
-		if (area) {
-			Destroy (area.transform.root.gameObject);
+		if (area && area.Owner  != playerOwner) {
+			toCleanUp.Add (area);
+			if (currentlyShinking == null) {
+				currentlyShinking = StartCoroutine (ShrinkPool());
+			}
+		
 		}
+
+	}
+
+	Coroutine currentlyShinking;
+	IEnumerator ShrinkPool()
+	{
+		while (toCleanUp.Count > 0) {
+
+			yield return new WaitForSeconds (.15f);
+			toCleanUp.RemoveAll (item => item == null);
+			foreach (AreaDamage damage in toCleanUp) {
+				damage.transform.root.localScale  *= .87f;
+				if (damage.transform.lossyScale.x < 6f) { // 6 is a random number based on the poisonCloud and BigPoisonCloud prefab
+					Destroy (damage.transform.root.gameObject);
+				}
+			}
+		
+		
+		}
+
+		currentlyShinking = null;
+		yield return null;
 
 	}
 
@@ -68,6 +96,11 @@ public class gravityWell : MonoBehaviour, Modifier {
 			manage.myStats.removeModifier (this);
 			Protecters.Remove (other.gameObject);
 		
+		}
+
+		AreaDamage area = other.GetComponent<AreaDamage> ();
+		if (area) {
+			toCleanUp.Remove (area);
 		}
 	}
 

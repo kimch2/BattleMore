@@ -1,10 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using DigitalRuby.SoundManagerNamespace;
 
 public class SoundTrackPlayer : MonoBehaviour {
 
+	public enum SongName
+	{
+		 EtheralSkies, BattleTremors, BurningPlasma,HeartOfIron, StrangerBattles,TheOtherWorld, Ashes2,Ashes3,Ashes4,Ashes5,Substrate,PacificRim
+	}
 
+
+	[Tooltip("Make sure the order of these enums matches those in the song playlist")]
+	public List<SongName> levelPlayList = new List<SongName>(){ SongName.EtheralSkies, SongName.BattleTremors, SongName.BurningPlasma, SongName.HeartOfIron, 
+		SongName.StrangerBattles, SongName.Ashes2, SongName.Ashes3, SongName.Ashes4, SongName.Ashes5, SongName.Substrate, SongName.PacificRim};
 	public SoundTrackPlayList myPlayList;
 	AudioSource mySrc;
 
@@ -12,25 +21,24 @@ public class SoundTrackPlayer : MonoBehaviour {
 
 
 	void Start () {
-		currentIndex = Random.Range (0, myPlayList.myTracks.Count - 1);
 		mySrc = GetComponent<AudioSource> ();
 		playNextTrack ();
 	}
 
 	void playNextTrack()
 	{
-		currentIndex++;
-		if (currentIndex >= myPlayList.myTracks.Count) {
-			currentIndex = 0;}
-		mySrc.clip = myPlayList.myTracks [currentIndex];
-		mySrc.Play ();
 
+
+		mySrc.clip = myPlayList.myTracks [ (int)levelPlayList[ currentIndex]];
+		mySrc.Play ();
+	
+		currentIndex++;
+		if (currentIndex >=levelPlayList.Count) {
+			currentIndex = 0;}
 		//Invoke ("playNextTrack", mySrc.clip.length -1.5f);
 
 	}
-
-	float updateTime;
-
+		
 	void Update(){
 
 		if(!mySrc.isPlaying){

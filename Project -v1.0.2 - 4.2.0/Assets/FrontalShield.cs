@@ -6,6 +6,7 @@ public class FrontalShield : Ability,Modifier {
 	[Tooltip("between -90 and 90. 0 is to the side.")]
 	public float frontAngle;
 	public float FrontArmorAmount;
+	public bool facingBack;
 	public UnitStats myStats;
 
 	public GameObject hullBleeder;
@@ -27,7 +28,7 @@ public class FrontalShield : Ability,Modifier {
 
 		//This makes it so all childed turrets get their incoming damage reduced by the tanks shields. 
 		foreach (IWeapon obj in GetComponent<UnitManager>().myWeapon) {
-
+			
 			obj.gameObject.GetComponent<UnitManager> ().myStats.addModifier (this);
 
 		}
@@ -42,8 +43,9 @@ public class FrontalShield : Ability,Modifier {
 			return amount;
 		}
 		Vector3 direction = src.transform.position - this.gameObject.transform.position;
+		Debug.Log ("Angle " +Vector3.Dot (direction, this.transform.forward) );
 
-		if (Vector3.Dot (direction, this.transform.forward) > frontAngle) {
+		if ((!facingBack && Vector3.Dot (direction, this.transform.forward) > frontAngle) || (facingBack && Mathf.Abs( Vector3.Dot (direction, this.transform.forward)) < frontAngle)) {
 
 		
 			amount -= FrontArmorAmount;
@@ -57,6 +59,9 @@ public class FrontalShield : Ability,Modifier {
 				GameObject obj = (GameObject)Instantiate (shieldEffect, this.gameObject.transform.position, this.gameObject.transform.rotation);
 				obj.transform.SetParent (this.gameObject.transform);
 			}
+		
+		
+		
 		} else {
 			lastHit = Time.time;
 			if (bleederCo == null) {
@@ -69,14 +74,15 @@ public class FrontalShield : Ability,Modifier {
 
 
 	IEnumerator delayTurnOff()
-	{
-		hullBleeder.SetActive (true);
-		while (Time.time < lastHit + .3f) {
+	{if (hullBleeder) {
+			hullBleeder.SetActive (true);
+			while (Time.time < lastHit + .3f) {
 		
-			yield return new WaitForSeconds (.2f);
+				yield return new WaitForSeconds (.2f);
+			}
+			hullBleeder.SetActive (false);
+			bleederCo = null;
 		}
-		hullBleeder.SetActive (false);
-		bleederCo = null;
 	}
 
 

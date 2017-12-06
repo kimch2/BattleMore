@@ -96,6 +96,7 @@ public class UISetter : MonoBehaviour {
 
 	IEnumerator fadeUI(float duration, bool active)
 	{
+		
 		if (active) {
 			for (float i = 0; i < duration; i += Time.deltaTime) {
 				canGroup.alpha = i / duration;
