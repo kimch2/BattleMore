@@ -365,6 +365,19 @@ public class UnitManager : Unit,IOrderable{
 		abilityList.RemoveAll(item => item == null);}
 
 
+	public void AddEnemySighted(EnemySighted comp)
+	{
+		EnemyWatchers.Add (comp);
+	}
+
+	public void AddAllySighted(AllySighted comp)
+	{
+		AllyWatchers.Add (comp);
+	}
+
+	List<EnemySighted> EnemyWatchers = new List<EnemySighted> ();
+	List<AllySighted> AllyWatchers = new List<AllySighted> ();
+
 	//Other Units have entered vision
 	void OnTriggerEnter(Collider other)
 	{
@@ -392,8 +405,18 @@ public class UnitManager : Unit,IOrderable{
 
 				if (manage.PlayerOwner != PlayerOwner) {
 					enemies.Add (manage);
+					foreach (EnemySighted sighter in EnemyWatchers) {
+						if (sighter != null) {
+							sighter.EnemySpotted (manage);
+						}
+					}
 				} else {
 					allies.Add (manage);
+					foreach (AllySighted sighter in AllyWatchers) {
+						if (sighter != null) {
+							sighter.AllySpotted (manage);
+						}
+					}
 				}
 			}
 		}

@@ -2,19 +2,16 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class MissileArmer :Ability{
+public class MissileArmer :Ability,AllySighted{
 
 	public UnitManager manager;
 
-	public bool nitro;
 
 	public bool shields;
 	public float shieldRate;
 	public GameObject shieldglobe;
 	public GameObject OverchargeBoost;
 
-
-	public List<StimPack> stimList = new List<StimPack>();
 	public List<DayexaShield> shieldList = new List<DayexaShield> ();
 
 
@@ -26,6 +23,7 @@ public class MissileArmer :Ability{
 	void Start () {
 
 		manager = GetComponent<UnitManager> ();
+		manager.AddAllySighted (this);
 		InvokeRepeating ("UpdateCharges", 1, 1.8f);
 	}
 
@@ -100,24 +98,10 @@ public class MissileArmer :Ability{
 
 		if (manage.PlayerOwner == manager.PlayerOwner) {
 
-		
-
-
-			if (nitro) {
-
-
-				StimPack stim = other.gameObject.GetComponent<StimPack> ();
-				if (stim) {
-					stimList.Remove (stim);
-				}
-
+			DayexaShield s = other.gameObject.GetComponent<DayexaShield> ();
+			if (s) {
+				shieldList.Remove (s);
 			}
-
-				DayexaShield s = other.gameObject.GetComponent<DayexaShield> ();
-				if (s) {
-					shieldList.Remove (s);
-				}
-
 
 		}
 
@@ -125,47 +109,17 @@ public class MissileArmer :Ability{
 	}
 
 
-
-	void OnTriggerEnter(Collider other)
+	public void AllySpotted (UnitManager manager)
 	{
-		//need to set up calls to listener components
-		//this will need to be refactored for team games
-		if (other.isTrigger) {
-			return;}
+		shieldList.RemoveAll (item => item == null);
 
-
-		UnitManager manage = other.gameObject.GetComponent<UnitManager>();
-
-		if (manage == null) {
-			return;
+		if (shields) {
+			DayexaShield s = manager.gameObject.GetComponent<DayexaShield> ();
+			if (s) {
+				shieldList.Add (s);
+			}
 		}
 
-		if (manage.PlayerOwner == manager.PlayerOwner) {
-
-			shieldList.RemoveAll (item => item == null);
-
-			if (nitro) {
-
-				//Debug.Log ("Adding Nitro " + other.gameObject);
-				StimPack stim = other.gameObject.GetComponent<StimPack> ();
-				if (stim) {
-					stimList.Add (stim);
-				}
-
-
-			}
-			if (shields) {
-				DayexaShield s = other.gameObject.GetComponent<DayexaShield> ();
-				if (s) {
-					shieldList.Add (s);
-				}
-			}
-			}
-
-
-
 	}
-
-
-
+		
 }

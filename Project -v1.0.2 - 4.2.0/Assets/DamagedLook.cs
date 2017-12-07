@@ -49,7 +49,13 @@ public class DamagedLook : MonoBehaviour,Modifier  {
 
 		if (damageChangers [currentIndex].healthRatio > ratio) {
 			currentIndex++;
+			if (damageChangers.Count > currentIndex) {
+				currentIndex = damageChangers.Count - 1;
+			} else if (currentIndex < 0) {
+				currentIndex = 0;
+			}
 			mod.rateOverTime = damageChangers [currentIndex].EmmisionRate;
+			
 		}
 
 		return amount;

@@ -414,6 +414,7 @@
      <Compile Include="Assets\Scripts - In Game\$leftrighttest_276.cs" />
      <Compile Include="Assets\Scripts - In Game\Ability.cs" />
      <Compile Include="Assets\Scripts - In Game\AbstractCost.cs" />
+     <Compile Include="Assets\Scripts - In Game\AllySighted.cs" />
      <Compile Include="Assets\Scripts - In Game\AttackMoveState.cs" />
      <Compile Include="Assets\Scripts - In Game\AttckWhileMoveState.cs" />
      <Compile Include="Assets\Scripts - In Game\bobble.cs" />
@@ -430,6 +431,7 @@
      <Compile Include="Assets\Scripts - In Game\customMover.cs" />
      <Compile Include="Assets\Scripts - In Game\DamageTypes.cs" />
      <Compile Include="Assets\Scripts - In Game\DefaultState.cs" />
+     <Compile Include="Assets\Scripts - In Game\EnemySighted.cs" />
      <Compile Include="Assets\Scripts - In Game\Events\Custom EventArgs\KeyBoardEventActions\Key_Control.cs" />
      <Compile Include="Assets\Scripts - In Game\Events\Custom EventArgs\KeyBoardEventActions\Key_Escape.cs" />
      <Compile Include="Assets\Scripts - In Game\Events\Custom EventArgs\KeyBoardEventActions\Key_Shift.cs" />
