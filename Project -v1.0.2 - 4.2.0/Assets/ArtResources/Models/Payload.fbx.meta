@@ -1,16 +1,32 @@
 fileFormatVersion: 2
-guid: fc68b3a8e9220c54a9d72be5d0993a86
-timeCreated: 1489814446
+guid: 1164f4e035b835c41a1cfc8bb8af8586
+timeCreated: 1512675409
 licenseType: Free
 ModelImporter:
-  serializedVersion: 19
+  serializedVersion: 21
   fileIDToRecycleName:
-    100000: //RootNode
-    400000: //RootNode
-    2300000: //RootNode
-    3300000: //RootNode
-    4300000: pCube28
-    9500000: //RootNode
+    100000: FacilityModule.001
+    100002: FacilityModule.002
+    100004: FacilityModule.004
+    100006: FacilityModule.005
+    100008: //RootNode
+    400000: FacilityModule.001
+    400002: FacilityModule.002
+    400004: FacilityModule.004
+    400006: FacilityModule.005
+    400008: //RootNode
+    2300000: FacilityModule.001
+    2300002: FacilityModule.002
+    2300004: FacilityModule.004
+    2300006: FacilityModule.005
+    3300000: FacilityModule.001
+    3300002: FacilityModule.002
+    3300004: FacilityModule.004
+    3300006: FacilityModule.005
+    4300000: FacilityModule.005
+    4300002: FacilityModule.004
+    4300004: FacilityModule.002
+    4300006: FacilityModule.001
   materials:
     importMaterials: 1
     materialName: 0
@@ -21,6 +37,8 @@ ModelImporter:
     resampleCurves: 1
     optimizeGameObjects: 0
     motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
@@ -31,6 +49,7 @@ ModelImporter:
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
+    extraUserProperties: []
     clipAnimations: []
     isReadable: 1
   meshes:
@@ -38,7 +57,10 @@ ModelImporter:
     globalScale: 1
     meshCompression: 0
     addColliders: 0
+    importVisibility: 1
     importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
@@ -54,6 +76,7 @@ ModelImporter:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
+    normalCalculationMode: 4
   importAnimation: 1
   copyAvatar: 0
   humanDescription:
@@ -73,7 +96,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 0
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
