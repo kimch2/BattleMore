@@ -48,7 +48,11 @@ public class Tweener : MonoBehaviour {
 	}
 
 
+	public void GoToPose(string nextPoseName)
+	{//Debug.Log ("Going to pose " + nextPoseName + "  " + this.gameObject + "  " + currentTweens.Count);
 
+		GoToPose (nextPoseName,1);
+	}
 
 	public void GoToPose(string nextPoseName,float tweenTime =1)
 	{//Debug.Log ("Going to pose " + nextPoseName + "  " + this.gameObject + "  " + currentTweens.Count);
