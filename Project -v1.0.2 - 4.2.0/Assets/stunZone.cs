@@ -4,14 +4,6 @@ using UnityEngine;
 
 public class stunZone : VisionTrigger {
 
-	//Currently meant to be used on the SquareTrons squareZone; Not Actually a stun zone, its a root zone
-	selfDestructTimer timer ; 
-
-	void Start()
-	{
-		timer = GetComponentInParent<selfDestructTimer> ();
-	}
-
 
 
 	public override void UnitEnterTrigger(UnitManager manager)

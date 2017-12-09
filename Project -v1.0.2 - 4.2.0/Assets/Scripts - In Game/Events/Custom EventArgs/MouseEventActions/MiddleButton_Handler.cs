@@ -10,9 +10,9 @@ public class MiddleButton_Handler : MouseEventArgs {
 	
 	public override void Command()
 	{
-		IUIManager uiManager = GameObject.FindObjectOfType<UIManager> ();
+		IUIManager uiManager = UIManager.main;// GameObject.FindObjectOfType<UIManager> ();
 
-			uiManager.MiddleButton_SingleClick (this);
+		uiManager.MiddleButton_SingleClick (this);
 
 	}
 }

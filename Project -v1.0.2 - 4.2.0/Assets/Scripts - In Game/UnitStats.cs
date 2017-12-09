@@ -373,7 +373,8 @@ public class UnitStats : MonoBehaviour {
 						spawnLoc = objecthit.point;
 					}
 					//Debug.Log ("Rotation is " + this.gameObject.transform.rotation);
-					GameObject corpse = GameObject.Instantiate (deathCorpse,spawnLoc, this.gameObject.transform.rotation);
+					//GameObject corpse = 
+						GameObject.Instantiate (deathCorpse,spawnLoc, this.gameObject.transform.rotation);
 				//	corpse.transform.rot.up = Vector3.up;
 				}
 

@@ -72,7 +72,8 @@ public class PenetratingShot : Projectile {
 	{
 		if (target) {
 
-			CharacterController cont = target.GetComponent<CharacterController> ();
+			//CharacterController cont = 
+				target.GetComponent<CharacterController> ();
 
 			randomOffset = Vector3.up;
 

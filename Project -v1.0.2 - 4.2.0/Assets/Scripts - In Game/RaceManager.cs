@@ -61,6 +61,11 @@ public class RaceManager : MonoBehaviour, ManagerWatcher {
 	private Dictionary<string, int > unitTypeCount = new Dictionary<string, int>();
 
 
+	List<BuildUnitObjective> buildUnitObjectList = new List<BuildUnitObjective> ();
+	public void addBuildUnitObjective(BuildUnitObjective obj)
+	{
+		buildUnitObjectList.Add (obj);
+	}
 
 	private List<LethalDamageinterface> lethalTrigger = new List<LethalDamageinterface>();
 	private List<LethalDamageinterface> deathTrigger = new List<LethalDamageinterface>();
@@ -473,7 +478,9 @@ public class RaceManager : MonoBehaviour, ManagerWatcher {
 		if (!unitRoster.ContainsKey (obj.UnitName)) {
 			unitRoster.Add(obj.UnitName, new List<UnitManager>());
 		}
+
 		unitRoster [obj.UnitName].Add (obj);
+
 		if (playerNumber == 1) {
 			if (FButtonManager.main == null) {
 				FButtonManager.main = GameObject.FindObjectOfType<FButtonManager> ();
@@ -496,6 +503,7 @@ public class RaceManager : MonoBehaviour, ManagerWatcher {
 			}
 
 		}
+
 		if (obj.UnitName != "Armory") {
 			Selected sel = obj.GetComponent<Selected> ();
 			sel.decalCircle.GetComponent<MeshRenderer> ().material = myDecal;
@@ -509,8 +517,6 @@ public class RaceManager : MonoBehaviour, ManagerWatcher {
 		} else {
 			applyUpgrade (obj);
 		}
-
-	
 
 		string unitName = obj.UnitName;
 
@@ -542,12 +548,10 @@ public class RaceManager : MonoBehaviour, ManagerWatcher {
 			}
 
 
-
 		//Debug.Log ("Adding" + obj + "  " + playerNumber + "count " + unitTypeCount [unitName]);
-		//Debug.Log ("STARTING");
-	
 
-		foreach (BuildUnitObjective objective in GameObject.FindObjectsOfType<BuildUnitObjective>()) {
+
+		foreach (BuildUnitObjective objective in buildUnitObjectList) {
 			objective.buildUnit (obj);
 		}
 		//Debug.Log ("Just built a " + unitName + "    " + unitTypeCount[unitName]);
@@ -564,7 +568,6 @@ public class RaceManager : MonoBehaviour, ManagerWatcher {
 					}
 				}
 			}
-
 
 
 		//uiManager.changeUnits ();

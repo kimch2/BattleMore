@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour {
 	public static GameManager getInstance()
 	{
 		if (main == null) {
+
 			main = GameObject.FindObjectOfType<GameManager>();
 		}
 		return main;

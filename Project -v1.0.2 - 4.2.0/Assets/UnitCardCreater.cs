@@ -179,7 +179,7 @@ public class UnitCardCreater : MonoBehaviour {
 
 		ArmorTypes.text = blankText + manager.myStats.armorType;
 		SizeTypes.text = blankText + manager.myStats.sizeType;
-		string s = "  ";
+		//string s = "  ";
 
 	
 		if (currentUnit.myStats.MaxEnergy > 0) {

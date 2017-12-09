@@ -10,7 +10,7 @@ public class LeftButton_Handler : MouseEventArgs {
 	
 	public override void Command()
 	{
-		IUIManager uiManager = GameObject.FindObjectOfType<UIManager> ();
+		IUIManager uiManager = UIManager.main;// GameObject.FindObjectOfType<UIManager> ();
 		
 		if (!buttonUp)
 		{

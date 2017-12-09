@@ -380,6 +380,7 @@ public class FogOfWar : MonoBehaviour
         }
     }
 
+
     void UpdateTexture()
 		{if (HasUnFogged) {
 		
@@ -389,12 +390,14 @@ public class FogOfWar : MonoBehaviour
 			texture.Apply ();
 
 			byte partialfog = (byte)(partialFogAmount * 255);
-
+			int index = 0;
 			for (int y = 0; y < mapResolution; ++y) {
 				for (int x = 0; x < mapResolution; ++x) {
-					int index = y * mapResolution + x;
-					if (_values [index] < partialfog)
+					//int index = y * mapResolution + x;
+					if (_values [index] < partialfog) {
 						_values [index] = partialfog;
+					}
+					index++;
 				}
 			}
 		}

@@ -9,7 +9,11 @@ public class BuildUnitObjective : Objective  {
 
 	private int total = -3;
 
-	
+	void Start()
+	{
+		base.Start ();
+		GameManager.main.playerList [0].addBuildUnitObjective (this);
+	}
 
 
 

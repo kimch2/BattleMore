@@ -176,15 +176,18 @@ public class UnitManager : Unit,IOrderable{
 				Invoke ("GiveStartCommand", .3f);
 			}
 
-
 			if (Time.timeSinceLevelLoad < 1 || !myStats.isUnitType (UnitTypes.UnitTypeTag.Structure) || UnitName == "Augmentor") {
-				//	Debug.Log (" manager " + man.playerList.Length + "   " + (PlayerOwner - 1) +"  " + this.gameObject);
-				GameManager.getInstance ().playerList [PlayerOwner - 1].addUnit (this);
+				
+				RaceManager racer = GameManager.getInstance ().playerList [PlayerOwner - 1];
+
+					racer.addUnit (this);
 			}
+
 
 			if (myStats.isUnitType (UnitTypes.UnitTypeTag.Structure) && UnitName != "Augmentor") {
 				GameManager.getInstance ().playerList [PlayerOwner - 1].applyUpgrade (this);
 			}
+	
 			hasStarted = true;
 		}
 	}

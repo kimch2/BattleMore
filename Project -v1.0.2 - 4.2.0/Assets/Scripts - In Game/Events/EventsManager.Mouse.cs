@@ -10,7 +10,7 @@ public partial class EventsManager {
 	private DateTime timeAtFirstClick;
 
 	private void CheckMouseClicks()
-	{
+	{try{
 		if (Input.GetMouseButtonDown(0))
 		{
 			if (MouseClick != null) 
@@ -59,12 +59,19 @@ public partial class EventsManager {
 				MouseScrollWheel(this, new ScrollWheelEventArgs(Input.GetAxis ("Mouse ScrollWheel")));
 			}
 		}
-		
-		if (checkForDoubleClick)
-		{
-			if ((DateTime.Now-timeAtFirstClick).Milliseconds >= doubleClickTime)
-			{
-				checkForDoubleClick = false;
+			if (checkForDoubleClick) {
+				if ((DateTime.Now - timeAtFirstClick).Milliseconds >= doubleClickTime) {
+					checkForDoubleClick = false;
+				}
+			}
+		}
+		catch (Exception e){
+			Debug.Log ("There was a click exception " + e);
+
+			if (checkForDoubleClick) {
+				if ((DateTime.Now - timeAtFirstClick).Milliseconds >= doubleClickTime) {
+					checkForDoubleClick = false;
+				}
 			}
 		}
 	}

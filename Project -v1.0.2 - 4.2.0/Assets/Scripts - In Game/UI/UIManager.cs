@@ -400,7 +400,7 @@ public class UIManager : MonoBehaviour, IUIManager {
 	//------------------------Mouse Button Commands--------------------------------------------
 	public void LeftButton_SingleClickDown(MouseEventArgs e)
 	{	clickOverUI = isPointerOverUIObject ();
-
+		//Debug.Log ("Single Click");
 
 		if(hoverOver != HoverOver.Menu)
 		switch (m_Mode)
@@ -440,6 +440,7 @@ public class UIManager : MonoBehaviour, IUIManager {
 
 	public void LeftButton_DoubleClickDown(MouseEventArgs e)
 	{
+		//Debug.Log ("Double click");
 		lastClickDouble = Time.time;
 	
 			//Select all units of that type on screen

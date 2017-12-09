@@ -456,7 +456,7 @@ public class AnimationPose
 	public Vector3 WrapEnd(Vector3 start, Vector3 end)
 	{
 		if (Mathf.Abs (start.x - end.x) > 180) {
-			if (end.x > end.x) {
+			if (start.x > end.x) {
 				end.x += 360;
 			} else {
 				end.x -= 360;

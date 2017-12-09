@@ -209,7 +209,8 @@ public class MiniMapUIController : MonoBehaviour, IPointerDownHandler , IPointer
 
 		GameObject obj = (GameObject)Instantiate (warningSymbol, new Vector2 (iCoord, jCoord), Quaternion.identity, newParent);
 		if (pulsing) {
-			UIPulse pulser = obj.AddComponent<UIPulse> ();
+			//UIPulse pulser = 
+				obj.AddComponent<UIPulse> ();
 		}
 		obj.GetComponent<Image> ().sprite = symbol;
 		obj.transform.localPosition = new Vector2 (iCoord - UIWidth / 2, jCoord - UIHeight / 2);
@@ -531,8 +532,8 @@ public class MiniMapUIController : MonoBehaviour, IPointerDownHandler , IPointer
 
 
 	Color32[] pixelsArray;
-	Color32 transParent = new Color32 (0, 0, 0, 0);
-	Color32 blackColor = new Color32 (0, 0, 0, 255);
+	//Color32 transParent = new Color32 (0, 0, 0, 0);
+	//Color32 blackColor = new Color32 (0, 0, 0, 255);
 
 	int lastFrame;
 	public void setFog ()
@@ -555,7 +556,7 @@ public class MiniMapUIController : MonoBehaviour, IPointerDownHandler , IPointer
 		watch.Start ();
 		//Debug.Log ("Size is " + fog.texture.width);
 
-		byte[] original = fog.getTexture ().GetRawTextureData ();
+		//byte[] original = fog.getTexture ().GetRawTextureData ();
 		_texture = fog.getTexture ();
 		_texture.Apply ();/*
 
