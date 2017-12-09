@@ -1,12 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.EventSystems;
-
+using System.Collections.Generic;
 public class laserGun : MonoBehaviour {
 
 
 
 	Camera myCam;
+	GameObject lastHit;
+
 	// Use this for initialization
 	void Start () {
 		myCam = GetComponent<Camera> ();
@@ -15,36 +17,64 @@ public class laserGun : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+		if (!isPointerOverUIObject()) {
+
+			Ray rayb = myCam.ScreenPointToRay (Input.mousePosition);
+			RaycastHit hitb;
+
+			if (Physics.Raycast (rayb, out hitb, Mathf.Infinity, ~(1 << 16))) {
+
+				if (hitb.collider.gameObject != lastHit) {
+					
+					if (lastHit && lastHit.GetComponent<MouseClicker> ()) {
+						lastHit.GetComponent<MouseClicker> ().OnExit.Invoke ();
+					}
+					lastHit = hitb.collider.gameObject;
+					if (lastHit.GetComponent<MouseClicker> ()) {
+						lastHit.GetComponent<MouseClicker> ().OnHover.Invoke ();
+					}
+
+				
+				}
 
 
-		if (Input.GetMouseButtonDown (0)) {
+				if (Input.GetMouseButtonDown (0)) {
+					MouseClicker clicker = lastHit.GetComponent<MouseClicker> ();
+					if (clicker && clicker.enabled) {
+						clicker.OnClick.Invoke ();
+					}
 
-			if (!EventSystem.current.IsPointerOverGameObject ()) 
-			{
-
-			//	Debug.Log ("Not over UI ");
-				//lineRender.enabled = true;
-
-				Ray rayb = myCam.ScreenPointToRay (Input.mousePosition);
-				RaycastHit hitb;
-
-				if (Physics.Raycast (rayb, out hitb, Mathf.Infinity, ~(1 << 16))) {
 					//Debug.Log ("hit a  " + hitb.collider.gameObject);
 					if (hitb.collider.gameObject.GetComponent<blowUp> ()) {
 						hitb.collider.gameObject.GetComponent<blowUp> ().blowUpTrigger ();
 					}
 
-					if (hitb.collider.gameObject.GetComponent<MenuAnimationPlayer>()) {
-		
+					if (hitb.collider.gameObject.GetComponent<MenuAnimationPlayer> ()) {
+
 						hitb.collider.gameObject.GetComponent<MenuAnimationPlayer> ().ClickOn ();
 					}
-
 				}
-
-
-			
 			}
+		
+		}
+
+	}
+
+
+	public bool isPointerOverUIObject()
+	{
+		PointerEventData eventDatacurrenPosition = new PointerEventData (EventSystem.current);
+		eventDatacurrenPosition.position = new Vector2 (Input.mousePosition.x, Input.mousePosition.y);
+
+		List<RaycastResult> results = new List<RaycastResult> ();
+		EventSystem.current.RaycastAll (eventDatacurrenPosition, results);
+
+		if (results.Count == 0) {
+			return false;
 		} 
-	
+		//Debug.Log ("returning " + (results[0].distance == 0));
+		return results[0].distance == 0;
+
+
 	}
 }

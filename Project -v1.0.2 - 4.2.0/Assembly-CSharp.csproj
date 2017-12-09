@@ -298,6 +298,7 @@
      <Compile Include="Assets\MoneyPickUp.cs" />
      <Compile Include="Assets\Morph.cs" />
      <Compile Include="Assets\mortarUpgrade.cs" />
+     <Compile Include="Assets\MouseClicker.cs" />
      <Compile Include="Assets\mousetracker.cs" />
      <Compile Include="Assets\MultiShotParticle.cs" />
      <Compile Include="Assets\MVPCalculator.cs" />
