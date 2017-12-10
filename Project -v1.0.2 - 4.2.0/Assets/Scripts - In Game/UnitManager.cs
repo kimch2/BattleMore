@@ -118,25 +118,7 @@ public class UnitManager : Unit,IOrderable{
 
 
 
-		if (!fogger) {
-			fogger = GetComponent<FogOfWarUnit> ();
-		}
-
-		if (gameObject.GetComponent<CharacterController> () && visionSphere != null) {
-			float distance = visionRange + gameObject.GetComponent<CharacterController> ().radius;
-			visionSphere.radius = distance;
-
-
-			if(fogger){
-				fogger.radius = distance +3;
-			}
-		}
-		 else {
-			visionSphere.radius = visionRange;
-			if (fogger) {
-				fogger.radius = visionRange +3;
-			}
-		}
+		initializeVision (false);
 
 		if(startingState == UnitState.StateType.HoldGround) {
 
@@ -157,15 +139,38 @@ public class UnitManager : Unit,IOrderable{
 			
 			//changeState (new turretState (this));
 		//}
-
-
-
 	
 			chaseRange = visionRange;
 
-	
 	}
 
+	public void initializeVision(bool createIt)
+	{
+		if (!fogger) {
+			fogger = GetComponent<FogOfWarUnit> ();
+		}
+		if (!fogger && createIt) {
+			fogger = gameObject.AddComponent<FogOfWarUnit> ();
+			if (cMover) {
+				cMover.myFogger = fogger;}
+		}
+
+		if (CharController && visionSphere != null) {
+			float distance = visionRange + CharController.radius;
+			visionSphere.radius = distance;
+
+
+			if(fogger){
+				fogger.radius = distance +3;
+			}
+		}
+		else {
+			visionSphere.radius = visionRange;
+			if (fogger) {
+				fogger.radius = visionRange +3;
+			}
+		}
+	}
 
 	bool hasStarted = false;
 	protected void Start()

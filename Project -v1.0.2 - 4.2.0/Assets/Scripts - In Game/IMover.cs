@@ -15,7 +15,7 @@ public abstract class IMover: MonoBehaviour {
 	public abstract bool move ();
 	public abstract void stop ();
 
-	protected FogOfWarUnit myFogger;
+	public FogOfWarUnit myFogger;
 	public 	abstract void resetMoveLocation (Vector3 location);
 	public 	abstract void resetMoveLocation (Transform theTarget);
 

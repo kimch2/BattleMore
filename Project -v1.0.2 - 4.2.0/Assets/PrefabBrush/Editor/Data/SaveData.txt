@@ -1,17 +1,17 @@
-Layer Selection: Default
+Layer Selection: Terrain
 Brush Max Size: 50
 Brush Size: 5
 Fill Mode: False
 Fill Rate: 0.5
 
-Game Object: Assets/Prefabs/Coalition/ScrapCycle.prefab
+Game Object: Assets/Prefabs/BunnyAssaultMode/SterileBunny.prefab
 Layer: Default
 Toggle: True
 Slider: 1
 Lock Orientation Toggle: False
-Random Rotation Toggle: True
+Random Rotation Toggle: False
 Random Rotation X: False
-Random Rotation Y: True
+Random Rotation Y: False
 Random Rotation Z: False
 Random Scale Toggle: False
 Random Scale Min: 0.1

@@ -25,6 +25,17 @@ public class ChainWhip : MonoBehaviour {
 
 	public List<Vector3> ChainExtensionPoints;
 
+	void Start()
+	{
+		if (childWhip) {
+
+			if (myCoro == null) {
+				myCoro = StartCoroutine (WhipSpin ());
+				//mySpinner = StartCoroutine (UpdateRotation ());
+			}
+		}
+
+	}
 
 	void OnTriggerEnter(Collider other)
 	{
@@ -48,10 +59,6 @@ public class ChainWhip : MonoBehaviour {
 	
 					if (childWhip && myWeap.simpleCanAttack (manage)) {
 		
-						if (myCoro == null) {
-							myCoro = StartCoroutine (WhipSpin ());
-							//mySpinner = StartCoroutine (UpdateRotation ());
-						}
 					} else if (!childWhip) {
 						float distance = Vector3.Distance (transform.position, manage.transform.position);
 						manage.myStats.TakeDamage (maxDamage * (distance / maxRadius), myManager.gameObject, DamageTypes.DamageType.Regular);

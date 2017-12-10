@@ -58,6 +58,8 @@ public class CustomRVO : IMover {
 		seeker = GetComponent<Seeker>();
 	}
 
+
+
 	// Use this for initialization
 	public void Start () {
 		#if RVOImp

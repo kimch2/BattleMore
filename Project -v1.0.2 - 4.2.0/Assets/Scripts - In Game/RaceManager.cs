@@ -488,6 +488,9 @@ public class RaceManager : MonoBehaviour, ManagerWatcher {
 			FButtonManager.main.updateNumbers (unitRoster);
 
 
+			obj.initializeVision (true);
+
+
 			if (obj.myStats.isUnitType (UnitTypes.UnitTypeTag.Worker)) {
 
 				if (uiManager != null) {

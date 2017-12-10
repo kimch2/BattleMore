@@ -13,7 +13,7 @@ public class BuildUnit : UnitProduction {
 
 	private float timer =0;
 	private bool buildingUnit = false;
-	//private UnitManager manage;
+	private UnitManager myManage;
 	private HealthDisplay HD;
 	private BuildManager buildMan;
 
@@ -27,6 +27,7 @@ public class BuildUnit : UnitProduction {
 	void Awake()
 	{audioSrc = GetComponent<AudioSource> ();
 		myType = type.activated;
+		myManage = GetComponent<UnitManager> ();
 	}
 
 
@@ -180,6 +181,7 @@ public class BuildUnit : UnitProduction {
 		GameObject unit = (GameObject)Instantiate(unitToBuild, location, Quaternion.identity);
 		unit.transform.LookAt (location + Vector3.right + Vector3.back);
 		UnitManager unitMan = unit.GetComponent<UnitManager> ();
+		unitMan.PlayerOwner = myManage.PlayerOwner; 
 		unitMan.setInteractor();
 		unitMan.interactor.initialize ();
 		if (myInteractor != null) {
