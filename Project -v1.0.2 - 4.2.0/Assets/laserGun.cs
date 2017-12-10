@@ -27,11 +27,11 @@ public class laserGun : MonoBehaviour {
 				if (hitb.collider.gameObject != lastHit) {
 					
 					if (lastHit && lastHit.GetComponent<MouseClicker> ()) {
-						lastHit.GetComponent<MouseClicker> ().OnExit.Invoke ();
+						lastHit.GetComponent<MouseClicker> ().executeOnExit();
 					}
 					lastHit = hitb.collider.gameObject;
 					if (lastHit.GetComponent<MouseClicker> ()) {
-						lastHit.GetComponent<MouseClicker> ().OnHover.Invoke ();
+						lastHit.GetComponent<MouseClicker> ().executeOnHover ();
 					}
 
 				
@@ -41,7 +41,7 @@ public class laserGun : MonoBehaviour {
 				if (Input.GetMouseButtonDown (0)) {
 					MouseClicker clicker = lastHit.GetComponent<MouseClicker> ();
 					if (clicker && clicker.enabled) {
-						clicker.OnClick.Invoke ();
+						clicker.executeOnClick ();
 					}
 
 					//Debug.Log ("hit a  " + hitb.collider.gameObject);
