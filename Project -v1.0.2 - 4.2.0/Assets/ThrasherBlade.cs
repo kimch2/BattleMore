@@ -26,6 +26,7 @@ public class ThrasherBlade : Projectile {
 		lookAtTarget ();
 		trueROlltime = rollTime;
 		initialSpeed = speed /1.25f;
+		GetComponent<MiningSawDamager> ().Owner = sourceInt;
 	}
 
 	protected override void Update () {

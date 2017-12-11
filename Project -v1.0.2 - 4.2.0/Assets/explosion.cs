@@ -51,7 +51,7 @@ public class explosion : MonoBehaviour {
 		scale += growthRate * Time.deltaTime;
 		scale = Mathf.Min (maxSize, scale);
 		transform.localScale = Vector3.one * scale;
-		if (scale > maxSize) Destroy (gameObject);
+		if (scale >= maxSize) Destroy (gameObject);
 
 	
 	}

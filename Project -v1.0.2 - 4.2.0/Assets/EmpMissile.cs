@@ -110,7 +110,7 @@ public class EmpMissile :  TargetAbility {
 		if (target) {
 			proj.SendMessage ("setTarget", target.GetComponent<UnitManager>());
 		}
-		proj.SendMessage ("setDamage", 10);
+		proj.SendMessage ("setDamage", 10, SendMessageOptions.DontRequireReceiver);
 
 		if (target) {
 			script.target = target.GetComponent<UnitManager> ();

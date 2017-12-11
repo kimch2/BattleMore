@@ -163,7 +163,7 @@ public class WaveManager : MonoBehaviour {
 				waveOption = container.getWave (ReplayWaves [UnityEngine.Random.Range (0, ReplayWaves.Count)]);
 				CurrentWaves = waveOption.waveRampUp;
 			}
-			Debug.Log ("Spawning wave " + this.gameObject + "  " + currentWaveIndex);
+			//Debug.Log ("Spawning wave " + this.gameObject + "  " + currentWaveIndex);
 
 			foreach (GameObject obj in CurrentWaves[currentWaveIndex].waveType) {
 

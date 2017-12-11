@@ -565,6 +565,7 @@
      <Compile Include="Assets\stunStrike.cs" />
      <Compile Include="Assets\stunZone.cs" />
      <Compile Include="Assets\SuicideAttack.cs" />
+     <Compile Include="Assets\SummonStructure.cs" />
      <Compile Include="Assets\SurviveVictory.cs" />
      <Compile Include="Assets\TargetAbility.cs" />
      <Compile Include="Assets\TargetCircle.cs" />

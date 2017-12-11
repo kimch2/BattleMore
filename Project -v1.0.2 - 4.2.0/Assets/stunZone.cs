@@ -24,7 +24,7 @@ public class stunZone : VisionTrigger {
 	void OnDestroy()
 	{
 		foreach (UnitManager manage in InVision) {
-			if (manage) {
+			if (manage && manage.cMover) {
 				
 				manage.cMover.removeSpeedBuff ( this);
 			}

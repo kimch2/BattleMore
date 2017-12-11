@@ -22,6 +22,7 @@ public class SoundTrackPlayer : MonoBehaviour {
 
 	void Start () {
 		mySrc = GetComponent<AudioSource> ();
+		mySrc.loop = false;
 		playNextTrack ();
 	}
 

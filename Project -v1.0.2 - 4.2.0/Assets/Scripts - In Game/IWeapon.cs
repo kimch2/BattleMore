@@ -367,9 +367,8 @@ public class IWeapon : MonoBehaviour {
 			if (OnHitEffect) {
 
 				if (!fireEffect) {
-					//GameObject temp = (GameObject)
-					Instantiate (OnHitEffect, target.transform.position, Quaternion.identity);
-					fireEffect = OnHitEffect.GetComponent<MultiShotParticle> ();
+					GameObject temp = (GameObject)Instantiate (OnHitEffect, target.transform.position, Quaternion.identity);
+					fireEffect =temp.GetComponent<MultiShotParticle> ();
 					fireEffect.playEffect ();
 				} else {
 					fireEffect.transform.position = target.transform.position + Vector3.up;
