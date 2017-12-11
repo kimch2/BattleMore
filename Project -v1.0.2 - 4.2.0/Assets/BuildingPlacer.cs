@@ -76,7 +76,9 @@ public class BuildingPlacer : MonoBehaviour {
 	{
 
 		FogOfWarUnit fow = b.GetComponent<FogOfWarUnit> ();
-		fow.enabled = false;
+		if (fow) {
+			fow.enabled = false;
+		}
 		GetComponent<SphereCollider> ().enabled = true;
 		GetComponent<SphereCollider> ().radius = 10;
 		objects.Clear ();

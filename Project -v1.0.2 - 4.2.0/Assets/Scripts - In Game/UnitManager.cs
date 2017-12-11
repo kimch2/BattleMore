@@ -306,7 +306,10 @@ public class UnitManager : Unit,IOrderable{
 						
 						changeState (new AbilityFollowState (obj, loc, (TargetAbility)abilityList [n]), false, queue);
 					} else if (abilityList [n] is Morph || abilityList [n] is BuildStructure) {
-						changeState (new PlaceBuildingState (obj,loc, abilityList [n]), false, queue);
+						changeState (new PlaceBuildingState (obj, loc, abilityList [n]), false, queue);
+					} else if (abilityList [n] is SummonStructure) {
+						((SummonStructure)abilityList [n]).setBuildSpot (loc, obj);
+						((SummonStructure)abilityList [n]).Activate ();
 					}
 
 				}

@@ -88,7 +88,7 @@ public class Page  {
 		// these two parts in the if/else statement are identical except for the kind of state they are looking for.
 		bool canCast =false;
 		rows [n / 4].RemoveAll (item => item == null);
-		if (rows [n / 4] [0].abilityList [X] is BuildStructure) {
+		if (rows [n / 4] [0].abilityList [X] is BuildStructure || rows [n / 4] [0].abilityList [X] is SummonStructure) {
 			foreach (RTSObject unit in rows[n/4]) {
 				if (unit) {
 					continueOrder ord = unit.abilityList [X].canActivate (true);
@@ -126,7 +126,8 @@ public class Page  {
 				RaceManager.Destroy (obj);
 			}
 
-		} else {
+		} 
+		else {
 			foreach (RTSObject unit in rows[n/4]) {
 				if (unit) {
 					continueOrder ord = unit.abilityList [X].canActivate (true);
@@ -187,6 +188,8 @@ public class Page  {
 
 	public bool canCast(int n)
 	{
+
+
 		int X = n - rows [n / 4] [0].AbilityStartingRow * 4;
 		foreach (RTSObject unit in rows[n/4]) {
 			
@@ -212,7 +215,7 @@ public class Page  {
 
 	public bool validTarget(GameObject target, Vector3 location, int n)
 	{
-		
+		Debug.Log ("CheckingB " + n);
 		int X = n - rows [n / 4] [0].AbilityStartingRow * 4;
 
 		if (rows [n / 4].Count == 0) {

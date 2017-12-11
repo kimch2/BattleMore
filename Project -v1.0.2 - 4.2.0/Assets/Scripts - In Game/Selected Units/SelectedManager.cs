@@ -354,7 +354,9 @@ public class SelectedManager : MonoBehaviour, ISelectedManager
 			} else if (UIPages [currentPage].isBuildingAbility (n)) {
 				//Debug.Log ("In here 2 ");
 				if (UIPages [currentPage].canCast(n)) {
+			
 					uiManage.UserPlacingBuilding (((UnitProduction)UIPages [currentPage].getAbility (n)).unitToBuild, n);
+					
 				}
 
 			}

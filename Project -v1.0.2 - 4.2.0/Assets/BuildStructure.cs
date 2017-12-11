@@ -90,7 +90,8 @@ public class BuildStructure:  UnitProduction {
 	public override void setAutoCast(bool offOn){}
 
 	public void setBuildSpot(Vector3 buildSpot)
-	{targetLocation = buildSpot;
+	{Debug.Log ("Set build spot " + buildSpot ) ;
+		targetLocation = buildSpot;
 	}
 
 
@@ -164,7 +165,9 @@ public class BuildStructure:  UnitProduction {
 
 	override
 	public void Activate()
-	{if (!Morphing) {
+	{Debug.Log ("Activating");
+
+		if (!Morphing) {
 			HD.loadIMage (iconPic);
 
 	
@@ -182,7 +185,7 @@ public class BuildStructure:  UnitProduction {
 			if (mySelect.IsSelected) {
 				SelectedManager.main.updateUI ();
 			}
-			inConstruction = ((GameObject)Instantiate(unitToBuild, targetLocation + Vector3.up, Quaternion.identity)).GetComponent<UnitManager>();
+			inConstruction = ((GameObject)Instantiate(unitToBuild, targetLocation, Quaternion.identity)).GetComponent<UnitManager>();
 
 			builder = inConstruction.GetComponent<BuildingInteractor> ();
 			if (!builder) {

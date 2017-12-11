@@ -65,6 +65,7 @@ public class BuildingInteractor : MonoBehaviour, Iinteract {
 		doneConstruction = false;
 		//buildTime = buildtime;
 
+		GameManager.main.playerList [myManager.PlayerOwner - 1].addUnit (myManager);
 		foreach (Ability ab in  GetComponent<UnitManager>().abilityList) {
 			if (ab) {
 				ab.active = false;
@@ -77,6 +78,40 @@ public class BuildingInteractor : MonoBehaviour, Iinteract {
 			myAnim.speed = animationRate;
 		}
 	}
+
+	public void startSelfConstruction(GameObject obj, float constructionTime)
+	{
+		GameManager.main.playerList [myManager.PlayerOwner - 1].addUnit (myManager);
+		sourceObj = obj;
+		doneConstruction = false;
+		//buildTime = buildtime;
+
+		foreach (Ability ab in  GetComponent<UnitManager>().abilityList) {
+			if (ab) {
+				ab.active = false;
+			}
+			//ab.enabled = false;
+		}
+		if(myAnim)
+		{myAnim.Play ("Construct");
+			animSpeed = 1;
+			myAnim.speed = 1;
+		}
+		StartCoroutine (selfBuild (constructionTime));
+	}
+
+	IEnumerator selfBuild(float constructionTime)
+	{
+		while (!doneConstruction) {
+			yield return null;
+			construct (Time.deltaTime/constructionTime);
+		}
+		if (GetComponent<Selected> ().IsSelected) {
+			SelectedManager.main.updateUI ();
+		}
+	}
+
+
 
 	public bool ConstructDone()
 	{return doneConstruction;
@@ -129,7 +164,7 @@ public class BuildingInteractor : MonoBehaviour, Iinteract {
 				}
 			}
 				
-			GameManager.main.playerList [myManager.PlayerOwner - 1].addUnit (myManager);
+		
 
 			foreach (ResearchUpgrade ru in GetComponents<ResearchUpgrade>()) {
 				ru.UpdateAvailable ();
@@ -165,7 +200,7 @@ public class BuildingInteractor : MonoBehaviour, Iinteract {
 			AttackMoveSpawn = false;
 			if (RallyPointObj) {
 				if (myLine) {
-					myLine.SetPositions (new Vector3[]{ this.gameObject.transform.position, order.OrderLocation });
+					myLine.SetPositions (new Vector3[]{ this.gameObject.transform.position + Vector3.up, order.OrderLocation });
 				}
 				RallyPointObj.transform.position = order.OrderLocation;
 			}
@@ -181,7 +216,7 @@ public class BuildingInteractor : MonoBehaviour, Iinteract {
 			GetComponent<Selected> ().RallyUnit =null;
 			if (RallyPointObj) {
 				if (myLine) {
-					myLine.SetPositions (new Vector3[]{ this.gameObject.transform.position, order.OrderLocation });
+					myLine.SetPositions (new Vector3[]{ this.gameObject.transform.position + Vector3.up, order.OrderLocation });
 				}
 				RallyPointObj.transform.position = order.OrderLocation;
 			}
@@ -197,7 +232,7 @@ public class BuildingInteractor : MonoBehaviour, Iinteract {
 				
 				RallyPointObj.transform.position = order.Target.gameObject.transform.position;
 				if (myLine) {
-					myLine.SetPositions (new Vector3[]{ this.gameObject.transform.position, order.Target.gameObject.transform.position });
+					myLine.SetPositions (new Vector3[]{ this.gameObject.transform.position + Vector3.up, order.Target.gameObject.transform.position });
 				}
 
 			}
@@ -212,7 +247,7 @@ public class BuildingInteractor : MonoBehaviour, Iinteract {
 				RallyPointObj.transform.position = order.Target.gameObject.transform.position;
 				if (myLine) {
 					myLine.SetPositions (new Vector3[] {
-						this.gameObject.transform.position,
+						this.gameObject.transform.position+ Vector3.up,
 						order.Target.gameObject.transform.position
 					});
 				}

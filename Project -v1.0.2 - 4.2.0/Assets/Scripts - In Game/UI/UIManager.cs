@@ -378,11 +378,7 @@ public class UIManager : MonoBehaviour, IUIManager {
 		if (!clickOverUI) {
 			if (Physics.Raycast (ray, out hit, Mathf.Infinity, 1 << 8)) {
 
-				Vector3 spot = hit.point;
-				spot.y += 7;
-
-
-				m_ObjectBeingPlaced.transform.position = spot;
+				m_ObjectBeingPlaced.transform.position = hit.point;
 				//buildingPlacer.transform.position = spot;
 
 
@@ -947,6 +943,7 @@ public class UIManager : MonoBehaviour, IUIManager {
 
 	public void SwitchToModePlacingBuilding(GameObject item)
 	{
+
 		thingToBeBuilt = item;
 		if (m_Mode == Mode.PlaceBuilding) {
 			if (m_ObjectBeingPlaced) {

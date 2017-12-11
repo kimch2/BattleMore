@@ -2,18 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SummonStructure : TargetAbility {
+public class SummonStructure :  UnitProduction{
 
 
 	protected Selected mySelect;
-	public GameObject ToSummon;
+
 	Coroutine currentCharger;
 	UnitManager myManager;
-	public bool OnlyOnPathable;
-
+	Vector3 targetLocation;
+	public float Range;
 	// Use this for initialization
 	void Start () {
-		myType = type.target;
+		myType = type.building;
 		mySelect = GetComponent<Selected> ();
 		myManager = GetComponent<UnitManager> ();
 
@@ -25,7 +25,13 @@ public class SummonStructure : TargetAbility {
 	public continueOrder canActivate(bool showError){
 
 		continueOrder order = new continueOrder ();
-
+		/*
+		if (UIManager.main.m_ObjectBeingPlaced) {
+			if (Vector3.Distance (UIManager.main.m_ObjectBeingPlaced.transform.position, this.transform.position) < Range) {
+				order.canCast = false;
+			}
+		}
+*/
 		if (!myCost.canActivate (this)) {
 			order.canCast = false;
 
@@ -45,23 +51,41 @@ public class SummonStructure : TargetAbility {
 	override
 	public void Activate()
 	{
+		myCost.payCost ();
+		GameObject inConstruction = null;
+
+		Vector3 pos = targetLocation;
+
+		inConstruction = (GameObject)Instantiate (unitToBuild, pos, Quaternion.identity);
+		UnitManager buildingManager = inConstruction.GetComponent<UnitManager> ();
+		BuildingInteractor builder = inConstruction.GetComponent<BuildingInteractor> ();
+
+		buildingManager.PlayerOwner = myManager.PlayerOwner;
+		builder.startConstruction (unitToBuild, 1);
+		buildingManager.setInteractor();
+		buildingManager.interactor.initialize ();
+		inConstruction.GetComponent<Selected> ().Initialize ();
+		buildingManager.myStats.SetHealth (.02f);
+		builder.startSelfConstruction (unitToBuild,buildTime);
+
 	}  // returns whether or not the next unit in the same group should also cast it
 
 
 	override
 	public  void setAutoCast(bool offOn){}
 
-	public override bool isValidTarget (GameObject target, Vector3 location){
+	public bool isValidTarget (GameObject target, Vector3 location){
 
-		if (OnlyOnPathable) {
-			return onPathableGround (location);
-		}
+
 		return true;
 
 	}
 
-
-	override
+	public void setBuildSpot(Vector3 buildSpot, GameObject ghostPlacer)
+	{targetLocation = buildSpot;
+		Destroy (ghostPlacer);
+	}
+		
 	public  bool Cast(GameObject target, Vector3 location)
 	{
 
@@ -70,27 +94,44 @@ public class SummonStructure : TargetAbility {
 		return false;
 
 	}
-	override
+
 	public void Cast(){
 		myCost.payCost ();
 		GameObject inConstruction = null;
 
-		Vector3 pos = location;
-		inConstruction = (GameObject)Instantiate (ToSummon, pos, Quaternion.identity);
+		Vector3 pos = targetLocation;
+		inConstruction = (GameObject)Instantiate (unitToBuild, pos, Quaternion.identity);
 		UnitManager buildingManager = inConstruction.GetComponent<UnitManager> ();
 		BuildingInteractor builder = inConstruction.GetComponent<BuildingInteractor> ();
 	
 		buildingManager.PlayerOwner = myManager.PlayerOwner;
-		builder.startConstruction (ToSummon, 1);
+		builder.startConstruction (unitToBuild, 1);
 		buildingManager.setInteractor();
 		buildingManager.interactor.initialize ();
 		inConstruction.GetComponent<Selected> ().Initialize ();
 		buildingManager.myStats.SetHealth (.02f);
-		while (!builder.ConstructDone ()) {
-			builder.construct (10);
-		}
+		builder.startSelfConstruction (unitToBuild,buildTime);
 
 
+	}
+
+
+	public override void startBuilding(){}
+
+	public override void DeQueueUnit()
+	{
+
+	}
+
+
+	public override void cancelBuilding ()
+	{	
+
+	}
+
+	public override float getProgress ()
+	{
+		return 0;
 	}
 
 

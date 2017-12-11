@@ -54,9 +54,10 @@ public class AbstractCost : MonoBehaviour {
 	{	cooldownTimer = cooldown;
 	//	Debug.Log ("Resting cooldown " + cooldownTimer);
 		while (true){
-			yield return 0;
+			yield return null;
 		if (cooldownTimer > 0) {
 			cooldownTimer -= Time.deltaTime;
+			//	Debug.Log ("Colling " + cooldownTimer + "   " +UsedFor + "  " + this.gameObject);
 			//selectMan.updateCoolDown (cooldownTimer / cooldown);
 		}
 		else

@@ -57,7 +57,6 @@ public class PlaceBuildingState :UnitState {
 			if (myManager.cMover.move ()) {
 				waiting = true;
 				Vector3 endSpot = location;
-				location.y += 5;
 				if (myManager.cMover is airmover) {
 					endSpot.y += ((airmover)myManager.cMover).flyerHeight;
 				}
