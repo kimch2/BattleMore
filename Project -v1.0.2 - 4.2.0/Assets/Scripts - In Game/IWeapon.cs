@@ -376,7 +376,7 @@ public class IWeapon : MonoBehaviour {
 					fireEffect.transform.position = target.transform.position + Vector3.up;
 					fireEffect.playEffect ();
 				}
-				Debug.Log ("Playing eeffect " + fireEffect.gameObject.activeSelf);
+				//Debug.Log ("Playing eeffect " + fireEffect.gameObject.activeSelf);
 			}
 
 		}

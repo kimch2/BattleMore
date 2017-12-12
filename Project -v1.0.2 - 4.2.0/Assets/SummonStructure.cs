@@ -56,7 +56,13 @@ public class SummonStructure :  UnitProduction{
 
 		Vector3 pos = targetLocation;
 
-		inConstruction = (GameObject)Instantiate (unitToBuild, pos, Quaternion.identity);
+		if (this.gameObject.name.Contains( unitToBuild.name)) {
+			Debug.Log ("Loading unit :" + unitToBuild.name);
+			inConstruction = (GameObject)Instantiate (Resources.Load<GameObject> (unitToBuild.name), pos, Quaternion.identity);
+		} else {
+			Debug.Log ("Second unit " + unitToBuild);
+			inConstruction = (GameObject)Instantiate (unitToBuild, pos, Quaternion.identity);
+		}
 		UnitManager buildingManager = inConstruction.GetComponent<UnitManager> ();
 		BuildingInteractor builder = inConstruction.GetComponent<BuildingInteractor> ();
 
