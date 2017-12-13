@@ -288,24 +288,15 @@ public class IWeapon : MonoBehaviour {
 		if (myManager) {
 			myManager.animAttack ();
 		}
-		yield return new WaitForSeconds(time);
 
+		LookAtTarget (target.gameObject);
+		yield return new WaitForSeconds(time);
 
 		enemy = target;
 		if (target) {
-			if (turretClass) {
-				turretClass.Target (enemy.gameObject);
-			}
-			else{
-				//if (!(this is AngleWeapon)) {
-					Vector3 spotter = enemy.transform.position;
-					spotter.y = this.transform.position.y;
-					this.gameObject.transform.LookAt (spotter);
-			//	}
-			}
+			LookAtTarget (target.gameObject);
+
 			float damage = baseDamage;
-
-
 			foreach (bonusDamage tag in extraDamage) {
 				if (target.myStats.isUnitType (tag.type)) {
 					damage += tag.bonus;
@@ -379,6 +370,22 @@ public class IWeapon : MonoBehaviour {
 				//Debug.Log ("Playing eeffect " + fireEffect.gameObject.activeSelf);
 			}
 
+		}
+	}
+
+	void LookAtTarget(GameObject target)
+	{
+		if(target){
+		if (turretClass) {
+				turretClass.Target (target.gameObject);
+		}
+		else{
+			//if (!(this is AngleWeapon)) {
+				Vector3 spotter = target.transform.position;
+			spotter.y = this.transform.position.y;
+			this.gameObject.transform.LookAt (spotter);
+			//	}
+			}
 		}
 	}
 

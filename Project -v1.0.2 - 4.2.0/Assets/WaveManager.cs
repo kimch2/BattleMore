@@ -110,6 +110,7 @@ public class WaveManager : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+		//Debug.Log (Time.timeSinceLevelLoad + "   " + mystartTime + "    " + nextActionTime);
 		if (Time.timeSinceLevelLoad - mystartTime > nextActionTime) {
 
 			float delay = .1f;
@@ -123,10 +124,12 @@ public class WaveManager : MonoBehaviour {
 
 
 			if (currentWaveIndex >= myWaves.Count) {
+
 				return;
 			}
 			if (myWaves [currentWaveIndex].MustBeHere && !myWaves [currentWaveIndex].SpawnObject) {
 				setNextWave ();
+
 				return;
 			} else if ( myWaves [currentWaveIndex].SpawnObject) {
 				spawner = myWaves [currentWaveIndex].SpawnObject;

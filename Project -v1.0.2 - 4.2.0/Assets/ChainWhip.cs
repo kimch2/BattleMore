@@ -99,22 +99,23 @@ public class ChainWhip : MonoBehaviour {
 
 			if (myManager.enemies.Count > 0) {
 
-				myCoro = StartCoroutine (WhipSpin());
+				//myCoro = StartCoroutine (WhipSpin());
 			
 				break;
 			} else {
 				setScale (-2);
 			}
 		}
+		/*
 		if (myManager.enemies.Count > 0) {
-			myCoro = StartCoroutine (WhipSpin ());
+		//	myCoro = StartCoroutine (WhipSpin ());
 			//StopCoroutine (mySpinner);
 
 
 		} else {
-			whipOn = false;
-			myCoro = null;
-		}
+			//whipOn = false;
+		//	myCoro = null;
+		}*/
 	}
 
 	void setScale(float changeAmount)

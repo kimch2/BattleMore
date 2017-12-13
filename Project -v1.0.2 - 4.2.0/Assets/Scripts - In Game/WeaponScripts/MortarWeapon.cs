@@ -10,7 +10,7 @@ public class MortarWeapon : IWeapon {
 
 	public float minimumRange;
 	public float attackArc;
-
+	public float projectileSpeed;
 
 	public override bool checkMinimumRange(UnitManager target)
 	{
@@ -60,6 +60,7 @@ public class MortarWeapon : IWeapon {
 		}
 		MortarProjectile projScript = proj.GetComponent<MortarProjectile> ();
 		projScript.arcAngle = attackArc;
+		projScript.speed = projectileSpeed;
 		return proj;
 
 	}

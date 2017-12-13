@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SimpleSpawner : MonoBehaviour {
 
-
+	public float firstSpawn = 20;
 	public float spawnRate;
 	public bool increasingSpawnRate;
 	public List<GameObject> enemyTypes;
@@ -16,7 +16,7 @@ public class SimpleSpawner : MonoBehaviour {
 	void Start () {
 		difficultyM = GameObject.FindObjectOfType<DifficultyManager> ();
 		if (enemyTypes.Count > 0) {
-			Invoke ("SpawnEnemy", 20);
+			Invoke ("SpawnEnemy", firstSpawn);
 		}
 
 		spawnRate -= ((LevelData.getDifficulty() -1) * 2);

@@ -43,8 +43,7 @@ public class FrontalShield : Ability,Modifier {
 			return amount;
 		}
 		Vector3 direction = src.transform.position - this.gameObject.transform.position;
-		Debug.Log ("Angle " +Vector3.Dot (direction, this.transform.forward) );
-
+	
 		if ((!facingBack && Vector3.Dot (direction, this.transform.forward) > frontAngle) || (facingBack && Mathf.Abs( Vector3.Dot (direction, this.transform.forward)) < frontAngle)) {
 
 		

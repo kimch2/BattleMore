@@ -28,7 +28,7 @@ public class DifficultyManager : MonoBehaviour {
 	public List<GameObject> deleteOnMedium;
 	int difficulty;
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 		difficulty = LevelData.getDifficulty ();
 		Debug.Log (" Difficulty " + difficulty);
 
@@ -97,9 +97,6 @@ public class DifficultyManager : MonoBehaviour {
 				}
 
 			}
-
-
-		
 		}
 	}
 

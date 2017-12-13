@@ -37,8 +37,8 @@ public class BuildingInteractor : MonoBehaviour, Iinteract {
 			doneConstruction = true;
 			underConstruction = 1;
 			if (myAnim) {
-				myAnim.speed = 20;
-				myAnim.SetInteger ("State", 1);
+				//myAnim.speed = 20;
+			//	myAnim.SetInteger ("State", 1);
 			}
 
 		}
@@ -82,10 +82,11 @@ public class BuildingInteractor : MonoBehaviour, Iinteract {
 	public void startSelfConstruction(GameObject obj, float constructionTime)
 	{
 		GameManager.main.playerList [myManager.PlayerOwner - 1].addUnit (myManager);
+		myManager.setStun (true, this, false);
 		sourceObj = obj;
 		doneConstruction = false;
 		//buildTime = buildtime;
-
+	
 		foreach (Ability ab in  GetComponent<UnitManager>().abilityList) {
 			if (ab) {
 				ab.active = false;
@@ -102,10 +103,18 @@ public class BuildingInteractor : MonoBehaviour, Iinteract {
 
 	IEnumerator selfBuild(float constructionTime)
 	{
+		if (myManager.myStats.supply > 0) {
+			GameManager.main.playerList [myManager.PlayerOwner - 1].UnitCreated (myManager.myStats.supply);
+		}
+
 		while (!doneConstruction) {
 			yield return null;
 			construct (Time.deltaTime/constructionTime);
 		}
+		if (myManager.myStats.supply < 0) {
+			GameManager.main.playerList [myManager.PlayerOwner - 1].UnitCreated (myManager.myStats.supply);
+		}
+		myManager.setStun (true, this, false);
 		if (GetComponent<Selected> ().IsSelected) {
 			SelectedManager.main.updateUI ();
 		}
