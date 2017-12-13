@@ -95,6 +95,7 @@
 			}
 
 			if (manage.PlayerOwner != Owner) {
+			manage.myStats.TakeDamage (damage, this.gameObject.gameObject.gameObject, myType);
 				enemies.Add (manage.myStats);
 
 				return;

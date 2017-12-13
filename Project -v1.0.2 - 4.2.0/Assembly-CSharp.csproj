@@ -408,6 +408,7 @@
      <Compile Include="Assets\ResourceGenerator.cs" />
      <Compile Include="Assets\RoamAI.cs" />
      <Compile Include="Assets\RocketBooster.cs" />
+     <Compile Include="Assets\SalvageTarget.cs" />
      <Compile Include="Assets\Sanguinate.cs" />
      <Compile Include="Assets\SanguinAura.cs" />
      <Compile Include="Assets\SateliteScan.cs" />

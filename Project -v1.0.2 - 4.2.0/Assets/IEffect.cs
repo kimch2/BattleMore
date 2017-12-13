@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public abstract class IEffect: MonoBehaviour{
+public interface IEffect{//: MonoBehaviour{
 
 
-	public abstract void apply (GameObject source, GameObject target);
+	 void apply (GameObject source, GameObject target);
 
 
 

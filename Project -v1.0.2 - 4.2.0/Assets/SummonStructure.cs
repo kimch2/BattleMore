@@ -10,6 +10,8 @@ public class SummonStructure :  UnitProduction{
 	Coroutine currentCharger;
 	UnitManager myManager;
 	Vector3 targetLocation;
+
+	public Animator myAnim;
 	public float Range;
 	// Use this for initialization
 	void Start () {
@@ -57,12 +59,15 @@ public class SummonStructure :  UnitProduction{
 		Vector3 pos = targetLocation;
 
 		if (this.gameObject.name.Contains( unitToBuild.name)) {
-			Debug.Log ("Loading unit :" + unitToBuild.name);
-			inConstruction = (GameObject)Instantiate (Resources.Load<GameObject> (unitToBuild.name), pos, Quaternion.identity);
+			//Debug.Log ("Loading unit :" + unitToBuild.name);
+			// this is so it can construct itself as a prefab and not a copy of itself
+			inConstruction = (GameObject)Instantiate (Resources.Load<GameObject> (unitToBuild.GetComponent<UnitManager>().UnitName), pos, Quaternion.identity);
 		} else {
-			Debug.Log ("Second unit " + unitToBuild);
+			//Debug.Log ("Second unit " + unitToBuild);
 			inConstruction = (GameObject)Instantiate (unitToBuild, pos, Quaternion.identity);
 		}
+
+		myAnim.CrossFade ("Summon",3);
 		UnitManager buildingManager = inConstruction.GetComponent<UnitManager> ();
 		BuildingInteractor builder = inConstruction.GetComponent<BuildingInteractor> ();
 

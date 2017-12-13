@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class UndyingArmor :  IEffect,Modifier {
+public class UndyingArmor : MonoBehaviour , IEffect,Modifier{
 
 
 	private bool onTarget;
@@ -41,7 +41,7 @@ public class UndyingArmor :  IEffect,Modifier {
 
 	}
 
-	public override void apply (GameObject source, GameObject target)
+	public void apply (GameObject source, GameObject target)
 	{Debug.Log ("Applying to " + target);
 
 		target.AddComponent<UndyingArmor> ();

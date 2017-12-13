@@ -17,7 +17,7 @@ public class SingleTarget:  TargetAbility {
 
 	Coroutine currentCharger;
 	// Use this for initialization
-	void Start () {
+	protected void Start () {
 		myType = type.target;
 		mySelect = GetComponent<Selected> ();
 		manage = this.gameObject.GetComponent<UnitManager> ();
@@ -45,7 +45,7 @@ public class SingleTarget:  TargetAbility {
 
 		continueOrder order = new continueOrder ();
 
-		if (!myCost.canActivate (this)) {
+		if (myCost && !myCost.canActivate (this)) {
 			order.canCast = false;
 			if (myCost.energy == 0 && myCost.ResourceOne == 0 && chargeCount > 0) {
 				order.canCast = true;
@@ -125,8 +125,9 @@ public class SingleTarget:  TargetAbility {
 					currentCharger = StartCoroutine (increaseCharges ());
 				}
 			}
-			myCost.payCost ();
-		
+			if (myCost) {
+				myCost.payCost ();
+			}
 			GameObject proj = null;
 
 			if (missile) {
@@ -165,8 +166,9 @@ public class SingleTarget:  TargetAbility {
 					currentCharger = StartCoroutine (increaseCharges ());
 				}
 			}
-			myCost.payCost ();
-
+			if (myCost) {
+				myCost.payCost ();
+			}
 			GameObject proj = null;
 
 			if (missile) {
@@ -201,7 +203,9 @@ public class SingleTarget:  TargetAbility {
 		if (chargeCount == 0) {
 			active = false;
 		
+
 		}
+
 		myCost.startCooldown ();
 		yield return new WaitForSeconds (myCost.cooldown-.2f);
 		active = true;

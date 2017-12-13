@@ -1,16 +1,22 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\OreExtractor.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\UnitCardCreater.cs">
     <Files>
-      <File FileName="Assets\Scripts - In Game\UnitManager.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts - In Game\UnitManager.cs" Line="20" Column="16" />
       <File FileName="Assets\SummonStructure.cs" Line="1" Column="1" />
       <File FileName="Assets\BuildStructure.cs" Line="1" Column="1" />
-      <File FileName="Assets\TargetAbility.cs" Line="1" Column="1" />
+      <File FileName="Assets\TargetAbility.cs" Line="8" Column="2" />
       <File FileName="Assets\Scripts - In Game\Selected Units\SelectedManager.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts - In Game\RaceManager.cs" Line="1" Column="1" />
-      <File FileName="Assets\BuildingInteractor.cs" Line="1" Column="1" />
-      <File FileName="Assets\deexaArmor.cs" Line="1" Column="1" />
-      <File FileName="Assets\OreExtractor.cs" Line="19" Column="4" />
+      <File FileName="Assets\SalvageTarget.cs" Line="13" Column="59" />
+      <File FileName="Assets\ChainWhip.cs" Line="54" Column="4" />
+      <File FileName="Assets\SingleTarget.cs" Line="45" Column="3" />
+      <File FileName="Assets\IEffect.cs" Line="10" Column="2" />
+      <File FileName="Assets\Scripts - In Game\UnitStats.cs" Line="34" Column="20" />
+      <File FileName="Assets\Page.cs" Line="217" Column="3" />
+      <File FileName="Assets\UnitCardCreater.cs" Line="168" Column="44" />
+      <File FileName="Assets\SpeedUpgrade.cs" Line="26" Column="27" />
+      <File FileName="Assets\Scripts - In Game\IMover.cs" Line="61" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

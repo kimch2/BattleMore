@@ -41,6 +41,9 @@ public class ChainWhip : MonoBehaviour {
 	{
 		//need to set up calls to listener components
 		//this will need to be refactored for team games
+		if (childWhip) {
+			return;
+		}
 
 		if (!other.isTrigger) {
 
@@ -61,7 +64,8 @@ public class ChainWhip : MonoBehaviour {
 		
 					} else if (!childWhip) {
 						float distance = Vector3.Distance (transform.position, manage.transform.position);
-						manage.myStats.TakeDamage (maxDamage * (distance / maxRadius), myManager.gameObject, DamageTypes.DamageType.Regular);
+						float amount = manage.myStats.TakeDamage (maxDamage * (distance / maxRadius), myManager.gameObject, DamageTypes.DamageType.Regular);
+						myManager.myStats.veteranDamage (amount);
 						SoundManager.PlayOneShotSound (audioSource, hitSound);
 		
 						/*

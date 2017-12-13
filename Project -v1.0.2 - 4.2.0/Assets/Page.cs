@@ -215,7 +215,6 @@ public class Page  {
 
 	public bool validTarget(GameObject target, Vector3 location, int n)
 	{
-		Debug.Log ("CheckingB " + n);
 		int X = n - rows [n / 4] [0].AbilityStartingRow * 4;
 
 		if (rows [n / 4].Count == 0) {

@@ -31,6 +31,7 @@ public class UnitStats : MonoBehaviour {
 
 	public float armor;
 	public float spellResist;
+	public float cost;
 	private UnitManager myManager;
 
 	private List<Modifier> damageModifiers = new List<Modifier>();

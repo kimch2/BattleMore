@@ -111,11 +111,11 @@ public class UnitCardCreater : MonoBehaviour {
 			}
 			VetStats.text +=  currentUnit.myStats.veternStat.UnitName + 
 			"\nKills: " + currentUnit.myStats.veternStat.kills +
-			"\nDamage Dealt: " + currentUnit.myStats.veternStat.damageDone +
+				"\nDamage Dealt: " + ((int)currentUnit.myStats.veternStat.damageDone) +
 			"\nHealing Done: " + currentUnit.myStats.veternStat.healingDone +
 
-			"\nEnergy Charged: " + currentUnit.myStats.veternStat.energyGained+
-			"\nArmor Mitigated\nDamage: " + currentUnit.myStats.veternStat.mitigatedDamage ;
+				"\nEnergy Charged: " + ((int)currentUnit.myStats.veternStat.energyGained)+
+				"\nArmor Mitigated\nDamage: " + ((int)currentUnit.myStats.veternStat.mitigatedDamage) ;
 
 			if (currentUnit.PlayerOwner == 1) {
 				VetBackStory.text = currentUnit.myStats.veternStat.backstory;
@@ -167,7 +167,7 @@ public class UnitCardCreater : MonoBehaviour {
 		if (manager.cMover != null) {
 			if (manager.cMover.getMaxSpeed () > 0) {
 				speedIcon.enabled = true;
-				speed.text = "" + manager.cMover.getMaxSpeed ();
+				speed.text = "" + (int)manager.cMover.getMaxSpeed ();
 			} else {
 				speed.text = blankText;
 				speedIcon.enabled = false;
