@@ -17,6 +17,7 @@ public class ThrasherBlade : Projectile {
 
 	public override void setup()
 	{base.Start ();
+
 		Origin = this.transform.position;
 		EndTarget = target.transform.position;
 		dir = (EndTarget - transform.position);
@@ -27,6 +28,7 @@ public class ThrasherBlade : Projectile {
 		trueROlltime = rollTime;
 		initialSpeed = speed /1.25f;
 		GetComponent<MiningSawDamager> ().Owner = sourceInt;
+		GetComponent<MiningSawDamager> ().myManager = SourceMan;
 	}
 
 	protected override void Update () {

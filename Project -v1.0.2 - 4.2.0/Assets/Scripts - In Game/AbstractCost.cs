@@ -28,7 +28,6 @@ public class AbstractCost : MonoBehaviour {
 		private UnitStats stats;
 
 		private RaceManager myGame;
-		public bool allowedToActivate;
 
 		//private Selected selectMan;
 

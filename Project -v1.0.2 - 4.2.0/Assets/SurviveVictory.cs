@@ -40,8 +40,11 @@ public class SurviveVictory : Objective {
 
 	void WaitFunction()
 	{
-
-		StartCoroutine (endEffects ());
+		if (QuakeBuilding && myParticles) {
+			StartCoroutine (endEffects ());
+		} else {
+			complete ();
+		}
 	}
 
 	IEnumerator endEffects()

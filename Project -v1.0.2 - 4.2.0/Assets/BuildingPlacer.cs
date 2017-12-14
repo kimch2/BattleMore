@@ -21,6 +21,7 @@ public class BuildingPlacer : MonoBehaviour {
 	void Update () {
 
 		if (building) {
+			objects.RemoveAll (item => item == null);
 			if (objects.Count == 0) {
 				Tile t = Grid.main.GetClosestRedTile (this.gameObject.transform.position);
 				if (FogOfWar.current.IsInCompleteFog (this.gameObject.transform.position)) {
@@ -42,7 +43,7 @@ public class BuildingPlacer : MonoBehaviour {
 	}
 
 	public bool canBuild()
-	{  
+	{  		objects.RemoveAll (item => item == null);
 
 		if (objects.Count != 0) {
 			return false;

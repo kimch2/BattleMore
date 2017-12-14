@@ -172,26 +172,12 @@ public class UiAbilityManager : MonoBehaviour {
 						if (abilA != null && abilA.myCost) {
 							if (abilA.myCost.cooldown != 0) {
 
-								float maxA = 0;
-								foreach (RTSObject obj in currentPage.rows [j]) {
-									float n = obj.getUnitManager().abilityList [AbilityX * 4].myCost.cooldownProgress ();
-									if (n > maxA) {
-										maxA = n;
-										if (n > .99f) {
-											break;
-										}
-									}
-
-								}
-
-								certainButtons [j].QSlide.value = maxA;
-							
-								certainButtons [j].QSlide.gameObject.SetActive (certainButtons [j].QSlide.value < .98);
+							setButtonCooldown (certainButtons [j].QSlide,AbilityX * 4, j);
 							}
 						certainButtons [j].Qmoney.enabled = abilA.myCost.ResourceOne > racer.ResourceOne;
-					}else {
+						}else {
 						certainButtons [j].Qmoney.enabled = false;
-					}
+						}
 					}
 					if (man.abilityList.Count >1+ AbilityX * 4) {
 						Ability abilB = man.abilityList [1 + AbilityX * 4];
@@ -199,23 +185,8 @@ public class UiAbilityManager : MonoBehaviour {
 
 						if (abilB.myCost.cooldown != 0) {
 
+							setButtonCooldown (certainButtons [j].WSlide, 1 + AbilityX * 4, j);
 
-							float maxA = 0;
-							foreach (RTSObject obj in currentPage.rows [j]) {
-								float n = obj.getUnitManager ().abilityList [1 + AbilityX * 4].myCost.cooldownProgress ();
-								if (n > maxA) {
-									maxA = n;
-									if (n > .99f) {
-										break;
-									}
-								}
-
-							}
-
-
-							certainButtons [j].WSlide.value = maxA;
-							
-							certainButtons [j].WSlide.gameObject.SetActive (certainButtons [j].WSlide.value < .98);
 						}
 						certainButtons [j].Wmoney.enabled = abilB.myCost.ResourceOne > racer.ResourceOne;
 
@@ -229,20 +200,8 @@ public class UiAbilityManager : MonoBehaviour {
 
 							if (abilC.myCost.cooldown != 0) {
 
+							setButtonCooldown (certainButtons [j].ESlide, 2 + AbilityX * 4, j);
 
-								float maxA = 0;
-								foreach (RTSObject obj in currentPage.rows [j]) {
-									float n = obj.getUnitManager().abilityList [2 + AbilityX * 4].myCost.cooldownProgress ();
-									if (n > maxA) {
-										maxA = n;
-										if (n > .99f) {
-											break;
-										}
-									}
-								}
-
-								certainButtons [j].ESlide.value = maxA;
-								certainButtons [j].ESlide.gameObject.SetActive (certainButtons [j].ESlide.value < .98);
 							}
 						certainButtons [j].Emoney.enabled = abilC.myCost.ResourceOne > racer.ResourceOne;
 					}else {
@@ -256,21 +215,8 @@ public class UiAbilityManager : MonoBehaviour {
 
 						if (abilD.myCost.cooldown != 0) {
 
-								float maxA = 0;
-								foreach (RTSObject obj in currentPage.rows [j]) {
-									float n = obj.getUnitManager().abilityList [3 + AbilityX * 4].myCost.cooldownProgress ();
+							setButtonCooldown (certainButtons [j].RSlide, 3 + AbilityX * 4, j);
 
-
-									if (n > maxA) {
-										maxA = n;
-										if (n > .99f) {
-											break;
-										}
-									}
-								}
-
-								certainButtons [j].RSlide.value = maxA;
-								certainButtons [j].RSlide.gameObject.SetActive (certainButtons [j].RSlide.value < .98);	
 							}
 						certainButtons [j].Rmoney.enabled = abilD.myCost.ResourceOne > racer.ResourceOne;
 					}else {
@@ -288,6 +234,27 @@ public class UiAbilityManager : MonoBehaviour {
 	}
 
 
+
+	void setButtonCooldown(Slider slide, int abilityNum, int row)
+	{
+		float maxA = 0;
+		foreach (RTSObject obj in currentPage.rows [row]) {
+			if (obj.getUnitManager ().abilityList [abilityNum].active) {
+				float n = obj.getUnitManager ().abilityList [abilityNum].myCost.cooldownProgress ();
+
+
+				if (n > maxA) {
+					maxA = n;
+					if (n > .99f) {
+						break;
+					}
+				}
+			}
+		}
+
+		slide.value = maxA;
+		slide.gameObject.SetActive (maxA < .98);	
+	}
 
 	public void IconClick(GameObject obj)
 	{
@@ -603,6 +570,7 @@ public class UiAbilityManager : MonoBehaviour {
 								trans.GetComponent<Button> ().interactable = true;
 							} else {
 							cb.disabledColor = disabledColor;
+							Debug.Log ("Turning Off");
 								trans.GetComponent<Button> ().interactable = false;
 
 							}

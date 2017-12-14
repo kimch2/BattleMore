@@ -114,7 +114,7 @@ public class BuildingInteractor : MonoBehaviour, Iinteract {
 		if (myManager.myStats.supply < 0) {
 			GameManager.main.playerList [myManager.PlayerOwner - 1].UnitCreated (myManager.myStats.supply);
 		}
-		myManager.setStun (true, this, false);
+		myManager.setStun (false, this, false);
 		if (GetComponent<Selected> ().IsSelected) {
 			SelectedManager.main.updateUI ();
 		}

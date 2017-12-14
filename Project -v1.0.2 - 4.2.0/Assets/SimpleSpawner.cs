@@ -33,7 +33,7 @@ public class SimpleSpawner : MonoBehaviour {
 
 
 		
-		GameObject unit = (GameObject)Instantiate (enemyTypes [Random.Range (0, enemyTypes.Count - 1)], this.transform.position, Quaternion.identity);
+		GameObject unit = (GameObject)Instantiate (enemyTypes [Random.Range (0, enemyTypes.Count)], this.transform.position, Quaternion.identity);
 		difficultyM.SetUnitStats (unit);
 		unit.GetComponent<UnitManager> ().GiveOrder (Orders.CreateAttackMove (attackPoint));
 		if (increasingSpawnRate && spawnRate > .8f) {

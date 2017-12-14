@@ -41,9 +41,6 @@ public class ChainWhip : MonoBehaviour {
 	{
 		//need to set up calls to listener components
 		//this will need to be refactored for team games
-		if (childWhip) {
-			return;
-		}
 
 		if (!other.isTrigger) {
 
@@ -59,6 +56,14 @@ public class ChainWhip : MonoBehaviour {
 
 
 				if (manage.PlayerOwner != myManager.PlayerOwner) {
+					if (childWhip) {
+
+						if (myCoro == null) {
+							myCoro = StartCoroutine (WhipSpin ());
+							//mySpinner = StartCoroutine (UpdateRotation ());
+						}
+					}
+
 	
 					if (childWhip && myWeap.simpleCanAttack (manage)) {
 		
@@ -88,8 +93,8 @@ public class ChainWhip : MonoBehaviour {
 		yield return null;
 
 		while (myManager.enemies.Count > 0) {
-			setScale (2);
-			yield return new WaitForSeconds (.2f);
+			setScale (1.2f);
+			yield return new WaitForSeconds (.12f);
 			myManager.enemies.RemoveAll (item => item == null);
 		
 		}
@@ -106,16 +111,15 @@ public class ChainWhip : MonoBehaviour {
 				setScale (-2);
 			}
 		}
-		/*
+
 		if (myManager.enemies.Count > 0) {
-		//	myCoro = StartCoroutine (WhipSpin ());
+			myCoro = StartCoroutine (WhipSpin ());
 			//StopCoroutine (mySpinner);
 
-
 		} else {
-			//whipOn = false;
-		//	myCoro = null;
-		}*/
+			whipOn = false;
+			myCoro = null;
+		}
 	}
 
 	void setScale(float changeAmount)
@@ -144,7 +148,7 @@ public class ChainWhip : MonoBehaviour {
 	}
 
 
-	void Update () 
+	void LateUpdate () 
 	{ 
 	if (whipOn) {
 			

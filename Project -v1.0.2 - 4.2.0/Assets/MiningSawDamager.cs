@@ -17,7 +17,7 @@
 		public float turretRatio = .2f;
 	private AudioSource myAudio;
 	public AudioClip chopSound;
-
+	public UnitManager myManager;
 	private int iter = 0;
 
 
@@ -34,13 +34,17 @@
 				if (enemies.Count > 0) {
 	
 					enemies.RemoveAll (item => item == null);
+
+			float amount = 0;
 					foreach (UnitStats s in enemies) {
 
 					if (s.isUnitType (UnitTypes.UnitTypeTag.Turret)) {
-						s.TakeDamage (damage * (turretRatio), this.gameObject.gameObject.gameObject, myType);
+					amount += 	s.TakeDamage (damage * (turretRatio), this.gameObject.gameObject.gameObject, myType);
+				
 					} else {
 
-						s.TakeDamage (damage, this.gameObject.gameObject.gameObject, myType);
+					 amount += s.TakeDamage (damage, this.gameObject.gameObject.gameObject, myType);
+
 						iter++;
 						if (iter == 6) {
 								PopUpMaker.CreateGlobalPopUp (-(damage*2) + "", Color.red, s.gameObject.transform.position);
@@ -52,6 +56,9 @@
 					}
 					//obj.transform.SetParent (this.gameObject.transform);
 					}
+			if (myManager) {
+				myManager.myStats.veteranDamage (amount);
+			}
 				}
 
 
@@ -95,7 +102,10 @@
 			}
 
 			if (manage.PlayerOwner != Owner) {
-			manage.myStats.TakeDamage (damage, this.gameObject.gameObject.gameObject, myType);
+			float amount = manage.myStats.TakeDamage (damage, this.gameObject.gameObject.gameObject, myType);
+			if (myManager) {
+				myManager.myStats.veteranDamage (amount);
+			}
 				enemies.Add (manage.myStats);
 
 				return;
@@ -106,7 +116,12 @@
 
 
 		void OnTriggerExit(Collider other)
-		{UnitManager manage = other.gameObject.GetComponent<UnitManager> ();
+		{
+		if (other.isTrigger || other.gameObject.layer == 15) {
+			return;}
+
+
+		UnitManager manage = other.gameObject.GetComponent<UnitManager> ();
 
 
 			if (manage == null) {
