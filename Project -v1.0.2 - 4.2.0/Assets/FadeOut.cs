@@ -8,9 +8,9 @@ public class FadeOut : MonoBehaviour {
 	public float fadeLength;
 	public Image myImage;
 	public Text myText;
-	private float fadeStartTime;
+	private float fadeStartTime = .75f;
 
-
+	public float textfadeInTime;
 
 	public static FadeOut main;
 	// Use this for initialization
@@ -20,7 +20,9 @@ public class FadeOut : MonoBehaviour {
 		fadeStartTime = blackTime;
 		myImage.enabled = true;
 		myText.enabled = true;
-
+		if (textfadeInTime > 0) {
+			StartCoroutine (fadeInText());
+		}
 	
 	}
 	
@@ -30,7 +32,7 @@ public class FadeOut : MonoBehaviour {
 		if (Time.timeSinceLevelLoad > fadeStartTime) {
 			
 			myImage.color = new Color (0, 0, 0, 1 - (Time.timeSinceLevelLoad -  fadeStartTime) / fadeLength);
-			myText.color = new Color (1, 1, 1, 1 - (Time.timeSinceLevelLoad -  fadeStartTime) / fadeLength);
+			myText.color = new Color (myText.color.r, myText.color.g, myText.color.b, 1 - (Time.timeSinceLevelLoad -  fadeStartTime +1f) / fadeLength);
 
 			if (Time.timeSinceLevelLoad >fadeStartTime + fadeLength) {
 				myImage.color = new Color (0, 0, 0, 0);
@@ -39,13 +41,21 @@ public class FadeOut : MonoBehaviour {
 				this.enabled = false;
 			}
 		} else {
-			MainCamera.main.goToStart ();
+			if (MainCamera.main) {
+				MainCamera.main.goToStart ();
+			}
 		}
 
 	
 	}
 
-
+	IEnumerator fadeInText()
+	{	
+		for (float i = 0; i < textfadeInTime; i += Time.deltaTime) {
+			yield return null;
+			myText.color = new Color (myText.color.r, myText.color.g, myText.color.b, (i / textfadeInTime));
+		}	
+	}
 
 
 	public void startFade(float length)

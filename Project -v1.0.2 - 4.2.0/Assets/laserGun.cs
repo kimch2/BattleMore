@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class laserGun : MonoBehaviour {
 
 
-
+	public bool raycastToUI;
 	Camera myCam;
 	GameObject lastHit;
 
@@ -17,13 +17,13 @@ public class laserGun : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if (!isPointerOverUIObject()) {
+		if (!isPointerOverUIObject() || raycastToUI) {
 
 			Ray rayb = myCam.ScreenPointToRay (Input.mousePosition);
 			RaycastHit hitb;
 
 			if (Physics.Raycast (rayb, out hitb, Mathf.Infinity, ~(1 << 16))) {
-
+				Debug.Log ("hitting " + hitb.collider.gameObject);
 				if (hitb.collider.gameObject != lastHit) {
 					
 					if (lastHit && lastHit.GetComponent<MouseClicker> ()) {

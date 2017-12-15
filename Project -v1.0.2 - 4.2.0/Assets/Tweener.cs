@@ -9,7 +9,7 @@ public class Tweener : MonoBehaviour {
 	public int startingStateIndex;
 	public List<TweenState> MyStates;
 	TweenState currenState;
-
+	public float defaultTweenTime = .85f;
 	void Start()
 	{
 		//GoToPose (myPoses[0].PoseName, 5);
@@ -39,7 +39,7 @@ public class Tweener : MonoBehaviour {
 			currenState = MyStates.Find (ii => ii.StateName == nextStateName);
 			GoToPose (nextStateName, toMove.transitionTime);
 		} else {
-			GoToPose(input,.85f);
+			GoToPose(input,defaultTweenTime);
 		}
 		// MyStates.Find(item => item == nextStateName);
 
@@ -51,11 +51,11 @@ public class Tweener : MonoBehaviour {
 	public void GoToPose(string nextPoseName)
 	{//Debug.Log ("Going to pose " + nextPoseName + "  " + this.gameObject + "  " + currentTweens.Count);
 
-		GoToPose (nextPoseName,1);
+		GoToPose (nextPoseName,defaultTweenTime);
 	}
 
 	public void GoToPose(string nextPoseName,float tweenTime =1)
-	{//Debug.Log ("Going to pose " + nextPoseName + "  " + this.gameObject + "  " + currentTweens.Count);
+	{//Debug.Log ("Going to pose " + nextPoseName + "  " + this.gameObject + "  " +tweenTime);
 		foreach (AnimationPose pose in myPoses) {
 			
 			if (pose.PoseName == nextPoseName) {
@@ -68,8 +68,10 @@ public class Tweener : MonoBehaviour {
 	void ShiftToPose(AnimationPose pose, float tweenTime)
 	{
 		StopAllTweens ();
-
-		Coroutine myCorout = StartCoroutine (Tween(pose, tweenTime));
+		Coroutine myCorout = null;
+		if (this.gameObject.activeInHierarchy) {
+			myCorout = StartCoroutine (Tween (pose, tweenTime));
+		}
 		//Debug.Log ("adding " + nextPoseName);
 		currentTweens.Add (pose.PoseName, myCorout);
 	}
