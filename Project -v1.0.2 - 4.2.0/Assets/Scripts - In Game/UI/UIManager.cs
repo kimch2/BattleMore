@@ -42,10 +42,10 @@ public class UIManager : MonoBehaviour, IUIManager {
 
 	//Used for right click Formations
 	private Vector2 rightClickOrigin;
+	private Vector3 rightClickEnd;
 	private bool rightClickDrag;
 	private LineRenderer lineRender;
 	private Vector3 rightClickOrThree = Vector3.zero;
-
 
 	private float lastClickDouble;
 	public bool IsShiftDown
@@ -80,8 +80,8 @@ public class UIManager : MonoBehaviour, IUIManager {
 		lineRender = GetComponent<LineRenderer> ();
 		fog = GameObject.FindObjectOfType<FogOfWar> ();
 		//Resolve interface variables
-		m_SelectedManager =  GameObject.FindObjectOfType<SelectedManager>();
-		m_Camera = GameObject.FindObjectOfType<MainCamera> (); //ManagerResolver.Resolve<ICamera>();	
+		m_SelectedManager = SelectedManager.main;// GameObject.FindObjectOfType<SelectedManager>();
+		m_Camera =  MainCamera.main;//  GameObject.FindObjectOfType<MainCamera> (); //ManagerResolver.Resolve<ICamera>();	
 		m_GuiManager =GameObject.FindObjectOfType<GUIManager>();// ManagerResolver.Resolve<IGUIManager>();
 	
 		//Attach Event Handlers
@@ -93,8 +93,8 @@ public class UIManager : MonoBehaviour, IUIManager {
 		eventsManager.KeyAction += KeyBoardPressedHandler;
 		eventsManager.ScreenEdgeMousePosition += MouseAtScreenEdgeHandler;
 
-		raceManager = GameObject.FindGameObjectWithTag ("GameRaceManager").GetComponent<GameManager>().activePlayer;
-	
+		raceManager = GameManager.main.activePlayer;
+		formationLight = Resources.Load<GameObject> ("FormationLight");
 
 	}
 	
@@ -119,7 +119,16 @@ public class UIManager : MonoBehaviour, IUIManager {
 
 
 				rightClickDrag = true;
+
+				if (formationCoroutine != null) {
+					StopCoroutine (formationCoroutine);
+				}
+
+				formationCoroutine = StartCoroutine (formationDisplay());
+
+
 			}
+
 		
 		} 
 
@@ -134,11 +143,11 @@ public class UIManager : MonoBehaviour, IUIManager {
 				Ray rayb = Camera.main.ScreenPointToRay (Input.mousePosition);
 				RaycastHit hitb;
 				Vector3 b = Vector3.zero;
-				if (Physics.Raycast (rayb, out hitb, Mathf.Infinity,~((1 << 16) | (1 << 20)))) {
-					b = hitb.point + Vector3.up*2;
+				if (Physics.Raycast (rayb, out hitb, Mathf.Infinity, 1 << 8)){
+					rightClickEnd = hitb.point + Vector3.up*2;
 				}
-
-				lineRender.SetPositions (new Vector3[2] { rightClickOrThree, b });
+			
+				lineRender.SetPositions (new Vector3[2] { rightClickOrThree, rightClickEnd });
 			} else {
 				lineRender.enabled = false;}
 
@@ -850,7 +859,78 @@ public class UIManager : MonoBehaviour, IUIManager {
 			}
 		}
 	}
-	
+
+
+	List<GameObject> formationLights = new List<GameObject>();
+	GameObject formationLight;
+	Coroutine formationCoroutine = null;
+	IEnumerator formationDisplay()
+	{ // The code here is basically a duplicate of the code in the selectedManager for formation Ordering
+		Vector3 superUp = Vector3.up * 40;
+		yield return new WaitForSeconds (.01f);
+
+		while (rightClickDrag && m_SelectedManager.ActiveObjectList ().Count > 0) {
+
+			if (Vector2.Distance (Input.mousePosition, rightClickOrigin) > 45) {
+
+				List<RTSObject> trueMovers = new List< RTSObject> ();
+
+				Vector3 middlePoint = Vector3.zero;
+				foreach (RTSObject obj in m_SelectedManager.ActiveObjectList ()) {
+					if (obj.getUnitManager ().cMover) {
+						trueMovers.Add (obj);
+						middlePoint += obj.transform.position;
+					}
+				}
+				
+				middlePoint /= trueMovers.Count;
+
+				float angle = (float)(Mathf.Atan2 (rightClickEnd.x - rightClickOrThree.x, rightClickEnd.z - rightClickOrThree.z) / Mathf.PI) * 180;
+		
+				if (angle < 0) {
+					angle += 360;
+				}
+				angle += 90;
+				Vector3 newPoint = Vector3.Lerp (rightClickOrThree, rightClickEnd, .5f);
+
+				float sepDistance = Vector3.Distance (newPoint, rightClickEnd) / 15;
+				sepDistance = Math.Max (sepDistance, 1.2f);
+				List<Vector3> points = Formations.getFormation (trueMovers.Count, Mathf.Min (3f, sepDistance));
+				for (int t = 0; t < points.Count; t++) {
+					points [t] = Quaternion.Euler (0, angle, 0) * points [t] + newPoint;
+				}
+
+
+
+				int x = formationLights.Count;
+				for (int n = x; n < m_SelectedManager.ActiveObjectList ().Count; n++) {
+					formationLights.Add (Instantiate<GameObject> (formationLight));
+				}
+
+				for (int i = 0; i < formationLights.Count; i++) {
+					if (i < m_SelectedManager.ActiveObjectList ().Count) {
+						formationLights [i].SetActive (true);
+						formationLights [i].transform.position = points [i] + superUp;
+						formationLights [i].transform.localEulerAngles = new Vector3 (0,angle,0);
+					} else {
+						formationLights [i].SetActive (false);
+					}
+				}
+				yield return null;
+		
+			} else {
+				for (int i = 0; i < formationLights.Count; i++) {
+					formationLights [i].SetActive (false);
+				}
+			}
+			yield return null;
+		}
+		formationCoroutine = null;
+		for (int i = 0; i < formationLights.Count; i++) {
+			formationLights [i].SetActive (false);
+		}
+
+	}
 
 	public void MiddleButton_SingleClick(MouseEventArgs e)
 	{

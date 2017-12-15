@@ -893,22 +893,24 @@ public class SelectedManager : MonoBehaviour, ISelectedManager
 
 		middlePoint /= MoverCount;
 
+
+
+
 		float angle;
+
 		if (sepDistance == 1) {
-			angle = Vector2.Angle (Vector2.up, new Vector2 (middlePoint.x - targetPoint.x, middlePoint.z - targetPoint.z));
+			angle = (float)(Mathf.Atan2 (middlePoint.x - targetPoint.x, middlePoint.z - targetPoint.z) / Mathf.PI) * 180;
 		} else {
-			//Used when there is a right click drag spread formation
-			angle = Vector2.Angle (Vector2.up, new Vector2 (secondPoint.x - targetPoint.x, secondPoint.z - targetPoint.z)) + 90;
+			angle = (float)(Mathf.Atan2(secondPoint.x - targetPoint.x,secondPoint.z - targetPoint.z) / Mathf.PI) * 180 + 90;
 			targetPoint = Vector3.Lerp (targetPoint, secondPoint, .5f);
 		}
-		if (middlePoint.x < targetPoint.x) {
-			angle *= -1;
-		} 
+			
 
-		List<Vector3> points = Formations.getFormation (MoverCount, Mathf.Min (2, sepDistance));
+		float sepDistanceD = Vector3.Distance (targetPoint, secondPoint) / 15;
+		sepDistance = Mathf.Max (sepDistance, 1.2f);
+		List<Vector3> points = Formations.getFormation (MoverCount, Mathf.Min(3f, sepDistance));
 		for (int t = 0; t < points.Count; t++) {
-	
-			points [t] = Quaternion.Euler (0, angle, 0) * points [t] + targetPoint;
+			points [t] = Quaternion.Euler (0, angle, 0) * points [t] +  targetPoint;
 		}
 
 
