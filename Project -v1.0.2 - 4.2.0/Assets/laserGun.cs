@@ -23,7 +23,7 @@ public class laserGun : MonoBehaviour {
 			RaycastHit hitb;
 
 			if (Physics.Raycast (rayb, out hitb, Mathf.Infinity, ~(1 << 16))) {
-				Debug.Log ("hitting " + hitb.collider.gameObject);
+			//	Debug.Log ("hitting " + hitb.collider.gameObject);
 				if (hitb.collider.gameObject != lastHit) {
 					
 					if (lastHit && lastHit.GetComponent<MouseClicker> ()) {

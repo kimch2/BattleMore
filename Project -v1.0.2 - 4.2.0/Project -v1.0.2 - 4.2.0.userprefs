@@ -1,12 +1,16 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Tweener.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\GameTips.cs">
     <Files>
       <File FileName="Assets\Scripts - In Game\UnitManager.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts - In Game\Selected Units\SelectedManager.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts - In Game\UI\UIManager.cs" Line="1" Column="1" />
       <File FileName="Assets\Prefabs\Level2\Formations.cs" Line="1" Column="1" />
-      <File FileName="Assets\Tweener.cs" Line="56" Column="5" />
+      <File FileName="Assets\Tweener.cs" Line="1" Column="1" />
+      <File FileName="Assets\MouseOver.cs" Line="1" Column="1" />
+      <File FileName="Assets\laserGun.cs" Line="1" Column="1" />
+      <File FileName="Assets\HotkeyMenu.cs" Line="1" Column="1" />
+      <File FileName="Assets\GameTips.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

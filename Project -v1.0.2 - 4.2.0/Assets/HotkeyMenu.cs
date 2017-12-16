@@ -140,7 +140,7 @@ public class HotkeyMenu : MonoBehaviour {
 				GameObject tempName = (GameObject)Instantiate (name, this.gameObject.transform.position, Quaternion.identity);
 				tempName.transform.SetParent (grid.transform);
 	
-				tempName.GetComponent<Text> ().text = obj.GetComponent<UnitManager> ().UnitName;
+				tempName.GetComponent<Text> ().text = obj.GetComponent<UnitManager> ().UnitName + "    ";
 
 				for (int i = 0; i < 4; i++) {
 

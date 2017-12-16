@@ -25,7 +25,6 @@ public class MouseOver : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
 	public void OnPointerEnter(PointerEventData eventd)
 	{
-		Debug.Log ("Triggering Enter " + this.gameObject);
 		executeOnHover ();
 		//toolbox.gameObject.GetComponentInChildren<Text> ().text = helpText;
 	}

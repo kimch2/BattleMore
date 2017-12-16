@@ -133,10 +133,12 @@ public class Tweener : MonoBehaviour {
 	IEnumerator Tween(AnimationPose pose, float tweenTime)
 	{
 		pose.setStartPoses ();
-		for (float i = 0; i < tweenTime; i += Time.deltaTime) {
+
+		//Time.unscaledDeltaTime.captureFramerate
+		for (float i = 0; i < tweenTime; i += Time.timeScale == 0 ?  (1/Time.unscaledDeltaTime) : Time.deltaTime) {
 			pose.updateTween (i / tweenTime);
 		
-			yield return null;
+			yield return 0;
 		}
 		pose.updateTween (1);
 		//Debug.Log ("Ending tween " + pose.PoseName);
