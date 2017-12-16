@@ -47,6 +47,15 @@ public class Tweener : MonoBehaviour {
 
 	}
 
+	public void goStraightToState(string stateName)
+	{
+		foreach (TweenState stat in MyStates) {
+			if (stat.StateName == stateName) {
+				currenState = stat;
+				GoToPose (stateName);
+			}
+		}
+	}
 
 	public void GoToPose(string nextPoseName)
 	{//Debug.Log ("Going to pose " + nextPoseName + "  " + this.gameObject + "  " + currentTweens.Count);
