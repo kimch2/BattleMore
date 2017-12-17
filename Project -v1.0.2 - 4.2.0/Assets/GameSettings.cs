@@ -8,6 +8,36 @@ public class GameSettings {
 	public static float gameSpeed = -1;
 
 
+	public static float getUnitResponseFreq()
+	{
+		return PlayerPrefs.GetFloat ("UnitResponse",5);
+	}
+	public static float getBaseAlertFreq()
+	{
+		return PlayerPrefs.GetFloat ("BaseAlert",10);
+	}
+
+	public static void setUnitResponseFreq(float amount)
+	{
+		SelectedManager.main.unitResponseFrequancy = amount;
+		PlayerPrefs.SetFloat ("UnitResponse",amount);
+	}
+	public static void setBaseAlertFreq(float amount)
+	{
+		ErrorPrompt.instance.errorFreq = amount;
+		PlayerPrefs.SetFloat ("BaseAlert",amount);
+	}
+
+
+	public static void setWaveWarning(bool active)
+	{
+		PlayerPrefs.SetInt ("WaveWarning", active ? 1 : 0);
+	}
+	public static bool getWaveWarning()
+	{
+		return PlayerPrefs.GetInt ("WaveWarning",1) == 1;
+	}
+
 
 
 	public static float getMusicVolume()

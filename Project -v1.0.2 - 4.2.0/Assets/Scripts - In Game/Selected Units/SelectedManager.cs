@@ -42,7 +42,7 @@ public class SelectedManager : MonoBehaviour, ISelectedManager
 	public AudioClip attackSound;
 	private AudioSource AudioSrc;
 
-	private int soundIndex;
+	public float unitResponseFrequancy; // between .35 (14 second min and 2 (2.5 second minimum))
  
     void Start()
 	{
@@ -704,14 +704,8 @@ public class SelectedManager : MonoBehaviour, ISelectedManager
 			AudioSrc.PlayOneShot (attackSound,.1f);
 		}
 
-	if (Time.time > lastVoiceTime + 5) {
+		if (Time.time > lastVoiceTime + (5 / unitResponseFrequancy)) {
 			
-		soundIndex++;
-		if (soundIndex > 12) {
-			soundIndex = 0;
-		}
-		if(soundIndex != 1)
-			{return;}
 
 			UnitManager listTop = SelectedObjects [0].getUnitManager();
 			lastVoiceTime = Time.time;

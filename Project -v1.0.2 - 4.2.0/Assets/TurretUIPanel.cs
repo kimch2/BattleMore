@@ -10,6 +10,13 @@ public class TurretUIPanel : MonoBehaviour {
 
 
 	public Image personPic;
+	public static TurretUIPanel main;
+
+	void Awake()
+	{
+		main = this;
+	}
+
 
 	// Use this for initialization
 	void Start () {

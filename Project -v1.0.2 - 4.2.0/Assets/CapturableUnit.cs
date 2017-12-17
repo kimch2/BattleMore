@@ -6,6 +6,7 @@ public class CapturableUnit : MonoBehaviour {
 
 	public List<UnitManager> myManagers = new List<UnitManager>();
 	public bool cutscene;
+	bool alreadyCaptured;
 	//Add all managers in the unit to this list
 	// In order to use this, set the units playerNumber(UnitManager) to 3
 	// and disable the FogOfWarUnitScript
@@ -30,18 +31,19 @@ public class CapturableUnit : MonoBehaviour {
 
 	public void capture()
 	{
+		if (!alreadyCaptured) {
+			alreadyCaptured = true;
+			foreach (UnitManager manager in myManagers) {
+				if (manager) {
+					StartCoroutine (SwapUnits (manager));
+				}
+			}
 
-		foreach (UnitManager manager in myManagers) {
-			if (manager) {
-				StartCoroutine (SwapUnits (manager));
+			OnCapture.Invoke ();
+			if (cutscene) {
+				GameObject.FindObjectOfType<MainCamera> ().setCutScene (this.gameObject.transform.position, 120);
 			}
 		}
-
-		OnCapture.Invoke ();
-		if (cutscene) {
-			GameObject.FindObjectOfType<MainCamera> ().setCutScene (this.gameObject.transform.position, 120);
-		}
-	
 
 	}
 

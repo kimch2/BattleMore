@@ -7,8 +7,8 @@ public class BuildUnitObjective : Objective  {
 	public List<GameObject> unitsToBuild = new List<GameObject> ();
 	public bool anyCombo;
 
-	private int total = -3;
-
+	private int total = 0;
+	public bool startCountingWhenTriggered = true;
 	void Start()
 	{
 		base.Start ();
@@ -19,13 +19,18 @@ public class BuildUnitObjective : Objective  {
 
 	public void buildUnit(UnitManager obj)
 	{
+		if (startCountingWhenTriggered && !started) {
+			return;
+		}
 
 		for (int i = 0; i < unitsToBuild.Count; i++) {
 
+		
 			if (unitsToBuild [i].GetComponent<UnitManager> ().UnitName == obj.UnitName) {
+
+
 				if (anyCombo) {
 					total++;
-					//Debug.Log (total +"  " +unitsToBuild.Count );
 					if (total == unitsToBuild.Count) {
 						complete ();
 					}

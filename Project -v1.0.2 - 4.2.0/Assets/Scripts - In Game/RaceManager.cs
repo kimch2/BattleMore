@@ -474,6 +474,7 @@ public class RaceManager : MonoBehaviour, ManagerWatcher {
 
 	public void addUnit(UnitManager obj )
 	{
+		
 
 		if (!unitRoster.ContainsKey (obj.UnitName)) {
 			unitRoster.Add(obj.UnitName, new List<UnitManager>());

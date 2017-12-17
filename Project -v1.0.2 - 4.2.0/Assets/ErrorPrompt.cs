@@ -17,7 +17,7 @@ public class ErrorPrompt : MonoBehaviour {
 	int currentAlertIndex;
 
 	float lastErrorTime;
-
+	public float errorFreq;
 
 
 	public void showError(string err)
@@ -139,8 +139,8 @@ public class ErrorPrompt : MonoBehaviour {
 	}
 	
 	public void underAttack(Vector3 location)
-	{
-		if (Time.time > lastAttackAlert + 10 &&!checkIfOnScreen(location)) {
+	{	
+			if (lastAttackAlert + (10 / errorFreq) < Time.time &&!checkIfOnScreen(location)) {
 			showError ("Under Attack!", myVoicePack.getTroopAttackLine());
 			addAlertLocation( location);
 		
@@ -162,7 +162,7 @@ public class ErrorPrompt : MonoBehaviour {
 	public void underBaseAttack(Vector3 location)
 	{
 
-		if (Time.time > lastAttackAlert + 10 && !checkIfOnScreen(location)) {
+		if (lastAttackAlert + (10 / errorFreq) < Time.time &&!checkIfOnScreen(location)) {
 			showError ("Base Under Attack!", myVoicePack.getbaseAttackedLine());
 			addAlertLocation( location);
 
@@ -173,7 +173,10 @@ public class ErrorPrompt : MonoBehaviour {
 
 
 	public void EnemyWave(WaveContainer.waveWarningType waveType)
-	{ExpositionDisplayer.instance.displayText ("", 5, myVoicePack.getEnemyWaveLine(), 1, null, 4);
+	{
+		if (GameSettings.getWaveWarning ()) {
+			ExpositionDisplayer.instance.displayText ("", 5, myVoicePack.getEnemyWaveLine (), 1, null, 4);
+		}
 		//showError ("Enemy Wave Detected!", myVoicePack.getbaseAttackedLine());
 	}
 

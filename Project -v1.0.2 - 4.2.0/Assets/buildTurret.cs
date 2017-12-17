@@ -35,7 +35,7 @@ public class buildTurret :UnitProduction{
 		mySelect = GetComponent<Selected> ();
 
 		myCost.cooldown = buildTime;
-		racer = GameObject.FindGameObjectWithTag ("GameRaceManager").GetComponent<RaceManager> ();
+		racer = GameManager.main.playerList [manager.PlayerOwner - 1]; 
 		HD = GetComponentInChildren<HealthDisplay>();
 
 		if (rapidArms) {

@@ -236,7 +236,7 @@ public class UnitManager : Unit,IOrderable{
 	// Update is called once per frame
 	new void Update () {
 		if (myState != null && !isStunned) {
-
+			//Debug.Log ("This " + this.gameObject  + "  " + myState);
 			myState.Update ();
 		} 
 	}
@@ -793,13 +793,12 @@ public class UnitManager : Unit,IOrderable{
 				cMover.stop ();
 			}
 		} else {
-			if (stunSources.Contains (source)) {
 			
-				stunSources.Remove (source);
-			} else {stunSources.RemoveAll (item => item == null);
-			}
-		}
+			stunSources.Remove (source);
+			stunSources.RemoveAll (item => item == null);
 
+		}
+	//	Debug.Log ("StunningBB " + StunOrNot + "   " + stunSources.Count + "   " + stunSources[0]);
 			isStunned = (stunSources.Count > 0);
 
 		//Debug.Log ("Is stunned ");

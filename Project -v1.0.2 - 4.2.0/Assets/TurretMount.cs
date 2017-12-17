@@ -25,7 +25,7 @@ public class TurretMount : MonoBehaviour, Modifier {
 			}
 		
 
-			foreach (TurretScreenDisplayer tm in GameObject.FindObjectsOfType<TurretScreenDisplayer>()) {
+			foreach (TurretScreenDisplayer tm in  GameObject.FindObjectsOfType<TurretScreenDisplayer>()) {
 				if (!tm.mounts.Contains (this)) {
 					tm.mounts.Add (this);
 					addShop (tm);

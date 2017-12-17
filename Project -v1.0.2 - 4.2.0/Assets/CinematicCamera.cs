@@ -92,6 +92,7 @@ public class CinematicCamera : SceneEventTrigger {
 	}
 
 	public override void trigger (int index, float input, Vector3 location, GameObject target, bool doIt){
+
 		previousGameSpeed = Time.timeScale;
 		Time.timeScale = previousGameSpeed;
 		previousCamPos = MainCamera.main.gameObject.transform.position;
@@ -148,7 +149,7 @@ public class CinematicCamera : SceneEventTrigger {
 			foreach (KeyValuePair<string, List<UnitManager>> pairs in  GameManager.main.playerList[n-1].getFastUnitList()) {
 				foreach (UnitManager manage in pairs.Value) {
 					if (manage) {
-						//Debug.Log ("Stunning " + manage.gameObject);
+						//Debug.Log ("Stunning " + manage.gameObject +"  " + active);
 						manage.setStun (active, this, false);
 					}
 				}

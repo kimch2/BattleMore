@@ -11,6 +11,7 @@ public class Objective : SceneEventTrigger {
 	public bool completed;
 	public Objective nextObjective;
 	public bool UltimateObjective;
+	protected bool started;
 
 	public UnityEngine.Events.UnityEvent OnStart;
 	public UnityEngine.Events.UnityEvent OnComplete;
@@ -25,7 +26,7 @@ public class Objective : SceneEventTrigger {
 	}
 
 	public virtual void BeginObjective()
-	{
+	{started = true;
 		VictoryTrigger.instance.addObjective (this);
 		OnStart.Invoke ();
 	}

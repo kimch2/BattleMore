@@ -17,24 +17,27 @@ public class UnitEnterTrigger : MonoBehaviour {
 	public List<SceneEventTrigger> myTriggers;
 
 	public UnityEngine.Events.UnityEvent OnEnter;
-
+	bool alreadyTriggered;
 
 
 	void OnTriggerEnter(Collider other)
 	{
-		if (other.isTrigger) {
-			return;
-		}
-		if (other.GetComponent<UnitManager> ()) {
-			if (other.GetComponent<UnitManager> ().PlayerOwner == player) {
+		if (!alreadyTriggered) {
+		
+			if (other.isTrigger) {
+				return;
+			}
+			if (other.GetComponent<UnitManager> ()) {
+				if (other.GetComponent<UnitManager> ().PlayerOwner == player) {
 
-				if (specificUnits.Count > 0) {
-					if (specificUnits.Contains (other.GetComponent<UnitManager> ().UnitName)) {
+					if (specificUnits.Count > 0) {
+						if (specificUnits.Contains (other.GetComponent<UnitManager> ().UnitName)) {
+							StartCoroutine (Fire ());
+						}
+					} else {
+						//Debug.Log (other.gameObject);
 						StartCoroutine (Fire ());
 					}
-				} else {
-					//Debug.Log (other.gameObject);
-					StartCoroutine (Fire ());
 				}
 			}
 		}
@@ -44,6 +47,7 @@ public class UnitEnterTrigger : MonoBehaviour {
 
 	IEnumerator Fire ()
 	{
+		alreadyTriggered = true;
 		yield return new WaitForSeconds (delay + .0001f);
 
 		foreach (SceneEventTrigger trig in myTriggers) {

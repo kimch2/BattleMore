@@ -12,12 +12,14 @@ public class SoundOptions : MonoBehaviour {
 
 	private Slider masterSLider;
 	private Slider musicSlider;
-
+	public Slider unitResp;
+	public Slider AlertFreq;
+	public Toggle WaveWarning;
 
 	// Use this for initialization
 	void Start () {
 		
-
+		WaveWarning.isOn = GameSettings.getWaveWarning ();
 		masterSLider = masterSLiderO.GetComponent<Slider> ();
 
 		musicSlider = musicSliderO.GetComponent<Slider> ();
@@ -29,7 +31,8 @@ public class SoundOptions : MonoBehaviour {
 			music = GameObject.FindObjectOfType<Camera> ().GetComponent<AudioSource> ();
 		}
 
-
+		AlertFreq.value =( GameSettings.getBaseAlertFreq () -.2f) /1.5f;
+		unitResp.value = (GameSettings.getUnitResponseFreq () - .35f) / 1.65f;
 		//if (GameSettings.getMasterVolume()> -1) {
 			masterSLider.value = GameSettings.getMasterVolume();
 			AudioListener.volume = masterSLider.value;
@@ -80,5 +83,18 @@ public class SoundOptions : MonoBehaviour {
 		GameSettings.setMasterVolume (masterSLider.value);
 	}
 
+	public void UnitResponseChange()
+	{
+		GameSettings.setUnitResponseFreq (unitResp.value * 1.65f + .35f);
+	}
+	public void AlertResponseChange()
+	{
+		GameSettings.setBaseAlertFreq(AlertFreq.value * 1.5f + .2f);
+	}
+
+	public void toggleWaveWarning()
+	{ 
+		GameSettings.setWaveWarning (WaveWarning.isOn);
+	}
 
 }

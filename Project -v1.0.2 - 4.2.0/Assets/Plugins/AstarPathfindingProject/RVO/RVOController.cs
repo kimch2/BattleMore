@@ -210,10 +210,10 @@ namespace Pathfinding.RVO {
 				
 			rvoAgent.DesiredVelocity = desiredVelocity + force*wallAvoidForce;
 		
-			tr.position = realPos + Vector3.up*height*0.5f - center - Vector3.up*.5f;
+			//tr.position = realPos + Vector3.up*height*0.5f - center - Vector3.up*.5f;
+			tr.position = realPos + Vector3.up*height*0.5f - center;
 
-
-
+			Move (Vector3.zero);
 			/*
 
 			if (mask != 0 && Physics.Raycast (Vector3.up * height * 10f, Vector3.down, out hit, 55, mask)) {
@@ -313,7 +313,7 @@ namespace Pathfinding.RVO {
 			realPos.y = adjustedY;
 
 			if (desiredVelocity != Vector3.zero) {
-				if (mask != 0 && Physics.Raycast (realPos + Vector3.up * height * 10f , Vector3.down, out hit, 55, mask & ~(1 << 20))) {
+				if (mask != 0 && Physics.Raycast (realPos + Vector3.up * height * 10f , Vector3.down, out hit, 55, mask)){//  & ~(1 << 20))) {
 					//	Debug.Log ("Hitting " + hit.collider);
 					adjustedY = hit.point.y;
 				} else {
