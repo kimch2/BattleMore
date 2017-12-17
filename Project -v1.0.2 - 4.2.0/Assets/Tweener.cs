@@ -112,7 +112,9 @@ public class Tweener : MonoBehaviour {
 	{
 		foreach (KeyValuePair<string,Coroutine> pair in currentTweens) {
 			Coroutine temp = pair.Value;
-			StopCoroutine (temp);
+			if (temp != null) {
+				StopCoroutine (temp);
+			}
 			//StopCoroutine (pair.value);
 			//Debug.Log ("Removing " + name);
 		
@@ -182,6 +184,36 @@ public class TweenerEditor : Editor {
 				newObj.PoseName = t.gameObject.name;
 			}
 			targ.myPoses.Add (newPose);
+		}
+		if (GUILayout.Button ("Quick Button Maker!")) {
+			((Tweener)target).defaultTweenTime = .1f;
+			AnimationPose OnPose = new AnimationPose ();
+			OnPose.PoseName = "Off";
+			foreach (Transform t in targ.quickList) {
+				ObjectPose newObj = new ObjectPose (targ.transform);
+				newObj.myObject = t;
+				newObj.usesScale = true;
+				newObj.usesPosition = false;
+				newObj.usesRotation = false;
+				newObj.scale = Vector3.one;
+				OnPose.objPoses.Add (newObj);
+				newObj.PoseName = "Off";
+			}
+			targ.myPoses.Add (OnPose);
+
+			AnimationPose OffPose = new AnimationPose ();
+			OffPose.PoseName = "On";
+			foreach (Transform t in targ.quickList) {
+				ObjectPose newObj = new ObjectPose (targ.transform);
+				newObj.myObject = t;
+				newObj.usesScale = true;
+				newObj.usesPosition = false;
+				newObj.usesRotation = false;
+				newObj.scale = Vector3.one * 1.18f;
+				OffPose.objPoses.Add (newObj);
+				newObj.PoseName = "On";
+			}
+			targ.myPoses.Add (OffPose);
 		}
 
 		if (GUILayout.Button ("Add New Animation Pose")) {

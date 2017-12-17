@@ -49,30 +49,23 @@ public class LevelManager : MonoBehaviour {
 		foreach (GameObject ob in Expositions) {
 			ob.SetActive (false);
 		}
-		//Debug.Log (" current level " + LevelData.getHighestLevel());
-		//Debug.Log ("Num is " +PlayerPrefs.GetInt ("RecentLevel") + "  " + LevelCompilation.getLevelInfo().ls.Count );
-		//ReplayButtonText.text = "Replay Previous:\n" + LevelCompilation.getLevelInfo().ls[PlayerPrefs.GetInt ("RecentLevel")].LevelName;
-
 
 			currentTech = Vehicles;
 		if (LevelData.getHighestLevel() == 0) {
 			techButton.interactable = false;
-			UltButton.interactable = false;
+			UltButton.gameObject.SetActive (false);//.interactable = false;
 			} 
 		else if (LevelData.getHighestLevel() == 1) {
 			techButton.interactable = true;
-			UltButton.interactable = false;
+			UltButton.gameObject.SetActive (false);
+			//UltButton.interactable = false;
 		} else {
 			techButton.interactable = true;
-			UltButton.interactable = true;
+			UltButton.gameObject.SetActive (true);
+			//UltButton.interactable = true;
 		}
 		
 		currentTech = Vehicles;
-
-		//setActive (Turrets, false);
-		//setActive (Structures, false);
-		//setActive (Vehicles, false);
-
 
 		difficultyBars.value = LevelData.getDifficulty () - 1;
 	
@@ -94,10 +87,6 @@ public class LevelManager : MonoBehaviour {
 
 	public void closeLevelIntro()
 	{
-		//levelIntros.GetComponent<Canvas> ().enabled = false;// .SetActive (false);
-		//MainScreen.SetActive (true);
-
-		//GameObject.FindObjectOfType<MissionMapManager> ().toggleMissionMap (true);
 
 		foreach (ToolTip tt in GameObject.FindObjectsOfType<ToolTip>()) {
 			if (tt.toolbox) {
@@ -120,11 +109,8 @@ public class LevelManager : MonoBehaviour {
 		AllTechToggle.SetActive (LevelData.getHighestLevel () > 6 && n < 6 && n != 0); // n!=0 because we dont have full tech tree on first level no matter what
 		AllTechToggle.GetComponent<Toggle>().isOn = PlayerPrefs.GetInt ("AllTech",0) == 1;
 
-	//	levelIntros.GetComponent<Canvas> ().enabled = true; //.SetActive (true);
 		LevelCompilation comp = Resources.Load<GameObject> ("LevelEditor").GetComponent<LevelCompilation> ();
 		IntroMaker.LoadLevel (comp.MyLevels[n]);
-	//	MainScreen.SetActive (false);
-	
 	}
 
 	public void setActive(List<Canvas> canvases, bool setActive)
@@ -134,38 +120,41 @@ public class LevelManager : MonoBehaviour {
 	}
 
 	public void ToggleVehicle()
-	{
-		if (currentTech != null) {
-			setActive (currentTech,false);
+	{	if (currentTech != Vehicles) {
+			if (currentTech != null) {
+				setActive (currentTech, false);
 		
-		}
+			}
 
-		currentTech = Vehicles;
-		setActive (Vehicles, true);
-		GameObject.FindObjectOfType<CampTechCamManager> ().loadTech ("Manticore");
+			currentTech = Vehicles;
+			setActive (Vehicles, true);
+			GameObject.FindObjectOfType<CampTechCamManager> ().loadTech ("Manticore");
+		}
 	}
 
 	public void ToggleStruct()
-	{
-		if (currentTech != null) {
-			setActive (currentTech,false);
+	{if (currentTech != Structures) {
+			if (currentTech != null) {
+				setActive (currentTech, false);
+			}
+
+			currentTech = Structures;
+			setActive (Structures, true);
+			GameObject.FindObjectOfType<CampTechCamManager> ().loadTech ("Armory");
 		}
-
-		currentTech = Structures;
-		setActive (Structures, true);
-		GameObject.FindObjectOfType<CampTechCamManager> ().loadTech ("Armory");
-
 	}
 
 	public void ToggleTurret()
 	{
-		if (currentTech != null) {
-			setActive (currentTech,false);
-		}
-		currentTech = Turrets;
-		setActive (Turrets, true);
+		if (currentTech != Turrets) {
+			if (currentTech != null) {
+				setActive (currentTech, false);
+			}
+			currentTech = Turrets;
+			setActive (Turrets, true);
 
-		GameObject.FindObjectOfType<CampTechCamManager> ().loadTech ("Minigun");
+			GameObject.FindObjectOfType<CampTechCamManager> ().loadTech ("Minigun");
+		}
 	}
 
 
@@ -182,29 +171,19 @@ public class LevelManager : MonoBehaviour {
 
 
 	public void ToggleTech()
-	{	Debug.Log ("Toggling " + LevelSelector);
+	{
 		mySource.PlayOneShot (buttonPress);
-		//Technology.enabled = (!Technology.enabled);//.enabled = !Technology.enabled;'
-
-		//currentTech.enabled = Technology.enabled;
 		LevelSelector.GetComponent<Canvas>().enabled = !LevelSelector.GetComponent<Canvas>().enabled;
-
-		//if (LevelSelector.GetComponent<Canvas> ().enabled) {
-		//	GameObject.FindObjectOfType<CampTechCamManager> ().returnToStart ();
-		//} 
 
 	}
 
 	public void toggleTechTree()
 	{mySource.PlayOneShot (buttonPress);
-		//Technology.enabled = !Technology.enabled;
-		Debug.Log("TogglingA " + TechTree);
 		TechTree.enabled = !TechTree.enabled;
 	}
 
 	public void toggleUltTree()
 	{mySource.PlayOneShot (buttonPress);
-		//Technology.enabled = !Technology.enabled;
 		CanvasGroup grouper = UltTree.GetComponent<CanvasGroup>();
 		if (grouper.interactable) {
 			grouper.interactable = false;
@@ -225,9 +204,6 @@ public class LevelManager : MonoBehaviour {
 			mySource.PlayOneShot (buttonPress);
 		}
 		LevelData.setDifficulty (i.value + 1);
-		//setDifficultyDropDowns (i.value);
-	
-	
 	}
 
 

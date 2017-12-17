@@ -36,8 +36,9 @@ public class MouseOver : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
 
 	void OnDisable()
-	{executeOnExit ();
-		
+	{//Debug.Log ("Executing " +this.gameObject);
+		executeOnExit ();	
 	}
+
 
 }

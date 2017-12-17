@@ -19,12 +19,16 @@ public class GameSettings {
 
 	public static void setUnitResponseFreq(float amount)
 	{
-		SelectedManager.main.unitResponseFrequancy = amount;
+		if (SelectedManager.main) {
+			SelectedManager.main.unitResponseFrequancy = amount;
+		}
 		PlayerPrefs.SetFloat ("UnitResponse",amount);
 	}
 	public static void setBaseAlertFreq(float amount)
 	{
-		ErrorPrompt.instance.errorFreq = amount;
+		if (ErrorPrompt.instance) {
+			ErrorPrompt.instance.errorFreq = amount;
+		}
 		PlayerPrefs.SetFloat ("BaseAlert",amount);
 	}
 

@@ -16,14 +16,14 @@ public class laserGun : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
-		if (!isPointerOverUIObject() || raycastToUI) {
+		
+		if (!isPointerOverUIObject() || raycastToUI){// !isPointerOverUIObject() || raycastToUI) {
 
 			Ray rayb = myCam.ScreenPointToRay (Input.mousePosition);
 			RaycastHit hitb;
 
 			if (Physics.Raycast (rayb, out hitb, Mathf.Infinity, ~(1 << 16))) {
-			//	Debug.Log ("hitting " + hitb.collider.gameObject);
+				//Debug.Log ("hitting " + hitb.collider.gameObject);
 				if (hitb.collider.gameObject != lastHit) {
 					
 					if (lastHit && lastHit.GetComponent<MouseClicker> ()) {
@@ -72,8 +72,9 @@ public class laserGun : MonoBehaviour {
 		if (results.Count == 0) {
 			return false;
 		} 
-		//Debug.Log ("returning " + (results[0].distance == 0));
-		return results[0].distance == 0;
+		//Debug.Log ("returning " + (results[0].distance == 0) + "   " + results.Count + "  " + results[0].gameObject + "   " +results[1].gameObject);
+
+		return true;//results[0].distance == 0;
 
 
 	}
