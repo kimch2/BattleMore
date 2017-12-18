@@ -59,7 +59,7 @@ public class WaveManager : MonoBehaviour {
 	[System.Serializable]
 	public class attackWarning
 	{
-		[TextArea(2,10)]
+		//[TextArea(2,10)]
 		public string textWarning;
 		public AudioClip audioWarning;
 		public Sprite myPic;

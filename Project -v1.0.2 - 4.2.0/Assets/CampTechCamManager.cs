@@ -149,7 +149,7 @@ public class CampTechCamManager : MonoBehaviour {
 			StopCoroutine (CameraFlight);
 		}
 		//CameraFlight = StartCoroutine (FocusOnObject(currentTech));
-		Debug.Log("Going to the thing " + currentTech.CamFocus);
+	//	Debug.Log("Going to the thing " + currentTech.CamFocus);
 		currentTech.CamFocus.GetComponent<Tweener> ().GoToPose ("Poser");
 		mySource.PlayOneShot (buttonPress);
 

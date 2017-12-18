@@ -77,7 +77,7 @@ public class CampUpgradePurchase : MonoBehaviour {
 			
 			GameObject.FindObjectOfType<TrueUpgradeManager> ().upgradeBought (myUpgrade, myType);
 		}
-
+		GetComponent<MouseOver> ().enabled = false;
 		GetComponent<Image> ().color = Color.blue;
 		GetComponent<Button> ().interactable = false;
 		updateCostObject ();
@@ -104,6 +104,7 @@ public class CampUpgradePurchase : MonoBehaviour {
 			Costobject.GetComponent<Image> ().material = null;
 			GetComponent<Button> ().interactable = true;
 			GetComponent<Image> ().material = null;
+			GetComponent<MouseOver> ().enabled = true;
 			//GetComponent<Image> ().sprite = BlueOutline;//.color = Color.blue;
 		}
 	}
