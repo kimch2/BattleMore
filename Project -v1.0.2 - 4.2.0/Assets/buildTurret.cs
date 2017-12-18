@@ -34,7 +34,7 @@ public class buildTurret :UnitProduction{
 		manager = GetComponent<UnitManager> ();
 		mySelect = GetComponent<Selected> ();
 
-		myCost.cooldown = buildTime;
+	//	myCost.cooldown = buildTime;
 		racer = GameManager.main.playerList [manager.PlayerOwner - 1]; 
 		HD = GetComponentInChildren<HealthDisplay>();
 

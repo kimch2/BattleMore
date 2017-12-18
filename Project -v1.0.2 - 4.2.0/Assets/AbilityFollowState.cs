@@ -31,7 +31,7 @@ public class AbilityFollowState  : UnitState {
 
 	public override void initialize()
 	{
-		Debug.Log ("I am on " + myManager.gameObject);
+	//	Debug.Log ("I am on " + myManager.gameObject);
 		if (myManager.cMover) {
 			refreshTime = 30 - (int)myManager.cMover.getMaxSpeed ();
 		} else {

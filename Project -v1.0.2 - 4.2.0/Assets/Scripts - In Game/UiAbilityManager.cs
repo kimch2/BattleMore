@@ -174,9 +174,13 @@ public class UiAbilityManager : MonoBehaviour {
 
 							setButtonCooldown (certainButtons [j].QSlide,AbilityX * 4, j);
 							}
+						else {
+							certainButtons [j].QSlide.gameObject.SetActive (false);
+						}
 						certainButtons [j].Qmoney.enabled = abilA.myCost.ResourceOne > racer.ResourceOne;
 						}else {
 						certainButtons [j].Qmoney.enabled = false;
+						certainButtons [j].QSlide.gameObject.SetActive (false);
 						}
 					}
 					if (man.abilityList.Count >1+ AbilityX * 4) {
@@ -186,26 +190,33 @@ public class UiAbilityManager : MonoBehaviour {
 						if (abilB.myCost.cooldown != 0) {
 
 							setButtonCooldown (certainButtons [j].WSlide, 1 + AbilityX * 4, j);
-
+						}
+						else {
+							certainButtons [j].WSlide.gameObject.SetActive (false);
 						}
 						certainButtons [j].Wmoney.enabled = abilB.myCost.ResourceOne > racer.ResourceOne;
 
 					} else {
 						certainButtons [j].Wmoney.enabled = false;
+						certainButtons [j].WSlide.gameObject.SetActive (false);
 					}
 					}
 					if (man.abilityList.Count > 2 + AbilityX * 4) {
 						Ability abilC = man.abilityList [2 + AbilityX * 4];
 						if (abilC != null && abilC.myCost) {
-
+						Debug.Log ("Cooldown " +abilC.myCost.cooldown);
 							if (abilC.myCost.cooldown != 0) {
 
 							setButtonCooldown (certainButtons [j].ESlide, 2 + AbilityX * 4, j);
 
 							}
+						else {
+							certainButtons [j].ESlide.gameObject.SetActive (false);
+						}
 						certainButtons [j].Emoney.enabled = abilC.myCost.ResourceOne > racer.ResourceOne;
 					}else {
 						certainButtons [j].Emoney.enabled = false;
+						certainButtons [j].ESlide.gameObject.SetActive (false);
 					}
 					}
 			
@@ -217,10 +228,13 @@ public class UiAbilityManager : MonoBehaviour {
 
 							setButtonCooldown (certainButtons [j].RSlide, 3 + AbilityX * 4, j);
 
-							}
+						} else {
+							certainButtons [j].RSlide.gameObject.SetActive (false);
+						}
 						certainButtons [j].Rmoney.enabled = abilD.myCost.ResourceOne > racer.ResourceOne;
 					}else {
-						certainButtons [j].Qmoney.enabled = false;
+						certainButtons [j].Rmoney.enabled = false;
+						certainButtons [j].RSlide.gameObject.SetActive (false);
 					}
 
 
@@ -429,7 +443,7 @@ public class UiAbilityManager : MonoBehaviour {
 					int separation = 59;
 
 					if (uiPage.rows [j].Count > 14) {
-						separation = Mathf.Max (10, 508 / picCount);
+						separation = Mathf.Max (15, 558 / picCount);
 					}
 				
 					int currentX = 140;

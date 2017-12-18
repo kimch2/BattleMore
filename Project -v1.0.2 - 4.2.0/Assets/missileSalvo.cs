@@ -258,7 +258,7 @@ public class missileSalvo :  Ability, Iinteract, Validator, Notify{
 
 		while (true) {
 
-			if (home && homeLocation != Vector3.zero && Vector3.Distance(transform.position,homeLocation) < 20  && !inLanding) {
+			if (home && homeLocation != Vector3.zero && Vector3.Distance(transform.position,homeLocation) < 30  && !inLanding) {
 
 			
 				Vector3 temp = home.requestLanding (this.gameObject);
