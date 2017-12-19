@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Pathfinding;
 
 public class BuildingInteractor : MonoBehaviour, Iinteract {
 
@@ -31,21 +32,25 @@ public class BuildingInteractor : MonoBehaviour, Iinteract {
 		myManager.setInteractor (this);
 	}
 
+	bool initialized = false;
+
 	void Start () {
+		if (!initialized) {
+			initialized = true;
+			GraphUpdateObject b = new GraphUpdateObject (GetComponent<CharacterController> ().bounds); 
+			StartCoroutine (DeathRescan (b));
 
-		if (Clock.main.getTotalSecond () < 3) {
-			doneConstruction = true;
-			underConstruction = 1;
-			if (myAnim) {
-				//myAnim.speed = 20;
-			//	myAnim.SetInteger ("State", 1);
+			if (Clock.main.getTotalSecond () < 3) {
+				doneConstruction = true;
+				underConstruction = 1;
+
+			} else {
+				myManager.setStun (true, this, false);
 			}
-
+			if (!myAnim) {
+				myAnim = GetComponentInChildren<Animator> ();
+			}
 		}
-		if (!myAnim) {
-			myAnim = GetComponentInChildren<Animator> ();
-		}
-
 	}
 
 	public void cancelBuilding()
@@ -65,7 +70,7 @@ public class BuildingInteractor : MonoBehaviour, Iinteract {
 		doneConstruction = false;
 		//buildTime = buildtime;
 
-		GameManager.main.playerList [myManager.PlayerOwner - 1].addUnit (myManager);
+		//GameManager.main.playerList [myManager.PlayerOwner - 1].addUnit (myManager);
 		foreach (Ability ab in  GetComponent<UnitManager>().abilityList) {
 			if (ab) {
 				ab.active = false;
@@ -82,7 +87,7 @@ public class BuildingInteractor : MonoBehaviour, Iinteract {
 	public void startSelfConstruction(GameObject obj, float constructionTime)
 	{
 		GameManager.main.playerList [myManager.PlayerOwner - 1].addUnit (myManager);
-		myManager.setStun (true, this, false);
+
 		sourceObj = obj;
 		doneConstruction = false;
 		//buildTime = buildtime;
@@ -114,7 +119,7 @@ public class BuildingInteractor : MonoBehaviour, Iinteract {
 		if (myManager.myStats.supply < 0) {
 			GameManager.main.playerList [myManager.PlayerOwner - 1].UnitCreated (myManager.myStats.supply);
 		}
-		myManager.setStun (false, this, false);
+		//myManager.setStun (false, this, false);
 		if (GetComponent<Selected> ().IsSelected) {
 			SelectedManager.main.updateUI ();
 		}
@@ -147,7 +152,11 @@ public class BuildingInteractor : MonoBehaviour, Iinteract {
 		underConstruction += m;
 		myManager.myStats.heal (myManager.myStats.Maxhealth * m, DamageTypes.DamageType.True);
 		if (underConstruction >= 1) {
+			
+			GameManager.main.playerList [myManager.PlayerOwner - 1].addUnit (myManager);
 			doneConstruction = true;
+			//Debug.Log ("Finished up");
+			myManager.setStun (false, this, true);
 			if (myAnim) {
 				myAnim.SetInteger ("State", 1);
 			}
@@ -182,6 +191,12 @@ public class BuildingInteractor : MonoBehaviour, Iinteract {
 			return 1;
 		}
 		return underConstruction;
+	}
+
+	IEnumerator DeathRescan(GraphUpdateObject b)
+	{	
+		yield return new WaitForSeconds (.2f);
+		AstarPath.active.UpdateGraphs (b);
 	}
 
 

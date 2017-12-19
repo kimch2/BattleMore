@@ -44,6 +44,10 @@ public class BuildStructure:  UnitProduction {
 	void Update () {
 		if (Morphing) {
 
+			if (!builder) {
+				cancelBuilding ();
+				return;
+			}
 
 			float percent = builder.construct (Time.deltaTime / buildTime);
 			if (percent >= 1) {
@@ -90,7 +94,7 @@ public class BuildStructure:  UnitProduction {
 	public override void setAutoCast(bool offOn){}
 
 	public void setBuildSpot(Vector3 buildSpot)
-	{Debug.Log ("Set build spot " + buildSpot ) ;
+	{//Debug.Log ("Set build spot " + buildSpot ) ;
 		targetLocation = buildSpot;
 	}
 
@@ -117,8 +121,9 @@ public class BuildStructure:  UnitProduction {
 		myManager.setStun (false, this, false);
 		myManager.changeState(new DefaultState());
 
-		Destroy (inConstruction.gameObject);
-
+		if (inConstruction) {
+			Destroy (inConstruction.gameObject);
+		}
 		if (mySelect.IsSelected) {
 			SelectedManager.main.updateUI ();
 		}
@@ -165,7 +170,7 @@ public class BuildStructure:  UnitProduction {
 
 	override
 	public void Activate()
-	{Debug.Log ("Activating");
+	{//Debug.Log ("Activating");
 
 		if (!Morphing) {
 			HD.loadIMage (iconPic);

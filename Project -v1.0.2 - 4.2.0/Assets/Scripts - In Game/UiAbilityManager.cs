@@ -204,7 +204,7 @@ public class UiAbilityManager : MonoBehaviour {
 					if (man.abilityList.Count > 2 + AbilityX * 4) {
 						Ability abilC = man.abilityList [2 + AbilityX * 4];
 						if (abilC != null && abilC.myCost) {
-						Debug.Log ("Cooldown " +abilC.myCost.cooldown);
+					//	Debug.Log ("Cooldown " +abilC.myCost.cooldown);
 							if (abilC.myCost.cooldown != 0) {
 
 							setButtonCooldown (certainButtons [j].ESlide, 2 + AbilityX * 4, j);
@@ -584,7 +584,6 @@ public class UiAbilityManager : MonoBehaviour {
 								trans.GetComponent<Button> ().interactable = true;
 							} else {
 							cb.disabledColor = disabledColor;
-							Debug.Log ("Turning Off");
 								trans.GetComponent<Button> ().interactable = false;
 
 							}

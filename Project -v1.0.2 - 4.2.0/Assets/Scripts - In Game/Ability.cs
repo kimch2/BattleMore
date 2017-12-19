@@ -60,11 +60,15 @@ public abstract class Ability : MonoBehaviour {
 	}
 
 
-	void Awake()
+	protected void Awake()
 	{
 		audioSrc = GetComponent<AudioSource> ();
-
-
+		StartCoroutine( delayedInitialize());
+	}
+	IEnumerator delayedInitialize()
+	{
+		yield return null;
+		initialize();
 	}
 
 
@@ -76,10 +80,6 @@ public abstract class Ability : MonoBehaviour {
 	public void newUnitCreated(string newUnit)
 	{
 
-		//Debug.Log ("I am " + this.gameObject + "   " + newUnit);
-		if (!initialized) {
-			initialize ();
-		}
 		if (requirementList.Count == 0) {
 			return;
 		}

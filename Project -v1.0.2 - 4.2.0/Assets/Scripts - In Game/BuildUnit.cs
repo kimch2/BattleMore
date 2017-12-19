@@ -25,7 +25,8 @@ public class BuildUnit : UnitProduction {
 	// Use this for initialization
 
 	void Awake()
-	{audioSrc = GetComponent<AudioSource> ();
+	{base.Awake ();
+
 		myType = type.activated;
 		myManage = GetComponent<UnitManager> ();
 	}

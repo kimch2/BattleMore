@@ -179,6 +179,7 @@ public class RaceManager : MonoBehaviour, ManagerWatcher {
 
 	public void addBuildTrigger(string unitName, Ability a)
 	{
+
 		List<Ability> ab;
 		if (UnitBuildTrigger.ContainsKey (unitName)) {
 			ab = UnitBuildTrigger [unitName];
@@ -186,9 +187,12 @@ public class RaceManager : MonoBehaviour, ManagerWatcher {
 			ab = new List<Ability> ();
 			UnitBuildTrigger.Add (unitName, ab);
 		}
+
 		ab.Add (a);
 
-		
+		if (unitRoster.ContainsKey(unitName) &&  unitRoster [unitName].Count > 0) {
+			a.newUnitCreated (unitName);
+		}
 	}
 
 
@@ -372,15 +376,83 @@ public class RaceManager : MonoBehaviour, ManagerWatcher {
 	}
 
 
+
+
+	IEnumerator DeathRescan(GraphUpdateObject b)
+	{	
+		yield return new WaitForSeconds (.2f);
+
+			AstarPath.active.UpdateGraphs (b);
+
+	}
+
+
+	public void addUnit(UnitManager obj )
+	{
+	//	Debug.Log ("Building unit " + obj.UnitName);
+		if (!unitRoster.ContainsKey (obj.UnitName)) {
+			unitRoster.Add(obj.UnitName, new List<UnitManager>());
+		}
+		List<UnitManager> tempRefList = unitRoster [obj.UnitName];
+		tempRefList.Add (obj);
+		tempRefList.RemoveAll (item => item == null);
+	
+		if (playerNumber == 1) {
+			if (FButtonManager.main == null) {
+				FButtonManager.main = GameObject.FindObjectOfType<FButtonManager> ();
+			}
+			FButtonManager.main.updateNumbers (unitRoster);
+
+
+			obj.initializeVision (true);
+
+			if (uiManager != null) {
+				foreach (ArmyUIManager uiMan in uiManager.production.GetComponents<ArmyUIManager> ()) {
+					uiMan.updateUnits (obj);
+				}
+			}
+		}
+
+		if (obj.UnitName != "Armory") {
+			Selected sel = obj.GetComponent<Selected> ();
+			sel.decalCircle.GetComponent<MeshRenderer> ().material = myDecal;
+		}
+
+
+		//if (obj.gameObject.layer == 10) {//BUilding layer
+			//This rescans the Astar graph after the building dies
+			//GraphUpdateObject b = new GraphUpdateObject (obj.GetComponent<CharacterController> ().bounds); 
+			//StartCoroutine (DeathRescan (b));
+		//} 
+
+		applyUpgrade (obj);
+
+		foreach (BuildUnitObjective objective in buildUnitObjectList) {
+			objective.buildUnit (obj);
+		}
+		//Debug.Log ("Just built a " + unitName + "    " + unitTypeCount[unitName]);
+		// new unit, call update function on units abilities
+		if (tempRefList.Count == 1) {
+
+			if(UnitBuildTrigger.ContainsKey(obj.UnitName)){
+				UnitBuildTrigger [obj.UnitName].RemoveAll (item => item == null);
+				foreach (Ability a in UnitBuildTrigger[obj.UnitName] ) {
+
+					a.newUnitCreated (obj.UnitName);
+				
+					}
+				}
+			}
+	}
+
+
 	//Truedeath applies to thing like summons and building placers. they aren't real units so they shouldnt be treated as such.
 	public bool UnitDying(UnitManager Unit, GameObject deathSource, bool trueDeath)
 	{bool finishDeath = true;
 
-	
+
 		if (trueDeath) {
 			foreach (LethalDamageinterface trigger in lethalTrigger) {
-
-
 				if (trigger != null) {
 					if (trigger.lethalDamageTrigger (Unit, deathSource) == false) {
 						finishDeath = false;
@@ -399,183 +471,50 @@ public class RaceManager : MonoBehaviour, ManagerWatcher {
 					}
 				}
 			}
-		
-		
+
+
 			string unitName = Unit.UnitName;
-
-			if (unitTypeCount.ContainsKey (unitName)) {
-				unitTypeCount [unitName]--;
-
-
-				// No Units of tis type, call update function on units abilities
-
-				if (unitTypeCount [unitName] == 0 && trueDeath) {
-					//unitList.RemoveAll (item => item == null);
-
-					unitRoster[unitName].RemoveAll (item => item == null);
-					if(UnitBuildTrigger.ContainsKey(unitName)){
+			List<UnitManager> tempRefList = unitRoster [unitName];
+			if (tempRefList != null) {
+				tempRefList.Remove (Unit);
+			
+				tempRefList.RemoveAll (item => item == null);
+				if (tempRefList.Count == 0 && trueDeath) {
+					if (UnitBuildTrigger.ContainsKey (unitName)) {
 						UnitBuildTrigger [unitName].RemoveAll (item => item == null);
-						foreach (Ability a in UnitBuildTrigger[unitName]){
+						foreach (Ability a in UnitBuildTrigger[unitName]) {
 							a.UnitDied (unitName);
 
 						}
 					}
 				}
+			}
 
-			} 
-			if (Unit.myStats.isUnitType (UnitTypes.UnitTypeTag.Structure)) {
+			if (Unit.gameObject.layer == 10 ){ //.myStats.isUnitType (UnitTypes.UnitTypeTag.Structure)) {
 				//This rescans the Astar graph after the unit dies
 				GraphUpdateObject b =new GraphUpdateObject(Unit.GetComponent<CharacterController>().bounds); 
 
 				StartCoroutine (DeathRescan (b));
 			}
 
-			if (trueDeath) {
-				if (Unit.myStats.isUnitType (UnitTypes.UnitTypeTag.Worker)) {
-					//Debug.Log ("Is a worker");
-					if (uiManager != null) {
-						uiManager.production.GetComponent<EconomyManager> ().updateWorker (-1);
-					}
-				}
-			}
-		
 			if (!Unit.myStats.isUnitType (UnitTypes.UnitTypeTag.Turret) && !Unit.myStats.isUnitType (UnitTypes.UnitTypeTag.Summon)) {
 				unitsLost++;
 			}
-			try{
-				unitRoster [unitName].Remove (Unit);}
-			catch{
-			}
 
-			//unitList.Remove(Unit);
 			if (trueDeath) {
 				foreach (LethalDamageinterface trigger in deathTrigger) {
 					trigger.lethalDamageTrigger (Unit, deathSource);
 				}
 			}
 		}
-		//if (Unit.GetComponentInChildren<TurretMount> ()) {
-		//	FButtonManager.main.updateTankNumber ();
-		//}
+
 		if (playerNumber == 1) {
 			FButtonManager.main.updateNumbers (unitRoster);
 		}
 		return finishDeath;
 	}
 
-	IEnumerator DeathRescan(GraphUpdateObject b)
-	{	
-		yield return new WaitForSeconds (.2f);
 
-			AstarPath.active.UpdateGraphs (b);
-
-	}
-
-
-	public void addUnit(UnitManager obj )
-	{
-		
-
-		if (!unitRoster.ContainsKey (obj.UnitName)) {
-			unitRoster.Add(obj.UnitName, new List<UnitManager>());
-		}
-
-		unitRoster [obj.UnitName].Add (obj);
-
-		if (playerNumber == 1) {
-			if (FButtonManager.main == null) {
-				FButtonManager.main = GameObject.FindObjectOfType<FButtonManager> ();
-			}
-			FButtonManager.main.updateNumbers (unitRoster);
-
-
-			obj.initializeVision (true);
-
-
-			if (obj.myStats.isUnitType (UnitTypes.UnitTypeTag.Worker)) {
-
-				if (uiManager != null) {
-					uiManager.production.GetComponent<EconomyManager> ().updateWorker (1);
-				}
-			}
-
-			if (uiManager != null) {
-				foreach (ArmyUIManager uiMan in uiManager.production.GetComponents<ArmyUIManager> ()) {
-					uiMan.updateUnits (obj);
-				}
-					
-			}
-
-		}
-
-		if (obj.UnitName != "Armory") {
-			Selected sel = obj.GetComponent<Selected> ();
-			sel.decalCircle.GetComponent<MeshRenderer> ().material = myDecal;
-		}
-
-
-		if (obj.gameObject.layer == 10) {
-			//This rescans the Astar graph after the unit dies
-			GraphUpdateObject b = new GraphUpdateObject (obj.GetComponent<CharacterController> ().bounds); 
-			StartCoroutine (DeathRescan (b));
-		} else {
-			applyUpgrade (obj);
-		}
-
-		string unitName = obj.UnitName;
-
-		if (unitTypeCount.ContainsKey (unitName)) {
-			
-			unitTypeCount [unitName]++;
-			if (unitTypeCount [unitName] < 1) {
-				unitTypeCount [unitName] = 1;
-			}
-		} else {
-			
-			unitTypeCount.Add (unitName, 1);
-		}
-
-			//apply all existing units built to new unit
-			foreach (KeyValuePair<string, int> n in unitTypeCount) {
-
-				if (n.Value < 1) {
-					continue;
-				}
-
-				foreach (Ability ab in obj.abilityList) {
-					if (ab != null) {
-						//Debug.Log ("checking against a " + n.Key);
-						ab.newUnitCreated (n.Key);
-					}
-				}
-				
-			}
-
-
-		//Debug.Log ("Adding" + obj + "  " + playerNumber + "count " + unitTypeCount [unitName]);
-
-
-		foreach (BuildUnitObjective objective in buildUnitObjectList) {
-			objective.buildUnit (obj);
-		}
-		//Debug.Log ("Just built a " + unitName + "    " + unitTypeCount[unitName]);
-		// new unit, call update function on units abilities
-		if (unitTypeCount [unitName] == 1) {
-
-
-			if(UnitBuildTrigger.ContainsKey(unitName)){
-				UnitBuildTrigger [unitName].RemoveAll (item => item == null);
-				foreach (Ability a in UnitBuildTrigger[unitName] ) {
-
-						a.newUnitCreated (unitName);
-				
-					}
-				}
-			}
-
-
-		//uiManager.changeUnits ();
-	}
 
 	//Set income to false if you dont want it to count towards your income per minute.
 	public void updateResources(float resOne, float resTwo, bool income)

@@ -7,7 +7,6 @@ public class EconomyManager : MonoBehaviour {
 
 	private RaceManager racer;
 
-	public Text Workers ;
 	public Text ResourceOne;
 	public Text BarResOneAvg;
 	public Text ResourceTwo;
@@ -15,14 +14,10 @@ public class EconomyManager : MonoBehaviour {
 
 	private Dictionary<float, int> resOneMap = new Dictionary<float, int>();
 	private Dictionary<float, int> resTwoMap = new Dictionary<float, int>();
-	private int totalWorkers = 0;
 
 	// Use this for initialization
 	void Start () {
 		racer = GameManager.main.playerList [0];
-	
-
-		updateWorker (0);
 
 		if (racer.OneName.Length > 0) {
 			
@@ -78,16 +73,8 @@ public class EconomyManager : MonoBehaviour {
 			ResourceTwo.text = racer.TwoName + ": " + totalResTwo * 6+ " per min";
 
 		}
-		}
-
-
-
-
-	public void updateWorker( int input)
-	{totalWorkers += input;
-
-		Workers.text = "Workers: " + totalWorkers;
 	}
+
 
 
 	public void updateMoney(int resOne, int resTwo)
