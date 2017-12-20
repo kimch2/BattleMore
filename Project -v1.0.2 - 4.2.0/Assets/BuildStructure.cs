@@ -22,7 +22,8 @@ public class BuildStructure:  UnitProduction {
 	public float animationRate =1;
 
 	void Awake()
-	{audioSrc = GetComponent<AudioSource> ();
+	{base.Awake ();
+		audioSrc = GetComponent<AudioSource> ();
 		myType = type.building;
 		buildMan = GetComponent<BuildManager> ();
 		myManager = GetComponent<UnitManager> ();

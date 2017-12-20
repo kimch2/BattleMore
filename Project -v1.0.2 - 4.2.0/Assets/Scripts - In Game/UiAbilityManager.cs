@@ -177,10 +177,10 @@ public class UiAbilityManager : MonoBehaviour {
 						else {
 							certainButtons [j].QSlide.gameObject.SetActive (false);
 						}
-						certainButtons [j].Qmoney.enabled = abilA.myCost.ResourceOne > racer.ResourceOne;
+							certainButtons [j].Qmoney.enabled = abilA.myCost.ResourceOne > racer.ResourceOne;
 						}else {
-						certainButtons [j].Qmoney.enabled = false;
-						certainButtons [j].QSlide.gameObject.SetActive (false);
+							certainButtons [j].Qmoney.enabled = false;
+							certainButtons [j].QSlide.gameObject.SetActive (false);
 						}
 					}
 					if (man.abilityList.Count >1+ AbilityX * 4) {
@@ -253,7 +253,7 @@ public class UiAbilityManager : MonoBehaviour {
 	{
 		float maxA = 0;
 		foreach (RTSObject obj in currentPage.rows [row]) {
-			if (obj.getUnitManager ().abilityList [abilityNum].active) {
+		//	if (obj.getUnitManager ().abilityList [abilityNum].active) {
 				float n = obj.getUnitManager ().abilityList [abilityNum].myCost.cooldownProgress ();
 
 
@@ -263,7 +263,7 @@ public class UiAbilityManager : MonoBehaviour {
 						break;
 					}
 				}
-			}
+			//}
 		}
 
 		slide.value = maxA;

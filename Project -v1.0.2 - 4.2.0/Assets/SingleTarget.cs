@@ -177,12 +177,16 @@ public class SingleTarget:  TargetAbility {
 				proj = (GameObject)Instantiate (missile, pos, Quaternion.identity);
 
 				Projectile script = proj.GetComponent<Projectile> ();
-				proj.SendMessage ("setSource", this.gameObject);
-				proj.SendMessage ("setTarget", target.GetComponent<UnitManager>());
 				if (script) {
-					script.target = target.GetComponent<UnitManager>();
-					script.Source = this.gameObject;
+					script.Initialize (target.GetComponent<UnitManager>(),0, manage);
+					script.setup ();
+				} else {
+
+					proj.SendMessage ("setSource", this.gameObject, SendMessageOptions.DontRequireReceiver);
+					proj.SendMessage ("setTarget", target, SendMessageOptions.DontRequireReceiver);
+					proj.SendMessage ("setDamage", 0, SendMessageOptions.DontRequireReceiver);
 				}
+			
 
 			} else {
 

@@ -113,7 +113,7 @@ public class DeployTurret  : TargetAbility{
 		else if (turrManage.UnitName.Contains("Repair")) {
 			iconPic = turretIcons [3];
 		}
-		else if (turrManage.UnitName.Contains( "Fire")) {
+		else if (turrManage.UnitName.Contains( "Mort")) {
 			iconPic = turretIcons [4];
 		}
 		changeCharge (0);
