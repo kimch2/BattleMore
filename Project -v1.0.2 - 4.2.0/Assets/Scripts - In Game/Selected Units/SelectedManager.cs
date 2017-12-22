@@ -52,7 +52,7 @@ public class SelectedManager : MonoBehaviour, ISelectedManager
 		raceMan = GameManager.main.activePlayer;
 
 		controlUI = GameObject.FindObjectOfType<ControlGroupUI> ();
-		pageUI = GameObject.FindObjectOfType<PageUIManager> ();
+		pageUI =  GameObject.FindObjectOfType<PageUIManager> ();
 		targetManager = GameObject.FindObjectOfType<TargetCircleManager> ();
 		AudioSrc =GameObject.FindObjectOfType<ExpositionDisplayer>().GetComponent<AudioSource> ();
 
@@ -611,7 +611,7 @@ public class SelectedManager : MonoBehaviour, ISelectedManager
 		
 
         }
-		if (abilityManager) {
+		if (abilityManager && pageUI) {
 			abilityManager.loadUI (UIPages [currentPage]);
 			pageUI.setPageCount (UIPages);
 		}

@@ -48,8 +48,16 @@ public class bunnyManager : Objective {
 
 	public void changeInBunnyCount(int change)
 	{
-		int oldAmount = currAmount;
-		currAmount =GameObject.FindObjectsOfType<bunnyPopulate>().Length -1;
+		int oldAmount = currAmount;  
+
+		int iter = -1;
+		foreach (bunnyPopulate bp in GameObject.FindObjectsOfType<bunnyPopulate>()) {
+			if (bp.repopulateTime != 0) {
+			
+				iter++;}
+		}
+
+		currAmount = iter;
 
 
 		if (oldAmount < currAmount) {

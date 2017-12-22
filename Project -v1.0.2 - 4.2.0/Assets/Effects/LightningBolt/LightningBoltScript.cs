@@ -182,13 +182,13 @@ namespace DigitalRuby.LightningBolt
         }
 
 		void OnDisable()
-		{
-			lineRenderer.positionCount = 0;
-			if (currentLightning != null) {
-				StopCoroutine (currentLightning);
-				currentLightning = null;
+		{if (lineRenderer) {
+				lineRenderer.positionCount = 0;
+				if (currentLightning != null) {
+					StopCoroutine (currentLightning);
+					currentLightning = null;
+				}
 			}
-			
 		}
 
         public void RandomVector(ref Vector3 start, ref Vector3 end, float offsetAmount, out Vector3 result)

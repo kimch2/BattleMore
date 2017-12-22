@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using DigitalRuby.SoundManagerNamespace;
 public class PulseCannon : IWeapon {
 
 	//Like the Iweapon but this fires at every person around it 
@@ -42,18 +42,10 @@ public class PulseCannon : IWeapon {
 
 		if (target) {
 
-
-
-			//UnitStats targetStats = target.GetComponent<UnitStats> ();
-
-
-		
-
-
 			GameObject proj = null;
 			if (projectile != null) {
 	
-				proj = (GameObject)Instantiate (projectile,this.transform.position +  firePoints[originIndex].position, Quaternion.identity);
+				proj = createBullet ();// (GameObject)Instantiate (projectile,this.transform.position +  firePoints[originIndex].position, Quaternion.identity);
 				originIndex++;
 				if (originIndex == firePoints.Count) {
 					originIndex = 0;}
@@ -86,8 +78,10 @@ public class PulseCannon : IWeapon {
 				myManager.cleanEnemy ();
 			}
 			if (attackSoundEffect && audioSrc) {
+				//Debug.Log ("Playing Sound effect");
+				audioSrc.pitch = ((float)Random.Range (7, 12) / 10);
+				SoundManager.PlayOneShotSound(audioSrc, attackSoundEffect);
 
-				audioSrc.PlayOneShot (attackSoundEffect);
 			}
 
 		}

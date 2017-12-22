@@ -59,6 +59,8 @@ public class DayexaShield : Ability,Modifier , Notify{
 		if (AbsorbRecoil) {
 
 			myStats.veternStat.UpEnergy( myStats.changeEnergy (damage/10));
+
+
 		}
 
 		return damage;
