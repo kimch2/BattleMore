@@ -175,7 +175,7 @@ public class ErrorPrompt : MonoBehaviour {
 	public void EnemyWave(WaveContainer.waveWarningType waveType)
 	{
 		if (GameSettings.getWaveWarning ()) {
-			ExpositionDisplayer.instance.displayText ("", 5, myVoicePack.getEnemyWaveLine (), 1, null, 4);
+			ExpositionDisplayer.instance.displayText ("", 5, myVoicePack.getEnemyWaveLine (waveType), 1, null, 4);
 		}
 		//showError ("Enemy Wave Detected!", myVoicePack.getbaseAttackedLine());
 	}

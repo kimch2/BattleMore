@@ -16,6 +16,8 @@ public class UISetter : MonoBehaviour {
 
 	public CanvasGroup canGroup;
 	public static UISetter main;
+
+	public GameObject EnemyArsenalButton;
 	void Awake()
 	{main = this;
 		
@@ -81,8 +83,22 @@ public class UISetter : MonoBehaviour {
 
 		LevelTitle.text = comp.MyLevels [LevelNum].LevelName;
 		startFade (1, true);
+
+		if(comp.MyLevels[LevelNum].ArsenalDisplayTime >= 0)
+		{Invoke("turnOnArsenal", comp.MyLevels[LevelNum].ArsenalDisplayTime);}
+
+
+
 	}
 
+
+	void turnOnArsenal()
+	{
+		if (EnemyArsenalButton) {
+			EnemyArsenalButton.SetActive (true);
+			EnemyArsenalButton.GetComponent<Tweener> ().playTransition ("Pulse");
+		}
+	}
 
 	Coroutine fading;
 

@@ -2,22 +2,37 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class CapturableUnit : MonoBehaviour {
+public class CapturableUnit : MonoBehaviour, Modifier  {
 
 	public List<UnitManager> myManagers = new List<UnitManager>();
 	public bool cutscene;
 	bool alreadyCaptured;
+	public float captureRange =50;
 	//Add all managers in the unit to this list
 	// In order to use this, set the units playerNumber(UnitManager) to 3
 	// and disable the FogOfWarUnitScript
 	// Set the Vision Range in the Unitmanger 5 more than what it should be,
 
+
+	public float modify(float damage, GameObject source, DamageTypes.DamageType theType)
+	{
+		UnitManager sourceManage = source.GetComponent<UnitManager> ();
+		if (sourceManage) {
+
+			capture ();
+		}
+		return damage;
+	}
+
+
+
 	IEnumerator Start()
 	{
 		yield return null;
 		foreach (UnitManager manager in myManagers) {
+			manager.myStats.addModifier (this);
 			manager.setStun (true, this, false);
-			manager.getVisionSphere ().radius = 40;
+			manager.getVisionSphere ().radius = captureRange;
 		}
 
 		yield return null;

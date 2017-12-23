@@ -60,9 +60,14 @@ public class InteractState : UnitState {
 			
 				return;}
 
-		} else {
-			//Debug.Log ("Totally in range");
+		} else {	
 			myManager.cMover.stop ();
+			if (target.PlayerOwner == myManager.PlayerOwner) {
+				myManager.changeState(new DefaultState());
+				return;
+			}
+			//Debug.Log ("Totally in range");
+
 			IWeapon myWeap = myManager.canAttack (target);	
 
 			if (myWeap) {
