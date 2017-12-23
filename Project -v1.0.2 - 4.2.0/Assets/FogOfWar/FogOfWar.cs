@@ -278,7 +278,7 @@ public class FogOfWar : MonoBehaviour
         _camera.depthTextureMode |= DepthTextureMode.Depth;
 
 		HasUnFogged = true;
-		InvokeRepeating( "UpdateTexture",.01f, .1f);
+		InvokeRepeating( "UpdateTexture",.01f, .08f);
 		Invoke("delayedFogger",1.1f);
 		Invoke ("UpdateTexture", 1.2f);
 

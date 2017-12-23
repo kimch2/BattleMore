@@ -386,6 +386,8 @@ public class UnitManager : Unit,IOrderable{
 		AllyWatchers.Add (comp);
 	}
 
+
+
 	List<EnemySighted> EnemyWatchers = new List<EnemySighted> ();
 	List<AllySighted> AllyWatchers = new List<AllySighted> ();
 
@@ -452,7 +454,20 @@ public class UnitManager : Unit,IOrderable{
 		if (manage) {
 			if (enemies.Contains (manage)) {
 				enemies.Remove (manage);
+				foreach (EnemySighted sighter in EnemyWatchers) {
+					if (sighter != null) {
+						sighter.enemyLeft (manage);
+					
+					}
+				}
 			} else if (allies.Contains (manage)) {
+
+				foreach (AllySighted sighter in AllyWatchers) {
+					if (sighter != null) {
+						sighter.allyLeft (manage);
+					}
+				}
+
 				allies.Remove (manage);
 				//Debug.Log ( this.gameObject + "  Removing " + other.gameObject);
 			} 

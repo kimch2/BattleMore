@@ -50,7 +50,7 @@ public class MissionManager : MonoBehaviour {
 
 	public void StartMission(int levelNum)
 	{
-		loadingScreen.SetActive (true);
+		loadingScreen.GetComponent<Canvas> ().enabled = true;
 		SceneManager.LoadScene (levelNum);
 	}
 

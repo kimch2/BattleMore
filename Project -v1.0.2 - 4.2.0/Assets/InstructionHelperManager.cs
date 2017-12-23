@@ -15,13 +15,13 @@ public class InstructionHelperManager : MonoBehaviour {
 
 	public  void addBUtton( string text, float duration, Sprite pic)
 	{
-		GameObject obj = (GameObject)Instantiate (instance.button);
-		obj.transform.SetParent (instance.transform);
+		GameObject obj = (GameObject)Instantiate (instance.button, instance.transform);
+		//obj.transform.SetParent (instance.transform);
 		obj.GetComponent<InstructionHelper> ().text = text;
 		obj.GetComponent<InstructionHelper> ().duration =duration;
 
 		obj.GetComponent<InstructionHelper> ().myPic = pic;
-
+		obj.GetComponent<InstructionHelper> ().buttonImage.sprite = pic;
 
 	}
 

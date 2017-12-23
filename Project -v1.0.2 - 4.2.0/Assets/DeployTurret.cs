@@ -67,9 +67,7 @@ public class DeployTurret  : TargetAbility{
 			
 
 					if (obj.turret == null && obj.lastUnPlaceTime < Time.time -2) {
-						if (soundEffect) {
-							audioSrc.PlayOneShot (soundEffect);
-						}
+
 						obj.placeTurret (createUnit ());
 						if (PlaceEffect) {
 							Instantiate (PlaceEffect, obj.transform.position, Quaternion.identity, obj.transform);
@@ -302,9 +300,7 @@ public class DeployTurret  : TargetAbility{
 
 		foreach (TurretMount tm in target.GetComponentsInChildren<TurretMount>()) {
 			if (!tm.turret) {
-				if (soundEffect) {
-					audioSrc.PlayOneShot (soundEffect);
-				}
+
 				tm.placeTurret (createUnit ());
 				if (PlaceEffect) {
 					Instantiate (PlaceEffect, tm.transform.position, Quaternion.identity, tm.transform);
@@ -318,6 +314,11 @@ public class DeployTurret  : TargetAbility{
 		Vector3 pos = location;
 
 		GameObject proj = (GameObject)Instantiate (UnitToBuild, pos+ Vector3.up * .5f, Quaternion.identity);
+		if (soundEffect) {
+			audioSrc.PlayOneShot (soundEffect);
+		}
+
+
 		Instantiate (PlaceEffect,  pos+ Vector3.up * .5f, Quaternion.identity);
 		currentTurret.GetComponent<UnitManager> ().enabled = true;
 		GameObject newTurret =  (GameObject)Instantiate (currentTurret, pos + Vector3.up *2f, Quaternion.identity);
@@ -351,9 +352,7 @@ public class DeployTurret  : TargetAbility{
 		if (target) {
 			foreach (TurretMount tm in target.GetComponentsInChildren<TurretMount>()) {
 				if (!tm.turret) {
-					if (soundEffect) {
-						audioSrc.PlayOneShot (soundEffect);
-					}
+
 					tm.placeTurret (createUnit ());
 					if (PlaceEffect) {
 						Instantiate (PlaceEffect, tm.transform.position, Quaternion.identity, tm.transform);
@@ -372,6 +371,11 @@ public class DeployTurret  : TargetAbility{
 			Instantiate (PlaceEffect, pos + Vector3.up * .5f, Quaternion.identity);
 			currentTurret.GetComponent<UnitManager> ().enabled = true;
 			GameObject newTurret = (GameObject)Instantiate (currentTurret, pos + Vector3.up * 2f, Quaternion.identity);
+
+			if (soundEffect) {
+				audioSrc.PlayOneShot (soundEffect);
+			}
+
 			if (newTurret.GetComponent<RepairTurret> ()) {
 				newTurret.GetComponent<RepairTurret> ().enabled = true;
 			}
@@ -412,6 +416,9 @@ public class DeployTurret  : TargetAbility{
 		Vector3 location = new Vector3(this.gameObject.transform.position.x + 25,this.gameObject.transform.position.y+4,this.gameObject.transform.position.z);
 		//changeCharge (-1);
 
+		if (soundEffect) {
+			audioSrc.PlayOneShot (soundEffect);
+		}
 		GameObject tur = (GameObject)Instantiate(currentTurret, location, Quaternion.identity);
 
 		if (chargeCount == maxChargeCount) {

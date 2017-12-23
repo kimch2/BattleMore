@@ -32,7 +32,7 @@ public class RepairDrone : MonoBehaviour {
 			if (Vector3.Distance (myHome.transform.position, this.gameObject.transform.position) > 50) {
 				returnHome ();
 			} else if (Vector3.Distance (target.transform.position, this.gameObject.transform.position) > 5) {
-				transform.Translate (((target.transform.position + (Vector3.up * 4)) - this.gameObject.transform.position).normalized * Time.deltaTime * 30f);
+				transform.Translate (((target.transform.position + (Vector3.up * 4)) - this.gameObject.transform.position).normalized * Time.deltaTime * 33f);
 			} else {
 				if (Time.time > nextActionTime) {
 					nextActionTime = Time.time + 1;

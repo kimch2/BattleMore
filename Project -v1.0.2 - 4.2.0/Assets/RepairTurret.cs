@@ -46,6 +46,7 @@ public class RepairTurret : Ability, Modifier{
 		if (!DroneAway) {
 
 			if (mymanager.getState () is MoveState) {
+
 				if (!((MoveState)mymanager.getState ()).assumedMove) {
 
 					return;
@@ -58,6 +59,7 @@ public class RepairTurret : Ability, Modifier{
 					if (mymanager.cMover) {
 						mymanager.cMover.stop ();
 					}
+
 					mymanager.changeState (new DefaultState ());
 				}
 
@@ -83,13 +85,13 @@ public class RepairTurret : Ability, Modifier{
 				
 					commandRepair = false;
 					if (target && target != mymanager.gameObject && !(mymanager.getState() is AttackMoveState)) {
-				
+
 						mymanager.changeState (new FollowState (target, null));
 					
 					} 
 				} 
 			} else if (target && target != mymanager.gameObject && !(mymanager.getState() is AttackMoveState)){
-				
+
 					mymanager.changeState (new FollowState (target, null));
 
 				}
@@ -104,10 +106,12 @@ public class RepairTurret : Ability, Modifier{
 					if (mymanager.cMover) {
 						mymanager.cMover.stop ();
 					}
+
 					mymanager.changeState (new DefaultState ());
 				} else if (!(mymanager.getState () is AttackMoveState)) {
 
 					if (mymanager.cMover) {
+
 						mymanager.cMover.stop ();
 					}
 				}
@@ -119,10 +123,14 @@ public class RepairTurret : Ability, Modifier{
 
 			if (Vector3.Distance (this.gameObject.transform.position, target.transform.position) < 40) {
 
-				if (mymanager.myWeapon.Count == 0 || !(mymanager.getState () is AttackMoveState)) {
+				// Fix this line of code if tritons have a hard time moving while holding a repait bay
+				if (mymanager.myWeapon.Count == 0 && (mymanager.getState () is AttackMoveState)) {
+					//if ((mymanager.myWeapon.Count == 0 && !(mymanager.getState () is MoveState) )|| !(mymanager.getState () is AttackMoveState)&& !(mymanager.getState () is MoveState)) {
+						
 					if (mymanager.cMover) {
 						mymanager.cMover.stop ();
 					}
+				
 					mymanager.changeState (new DefaultState ());
 				} 
 			}
@@ -162,6 +170,7 @@ public class RepairTurret : Ability, Modifier{
 		if (Vector3.Distance (target.transform.position, this.gameObject.transform.position) < 40) {
 			if (mymanager.myWeapon.Count == 0) {
 				mymanager.cMover.stop ();
+
 				mymanager.changeState (new DefaultState ());
 			}
 			droneScript.setTarget (target);
@@ -169,6 +178,7 @@ public class RepairTurret : Ability, Modifier{
 			drone.transform.SetParent (null);
 
 		} else {
+
 			mymanager.changeState (new FollowState (target, null));
 		}
 		return true;

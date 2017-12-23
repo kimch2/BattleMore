@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class InstructionHelper : MonoBehaviour {
 
@@ -9,7 +10,7 @@ public class InstructionHelper : MonoBehaviour {
 
 	public AudioClip sound;
 	public Sprite myPic;
-
+	public Image buttonImage;
 
 	public void exit()
 	{

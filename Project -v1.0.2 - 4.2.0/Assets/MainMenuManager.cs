@@ -12,6 +12,7 @@ public class MainMenuManager : MonoBehaviour {
 	public Canvas Credits;
 	public Canvas loadCanvas;
 	public Canvas OptionsCan;
+	public Canvas LoadingScreen;
 
 	public AudioSource audioSource;
 	private Canvas currentScreen;
@@ -38,7 +39,9 @@ public class MainMenuManager : MonoBehaviour {
 
 
 	public void toPrologue()
-	{
+	{if (LoadingScreen) {
+			LoadingScreen.enabled = true;
+		}
 		SceneManager.LoadScene (2);
 	}
 
@@ -47,16 +50,23 @@ public class MainMenuManager : MonoBehaviour {
 		setDifficulty (dropper);
 		resetProgress ();
 		audioSource.Stop ();
+		if (LoadingScreen) {
+			LoadingScreen.enabled = true;
+		}
 		SceneManager.LoadScene(5);
 	}
 
 	public void toCampaignLevelSelect()
-	{
+	{	if (LoadingScreen) {
+			LoadingScreen.enabled = true;
+		}
 		SceneManager.LoadScene (1);
 	}
 
 	public void toCampaign()
-		{loadScreen (campaign);
+		{
+		
+		loadScreen (campaign);
 		audioSource.Play ();
 	
 	}
@@ -80,6 +90,9 @@ public class MainMenuManager : MonoBehaviour {
 	public void LoadLevel(int n)
 	{//LevelData.currentLevel = n;
 		LevelData.getsaveInfo().ComingFromLevel = false;
+		if (LoadingScreen) {
+			LoadingScreen.enabled = true;
+		}
 		SceneManager.LoadScene (3);
 	}
 
