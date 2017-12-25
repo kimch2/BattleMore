@@ -14,6 +14,9 @@ public class TrueUpgradeManager : MonoBehaviour {
 
 	public static TrueUpgradeManager instance;
 
+	[Tooltip("0 hsould be vehicles, 1 should be buildings, 2 should be turrets")]
+	public List<UnityEngine.UI.Text> UnAppliedExclam;
+
 	void Awake()
 	{instance = this;
 		
@@ -24,9 +27,23 @@ public class TrueUpgradeManager : MonoBehaviour {
 
 		bool unUsed = false;
 
+		foreach (UnityEngine.UI.Text tex in UnAppliedExclam) {
+			tex.enabled = false;
+		}
+
 		foreach (CampaignUpgrade upgrade in CampUpRef) {
 			if (upgrade && upgrade.myUpgrades.Count > 1 && upgrade.currentIndex == 0 && upgrade.unlocked) {
 		
+				if (upgrade.myTypes.Contains (CampaignUpgrade.upgradeType.Vehicle)) {
+					UnAppliedExclam [0].enabled = true;
+				}
+				else 	if (upgrade.myTypes.Contains (CampaignUpgrade.upgradeType.Building)) {
+					UnAppliedExclam [1].enabled = true;
+				}
+				else 	if (upgrade.myTypes.Contains (CampaignUpgrade.upgradeType.Turret)) {
+					UnAppliedExclam [2].enabled = true;
+				}
+
 				unUsed = true;
 				break;
 			}

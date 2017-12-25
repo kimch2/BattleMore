@@ -92,6 +92,10 @@ public class ErrorPrompt : MonoBehaviour {
 	{showError( "Not enough Supply, Build more Aether Cores", myVoicePack.getSupplyLine());
 		}
 
+	public void atMaxSupply()
+	{showError( "Army Supply limit reached", myVoicePack.getMaxSupplyLine());
+	}
+
 	public void notEnoughEnergy()
 	{showError(  "Not enough Energy");
 		}

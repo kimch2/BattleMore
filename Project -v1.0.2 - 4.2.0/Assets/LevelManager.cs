@@ -35,7 +35,6 @@ public class LevelManager : MonoBehaviour {
 	public GameObject defaultTurret;
 
 	public VoiceContainer voicePacks;
-	public Text ReplayButtonText;
 	public GameObject AllTechToggle;
 	public LevelIntroMaker IntroMaker;
 

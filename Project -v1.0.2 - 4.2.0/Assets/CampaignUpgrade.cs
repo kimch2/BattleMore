@@ -16,7 +16,7 @@ public class CampaignUpgrade : MonoBehaviour {
 	public List<Button> myButtons;
 	public List<Image> myPic;
 
-	public enum upgradeType{Shields, Barrels, Speed, Concussion, Siege, Mount, Construction, Recoil, Ability, Deployment, DuplexPlating, DoublePHD,General,Munition}
+	public enum upgradeType{Shields, Barrels, Speed, Concussion, Siege, Mount, Construction, Recoil, Ability, Deployment, DuplexPlating, DoublePHD,General,Munition, Building,Vehicle,Turret}
 
 	public Material grayScale;
 	SpecificUpgrade currentUpgrade;

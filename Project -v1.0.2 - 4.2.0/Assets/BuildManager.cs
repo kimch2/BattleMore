@@ -193,8 +193,11 @@ public class BuildManager : MonoBehaviour {
 
 	IEnumerator waitOnSupply(float supply)
 	{
-
-		ErrorPrompt.instance.notEnoughSupply ();
+		if (raceMan.supplyMax == raceMan.supplyCap) {
+			ErrorPrompt.instance.atMaxSupply ();
+		} else {
+			ErrorPrompt.instance.notEnoughSupply ();
+		}
 		while (buildOrder.Count > 0) {
 			yield return new WaitForSeconds (.3f);
 			

@@ -63,7 +63,7 @@ public class RaceUIManager : MonoBehaviour , ManagerWatcher{
 				resourceTwo.text = "";
 			}
 			if (raceManager.supplyMax >= raceManager.supplyCap) {
-				supply.color = Color.cyan;
+				supply.color = Color.white;
 			}
 			else if (raceManager.currentSupply < Mathf.Min(raceManager.supplyMax, raceManager.supplyCap) - 5  ) {
 				supply.color = Color.green;

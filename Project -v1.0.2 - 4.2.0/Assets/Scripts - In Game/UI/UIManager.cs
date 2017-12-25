@@ -903,12 +903,12 @@ public class UIManager : MonoBehaviour, IUIManager {
 
 
 				int x = formationLights.Count;
-				for (int n = x; n < m_SelectedManager.ActiveObjectList ().Count; n++) {
+				for (int n = x; n < trueMovers.Count; n++) {
 					formationLights.Add (Instantiate<GameObject> (formationLight));
 				}
 
 				for (int i = 0; i < formationLights.Count; i++) {
-					if (i < m_SelectedManager.ActiveObjectList ().Count) {
+					if (i < trueMovers.Count) {
 						formationLights [i].SetActive (true);
 						formationLights [i].transform.position = points [i] + superUp;
 						formationLights [i].transform.localEulerAngles = new Vector3 (0,angle,0);
