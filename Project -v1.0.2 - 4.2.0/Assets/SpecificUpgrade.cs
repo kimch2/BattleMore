@@ -4,10 +4,8 @@ using System.Collections.Generic;
 
 public abstract class SpecificUpgrade : Upgrade {
 
-	[Tooltip("This list is applied at runtime and contains all the units the upgrade applies to")]
 	public List<string> unitsToApply = new List<string>();
-	[Tooltip("This is all the Untis it can possible apply to")]
-	public List<RaceInfo.unitType> ApplicableUnits;
+
 	override
 	public void applyUpgrade(GameObject obj)
 	{	

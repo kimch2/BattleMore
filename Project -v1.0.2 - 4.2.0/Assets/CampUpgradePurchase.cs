@@ -35,33 +35,33 @@ public class CampUpgradePurchase : MonoBehaviour {
 			}
 		}
 	}
-		
-	public void purchase()
+
+
+	public void Initialize()
 	{
 		
-		if (!purchased) {
-			if (myCost <= LevelData.getMoney ()) {
-				purchased = true;
-				activate ();
-				manager.changeMoney (-myCost);
-				GetComponent<Image> ().color = Color.cyan;
-				LevelData.addUpgrade (myUpgrade);
+		GetComponent<Button> ().interactable = (myCost <= LevelData.getMoney());
 
-				updateCostObject ();
-				DirectUpgradeApplier.instance.CreatePage (myUpgrade); 
+	}
 
-				foreach (CampUpgradePurchase up in enables) {
-					up.activate ();
-				}
+	public void purchase()
+	{
+		if (myCost <= LevelData.getMoney()) {
+			manager.changeMoney (-myCost);
+			GetComponent<Image> ().color = Color.cyan;
+			GetComponent<Button> ().interactable = false;
+			LevelData.addUpgrade (myUpgrade);
 
-				if (myUpgrade) {
-					TrueUpgradeManager.instance.upgradeBought (myUpgrade, myType);
-				}
-			} else {
-				// To Do- put in some kind of audio or visual thing saying you dont have enough money
+			updateCostObject ();
+		
+
+			foreach (CampUpgradePurchase up in enables) {
+				up.activate ();
 			}
-		} else {
-			DirectUpgradeApplier.instance.CreatePage (myUpgrade); 
+
+			if (myUpgrade) {
+				GameObject.FindObjectOfType<TrueUpgradeManager> ().upgradeBought (myUpgrade, myType);
+				}
 		}
 		
 	}
@@ -77,8 +77,9 @@ public class CampUpgradePurchase : MonoBehaviour {
 			
 			GameObject.FindObjectOfType<TrueUpgradeManager> ().upgradeBought (myUpgrade, myType);
 		}
-		activate ();
+		GetComponent<MouseOver> ().enabled = false;
 		GetComponent<Image> ().color = Color.blue;
+		GetComponent<Button> ().interactable = false;
 		updateCostObject ();
 
 	}
@@ -98,11 +99,13 @@ public class CampUpgradePurchase : MonoBehaviour {
 
 
 	public void activate()
-	{
+	{if (!purchased) {
+			purchased = true;
 			Costobject.GetComponent<Image> ().material = null;
 			GetComponent<Button> ().interactable = true;
 			GetComponent<Image> ().material = null;
 			GetComponent<MouseOver> ().enabled = true;
-
+			//GetComponent<Image> ().sprite = BlueOutline;//.color = Color.blue;
+		}
 	}
 }

@@ -7,10 +7,7 @@ public class RaceInfo : MonoBehaviour {
 
 
 	public enum raceType{Daexa, Urden}
-	public enum unitType
-	{
-		ConstructionYard,Armory,AetherCore,Augmentor,Aviatrix,FluxArray,EngineeringBay,Academy,Manticore,SteelCraftor,Zephyr,Vulcan,Triton,Chimera,Minigun,ImperioCannon,RepairBay,MortarPod
-	}
+
 	public raceType race;
 	public string subtitle;
 

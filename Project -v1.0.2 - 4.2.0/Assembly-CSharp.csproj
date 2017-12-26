@@ -159,7 +159,6 @@
      <Compile Include="Assets\DetachAugment.cs" />
      <Compile Include="Assets\dialogManager.cs" />
      <Compile Include="Assets\DifficultyManager.cs" />
-     <Compile Include="Assets\DirectUpgradeApplier.cs" />
      <Compile Include="Assets\DoubleUpgrade.cs" />
      <Compile Include="Assets\DoubleUpgradeApp.cs" />
      <Compile Include="Assets\DrillSpotter.cs" />

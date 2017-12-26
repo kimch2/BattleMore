@@ -5,10 +5,17 @@ using System.Collections.Generic;
 
 public class LevelManager : MonoBehaviour {
 
+	AudioSource mySource;
+	public AudioClip buttonPress;
 
+	public GameObject MainScreen;
+
+	public GameObject levelIntros;
+	public List<GameObject> Expositions = new List<GameObject> ();
 
 	public Dropdown difficultyBars;
 
+	public Canvas Technology;
 	public Canvas TechTree;
 	public Canvas UltTree;
  
@@ -21,6 +28,12 @@ public class LevelManager : MonoBehaviour {
 	public List<Canvas> Structures;
 
 	private List<Canvas> currentTech;
+	public GameObject LevelSelector;
+
+	public GameObject defaultStructure;
+	public GameObject defaultVehicle;
+	public GameObject defaultTurret;
+
 	public VoiceContainer voicePacks;
 	public GameObject AllTechToggle;
 	public LevelIntroMaker IntroMaker;
@@ -28,19 +41,27 @@ public class LevelManager : MonoBehaviour {
 	public static LevelManager main;
 	// Use this for initialization
 	void Awake () {
+		mySource = GetComponent<AudioSource> ();
 		main = this;
+
+
+		foreach (GameObject ob in Expositions) {
+			ob.SetActive (false);
+		}
 
 			currentTech = Vehicles;
 		if (LevelData.getHighestLevel() == 0) {
 			techButton.interactable = false;
-			UltButton.gameObject.SetActive (false);
+			UltButton.gameObject.SetActive (false);//.interactable = false;
 			} 
 		else if (LevelData.getHighestLevel() == 1) {
 			techButton.interactable = true;
 			UltButton.gameObject.SetActive (false);
+			//UltButton.interactable = false;
 		} else {
 			techButton.interactable = true;
 			UltButton.gameObject.SetActive (true);
+			//UltButton.interactable = true;
 		}
 		
 		currentTech = Vehicles;
@@ -50,9 +71,22 @@ public class LevelManager : MonoBehaviour {
 		changeMoney (0);
 
 	}
+
+
+
+	public void nextLevel()
+	{
 		
+		//Debug.Log ("Being called");
+		Expositions [LevelData.getHighestLevel()].SetActive (true);
+
+	}
+
+
+
 	public void closeLevelIntro()
 	{
+
 		foreach (ToolTip tt in GameObject.FindObjectsOfType<ToolTip>()) {
 			if (tt.toolbox) {
 				tt.toolbox.enabled = false;
@@ -60,8 +94,9 @@ public class LevelManager : MonoBehaviour {
 				tt.ToolObj.SetActive (false);
 			}
 		}
-	}
 
+
+	}
 
 	public void setAllTech(Toggle  myToggle)
 	{
@@ -92,8 +127,7 @@ public class LevelManager : MonoBehaviour {
 
 			currentTech = Vehicles;
 			setActive (Vehicles, true);
-			CampTechCamManager.instance.loadTech ("Manticore");
-
+			GameObject.FindObjectOfType<CampTechCamManager> ().loadTech ("Manticore");
 		}
 	}
 
@@ -105,7 +139,7 @@ public class LevelManager : MonoBehaviour {
 
 			currentTech = Structures;
 			setActive (Structures, true);
-			CampTechCamManager.instance.loadTech ("Construction yard");
+			GameObject.FindObjectOfType<CampTechCamManager> ().loadTech ("Armory");
 		}
 	}
 
@@ -117,7 +151,8 @@ public class LevelManager : MonoBehaviour {
 			}
 			currentTech = Turrets;
 			setActive (Turrets, true);
-			CampTechCamManager.instance.loadTech ("Minigun");
+
+			GameObject.FindObjectOfType<CampTechCamManager> ().loadTech ("Minigun");
 		}
 	}
 
@@ -127,16 +162,27 @@ public class LevelManager : MonoBehaviour {
 		UnityEngine.SceneManagement.SceneManager.LoadScene (0);
 	}
 
+	public void showMainScreen()
+	{
 
+
+	}
+
+
+	public void ToggleTech()
+	{
+		mySource.PlayOneShot (buttonPress);
+		LevelSelector.GetComponent<Canvas>().enabled = !LevelSelector.GetComponent<Canvas>().enabled;
+
+	}
 
 	public void toggleTechTree()
-	{	TrueUpgradeManager.instance.playSimpleSound ();
-
+	{mySource.PlayOneShot (buttonPress);
 		TechTree.enabled = !TechTree.enabled;
 	}
 
 	public void toggleUltTree()
-	{TrueUpgradeManager.instance.playSimpleSound ();
+	{mySource.PlayOneShot (buttonPress);
 		CanvasGroup grouper = UltTree.GetComponent<CanvasGroup>();
 		if (grouper.interactable) {
 			grouper.interactable = false;
@@ -154,7 +200,7 @@ public class LevelManager : MonoBehaviour {
 	public void setDifficulty(Dropdown i)
 	{
 		if (Time.timeSinceLevelLoad > 1) {
-			TrueUpgradeManager.instance.playSimpleSound ();
+			mySource.PlayOneShot (buttonPress);
 		}
 		LevelData.setDifficulty (i.value + 1);
 	}
@@ -162,12 +208,15 @@ public class LevelManager : MonoBehaviour {
 
 	public void changeMoney(int input)
 	{
+
 		LevelData.addMoney (input);
 		foreach (Text t in creditDisplayers) {
 			if (t) {
 				t.text = "" + LevelData.getMoney ();
 			}
 		}
+
+		//Debug.Log ("money " + LevelData.totalXP);
 	}
 
 	public void setAnnouncer(Dropdown i)
@@ -178,7 +227,7 @@ public class LevelManager : MonoBehaviour {
 				PlayerPrefs.SetInt ("VoicePack", j);
 
 				if (Time.timeSinceLevelLoad > 2) {
-					GetComponent<AudioSource>().PlayOneShot (voicePacks.LockedVoicePacks [j].getVoicePackLine ());
+					mySource.PlayOneShot (voicePacks.LockedVoicePacks [j].getVoicePackLine ());
 				}
 			}
 		}
