@@ -107,8 +107,8 @@ public class CampaignUpgrade : MonoBehaviour {
 
 		PlayerPrefs.SetString (this.gameObject.ToString (), options[currentIndex]);
 		LevelData.applyUpgrade (this.gameObject.ToString (), currentIndex);
-		GameObject.FindObjectOfType<TrueUpgradeManager> ().playSound ();
-		GameObject.FindObjectOfType<CampTechCamManager> ().AssignTechEffect ();
+		TrueUpgradeManager.instance.playSound ();
+		CampTechCamManager.instance.AssignTechEffect ();
 
 		SetImageDescript ();
 		if (currentUpgrade) {
@@ -122,11 +122,17 @@ public class CampaignUpgrade : MonoBehaviour {
 		foreach (StatDisplayer stat in myStatDisplayer) {
 			stat.SetText ();
 		}
+		TrueUpgradeManager.instance.Unused ();
+	}
 
-
-		GameObject.FindObjectOfType<TrueUpgradeManager> ().Unused ();			
-
-
+	public void setUpgrade(SpecificUpgrade upgrade)
+	{
+		for (   int i = 0; i < myUpgrades.Count; i ++){
+			if (myUpgrades [i].pointer == upgrade) {
+				setUpgrade (i);
+				break;
+			}
+		}
 	}
 
 
@@ -203,7 +209,7 @@ public class CampaignUpgrade : MonoBehaviour {
 	{
 		myUpgrades.Clear ();
 		options = new List<string> ();
-		foreach (UpgradesPiece  up in GameObject.FindObjectOfType<TrueUpgradeManager>().myUpgrades) {
+		foreach (UpgradesPiece  up in TrueUpgradeManager.instance.myUpgrades) {
 
 			if (up.isUnlocked() && myTypes.Contains (up.myType) && !myUpgrades.Contains(up)) {
 

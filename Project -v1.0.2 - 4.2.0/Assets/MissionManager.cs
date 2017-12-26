@@ -22,10 +22,7 @@ public class MissionManager : MonoBehaviour {
 		Intelligence.enabled = !Intelligence.enabled;
 
 	}
-
-
-
-
+		
 	public void toggleVictory()
 	{
 		Victoryscreen.enabled = !Victoryscreen.enabled;
@@ -36,20 +33,13 @@ public class MissionManager : MonoBehaviour {
 	public void nextLevel(){
 		Victoryscreen.enabled = !Victoryscreen.enabled;
 		myCanvas.enabled = !myCanvas.enabled;
-	
-			LevelManager.main.nextLevel ();
 
 	}
+		
 
-	public void Replay()
+	public void StartMission(int levelNum, Sprite loadingPic)
 	{
-		StartMission( PlayerPrefs.GetInt("RecentLevel", 1));
-
-	}
-
-
-	public void StartMission(int levelNum)
-	{
+		loadingScreen.GetComponent<Image> ().sprite = loadingPic;
 		loadingScreen.GetComponent<Canvas> ().enabled = true;
 		SceneManager.LoadScene (levelNum);
 	}

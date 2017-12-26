@@ -76,12 +76,14 @@ public class LevelIntroMaker : MonoBehaviour {
 
 	public void LoadLevel()
 	{
-		GameObject.FindObjectOfType<MissionManager> ().StartMission (currentInfo.SceneNumber);
+		LevelCompilation comp = Resources.Load<GameObject> ("LevelEditor").GetComponent<LevelCompilation> ();
+
+		GameObject.FindObjectOfType<MissionManager> ().StartMission (currentInfo.SceneNumber, currentInfo.loadingScreen);
 		foreach (Text t in LevelTitles) {
 			t.text = currentInfo.LevelName;
 		}
 			
-		int i = Resources.Load<GameObject> ("LevelEditor").GetComponent<LevelCompilation>().MyLevels.IndexOf(currentInfo);
+		int i = comp.MyLevels.IndexOf(currentInfo);
 		if (PlayerPrefs.GetInt ("L" + i + "Win") == 0) {
 			LoadingTip.loadLevelTip (currentInfo.defaultTip);
 		} else {

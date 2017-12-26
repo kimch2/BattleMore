@@ -26,6 +26,7 @@ public class LevelInfo {
 	public EnemyArsenal displayArsenal;
 	public float ArsenalDisplayTime = -1;
 	public int defaultTip;
+	public Sprite loadingScreen;
 
 
 
