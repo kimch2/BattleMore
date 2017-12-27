@@ -10,14 +10,24 @@ public class SlowDebuff : Behavior, Notify {
 	public float duration;
 	public bool stackable;
 	public float percent;
+	public bool applyOnStart = false;
+	private float removalTime;
 
-	private float nextActionTime;
-	// Use this for initialization
-	void Start () {
-		if (this.gameObject.GetComponent<Projectile> ()) {
-			this.gameObject.GetComponent<Projectile> ().triggers.Add (this);
+	void Start()
+	{
+		if (applyOnStart) {
+			AddToWeapon ();
 		}
-	
+	}
+
+	public void AddToWeapon()
+	{
+		UnitManager manager = GetComponent<UnitManager> ();
+		if (manager) {
+			foreach (IWeapon weap in manager.myWeapon) {
+				weap.addNotifyTrigger (this);
+			}
+		} 
 	}
 
 	public void initialize(float dur, float speed, float percentdec)
@@ -27,7 +37,6 @@ public class SlowDebuff : Behavior, Notify {
 		duration = dur;
 		speedDecrease = speed;
 		percent = percentdec;
-		nextActionTime = Time.time + duration;
 
 		mover = this.gameObject.GetComponent<UnitManager>().cMover;
 		mover.removeSpeedBuff (this);
@@ -35,51 +44,33 @@ public class SlowDebuff : Behavior, Notify {
 		mover.changeSpeed (percent, speedDecrease, false, this);
 
 		setBuffStuff (Behavior.buffType.movement, true);
+		StopAllCoroutines ();
+		StartCoroutine (waitForTime());
 			
 
 	}
 
-	public void resetTime()
-	{nextActionTime = Time.time + duration;}
-	
-	// Update is called once per frame
-	void Update () {
-	
-		if (OnTarget) {
-
-			if (Time.time > nextActionTime) {
-				
-
-				Destroy (this);
-			}
-		}
+	IEnumerator waitForTime()
+	{
+		yield return new WaitForSeconds (duration);
+		mover.removeSpeedBuff (this);
 	}
 
 
-	public void OnDestroy()
-	{	
-		if (OnTarget) {
-			mover.removeSpeedBuff (this);
-	
-		}
-	}
 
 	public float trigger(GameObject source,GameObject proj, UnitManager target, float damage)
-	{SlowDebuff deb = target.GetComponent<SlowDebuff> ();
-		if (deb) {
-			if (stackable) {
-				deb.initialize (duration, speedDecrease, percent);
-			}
-			else{
-				deb.resetTime();
-			}
-		} else {
-			if(target.GetComponent<customMover>() != null){
-				target.gameObject.AddComponent<SlowDebuff> ();
-			deb = target.GetComponent<SlowDebuff> ();
-			deb.initialize (duration, speedDecrease,percent);}
-		}
+	{
 
+		if (proj && proj.GetComponent<Projectile>().triggers.Contains(this) && target.cMover) {
+			
+			SlowDebuff debuff = target.gameObject.GetComponent<SlowDebuff> ();
+			if (!debuff) {
+				target.gameObject.AddComponent<SlowDebuff> ();
+			}
+			debuff.initialize (duration, speedDecrease, percent);
+		} else if (proj){
+			proj.GetComponent<Projectile> ().triggers.Add (this);
+		}
 
 		return damage;
 	}

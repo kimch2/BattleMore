@@ -352,7 +352,6 @@ public class IWeapon : MonoBehaviour {
 				
 				audioSrc.pitch = ((float)Random.Range (7, 12) / 10);
 					SoundManager.PlayOneShotSound(audioSrc, attackSoundEffect);
-				//audioSrc.PlayOneShot (attackSoundEffect, Random.value/3 + .15f);
 			}
 
 			if (OnHitEffect) {
@@ -367,7 +366,6 @@ public class IWeapon : MonoBehaviour {
 					fireEffect.transform.position = target.transform.position + Vector3.up;
 					fireEffect.playEffect ();
 				}
-				//Debug.Log ("Playing eeffect " + fireEffect.gameObject.activeSelf);
 			}
 
 		}

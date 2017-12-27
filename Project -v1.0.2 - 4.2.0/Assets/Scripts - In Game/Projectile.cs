@@ -202,9 +202,8 @@ public  class Projectile : MonoBehaviour {
 				return;
 			}
 
-			if(!trackTarget && (other.gameObject!= Source || !other.gameObject.transform.IsChildOf(Source.transform) ))
-				{
-				Terminate(null);}
+		if(!trackTarget && (other.gameObject!= Source || !other.gameObject.transform.IsChildOf(Source.transform) ))
+			{Terminate(null);}
 		
 	}
 
@@ -284,6 +283,7 @@ public  class Projectile : MonoBehaviour {
 	public void Despawn()
 	{//Debug.Log ("Despawning " + this.gameObject);
 		myBulletPool.FastDespawn (this.gameObject, 0);
+		triggers.Clear ();
 	}
 
 

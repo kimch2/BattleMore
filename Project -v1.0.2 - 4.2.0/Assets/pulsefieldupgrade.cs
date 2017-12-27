@@ -15,7 +15,7 @@ public class pulsefieldupgrade : Upgrade {
 			manager.energyChargeRate += rechargeIncrease;
 			//Debug.Log ("Recharge rate is " + manager.energyChargeRate);
 			manager.Descripton = "Passively Regenerates allied units energy (" + manager.energyChargeRate + " per second).\n\nActivate to instead discharge energy (20 per second) to damage nearby enemy units.";
-		
+			manager.iconPic = iconPic;
 		}
 	}
 
