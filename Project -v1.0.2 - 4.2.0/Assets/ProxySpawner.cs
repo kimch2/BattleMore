@@ -5,7 +5,7 @@ using UnityEngine;
 public class ProxySpawner :VisionTrigger {
 
 	[Tooltip("Max number of guys spawned here in one game")]
-	public int maxSpawnCount;
+	public int maxSpawnCount =10000;
 	int totalSpawned = 0;
 
 	[Tooltip("How many guys can be in a waveThis is multiplied by the difficulty number")]

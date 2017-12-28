@@ -4,14 +4,25 @@ using UnityEngine;
 
 public class stunZone : VisionTrigger {
 
-
+	public float rootTime = 2;
 
 	public override void UnitEnterTrigger(UnitManager manager)
 	{	if (manager.cMover) {
-			manager.cMover.changeSpeed (0, -1000, false, this);
+			StartCoroutine (timedRoot(manager));
 		}
 		//manager.StunForTime (this, timer.timer);
 	}
+
+	IEnumerator timedRoot(UnitManager manager)
+	{
+		manager.cMover.changeSpeed (0, -1000, false, this);
+		yield return new WaitForSeconds (rootTime);
+		if (manager) {
+			manager.cMover.removeSpeedBuff (this);
+		}
+	}
+
+
 
 
 	public override void UnitExitTrigger(UnitManager manager)
