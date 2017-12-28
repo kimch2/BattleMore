@@ -8,8 +8,14 @@ public class BridgeActivator : VisionTrigger {
 	public GameObject Bridge;
 
 	public GameObject DeathZone;
+	public AudioClip soundEffect;
+	AudioSource source;
+
 	void Start()
 	{
+		source = this.gameObject.AddComponent<AudioSource> ();
+		source.playOnAwake = false;
+		source.loop = false;
 		Bridge.SetActive (false);
 		DeathZone.SetActive (true);
 		StartCoroutine (DeathRescan ());
@@ -21,6 +27,7 @@ public class BridgeActivator : VisionTrigger {
 			Bridge.SetActive (false);
 			DeathZone.SetActive (true);
 			StartCoroutine (DeathRescan ());
+			source.PlayOneShot (soundEffect);
 		}
 	}
 
@@ -29,6 +36,9 @@ public class BridgeActivator : VisionTrigger {
 		Bridge.SetActive (true);
 		DeathZone.SetActive (false);
 		StartCoroutine (DeathRescan ());
+		if (InVision.Count == 1) {
+			source.PlayOneShot (soundEffect);
+		}
 	}
 
 
