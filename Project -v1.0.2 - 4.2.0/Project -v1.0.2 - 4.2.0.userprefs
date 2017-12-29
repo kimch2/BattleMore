@@ -1,18 +1,15 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\ProxySpawner.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\VictoryTrigger.cs">
     <Files>
       <File FileName="Assets\TrueUpgradeManager.cs" Line="1" Column="1" />
       <File FileName="Assets\CampaignUpgrade.cs" Line="1" Column="1" />
       <File FileName="Assets\DirectUpgradeApplier.cs" Line="1" Column="1" />
       <File FileName="Assets\ConstructionUpgrade.cs" Line="1" Column="1" />
       <File FileName="Assets\CampTechCamManager.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts - In Game\IWeapon.cs" Line="1" Column="1" />
-      <File FileName="Assets\RabbitEgg.cs" Line="1" Column="1" />
-      <File FileName="Assets\CustomRVO.cs" Line="1" Column="1" />
-      <File FileName="Assets\Plugins\AstarPathfindingProject\RVO\RVOController.cs" Line="1" Column="1" />
-      <File FileName="Assets\explosion.cs" Line="1" Column="1" />
-      <File FileName="Assets\ProxySpawner.cs" Line="68" Column="4" />
+      <File FileName="Assets\Scripts - In Game\UiAbilityManager.cs" Line="265" Column="11" />
+      <File FileName="Assets\CapturableUnit.cs" Line="30" Column="2" />
+      <File FileName="Assets\VictoryTrigger.cs" Line="168" Column="40" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

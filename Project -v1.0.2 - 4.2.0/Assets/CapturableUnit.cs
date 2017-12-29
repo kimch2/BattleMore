@@ -16,10 +16,12 @@ public class CapturableUnit : MonoBehaviour, Modifier  {
 
 	public float modify(float damage, GameObject source, DamageTypes.DamageType theType)
 	{
-		UnitManager sourceManage = source.GetComponent<UnitManager> ();
-		if (sourceManage) {
+		if (source) {
+			UnitManager sourceManage = source.GetComponent<UnitManager> ();
+			if (sourceManage) {
 
-			capture ();
+				capture ();
+			}
 		}
 		return damage;
 	}

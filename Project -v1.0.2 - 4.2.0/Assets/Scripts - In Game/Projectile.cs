@@ -232,7 +232,9 @@ public  class Projectile : MonoBehaviour {
 		if (explosionO && SepDamWithExplos && target || !explosionO && target) {
 			
 			foreach (Notify not in triggers) {
-				not.trigger (this.gameObject, this.gameObject, target, damage);
+				if (not != null) {
+					not.trigger (this.gameObject, this.gameObject, target, damage);
+				}
 			}
 			if (target != null && target.myStats != null) {
 
@@ -282,7 +284,7 @@ public  class Projectile : MonoBehaviour {
 
 	public void Despawn()
 	{//Debug.Log ("Despawning " + this.gameObject);
-		myBulletPool.FastDespawn (this.gameObject, 0);
+		//myBulletPool.FastDespawn (this.gameObject, 0);
 		triggers.Clear ();
 	}
 

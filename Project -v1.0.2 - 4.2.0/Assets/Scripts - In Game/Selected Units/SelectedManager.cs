@@ -1220,7 +1220,8 @@ public class SelectedManager : MonoBehaviour, ISelectedManager
 		CreateUIPages(0);
 	}
 
-
+	public List<Page> getPageList()
+	{return UIPages;}
 
 
 	public void attackMoveO(Vector3 input)

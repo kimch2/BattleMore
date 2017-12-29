@@ -15,6 +15,12 @@ public class UiAbilityManager : MonoBehaviour {
 	Color disabledColor = new Color(.5f,0,0,1);
 	public List<Button> quickButtons = new List<Button>();
 	public List<AbilityBox> quickAbility = new List<AbilityBox>();
+	bool showAllUnits = false;
+	public GameObject GridObject;
+	public Image gridButton;
+	public Sprite showallGrid;
+	public Sprite showSomeGrid;
+
 
 
 	public static UiAbilityManager main;
@@ -66,9 +72,12 @@ public class UiAbilityManager : MonoBehaviour {
 
 	private float nextActionTime;
 
+
 	void Awake()
 	{
 		main = this;
+		if (PlayerPrefs.GetInt ("GridMode", 1) == 1) {
+			toggleGridMode ();}
 	}
 
 	public void pressButton(int n)
@@ -248,6 +257,19 @@ public class UiAbilityManager : MonoBehaviour {
 	}
 
 
+	public void toggleGridMode()
+	{
+		showAllUnits = !showAllUnits;
+		if (showAllUnits) {
+			gridButton.sprite = showallGrid;
+		} else {
+			gridButton.sprite = showSomeGrid;
+		}
+		PlayerPrefs.SetInt ("GridMode", showAllUnits ? 1:0);
+		if (currentPage != null) {
+			loadUI (currentPage );
+		}
+	}
 
 	void setButtonCooldown(Slider slide, int abilityNum, int row)
 	{
@@ -330,9 +352,6 @@ public class UiAbilityManager : MonoBehaviour {
 			currentPage = null;
 		cardCreator.turnOff ();
 
-			
-
-
 	}
 
 
@@ -382,10 +401,7 @@ public class UiAbilityManager : MonoBehaviour {
 						continue;
 					}
 				}
-					
 						totalUnit += uiPage.rows [j].Count;
-	
-			
 			}
 		}
 
@@ -399,7 +415,7 @@ public class UiAbilityManager : MonoBehaviour {
 			return;
 		}
 
-		else if (totalUnit > 1 ) {
+		else if (totalUnit > 1  || (selectMan.ActiveObjectList().Count > 1 && showAllUnits)) {
 			OreCanvas.enabled = false;
 			cardCreator.gameObject.GetComponent<Canvas> ().enabled = false;
 			if (totalUnit == 0) {
@@ -436,39 +452,75 @@ public class UiAbilityManager : MonoBehaviour {
 			IconStartPoints [j].SetActive (true);
 		// fill the icon panel
 		
-			if (totalUnit > 1) {
-				
-				if (j == 0 || uiPage.rows [j] != uiPage.rows [j - 1]) {
-					int picCount = Mathf.Min (uiPage.rows [j].Count, 18);
-					int separation = 59;
+			if (totalUnit > 1 || (selectMan.ActiveObjectList().Count > 1 && showAllUnits)) {
 
-					if (uiPage.rows [j].Count > 14) {
-						separation = Mathf.Max (15, 558 / picCount);
+				if (showAllUnits) {
+					if (j == 0) {
+
+						List<Page> currentPages = selectMan.getPageList ();
+						for (int e = 0; e < currentPages.Count; e++) {
+					
+							for (int p = 0; p < currentPages[e].rows.Length; p++) {
+
+								if (currentPages[e].rows [p] != null) {
+									if (p == 0 ||currentPages[e].rows [p] != currentPages[e].rows [p - 1]) {
+
+										for (int x = 0; x < currentPages[e].rows [p].Count; x++) {
+
+										
+											GameObject unit = (GameObject)Instantiate (buttonTemplate, Vector3.zero, Quaternion.identity, GridObject.transform);
+										
+											Transform icontransform = unit.transform.Find ("UnitIconTemplate");
+											icontransform.GetComponent<UnitIconInfo> ().setInfo (currentPages[e].rows [p] [x].gameObject); //.myUnit = uiPage.rows [j] [k].gameObject;
+											icontransform.GetComponent<Button> ().onClick.AddListener (delegate() {
+												IconClick (unit);
+											});
+
+											unitIcons.Add (unit, currentPages[e].rows [p] [x].gameObject);
+											currentPages[e].rows [p] [x].gameObject.GetComponent<Selected> ().setIcon (unit);
+										}
+									}
+								}
+							}
+						}
 					}
+				}
+				else{
+					if (j == 0 || uiPage.rows [j] != uiPage.rows [j - 1]) {
+						int picCount = Mathf.Min (uiPage.rows [j].Count, 18);
+						int separation = 59;
+
+						if (uiPage.rows [j].Count > 14) {
+							separation = Mathf.Max (15, 558 / picCount);
+						}
 				
-					int currentX = 140;
-					for (int k = 0; k < picCount; k++) {
+						int currentX = 140;
+						for (int k = 0; k < picCount; k++) {
 
-						Vector3 pos =IconStartPoints[j].transform.position;
-						pos.x += currentX *this.transform.localScale.x ;
+							Vector3 pos = IconStartPoints [j].transform.position;
+							pos.x += currentX * this.transform.localScale.x;
 
-						GameObject unit = (GameObject)Instantiate (buttonTemplate);
-
-						unit.transform.Find ("UnitIconTemplate").GetComponent<UnitIconInfo> ().setInfo (uiPage.rows [j] [k].gameObject); //.myUnit = uiPage.rows [j] [k].gameObject;
-						unit.transform.localScale = this.transform.localScale;
+							GameObject unit = (GameObject)Instantiate (buttonTemplate);
+							Transform icontransform = unit.transform.Find ("UnitIconTemplate");
 					
-						unit.transform.rotation = this.transform.rotation;
-						unit.transform.SetParent (topDividerBar.transform.parent);
-
-						unit.transform.position = pos;
-
-						//unit.transform.FindChild("UnitIconTemplate").GetComponent<Image> ().sprite = uiPage.rows [j] [k].gameObject.GetComponent<UnitStats> ().Icon;
+							icontransform.GetComponent<UnitIconInfo> ().setInfo (uiPage.rows [j] [k].gameObject); //.myUnit = uiPage.rows [j] [k].gameObject;
+							unit.transform.localScale = this.transform.localScale;
 					
-						currentX += separation;
-						unit.transform.Find("UnitIconTemplate").GetComponent<Button> ().onClick.AddListener(delegate() {IconClick(unit);});
+							unit.transform.rotation = this.transform.rotation;
+							unit.transform.SetParent (topDividerBar.transform.parent);
+
+							unit.transform.position = pos;
+
+							//unit.transform.FindChild("UnitIconTemplate").GetComponent<Image> ().sprite = uiPage.rows [j] [k].gameObject.GetComponent<UnitStats> ().Icon;
 					
-						unitIcons.Add (unit, uiPage.rows [j] [k].gameObject);
-						uiPage.rows [j] [k].gameObject.GetComponent<Selected> ().setIcon (unit);
+							currentX += separation;
+							icontransform.GetComponent<Button> ().onClick.AddListener (delegate() {
+								IconClick (unit);
+							});
+					
+							unitIcons.Add (unit, uiPage.rows [j] [k].gameObject);
+							uiPage.rows [j] [k].gameObject.GetComponent<Selected> ().setIcon (unit);
+						}
 					}
 				}
 			} else {

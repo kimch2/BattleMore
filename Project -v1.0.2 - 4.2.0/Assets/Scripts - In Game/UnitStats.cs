@@ -262,11 +262,12 @@ public class UnitStats : MonoBehaviour {
 			bool setToZero = false;
 			if (type != DamageTypes.DamageType.True) {
 				foreach (Modifier mod in damageModifiers) {
-
-					amount = mod.modify (amount, source, type);
-					if (amount <= 0) {
-						setToZero = true;
-						break;
+					if (mod != null) {
+						amount = mod.modify (amount, source, type);
+						if (amount <= 0) {
+							setToZero = true;
+							break;
+						}
 					}
 				}
 			}
