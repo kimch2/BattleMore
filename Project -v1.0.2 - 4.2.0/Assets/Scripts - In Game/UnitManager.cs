@@ -701,11 +701,12 @@ public class UnitManager : Unit,IOrderable{
 	public void animAttack()
 	{
 		if (myAnim ) {
-			foreach (AnimatorControllerParameter parem in myAnim.parameters) {
-				if (parem.name == "State") {
-					myAnim.SetInteger ("State", 3);
-				}
-			}
+			myAnim.Play ("Attack");
+			//foreach (AnimatorControllerParameter parem in myAnim.parameters) {
+				//if (parem.name == "State") {
+					//myAnim.SetInteger ("State", 3);
+				//}
+			//}
 		}
 	}
 

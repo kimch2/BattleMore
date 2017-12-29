@@ -172,6 +172,7 @@
      <None Include="Assets\Materials\Bit2Good\SFS\Shaders\SFS_Pr_D_S.shader" />
      <None Include="Assets\Materials\Bit2Good\SFS\Shaders\SFS_Pr_Dt_S.shader" />
      <None Include="Assets\Materials\Bit2Good\SFS\Shaders\SFS_St_D_S_DS.shader" />
+     <None Include="Assets\Squirrel\Squirrel_readme.txt" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\SunShaftsComposite.shader" />
      <None Include="Assets\PostProcessing\Editor Resources\Monitors\ParadeRender.shader" />
      <None Include="Assets\PostProcessing\Resources\Shaders\LutGen.shader" />

@@ -208,6 +208,7 @@
      <Compile Include="Assets\ExplodeOnDeath.cs" />
      <Compile Include="Assets\ExplodeParts.cs" />
      <Compile Include="Assets\explosion.cs" />
+     <Compile Include="Assets\explosionUpgrade.cs" />
      <Compile Include="Assets\ExpositionDisplayer.cs" />
      <Compile Include="Assets\ExpositionTexts.cs" />
      <Compile Include="Assets\ExtendedBarrels.cs" />
@@ -564,6 +565,7 @@
      <Compile Include="Assets\SpeedUpgrade.cs" />
      <Compile Include="Assets\SplineCurve.cs" />
      <Compile Include="Assets\SquareDamageZone.cs" />
+     <Compile Include="Assets\Squirrel\Scripts\Squirrel.cs" />
      <Compile Include="Assets\StandardInteract.cs" />
      <Compile Include="Assets\StatDisplayer.cs" />
      <Compile Include="Assets\stunStrike.cs" />
@@ -668,6 +670,7 @@
      <None Include="Assets\Materials\Bit2Good\SFS\Shaders\SFS_Pr_D_S.shader" />
      <None Include="Assets\Materials\Bit2Good\SFS\Shaders\SFS_Pr_Dt_S.shader" />
      <None Include="Assets\Materials\Bit2Good\SFS\Shaders\SFS_St_D_S_DS.shader" />
+     <None Include="Assets\Squirrel\Squirrel_readme.txt" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\SunShaftsComposite.shader" />
      <None Include="Assets\PostProcessing\Editor Resources\Monitors\ParadeRender.shader" />
      <None Include="Assets\PostProcessing\Resources\Shaders\LutGen.shader" />

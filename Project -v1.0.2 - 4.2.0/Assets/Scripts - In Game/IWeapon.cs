@@ -429,6 +429,11 @@ public class IWeapon : MonoBehaviour {
 		upgradeLevel++;
 	}
 
+	public void resetBulletPool()
+	{
+		myBulletPool = Lean.LeanPool.getSpawnPool (projectile);
+	}
+
 	public bool isValidTarget(UnitManager target)
 	{
 
