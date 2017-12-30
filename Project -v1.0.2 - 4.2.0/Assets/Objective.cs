@@ -38,21 +38,23 @@ public class Objective : SceneEventTrigger {
 
 	public void complete()
 	{
-		completed = true;
+		if (!completed) {
+			completed = true;
 
-		foreach (SceneEventTrigger trig in myEvents) {
-			if (trig) {
-				trig.trigger (0, 0, Vector3.zero, null, false);
+			foreach (SceneEventTrigger trig in myEvents) {
+				if (trig) {
+					trig.trigger (0, 0, Vector3.zero, null, false);
+				}
 			}
-		}
 
-		if(nextObjective){
-			nextObjective.trigger (0, 0, Vector3.zero, null, false);}
-		VictoryTrigger.instance.CompleteObject (this);
+			if (nextObjective) {
+				nextObjective.trigger (0, 0, Vector3.zero, null, false);
+			}
+			VictoryTrigger.instance.CompleteObject (this);
 	
-		OnComplete.Invoke ();
+			OnComplete.Invoke ();
 
-
+		}
 	}
 
 	public void unComplete()
