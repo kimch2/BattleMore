@@ -364,6 +364,7 @@ public class UnitStats : MonoBehaviour {
 					}
 				}
 
+				Debug.Log("Rotation is " + transform.rotation.eulerAngles);
 
 				if (deathCorpse != null) {
 
@@ -371,11 +372,12 @@ public class UnitStats : MonoBehaviour {
 					if (!isUnitType (UnitTypes.UnitTypeTag.Air)) {
 						RaycastHit objecthit;
 
-						Physics.Raycast (this.gameObject.transform.position, Vector3.down, out objecthit, 1000, 1 << 8);
+						Physics.Raycast (this.gameObject.transform.position + Vector3.up *10, Vector3.down, out objecthit, 1000, 1 << 8);
 						spawnLoc = objecthit.point;
 					}
 					//Debug.Log ("Rotation is " + this.gameObject.transform.rotation);
 					//GameObject corpse = 
+
 						GameObject.Instantiate (deathCorpse,spawnLoc, this.gameObject.transform.rotation);
 				//	corpse.transform.rot.up = Vector3.up;
 				}

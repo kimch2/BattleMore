@@ -20,7 +20,7 @@ public class TextTrigger : SceneEventTrigger {
 	public float stealCamera;
 
 	public void triggerMe (){
-		Debug.Log ("Triggering " + this.gameObject);
+
 		if (!hasTriggered) {
 			hasTriggered = true;
 
@@ -44,7 +44,7 @@ public class TextTrigger : SceneEventTrigger {
 				}
 				//ExpositionDisplayer.instance.displayText (text, duration, sound, .93f, myPic,Priority);
 				if (stealCamera > 0) {
-					MainCamera.main.setCutScene (this.gameObject.transform.position, 120);
+					MainCamera.main.setCutScene (this.gameObject.transform.position, MainCamera.main.transform.position.y);
 				}
 			}
 		}

@@ -1,6 +1,6 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\TempInvulnerable.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts - In Game\Camera\MainCamera.cs">
     <Files>
       <File FileName="Assets\TrueUpgradeManager.cs" Line="1" Column="1" />
       <File FileName="Assets\CampaignUpgrade.cs" Line="1" Column="1" />
@@ -11,15 +11,10 @@
       <File FileName="Assets\DifficultyManager.cs" Line="1" Column="1" />
       <File FileName="Assets\DayFFUpgrade.cs" Line="1" Column="1" />
       <File FileName="Assets\SoundTrackPlayer.cs" Line="1" Column="1" />
-      <File FileName="Assets\SoundOptions.cs" Line="37" Column="38" />
-      <File FileName="Assets\GameSettings.cs" Line="17" Column="46" />
-      <File FileName="Assets\Scripts - In Game\Selected Units\SelectedManager.cs" Line="707" Column="46" />
-      <File FileName="Assets\GroundSetter.cs" Line="17" Column="106" />
-      <File FileName="Assets\Scripts - In Game\WeaponScripts\MortarProjectile.cs" Line="5" Column="39" />
-      <File FileName="Assets\Scripts - In Game\Projectile.cs" Line="259" Column="45" />
-      <File FileName="Assets\explosion.cs" Line="24" Column="23" />
-      <File FileName="Assets\ChangeAmmo.cs" Line="46" Column="16" />
-      <File FileName="Assets\TempInvulnerable.cs" Line="1" Column="1" />
+      <File FileName="Assets\SoundOptions.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts - In Game\UnitStats.cs" Line="381" Column="29" />
+      <File FileName="Assets\TextTrigger.cs" Line="47" Column="30" />
+      <File FileName="Assets\Scripts - In Game\Camera\MainCamera.cs" Line="186" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
