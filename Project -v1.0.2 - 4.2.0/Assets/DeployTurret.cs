@@ -97,7 +97,7 @@ public class DeployTurret  : TargetAbility{
 		UnitManager turrManage = currentTurret.GetComponent<UnitManager> ();
 
 
-		turrManage.enabled = false;
+		//turrManage.enabled = false;
 
 		currentReplciation = StartCoroutine (replicateTurrets());
 
@@ -325,14 +325,16 @@ public class DeployTurret  : TargetAbility{
 		if (newTurret.GetComponent<RepairTurret> ()) {
 			newTurret.GetComponent<RepairTurret> ().enabled = true;
 		}
+
+
 		newTurret.transform.SetParent (proj.transform);
 	
 		UnitManager turrManage = newTurret.GetComponent<UnitManager> ();
-
+		turrManage.enabled = true;
 		turrManage.setInteractor( newTurret.AddComponent<StandardInteract> ());
 		turrManage.changeState(new turretState(turrManage));
 		newTurret.GetComponent<UnitStats> ().otherTags.Add (UnitTypes.UnitTypeTag.Static_Defense);
-
+		proj.GetComponentInChildren<TurretMount> ().placeTurret (newTurret);
 		currentTurret.GetComponent<UnitManager> ().enabled = false;
 		return false;
 
@@ -382,11 +384,11 @@ public class DeployTurret  : TargetAbility{
 			newTurret.transform.SetParent (proj.transform);
 	
 			UnitManager turrManage = newTurret.GetComponent<UnitManager> ();
-
+			turrManage.enabled = true;
 			turrManage.setInteractor (newTurret.AddComponent<StandardInteract> ());
 			turrManage.changeState (new turretState (turrManage));
 			newTurret.GetComponent<UnitStats> ().otherTags.Add (UnitTypes.UnitTypeTag.Static_Defense);
-	
+			proj.GetComponentInChildren<TurretMount> ().placeTurret (newTurret);
 			currentTurret.GetComponent<UnitManager> ().enabled = false;
 		}
 

@@ -10,10 +10,10 @@ public class GroundSetter : MonoBehaviour {
 		Vector3 down = this.gameObject.transform.TransformDirection (Vector3.down);
 
 		if (Physics.Raycast (this.gameObject.transform.position + Vector3.up * 500, down, out objecthit, 1000, 1 << 8)) {
-			Debug.Log ("Hit " + objecthit.collider.gameObject + objecthit.collider.transform.position + "   "  + objecthit.point);
+			
 			this.gameObject.transform.position = new Vector3 (this.transform.position.x, objecthit.point.y , this.transform.position.z);
 		} else {
-			Debug.Log ("Terrain at  " + Terrain.activeTerrain.transform.position.y + "   " + Terrain.activeTerrain.SampleHeight (this.transform.position));
+			
 			this.gameObject.transform.position = new Vector3 (this.transform.position.x,Terrain.activeTerrain.transform.position.y + Terrain.activeTerrain.SampleHeight (this.transform.position), this.transform.position.z);
 		}
 		if (AlignUp) {

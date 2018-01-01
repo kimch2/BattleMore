@@ -364,7 +364,7 @@ public class UnitStats : MonoBehaviour {
 					}
 				}
 
-				Debug.Log("Rotation is " + transform.rotation.eulerAngles);
+			
 
 				if (deathCorpse != null) {
 

@@ -180,8 +180,7 @@ public class UnitManager : Unit,IOrderable{
 
 				Invoke ("GiveStartCommand", .3f);
 			}
-
-			if (Time.timeSinceLevelLoad < 1 || !myStats.isUnitType (UnitTypes.UnitTypeTag.Structure) || UnitName == "Augmentor") {
+		if (Time.timeSinceLevelLoad < 1 || !myStats.isUnitType (UnitTypes.UnitTypeTag.Structure) || UnitName == "Augmentor") {
 				
 				RaceManager racer = GameManager.getInstance ().playerList [PlayerOwner - 1];
 

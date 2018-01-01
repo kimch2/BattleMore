@@ -203,7 +203,7 @@ public class buildTurret :UnitProduction{
 		timer = 0;
 		buildingUnit = false;
 		//myCost.refundCost ();
-		GameObject.FindGameObjectWithTag("GameRaceManager").GetComponent<RaceManager>().UnitDied(unitToBuild.GetComponent<UnitStats>().supply, null);
+		racer.UnitDied(unitToBuild.GetComponent<UnitStats>().supply, null);
 		mySelect.updateCoolDown (0);
 		racer.stopBuildingUnit (this);
 
@@ -260,7 +260,7 @@ public class buildTurret :UnitProduction{
 		}
 
 		timer = buildTime;
-		GameObject.FindGameObjectWithTag("GameRaceManager").GetComponent<RaceManager>().UnitCreated(unitToBuild.GetComponent<UnitStats>().supply);
+		racer.UnitCreated(unitToBuild.GetComponent<UnitStats>().supply);
 		buildingUnit = true;
 		racer.buildingUnit (this);
 		HD.loadIMage(unitToBuild.GetComponent<UnitStats> ().Icon);

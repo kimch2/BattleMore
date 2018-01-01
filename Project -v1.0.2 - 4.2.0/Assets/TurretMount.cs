@@ -48,13 +48,13 @@ public class TurretMount : MonoBehaviour, Modifier {
 	
 	// Update is called once per frame
 	void Update () {
-	
-		if (turret && hasDisplayer.gameObject.activeSelf) {
-			hasDisplayer.gameObject.SetActive (false);
-		} else if (!turret && !hasDisplayer.gameObject.activeSelf) {
-			hasDisplayer.gameObject.SetActive (true);
+		if (hasDisplayer) {
+			if (turret &&hasDisplayer.gameObject.activeSelf) {
+				hasDisplayer.gameObject.SetActive (false);
+			} else if (!turret && !hasDisplayer.gameObject.activeSelf) {
+				hasDisplayer.gameObject.SetActive (true);
+			}
 		}
-
 	}
 
 	public void setSelect()
@@ -78,7 +78,7 @@ public class TurretMount : MonoBehaviour, Modifier {
 	public void addShop(TurretScreenDisplayer fact)
 	{
 
-		if (hasDisplayer.addFact (fact)) {
+		if ( hasDisplayer.addFact (fact)) {
 		
 		}
 	
