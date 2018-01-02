@@ -14,7 +14,6 @@ public class MiniMapUIController : MonoBehaviour, IPointerDownHandler , IPointer
 	private bool[,] virtTrapezoid;
 	private Texture2D screenTrapzoidTex;
 
-
 	public GameObject warningSymbol;
 	public Sprite defaultWarning;
 	private bool[,] virtUnitTexture;
@@ -34,7 +33,7 @@ public class MiniMapUIController : MonoBehaviour, IPointerDownHandler , IPointer
 	float Right = 1447f;
 	float bottom = 730f;
 
-
+	public Sprite lineArrow;
 	private float WorldHeight;
 	private float WorldWidth;
  
@@ -61,7 +60,7 @@ public class MiniMapUIController : MonoBehaviour, IPointerDownHandler , IPointer
 	Texture2D _texture;
 	GUIStyle _panelStyle;
 
-
+	public static MiniMapUIController main;
 	Ray ray1;
 
 	//Top left
@@ -98,6 +97,7 @@ public class MiniMapUIController : MonoBehaviour, IPointerDownHandler , IPointer
 
 	public void Initialize ()
 	{
+		main = this;
 
 		myCam = GameObject.FindObjectOfType<MainCamera> ();
 		Left = myCam.getBoundries ().xMin;
@@ -164,7 +164,7 @@ public class MiniMapUIController : MonoBehaviour, IPointerDownHandler , IPointer
 		InvokeRepeating ("UpdateMiniMapA", .7f, minimapUpdateRate);
 
 		transform.parent.gameObject.SetActive (wasOn);
-	
+
 	}
 
 
@@ -313,6 +313,17 @@ public class MiniMapUIController : MonoBehaviour, IPointerDownHandler , IPointer
 	int iCoord;
 	int jCoord;
 	int chitSize;
+
+	public Vector2 worldToMinimap(Vector3 location)
+	{
+
+		//int iCoord = (int)(((location.x - Left) / (WorldWidth)) * UIWidth);
+		//int jCoord = (int)(((location.z - bottom) / (WorldHeight)) * UIHeight);
+		Debug.Log(textureHeight);
+		return new Vector2((((location.x - Left) / (WorldWidth)) * UIWidth),(((location.z - bottom) / (WorldHeight)) * UIHeight));
+	}
+
+
 
 	//This method gets called alot so it is optimized like xrazy
 	private void updateTexture (Texture2D tex, bool[,] virtMap)
@@ -529,6 +540,54 @@ public class MiniMapUIController : MonoBehaviour, IPointerDownHandler , IPointer
 	
 	}
 
+	public void drawPath(List<Vector3> points, float duration)
+	{
+		StartCoroutine (drawPathY( points, duration));
+	}
+
+	IEnumerator drawPathY(List<Vector3> points, float duration)
+	{
+		List<GameObject> myArrows = new List<GameObject> ();
+		List<Vector2> newList = new List<Vector2> ();
+
+		//RectTransform newParent = (RectTransform)this.transform.parent.FindChild ("ScreenTrap");
+		for (int i = 0; i < points.Count; i++) {
+			newList.Add (worldToMinimap (points[i]));
+		}
+
+		int indexA = 0;
+		int indexB = 1;
+		while (indexB < points.Count) {
+		
+			float distance = Vector2.Distance (newList [indexA], newList [indexB]);
+
+			for (float i = 0; i < distance; i +=20) {
+				GameObject obj = (GameObject)Instantiate (warningSymbol, Vector2.Lerp(newList[indexA], newList[indexB], i / distance), Quaternion.identity, newParent);
+				((RectTransform)obj.transform).anchorMax = Vector2.zero;
+				((RectTransform)obj.transform).anchorMin = Vector2.zero;
+				((RectTransform)obj.transform).sizeDelta = new Vector2 (20,20);
+				obj.GetComponent<Image> ().sprite = lineArrow;
+				((RectTransform) obj.transform).anchoredPosition = Vector2.Lerp(newList[indexA], newList[indexB], i / distance);
+				//UIPulse pulse = obj.AddComponent<UIPulse> ();
+				//pulse.rate = 1;
+				//pulse.amplitude = 1.3f;
+				obj.transform.up = new Vector3 (  newList [indexB].x - newList [indexA].x , newList [indexB].y - newList [indexA].y   , 0);//  .Rotate (new Vector3());
+				myArrows.Add (obj);
+				yield return new WaitForSeconds (.12f);
+			}
+		
+			indexA++;
+			indexB++;
+		}
+
+		yield return new WaitForSeconds (duration);
+
+		foreach (GameObject toDelete in myArrows) {
+			Destroy (toDelete);
+		}
+	}
+
+
 
 	Color32[] pixelsArray;
 	//Color32 transParent = new Color32 (0, 0, 0, 0);
@@ -622,7 +681,7 @@ public class MiniMapUIController : MonoBehaviour, IPointerDownHandler , IPointer
 
 			RaycastHit hit;		
 
-			if (Physics.Raycast (RayPoint, Vector3.down, out hit, 400, ~(1 << 16))) {
+			if (Physics.Raycast (RayPoint, Vector3.down, out hit, 400, (1 << 8))) {
 	
 				//Debug.Log ("moving to " + hit.point);
 				SelectedManager.main.GiveOrder (Orders.CreateMoveOrder (hit.point));
@@ -657,7 +716,7 @@ public class MiniMapUIController : MonoBehaviour, IPointerDownHandler , IPointer
 
 		RaycastHit hit;		
 
-		if (Physics.Raycast (RayPoint, Vector3.down, out hit, 400, ~(1 << 16))) {
+		if (Physics.Raycast (RayPoint, Vector3.down, out hit, 400, (1 << 8))) {
 
 			//Debug.Log ("moving to " + hit.point);
 			SelectedManager.main.attackMoveO (hit.point);
