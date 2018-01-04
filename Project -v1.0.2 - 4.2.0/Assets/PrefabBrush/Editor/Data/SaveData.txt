@@ -1,10 +1,10 @@
 Layer Selection: Terrain
 Brush Max Size: 50
 Brush Size: 5
-Fill Mode: False
+Fill Mode: True
 Fill Rate: 0.5
 
-Game Object: Assets/Prefabs/BunnyAssaultMode/SterileBunny.prefab
+Game Object: Assets/Environment/SkythianCat/Hand_Painted_Nature_Kit_LITE/Prefabs/HABITATS/HABITAT_FOREST/Fern01.prefab
 Layer: Default
 Toggle: True
 Slider: 1
@@ -13,8 +13,8 @@ Random Rotation Toggle: False
 Random Rotation X: False
 Random Rotation Y: False
 Random Rotation Z: False
-Random Scale Toggle: False
-Random Scale Min: 0.1
+Random Scale Toggle: True
+Random Scale Min: 0.3
 Random Scale Max: 1
 Fixed Rotation Toggle: False
 Fixed Rotation X: 0
