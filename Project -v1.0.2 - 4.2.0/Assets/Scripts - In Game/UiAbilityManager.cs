@@ -22,6 +22,7 @@ public class UiAbilityManager : MonoBehaviour {
 	public Sprite showSomeGrid;
 
 
+	protected Lean.LeanPool myIconPool;
 
 	public static UiAbilityManager main;
 	[System.Serializable]
@@ -110,6 +111,7 @@ public class UiAbilityManager : MonoBehaviour {
 		GameMenu.main.addDisableScript (this);
 		nextActionTime = Time.time;
 		selectMan = SelectedManager.main; 
+		myIconPool = Lean.LeanPool.getSpawnPool (buttonTemplate);
 	}
 	
 	// Update is called once per frame
@@ -342,7 +344,8 @@ public class UiAbilityManager : MonoBehaviour {
 		}
 
 		foreach (KeyValuePair< GameObject, GameObject > del in unitIcons) {
-			Destroy (del.Key);
+			myIconPool.FastDespawn (del.Key);
+			//Destroy (del.Key);
 		}
 
 		unitIcons.Clear ();
@@ -381,7 +384,8 @@ public class UiAbilityManager : MonoBehaviour {
 
 
 		foreach (KeyValuePair< GameObject, GameObject > del in unitIcons) {
-			Destroy (del.Key);
+			myIconPool.FastDespawn (del.Key);
+			//Destroy (del.Key);
 		}
 
 		unitIcons.Clear ();
@@ -467,8 +471,8 @@ public class UiAbilityManager : MonoBehaviour {
 
 										for (int x = 0; x < currentPages[e].rows [p].Count; x++) {
 
-										
-											GameObject unit = (GameObject)Instantiate (buttonTemplate, Vector3.zero, Quaternion.identity, GridObject.transform);
+											GameObject unit = myIconPool.FastSpawn (Vector3.zero, Quaternion.identity, GridObject.transform);
+											//GameObject unit = (GameObject)Instantiate (buttonTemplate, Vector3.zero, Quaternion.identity, GridObject.transform);
 										
 											Transform icontransform = unit.transform.Find ("UnitIconTemplate");
 											icontransform.GetComponent<UnitIconInfo> ().setInfo (currentPages[e].rows [p] [x].gameObject); //.myUnit = uiPage.rows [j] [k].gameObject;
@@ -499,8 +503,8 @@ public class UiAbilityManager : MonoBehaviour {
 
 							Vector3 pos = IconStartPoints [j].transform.position;
 							pos.x += currentX * this.transform.localScale.x;
-
-							GameObject unit = (GameObject)Instantiate (buttonTemplate);
+							GameObject unit = myIconPool.FastSpawn (Vector3.zero, Quaternion.identity);
+							//GameObject unit = (GameObject)Instantiate (buttonTemplate);
 							Transform icontransform = unit.transform.Find ("UnitIconTemplate");
 					
 							icontransform.GetComponent<UnitIconInfo> ().setInfo (uiPage.rows [j] [k].gameObject); //.myUnit = uiPage.rows [j] [k].gameObject;

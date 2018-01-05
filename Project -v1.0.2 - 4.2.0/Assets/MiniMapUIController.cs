@@ -319,7 +319,6 @@ public class MiniMapUIController : MonoBehaviour, IPointerDownHandler , IPointer
 
 		//int iCoord = (int)(((location.x - Left) / (WorldWidth)) * UIWidth);
 		//int jCoord = (int)(((location.z - bottom) / (WorldHeight)) * UIHeight);
-		Debug.Log(textureHeight);
 		return new Vector2((((location.x - Left) / (WorldWidth)) * UIWidth),(((location.z - bottom) / (WorldHeight)) * UIHeight));
 	}
 
@@ -540,13 +539,14 @@ public class MiniMapUIController : MonoBehaviour, IPointerDownHandler , IPointer
 	
 	}
 
-	public void drawPath(List<Vector3> points, float duration)
+	public void drawPath(List<Vector3> points, float duration, float thickness=1)
 	{
-		StartCoroutine (drawPathY( points, duration));
+		StartCoroutine (drawPathY( points, duration,thickness));
 	}
 
-	IEnumerator drawPathY(List<Vector3> points, float duration)
+	IEnumerator drawPathY(List<Vector3> points, float duration, float thickness)
 	{
+		//Debug.Log ("Drawing path " + points.Count);
 		List<GameObject> myArrows = new List<GameObject> ();
 		List<Vector2> newList = new List<Vector2> ();
 
@@ -562,12 +562,13 @@ public class MiniMapUIController : MonoBehaviour, IPointerDownHandler , IPointer
 			float distance = Vector2.Distance (newList [indexA], newList [indexB]);
 
 			for (float i = 0; i < distance; i +=20) {
-				GameObject obj = (GameObject)Instantiate (warningSymbol, Vector2.Lerp(newList[indexA], newList[indexB], i / distance), Quaternion.identity, newParent);
+				GameObject obj = (GameObject)Instantiate (warningSymbol, Vector2.Lerp(newList[indexA], newList[indexB], (i/ distance)), Quaternion.identity, newParent);
+				obj.transform.SetAsFirstSibling();
 				((RectTransform)obj.transform).anchorMax = Vector2.zero;
 				((RectTransform)obj.transform).anchorMin = Vector2.zero;
-				((RectTransform)obj.transform).sizeDelta = new Vector2 (20,20);
+				((RectTransform)obj.transform).sizeDelta = new Vector2 (20 *thickness,20);
 				obj.GetComponent<Image> ().sprite = lineArrow;
-				((RectTransform) obj.transform).anchoredPosition = Vector2.Lerp(newList[indexA], newList[indexB], i / distance);
+				((RectTransform) obj.transform).anchoredPosition = Vector2.Lerp(newList[indexA], newList[indexB], (i +6)/ distance);
 				//UIPulse pulse = obj.AddComponent<UIPulse> ();
 				//pulse.rate = 1;
 				//pulse.amplitude = 1.3f;
