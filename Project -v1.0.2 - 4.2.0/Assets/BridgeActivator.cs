@@ -10,6 +10,7 @@ public class BridgeActivator : VisionTrigger {
 	public GameObject DeathZone;
 	public AudioClip soundEffect;
 	AudioSource source;
+	public MultiShotParticle myEffect;
 
 	void Start()
 	{
@@ -28,6 +29,7 @@ public class BridgeActivator : VisionTrigger {
 			DeathZone.SetActive (true);
 			StartCoroutine (DeathRescan ());
 			source.PlayOneShot (soundEffect);
+			myEffect.playEffect ();
 		}
 	}
 
@@ -38,6 +40,7 @@ public class BridgeActivator : VisionTrigger {
 		StartCoroutine (DeathRescan ());
 		if (InVision.Count == 1) {
 			source.PlayOneShot (soundEffect);
+			myEffect.playEffect ();
 		}
 	}
 
