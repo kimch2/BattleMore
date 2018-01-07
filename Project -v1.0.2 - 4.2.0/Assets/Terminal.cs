@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class Terminal : MonoBehaviour {
 
+	public GameObject openButton;
 	public Canvas toOpen;
 	public Canvas toReturn;
 	public int levelUnlocked;
@@ -12,6 +13,23 @@ public class Terminal : MonoBehaviour {
 
 	public Canvas nextCanvas;
 	public Canvas previousCan;
+	public GameObject nextButton;
+	public GameObject prevButton;
+
+
+	void Start()
+	{
+		
+		if (!LevelData.getsaveInfo().hasCompletedLevel (levelUnlocked)) {
+			openButton.SetActive (false);
+			toOpen.gameObject.SetActive (false);
+		}
+		if (!LevelData.getsaveInfo ().hasReadLog (openButton.GetComponentInChildren<Text> ().text)) {
+			openButton.GetComponent<Image> ().color = Color.cyan;
+		} else {
+			openButton.GetComponent<Image> ().color = Color.white;
+		}
+	}
 
 	public void close()
 	{
@@ -23,20 +41,32 @@ public class Terminal : MonoBehaviour {
 	{
 		toOpen.enabled = true;
 		toReturn.enabled = false;
+		LevelData.getsaveInfo ().readScienceLog(openButton.GetComponentInChildren<Text> ().text);
+		openButton.GetComponent<Image> ().color = Color.white;
+		
+		if (!nextCanvas || !nextCanvas.gameObject.activeInHierarchy ) {
+			nextButton.SetActive (false);
+		}
+
+		if (!previousCan ||  !previousCan.gameObject.activeInHierarchy ) {
+			prevButton.SetActive (false);
+		}
 	}
 
 	public void next()
 	{
 		if (nextCanvas) {
-			nextCanvas.enabled = true;
 			toOpen.enabled = false;
+	
+			nextCanvas.GetComponent<Terminal> ().Open ();
+
 		}
 	}
 
 	public void Previous()
 	{
 		if (previousCan) {
-			previousCan.enabled = true;
+			previousCan.GetComponent<Terminal> ().Open ();
 			toOpen.enabled = false;
 		}
 	}

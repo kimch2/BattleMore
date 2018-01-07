@@ -22,6 +22,39 @@ public class LevelData  {
 
 		public List<VeteranStats> myVets;
 
+		public List<string> scienceLogs = new List<string> ();
+
+		public bool hasCompletedLevel(int levelNumber)
+		{
+			foreach (levelInfo info in myLevels) {
+				if (info.levelNumber == levelNumber) {
+					return true;
+				}
+			}
+			return false;
+		}
+
+		/// <summary>
+		/// marks science log as being read, returns true if its the first time
+		/// </summary>
+		/// <returns><c>true</c>, if science log was  read, <c>false</c> otherwise.</returns>
+		/// <param name="name">Name.</param>
+		public bool readScienceLog(string name)
+		{
+			
+			if (!scienceLogs.Contains(name)) {
+				scienceLogs.Add (name);
+				saveGame ();
+				return true;
+			}
+			return false;
+		}
+
+		public bool hasReadLog(string name)
+		{
+			return scienceLogs.Contains(name);
+		}
+
 	}
 
 	[Serializable]
