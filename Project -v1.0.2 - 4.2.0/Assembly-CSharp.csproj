@@ -580,6 +580,7 @@
      <Compile Include="Assets\TargetDeathVictory.cs" />
      <Compile Include="Assets\Teleport.cs" />
      <Compile Include="Assets\TempInvulnerable.cs" />
+     <Compile Include="Assets\Terminal.cs" />
      <Compile Include="Assets\testScript.cs" />
      <Compile Include="Assets\TextChanger.cs" />
      <Compile Include="Assets\TextHolder.cs" />
