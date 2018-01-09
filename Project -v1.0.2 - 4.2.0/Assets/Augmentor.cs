@@ -11,12 +11,17 @@ public class Augmentor : TargetAbility, Iinteract, Modifier {
 	public rotater myRotate;
 	public float SpeedPlus = 1.35f;
 
+
 	// Use this for initialization
 	void Start () {
 		
 		myType = type.target;
 		manager.myWeapon.Clear ();
 		detacher = GetComponent<DetachAugment> ();
+		if (target) {
+			manager.changeState (new CastAbilityState (this),false,false);
+
+		}
 	}
 	
 
