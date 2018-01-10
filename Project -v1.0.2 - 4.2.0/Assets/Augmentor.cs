@@ -19,8 +19,8 @@ public class Augmentor : TargetAbility, Iinteract, Modifier {
 		manager.myWeapon.Clear ();
 		detacher = GetComponent<DetachAugment> ();
 		if (target) {
-			manager.changeState (new CastAbilityState (this),false,false);
-
+			StartCoroutine (delayCast());
+			//manager.changeState (new CastAbilityState (this),false,false);
 		}
 	}
 	
@@ -34,6 +34,7 @@ public class Augmentor : TargetAbility, Iinteract, Modifier {
 
 	override
 	public void Cast(){
+
 
 		Unattach ();
 		if (!target) {
@@ -110,7 +111,7 @@ public class Augmentor : TargetAbility, Iinteract, Modifier {
 
 		}
 
-
+		manager.changeState( new HoldState (manager));
 		if (target.GetComponent<Selected> ().IsSelected) {
 			RaceManager.updateActivity ();
 		}
@@ -248,6 +249,8 @@ public class Augmentor : TargetAbility, Iinteract, Modifier {
 
 	override
 	public  bool Cast(GameObject tar, Vector3 location){
+		Debug.Log ("Casting B");
+
 		target = tar;
 		attached = tar;
 
@@ -384,8 +387,10 @@ public class Augmentor : TargetAbility, Iinteract, Modifier {
 			Unattach ();
 		}
 
+		Debug.Log ("attached " + attached);
 		if (attached) {
 			if (s is DefaultState) {
+				Debug.Log ("Setting to hold state");
 				return new HoldState (manager);
 			}
 		}

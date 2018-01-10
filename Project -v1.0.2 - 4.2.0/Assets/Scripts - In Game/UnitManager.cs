@@ -127,18 +127,11 @@ public class UnitManager : Unit,IOrderable{
 		else if (cMover != null) {
 			//Debug.Log (this.gameObject + " state is default");
 			changeState (new DefaultState ());
-		} else if (startingState == UnitState.StateType.Turret)
-			//myStats.isUnitType (UnitTypes.UnitTypeTag.Turret)
-		         //  && this.gameObject.gameObject.GetComponent<UnitManager> ().UnitName == "Manticore"
- {		         //  && ((StandardInteract)this.gameObject.gameObject.GetComponent<UnitManager> ().interactor).attackWhileMoving) 
+		} else if (startingState == UnitState.StateType.Turret) {		       
 
 			changeState (new turretState (this));
 		} 
 
-		// else if( myStats.isUnitType (UnitTypes.UnitTypeTag.Static_Defense) ){
-			
-			//changeState (new turretState (this));
-		//}
 	
 			chaseRange = visionRange;
 
