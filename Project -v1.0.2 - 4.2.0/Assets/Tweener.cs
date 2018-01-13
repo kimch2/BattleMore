@@ -167,6 +167,9 @@ public class Tweener : MonoBehaviour {
 [CustomEditor(typeof(Tweener)),CanEditMultipleObjects]
 public class TweenerEditor : Editor {
 
+	bool useScales;
+	bool usePositions;
+	bool useRotations;
 	bool ShowAnimations;
 	bool ShowTransitions;
 	public override void OnInspectorGUI()
@@ -174,14 +177,36 @@ public class TweenerEditor : Editor {
 		Tweener targ = ((Tweener)target);
 		DrawDefaultInspector ();
 
+		GUILayout.BeginHorizontal ();
+		usePositions = EditorGUILayout.ToggleLeft ("Position", usePositions,GUILayout.Width(109));
+		useRotations = EditorGUILayout.ToggleLeft ("Rotation", useRotations,GUILayout.Width(109));
+		useScales    = EditorGUILayout.ToggleLeft ("Scale",useScales,GUILayout.Width(109));
+		GUILayout.EndHorizontal ();
 		if (GUILayout.Button ("Quick Key Frame Maker!")) {
+			
 			AnimationPose newPose = new AnimationPose ();
+			if (targ.quickList == null) {
+				targ.quickList = new List<Transform> ();
+			}
+
+			if (targ.quickList.Count == 0) {
+				targ.quickList.Add (targ.transform);
+			}
 			foreach (Transform t in targ.quickList) {
 				ObjectPose newObj = new ObjectPose (targ.transform);
 				newObj.myObject = t;
 				newObj.setCurrentVectors (newPose.myScope);
 				newPose.objPoses.Add (newObj);
 				newObj.PoseName = t.gameObject.name;
+				newObj.usesPosition = usePositions;
+				newObj.usesRotation = useRotations;
+				newObj.usesScale = useScales;
+
+			}
+			if (targ.myPoses.Count == 0) {
+				newPose.PoseName = "On";
+			} else {
+				newPose.PoseName = "Off";
 			}
 			targ.myPoses.Add (newPose);
 		}
@@ -247,6 +272,10 @@ public class TweenerEditor : Editor {
 			List<string> optionList = new List<string> ();
 			foreach (AnimationPose p in ((Tweener)target).myPoses) {
 				optionList.Add (p.PoseName);
+			}
+			if(((Tweener)target).myTransitions == null)
+			{
+				((Tweener)target).myTransitions = new List<transition> ();
 			}
 			ShowTransitions = EditorGUILayout.Foldout (ShowTransitions, "Transitions ("+((Tweener)target).myTransitions.Count+"):");
 			if(ShowTransitions){

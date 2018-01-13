@@ -58,7 +58,7 @@ public class CapturableUnit : MonoBehaviour, Modifier  {
 
 			OnCapture.Invoke ();
 			if (cutscene) {
-				GameObject.FindObjectOfType<MainCamera> ().setCutScene (this.gameObject.transform.position, 120);
+				MainCamera.main.setCutScene (this.gameObject.transform.position, 120);
 			}
 		}
 
