@@ -224,7 +224,7 @@ public class BuildingInteractor : MonoBehaviour, Iinteract {
 			AttackMoveSpawn = false;
 			if (RallyPointObj) {
 				if (myLine) {
-					myLine.SetPositions (new Vector3[]{ this.gameObject.transform.position + Vector3.up, order.OrderLocation });
+					myLine.SetPositions (new Vector3[]{ this.gameObject.transform.position + Vector3.up *5, order.OrderLocation + Vector3.up *3 });
 				}
 				RallyPointObj.transform.position = order.OrderLocation;
 			}
@@ -240,7 +240,7 @@ public class BuildingInteractor : MonoBehaviour, Iinteract {
 			GetComponent<Selected> ().RallyUnit =null;
 			if (RallyPointObj) {
 				if (myLine) {
-					myLine.SetPositions (new Vector3[]{ this.gameObject.transform.position + Vector3.up, order.OrderLocation });
+					myLine.SetPositions (new Vector3[]{ this.gameObject.transform.position + Vector3.up *5, order.OrderLocation + Vector3.up *3});
 				}
 				RallyPointObj.transform.position = order.OrderLocation;
 			}
@@ -256,7 +256,7 @@ public class BuildingInteractor : MonoBehaviour, Iinteract {
 				
 				RallyPointObj.transform.position = order.Target.gameObject.transform.position;
 				if (myLine) {
-					myLine.SetPositions (new Vector3[]{ this.gameObject.transform.position + Vector3.up, order.Target.gameObject.transform.position });
+					myLine.SetPositions (new Vector3[]{ this.gameObject.transform.position + Vector3.up*5, order.Target.gameObject.transform.position+ Vector3.up *3 });
 				}
 
 			}

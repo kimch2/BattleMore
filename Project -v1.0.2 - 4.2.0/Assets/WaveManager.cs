@@ -211,7 +211,10 @@ public class WaveManager : MonoBehaviour {
 			nextActionTime = myWaves [currentWaveIndex].waveSpawnTime;
 		}
 		else{
-			nextActionTime += 140;
+			nextActionTime += 180;
+			if (LevelData.getDifficulty () == 1) {
+				nextActionTime += 180;
+			}
 		} 
 
 	}

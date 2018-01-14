@@ -24,6 +24,7 @@ public class DragSelect : MonoBehaviour {
 		m_DragStyle.border.top = 1;
 		m_DragStyle.border.left = 1;
 		m_DragStyle.border.right = 1;
+	
 		uiManager = GameObject.FindObjectOfType<UIManager> ();
 		m_GuiManager = GameObject.FindObjectOfType<GUIManager> ();
 		//m_SelectedManager = ManagerResolver.Resolve<ISelectedManager>();
@@ -80,6 +81,7 @@ public class DragSelect : MonoBehaviour {
 	
 	public void DragBox(Vector2 topLeft, Vector2 bottomRight, GUIStyle style)
 	{
+		GUI.backgroundColor = Color.green;
 		float minX = Mathf.Max (topLeft.x, bottomRight.x);
 		float maxX = Mathf.Min (topLeft.x, bottomRight.x);
 		

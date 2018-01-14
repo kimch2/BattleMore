@@ -288,7 +288,7 @@ public class Selected : MonoBehaviour {
 		while (tempSelectTime > Time.time) {
 			
 			if (myLine && RallyUnit) {
-				myLine.SetPositions (new Vector3[]{ this.gameObject.transform.position, RallyUnit.transform.position });
+				myLine.SetPositions (new Vector3[]{ this.gameObject.transform.position + Vector3.up *4, RallyUnit.transform.position + Vector3.up });
 				RallyPoint.transform.position = RallyUnit.transform.position;
 			}
 			yield return 0;
@@ -466,7 +466,7 @@ public class Selected : MonoBehaviour {
 		while (IsSelected) {
 
 			if (myLine && RallyUnit) {
-				myLine.SetPositions (new Vector3[]{ this.gameObject.transform.position, RallyUnit.transform.position });
+				myLine.SetPositions (new Vector3[]{ this.gameObject.transform.position + Vector3.up *4, RallyUnit.transform.position + Vector3.up });
 				RallyPoint.transform.position = RallyUnit.transform.position;
 			}
 			yield return 0;

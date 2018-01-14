@@ -30,9 +30,11 @@ public class TuretBuildHelper :buildTurret{
 				buildMan.unitFinished (this);
 				racer.stopBuildingUnit (this);
 
-				if (!helper.hasTriggered && !HasBuilt) {
-					HasBuilt = true;
-					helper.trigger (0, 0, Vector3.zero, null, false);
+				if (helper) {
+					if (!helper.hasTriggered && !HasBuilt) {
+						HasBuilt = true;
+						helper.trigger (0, 0, Vector3.zero, null, false);
+					}
 				}
 				foreach (Transform obj in this.transform) {
 

@@ -387,10 +387,10 @@ public class Augmentor : TargetAbility, Iinteract, Modifier {
 			Unattach ();
 		}
 
-		Debug.Log ("attached " + attached);
+	//	Debug.Log ("attached " + attached);
 		if (attached) {
-			if (s is DefaultState) {
-				Debug.Log ("Setting to hold state");
+			if (s is DefaultState || s is AttackMoveState) {
+				//Debug.Log ("Setting to hold state");
 				return new HoldState (manager);
 			}
 		}
@@ -400,7 +400,7 @@ public class Augmentor : TargetAbility, Iinteract, Modifier {
 	// Attack move towards a ground location (Tab - ground)
 	public void  AttackMove(Order order)
 	{
-		if (attached) {
+		if (!attached) {
 			manager.changeState (new MoveState (order.OrderLocation, manager,true),false,order.queued);
 
 		}
