@@ -8,14 +8,14 @@ Game Object: Assets/Environment/SkythianCat/Hand_Painted_Nature_Kit_LITE/Prefabs
 Layer: Default
 Toggle: True
 Slider: 1
-Lock Orientation Toggle: False
+Lock Orientation Toggle: True
 Random Rotation Toggle: False
 Random Rotation X: False
 Random Rotation Y: False
 Random Rotation Z: False
 Random Scale Toggle: True
-Random Scale Min: 0.3
-Random Scale Max: 1
+Random Scale Min: 0.2
+Random Scale Max: 0.3
 Fixed Rotation Toggle: False
 Fixed Rotation X: 0
 Fixed Rotation Y: 0

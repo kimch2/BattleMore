@@ -21,6 +21,7 @@ public class BuildStructure:  UnitProduction {
 	private BuildingInteractor builder;
 	public float animationRate =1;
 
+	public ParticleSystem myEffect;
 	void Awake()
 	{base.Awake ();
 		audioSrc = GetComponent<AudioSource> ();
@@ -56,7 +57,7 @@ public class BuildStructure:  UnitProduction {
 				HD.stopBuilding ();
 				Morphing = false;
 				createUnit ();
-
+				myEffect.Stop ();
 
 				if (myManager.getStateCount () == 0 && myManager.getState() is DefaultState) {
 					RaycastHit hit;		
@@ -78,7 +79,7 @@ public class BuildStructure:  UnitProduction {
 	// this only halts construction
 	public void cancel()
 	{
-
+		myEffect.Stop ();
 		mySelect.updateCoolDown (0);
 		HD.stopBuilding ();
 		Morphing = false;
@@ -111,7 +112,7 @@ public class BuildStructure:  UnitProduction {
 
 	public override void cancelBuilding ()
 	{	
-
+		myEffect.Stop ();
 		racer.stopBuildingUnit (this);
 		HD.stopBuilding ();
 		mySelect.updateCoolDown (0);
@@ -181,7 +182,7 @@ public class BuildStructure:  UnitProduction {
 			//myCost.payCost ();
 			buildMan.buildUnit (this);
 			myManager.cMover.stop ();
-
+			myEffect.Play ();
 
 			Morphing = true;
 			racer.buildingUnit (this);
@@ -238,7 +239,7 @@ public class BuildStructure:  UnitProduction {
 	{
 		
 		HD.loadIMage (iconPic);
-
+		myEffect.Play ();
 
 		//Debug.Log ("Activating");
 

@@ -22,9 +22,12 @@ public class moneyObjective : Objective {
 	
 	// Update is called once per frame
 	void UpdateMoney () {
-
-		myText.text = myRace.ResourceOne +"/"+ moneyVictory;
-		moneySlide.value = myRace.ResourceOne / moneyVictory;
+		if (myText) {
+			myText.text = myRace.ResourceOne + "/" + moneyVictory;
+		}
+		if (moneySlide) {
+			moneySlide.value = myRace.ResourceOne / moneyVictory;
+		}
 
 		if (!playedHalfWay && myRace.ResourceOne > moneyVictory / 2) {
 			playedHalfWay = true;

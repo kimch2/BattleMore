@@ -47,6 +47,17 @@ public class Tweener : MonoBehaviour {
 
 	}
 
+	public void goStraightToPose(string PoseName)
+	{
+		foreach (AnimationPose pos in myPoses) {
+			if (pos.PoseName == pos.PoseName) {
+				pos.GoToPose ();
+				break;
+			}
+
+		}
+	}
+
 	public void goStraightToState(string stateName)
 	{
 		foreach (TweenState stat in MyStates) {
