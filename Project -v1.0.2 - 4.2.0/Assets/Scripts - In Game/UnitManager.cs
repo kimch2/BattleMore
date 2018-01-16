@@ -182,7 +182,7 @@ public class UnitManager : Unit,IOrderable{
 
 
 			if (myStats.isUnitType (UnitTypes.UnitTypeTag.Structure) && UnitName != "Augmentor") {
-				GameManager.getInstance ().playerList [PlayerOwner - 1].applyUpgrade (this);
+				//GameManager.getInstance ().playerList [PlayerOwner - 1].applyUpgrade (this);
 			}
 	
 			hasStarted = true;

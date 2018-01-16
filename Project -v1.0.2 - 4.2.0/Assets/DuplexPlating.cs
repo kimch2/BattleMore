@@ -13,6 +13,7 @@ public class DuplexPlating  :SpecificUpgrade{
 	public override void applyUpgrade (GameObject obj){
 
 		if (confirmUnit (obj)) {
+
 			UnitStats us = obj.GetComponent<UnitStats> ();
 			if (us.isUnitType (UnitTypes.UnitTypeTag.Structure)) {
 				us.armor += 4;
