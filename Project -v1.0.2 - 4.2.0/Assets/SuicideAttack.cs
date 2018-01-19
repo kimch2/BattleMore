@@ -15,6 +15,7 @@ public class SuicideAttack : MonoBehaviour, Notify,Modifier {
 	{
 		if (!hasFired) {
 			GameObject obj =	(GameObject)Instantiate (GetComponent<IWeapon> ().projectile, this.transform.position, Quaternion.identity);
+			obj.SendMessage ("setSource", this.gameObject, SendMessageOptions.DontRequireReceiver);
 			obj.GetComponent<explosion> ().damageAmount = GetComponent<IWeapon> ().baseDamage;
 		}
 

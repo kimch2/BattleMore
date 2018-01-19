@@ -313,6 +313,8 @@ public class IWeapon : MonoBehaviour {
 				damage = fireTriggers (this.gameObject, proj, target, damage);
 
 				Projectile script = proj.GetComponent<Projectile> ();
+
+				Debug.Log ("Creating " + script);
 				if (script) {
 					script.Initialize (target, damage, myManager);
 					script.setup ();

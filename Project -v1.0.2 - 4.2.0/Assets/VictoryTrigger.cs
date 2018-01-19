@@ -126,7 +126,7 @@ public class VictoryTrigger : MonoBehaviour {
 			myComp.MyLevels [levelNumber].increaseCompCount ();
 			int numTimesWon = PlayerPrefs.GetInt ("L" + levelNumber + "Win");
 
-			TechCredits -= numTimesWon; // Reduces the reward each time you replay a level
+			TechCredits -= numTimesWon * 2; // Reduces the reward each time you replay a level
 			if (TechCredits < 0) {
 				TechCredits = 0;}
 			PlayerPrefs.SetInt ("L" + levelNumber+"Win", numTimesWon + 1);

@@ -15,6 +15,7 @@ public class AreaDamage : MonoBehaviour {
 	public float damage = 5;
 	private AudioSource myAudio;
 	public AudioClip chopSound;
+	public bool showPop = true;
 
 	private int iter = 0;
 
@@ -35,13 +36,14 @@ public class AreaDamage : MonoBehaviour {
 			foreach (UnitStats s in enemies) {
 
 		
-					s.TakeDamage (damage, this.gameObject.gameObject.gameObject, myType);
+				s.TakeDamage (damage, this.gameObject.gameObject.gameObject, myType);
+				if (showPop) {
 					iter++;
 					if (iter == 6) {
-						PopUpMaker.CreateGlobalPopUp (-(damage*2) + "", Color.red, s.gameObject.transform.position);
+						PopUpMaker.CreateGlobalPopUp (-(damage * 2) + "", Color.red, s.gameObject.transform.position);
 						iter = 0;
 					}
-
+				}
 				if (cutEffect) {
 					Instantiate (cutEffect, s.gameObject.transform.position, Quaternion.identity);
 				}

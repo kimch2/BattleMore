@@ -39,7 +39,7 @@ public class DamagedLook : MonoBehaviour,Modifier  {
 
 	public float modify(float amount, GameObject src, DamageTypes.DamageType theType)
 	{
-		float ratio =	(myStat.health - amount) / myStat.Maxhealth;
+		float ratio =	Mathf.Max( (myStat.health - amount) / myStat.Maxhealth , .01f);
 
 		if (currentIndex != 0 && ratio > damageChangers [currentIndex - 1].healthRatio) {
 				currentIndex--;

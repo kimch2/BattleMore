@@ -35,6 +35,7 @@ public class explosion : MonoBehaviour {
 
 	public void setSource(GameObject sr)
 	{
+		Debug.Log ("Setting source " + sr);
 		source = sr;
 		if (source) {
 			mySrcMan = source.GetComponent<UnitManager> ();
