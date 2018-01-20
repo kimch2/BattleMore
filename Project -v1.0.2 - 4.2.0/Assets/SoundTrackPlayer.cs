@@ -7,18 +7,23 @@ public class SoundTrackPlayer : MonoBehaviour {
 
 	public enum SongName
 	{
-		 EtheralSkies, BattleTremors, BurningPlasma,HeartOfIron, StrangerBattles,TheOtherWorld, Ashes2,Ashes3,Ashes4,Ashes5,Substrate,PacificRim
+		 EtheralSkies, BattleTremors, BurningPlasma,HeartOfIron, StrangerBattles,TheOtherWorld
 	}
 
 
 	[Tooltip("Make sure the order of these enums matches those in the song playlist")]
 	public List<SongName> levelPlayList = new List<SongName>(){ SongName.EtheralSkies, SongName.BattleTremors, SongName.BurningPlasma, SongName.HeartOfIron, 
-		SongName.StrangerBattles, SongName.Ashes2, SongName.Ashes3, SongName.Ashes4, SongName.Ashes5, SongName.Substrate, SongName.PacificRim};
+		SongName.StrangerBattles};
 	public SoundTrackPlayList myPlayList;
 	AudioSource mySrc;
 
 	int currentIndex = 0;
+	public static SoundTrackPlayer main;
 
+	void Awake()
+	{
+		main = this;
+	}
 
 	void Start () {
 		mySrc = GetComponent<AudioSource> ();
@@ -26,11 +31,22 @@ public class SoundTrackPlayer : MonoBehaviour {
 		playNextTrack ();
 	}
 
+	public void playVictoryTrack()
+	{
+		
+	}
+
+	public void playDefeatTrack()
+	{
+		crossFadeTrack (1,Resources.Load<AudioClip>("DefeatScreenTrack"));
+	}
+
 	void playNextTrack()
 	{
 
 
 		mySrc.clip = myPlayList.myTracks [ (int)levelPlayList[ currentIndex]];
+		Debug.Log ("Sound track " + mySrc.clip.name);
 		mySrc.Play ();
 	
 		currentIndex++;

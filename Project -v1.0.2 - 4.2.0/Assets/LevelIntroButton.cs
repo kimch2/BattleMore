@@ -41,17 +41,34 @@ public class LevelIntroButton : MonoBehaviour {
 			return;
 		}
 
-		foreach (LevelInfo info in myComp.MyLevels) {
+		foreach (int i in  myComp.MyLevels[LevelIndex].UnlockedBy) {
+			if (myComp.MyLevels [i].getCompletionCount () == 0) {
+				gameObject.SetActive (false);
+				//return;
+			}
+		}
+
+		/*foreach (LevelInfo info in myComp.MyLevels) {
+			foreach (int i in info.UnlockedBy) {
+				if (myComp.MyLevels [i].getCompletionCount () == 0) {
+					gameObject.SetActive (false);
+					//return;
+				}
+			}
+		}
+
+			if(info.UnlockedBy.Contains())
+
 			if (info.getCompletionCount () > 0) {
 				if (info.UnlockOnWin.Contains (LevelIndex)) {
 					return;
 				}
 			}
 		}
-	
+	*/
 
 
-		gameObject.SetActive (false);
+		//gameObject.SetActive (false);
 	}
 
 }

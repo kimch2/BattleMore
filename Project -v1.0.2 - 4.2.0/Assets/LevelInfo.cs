@@ -15,7 +15,7 @@ public class LevelInfo {
 	public List<NewThing> newUnits = new List<NewThing>();
 	public List<NewThing> newAbilities= new List<NewThing>();
 	public List<NewThing> Intelligence= new List<NewThing>();
-	public List<int> UnlockOnWin;
+	public List<int> UnlockedBy;
 	int CompletionCount;
 	int HardestDifficulty;
 	int ShortestTime;// in seconds

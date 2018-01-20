@@ -82,11 +82,7 @@ public class VictoryTrigger : MonoBehaviour {
 			}
 			ObjectiveManager.instance.completeMain (obj);
 
-			//foreach (Objective o in mainObjective) {
-				//if (!o.completed) {
-				//	return;}
-			//}
-			//Win ();
+		
 		}
 	}
 
@@ -118,6 +114,7 @@ public class VictoryTrigger : MonoBehaviour {
 
 	public void Win()
 	{if (!hasFinished) {
+			SoundTrackPlayer.main.playVictoryTrack();
 			hasFinished = true;
 			VictoryScreen.enabled = true;
 
@@ -194,6 +191,7 @@ public class VictoryTrigger : MonoBehaviour {
 
 	IEnumerator LoseLevel ()
 	{Debug.Log ("LostB");
+		SoundTrackPlayer.main.playDefeatTrack();
 		yield return new WaitForSeconds (1);
 
 		foreach (int i in loseLine) {
