@@ -71,8 +71,6 @@ public class RaceManager : MonoBehaviour, ManagerWatcher {
 	private List<LethalDamageinterface> deathTrigger = new List<LethalDamageinterface>();
 	public RaceUIManager uiManager;
 
-
-	private static SelectedManager statSelect;
 	//Used for end level stats
 	public int unitsLost;
 	private float totalResOne;
@@ -230,46 +228,41 @@ public class RaceManager : MonoBehaviour, ManagerWatcher {
 		}
 	}
 
-	public static void  findSelectMan()
-	{if (statSelect == null) {
-			statSelect = GameObject.FindObjectOfType<SelectedManager> ();
-		}
-	}
+
 
 	public static void upDateUI()
-	{findSelectMan();
-		statSelect.reImageUI ();
+	{
+		SelectedManager.main.reImageUI ();
 	}
 
 	public static void upDateSingleCard()
-	{findSelectMan();
-		statSelect.RedoSingle();
+	{
+		SelectedManager.main.RedoSingle();
 	}
 
 
 	public static void upDateAutocast()
-	{findSelectMan();
-		statSelect.AutoCastUI();
+	{
+		SelectedManager.main.AutoCastUI();
 	}
 
 	public static void updateUIUnitcount()
-	{findSelectMan();
-		statSelect.updateUI();
+	{
+		SelectedManager.main.updateUI();
 	}
 
 	public static void updateActivity()
-	{findSelectMan();
-		statSelect.updateUIActivity();
+	{
+		SelectedManager.main.updateUIActivity();
 	}
 
 
 	public static void removeUnitSelect(RTSObject man)
-	{findSelectMan();
-		statSelect.DeselectObject(man);}
+	{
+		SelectedManager.main.DeselectObject(man);}
 
 	public static void AddUnitSelect(RTSObject man)
-	{findSelectMan();
-		statSelect.AddObject(man);}
+	{SelectedManager.main.AddObject(man);}
 
 
 
