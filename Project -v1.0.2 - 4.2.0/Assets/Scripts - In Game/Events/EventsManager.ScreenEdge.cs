@@ -40,7 +40,7 @@ public partial class EventsManager {
 			atScreenEdge = true;
 		}
 		
-		if (Input.mousePosition.y <= 0)
+		if (Input.mousePosition.y <= 1)
 		{
 			if (tempEventArgs == null)
 			{

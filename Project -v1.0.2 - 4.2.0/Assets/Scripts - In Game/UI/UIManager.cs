@@ -441,6 +441,19 @@ public class UIManager : MonoBehaviour, IUIManager {
 
 	}
 
+	public bool isPointerOverFloatingButton()
+	{
+		PointerEventData eventDatacurrenPosition = new PointerEventData (EventSystem.current);
+		eventDatacurrenPosition.position = new Vector2 (Input.mousePosition.x, Input.mousePosition.y);
+
+		List<RaycastResult> results = new List<RaycastResult> ();
+		EventSystem.current.RaycastAll (eventDatacurrenPosition, results);
+
+		return (results.Count != 0);
+	}
+
+
+
 
 
 	public void LeftButton_DoubleClickDown(MouseEventArgs e)
@@ -490,10 +503,7 @@ public class UIManager : MonoBehaviour, IUIManager {
 		
 		}
 		clickOverUI = isPointerOverUIObject ();
-		if (clickOverUI  ) {
-			//clickOverUI = false;
-			//return;
-		}
+
 
 		Vector3 targetPoint = Vector3.zero;
 			Ray ray;
@@ -511,7 +521,10 @@ public class UIManager : MonoBehaviour, IUIManager {
 				m_Placed = false;
 				return;
 			}
-	
+			//HIGHLY DANGEROUS CODE
+			if (isPointerOverFloatingButton ()) {
+				return;
+			}
 				//We've left clicked, have we left clicked on a unit?
 			if (!currentObject) {
 				

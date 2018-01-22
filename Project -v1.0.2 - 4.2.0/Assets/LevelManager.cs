@@ -30,7 +30,7 @@ public class LevelManager : MonoBehaviour {
 	void Awake () {
 		main = this;
 
-			currentTech = Vehicles;
+			//currentTech = Vehicles;
 		if (LevelData.getHighestLevel() == 0) {
 			techButton.interactable = false;
 			UltButton.gameObject.SetActive (false);
@@ -43,7 +43,7 @@ public class LevelManager : MonoBehaviour {
 			UltButton.gameObject.SetActive (true);
 		}
 		
-		currentTech = Vehicles;
+		//currentTech = Vehicles;
 
 		difficultyBars.value = LevelData.getDifficulty () - 1;
 	
@@ -84,7 +84,8 @@ public class LevelManager : MonoBehaviour {
 	}
 
 	public void ToggleVehicle()
-	{	if (currentTech != Vehicles) {
+	{	//Debug.Log ("Toggling " + currentTech[0].name);
+		if (currentTech != Vehicles) {
 			if (currentTech != null) {
 				setActive (currentTech, false);
 		
@@ -92,8 +93,7 @@ public class LevelManager : MonoBehaviour {
 
 			currentTech = Vehicles;
 			setActive (Vehicles, true);
-			CampTechCamManager.instance.loadTech ("Manticore");
-
+		
 		}
 	}
 
@@ -105,7 +105,7 @@ public class LevelManager : MonoBehaviour {
 
 			currentTech = Structures;
 			setActive (Structures, true);
-			CampTechCamManager.instance.loadTech ("Construction yard");
+		
 		}
 	}
 
@@ -117,7 +117,6 @@ public class LevelManager : MonoBehaviour {
 			}
 			currentTech = Turrets;
 			setActive (Turrets, true);
-			CampTechCamManager.instance.loadTech ("Minigun");
 		}
 	}
 

@@ -179,6 +179,7 @@ public class Selected : MonoBehaviour {
 	public void setIcon(GameObject obj)
 	{//buffDisplay.isOn = true;
 		if (!obj) {
+			unitIcon = null;
 			return;}
 		
 

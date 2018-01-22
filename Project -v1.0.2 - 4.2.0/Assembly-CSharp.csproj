@@ -205,6 +205,7 @@
      <Compile Include="Assets\energyDrain.cs" />
      <Compile Include="Assets\ErrorPrompt.cs" />
      <Compile Include="Assets\evasiveMenuvers.cs" />
+     <Compile Include="Assets\EventManager.cs" />
      <Compile Include="Assets\ExplodeOnDeath.cs" />
      <Compile Include="Assets\ExplodeParts.cs" />
      <Compile Include="Assets\explosion.cs" />

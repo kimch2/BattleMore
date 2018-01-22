@@ -20,6 +20,7 @@ public class SoundTrackPlayer : MonoBehaviour {
 	int currentIndex = 0;
 	public static SoundTrackPlayer main;
 
+	public bool ShowSoundTrackDebug;
 	void Awake()
 	{
 		main = this;
@@ -58,6 +59,9 @@ public class SoundTrackPlayer : MonoBehaviour {
 		
 	void Update(){
 
+		if(ShowSoundTrackDebug){
+		Debug.Log ("Sound " + mySrc.isPlaying + "  " + mySrc.time);
+		}
 		if(!mySrc.isPlaying){
 			if(mySrc.time > mySrc.clip.length -1){
 		//if (Time.unscaledTime > nextPlayTime) {

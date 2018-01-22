@@ -197,7 +197,7 @@ public class MainCamera : MonoBehaviour, ICamera {
 
 	public void Pan(object sender, ScreenEdgeEventArgs e)
 	{
-		if (canWeScroll)
+		if (canWeScroll && !middleMouseDown)
 		{
 			if (currentFlick != null)
 			{

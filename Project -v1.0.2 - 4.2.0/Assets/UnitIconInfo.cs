@@ -19,7 +19,17 @@ public class UnitIconInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 	public Text BuildNum;
 
 
-
+	public void reset()
+	{
+		BuildNum.text = "";
+		if (myUnit) {
+			myUnit.GetComponent<Selected> ().setIcon (null);
+		}
+		buildMan = null;
+		myUnit = null;
+		myStats = null;
+	
+	}
 
 	public void updateNum()
 	{try{if (!buildMan) {
@@ -43,7 +53,8 @@ public class UnitIconInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
 	public void setInfo(GameObject obj)
 	{
-	
+		
+
 		GetComponent<Image> ().sprite =obj.GetComponent<UnitStats> ().Icon;
 		buildMan = obj.GetComponent<BuildManager> ();
 		myUnit = obj;

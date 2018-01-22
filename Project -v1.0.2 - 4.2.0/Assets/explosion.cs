@@ -75,7 +75,10 @@ public class explosion : MonoBehaviour {
 
 					if (sourceInt == manager.PlayerOwner) {
 						amount *= friendlyFireRatio;
-					}
+				}
+				if (amount <= 0) {
+					return;
+				}
 
 					UnitStats stats = manager.myStats;
 					foreach ( IWeapon.bonusDamage tag in extraDamage) {

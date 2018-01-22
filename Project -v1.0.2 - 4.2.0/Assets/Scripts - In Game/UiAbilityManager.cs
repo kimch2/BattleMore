@@ -344,7 +344,10 @@ public class UiAbilityManager : MonoBehaviour {
 		}
 
 		foreach (KeyValuePair< GameObject, GameObject > del in unitIcons) {
+			//del.Key.GetComponentInChildren<Text> ().text = "";
+			del.Key.GetComponentInChildren<UnitIconInfo>().reset ();
 			myIconPool.FastDespawn (del.Key);
+
 			//Destroy (del.Key);
 		}
 
@@ -384,7 +387,9 @@ public class UiAbilityManager : MonoBehaviour {
 
 
 		foreach (KeyValuePair< GameObject, GameObject > del in unitIcons) {
+			del.Key.GetComponentInChildren<UnitIconInfo>().reset ();
 			myIconPool.FastDespawn (del.Key);
+		//	del.Key.GetComponentInChildren<Text> ().text = "";
 			//Destroy (del.Key);
 		}
 
@@ -472,6 +477,7 @@ public class UiAbilityManager : MonoBehaviour {
 										for (int x = 0; x < currentPages[e].rows [p].Count; x++) {
 
 											GameObject unit = myIconPool.FastSpawn (Vector3.zero, Quaternion.identity, GridObject.transform);
+											unit.transform.Find ("BuildCount").GetComponent<Text> ().text = "";
 											//GameObject unit = (GameObject)Instantiate (buttonTemplate, Vector3.zero, Quaternion.identity, GridObject.transform);
 										
 											Transform icontransform = unit.transform.Find ("UnitIconTemplate");
@@ -504,9 +510,11 @@ public class UiAbilityManager : MonoBehaviour {
 							Vector3 pos = IconStartPoints [j].transform.position;
 							pos.x += currentX * this.transform.localScale.x;
 							GameObject unit = myIconPool.FastSpawn (Vector3.zero, Quaternion.identity);
+
 							//GameObject unit = (GameObject)Instantiate (buttonTemplate);
 							Transform icontransform = unit.transform.Find ("UnitIconTemplate");
 					
+						
 							icontransform.GetComponent<UnitIconInfo> ().setInfo (uiPage.rows [j] [k].gameObject); //.myUnit = uiPage.rows [j] [k].gameObject;
 							unit.transform.localScale = this.transform.localScale;
 					

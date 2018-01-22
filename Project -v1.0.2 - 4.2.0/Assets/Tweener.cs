@@ -429,7 +429,11 @@ public class AnimationPose
 					objPoses [i].myObject.localEulerAngles = objPoses [i].rotation;
 				}
 				if (objPoses [i].usesPosition) {
-					objPoses [i].myObject.localPosition = objPoses [i].position;
+					if (objPoses [i].myObject is RectTransform) {
+						((RectTransform)objPoses [i].myObject).anchoredPosition3D = objPoses [i].position;
+					} else {
+						objPoses [i].myObject.localPosition = objPoses [i].position;
+					}
 				}
 			}
 
@@ -444,7 +448,11 @@ public class AnimationPose
 					objPoses [i].myObject.localEulerAngles +=  objPoses [i].rotation;
 				}
 				if (objPoses [i].usesPosition) {
-					objPoses [i].myObject.localPosition += objPoses [i].position;
+					if (objPoses [i].myObject is RectTransform) {
+						((RectTransform)objPoses [i].myObject).anchoredPosition3D = objPoses [i].position;
+					} else {
+						objPoses [i].myObject.localPosition += objPoses [i].position;
+					}
 				}
 			}
 			break;
@@ -455,7 +463,11 @@ public class AnimationPose
 					objPoses [i].myObject.eulerAngles = objPoses [i].rotation;
 				}
 				if (objPoses [i].usesPosition) {
-					objPoses [i].myObject.position = objPoses [i].position;
+					if (objPoses [i].myObject is RectTransform) {
+						((RectTransform)objPoses [i].myObject).anchoredPosition3D = objPoses [i].position;
+					} else {
+						objPoses [i].myObject.position = objPoses [i].position;
+					}
 				}
 			}
 			break;
@@ -467,7 +479,11 @@ public class AnimationPose
 					objPoses [i].myObject.eulerAngles += objPoses [i].rotation;
 				}
 				if (objPoses [i].usesPosition) {
-					objPoses [i].myObject.position += objPoses [i].position;
+					if (objPoses [i].myObject is RectTransform) {
+						((RectTransform)objPoses [i].myObject).anchoredPosition3D = objPoses [i].position;
+					} else {
+						objPoses [i].myObject.position += objPoses [i].position;
+					}
 				}
 			}
 			break;
@@ -487,8 +503,11 @@ public class AnimationPose
 					objPoses [i].myObject.localEulerAngles = Vector3.Lerp(startPoses [i].rotation,  WrapEnd(startPoses [i].rotation,  objPoses [i].rotation), lerpPosition);
 				}
 				if (objPoses [i].usesPosition) {
-			
-					objPoses [i].myObject.localPosition = Vector3.Lerp (startPoses [i].position, objPoses [i].position, lerpPosition);
+					if (objPoses [i].myObject is RectTransform) {
+						((RectTransform)objPoses [i].myObject).anchoredPosition3D = Vector3.Lerp (startPoses [i].position, objPoses [i].position, lerpPosition);
+					} else {
+						objPoses [i].myObject.localPosition = Vector3.Lerp (startPoses [i].position, objPoses [i].position, lerpPosition);
+					}
 				}
 			}
 
@@ -503,7 +522,11 @@ public class AnimationPose
 					objPoses [i].myObject.localEulerAngles = startPoses [i].rotation + Vector3.Lerp (Vector3.zero, WrapEnd(Vector3.zero,  objPoses [i].rotation), lerpPosition);
 					}
 				if (objPoses [i].usesPosition) {
-							objPoses [i].myObject.localPosition = startPoses [i].position + Vector3.Lerp (Vector3.zero, objPoses [i].position, lerpPosition);
+					if (objPoses [i].myObject is RectTransform) {
+						((RectTransform)objPoses [i].myObject).anchoredPosition3D = startPoses [i].position + Vector3.Lerp (Vector3.zero, objPoses [i].position, lerpPosition);
+					} else {
+						objPoses [i].myObject.localPosition = startPoses [i].position + Vector3.Lerp (Vector3.zero, objPoses [i].position, lerpPosition);
+					}
 					}
 					}
 			break;
@@ -517,7 +540,11 @@ public class AnimationPose
 					objPoses [i].myObject.eulerAngles = Vector3.Lerp(startPoses [i].rotation, WrapEnd(startPoses [i].rotation,  objPoses [i].rotation), lerpPosition);
 				}
 				if (objPoses [i].usesPosition) {
-					objPoses [i].myObject.position = Vector3.Lerp (startPoses [i].position, objPoses [i].position, lerpPosition);
+					if (objPoses [i].myObject is RectTransform) {
+						((RectTransform)objPoses [i].myObject).anchoredPosition3D = Vector3.Lerp (startPoses [i].position, objPoses [i].position, lerpPosition);
+					} else {
+						objPoses [i].myObject.position = Vector3.Lerp (startPoses [i].position, objPoses [i].position, lerpPosition);
+					}
 				}
 				}
 			break;
@@ -531,7 +558,11 @@ public class AnimationPose
 					objPoses [i].myObject.eulerAngles = startPoses [i].rotation + Vector3.Lerp (Vector3.zero, WrapEnd(Vector3.zero,  objPoses [i].rotation), lerpPosition);
 				}
 				if (objPoses [i].usesPosition) {
-					objPoses [i].myObject.position = startPoses [i].position + Vector3.Lerp (Vector3.zero, objPoses [i].position, lerpPosition);
+					if (objPoses [i].myObject is RectTransform) {
+						((RectTransform)objPoses [i].myObject).anchoredPosition3D = startPoses [i].position + Vector3.Lerp (Vector3.zero, objPoses [i].position, lerpPosition);
+					} else {
+						objPoses [i].myObject.position = startPoses [i].position + Vector3.Lerp (Vector3.zero, objPoses [i].position, lerpPosition);
+					}
 				}
 			}
 			break;
@@ -580,11 +611,19 @@ public class ObjectPose
 	public void setCurrentVectors(Tweener.TweenScope scope)
 	{if (scope == Tweener.TweenScope.Local || scope == Tweener.TweenScope.LocalStart ) {
 			scale = myObject.localScale;
-			position = myObject.localPosition;
+			if (myObject is RectTransform) {
+				position = ((RectTransform)myObject).anchoredPosition3D;
+			} else {
+				position = myObject.localPosition;
+			}
 			rotation = myObject.localEulerAngles;
 	} else if (scope == Tweener.TweenScope.World || scope == Tweener.TweenScope.WorldStart) {
 			scale = myObject.lossyScale;
-			position = myObject.position;
+		if (myObject is RectTransform) {
+			position = ((RectTransform)myObject).anchoredPosition3D;
+		} else {
+				position = myObject.position;
+			}
 		rotation = myObject.eulerAngles;
 		}
 
