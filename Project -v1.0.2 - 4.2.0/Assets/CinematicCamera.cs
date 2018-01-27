@@ -132,7 +132,7 @@ public class CinematicCamera : SceneEventTrigger {
 			}
 			myScenes [currentScene].onComplete.Invoke ();
 		
-			StartCoroutine (TweenFromScene (myScenes [currentScene].tweenFromScene));
+			StartCoroutine (TweenFromScene (myScenes [currentScene].tweenFromScene,myScenes [currentScene].TweenToPosition));
 			updateStun (false);
 			currentScene = -1;
 	
@@ -158,12 +158,18 @@ public class CinematicCamera : SceneEventTrigger {
 
 	}
 
-	IEnumerator TweenFromScene(float duration)
+	IEnumerator TweenFromScene(float duration ,Vector3 toPosition)
 	{
 		Camera cam = GetComponent<Camera> ();
 		float startAngle = cam.fieldOfView;
 		Vector3 startPosition = transform.position;
 		Quaternion startRotation = transform.rotation;
+		if (toPosition != Vector3.zero) {
+			float y = previousCamPos.y;
+			previousCamPos = toPosition;
+			previousCamPos.y = y;
+		}
+
 
 		yield return null;
 		for (float i = 0; i < duration; i += Time.deltaTime) {
@@ -229,6 +235,8 @@ public class CinematicCamera : SceneEventTrigger {
 		public List<SceneEventTrigger> nextTrig;
 		public UnityEngine.Events.UnityEvent onComplete;
 		public float tweenFromScene;
+		[Tooltip("Leave as vector 3 for no tween back")]
+		public Vector3 TweenToPosition;
 		public List<int> playersToStun;
 
 	}
@@ -270,8 +278,13 @@ public class CinematicCamera : SceneEventTrigger {
 
 				
 				}
+				Gizmos.color = Color.cyan;
+				if (s.TweenToPosition != Vector3.zero) {
+					Gizmos.DrawSphere (s.TweenToPosition, 3);
+				}
 			
 			}
+
 		
 		}
 	}

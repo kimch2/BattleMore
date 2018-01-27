@@ -197,5 +197,7 @@ public class GameMenu : MonoBehaviour {
 		setMenu (missionLog);
 	}
 
+	public void ExitGame()
+	{Application.Quit ();}
 
 }

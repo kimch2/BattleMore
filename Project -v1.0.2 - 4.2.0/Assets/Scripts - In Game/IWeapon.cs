@@ -314,7 +314,7 @@ public class IWeapon : MonoBehaviour {
 
 				Projectile script = proj.GetComponent<Projectile> ();
 
-				Debug.Log ("Creating " + script);
+				//Debug.Log ("Creating " + script);
 				if (script) {
 					script.Initialize (target, damage, myManager);
 					script.setup ();

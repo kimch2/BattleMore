@@ -13,15 +13,20 @@ public class FadeOut : MonoBehaviour {
 	public float textfadeInTime;
 
 	public static FadeOut main;
+	public bool fadeOutEveryTime = true;
 	// Use this for initialization
 	void Awake () {
 
-		main = this;
-		fadeStartTime = blackTime;
-		myImage.enabled = true;
-		myText.enabled = true;
-		if (textfadeInTime > 0) {
-			StartCoroutine (fadeInText());
+		if (fadeOutEveryTime || Time.time < 1) {
+	
+
+			main = this;
+			fadeStartTime = blackTime;
+			myImage.enabled = true;
+			myText.enabled = true;
+			if (textfadeInTime > 0) {
+				StartCoroutine (fadeInText ());
+			}
 		}
 	
 	}

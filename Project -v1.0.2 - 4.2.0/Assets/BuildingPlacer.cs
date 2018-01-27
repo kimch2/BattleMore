@@ -21,8 +21,15 @@ public class BuildingPlacer : MonoBehaviour {
 	void Update () {
 
 		if (building) {
+			
 			objects.RemoveAll (item => item == null);
 			if (objects.Count == 0) {
+
+				if (!AstarPath.active.graphs [0].GetNearest (transform.position).node.Walkable) {
+					setRenderers (bad);
+					return;
+				}
+
 				Tile t = Grid.main.GetClosestRedTile (this.gameObject.transform.position);
 				if (FogOfWar.current.IsInCompleteFog (this.gameObject.transform.position)) {
 					setRenderers (bad);
@@ -132,6 +139,7 @@ public class BuildingPlacer : MonoBehaviour {
 	void OnTriggerEnter(Collider other)
 	{
 		UnitManager manage = other.gameObject.GetComponent<UnitManager> ();
+	
 		if (manage || other.gameObject.layer == 17) {
 			//if (manage.PlayerOwner != 1 || manage.myStats.isUnitType (UnitTypes.UnitTypeTag.Structure)) {
 				objects.Add (other.gameObject);

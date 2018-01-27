@@ -131,6 +131,7 @@ public class airmover : IMover {
 	{//	location.y += 2;
 
 
+		location = MainCamera.main.getMapClampedLocation (location);
 		RaycastHit objecthit;
 	
 		if (Physics.Raycast (location + Vector3.up *30, Vector3.down, out objecthit, 1000, 1 << 8)) {

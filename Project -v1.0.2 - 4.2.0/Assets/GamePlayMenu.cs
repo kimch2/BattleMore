@@ -140,7 +140,7 @@ public class GamePlayMenu : MonoBehaviour {
 	public void setGameSpeed(Scrollbar theSlide)
 	{
 
-		GameSettings.gameSpeed = ((int)(theSlide.value/.2f))*.2f + .6f;
+		GameSettings.gameSpeed = ((int)(theSlide.value/.2f))*.2f + .8f;
 		speedPercent.text = "("+(int)(GameSettings.gameSpeed * 100) + ")%";
 
 

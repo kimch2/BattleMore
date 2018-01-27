@@ -419,6 +419,18 @@ public class MainCamera : MonoBehaviour, ICamera {
 		}
 	}
 
+	public Vector3 getMapClampedLocation(Vector3 targetLocation)
+	{
+
+		targetLocation.x = Mathf.Max (BottomLeftBorder.x + 8, targetLocation.x);
+		targetLocation.z = Mathf.Max (BottomLeftBorder.z + 8, targetLocation.z);
+
+		targetLocation.x = Mathf.Min (TopRightBorder.x - 8, targetLocation.x);
+		targetLocation.z = Mathf.Min (TopRightBorder.z - 8, targetLocation.z);
+		return targetLocation;
+	}
+
+
 	void OnDrawGizmos()
 	{	
 		Gizmos.DrawCube (TopRightBorder, Vector3.one*10);
