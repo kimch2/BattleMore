@@ -27,6 +27,7 @@ public class LevelInfo {
 	public float ArsenalDisplayTime = -1;
 	public int defaultTip;
 	public Sprite loadingScreen;
+	public bool showFullTechTree;
 
 
 

@@ -9,7 +9,7 @@ public abstract class Achievement : MonoBehaviour {
 	public Sprite myIcon;
 
 	public enum Earnings{all, unearned, earned}
-	public enum Level{all, campaign, one, two,three, four,five, six,seven,eight,nine,ten,eleven,twelve,thirteen, anyLevel}
+	public enum Level{all, campaign, one, two,three, four,five, six,seven,eight,nine,ten,eleven,twelve,thirteen,fourteen,fiftteen,sixteen, anyLevel}
 	public abstract void CheckBeginning ();
 	public abstract string GetDecription ();
 	public Level myLevel;
@@ -56,6 +56,12 @@ public abstract class Achievement : MonoBehaviour {
 			return 11;
 		case Level.thirteen:
 			return 12;
+		case Level.fourteen:
+			return 13;
+		case Level.fiftteen:
+			return 14;
+		case Level.sixteen:
+			return 15;
 
 
 		}

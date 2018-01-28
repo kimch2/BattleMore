@@ -70,10 +70,12 @@ public class LevelManager : MonoBehaviour {
 
 	public void openLevelIntro(int n)
 	{
-		AllTechToggle.SetActive (LevelData.getHighestLevel () > 6 && n < 6 && n != 0); // n!=0 because we dont have full tech tree on first level no matter what
-		AllTechToggle.GetComponent<Toggle>().isOn = PlayerPrefs.GetInt ("AllTech",0) == 1;
 
 		LevelCompilation comp = Resources.Load<GameObject> ("LevelEditor").GetComponent<LevelCompilation> ();
+
+		AllTechToggle.SetActive (LevelData.getHighestLevel () > 6 && comp.MyLevels[n].showFullTechTree); // n!=0 because we dont have full tech tree on first level no matter what
+		AllTechToggle.GetComponent<Toggle>().isOn = PlayerPrefs.GetInt ("AllTech",0) == 1;
+
 		IntroMaker.LoadLevel (comp.MyLevels[n]);
 	}
 
