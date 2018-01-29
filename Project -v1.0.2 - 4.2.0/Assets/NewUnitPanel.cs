@@ -37,24 +37,26 @@ public class NewUnitPanel : MonoBehaviour {
 		yield return null;
 		units.Clear ();
 		main = this;
-		int LevelNum = GameObject.FindObjectOfType<VictoryTrigger> ().levelNumber;
-		LevelCompilation comp = ((GameObject)Resources.Load ("LevelEditor")).GetComponent<LevelCompilation> ();	
-		if (comp.MyLevels [LevelNum].displayArsenal.tobeSeen.Count == 0) {
-			foreach (GameObject obj in ArsenalButtons) {
-				obj.SetActive (false);
-			}
-		} else {
+		if (VictoryTrigger.instance != null) {
+			int LevelNum = VictoryTrigger.instance.levelNumber;
+			LevelCompilation comp = ((GameObject)Resources.Load ("LevelEditor")).GetComponent<LevelCompilation> ();	
+			if (comp.MyLevels [LevelNum].displayArsenal.tobeSeen.Count == 0) {
+				foreach (GameObject obj in ArsenalButtons) {
+					obj.SetActive (false);
+				}
+			} else {
 		
-			foreach (GameObject manage in  comp.MyLevels [LevelNum].displayArsenal.tobeSeen) {
+				foreach (GameObject manage in  comp.MyLevels [LevelNum].displayArsenal.tobeSeen) {
 
-				addUnitToList (manage);
+					addUnitToList (manage);
 		
-			}
+				}
 
 	
 
 		
-			previous ();
+				previous ();
+			}
 		}
 	}
 

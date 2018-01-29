@@ -63,7 +63,9 @@ public class GameMenu : MonoBehaviour {
 		if (Input.GetKeyUp (KeyCode.Backspace)) {
 			
 			openMenu ();
-			CursorManager.main.normalMode ();
+			if (CursorManager.main) {
+				CursorManager.main.normalMode ();
+			}
 		}
 
 	}
@@ -98,7 +100,9 @@ public class GameMenu : MonoBehaviour {
 		}
 	else
 	{setMenu (myCanvas);
-		uimanage.setToMenu ();
+			if (uimanage) {
+				uimanage.setToMenu ();
+			}
 		pause ();
 	}
 		
@@ -135,7 +139,9 @@ public class GameMenu : MonoBehaviour {
 		ispaused = true;
 
 			Time.timeScale = 0;
-		displayer.pause ();
+		if (displayer) {
+			displayer.pause ();
+		}
 		foreach (MonoBehaviour m in disableScripts) {
 			m.enabled = false;
 		}
@@ -160,7 +166,9 @@ public class GameMenu : MonoBehaviour {
 	{
 		//	Debug.Log ("Pauseing");
 		ispaused = false;
-		displayer.resume ();
+		if (displayer) {
+			displayer.resume ();
+		}
 		Time.timeScale = GameSettings.gameSpeed;
 		foreach (MonoBehaviour m in disableScripts) {
 			m.enabled = true;
@@ -173,7 +181,9 @@ public class GameMenu : MonoBehaviour {
 
 	public void returnToGame()
 	{setMenu (null);
-		uimanage.SwitchToModeNormal ();
+		if (uimanage) {
+			uimanage.SwitchToModeNormal ();
+		}
 		unpause ();
 	}
 

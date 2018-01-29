@@ -8,7 +8,7 @@ public class SoundOptions : MonoBehaviour {
 
 	public GameObject masterSLiderO;
 	public GameObject musicSliderO;
-	private AudioSource music;
+	public AudioSource music;
 
 	private Slider masterSLider;
 	private Slider musicSlider;
@@ -30,7 +30,7 @@ public class SoundOptions : MonoBehaviour {
 			music = mc.GetComponent<AudioSource> ();
 		}
 		if (!music) {
-			music = GameObject.FindObjectOfType<Camera> ().GetComponent<AudioSource> ();
+			music = MainCamera.main.GetComponent<AudioSource> ();
 		}
 
 		if (AlertFreq) {
@@ -50,7 +50,7 @@ public class SoundOptions : MonoBehaviour {
 
 
 		//if (GameSettings.getMusicVolume()> -1) {
-			musicSlider.value = GameSettings.getMusicVolume ();
+		musicSlider.value = GameSettings.getMusicVolume ();
 		music.volume = musicSlider.value;
 		//} else {
 		//	musicSlider.value = music.volume;

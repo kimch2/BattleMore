@@ -56,46 +56,63 @@ public class HotkeyMenu : MonoBehaviour {
 			if (obj.GetComponent<Toggle>().isOn) {
 
 				selected [n % 4].Add (objectList[(int) n /4].GetComponent<UnitManager> ().UnitName);
-				myPics [n % 4].sprite = objectList [(int)n / 4].GetComponent<UnitStats> ().Icon;
-			
+				if (myPics [n % 4] != null) {
+					myPics [n % 4].sprite = objectList [(int)n / 4].GetComponent<UnitStats> ().Icon;
+				}
 			}
 			n++;
 		}
 
 		string toSave = "";
-		GroupOne.text = "Select all:\n";
+		if (GroupOne) {
+			GroupOne.text = "Select all:\n";
+		}
 		foreach (string s in selected[0]) {
-			GroupOne.text += s +"s, " ;
+			if (GroupOne) {
+				GroupOne.text += s + "s, ";
+			}
 			toSave += s;
 		}
 
 		toSave +=";";
-		GroupTwo.text = "Select all:\n";
+		if (GroupTwo) {
+			GroupTwo.text = "Select all:\n";
+		}
 		foreach (string s in selected[1]) {
-			GroupTwo.text += s +"s, ";
+			if (GroupTwo) {
+				GroupTwo.text += s + "s, ";
+			}
 			toSave += s;
 		}
 		toSave +=";";
 
-		GroupThree.text = "Select all:\n";
+		if (GroupThree) {
+			GroupThree.text = "Select all:\n";
+		}
 		foreach (string s in selected[2]) {
-			GroupThree.text += s +"s, ";
+			if (GroupThree) {
+				GroupThree.text += s + "s, ";
+			}
 			toSave += s;
 		}
 		toSave +=";";
 
-		GroupFour.text = "Select all:\n";
+		if (GroupFour) {
+			GroupFour.text = "Select all:\n";
+		}
 		foreach (string s in selected[3]) {
-			GroupFour.text += s + "s, ";
+			if (GroupFour) {
+				GroupFour.text += s + "s, ";
+			}
 			toSave += s;
 		}
 		toSave +=";";
 
 		// Change this when future levels are added.
-		PlayerPrefs.SetString ("FHotkey"+ Mathf.Min(3, VictoryTrigger.instance.levelNumber), toSave);
-
-		selectMan.applyGlobalSelection(selected);
-
+		PlayerPrefs.SetString ("FHotkey", toSave);
+		if (selectMan) {
+			selectMan.applyGlobalSelection (selected);
+		}
 
 		}
 
@@ -106,14 +123,15 @@ public class HotkeyMenu : MonoBehaviour {
 
 		char[] separator = {';'};
 		//fManager = GameObject.Find ("F-Buttons").GetComponent<FButtonManager>();
-		string loaded = PlayerPrefs.GetString("FHotkey"+ Mathf.Min(3, VictoryTrigger.instance.levelNumber), "");
+
+		string loaded = PlayerPrefs.GetString ("FHotkey", "");//+ Mathf.Min(3, VictoryTrigger.instance.levelNumber), "");
 		string[] separated = loaded.Split (separator,System.StringSplitOptions.RemoveEmptyEntries);
 
 	
 			selectMan = GameObject.FindObjectOfType<SelectedManager> ();
 			foreach (RaceInfo info in raceInfo.GetComponents<RaceInfo>()) {
 
-				if (info.race == GameManager.main.activePlayer.myRace) {
+			if (info.race == RaceInfo.raceType.Daexa) {
 
 					objectList = new List<GameObject> ();
 

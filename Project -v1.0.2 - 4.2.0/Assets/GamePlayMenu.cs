@@ -66,8 +66,9 @@ public class GamePlayMenu : MonoBehaviour {
 		toggled = !toggled;
 		GameSettings.setToolTips (toggled);
 		if (showToolTip.isOn != toggled) {
-			showToolTip.isOn = toggled;
+			//showToolTip.isOn = toggled;
 		}
+
 		foreach (ToolTip tool in Object.FindObjectsOfType<ToolTip> ()) {
 			if (!tool.Ability) {
 				tool.enabled = toggled;
@@ -80,7 +81,7 @@ public class GamePlayMenu : MonoBehaviour {
 		toggled = !toggled;
 		GameSettings.setAbility (toggled);
 		if (showAbility.isOn != toggled) {
-			showAbility.isOn = toggled;
+			//showAbility.isOn = toggled;
 		}
 		foreach (ToolTip tool in Object.FindObjectsOfType<ToolTip> ()) {
 			if (tool.Ability) {
@@ -95,10 +96,14 @@ public class GamePlayMenu : MonoBehaviour {
 		PlayerPrefs.SetInt ("SimpleUI", simpleToggle.isOn ? 1:0);
 
 		foreach (GameObject obj in SimpleObjects) {
-			obj.SetActive (!simpleToggle.isOn);
+			if (obj) {
+				obj.SetActive (!simpleToggle.isOn);
+			}
 		}
 		foreach (Canvas obj in SimpleCanvas) {
-			obj.enabled = !simpleToggle.isOn;
+			if (obj) {
+				obj.enabled = !simpleToggle.isOn;
+			}
 		}
 	}
 
@@ -107,8 +112,11 @@ public class GamePlayMenu : MonoBehaviour {
 
 		PlayerPrefs.SetInt ("SuperSimpleUI", ControlToggle.isOn ?1:0);
 	
+
 		foreach (GameObject obj in SuperSimpleObjects) {
-			obj.SetActive (!ControlToggle.isOn);
+			if (obj) {
+				obj.SetActive (!ControlToggle.isOn);
+			}
 		}
 	}
 
@@ -140,7 +148,7 @@ public class GamePlayMenu : MonoBehaviour {
 	public void setGameSpeed(Scrollbar theSlide)
 	{
 
-		GameSettings.gameSpeed = ((int)(theSlide.value/.2f))*.2f + .8f;
+		GameSettings.gameSpeed = 1 +  ((theSlide.value - .5f)  *.4f);
 		speedPercent.text = "("+(int)(GameSettings.gameSpeed * 100) + ")%";
 
 
