@@ -34,7 +34,7 @@ public class SoundTrackPlayer : MonoBehaviour {
 
 	public void playVictoryTrack()
 	{
-		
+		crossFadeTrack (1,Resources.Load<AudioClip>("VictoryTrack"));
 	}
 
 	public void playDefeatTrack()

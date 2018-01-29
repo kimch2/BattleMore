@@ -7,6 +7,10 @@ public class EventManager : MonoBehaviour {
 	public List<EventState> myStates;
 
 	EventState currentstate;
+	public string getCurrentState()
+	{
+		return currentstate.StateName;
+	}
 
 	public void EnterState(string stateName)
 	{

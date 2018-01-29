@@ -648,6 +648,7 @@
      <Compile Include="Assets\WayPoint.cs" />
      <Compile Include="Assets\WayPointInteracter.cs" />
      <Compile Include="Assets\ZephyrInteract.cs" />
+     <Compile Include="Assets\Zoomer.cs" />
      <None Include="Assets\Materials\Bit2Good\SFS\Shaders\SFS_Pr_Dt.shader" />
      <None Include="Assets\Editor\readme.txt" />
      <None Include="Assets\PostProcessing\Resources\Shaders\DepthOfField.shader" />
