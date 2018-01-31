@@ -9,6 +9,10 @@ public class EventManager : MonoBehaviour {
 	EventState currentstate;
 	public string getCurrentState()
 	{
+		if (currentstate == null) {
+			return "";
+		}
+
 		return currentstate.StateName;
 	}
 
