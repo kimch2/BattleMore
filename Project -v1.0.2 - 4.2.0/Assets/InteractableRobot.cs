@@ -34,7 +34,7 @@ public class InteractableRobot : MonoBehaviour {
 	public void MouseOver()
 	{
 		foreach (GameObject obj in glower) {
-			obj.GetComponent<MeshRenderer> ().materials [0].color = new Color (0,.1f,.75f,.6f);
+			obj.GetComponent<MeshRenderer> ().materials [0].color = new Color (0,1,.75f,.6f);
 		}
 		mouseOn = true;
 	}
@@ -47,21 +47,25 @@ public class InteractableRobot : MonoBehaviour {
 	public void interact()
 	{
 		if (currentLine != null) {
-			myText.transform.parent.gameObject.SetActive (true);
+			
 			mySrc.PlayOneShot (currentLine.MainLine.myClip);
 			StartCoroutine (scrollingText(currentLine.MainLine.myText));
 			StartCoroutine (endText (currentLine.MainLine.duration));
 			currentLine = null;
 			FlashingOn = false;
 			turnOffFlashing ();
-			myAnim.CrossFade ("SimonTalk",1);
+			myAnim.CrossFadeInFixedTime("SimonSHiver",.6f);
 		}
 	}
 
 	IEnumerator endText(float duration)
 	{
-		yield return new WaitForSeconds (duration);
+		yield return new WaitForSeconds (duration +3);
 		myText.transform.parent.gameObject.SetActive (false);
+		myAnim.CrossFadeInFixedTime ("SimonFly",1);
+		yield return new WaitForSeconds (1);
+		//GetComponent<Tweener> ().GoToPose ("Off");
+	
 	
 	}
 
@@ -71,16 +75,18 @@ public class InteractableRobot : MonoBehaviour {
 			if (!mouseOn) {
 				
 				for (float i = 0; i < .5f; i += Time.deltaTime) {
-
-					foreach (GameObject obj in glower) {
-						obj.GetComponent<MeshRenderer> ().materials [0].color = new Color (0, .75f, .75f, i);
+					if (!mouseOn) {
+						foreach (GameObject obj in glower) {
+							obj.GetComponent<MeshRenderer> ().materials [0].color = new Color (0, .75f, .75f, i);
+						}
 					}
 					yield return null;
 				}
 				for (float i = .5f; i > 0; i -= Time.deltaTime) {
-
-					foreach (GameObject obj in glower) {
-						obj.GetComponent<MeshRenderer> ().materials [0].color = new Color (0, .75f, .75f, i);
+					if (!mouseOn) {
+						foreach (GameObject obj in glower) {
+							obj.GetComponent<MeshRenderer> ().materials [0].color = new Color (0, .75f, .75f, i);
+						}
 					}
 					yield return null;
 				}
@@ -102,7 +108,8 @@ public class InteractableRobot : MonoBehaviour {
 
 	IEnumerator scrollingText(string dialog)
 	{
-
+		yield return new WaitForSeconds (.5f);
+		myText.transform.parent.gameObject.SetActive (true);
 		int i = 0;
 		while (i <dialog.Length) {
 			i++;

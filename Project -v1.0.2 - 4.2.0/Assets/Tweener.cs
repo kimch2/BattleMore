@@ -401,6 +401,7 @@ public class TweenerEditor : Editor {
 [System.Serializable]
 public class AnimationPose
 {	public bool ShowPoseInEditor;
+	
 	public string PoseName = "Poser";
 	public Tweener.TweenScope myScope;
 

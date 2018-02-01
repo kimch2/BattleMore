@@ -10,9 +10,10 @@
       <File FileName="Assets\LevelManager.cs" Line="1" Column="1" />
       <File FileName="Assets\AllLevelAch.cs" Line="1" Column="1" />
       <File FileName="Assets\Achievement.cs" Line="1" Column="1" />
-      <File FileName="Assets\InteractableRobot.cs" Line="88" Column="23" />
-      <File FileName="Assets\dialogManager.cs" Line="80" Column="1" />
-      <File FileName="Assets\ExpositionDisplayer.cs" Line="97" Column="1" />
+      <File FileName="Assets\InteractableRobot.cs" Line="107" Column="2" />
+      <File FileName="Assets\dialogManager.cs" Line="1" Column="1" />
+      <File FileName="Assets\ExpositionDisplayer.cs" Line="1" Column="1" />
+      <File FileName="Assets\Tweener.cs" Line="146" Column="5" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
