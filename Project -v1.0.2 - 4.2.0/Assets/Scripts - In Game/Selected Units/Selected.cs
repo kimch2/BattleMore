@@ -51,9 +51,11 @@ public class Selected : MonoBehaviour {
 	//private bool onCooldown = false;
 	// Use this for initialization
 	void Awake () 
-	{		Initialize ();
-
+	{		
+		Initialize ();
 	}
+
+
 
 
 	public void Initialize()

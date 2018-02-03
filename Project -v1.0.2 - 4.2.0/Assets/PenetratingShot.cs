@@ -58,9 +58,9 @@ public class PenetratingShot : Projectile {
 
 		}
 
-		gameObject.transform.Translate (Vector3.forward* speed * Time.deltaTime *40);
+		gameObject.transform.Translate (Vector3.forward* speed * Time.deltaTime );
 
-		currentDistance += speed * Time.deltaTime * 40;
+		currentDistance += speed * Time.deltaTime ;
 	
 
 

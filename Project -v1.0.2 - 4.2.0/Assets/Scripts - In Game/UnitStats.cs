@@ -145,9 +145,14 @@ public class UnitStats : MonoBehaviour {
 		if (HealthRegenPerSec > 0) {
 			StartCoroutine (regenHealth());
 		}
-	
+		Invoke ("firstHealth", .3f);
 	}
 
+	void firstHealth()
+	{if (!isUnitType (UnitTypes.UnitTypeTag.Invulnerable)) {
+			updateHealthBar ();
+		}
+	}
 
 
 	Coroutine EnergyUpdater;

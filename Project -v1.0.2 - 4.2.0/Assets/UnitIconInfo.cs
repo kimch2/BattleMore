@@ -28,6 +28,7 @@ public class UnitIconInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 		buildMan = null;
 		myUnit = null;
 		myStats = null;
+		GetComponent<Button> ().onClick.RemoveAllListeners ();
 	
 	}
 

@@ -25,9 +25,9 @@ public class MortarProjectile : Projectile {
 			return;
 		}
 
-		gameObject.transform.Translate (Vector3.forward* speed * Time.deltaTime *40);
+		gameObject.transform.Translate (Vector3.forward* speed * Time.deltaTime);
 
-		currentDistance += speed * Time.deltaTime * 40;
+		currentDistance += speed * Time.deltaTime ;
 
 		yAmount = (((distance / 2) - currentDistance) / distance) * arcAngle * Time.deltaTime;
 		control.Move (Vector3.up * yAmount);

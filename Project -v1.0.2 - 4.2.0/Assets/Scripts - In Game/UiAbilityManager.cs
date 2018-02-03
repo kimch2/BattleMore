@@ -361,10 +361,12 @@ public class UiAbilityManager : MonoBehaviour {
 	}
 
 
+	bool shownAll = false;
 
 
 	public void loadUI(Page uiPage)
 	{
+		shownAll = false;
 		IconStartPoints [0].SetActive (false);
 		IconStartPoints [1].SetActive (false);
 		IconStartPoints [2].SetActive (false);
@@ -461,10 +463,12 @@ public class UiAbilityManager : MonoBehaviour {
 			IconStartPoints [j].SetActive (true);
 		// fill the icon panel
 		
+			Debug.Log ("Total units " + totalUnit + "  show all " + showAllUnits + "   " + selectMan.ActiveObjectList().Count + "   " +j);
 			if (totalUnit > 1 || (selectMan.ActiveObjectList().Count > 1 && showAllUnits)) {
 
 				if (showAllUnits) {
-					if (j == 0) {
+					if (!shownAll) {
+						shownAll = true;
 
 						List<Page> currentPages = selectMan.getPageList ();
 						for (int e = 0; e < currentPages.Count; e++) {
@@ -482,6 +486,7 @@ public class UiAbilityManager : MonoBehaviour {
 										
 											Transform icontransform = unit.transform.Find ("UnitIconTemplate");
 											icontransform.GetComponent<UnitIconInfo> ().setInfo (currentPages[e].rows [p] [x].gameObject); //.myUnit = uiPage.rows [j] [k].gameObject;
+										
 											icontransform.GetComponent<Button> ().onClick.AddListener (delegate() {
 												IconClick (unit);
 											});

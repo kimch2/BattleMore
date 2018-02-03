@@ -137,10 +137,11 @@ public  class Projectile : MonoBehaviour {
 
 	protected float yAmount;
 
+	float movementAmount;
 	// Update is called once per frame
 	protected virtual void Update () {
-
-		if (distance - currentDistance < 1.5f ) {
+		/*
+		if (distance - currentDistance < 1.5f  || speed * Time.deltaTime * 2) {
 			if (target && trackTarget) {
 				if (Vector3.Distance (transform.position, target.transform.position) < 2) {
 					Terminate (target);
@@ -159,12 +160,24 @@ public  class Projectile : MonoBehaviour {
 			}
 		}
 	
+*/
 
-	
-		gameObject.transform.Translate (Vector3.forward* speed * Time.deltaTime *40);
+		movementAmount = speed * Time.deltaTime;
+		gameObject.transform.Translate (Vector3.forward* movementAmount);
 
-		currentDistance += speed * Time.deltaTime * 40;
+		if(target && trackTarget){
+			if (Vector3.Distance (target.transform.position + randomOffset, transform.position) < movementAmount) {
+				Terminate (target);
+			}
+		}
+		else
+		{
+			if (Vector3.Distance (lastLocation, transform.position) < movementAmount) {
+				Terminate (target);
+			}
+		}
 
+	//	currentDistance += speed * Time.deltaTime;
 	}
 
 	protected virtual void OnControllerColliderHit(ControllerColliderHit other)
@@ -210,8 +223,7 @@ public  class Projectile : MonoBehaviour {
 
 
 	public virtual void Terminate(UnitManager target)
-	{//Debug.Log ("Finished");
-
+	{
 		if (!gameObject.activeSelf) {
 		
 			return;
@@ -275,16 +287,13 @@ public  class Projectile : MonoBehaviour {
 		onHit ();
 		CancelInvoke ("lookAtTarget");
 		myBulletPool.FastDespawn (this.gameObject, 0);
-	
-		//Destroy (this.gameObject);
 
 	}
 
 
 
 	public void Despawn()
-	{//Debug.Log ("Despawning " + this.gameObject);
-		//myBulletPool.FastDespawn (this.gameObject, 0);
+	{
 		triggers.Clear ();
 	}
 
@@ -307,7 +316,6 @@ public  class Projectile : MonoBehaviour {
 
 	public void selfDestruct()
 	{target = null;
-		//selfDest = true;
 		if (explosionO) {
 			Instantiate (explosionO, lastLocation + randomOffset, Quaternion.identity);
 			Debug.Log ("Self destruct");
