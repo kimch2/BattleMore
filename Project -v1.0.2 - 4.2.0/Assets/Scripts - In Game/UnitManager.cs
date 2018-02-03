@@ -625,9 +625,11 @@ public class UnitManager : Unit,IOrderable{
 				return;
 
 			}  
-		} else if (myState is PlaceBuildingState) {
-			((PlaceBuildingState)myState).cancel ();
 		}
+		// This was causing problems with refunding money from building cancels. maybe it was here for a reason?
+		// else if (myState is PlaceBuildingState) {
+		//	((PlaceBuildingState)myState).cancel ();
+		//}
 
 	
 		else if (nextState is AttackMoveState ) {

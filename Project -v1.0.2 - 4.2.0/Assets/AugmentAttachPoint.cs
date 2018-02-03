@@ -7,7 +7,19 @@ public class AugmentAttachPoint : MonoBehaviour {
 	public Vector3 attachPoint;
 	public bool showPoint;
 
+	public void BuildingStuff()
+	{
+		if (myAugment) {
+			myAugment.GetComponent<Augmentor> ().startBuilding ();
+		}
+	}
 
+	public void stopBuilding()
+	{
+		if (myAugment) {
+			myAugment.GetComponent<Augmentor> ().stopBuilding();
+		}
+	}
 
 	public void OnDrawGizmos()
 	{if (showPoint) {

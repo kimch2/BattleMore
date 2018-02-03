@@ -16,7 +16,7 @@ public class BuildManager : MonoBehaviour {
 	[Tooltip("This will appear if the building could be building something but isn't")]
 	public GameObject buildDecal;
 	UnitManager manager;
-
+	public AugmentAttachPoint augmenter;
 	// Use this for initialization
 	void Start () {
 		raceMan = GameManager.main.activePlayer ;
@@ -53,7 +53,9 @@ public class BuildManager : MonoBehaviour {
 				}
 
 			} else {
-			
+				if (augmenter) {
+					augmenter.stopBuilding ();
+				}
 				waitingOnSupply = false;
 				if (mySelect.IsSelected) {
 					//Debug.Log ("Resetting it");
@@ -155,7 +157,10 @@ public class BuildManager : MonoBehaviour {
 			return false;
 		
 		}
-
+		if (augmenter) {
+		
+			augmenter.BuildingStuff ();
+		}
 		buildOrder.Add (prod);
 		if (mySelect.IsSelected) {
 			build.bUpdate (this.gameObject);

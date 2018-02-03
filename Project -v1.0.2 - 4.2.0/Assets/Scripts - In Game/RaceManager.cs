@@ -36,7 +36,8 @@ public class RaceManager : MonoBehaviour, ManagerWatcher {
 	public Ability UltFour;
 	public Slider slideFour;
 	public Button ultBFour;
-
+	public bool playUltTwoWarningFirstTime = true;
+	public bool playUltFourWarningFirstTime = true;
 	public RaceInfo.raceType myRace;
 	public GameObject upgradeBall;
 
@@ -848,12 +849,18 @@ public class RaceManager : MonoBehaviour, ManagerWatcher {
 	IEnumerator UltTwoNotif()
 	{
 		yield return new WaitForSeconds (UltTwo.myCost.cooldown);
+		if (!playUltTwoWarningFirstTime) {
+			playUltTwoWarningFirstTime = true;
+		}
 		ErrorPrompt.instance.UltTwoDone ();
 	}
 
 	IEnumerator UltFourNotif()
 	{
 		yield return new WaitForSeconds (UltFour.myCost.cooldown);
+		if (!playUltFourWarningFirstTime) {
+			playUltFourWarningFirstTime = true;
+		}
 		ErrorPrompt.instance.UltFourDone ();
 	}
 

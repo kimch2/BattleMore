@@ -8,6 +8,7 @@ public class Augmentor : TargetAbility, Iinteract, Modifier {
 	GameObject attached;
 	DetachAugment detacher;
 	IMover myMover;
+	public Tweener Swirly;
 	public rotater myRotate;
 	public float SpeedPlus = 1.35f;
 
@@ -55,7 +56,7 @@ public class Augmentor : TargetAbility, Iinteract, Modifier {
 			return;
 		}
 
-		myRotate.speed *= 3;
+		myRotate.enabled = true;
 
 		manager.myStats.myHeight = UnitTypes.HeightType.Ground;
 		manager.myStats.SetTags ();
@@ -64,6 +65,21 @@ public class Augmentor : TargetAbility, Iinteract, Modifier {
 		target.GetComponent<UnitManager> ().myStats.addDeathTrigger (this);
 
 		AAP.myAugment = this.gameObject;
+		BuildManager bm = AAP.gameObject.GetComponent<BuildManager> ();
+		if (bm) {
+			Swirly.GetComponent<SpriteRenderer> ().color = Color.yellow;
+			if (bm.buildOrder.Count > 0) {
+				startBuilding ();
+			} else {
+				stopBuilding ();
+			}
+		} else {
+			Swirly.GetComponent<SpriteRenderer> ().color = Color.blue;
+			myRotate.speed = -250;
+			stopBuilding ();
+		}
+	
+
 
 		this.gameObject.transform.position = target.transform.position+  target.transform.rotation * AAP.attachPoint;
 
@@ -166,11 +182,24 @@ public class Augmentor : TargetAbility, Iinteract, Modifier {
 		}
 	}
 
+	public void startBuilding()
+	{
+		myRotate.speed = -200;
+		Swirly.GoToPose ("On");
+	}
+
+	public void stopBuilding()
+	{
+		myRotate.speed = -100;
+		Swirly.GoToPose ("Middle");
+	}
+
 	public void Unattach()
 	{if (!attached) {
 			return;}
 		manager.getUnitStats ().attackPriority = 2;
-		myRotate.speed /= 3;
+		myRotate.enabled = false;
+		Swirly.GoToPose ("Off");
 		manager.myStats.myHeight = UnitTypes.HeightType.Air;
 		attached.GetComponent<UnitManager> ().myStats.removeDeathTrigger (this);
 		MissileArmer armer = attached.GetComponent<MissileArmer> ();

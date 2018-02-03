@@ -212,6 +212,10 @@ public class VictoryTrigger : MonoBehaviour {
 		//SceneManager.LoadScene (3);
 	}
 
+	public void loadLevel(int levelNumber)
+	{
+		UnityEngine.SceneManagement.SceneManager.LoadScene (levelNumber);
+	}
 
 
 	public LevelData.levelInfo createLevelInfo(int levelN, int EnemiesD, int UnitsL, int Res, string timer,
