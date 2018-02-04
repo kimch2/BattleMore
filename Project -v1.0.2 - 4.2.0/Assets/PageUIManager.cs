@@ -42,6 +42,10 @@ public class PageUIManager : MonoBehaviour {
 		}
 
 	}
+	public void clear ()
+	{
+	
+	}
 
 	public void setPageCount(List<Page> units)
 	{
@@ -50,13 +54,13 @@ public class PageUIManager : MonoBehaviour {
 				if (i < units.Count) {
 					pageList [i].gameObject.SetActive (true);
 					pageList [i].image.material = grayscale;
-					pageList [i].transform.SetSiblingIndex (pageList.Count -i -1);
+					pageList [i].transform.SetSiblingIndex (pageList.Count - i - 1);
 					Image[] array = pageList [i].GetComponentsInChildren<Image> ();
 
 					string lastDude = ""; // Dont repeat icons if a guy takes mroe than one row.
 					for (int n = 0; n < 3; n++) {
 						try {//Weird math here because the getComponentsInChildren also gets the component in itself
-							if(((units [i]).rows [n]) [0].getUnitManager ().UnitName != lastDude){
+							if (((units [i]).rows [n]) [0].getUnitManager ().UnitName != lastDude) {
 								array [n + (array.Length - 3)].sprite = ((units [i]).rows [n]) [0].getUnitManager ().getUnitStats ().Icon;
 								lastDude = ((units [i]).rows [n]) [0].getUnitManager ().UnitName;
 							}
@@ -74,6 +78,10 @@ public class PageUIManager : MonoBehaviour {
 			}
 			pageList [0].image.material = null;
 			pageList [0].transform.SetAsLastSibling ();
+		} else {
+			foreach (Button b in pageList) {
+				b.gameObject.SetActive (false);
+			}
 		}
 	}
 

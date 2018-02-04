@@ -79,7 +79,7 @@ public class Tweener : MonoBehaviour {
 		foreach (AnimationPose pose in myPoses) {
 			
 			if (pose.PoseName == nextPoseName) {
-
+				
 				ShiftToPose (pose,tweenTime);
 			}	
 		}
@@ -151,6 +151,7 @@ public class Tweener : MonoBehaviour {
 		for (float i = 0; i < tweenTime; i += Time.timeScale == 0 ?  (1/Time.unscaledDeltaTime) : Time.deltaTime) {
 			pose.updateTween (i / tweenTime);
 		
+			//Debug.Log ("SHifting");
 			yield return 0;
 		}
 		pose.updateTween (1);

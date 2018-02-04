@@ -316,7 +316,7 @@ public class UiAbilityManager : MonoBehaviour {
 	}
 
 	public void clearPage()
-	{
+	{Debug.Log ("Clearing");
 		currentPage = null;
 
 		foreach (StatsUI obj in Stats) {

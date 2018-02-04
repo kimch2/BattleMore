@@ -119,6 +119,7 @@
      <Compile Include="Assets\CampTechCamManager.cs" />
      <Compile Include="Assets\CampTooltip.cs" />
      <Compile Include="Assets\CampUpgradePurchase.cs" />
+     <Compile Include="Assets\canvasFader.cs" />
      <Compile Include="Assets\CapturableUnit.cs" />
      <Compile Include="Assets\CarryRacks.cs" />
      <Compile Include="Assets\CastAbilityState.cs" />

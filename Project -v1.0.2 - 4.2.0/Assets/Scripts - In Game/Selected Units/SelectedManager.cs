@@ -294,6 +294,7 @@ public class SelectedManager : MonoBehaviour, ISelectedManager
 		currentPage = n;
 		if (UIPages.Count > 0) {
 			abilityManager.loadUI (UIPages [currentPage]);
+			pageUI.selectPage (currentPage);
 		}
 	}
 
@@ -682,6 +683,7 @@ public class SelectedManager : MonoBehaviour, ISelectedManager
 
 			UIPages.Clear ();
 			abilityManager.clearPage ();
+			pageUI.setPageCount (UIPages);
 			return;
 		}
 
