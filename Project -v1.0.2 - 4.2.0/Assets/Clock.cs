@@ -16,13 +16,16 @@ public class Clock : MonoBehaviour {
 		nextActionTime = Time.time;
 		timer = 0;
 		main = this;
+
+		InvokeRepeating ("UpdateTime", 1, 1);
 	}
 
 	// Update is called once per frame
-	void Update () {
-		timer += Time.deltaTime;
-		if (Time.time > nextActionTime) {
+	void UpdateTime () {
+		//timer += Time.deltaTime;
+		//if (Time.time > nextActionTime) {
 			nextActionTime += 1;
+			timer = Time.timeSinceLevelLoad;
 			int time = (int)timer;
 			int minutes = time / 60;
 			int seconds = time % 60;
@@ -34,7 +37,7 @@ public class Clock : MonoBehaviour {
 				clockText.text = minutes + ":" + seconds;
 			}
 
-		}
+		//}
 	}
 
 	public float getTotalSecond()

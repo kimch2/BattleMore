@@ -303,7 +303,7 @@ namespace DigitalRuby.SoundManagerNamespace
         /// <summary>
         /// Maximum number of the same audio clip to play at once
         /// </summary>
-		public static int MaxDuplicateAudioClips = 5;
+		public static int MaxDuplicateAudioClips = 6;
 
         private static void EnsureCreated()
         {

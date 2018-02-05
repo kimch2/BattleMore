@@ -369,6 +369,7 @@ public class Selected : MonoBehaviour {
 					
 				}
 			}
+				checkOn ();
 		} else {
 			turretDisplay.updateHealth (ratio);}
 			checkOn ();}
@@ -393,7 +394,8 @@ public class Selected : MonoBehaviour {
 
 	public void checkOn()
 	{
-		if (coolDownSlider.value > 0 || energySlider.value < .99 || (healthslider.value < .99)) {
+		//Debug.Log ("Checkign on " + coolDownSlider.value +"   "+ energySlider.value  +"   "+healthslider.value);
+		if (coolDownSlider && coolDownSlider.gameObject.activeSelf || energySlider && energySlider.gameObject.activeSelf || healthslider && healthslider.gameObject.activeSelf) {//.value < .99 || (healthslider.value < .99)) {
 			buffDisplay.enabled = true;
 		} else {
 			buffDisplay.enabled = false;

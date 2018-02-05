@@ -113,6 +113,7 @@
      <Compile Include="Assets\BuildUnitObjective.cs" />
      <Compile Include="Assets\bunnyManager.cs" />
      <Compile Include="Assets\bunnyPopulate.cs" />
+     <Compile Include="Assets\CameraFirstTimePlayer.cs" />
      <Compile Include="Assets\CampaignUltUpgrade.cs" />
      <Compile Include="Assets\CampaignUpgrade.cs" />
      <Compile Include="Assets\CampShieldUpgrade.cs" />

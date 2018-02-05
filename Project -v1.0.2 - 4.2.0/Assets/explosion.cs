@@ -23,19 +23,21 @@ public class explosion : MonoBehaviour {
 
 	UnitManager mySrcMan;
 	// Use this for initialization
-	void Start () {
+	IEnumerator Start () {
 		if (particleEff) {
-		
 			GameObject obj = 	(GameObject)Instantiate (particleEff, this.gameObject.transform.position, Quaternion.identity);
-
 		}
-	
+		transform.localScale = Vector3.one * maxSize;
+		yield return null;
+		yield return null;
+		Destroy (this.gameObject);
+
 	}
 
 
 	public void setSource(GameObject sr)
 	{
-		Debug.Log ("Setting source " + sr);
+		//Debug.Log ("Setting source " + sr);
 		source = sr;
 		if (source) {
 			mySrcMan = source.GetComponent<UnitManager> ();
@@ -45,6 +47,7 @@ public class explosion : MonoBehaviour {
 		}
 	}
 
+	/*
 	// Update is called once per frame
 	void Update () {
 
@@ -55,7 +58,7 @@ public class explosion : MonoBehaviour {
 		if (scale >= maxSize) Destroy (gameObject);
 
 	
-	}
+	}*/
 
 
 
