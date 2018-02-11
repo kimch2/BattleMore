@@ -463,7 +463,7 @@ public class UiAbilityManager : MonoBehaviour {
 			IconStartPoints [j].SetActive (true);
 		// fill the icon panel
 		
-			Debug.Log ("Total units " + totalUnit + "  show all " + showAllUnits + "   " + selectMan.ActiveObjectList().Count + "   " +j);
+			//Debug.Log ("Total units " + totalUnit + "  show all " + showAllUnits + "   " + selectMan.ActiveObjectList().Count + "   " +j);
 			if (totalUnit > 1 || (selectMan.ActiveObjectList().Count > 1 && showAllUnits)) {
 
 				if (showAllUnits) {

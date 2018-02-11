@@ -30,7 +30,11 @@ public class SoundOptions : MonoBehaviour {
 			music = mc.GetComponent<AudioSource> ();
 		}
 		if (!music) {
-			music = MainCamera.main.GetComponent<AudioSource> ();
+			if (MainCamera.main) {
+				music = MainCamera.main.GetComponent<AudioSource> ();
+			} else {
+				music = GameObject.FindGameObjectWithTag ("MainCamera").GetComponent<AudioSource> ();
+			}
 		}
 
 		if (AlertFreq) {

@@ -28,9 +28,10 @@ public class NewAchievmentUI : MonoBehaviour {
 
 					if (ach.TechReward > 0) {
 						obj.transform.Find ("RewardDescription").GetComponent<Text> ().text = 
-						"+ " + ach.TechReward + " Tech Credits";
+						"+ " + ach.TechReward;
 						obj.transform.Find ("RewardPic").GetComponent<Image> ().enabled = true;
 					} else {
+					obj.transform.Find ("RewardDescription").GetComponent<Text> ().fontSize = 16;
 						obj.transform.Find ("RewardDescription").GetComponent<Text> ().text = 
 						"New Voice Pack!";
 						obj.transform.Find ("RewardHelp").GetComponent<Text> ().enabled = true;

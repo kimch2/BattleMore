@@ -338,6 +338,7 @@ public class newWorkerInteract :  Ability, Iinteract {
 
 
 	public override void setAutoCast(bool offOn){
+		autocast = offOn;
 	}
 
 

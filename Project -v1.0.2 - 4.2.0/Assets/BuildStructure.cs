@@ -143,7 +143,7 @@ public class BuildStructure:  UnitProduction {
 
 
 			order.nextUnitCast = true;
-			order.canCast = false;
+			order.canCast = true;
 			return order;
 		}
 

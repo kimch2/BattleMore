@@ -62,7 +62,7 @@ public class Page  {
 	}
 
 	public void fireAtTarget(GameObject obj , Vector3 loc,int n, bool queue)
-		{
+	{
 		if (rows [n / 4] [0] == null) {
 			return;
 		}
@@ -92,12 +92,14 @@ public class Page  {
 			foreach (RTSObject unit in rows[n/4]) {
 				if (unit) {
 					continueOrder ord = unit.abilityList [X].canActivate (true);
+
+					Debug.Log ("Can cast " + ord.canCast + "  " + ord.nextUnitCast);
 					if (!ord.nextUnitCast) {
 
 						if (ord.canCast) {
 							canCast = true;
 							if (((UnitManager)unit).getState () is PlaceBuildingState && foundNonFollow) {
-
+								Debug.Log ("Continuing");
 								continue;
 							}
 
@@ -115,7 +117,11 @@ public class Page  {
 						}		
 					} else if (ord.canCast) {
 						canCast = true;
+						if (((UnitManager)unit).getState () is ChannelState) {
+							queue = true;
+						}
 						unit.UseTargetAbility (obj, loc, X, queue);
+						Debug.Log ("Using ability");
 
 					}
 
@@ -156,14 +162,14 @@ public class Page  {
 						unit.UseTargetAbility (obj, loc, X, queue);
 
 					}
-
 				}
-
 			}
 		}
 
 		if(bestGuy)
-		{
+		{if (((UnitManager)bestGuy).getState () is ChannelState) {
+				queue = true;
+			}
 			bestGuy.UseTargetAbility (obj, loc, X, queue);
 		}
 

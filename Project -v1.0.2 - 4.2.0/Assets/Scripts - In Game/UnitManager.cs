@@ -115,9 +115,6 @@ public class UnitManager : Unit,IOrderable{
 			myStats.Initialize();
 
 
-
-
-
 		initializeVision (false);
 
 		if(startingState == UnitState.StateType.HoldGround) {
@@ -132,9 +129,7 @@ public class UnitManager : Unit,IOrderable{
 			changeState (new turretState (this));
 		} 
 
-	
-			chaseRange = visionRange;
-
+		chaseRange = visionRange;
 	}
 
 	public void initializeVision(bool createIt)
@@ -266,6 +261,7 @@ public class UnitManager : Unit,IOrderable{
 	override
 	public bool UseAbility(int n, bool queue)
 	{
+		
 		if (!isStunned && !isSilenced) {
 
 			continueOrder order = null;
@@ -287,8 +283,9 @@ public class UnitManager : Unit,IOrderable{
 
 	override
 	public bool UseTargetAbility(GameObject obj, Vector3 loc, int n, bool queue) // Either the obj - target or the location can be null.
-	{continueOrder order = new continueOrder();
-		if (!isStunned && !isSilenced) {
+	{//Debug.Log("Targeting " + isStunned);
+		continueOrder order = new continueOrder();
+		if ((!isStunned && !isSilenced) || (isStunned && queue)) { // If stuff breaks with abilities, this second bool operator may have broken it, also look in the page where the queue is forcibly set
 			if (abilityList [n] != null) {
 	
 				order = abilityList [n].canActivate (true);
@@ -317,7 +314,7 @@ public class UnitManager : Unit,IOrderable{
 	public void autoCast(int n, bool offOn) // Program in how it is autocast in a custom UnitState, which should be accessed/created from the interactor class
 	{
 		if (abilityList [n] != null) {
-			
+
 			abilityList [n].setAutoCast(offOn);
 
 		}
@@ -340,6 +337,7 @@ public class UnitManager : Unit,IOrderable{
 
 	public new void GiveOrder (Order order)
 	{
+
 		if (myState is  ChannelState) {
 			//order.queued = true;
 			foreach (UnitState s in queuedStates) {
