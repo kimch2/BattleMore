@@ -48,24 +48,28 @@ public class InteractableRobot : MonoBehaviour {
 	{
 		if (currentLine != null) {
 			
-			mySrc.PlayOneShot (currentLine.MainLine.myClip);
-			StartCoroutine (scrollingText(currentLine.MainLine.myText));
+			StartCoroutine (scrollingText(currentLine.MainLine.myText,currentLine.MainLine.myClip));
 			StartCoroutine (endText (currentLine.MainLine.duration));
+			Invoke ("flyAway", currentLine.MainLine.duration);
 			currentLine = null;
 			FlashingOn = false;
 			turnOffFlashing ();
 			myAnim.CrossFadeInFixedTime("SimonSHiver",.6f);
+
 		}
+	}
+
+	void flyAway()
+	{
+		myAnim.CrossFadeInFixedTime ("SimonFly",1);	
 	}
 
 	IEnumerator endText(float duration)
 	{
-		yield return new WaitForSeconds (duration +3);
+		yield return new WaitForSeconds (duration );
 		myText.transform.parent.gameObject.SetActive (false);
-		myAnim.CrossFadeInFixedTime ("SimonFly",1);
-		yield return new WaitForSeconds (1);
-		//GetComponent<Tweener> ().GoToPose ("Off");
-	
+
+
 	
 	}
 
@@ -106,9 +110,12 @@ public class InteractableRobot : MonoBehaviour {
 
 
 
-	IEnumerator scrollingText(string dialog)
+	public IEnumerator scrollingText(string dialog, AudioClip clip)
 	{
 		yield return new WaitForSeconds (.5f);
+		StartCoroutine (endText (clip.length + 2));
+
+		mySrc.PlayOneShot (clip);
 		myText.transform.parent.gameObject.SetActive (true);
 		int i = 0;
 		while (i <dialog.Length) {

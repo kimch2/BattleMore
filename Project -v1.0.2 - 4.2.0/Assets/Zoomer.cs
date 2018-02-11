@@ -8,10 +8,14 @@ public class Zoomer : MonoBehaviour {
 	float lastZoom;
 	public EventManager PureArmory;
 	// Update is called once per frame
+
+	int numTimes = 0;
 	void Update () {
 
 		if (Input.GetAxis ("Mouse ScrollWheel") < 0) {
-
+			numTimes++;
+			if (numTimes > 2) {
+				numTimes = 0;
 				if (lastZoom + 1 < Time.time) {
 					lastZoom = Time.time;
 					if (GetComponent<EventManager> ().getCurrentState () == "Armory") {
@@ -42,7 +46,11 @@ public class Zoomer : MonoBehaviour {
 						GetComponent<EventManager> ().EnterState ("MainArea");
 					}
 				}
+			}
+
 
 		}
+		else
+		{numTimes = 0;}
 	}
 }

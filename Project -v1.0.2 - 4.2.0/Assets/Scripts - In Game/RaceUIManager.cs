@@ -200,7 +200,7 @@ public class RaceUIManager : MonoBehaviour , ManagerWatcher{
 	
 	public void updateSupply( float current, float max){
 		if (raceManager.supplyMax >= raceManager.supplyCap) {
-			supply.color = Color.cyan;
+			supply.color = Color.white;
 		}
 
 		else if (current < max - 5) {
