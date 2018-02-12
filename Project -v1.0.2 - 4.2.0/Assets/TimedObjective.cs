@@ -5,9 +5,10 @@ using UnityEngine;
 public class TimedObjective : Objective {
 	
 	public float remainingTime;
-
+	public UnityEngine.Events.UnityEvent OnTimeOut;
 	string initialDescript;
 	public bool loseOnComplete = true;
+	public bool completeOnTimeOut = true;
 	// Use this for initialization
 	new void Start () {
 
@@ -40,9 +41,13 @@ public class TimedObjective : Objective {
 			if (!completed) {
 				VictoryTrigger.instance.Lose ();
 			}
-		} else {
+		} else if (completeOnTimeOut) {
 			complete ();
+		} else {
+			OnTimeOut.Invoke ();
 		}
+
+
 
 
 	}

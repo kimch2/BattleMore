@@ -71,6 +71,17 @@ public class WaveManager : MonoBehaviour {
 	}
 
 
+	public void ReleaseWave(int waveDifficulty)
+	{GameObject spawner = EmergencySpawnLocation;
+		float delay = .1f;
+		foreach (GameObject obj in CurrentWaves[0].waveType) {
+
+			StartCoroutine (MyCoroutine (delay, obj, spawner, myWaves [currentWaveIndex].RallyPointIndex == -1 ? firstRallyPoint : alternateRallyPoints[myWaves [currentWaveIndex].RallyPointIndex]));
+			delay += .2f;
+
+		}
+	}
+
 	void Start () {
 		mystartTime = Time.timeSinceLevelLoad;
 		//GeneralIndex = PlayerPrefs.GetInt ("VoicePack", 0);
