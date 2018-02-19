@@ -20,7 +20,7 @@ public class WaveManager : MonoBehaviour {
 	public Vector3 firstRallyPoint;
 	public List<Vector3> alternateRallyPoints;
 
-
+	public bool giveWarnings = true;
 	int currentWaveIndex;
 	private float nextActionTime = 10000;
 	int SpawnerCount;
@@ -162,7 +162,9 @@ public class WaveManager : MonoBehaviour {
 				//ExpositionDisplayer.instance.displayText (nextWave.warnings [n].textWarning, 7, nextWave.warnings [n].audioWarning, .93f, nextWave.warnings[n].myPic,4);
 
 			} else {
-				ErrorPrompt.instance.EnemyWave (waveOption.warningType);
+				if (giveWarnings) {
+					ErrorPrompt.instance.EnemyWave (waveOption.warningType);
+				}
 
 			}
 

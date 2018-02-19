@@ -43,7 +43,7 @@ public class DayNight : MonoBehaviour {
 		for (float i = 0; i < duration; i += Time.deltaTime) {
 			
 			dimmerLight.color = Color.Lerp (nightColor, dayColor, i / duration);
-			dimmerLight.shadowStrength = (i / duration) + .2f;
+			dimmerLight.shadowStrength =  Mathf.Clamp((i / duration) + .2f,.3f,1);
 			yield return null;
 		}	
 		StartCoroutine (DayToNight ());
@@ -55,7 +55,7 @@ public class DayNight : MonoBehaviour {
 		for (float i = 0; i < duration; i += Time.deltaTime) {
 			
 			dimmerLight.color = Color.Lerp ( dayColor, nightColor, i / duration);
-			dimmerLight.shadowStrength = (1- i / duration) + .2f;
+			dimmerLight.shadowStrength =  Mathf.Clamp((1- i / duration) + .2f,.3f,1);
 			yield return null;
 		}	
 		StartCoroutine (NightToDay());
