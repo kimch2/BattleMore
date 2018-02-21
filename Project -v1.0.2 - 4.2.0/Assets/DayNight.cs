@@ -13,12 +13,30 @@ public class DayNight : MonoBehaviour {
 
 	public Vector3 DayStartRotation;
 	public Vector3 DayEndRotation;
+	bool inDay = false;
+	public UnityEngine.UI.Text myText;
 	void Start()
 	{
 		StartCoroutine (NightToDay ());
 		StartCoroutine (DayShadow());
+		timeLeft = normalNightLength;
+		InvokeRepeating ("UpdateTime", 1, 1);
 	}
 
+	int dayCount = 1;
+	float timeLeft;
+
+
+	void UpdateTime()
+	{
+		timeLeft--;
+		if (inDay) {
+			myText.text = "Day: " + dayCount + "\n" + Clock.convertToString (timeLeft);
+			
+		} else {
+			myText.text = "Night: " + dayCount + "\n" + Clock.convertToString (timeLeft);
+		}
+	}
 
 
 	IEnumerator DayShadow()
@@ -46,7 +64,12 @@ public class DayNight : MonoBehaviour {
 			dimmerLight.shadowStrength =  Mathf.Clamp((i / duration) + .2f,.3f,1);
 			yield return null;
 		}	
+
 		StartCoroutine (DayToNight ());
+		inDay = true;
+		dayCount++;
+		timeLeft = normalNightLength;
+		myText.GetComponentInParent<UnityEngine.UI.Image> ().color = Color.red;
 	}
 
 	IEnumerator DayToNight()
@@ -59,6 +82,10 @@ public class DayNight : MonoBehaviour {
 			yield return null;
 		}	
 		StartCoroutine (NightToDay());
+		inDay = false;
+		timeLeft = normalDayLength;
+		myText.GetComponentInParent<UnityEngine.UI.Image> ().color = Color.white;
+
 	}
 
 }

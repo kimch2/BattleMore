@@ -17,6 +17,7 @@ public class SalvageTarget :SingleTarget, IEffect {
 		PopUpMaker.CreateGlobalPopUp ("+ " + (int)(amount *.75f), Color.white,target.transform.position);
 
 		target.GetComponent<UnitManager> ().myStats.kill (source);
+		GameManager.main.playerList [0].updateResources (amount,0,false);
 
 	}
 
