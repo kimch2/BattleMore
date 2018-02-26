@@ -18,7 +18,7 @@ public class ErrorPrompt : MonoBehaviour {
 
 	float lastErrorTime;
 	public float errorFreq;
-
+	public string supplyBuilding = "Aether Cores";
 
 	public void showError(string err)
 	{
@@ -89,7 +89,7 @@ public class ErrorPrompt : MonoBehaviour {
 	}
 
 	public void notEnoughSupply()
-	{showError( "Not enough Supply, Build more Aether Cores", myVoicePack.getSupplyLine());
+	{showError( "Not enough Supply, Build more " + supplyBuilding, myVoicePack.getSupplyLine());
 		}
 
 	public void atMaxSupply()

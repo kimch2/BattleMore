@@ -105,7 +105,7 @@ public class DifficultyEditor : EditorWindow {
 		{
 			List<GameObject> newDeleteOnEasy = new List<GameObject>();
 			foreach (UnitManager man in GameObject.FindObjectsOfType<UnitManager>()) {
-				if (man.PlayerOwner == 2 && !man.GetComponent<UnitStats>().otherTags.Contains(UnitTypes.UnitTypeTag.Structure)) {
+				if (man.PlayerOwner == 2 && !man.GetComponent<UnitStats>().otherTags.Contains(UnitTypes.UnitTypeTag.Structure)&& !man.GetComponent<UnitStats>().otherTags.Contains(UnitTypes.UnitTypeTag.Turret)) {
 					newDeleteOnEasy.Add (man.gameObject);
 				}
 			}
@@ -136,7 +136,7 @@ public class DifficultyEditor : EditorWindow {
 		{
 			List<GameObject> newDeleteOnMedium = new List<GameObject>();
 			foreach (UnitManager man in GameObject.FindObjectsOfType<UnitManager>()) {
-				if (man.PlayerOwner == 2 && !man.GetComponent<UnitStats>().otherTags.Contains(UnitTypes.UnitTypeTag.Structure)) {
+				if (man.PlayerOwner == 2 && !man.GetComponent<UnitStats>().otherTags.Contains(UnitTypes.UnitTypeTag.Structure)&& !man.GetComponent<UnitStats>().otherTags.Contains(UnitTypes.UnitTypeTag.Turret)) {
 					newDeleteOnMedium.Add (man.gameObject);
 				}
 			}

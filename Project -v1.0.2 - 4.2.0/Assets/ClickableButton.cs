@@ -10,17 +10,17 @@ public class ClickableButton : MonoBehaviour, IPointerClickHandler {
 
 	void Start()
 	{
-		selManager = GameObject.FindObjectOfType<SelectedManager> ();	}
+		selManager = SelectedManager.main;}
 
 
 	public void OnPointerClick(PointerEventData eventData)
-	{
-		if (eventData.button == PointerEventData.InputButton.Right) {
-			selManager.setAutoCast(abilityNumber);
-			selManager.AutoCastUI ();
+	{	if (selManager.ActiveObjectList () [0].getUnitManager ().PlayerOwner == 1) {
+			if (eventData.button == PointerEventData.InputButton.Right) {
+				selManager.setAutoCast (abilityNumber);
+				selManager.AutoCastUI ();
 		
+			}
 		}
-
 
 
 

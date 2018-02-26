@@ -17,13 +17,14 @@ public class deathTrigger : MonoBehaviour {
 	public List<SceneEventTrigger> myTriggers;
 
 
+	public UnityEngine.Events.UnityEvent OnDeath;
 
 	public void Dying()
 	{
 		foreach (SceneEventTrigger trig in myTriggers) {
-			Debug.Log ("Triggering " + trig);
 			trig.trigger (index, input, location, target, doIt);
 		}
+		OnDeath.Invoke ();
 
 
 	}

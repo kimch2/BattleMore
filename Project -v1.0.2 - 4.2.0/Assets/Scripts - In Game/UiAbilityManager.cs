@@ -277,8 +277,9 @@ public class UiAbilityManager : MonoBehaviour {
 	{
 		float maxA = 0;
 		foreach (RTSObject obj in currentPage.rows [row]) {
-		//	if (obj.getUnitManager ().abilityList [abilityNum].active) {
-				float n = obj.getUnitManager ().abilityList [abilityNum].myCost.cooldownProgress ();
+			Ability toCheck = obj.getUnitManager ().abilityList [abilityNum];
+			if (toCheck.active || toCheck.myCost.cooldownProgress() != 1 ) {
+				float n = toCheck.myCost.cooldownProgress ();
 
 
 				if (n > maxA) {
@@ -287,11 +288,11 @@ public class UiAbilityManager : MonoBehaviour {
 						break;
 					}
 				}
-			//}
+			}
 		}
 
 		slide.value = maxA;
-		slide.gameObject.SetActive (maxA < .98);	
+		slide.gameObject.SetActive (maxA < .98 && maxA!= 0);	
 	}
 
 	public void IconClick(GameObject obj)
@@ -316,7 +317,7 @@ public class UiAbilityManager : MonoBehaviour {
 	}
 
 	public void clearPage()
-	{Debug.Log ("Clearing");
+	{//Debug.Log ("Clearing");
 		currentPage = null;
 
 		foreach (StatsUI obj in Stats) {
@@ -1294,15 +1295,17 @@ public class UiAbilityManager : MonoBehaviour {
 
 	public void callAbility(int n)
 	{
-		if (Input.GetKey (KeyCode.LeftAlt)) {
-			selectMan.setAutoCast (n);
-			selectMan.AutoCastUI ();
-			audSrc.PlayOneShot (ButtonPress, .1f);
+		if (selectMan.ActiveObjectList () [0].getUnitManager ().PlayerOwner == 1) {
+			if (Input.GetKey (KeyCode.LeftAlt)) {
+				selectMan.setAutoCast (n);
+				selectMan.AutoCastUI ();
+				audSrc.PlayOneShot (ButtonPress, .1f);
 
-		}else if (quickButtons [n].IsInteractable() && quickAbility[n].myAbility && quickButtons[n].IsActive()){// && quickAbility[n].myAbility.active) {
-			selectMan.callAbility (n);
-			audSrc.PlayOneShot (ButtonPress, .1f);
+			} else if (quickButtons [n].IsInteractable () && quickAbility [n].myAbility && quickButtons [n].IsActive ()) {// && quickAbility[n].myAbility.active) {
+				selectMan.callAbility (n);
+				audSrc.PlayOneShot (ButtonPress, .1f);
 			
+			}
 		}
 		//EventSystem.current.SetSelectedGameObject (null);
 		

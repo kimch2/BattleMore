@@ -1,27 +1,22 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts - In Game\WeaponScripts\MortarProjectile.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Editor\DifficultyEditor.cs">
     <Files>
       <File FileName="Assets\Scripts - In Game\UI\UIManager.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts - In Game\UnitManager.cs" Line="1" Column="1" />
       <File FileName="Assets\BuildStructure.cs" Line="1" Column="1" />
       <File FileName="Assets\PlaceBuildingState.cs" Line="1" Column="1" />
       <File FileName="Assets\NewAchievmentUI.cs" Line="1" Column="1" />
-      <File FileName="Assets\DayNight.cs" Line="27" Column="61" />
+      <File FileName="Assets\DayNight.cs" Line="1" Column="1" />
       <File FileName="Assets\CameraFirstTimePlayer.cs" Line="1" Column="1" />
       <File FileName="Assets\InteractableRobot.cs" Line="1" Column="1" />
       <File FileName="Assets\DirectUpgradeApplier.cs" Line="1" Column="1" />
-      <File FileName="Assets\LevelData.cs" Line="1" Column="1" />
-      <File FileName="Assets\CampaignUpgrade.cs" Line="1" Column="1" />
-      <File FileName="Assets\TimedObjective.cs" Line="1" Column="1" />
-      <File FileName="Assets\Objective.cs" Line="1" Column="1" />
-      <File FileName="Assets\ObjectiveTrigger.cs" Line="1" Column="1" />
-      <File FileName="Assets\WaveManager.cs" Line="168" Column="5" />
-      <File FileName="Assets\TargetDeathVictory.cs" Line="63" Column="30" />
-      <File FileName="Assets\WaveContainer.cs" Line="57" Column="4" />
-      <File FileName="Assets\explosion.cs" Line="15" Column="29" />
-      <File FileName="Assets\ResearchUpgrade.cs" Line="210" Column="6" />
-      <File FileName="Assets\Scripts - In Game\WeaponScripts\MortarProjectile.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts - In Game\WeaponScripts\MortarWeapon.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts - In Game\UiAbilityManager.cs" Line="1298" Column="78" />
+      <File FileName="Assets\Scripts - In Game\AbstractCost.cs" Line="170" Column="24" />
+      <File FileName="Assets\ClickableButton.cs" Line="8" Column="27" />
+      <File FileName="Assets\ErrorPrompt.cs" Line="19" Column="22" />
+      <File FileName="Assets\Editor\DifficultyEditor.cs" Line="132" Column="32" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
