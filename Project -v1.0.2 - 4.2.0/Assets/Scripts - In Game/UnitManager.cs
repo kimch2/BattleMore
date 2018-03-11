@@ -492,37 +492,45 @@ public class UnitManager : Unit,IOrderable{
 
 	}
 	
-	public UnitManager findBestEnemy() // Similar to above method but takes into account attack priority (enemy soldiers should be attacked before buildings)
-	{enemies.RemoveAll(item => item == null);
-		UnitManager best = null;
+	public UnitManager findBestEnemy(out float distance, UnitManager best) // Similar to above method but takes into account attack priority (enemy soldiers should be attacked before buildings)
+	{	float bestPriority;
 
+		if (best != null) {
+			distance = Vector3.Distance (best.transform.position, transform.position);
+			bestPriority = best.myStats.attackPriority;
+		} else {
 
-		float distance = float.MaxValue;
-		float bestPriority = -1;
-
+			distance = float.MaxValue;
+			bestPriority = -1;
+		}
+		UnitManager currentIter;
+		float currDistance;
 		for (int i = 0; i < enemies.Count; i ++) {
-			if (enemies[i] != null) {
-				if (!isValidTarget (enemies [i])) {
-					continue;
-				}
-				if (enemies[i].myStats.attackPriority < bestPriority) {
-						
-					continue;
-					}
-				else if (enemies[i].myStats.attackPriority > bestPriority)
-					{best = enemies[i];
-					bestPriority = enemies[i].myStats.attackPriority;
-					}
-			
-				
-				float currDistance = Vector3.Distance(enemies[i].transform.position, this.gameObject.transform.position);
-				if(currDistance < distance)
-				      {best = enemies[i];
 
+			currentIter = enemies [i];
+			if (currentIter == null) {
+				continue;
+			}
+				
+			if (!isValidTarget (currentIter)) {
+				continue;
+			}
+
+			if (currentIter.myStats.attackPriority > bestPriority) {
+				best = currentIter;
+				bestPriority = currentIter.myStats.attackPriority;
+				distance = Vector3.Distance (currentIter.transform.position, this.gameObject.transform.position);
+			}
+			else if (currentIter.myStats.attackPriority == bestPriority) {
+			
+				currDistance = Vector3.Distance (currentIter.transform.position, this.gameObject.transform.position);
+
+				if (currDistance < distance) {
+					best = currentIter;
 					distance = currDistance;
 				}
-
 			}
+
 		}
 
 		return best;
@@ -748,10 +756,11 @@ public class UnitManager : Unit,IOrderable{
 		float min= 100000000;
 		foreach (IWeapon weap in myWeapon) {
 			if( weap.isValidTarget(obj)){
-				if (weap.range < min) {
-					best = weap;
-					min = weap.range;
-				}
+				return weap; // I think this was originally in here so that units would prefer swords to bows if the enemy was close enough, takign it out for optimizations
+				//if (weap.range < min) {
+				//	best = weap;
+					//min = weap.range;
+				//}
 			}
 
 		}

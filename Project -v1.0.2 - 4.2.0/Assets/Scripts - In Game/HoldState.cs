@@ -17,7 +17,8 @@ public class HoldState : UnitState {
 	public void Update () {
 
 		if (myManager) {
-			UnitManager enemy = myManager.findBestEnemy ();
+			float m;
+			UnitManager enemy = myManager.findBestEnemy (out m, null);
 
 			if (enemy) {
 				IWeapon myWeap = myManager.canAttack (enemy);

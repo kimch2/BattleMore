@@ -67,42 +67,19 @@ public class AttackMoveState : UnitState {
 		
 		if (Time.time > nextActionTime) {
 			nextActionTime += .2f;
-			UnitManager temp =  myManager.findBestEnemy ();
 
+			float distance = 0;
 
-
+			UnitManager temp =  myManager.findBestEnemy (out distance, enemy);
+		
 			if (temp) {
-				if (temp == enemy ){
-					if(Vector3.Distance (lastEnemyLocation, temp.transform.position) > 3) {
-						if (myManager.cMover) {
-							lastEnemyLocation = enemy.transform.position;
-							if (EnemyTooClose) {
-								myManager.cMover.resetMoveLocation (myManager.transform.position - (enemy.transform.position - myManager.transform.position).normalized * 10);
-							} else {
-								myManager.cMover.resetMoveLocation (enemy.transform.position);
-							}
-						}
-					}	
-				} else {
-
-					enemy = temp;
-
-
-					if (myManager.cMover) {
-						lastEnemyLocation = enemy.transform.position;
-						if (EnemyTooClose) {
-							myManager.cMover.resetMoveLocation (myManager.transform.position - (enemy.transform.position - myManager.transform.position).normalized * 10);
-						} else {
-							myManager.cMover.resetMoveLocation (enemy.transform.position);
-						}
-					}
-				}
-
+				enemy = temp;
 			} else if(enemy && Vector3.Distance(myManager.gameObject.transform.position,enemy.transform.position) > 85 ){
 				enemy = null;
 				myManager.cMover.resetMoveLocation (home);
 			}
 		}
+		// WE FOUND AN ENEMY, MAYBE
 		//still need to figure out calculation for if enemy goes out of range or if a better one comes into range
 
 
@@ -112,9 +89,7 @@ public class AttackMoveState : UnitState {
 			foreach (IWeapon weap in myManager.myWeapon) {
 				if (weap.inRange (enemy)) {
 
-
 					if (myManager.cMover) {
-						
 						myManager.cMover.stop ();
 					}
 					attacked = true;
@@ -142,14 +117,13 @@ public class AttackMoveState : UnitState {
 					}
 				}
 
-				//bool returned = 
 				myManager.cMover.move ();
-				//Debug.Log ("A " +myManager + "  " + myManager.cMover + " 0----" + returned);
+
 			}
 		} else {
 			if (!enemyDead) {
 				if (commandType == MoveType.command) {
-					//Debug.Log("continuing on");
+
 					myManager.cMover.resetMoveLocation (endLocation);
 				} else if (commandType == MoveType.passive) {//Debug.Log("going home");
 					if (myManager.cMover) {
@@ -168,6 +142,7 @@ public class AttackMoveState : UnitState {
 			if (myManager.cMover) {
 				//Debug.Log ("MovingB");
 				bool there = myManager.cMover.move ();
+				// We reached the end, now where do we go?
 				if (there && commandType == MoveType.patrol) {
 					
 					if (target == home) {
@@ -183,7 +158,6 @@ public class AttackMoveState : UnitState {
 
 					myManager.changeState (new DefaultState ());
 				}
-
 			}
 		}
 
@@ -205,26 +179,26 @@ public class AttackMoveState : UnitState {
 	override
 	public void attackResponse(UnitManager src, float amount)
 	{
-		if(src && !hasCalledAide){
+		if(src && !hasCalledAide && amount > 0){
 
 			if (src.PlayerOwner != myManager.PlayerOwner) {
 				hasCalledAide = true;
-					if(amount > 0){
-						foreach (UnitManager ally in myManager.allies) {
-							if (ally) {
-								UnitState hisState = ally.getState ();
-								if (hisState is DefaultState) {
-									hisState.attackResponse (src, 0);
-								}
 
+					foreach (UnitManager ally in myManager.allies) {
+						if (ally) {
+							UnitState hisState = ally.getState ();
+							if (hisState is DefaultState) {
+								hisState.attackResponse (src, 0);
 							}
+
 						}
 					}
-
 			}
 		}
 
 	}
+
+
 
 
 }

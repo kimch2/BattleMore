@@ -23,14 +23,14 @@ public class DefaultState : UnitState{
 		if (myManager.enemies.Count > 0) {
 			if (myManager.myWeapon.Count >0) {
 
-			
-				UnitManager target = myManager.findBestEnemy ();
+				float distance = 0;
+				UnitManager target = myManager.findBestEnemy (out distance, null);
 
 
 				if (target == null) {
 					return;}
 				
-				if (Vector3.Distance (myManager.gameObject.transform.position, target.transform.position) <= myManager.getChaseRange ()) {
+				if (distance <= myManager.getChaseRange ()) {
 					//Debug.Log ("Chasing attacker " + target);
 					myManager.changeState (new AttackMoveState (target.gameObject,
 						new Vector3 (), AttackMoveState.MoveType.passive, myManager, myManager.gameObject.transform.position));

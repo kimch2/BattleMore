@@ -471,6 +471,7 @@
      <Compile Include="Assets\Scripts - In Game\GUI\Textures\GUITextures.cs" />
      <Compile Include="Assets\Scripts - In Game\HeartStopper.cs" />
      <Compile Include="Assets\Scripts - In Game\HoldState.cs" />
+     <Compile Include="Assets\Scripts - In Game\IHealthBarState.cs" />
      <Compile Include="Assets\Scripts - In Game\ImmortalityProtocol.cs" />
      <Compile Include="Assets\Scripts - In Game\IMover.cs" />
      <Compile Include="Assets\Scripts - In Game\InteractState.cs" />

@@ -324,7 +324,7 @@ public class Selected : MonoBehaviour {
 
 
 	public void updateHealthBar(float ratio)
-	{try{
+	{//try{
 		if (!turretDisplay) {
 		
 			healthslider.value = ratio; 
@@ -371,11 +371,13 @@ public class Selected : MonoBehaviour {
 			}
 				checkOn ();
 		} else {
-			turretDisplay.updateHealth (ratio);}
-			checkOn ();}
-		catch(MissingReferenceException) {
-			
+			turretDisplay.updateHealth (ratio);
 		}
+		checkOn ();
+	//}
+		//catch(MissingReferenceException) {}
+			
+
 
 	}
 
@@ -507,4 +509,21 @@ public class Selected : MonoBehaviour {
 
 	}
 
+}
+	
+
+class AlwaysHealthBar: IHealthBarState
+{
+	public void UpdateHealthBar (float m)
+	{
+		
+	}
+	public void UpdateCoolDown (float m)
+	{
+		
+	}
+	public void updateEnergy(float m)
+	{
+		
+	}
 }

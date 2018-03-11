@@ -17,7 +17,7 @@ public class ErrorPrompt : MonoBehaviour {
 	int currentAlertIndex;
 
 	float lastErrorTime;
-	public float errorFreq;
+	float errorFreq;
 	public string supplyBuilding = "Aether Cores";
 
 	public void showError(string err)
@@ -141,10 +141,15 @@ public class ErrorPrompt : MonoBehaviour {
 	{showError( "Ore Deposit Depleted", myVoicePack.getOreDepletedLine());
 		addAlertLocation( location);
 	}
-	
+
+
+	public void setErrorFreq(float Amount)
+	{
+		errorFreq = (10 / Amount);
+	}
 	public void underAttack(Vector3 location)
 	{	
-			if (lastAttackAlert + (10 / errorFreq) < Time.time &&!checkIfOnScreen(location)) {
+			if (lastAttackAlert + errorFreq < Time.time && !checkIfOnScreen(location)) {
 			showError ("Under Attack!", myVoicePack.getTroopAttackLine());
 			addAlertLocation( location);
 		
@@ -166,7 +171,7 @@ public class ErrorPrompt : MonoBehaviour {
 	public void underBaseAttack(Vector3 location)
 	{
 
-		if (lastAttackAlert + (10 / errorFreq) < Time.time &&!checkIfOnScreen(location)) {
+		if (lastAttackAlert +  errorFreq < Time.time &&!checkIfOnScreen(location)) {
 			showError ("Base Under Attack!", myVoicePack.getbaseAttackedLine());
 			addAlertLocation( location);
 

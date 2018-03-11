@@ -24,7 +24,6 @@ public class UnitStats : MonoBehaviour {
 	public float EnergyRegenPerSec;
 	public Sprite Icon;
 
-	private int kills;
 	public float supply;    //positive gives supply, negative uses it
 	public float attackPriority =1 ;
 
@@ -262,60 +261,61 @@ public class UnitStats : MonoBehaviour {
 
 	public float TakeDamage(float amount, GameObject source, DamageTypes.DamageType type)
 	{
-		if (!otherTags.Contains (UnitTypes.UnitTypeTag.Invulnerable)) {
+		if (otherTags.Contains (UnitTypes.UnitTypeTag.Invulnerable)) {
+			return 0;
+		}
 			
-			bool setToZero = false;
-			if (type != DamageTypes.DamageType.True) {
-				foreach (Modifier mod in damageModifiers) {
-					if (mod != null) {
-						amount = mod.modify (amount, source, type);
-						if (amount <= 0) {
-							setToZero = true;
-							break;
+		//bool setToZero = false;
+		if (type != DamageTypes.DamageType.True) {
+			foreach (Modifier mod in damageModifiers) {
+				if (mod != null) {
+					amount = mod.modify (amount, source, type);
+					if (amount <= 0) {
+						//setToZero = true;
+						return 0;
 						}
 					}
 				}
+		}
+	//	if (!setToZero) {
+
+		if (type == DamageTypes.DamageType.Regular || type == DamageTypes.DamageType.Wound ) {
+
+			amount = Mathf.Max (amount - armor, 1);
+		}
+
+		if (myManager.PlayerOwner == 1 && source != this.gameObject) {
+			if (otherTags.Contains (UnitTypes.UnitTypeTag.Structure)) {
+				ErrorPrompt.instance.underBaseAttack (this.transform.position);
+			} else {
+				ErrorPrompt.instance.underAttack (this.transform.position);
 			}
-			if (!setToZero) {
-				if (type == DamageTypes.DamageType.Regular || type == DamageTypes.DamageType.Wound ) {
+		}
 
-					amount = Mathf.Max (amount - armor, 1);
-						
-				}
-				if (myManager.PlayerOwner == 1 && source != this.gameObject) {
-					if (isUnitType (UnitTypes.UnitTypeTag.Structure)) {
-					} else {
-						ErrorPrompt.instance.underAttack (this.transform.position);
-					}
-				}
+		if (takeDamageEffect) {
 
-				if (takeDamageEffect) {
-
-					Instantiate (takeDamageEffect, this.gameObject.transform.position, new Quaternion ());
-				}
-				if (veternStat != null) {
-					veternStat.UpMitigated(armor);
-					veternStat.UpdamTaken (amount);
-				}
+			Instantiate (takeDamageEffect, this.gameObject.transform.position, new Quaternion ());
+		}
+		if (veternStat != null) {
+			veternStat.UpMitigated(armor);
+			veternStat.UpdamTaken (amount);
+		}
 
 			//	Debug.Log ("Actual " + amount);
-				health -= amount;
+		health -= amount;
 			
-				if ((int)health <= 0) {
-					kill (source);
-				} else {
-					updateHealthBar ();
+		if ((int)health <= 0) {
+			kill (source);
+		} else {
+			updateHealthBar ();
 
-			
-
-					if (source) {
-						myManager.Attacked (source.GetComponent<UnitManager> ());
-					} 
-				}
-			}
-			return amount;
+			if (source) {
+				myManager.Attacked (source.GetComponent<UnitManager> ());
+				} 
 		}
-		return 0;
+
+		return amount;
+
 	}
 
 
@@ -344,78 +344,67 @@ public class UnitStats : MonoBehaviour {
 	{
 		if (dead)
 			return;
-		bool FinishDeath= true;
-		if (!otherTags.Contains(UnitTypes.UnitTypeTag.Invulnerable)) {
-			//foreach (Method effect in lethalDamage) {
 
-			//if(call deathTrigger != true)
-			//{FinishDeath = false;}
+		if (!otherTags.Contains (UnitTypes.UnitTypeTag.Invulnerable)) {
 
-
-			//}
-
-			FinishDeath = false;
 			if (this) {
-				FinishDeath = GameManager.main.playerList [myManager.PlayerOwner - 1].UnitDying (myManager, deathSource, true);
+				if (!GameManager.main.playerList [myManager.PlayerOwner - 1].UnitDying (myManager, deathSource, true)) {
+					return;
+				}
 			}
-
-			if (FinishDeath) {
-				dead = true;
-				deathTriggers.RemoveAll (item => item == null);
-				for(int i = deathTriggers.Count -1; i > -1; i --)
-				{
-					if (deathTriggers[i]!= null) {
-						deathTriggers[i].modify (0, deathSource, DamageTypes.DamageType.Regular);
-					}
-				}
-
-			
-
-				if (deathCorpse != null) {
-
-					Vector3 spawnLoc = this.gameObject.transform.position;
-					if (!isUnitType (UnitTypes.UnitTypeTag.Air)) {
-						RaycastHit objecthit;
-
-						Physics.Raycast (this.gameObject.transform.position + Vector3.up *10, Vector3.down, out objecthit, 1000, 1 << 8);
-						spawnLoc = objecthit.point;
-					}
-					//Debug.Log ("Rotation is " + this.gameObject.transform.rotation);
-					//GameObject corpse = 
-
-						GameObject.Instantiate (deathCorpse,spawnLoc, this.gameObject.transform.rotation);
-				//	corpse.transform.rot.up = Vector3.up;
-				}
-
-				if (deathSource) {
-					if (deathSource.GetComponent<UnitStats> ()) {
-						deathSource.GetComponent<UnitStats> ().upKills ();
-					}
-				}
-				//fix this when we have multiplayer games, here for optimizations?
-				if (myManager.PlayerOwner == 1) {
-					
-					GameManager.main.playerList[myManager.PlayerOwner-1].UnitDied (supply, myManager);
-				}
-
-				if (mySelection.IsSelected) {
-
-					RaceManager.removeUnitSelect(myManager);
-				}
-				if (deathEffect) {
-					Instantiate (deathEffect, this.gameObject.transform.position, Quaternion.identity);
-				}
-	
-				SelectedManager.main.updateControlGroups (myManager);
-				this.gameObject.SendMessage ("Dying",SendMessageOptions.DontRequireReceiver);
-				veternStat.Died = true;
-				veternStat.DeathTime = Time.timeSinceLevelLoad;
-				Destroy (this.gameObject);
-			
 				
+			dead = true;
+			deathTriggers.RemoveAll (item => item == null);
+			for (int i = deathTriggers.Count - 1; i > -1; i--) {
+				if (deathTriggers [i] != null) {
+					deathTriggers [i].modify (0, deathSource, DamageTypes.DamageType.Regular);
+				}
 			}
-		}
 
+			
+
+			if (deathCorpse != null) {
+
+				Vector3 spawnLoc = this.gameObject.transform.position;
+				if (!isUnitType (UnitTypes.UnitTypeTag.Air)) {
+					RaycastHit objecthit;
+
+					Physics.Raycast (this.gameObject.transform.position + Vector3.up * 10, Vector3.down, out objecthit, 1000, 1 << 8);
+					spawnLoc = objecthit.point;
+				}
+				//Debug.Log ("Rotation is " + this.gameObject.transform.rotation);
+				//GameObject corpse = 
+
+				GameObject.Instantiate (deathCorpse, spawnLoc, this.gameObject.transform.rotation);
+
+			}
+
+			if (deathSource) {
+				UnitStats sourceStats = deathSource.GetComponent<UnitStats> ();
+				if (sourceStats) {
+					sourceStats.upKills ();
+				}
+			}
+			//fix this when we have multiplayer games, here for optimizations?
+			if (myManager.PlayerOwner == 1) {
+					
+				GameManager.main.playerList [myManager.PlayerOwner - 1].UnitDied (supply, myManager);
+			}
+
+			if (mySelection.IsSelected) {
+				SelectedManager.main.DeselectObject (myManager);
+			}
+			if (deathEffect) {
+				Instantiate (deathEffect, this.gameObject.transform.position, Quaternion.identity);
+			}
+	
+			SelectedManager.main.updateControlGroups (myManager);
+			this.gameObject.SendMessage ("Dying", SendMessageOptions.DontRequireReceiver);
+			veternStat.Died = true;
+			veternStat.DeathTime = Time.timeSinceLevelLoad;
+			Destroy (this.gameObject);
+
+		}
 	}
 
 	/// <summary>
@@ -424,25 +413,25 @@ public class UnitStats : MonoBehaviour {
 	/// <param name="amount">Amount.</param>
 	public void veteranDamage(float amount)
 	{
-		if (otherTags.Contains (UnitTypes.UnitTypeTag.Turret)) {
-			try{
-			transform.root.GetComponent<UnitManager> ().myStats.veternStat.damageDone += amount;
+		if (otherTags.Contains (UnitTypes.UnitTypeTag.Turret) && transform.parent) {
+			UnitManager rootMan = transform.parent.GetComponentInParent<UnitManager> ();
+			if (rootMan) {
+				rootMan.myStats.veternStat.damageDone += amount;
 			}
-			catch{
-			}
+		} else {
+			veternStat.damageDone += amount;
 		}
-		veternStat.damageDone += amount;
 	}
 
 	public void upKills()
 	{
-		kills++;
 		veternStat.kills++;
-		if (otherTags.Contains (UnitTypes.UnitTypeTag.Turret)) {
-			try{
-			transform.root.GetComponent<UnitManager> ().myStats.upKills ();
-			}
-			catch{
+
+		if (otherTags.Contains (UnitTypes.UnitTypeTag.Turret) && transform.parent) {
+
+			UnitManager rootMan = transform.parent.GetComponentInParent<UnitManager> ();
+			if (rootMan) {
+				rootMan.myStats.upKills();
 			}
 		}
 		foreach (KillModifier km in killMods) {
@@ -564,8 +553,6 @@ public class UnitStats : MonoBehaviour {
 		
 		float amount = Math.Min (n, Maxhealth - health);
 
-
-
 		health += amount;
 
 		updateHealthBar();
@@ -587,7 +574,7 @@ public class UnitStats : MonoBehaviour {
 
 	public int getKills()
 	{
-		return kills;
+		return veternStat.kills;
 	}
 
 }

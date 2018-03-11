@@ -27,7 +27,7 @@ public class GameSettings {
 	public static void setBaseAlertFreq(float amount)
 	{
 		if (ErrorPrompt.instance) {
-			ErrorPrompt.instance.errorFreq = amount;
+			ErrorPrompt.instance.setErrorFreq( amount);
 		}
 		PlayerPrefs.SetFloat ("BaseAlert",amount);
 	}

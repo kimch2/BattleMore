@@ -447,7 +447,8 @@ public class IWeapon : MonoBehaviour {
 		foreach (Validator val in validators) {
 			if(val.validate(this.gameObject,target.gameObject) == false)
 			{
-				return false;}
+				return false;
+			}
 		}
 		return true;
 
