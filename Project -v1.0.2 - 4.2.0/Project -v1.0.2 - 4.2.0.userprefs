@@ -1,6 +1,6 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Editor\DifficultyEditor.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Tweener.cs">
     <Files>
       <File FileName="Assets\Scripts - In Game\UI\UIManager.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts - In Game\UnitManager.cs" Line="1" Column="1" />
@@ -8,15 +8,9 @@
       <File FileName="Assets\PlaceBuildingState.cs" Line="1" Column="1" />
       <File FileName="Assets\NewAchievmentUI.cs" Line="1" Column="1" />
       <File FileName="Assets\DayNight.cs" Line="1" Column="1" />
-      <File FileName="Assets\CameraFirstTimePlayer.cs" Line="1" Column="1" />
-      <File FileName="Assets\InteractableRobot.cs" Line="1" Column="1" />
-      <File FileName="Assets\DirectUpgradeApplier.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts - In Game\WeaponScripts\MortarWeapon.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts - In Game\UiAbilityManager.cs" Line="1298" Column="78" />
-      <File FileName="Assets\Scripts - In Game\AbstractCost.cs" Line="170" Column="24" />
-      <File FileName="Assets\ClickableButton.cs" Line="8" Column="27" />
-      <File FileName="Assets\ErrorPrompt.cs" Line="19" Column="22" />
-      <File FileName="Assets\Editor\DifficultyEditor.cs" Line="132" Column="32" />
+      <File FileName="Assets\CameraFirstTimePlayer.cs" Line="12" Column="2" />
+      <File FileName="Assets\TimeDelayTrigger.cs" Line="1" Column="1" />
+      <File FileName="Assets\Tweener.cs" Line="72" Column="57" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

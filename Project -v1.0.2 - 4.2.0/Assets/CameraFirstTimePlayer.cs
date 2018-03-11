@@ -11,7 +11,8 @@ public class CameraFirstTimePlayer : MonoBehaviour {
 	public GameObject hadrianPic;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
+		Debug.Log ("Highest level is " + LevelData.getHighestLevel ());
 		if (LevelData.getHighestLevel () == 1) {
 			hadrianPic.SetActive (true);
 			myRobot.StartCoroutine (myRobot.scrollingText(OpeningLine,openingAudio));
