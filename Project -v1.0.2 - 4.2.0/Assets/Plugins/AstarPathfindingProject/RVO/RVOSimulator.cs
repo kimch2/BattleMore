@@ -100,6 +100,14 @@ namespace Pathfinding.RVO {
 				simulator = new Pathfinding.RVO.Simulator(threadCount, doubleBuffering);
 				simulator.Interpolation = interpolation;
 				simulator.DesiredDeltaTime = 1.0f / desiredSimulationFPS;
+
+				simulator.DesiredDeltaTime = 1.0f / desiredSimulationFPS;
+				simulator.Interpolation = interpolation;
+				simulator.stepScale = stepScale;
+				simulator.qualityCutoff = qualityCutoff;
+				simulator.algorithm = algorithm;
+				simulator.Oversampling = oversampling;
+				simulator.WallThickness = wallThickness;
 			}
 
 			/*Debug.LogWarning ("RVO Local Avoidance is temporarily disabled in the A* Pathfinding Project due to licensing issues.\n" +
@@ -115,13 +123,14 @@ namespace Pathfinding.RVO {
 			Pathfinding.RVO.Sampled.Agent.GlobalIncompressibility = incompressibility;
 
 			var sim = GetSimulator();
+			/*
 			sim.DesiredDeltaTime = 1.0f / desiredSimulationFPS;
 			sim.Interpolation = interpolation;
 			sim.stepScale = stepScale;
 			sim.qualityCutoff = qualityCutoff;
 			sim.algorithm = algorithm;
 			sim.Oversampling = oversampling;
-			sim.WallThickness = wallThickness;
+			sim.WallThickness = wallThickness;*/
 			sim.Update();
 		}
 

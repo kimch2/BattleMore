@@ -222,7 +222,7 @@ public class UnitManager : Unit,IOrderable{
 	
 	// Update is called once per frame
 	new void Update () {
-		if (myState != null && !isStunned) {
+		if (myState != null){// && !isStunned) {
 			//Debug.Log ("This " + this.gameObject  + "  " + myState);
 			myState.Update ();
 		} 
@@ -491,10 +491,14 @@ public class UnitManager : Unit,IOrderable{
 		return best;
 
 	}
-	
-	public UnitManager findBestEnemy(out float distance, UnitManager best) // Similar to above method but takes into account attack priority (enemy soldiers should be attacked before buildings)
-	{	float bestPriority;
 
+
+	UnitManager currentIter;
+	float currDistance;
+	float bestPriority;
+
+	public UnitManager findBestEnemy(out float distance, UnitManager best) // Similar to above method but takes into account attack priority (enemy soldiers should be attacked before buildings)
+	{
 		if (best != null) {
 			distance = Vector3.Distance (best.transform.position, transform.position);
 			bestPriority = best.myStats.attackPriority;
@@ -503,8 +507,7 @@ public class UnitManager : Unit,IOrderable{
 			distance = float.MaxValue;
 			bestPriority = -1;
 		}
-		UnitManager currentIter;
-		float currDistance;
+
 		for (int i = 0; i < enemies.Count; i ++) {
 
 			currentIter = enemies [i];
@@ -571,6 +574,7 @@ public class UnitManager : Unit,IOrderable{
 			}
 		} 
 	}
+
 
 	public void changeState(UnitState nextState)
 	{
@@ -750,10 +754,12 @@ public class UnitManager : Unit,IOrderable{
 
 	}
 
-
+	IWeapon best = null;
+	float min= 100000000;
 	public IWeapon isValidTarget(UnitManager obj)
-	{IWeapon best = null;
-		float min= 100000000;
+	{
+		best = null;
+		min= 100000000;
 		foreach (IWeapon weap in myWeapon) {
 			if( weap.isValidTarget(obj)){
 				return weap; // I think this was originally in here so that units would prefer swords to bows if the enemy was close enough, takign it out for optimizations
@@ -816,7 +822,8 @@ public class UnitManager : Unit,IOrderable{
 
 		}
 	//	Debug.Log ("StunningBB " + StunOrNot + "   " + stunSources.Count + "   " + stunSources[0]);
-			isStunned = (stunSources.Count > 0);
+		enabled = !(stunSources.Count > 0);
+		isStunned = (stunSources.Count > 0);
 
 		//Debug.Log ("Is stunned ");
 		if (isStunned && StunRun == null && showIcon ) {
@@ -858,7 +865,7 @@ public class UnitManager : Unit,IOrderable{
 		}
 		stunSources.Add (source);
 		isStunned = (stunSources.Count > 0);
-
+		enabled = !(stunSources.Count > 0);
 		yield return new WaitForSeconds (duration);
 		if (stunSources.Contains (source)) {
 			stunSources.Remove (source);
@@ -867,7 +874,7 @@ public class UnitManager : Unit,IOrderable{
 		}
 
 	isStunned = (stunSources.Count > 0);
-
+		enabled = !(stunSources.Count > 0);
 		
 	}
 

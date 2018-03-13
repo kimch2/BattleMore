@@ -22,7 +22,6 @@ public class OneShotParticleSystem : MonoBehaviour {
 
 		public void Update() 
 		{
-
 			if(!ps.IsAlive())
 			{
 				Destroy(gameObject);

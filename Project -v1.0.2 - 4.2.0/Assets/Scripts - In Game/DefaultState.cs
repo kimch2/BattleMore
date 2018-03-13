@@ -11,20 +11,27 @@ public class DefaultState : UnitState{
 		//myMover = move;
 		//myWeapon = weapon;
 
-
+		updateTime = Time.time + Random.value;
 	}
 
+	float updateTime;
 
+	float distance = 0;
+	UnitManager target;
 	override
-	public void Update () {// change this later so t will only check for attackable enemies.
+	public void Update () { // change this later so t will only check for attackable enemies.
 	
-
+		if (Time.time < updateTime) {
+			return;
+		} else {
+			updateTime += .15f;
+		}
 
 		if (myManager.enemies.Count > 0) {
 			if (myManager.myWeapon.Count >0) {
 
-				float distance = 0;
-				UnitManager target = myManager.findBestEnemy (out distance, null);
+				distance = 0;
+				target = myManager.findBestEnemy (out distance, null);
 
 
 				if (target == null) {
