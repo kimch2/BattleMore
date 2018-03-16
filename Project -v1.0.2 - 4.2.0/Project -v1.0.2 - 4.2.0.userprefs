@@ -1,14 +1,17 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts - In Game\DefaultState.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\InteractableRobot.cs">
     <Files>
       <File FileName="Assets\Scripts - In Game\UI\UIManager.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts - In Game\UnitManager.cs" Line="511" Column="45" />
-      <File FileName="Assets\Scripts - In Game\UnitStats.cs" Line="214" Column="3" />
+      <File FileName="Assets\Scripts - In Game\UnitManager.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts - In Game\UnitStats.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts - In Game\AttackMoveState.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts - In Game\IWeapon.cs" Line="443" Column="27" />
-      <File FileName="Assets\Scripts - In Game\DefaultState.cs" Line="30" Column="3" />
-      <File FileName="Assets\Scripts - In Game\UnitState.cs" Line="33" Column="2" />
+      <File FileName="Assets\Scripts - In Game\IWeapon.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts - In Game\DefaultState.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts - In Game\UnitState.cs" Line="1" Column="1" />
+      <File FileName="Assets\FadeOut.cs" Line="37" Column="46" />
+      <File FileName="Assets\VictoryTrigger.cs" Line="116" Column="22" />
+      <File FileName="Assets\InteractableRobot.cs" Line="124" Column="40" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

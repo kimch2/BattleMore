@@ -117,6 +117,19 @@ public class VictoryTrigger : MonoBehaviour {
 			SoundTrackPlayer.main.playVictoryTrack();
 			hasFinished = true;
 			VictoryScreen.enabled = true;
+			if (LevelData.getDifficulty () == 1) {
+				VictoryScreen.transform.Find ("BackGround").GetComponent<UnityEngine.UI.Image> ().sprite = Resources.Load<Sprite> ("BronzeComplete");
+			}
+			else if (LevelData.getDifficulty () == 2)
+			{
+				VictoryScreen.transform.Find ("BackGround").GetComponent<UnityEngine.UI.Image> ().sprite = Resources.Load<Sprite> ("SilverComplete");
+
+			}
+			else
+			{
+				VictoryScreen.transform.Find ("BackGround").GetComponent<UnityEngine.UI.Image> ().sprite = Resources.Load<Sprite> ("GoldComplete");
+
+			}
 
 			LevelCompilation myComp = ((GameObject)(Resources.Load<GameObject> ("LevelEditor"))).GetComponent<LevelCompilation>();
 			//LevelCompilation.loadGameStatic ().ls [levelNumber].increaseCompCount ();

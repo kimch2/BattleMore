@@ -123,7 +123,7 @@ public class InteractableRobot : MonoBehaviour {
 
 			myText.text = dialog.Substring(0,i);
 
-			yield return new WaitForSeconds (.028f);
+			yield return new WaitForSeconds (.031f);
 		}
 
 
