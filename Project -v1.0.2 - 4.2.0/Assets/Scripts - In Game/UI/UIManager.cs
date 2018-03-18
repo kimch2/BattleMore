@@ -449,7 +449,14 @@ public class UIManager : MonoBehaviour, IUIManager {
 		List<RaycastResult> results = new List<RaycastResult> ();
 		EventSystem.current.RaycastAll (eventDatacurrenPosition, results);
 
-		return (results.Count != 0);
+		int count = 0;
+		foreach(RaycastResult res in results){
+			if (res.distance != 0) {
+				count++;
+			}
+		}
+
+		return (count != 0);
 	}
 
 
@@ -515,7 +522,7 @@ public class UIManager : MonoBehaviour, IUIManager {
 
 		case Mode.Normal:
 			//If we've just switched from another mode, don't execute
-
+		
 			if (m_Placed) {
 				//Debug.Log ("Was being placed");
 				m_Placed = false;
@@ -527,9 +534,9 @@ public class UIManager : MonoBehaviour, IUIManager {
 			}
 				//We've left clicked, have we left clicked on a unit?
 			if (!currentObject) {
-				
 				break;
 			}
+
 			int currentObjLayer = currentObject.layer;//layer tells us what we clicked on
             
 				//if we're not dragging and clicked on a unit
@@ -574,7 +581,6 @@ public class UIManager : MonoBehaviour, IUIManager {
 			}
             //or if we are dragging and clicked on empty air
 			 else if(m_GuiManager.Dragging){
-				
 				bool Refresh = false;
 						//Get the drag area
 						Vector3 upperLeft = new Vector3 ();

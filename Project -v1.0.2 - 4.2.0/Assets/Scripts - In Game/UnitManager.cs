@@ -129,7 +129,7 @@ public class UnitManager : Unit,IOrderable{
 			changeState (new turretState (this));
 		} 
 
-		chaseRange = visionRange;
+		chaseRange = visionRange+15;
 	}
 
 	public void initializeVision(bool createIt)
@@ -518,7 +518,7 @@ public class UnitManager : Unit,IOrderable{
 			if (!isValidTarget (currentIter)) {
 				continue;
 			}
-
+	
 			if (currentIter.myStats.attackPriority > bestPriority) {
 				best = currentIter;
 				bestPriority = currentIter.myStats.attackPriority;

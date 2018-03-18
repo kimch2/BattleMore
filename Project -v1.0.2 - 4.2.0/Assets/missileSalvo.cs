@@ -120,7 +120,14 @@ public class missileSalvo :  Ability, Iinteract, Validator, Notify{
 	override
 	public continueOrder canActivate(bool showError)
 	{
-		return new continueOrder ();
+
+		continueOrder newOrder = new continueOrder ();
+		if (chargeCount < maxRockets) {
+			newOrder.canCast = true;
+		} else {
+			newOrder.canCast = false;
+		}
+		return newOrder;
 
 	}
 
@@ -128,6 +135,7 @@ public class missileSalvo :  Ability, Iinteract, Validator, Notify{
 	override
 	public void Activate()
 	{
+
 		if (chargeCount < maxRockets) {
 			if (home) {
 				home.finished (this.gameObject);}
@@ -141,7 +149,7 @@ public class missileSalvo :  Ability, Iinteract, Validator, Notify{
 			float distance = 100000;
 
 			HarpyLandingPad[] landingPads = GameObject.FindObjectsOfType<HarpyLandingPad> ();
-
+			// NEED TO CHECK FOR PLAYER OWNER
 			foreach (HarpyLandingPad arm in landingPads) {
 				if (!arm.hasAvailable() || !arm.GetComponent<BuildingInteractor>().ConstructDone()) {
 					continue;

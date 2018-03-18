@@ -96,7 +96,7 @@ public class UISetter : MonoBehaviour {
 	{
 		if (EnemyArsenalButton) {
 			EnemyArsenalButton.SetActive (true);
-			EnemyArsenalButton.GetComponent<Tweener> ().playTransition ("Pulse");
+			//EnemyArsenalButton.GetComponent<Tweener> ().playTransition ("Pulse");
 		}
 	}
 

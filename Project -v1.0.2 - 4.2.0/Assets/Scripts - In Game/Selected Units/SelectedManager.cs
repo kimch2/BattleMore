@@ -409,6 +409,7 @@ public class SelectedManager : MonoBehaviour, ISelectedManager
     {
         if (!SelectedObjects.Contains(obj))
         {       
+			Debug.Log ("Adding " + obj);
             SelectedObjects.Add(obj);
 
             obj.SetSelected();

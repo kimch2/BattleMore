@@ -14,12 +14,13 @@ public class AttackMoveState : UnitState {
 	private bool enemyDead = false;
 
 	private float nextActionTime = 0;
-
+	float chaseRange;
 
 		public AttackMoveState(GameObject obj, Vector3 location, MoveType type,UnitManager man, Vector3 myhome )
 		{
 		myManager = man;
-
+		chaseRange = myManager.getChaseRange ();
+		Debug.Log ("chase is "+chaseRange);
 		home = myhome;
 		if (obj) {
 			enemy = obj.GetComponent<UnitManager> ();
@@ -61,6 +62,8 @@ public class AttackMoveState : UnitState {
 
 	bool EnemyTooClose = false;
 	Vector3 lastEnemyLocation;
+	int PathingUpdate = 0;
+
 	// Update is called once per frame
 	override
 	public void Update () {
@@ -73,17 +76,29 @@ public class AttackMoveState : UnitState {
 			UnitManager temp =  myManager.findBestEnemy (out distance, enemy);
 		
 			if (temp) {
-				enemy = temp;
-			} else if(enemy && Vector3.Distance(myManager.gameObject.transform.position,enemy.transform.position) > 85 ){
-				enemy = null;
-				myManager.cMover.resetMoveLocation (home);
+
+				if (distance >chaseRange) {
+					enemy = null;
+					myManager.cMover.resetMoveLocation (home);
+
+				} else {
+					
+					if (PathingUpdate == 0) {
+						myManager.cMover.resetMoveLocation (temp.transform.position);
+						PathingUpdate = 4;
+					}
+
+					enemy = temp;
+					PathingUpdate--;
+
+				}
 			}
 		}
 		// WE FOUND AN ENEMY, MAYBE
 		//still need to figure out calculation for if enemy goes out of range or if a better one comes into range
 
 
-		if (enemy != null && myManager.myWeapon.Count > 0) {
+		if (enemy != null) { // && myManager.myWeapon.Count > 0) {
 			enemyDead = false;
 			bool attacked = false;
 			foreach (IWeapon weap in myManager.myWeapon) {

@@ -59,6 +59,7 @@ public class Augmentor : TargetAbility, Iinteract, Modifier {
 		myRotate.enabled = true;
 
 		manager.myStats.myHeight = UnitTypes.HeightType.Ground;
+		manager.myStats.otherTags.Add(UnitTypes.UnitTypeTag.Structure);
 		manager.myStats.SetTags ();
 		detacher.allowDetach (true);
 		attached = target;
@@ -204,7 +205,7 @@ public class Augmentor : TargetAbility, Iinteract, Modifier {
 		attached.GetComponent<UnitManager> ().myStats.removeDeathTrigger (this);
 		MissileArmer armer = attached.GetComponent<MissileArmer> ();
 		UnitManager man = attached.GetComponent<UnitManager> ();
-
+		manager.myStats.otherTags.Remove(UnitTypes.UnitTypeTag.Structure);
 		manager.myStats.SetTags ();
 
 		if (armer) {
@@ -278,14 +279,14 @@ public class Augmentor : TargetAbility, Iinteract, Modifier {
 
 	override
 	public  bool Cast(GameObject tar, Vector3 location){
-		Debug.Log ("Casting B");
-
+		
 		target = tar;
 		attached = tar;
 
 		Vector3 attachSpot = target.transform.position;
 
 		this.gameObject.transform.position =  target.transform.rotation * attachSpot;
+		manager.myStats.otherTags.Add(UnitTypes.UnitTypeTag.Structure);
 		///myMover = manager.cMover;
 		/// 
 	

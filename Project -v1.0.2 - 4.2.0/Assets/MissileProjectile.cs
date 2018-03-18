@@ -56,7 +56,7 @@ public class MissileProjectile : Projectile {
 		}
 		Vector3 prevPos = transform.position;
 		transform.LookAt (lastLocation);
-		gameObject.transform.Translate ((Vector3.forward * speed) *40* Time.deltaTime);
+		gameObject.transform.Translate ((Vector3.forward * speed) * Time.deltaTime);
 		gameObject.transform.Translate (((gameObject.transform.right * nextX) + (gameObject.transform.up * nextY)) * Time.deltaTime);
 
 
@@ -65,7 +65,7 @@ public class MissileProjectile : Projectile {
 
 
 		//myModel.transform.LookAt (target.transform.position);
-		currentDistance += speed * Time.deltaTime * 40;
+		currentDistance += speed * Time.deltaTime ;
 
 	}
 
