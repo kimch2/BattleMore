@@ -14,7 +14,8 @@ public class MortarWeapon : IWeapon {
 
 	public override bool checkMinimumRange(UnitManager target)
 	{
-		float distance = Mathf.Sqrt((Mathf.Pow (transform.position.x - target.transform.position.x, 2) + Mathf.Pow (transform.position.z - target.transform.position.z, 2))) - target.CharController.radius;
+		float distance = Vector3.Distance(target.transform.position, transform.position) - target.CharController.radius;
+	
 		if ( distance < minimumRange) {
 
 			return false;

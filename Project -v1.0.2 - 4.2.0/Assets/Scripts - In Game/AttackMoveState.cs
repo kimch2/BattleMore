@@ -20,7 +20,7 @@ public class AttackMoveState : UnitState {
 		{
 		myManager = man;
 		chaseRange = myManager.getChaseRange ();
-		Debug.Log ("chase is "+chaseRange);
+
 		home = myhome;
 		if (obj) {
 			enemy = obj.GetComponent<UnitManager> ();
@@ -82,13 +82,22 @@ public class AttackMoveState : UnitState {
 					myManager.cMover.resetMoveLocation (home);
 
 				} else {
-					
+					enemy = temp;
 					if (PathingUpdate == 0) {
-						myManager.cMover.resetMoveLocation (temp.transform.position);
+						if (EnemyTooClose) {
+							myManager.cMover.resetMoveLocation (myManager.transform.position - (enemy.transform.position - myManager.transform.position).normalized * 10);
+
+						} else {
+							if (enemy.transform.position != lastEnemyLocation) {
+								lastEnemyLocation = enemy.transform.position;
+
+								myManager.cMover.resetMoveLocation (temp.transform.position);
+							}
+						}
 						PathingUpdate = 4;
 					}
 
-					enemy = temp;
+
 					PathingUpdate--;
 
 				}
@@ -101,6 +110,7 @@ public class AttackMoveState : UnitState {
 		if (enemy != null) { // && myManager.myWeapon.Count > 0) {
 			enemyDead = false;
 			bool attacked = false;
+			bool stillTooClose = false;
 			foreach (IWeapon weap in myManager.myWeapon) {
 				if (weap.inRange (enemy)) {
 
@@ -112,22 +122,22 @@ public class AttackMoveState : UnitState {
 						weap.attack (enemy, myManager);
 					} 
 				} else {
-					EnemyTooClose =	!weap.checkMinimumRange (enemy);
 					
+					EnemyTooClose =	!weap.checkMinimumRange (enemy);
 				}
 
 			}
 
 			if (!attacked) {
-				
-				if (myManager.cMover.myspeed == 0) {
-					lastEnemyLocation = enemy.transform.position;
-					if (EnemyTooClose) {
 
+	
+				if (myManager.cMover.myspeed == 0) {
+
+					if (EnemyTooClose) {
+						
 						myManager.cMover.resetMoveLocation ( myManager.transform.position - ( enemy.transform.position - myManager.transform.position ).normalized *10);
-						//Debug.Log ("Moving Away him " + enemy.transform.position + "  " + ( myManager.transform.position - ( enemy.transform.position - myManager.transform.position ).normalized *10));
 					} else {
-					//	Debug.Log ("Towards");
+				
 						myManager.cMover.resetMoveLocation (enemy.transform.position);
 					}
 				}

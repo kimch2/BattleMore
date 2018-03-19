@@ -14,6 +14,7 @@ public class explosionUpgrade : Upgrade {
 		UnitManager manage = obj.GetComponent<UnitManager> ();
 		if(manage && manage.UnitName == "Zephyr")
 		{
+			manage.GetComponent<missileSalvo> ().iconPic = iconPic;
 			foreach(IWeapon weap in manage.myWeapon)
 			{
 				if(weap.Title == "Stinger Missiles")
