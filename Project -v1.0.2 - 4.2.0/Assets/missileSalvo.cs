@@ -289,7 +289,7 @@ public class missileSalvo :  Ability, Iinteract, Validator, Notify{
 	public virtual UnitState computeState(UnitState s)
 	{
 
-		if (inLanding) {
+		if (inLanding || this == null) {
 			return null;}
 
 		airmover air = GetComponent<airmover> ();

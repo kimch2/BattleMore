@@ -633,8 +633,9 @@ public class SelectedManager : MonoBehaviour, ISelectedManager
         if (SelectedObjects.Count == 0)
             return;
         foreach (RTSObject obj in SelectedObjects)
-        {
-            obj.SetDeselected();
+		{if (obj) {
+				obj.SetDeselected ();
+			}
         }
 
         SelectedObjects.Clear();

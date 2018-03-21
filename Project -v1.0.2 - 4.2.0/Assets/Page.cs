@@ -93,13 +93,13 @@ public class Page  {
 				if (unit) {
 					continueOrder ord = unit.abilityList [X].canActivate (true);
 
-					Debug.Log ("Can cast " + ord.canCast + "  " + ord.nextUnitCast);
+				
 					if (!ord.nextUnitCast) {
 
 						if (ord.canCast) {
 							canCast = true;
 							if (((UnitManager)unit).getState () is PlaceBuildingState && foundNonFollow) {
-								Debug.Log ("Continuing");
+							//	Debug.Log ("Continuing");
 								continue;
 							}
 

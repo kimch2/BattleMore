@@ -93,7 +93,7 @@ public class ProductionManager : MonoBehaviour {
 		}
 		catch{
 		}
-		if (iconList [produce.Name]) {
+		if (iconList.ContainsKey(produce.name) &&  iconList [produce.Name]) {
 			if (addIt) {
 				iconList [produce.Name].GetComponent<DropDownDudeFinder> ().myProducer.Add (produce.gameObject);
 			} else {

@@ -1,15 +1,21 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts - In Game\AttackMoveState.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts - In Game\UnitState.cs">
     <Files>
       <File FileName="Assets\Scripts - In Game\UnitManager.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts - In Game\UnitStats.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts - In Game\AttackMoveState.cs" Line="84" Column="13" />
-      <File FileName="Assets\Scripts - In Game\UnitState.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts - In Game\Selected Units\SelectedManager.cs" Line="411" Column="17" />
-      <File FileName="Assets\Scripts - In Game\WeaponScripts\MortarWeapon.cs" Line="18" Column="2" />
-      <File FileName="Assets\Scripts - In Game\IWeapon.cs" Line="253" Column="30" />
-      <File FileName="Assets\explosionUpgrade.cs" Line="23" Column="30" />
+      <File FileName="Assets\Scripts - In Game\AttackMoveState.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts - In Game\UnitState.cs" Line="42" Column="1" />
+      <File FileName="Assets\Scripts - In Game\Selected Units\SelectedManager.cs" Line="711" Column="23" />
+      <File FileName="Assets\Scripts - In Game\UI\UIManager.cs" Line="433" Column="31" />
+      <File FileName="Assets\Scripts - In Game\Events\EventsManager.Mouse.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts - In Game\DefaultState.cs" Line="83" Column="7" />
+      <File FileName="Assets\airmover.cs" Line="134" Column="40" />
+      <File FileName="Assets\Scripts - In Game\Camera\MainCamera.cs" Line="423" Column="3" />
+      <File FileName="Assets\TimedObjective.cs" Line="42" Column="4" />
+      <File FileName="Assets\PayloadFirendlyEndZone.cs" Line="69" Column="61" />
+      <File FileName="Assets\Thornmail.cs" Line="23" Column="2" />
+      <File FileName="Assets\UnitEnterTrigger.cs" Line="55" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

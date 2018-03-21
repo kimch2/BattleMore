@@ -67,7 +67,7 @@ public class PayloadFirendlyEndZone : MonoBehaviour {
 		loc.GetComponent<ObjectiveTrigger> ().myObj = myObjectives [payloadIndex];
 
 		MiniMapIconer iconer = loc.GetComponent<MiniMapIconer> ();
-		Debug.Log ("Oeping with " + loc + "   " + iconer);
+	
 		if (!iconer && loc.transform.parent) {
 			iconer = loc.transform.parent.GetComponentInChildren<MiniMapIconer> ();
 		}

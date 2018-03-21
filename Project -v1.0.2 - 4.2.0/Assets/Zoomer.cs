@@ -14,9 +14,9 @@ public class Zoomer : MonoBehaviour {
 
 		if (Input.GetAxis ("Mouse ScrollWheel") < 0) {
 			numTimes++;
-			Debug.Log ("Up");
+
 			if (numTimes > 3) {
-				Debug.Log ("NUm times " + numTimes);
+
 				numTimes = 0;
 				if (lastZoom + 1 < Time.time) {
 					lastZoom = Time.time;

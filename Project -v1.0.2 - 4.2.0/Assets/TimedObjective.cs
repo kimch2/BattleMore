@@ -28,7 +28,7 @@ public class TimedObjective : Objective {
 
 	IEnumerator countDown()
 	{
-		Debug.Log ("Starting countddown");
+		//Debug.Log ("Starting countddown");
 		while (remainingTime > 0 && !completed) {
 			yield return new WaitForSeconds (1);
 			remainingTime -= 1;
@@ -37,7 +37,12 @@ public class TimedObjective : Objective {
 		
 		
 		}
-		if (loseOnComplete) {
+		if (completed) {
+			complete ();
+
+		}
+
+		else if (loseOnComplete) {
 			if (!completed) {
 				VictoryTrigger.instance.Lose ();
 			}

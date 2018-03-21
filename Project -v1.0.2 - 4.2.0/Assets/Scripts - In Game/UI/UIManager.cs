@@ -363,9 +363,9 @@ public class UIManager : MonoBehaviour, IUIManager {
 			}
 
 			if(select)
-				
 			{select.tempSelect ();}
-			if (currentObject.GetComponentInParent<UnitManager> ().PlayerOwner != raceManager.playerNumber) {
+			UnitManager manag = currentObject.GetComponentInParent<UnitManager> ();
+			if (manag && manag.PlayerOwner != raceManager.playerNumber) {
 				interactionState = InteractionState.Attack;
 				CursorManager.main.attackMode ();
 				return;

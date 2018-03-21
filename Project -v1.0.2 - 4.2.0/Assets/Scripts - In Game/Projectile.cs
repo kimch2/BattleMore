@@ -316,13 +316,27 @@ public  class Projectile : MonoBehaviour {
 
 	public void selfDestruct()
 	{target = null;
-		if (explosionO) {
-			Instantiate (explosionO, lastLocation + randomOffset, Quaternion.identity);
-			Debug.Log ("Self destruct");
+
+		if (SpecialEffect) {
+
+			if (!myEffect) {
+				myEffect = Instantiate (SpecialEffect, (transform.position + lastLocation + randomOffset) * .5f, transform.rotation);
+				multiParticle = myEffect.GetComponent<MultiShotParticle> ();
+
+			} else {
+				myEffect.transform.position = (transform.position + lastLocation + randomOffset) * .5f;
+				myEffect.transform.rotation = transform.rotation;
+
+			}
+
+			if (multiParticle) {
+				multiParticle.playEffect ();
+			}
 		}
 
 		onHit ();
-		GameObject.Destroy (this.gameObject);
+		myBulletPool.FastDespawn (this.gameObject, 0);
+		
 	}
 
 

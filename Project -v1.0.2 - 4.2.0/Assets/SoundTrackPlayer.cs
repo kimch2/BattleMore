@@ -63,7 +63,7 @@ public class SoundTrackPlayer : MonoBehaviour {
 		Debug.Log ("Sound " + mySrc.isPlaying + "  " + mySrc.time);
 		}
 		if(!mySrc.isPlaying){
-			if(mySrc.time > mySrc.clip.length -1){
+			if(mySrc.time > mySrc.clip.length -1 || mySrc.time == 0){
 		//if (Time.unscaledTime > nextPlayTime) {
 				playNextTrack ();
 			}

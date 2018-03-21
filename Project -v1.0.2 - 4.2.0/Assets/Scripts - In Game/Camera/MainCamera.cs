@@ -422,11 +422,11 @@ public class MainCamera : MonoBehaviour, ICamera {
 	public Vector3 getMapClampedLocation(Vector3 targetLocation)
 	{
 
-		targetLocation.x = Mathf.Max (BottomLeftBorder.x + 8, targetLocation.x);
-		targetLocation.z = Mathf.Max (BottomLeftBorder.z + 8, targetLocation.z);
+		targetLocation.x = Mathf.Max (BottomLeftBorder.x + 10, targetLocation.x);
+		targetLocation.z = Mathf.Max (BottomLeftBorder.z + 10, targetLocation.z);
 
-		targetLocation.x = Mathf.Min (TopRightBorder.x - 8, targetLocation.x);
-		targetLocation.z = Mathf.Min (TopRightBorder.z - 8, targetLocation.z);
+		targetLocation.x = Mathf.Min (TopRightBorder.x - 10, targetLocation.x);
+		targetLocation.z = Mathf.Min (TopRightBorder.z - 10, targetLocation.z);
 		return targetLocation;
 	}
 
