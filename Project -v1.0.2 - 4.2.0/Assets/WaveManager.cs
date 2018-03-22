@@ -168,6 +168,13 @@ public class WaveManager : MonoBehaviour {
 
 			}
 
+			if (CurrentWaves == null) {
+				if (ReplayWaves.Count > 0) {
+					waveOption = container.getWave (ReplayWaves [UnityEngine.Random.Range (0, ReplayWaves.Count)]);
+				} else
+					waveOption = container.getWave (FirstPlayWaveType);
+				CurrentWaves = waveOption.waveRampUp;
+			}
 
 			foreach (MiniMapUIController mini in GameManager.main.MiniMaps) {
 				if (mini) {
@@ -175,10 +182,7 @@ public class WaveManager : MonoBehaviour {
 				}
 			}
 
-			if (CurrentWaves == null) {
-				waveOption = container.getWave (ReplayWaves [UnityEngine.Random.Range (0, ReplayWaves.Count)]);
-				CurrentWaves = waveOption.waveRampUp;
-			}
+
 			//Debug.Log ("Spawning wave " + this.gameObject + "  " + currentWaveIndex);
 
 			foreach (GameObject obj in CurrentWaves[currentWaveIndex].waveType) {

@@ -42,20 +42,7 @@ public class HarpyLandingPad : MonoBehaviour {
 
 	public float startLanding( GameObject incoming)
 	{
-		if (rightPadInUse == incoming) {
 
-		//	myAnim.Play ("BallisticsLabRight");
-
-
-		}
-
-
-		if (leftPadInUse == incoming) {
-
-		
-			//myAnim.Play ("BallisticLeftOut");
-
-		}
 		return landingTime;
 
 	}

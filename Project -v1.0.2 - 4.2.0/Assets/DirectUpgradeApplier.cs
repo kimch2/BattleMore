@@ -48,7 +48,7 @@ public class DirectUpgradeApplier : MonoBehaviour {
 
 	public void applyUpgrade(CampaignUpgrade upgrader)
 	{
-		Debug.Log ("Applyinh " + upgrader.name);
+	//	Debug.Log ("Applyinh " + upgrader.name);
 		upgrader.setUpgrade (currentUpgrade);
 	}
 
@@ -56,7 +56,7 @@ public class DirectUpgradeApplier : MonoBehaviour {
 	{
 		foreach (GameObject obj in existingButtons) {
 			if (obj.activeSelf) {
-				Debug.Log ("Triggering on " + obj);
+				//Debug.Log ("Triggering on " + obj);
 				obj.GetComponent<Button> ().onClick.Invoke ();
 			}
 		}

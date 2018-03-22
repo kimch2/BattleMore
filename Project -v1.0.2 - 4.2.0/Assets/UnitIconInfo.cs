@@ -29,7 +29,7 @@ public class UnitIconInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 		myUnit = null;
 		myStats = null;
 		GetComponent<Button> ().onClick.RemoveAllListeners ();
-	
+		toolbox.enabled = false;
 	}
 
 	public void updateNum()

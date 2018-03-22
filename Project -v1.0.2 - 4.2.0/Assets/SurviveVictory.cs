@@ -10,6 +10,7 @@ public class SurviveVictory : Objective {
 	public float SurvivalTime;
 	int pulsesUsed;
 	float startTime;
+	public AudioSource PulseSound;
 
 	string rawObjectText;
 	// Use this for initialization
@@ -19,23 +20,28 @@ public class SurviveVictory : Objective {
 		VictoryTrigger.instance.addObjective (this);
 	
 
-		Invoke ("WaitFunction", SurvivalTime);
+
 		InvokeRepeating ("UpdateObj", 1,1);
 	}
 
 
 	public void UpdateObj()
 	{
-		description = rawObjectText + " " + Clock.convertToString(SurvivalTime + (pulsesUsed * 15) - (Time.timeSinceLevelLoad - startTime));
-		VictoryTrigger.instance.UpdateObjective (this);
+		if (SurvivalTime < 1) {
+			WaitFunction ();
+			CancelInvoke ("UpdateObj");
+		} else {
+			SurvivalTime -= 1;
+			description = rawObjectText + " " + Clock.convertToString (SurvivalTime);
+			VictoryTrigger.instance.UpdateObjective (this);
+		}
 	}
 
 
 	public void increaseWait ()
 	{
-		CancelInvoke ("WaitFunction");
 		pulsesUsed++;
-		Invoke ("WaitFunction", SurvivalTime + (pulsesUsed * 10) - Time.timeSinceLevelLoad);
+		SurvivalTime += 10;
 	}
 
 	void WaitFunction()
@@ -53,15 +59,27 @@ public class SurviveVictory : Objective {
 		MainCamera.main.setCutScene (QuakeBuilding.transform.position, 100);
 		yield return new WaitForSeconds (.5f);
 		myParticles.playEffect ();
+		if (PulseSound) {
+			PulseSound.Play ();
+		}
 		QuakeBuilding.GetComponentInChildren<Animator> ().SetTrigger("Pulse");
 		yield return new WaitForSeconds (1f);
 		myParticles.playEffect ();
+		if (PulseSound) {
+			PulseSound.Play ();
+		}
 		QuakeBuilding.GetComponentInChildren<Animator> ().SetTrigger("Pulse");
 		yield return new WaitForSeconds (1f);
 		myParticles.playEffect ();
+		if (PulseSound) {
+			PulseSound.Play ();
+		}
 		QuakeBuilding.GetComponentInChildren<Animator> ().SetTrigger("Pulse");
 		yield return new WaitForSeconds (1f);
 		myParticles.playEffect ();
+		if (PulseSound) {
+			PulseSound.Play ();
+		}
 		QuakeBuilding.GetComponentInChildren<Animator> ().SetTrigger("Pulse");
 		yield return new WaitForSeconds (1f);
 		complete ();
