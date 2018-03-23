@@ -28,7 +28,7 @@ public class BridgeActivator : VisionTrigger {
 			Bridge.SetActive (false);
 			DeathZone.SetActive (true);
 			StartCoroutine (DeathRescan ());
-			source.PlayOneShot (soundEffect);
+			source.PlayOneShot (soundEffect,.76f);
 			myEffect.playEffect ();
 		}
 	}
@@ -39,7 +39,7 @@ public class BridgeActivator : VisionTrigger {
 		DeathZone.SetActive (false);
 		StartCoroutine (DeathRescan ());
 		if (InVision.Count == 1) {
-			source.PlayOneShot (soundEffect);
+			source.PlayOneShot (soundEffect,.76f);
 			myEffect.playEffect ();
 		}
 	}

@@ -346,6 +346,7 @@ public class SelectedManager : MonoBehaviour, ISelectedManager
 			
 			if (UIPages [currentPage].isTargetAbility (n)) {
 				//Debug.Log ("In here 1 ");
+				UISoundManager.interfaceClick (true);
 				targetManager.loadUnits (UIPages [currentPage].getUnitsFromAbilities (n),
 					((TargetAbility)UIPages [currentPage].getAbility (n)).range);
 				uiManage.SwitchMode (Mode.targetAbility);
@@ -355,7 +356,7 @@ public class SelectedManager : MonoBehaviour, ISelectedManager
 			} else if (UIPages [currentPage].isBuildingAbility (n)) {
 				//Debug.Log ("In here 2 ");
 				if (UIPages [currentPage].canCast(n)) {
-			
+					UISoundManager.interfaceClick (true);
 					uiManage.UserPlacingBuilding (((UnitProduction)UIPages [currentPage].getAbility (n)).unitToBuild, n);
 					
 				}
@@ -363,6 +364,7 @@ public class SelectedManager : MonoBehaviour, ISelectedManager
 			}
 			else {
 				//Debug.Log ("In here 3 ");
+				UISoundManager.interfaceClick (true);
 				UIPages [currentPage].useAbility (n, Input.GetKey(KeyCode.LeftShift));
 			}
 		}

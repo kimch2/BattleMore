@@ -17,6 +17,7 @@ public class mortarUpgrade : Upgrade {
 			
 			pod.totalShots += podIncrease;
 			pod.shotCount += podIncrease;
+
 			pod.updateUI ();
 			pod.reloadRate -= reloadDecrease;
 

@@ -79,7 +79,8 @@ public class ErrorPrompt : MonoBehaviour {
 	
 
 	public void notEnoughResource()
-	{showError( "Not Enough Ore",myVoicePack.getOreLine());
+	{UISoundManager.interfaceClick (false);
+		showError( "Not Enough Ore",myVoicePack.getOreLine());
 	} 
 
 
@@ -89,7 +90,8 @@ public class ErrorPrompt : MonoBehaviour {
 	}
 
 	public void notEnoughSupply()
-	{showError( "Not enough Supply, Build more " + supplyBuilding, myVoicePack.getSupplyLine());
+	{UISoundManager.interfaceClick (false);
+		showError( "Not enough Supply, Build more " + supplyBuilding, myVoicePack.getSupplyLine());
 		}
 
 	public void atMaxSupply()
@@ -97,7 +99,8 @@ public class ErrorPrompt : MonoBehaviour {
 	}
 
 	public void notEnoughEnergy()
-	{showError(  "Not enough Energy");
+	{UISoundManager.interfaceClick (false);
+		showError(  "Not enough Energy");
 		}
 
 	public void populationcapHit()
@@ -125,16 +128,18 @@ public class ErrorPrompt : MonoBehaviour {
 	
 	}
 	public void invalidGroundLocation()
-	{
+	{UISoundManager.interfaceClick (false);
 		showError( "Invalid Location", myVoicePack.getBadBuildingLine());
 	}
 
 	public void invalidTarget()
-	{showError( "Invalid target.");
+	{UISoundManager.interfaceClick (false);
+		showError( "Invalid target.");
 		}
 
 	public void onCooldown()
-	{showError( "Ability on Cooldown", myVoicePack.getCooldownLine());
+	{UISoundManager.interfaceClick (false);
+		showError( "Ability on Cooldown", myVoicePack.getCooldownLine());
 	}
 
 	public void OreDepleted(Vector3 location)

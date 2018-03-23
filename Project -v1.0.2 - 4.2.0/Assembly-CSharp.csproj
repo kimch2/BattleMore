@@ -617,6 +617,7 @@
      <Compile Include="Assets\Tweener.cs" />
      <Compile Include="Assets\UIHighLight.cs" />
      <Compile Include="Assets\UISetter.cs" />
+     <Compile Include="Assets\UISoundManager.cs" />
      <Compile Include="Assets\UltCooldown.cs" />
      <Compile Include="Assets\UltimateApplier.cs" />
      <Compile Include="Assets\UltTip.cs" />

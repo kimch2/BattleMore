@@ -18,6 +18,7 @@ public class RaceUIManager : MonoBehaviour , ManagerWatcher{
 	public bool runTabs;
 	//tooltips are left open when they are deselected
 	public List<GameObject> BuggedCans;
+	public UiAbilityManager UIAbility;
 
 	public Dropdown production; // Controls which Info panel to display - Production, Income, or Current total army
 
@@ -218,43 +219,59 @@ public class RaceUIManager : MonoBehaviour , ManagerWatcher{
 	}
 
 	public void fOne()
-	{SelectedManager.main.globalSelect(0);}
+	{SelectedManager.main.globalSelect(0);
+		UISoundManager.interfaceClick (true);}
 	
 	public void fTwo()
-	{SelectedManager.main.globalSelect(1);}
+	{SelectedManager.main.globalSelect(1);
+		UISoundManager.interfaceClick (true);}
 	
 	public void fThree()
-	{SelectedManager.main.globalSelect(2);}
+	{SelectedManager.main.globalSelect(2);
+		UISoundManager.interfaceClick (true);}
 	
 	public void fFour()
-	{SelectedManager.main.globalSelect(3);}
+	{SelectedManager.main.globalSelect(3);
+		UISoundManager.interfaceClick (true);}
 	
 	public void fFive()
-	{raceManager.useAbilityOne ();}
+	{raceManager.useAbilityOne ();
+		UISoundManager.interfaceClick (true);}
 	
 	public void fSix()
 	{raceManager.useAbilityTwo ();
+		UISoundManager.interfaceClick (true);
 		}
 	
 	public void fSeven()
 	{raceManager.useAbilityThree ();
+		UISoundManager.interfaceClick (true);
 	}
 	
 	public void fEight()
 	{raceManager.useAbilityFour ();
+		UISoundManager.interfaceClick (true);
 	}
 	
 	public void fNine()
-	{SelectedManager.main.selectAllArmy ();}
+	{SelectedManager.main.selectAllArmy ();
+		UISoundManager.interfaceClick (true);
+	}
 	
 	public void fTen()
-	{SelectedManager.main.selectIdleWorker ();}
+	{SelectedManager.main.selectIdleWorker ();
+		UISoundManager.interfaceClick (true);
+	}
 	
 	public void fEleven()
-	{	SelectedManager.main.selectAllBuildings ();}
+	{	SelectedManager.main.selectAllBuildings ();
+		UISoundManager.interfaceClick (true);
+	}
 	
 	public void fTwelve()
-	{SelectedManager.main.selectAllUnArmedTanks ();}
+	{SelectedManager.main.selectAllUnArmedTanks ();
+		UISoundManager.interfaceClick (true);
+	}
 
 
 

@@ -7,8 +7,6 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 public class UiAbilityManager : MonoBehaviour {
 
-	public AudioClip ButtonPress;
-	AudioSource audSrc;
 	RaceManager racer;
 
 	//public List<GameObject> UIButtons = new List<GameObject>();
@@ -107,7 +105,7 @@ public class UiAbilityManager : MonoBehaviour {
 		IconStartPoints [0].SetActive (false);
 		IconStartPoints [1].SetActive (false);
 		IconStartPoints [2].SetActive (false);
-		audSrc = GameObject.FindObjectOfType<ExpositionDisplayer> ().GetComponent<AudioSource> ();
+
 		GameMenu.main.addDisableScript (this);
 		nextActionTime = Time.time;
 		selectMan = SelectedManager.main; 
@@ -1299,11 +1297,12 @@ public class UiAbilityManager : MonoBehaviour {
 			if (Input.GetKey (KeyCode.LeftAlt)) {
 				selectMan.setAutoCast (n);
 				selectMan.AutoCastUI ();
-				audSrc.PlayOneShot (ButtonPress, .1f);
+				UISoundManager.interfaceClick (true);
 
 			} else if (quickButtons [n].IsInteractable () && quickAbility [n].myAbility && quickButtons [n].IsActive ()) {// && quickAbility[n].myAbility.active) {
 				selectMan.callAbility (n);
-				audSrc.PlayOneShot (ButtonPress, .1f);
+			
+
 			
 			}
 		}
@@ -1438,9 +1437,6 @@ public class UiAbilityManager : MonoBehaviour {
 
 	
 	}
-
-
-
 
 
 }
