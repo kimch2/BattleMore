@@ -47,10 +47,13 @@ public class UltUpgradeUI : MonoBehaviour {
 	}
 
 	public void increaseUltLevel(int index)
-	{if (UltUpgradeUI.availableArb > 0) {
+	{
+		
+		if (UltUpgradeUI.availableArb > 0) {
 			if (myCategories [index].upLevel ()) {
 				UltUpgradeUI.availableArb--;
 			}
+
 			PlayerPrefs.SetInt (UltName + "" + index, myCategories [index].currentLevel);
 			updateArbText ();
 

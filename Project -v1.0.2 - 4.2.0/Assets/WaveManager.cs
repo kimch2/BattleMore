@@ -121,11 +121,11 @@ public class WaveManager : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		//Debug.Log (Time.timeSinceLevelLoad + "   " + mystartTime + "    " + nextActionTime);
+		
 		if (Time.timeSinceLevelLoad - mystartTime > nextActionTime) {
 
 			float delay = .1f;
-
+		
 			if (spawnLocations.Count < SpawnerCount) {
 				spawnLocations.RemoveAll (item => item == null);
 				SpawnerCount = spawnLocations.Count;
@@ -183,32 +183,32 @@ public class WaveManager : MonoBehaviour {
 			}
 
 
-			//Debug.Log ("Spawning wave " + this.gameObject + "  " + currentWaveIndex);
+			Debug.Log ("Spawning wave " + this.gameObject + "  " + currentWaveIndex);
 
-			foreach (GameObject obj in CurrentWaves[currentWaveIndex].waveType) {
+			foreach (GameObject obj in CurrentWaves[myWaves[currentWaveIndex].WaveAdvancement].waveType) {
 
 				StartCoroutine (MyCoroutine (delay, obj, spawner, myWaves [currentWaveIndex].RallyPointIndex == -1 ? firstRallyPoint : alternateRallyPoints[myWaves [currentWaveIndex].RallyPointIndex]));
-				delay += .2f;
+				delay += .12f;
 
 			}
 
 
 
 			if (LevelData.getDifficulty () >= 2) {
-				SpawnExtra (CurrentWaves [currentWaveIndex], spawner , myWaves [currentWaveIndex].RallyPointIndex == -1 ? firstRallyPoint : alternateRallyPoints[myWaves [currentWaveIndex].RallyPointIndex]);
-				foreach (GameObject obj in CurrentWaves[currentWaveIndex].mediumExtra) {
+				SpawnExtra (CurrentWaves [myWaves [currentWaveIndex].WaveAdvancement], spawner , myWaves [currentWaveIndex].RallyPointIndex == -1 ? firstRallyPoint : alternateRallyPoints[myWaves [currentWaveIndex].RallyPointIndex]);
+				foreach (GameObject obj in CurrentWaves[myWaves[currentWaveIndex].WaveAdvancement].mediumExtra) {
 					StartCoroutine (MyCoroutine (delay, obj, spawner, myWaves [currentWaveIndex].RallyPointIndex == -1 ? firstRallyPoint : alternateRallyPoints[myWaves [currentWaveIndex].RallyPointIndex]));
-					delay += .2f;
+					delay += .12f;
 
 				}
 			}
 			if (LevelData.getDifficulty () >= 3) {
 
-				foreach (GameObject obj in CurrentWaves[currentWaveIndex].HardExtra) {
+				foreach (GameObject obj in CurrentWaves[myWaves[currentWaveIndex].WaveAdvancement].HardExtra) {
 
 
 					StartCoroutine (MyCoroutine (delay, obj, spawner,  myWaves [currentWaveIndex].RallyPointIndex == -1 ? firstRallyPoint : alternateRallyPoints[myWaves [currentWaveIndex].RallyPointIndex]));
-					delay += .2f;
+					delay += .12f;
 
 				}
 			}
@@ -223,9 +223,10 @@ public class WaveManager : MonoBehaviour {
 
 	void setNextWave()
 	{
-		if (currentWaveIndex < CurrentWaves.Count - 1) {
+		if (currentWaveIndex < myWaves.Count - 1) {
 			currentWaveIndex++;
 			nextActionTime = myWaves [currentWaveIndex].waveSpawnTime;
+			Debug.Log ("Launchign"  + currentWaveIndex + "   " + nextActionTime + "    " + CurrentWaves.Count ) ;
 		}
 		else{
 			nextActionTime += 180;
@@ -246,7 +247,7 @@ public class WaveManager : MonoBehaviour {
 			foreach (GameObject obj in myWave.HardExtra) {
 
 				StartCoroutine(MyCoroutine(delay, obj,Spawner,spawnSpot));
-				delay += .2f;
+				delay += .12f;
 
 			}
 		}
@@ -288,7 +289,10 @@ public class WaveManager : MonoBehaviour {
 
 
 		difficultyM.SetUnitStats (unit);
-		//Debug.Log ("just made " + unit);
+
+		UnitManager manage = unit.GetComponent<UnitManager> ();
+		manage.startingCommand.Clear ();
+
 		unit.GetComponent<UnitManager> ().GiveOrder (Orders.CreateAttackMove (attackzone));
 
 	}

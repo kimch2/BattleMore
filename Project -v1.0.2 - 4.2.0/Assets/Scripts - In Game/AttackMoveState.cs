@@ -88,7 +88,7 @@ public class AttackMoveState : UnitState {
 							myManager.cMover.resetMoveLocation (myManager.transform.position - (enemy.transform.position - myManager.transform.position).normalized * 10);
 
 						} else {
-							if (enemy.transform.position != lastEnemyLocation) {
+							if (Vector3.Distance( enemy.transform.position, lastEnemyLocation) < 2) {
 								lastEnemyLocation = enemy.transform.position;
 
 								myManager.cMover.resetMoveLocation (temp.transform.position);

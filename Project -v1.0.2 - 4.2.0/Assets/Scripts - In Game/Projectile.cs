@@ -196,7 +196,8 @@ public  class Projectile : MonoBehaviour {
 		{
 			Terminate(null);}
 	}
-	
+
+	//DO I NEED THIS?
 	public virtual void OnTriggerEnter(Collider other)
 	{if (!target) {
 			return;}
@@ -208,15 +209,17 @@ public  class Projectile : MonoBehaviour {
 
 		if (other.gameObject == target || other.gameObject.transform.IsChildOf(target.transform)) {
 			Terminate (other.gameObject.GetComponent<UnitManager> ());
+			Debug.Log (" COLLIDER HIT ENEMY");
+
 			return;
 			}
 
-			if (currentDistance / distance < .5) {
-				return;
-			}
 
 		if(!trackTarget && (other.gameObject!= Source || !other.gameObject.transform.IsChildOf(Source.transform) ))
-			{Terminate(null);}
+			{Terminate(null);
+			Debug.Log (" COLLIDER HIT ENEMY");
+
+		}
 		
 	}
 

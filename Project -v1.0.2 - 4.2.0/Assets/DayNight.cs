@@ -69,8 +69,9 @@ public class DayNight : MonoBehaviour {
 
 	IEnumerator DayShadow()
 	{
+		float duration = normalDayLength + normalNightLength / 2;
 		while(true){
-			float duration = normalDayLength + normalNightLength / 2;
+
 			yield return new WaitForSeconds (normalNightLength/ 2);
 			for (float i = 0; i < duration; i += Time.deltaTime) {
 				dimmerLight.GetComponent<Transform> ().eulerAngles = Vector3.Lerp (DayStartRotation, DayEndRotation, i /duration);
@@ -84,8 +85,8 @@ public class DayNight : MonoBehaviour {
 
 	IEnumerator NightToDay()
 	{
-		float duration = normalNightLength / 3;
-		yield return new WaitForSeconds (duration*2);
+		float duration = normalNightLength / 4;
+		yield return new WaitForSeconds (duration*3);
 		for (float i = 0; i < duration; i += Time.deltaTime) {
 			
 			dimmerLight.color = Color.Lerp (nightColor, dayColor, i / duration);
@@ -97,8 +98,8 @@ public class DayNight : MonoBehaviour {
 	}
 
 	IEnumerator DayToNight()
-	{	float duration = normalDayLength / 3;
-		yield return new WaitForSeconds (duration*2);
+	{	float duration = normalDayLength /4;
+		yield return new WaitForSeconds (duration*3);
 		for (float i = 0; i < duration; i += Time.deltaTime) {
 			
 			dimmerLight.color = Color.Lerp ( dayColor, nightColor, i / duration);

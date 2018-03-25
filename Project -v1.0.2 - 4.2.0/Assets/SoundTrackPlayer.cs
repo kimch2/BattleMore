@@ -7,7 +7,7 @@ public class SoundTrackPlayer : MonoBehaviour {
 
 	public enum SongName
 	{
-		 EtheralSkies, BattleTremors, BurningPlasma,HeartOfIron, StrangerBattles,TheOtherWorld
+		 EtheralSkies, BattleTremors, BurningPlasma,HeartOfIron, StrangerBattles,TheOtherWorld, HeavyMetalMeltdown
 	}
 
 

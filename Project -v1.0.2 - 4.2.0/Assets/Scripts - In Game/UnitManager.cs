@@ -166,7 +166,7 @@ public class UnitManager : Unit,IOrderable{
 		if (!hasStarted) {
 			if (startingCommand.Count > 0) {
 
-				Invoke ("GiveStartCommand", .3f);
+				Invoke ("GiveStartCommand", .1f);
 			}
 		if (Time.timeSinceLevelLoad < 1 || !myStats.isUnitType (UnitTypes.UnitTypeTag.Structure) || UnitName == "Augmentor") {
 				
@@ -389,14 +389,15 @@ public class UnitManager : Unit,IOrderable{
 
 		if (!other.isTrigger) {
 
+			/// check if still hit
 			if (other.gameObject.layer == 15) { // Its a projectile, the most common kind of trigger
 				return;
 			}
-
+			/* We Don't need to consider this, probably
 			if (other.gameObject.layer == 13) {
 				neutrals.Add (other.gameObject);
 				return;
-			}
+			}*/
 			//Debug.Log (this.gameObject + " hit " + other.gameObject);
 			UnitManager manage = other.gameObject.GetComponent<UnitManager>();
 
@@ -434,23 +435,22 @@ public class UnitManager : Unit,IOrderable{
 		if (other.gameObject.layer == 15) { // Its a projectile, the most common kind of trigger
 			return;
 		}
-
+		/*
 		if (neutrals.Contains (other.gameObject)) {
 			neutrals.Remove (other.gameObject);
 		}
-
+*/
 		UnitManager manage = other.gameObject.GetComponent<UnitManager>();
 
-		if (manage) {
-			if (enemies.Contains (manage)) {
-				enemies.Remove (manage);
+
+			if(	enemies.Remove (manage)){
 				foreach (EnemySighted sighter in EnemyWatchers) {
 					if (sighter != null) {
 						sighter.enemyLeft (manage);
 					
 					}
 				}
-			} else if (allies.Contains (manage)) {
+		} else if (allies.Remove (manage)) {
 
 				foreach (AllySighted sighter in AllyWatchers) {
 					if (sighter != null) {
@@ -458,11 +458,12 @@ public class UnitManager : Unit,IOrderable{
 					}
 				}
 
-				allies.Remove (manage);
+				//allies.Remove (manage); changed contained to remove above wich changes order, might break!!!
 				//Debug.Log ( this.gameObject + "  Removing " + other.gameObject);
-			} 
-		}
-	
+			}
+			else {
+				neutrals.Remove (other.gameObject);
+			}
 	}
 
 
@@ -472,16 +473,16 @@ public class UnitManager : Unit,IOrderable{
 
 		enemies.RemoveAll(item => item == null);
 		UnitManager best = null;
-
+		float currDistance = 0;
 		float distance = float.MaxValue;
 	
 		
 		for (int i = 0; i < enemies.Count; i ++) {
 			if (enemies[i] != null) {
 				
-				float currDistance = Vector3.Distance(enemies[i].transform.position, this.gameObject.transform.position);
+				currDistance = Vector3.Distance(enemies[i].transform.position, this.gameObject.transform.position);
 				if(currDistance < distance)
-				{best = enemies[i];
+					{best = enemies[i];
 					
 					distance = currDistance;
 				}
