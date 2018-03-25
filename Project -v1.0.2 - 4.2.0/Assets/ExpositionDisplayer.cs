@@ -180,7 +180,7 @@ public class ExpositionDisplayer : MonoBehaviour {
 
 	void playMessage(SoundMessage myMess)
 	{
-		//Debug.Log ("Playing Message " + myMess.myText + "  " + myMess.myClip.name);
+		//Debug.Log ("Playing Message " + myMess.myText + "  " + myMess.myClip.name + "   " + myMess.volume);
 		currentMessage = myMess;
 		inMessage = true;
 		if (myMess.myPic == null) {

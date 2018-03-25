@@ -231,7 +231,7 @@ public  class Projectile : MonoBehaviour {
 
 		if (explosionO) {
 
-			GameObject explode = (GameObject)Instantiate (explosionO, lastLocation + randomOffset, Quaternion.identity);
+			GameObject explode = (GameObject)Instantiate (explosionO, transform.position, Quaternion.identity);
 
 			explosion Escript = explode.GetComponent<explosion> ();
 			if (Escript) {
@@ -268,7 +268,7 @@ public  class Projectile : MonoBehaviour {
 		if (SpecialEffect) {
 
 			if (!myEffect) {
-				myEffect = Instantiate (SpecialEffect, (transform.position + lastLocation + randomOffset) * .5f, transform.rotation);
+				myEffect = Instantiate (SpecialEffect, transform.position, transform.rotation);
 				multiParticle = myEffect.GetComponent<MultiShotParticle> ();
 
 			}
@@ -320,7 +320,7 @@ public  class Projectile : MonoBehaviour {
 		if (SpecialEffect) {
 
 			if (!myEffect) {
-				myEffect = Instantiate (SpecialEffect, (transform.position + lastLocation + randomOffset) * .5f, transform.rotation);
+				myEffect = Instantiate (SpecialEffect, transform.position, transform.rotation);
 				multiParticle = myEffect.GetComponent<MultiShotParticle> ();
 
 			} else {

@@ -23,9 +23,9 @@ public class UISoundManager : MonoBehaviour {
 	{
 		if (good) {
 	
-			mySrc.PlayOneShot (goodSound, .47f);
+			mySrc.PlayOneShot (goodSound, .4f);
 		} else {
-			
+
 			mySrc.PlayOneShot (badSound, .25f);
 		}
 	}

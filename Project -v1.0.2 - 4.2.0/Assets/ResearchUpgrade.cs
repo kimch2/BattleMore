@@ -210,9 +210,10 @@ public class ResearchUpgrade: UnitProduction, Upgradable{
 				}
 
 			} else {
-				this.gameObject.GetComponent<UnitManager> ().abilityList[GetComponent<UnitManager> ().abilityList.IndexOf(this)] = null;
-			//	this.gameObject.GetComponent<UnitManager> ().removeAbility (this);
-
+				if (myManager.abilityList.Count > myManager.abilityList.IndexOf (this)) {
+					myManager.abilityList [myManager.abilityList.IndexOf (this)] = null;
+				}
+			
 				foreach (Upgrade up in upgrades) {
 
 					Destroy (up);

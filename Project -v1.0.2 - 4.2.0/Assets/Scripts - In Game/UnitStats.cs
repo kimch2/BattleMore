@@ -41,6 +41,8 @@ public class UnitStats : MonoBehaviour {
 	public List<UnitTypes.UnitTypeTag> otherTags = new  List<UnitTypes.UnitTypeTag> ();
 	private List<UnitTypes.UnitTypeTag> TotalTags = new  List<UnitTypes.UnitTypeTag> ();
 
+	int typeBitMask;
+
 	public UnitTypes.UnitArmorTag armorType;
 	public UnitTypes.SizeTag sizeType;
 	public UnitTypes.HeightType myHeight;
@@ -89,6 +91,12 @@ public class UnitStats : MonoBehaviour {
 		TotalTags.Add ((UnitTypes.UnitTypeTag)Enum.Parse(typeof(UnitTypes.UnitTypeTag) ,myHeight.ToString()));
 		TotalTags.Add ((UnitTypes.UnitTypeTag)Enum.Parse(typeof(UnitTypes.UnitTypeTag) ,sizeType.ToString()));
 
+		int bitMask = 0;
+		foreach (UnitTypes.UnitTypeTag t in TotalTags) {
+			bitMask += (int)Mathf.Pow (2, ((int)t));
+		}
+		typeBitMask = bitMask;
+		//Debug.Log (this.gameObject + ": "+bitMask);
 	}
 
 	public void Initialize()
@@ -209,8 +217,11 @@ public class UnitStats : MonoBehaviour {
 	}
 
 
+	int n = 0;
 	public bool isUnitType(UnitTypes.UnitTypeTag type){
-		return TotalTags.Contains (type);
+
+		n = (1 << ((int)type));
+		return (typeBitMask &  n) ==  n;
 	}
 
 	public void addBuff(Buff input, bool stack)
@@ -261,7 +272,7 @@ public class UnitStats : MonoBehaviour {
 
 	public float TakeDamage(float amount, GameObject source, DamageTypes.DamageType type)
 	{
-		if (otherTags.Contains (UnitTypes.UnitTypeTag.Invulnerable)) {
+		if (isUnitType(UnitTypes.UnitTypeTag.Invulnerable)) {
 			return 0;
 		}
 			
@@ -285,7 +296,7 @@ public class UnitStats : MonoBehaviour {
 		}
 
 		if (myManager.PlayerOwner == 1 && source != this.gameObject) {
-			if (otherTags.Contains (UnitTypes.UnitTypeTag.Structure)) {
+			if (isUnitType(UnitTypes.UnitTypeTag.Structure)) {
 				ErrorPrompt.instance.underBaseAttack (this.transform.position);
 			} else {
 				ErrorPrompt.instance.underAttack (this.transform.position);
@@ -345,7 +356,7 @@ public class UnitStats : MonoBehaviour {
 		if (dead)
 			return;
 
-		if (!otherTags.Contains (UnitTypes.UnitTypeTag.Invulnerable)) {
+		if (!isUnitType(UnitTypes.UnitTypeTag.Invulnerable)) {
 
 			if (this) {
 				if (!GameManager.main.playerList [myManager.PlayerOwner - 1].UnitDying (myManager, deathSource, true)) {
@@ -413,7 +424,7 @@ public class UnitStats : MonoBehaviour {
 	/// <param name="amount">Amount.</param>
 	public void veteranDamage(float amount)
 	{
-		if (otherTags.Contains (UnitTypes.UnitTypeTag.Turret) && transform.parent) {
+		if (isUnitType(UnitTypes.UnitTypeTag.Turret) && transform.parent) {
 			UnitManager rootMan = transform.parent.GetComponentInParent<UnitManager> ();
 			if (rootMan) {
 				rootMan.myStats.veternStat.damageDone += amount;
@@ -427,7 +438,7 @@ public class UnitStats : MonoBehaviour {
 	{
 		veternStat.kills++;
 
-		if (otherTags.Contains (UnitTypes.UnitTypeTag.Turret) && transform.parent) {
+		if (isUnitType(UnitTypes.UnitTypeTag.Turret) && transform.parent) {
 
 			UnitManager rootMan = transform.parent.GetComponentInParent<UnitManager> ();
 			if (rootMan) {

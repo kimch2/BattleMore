@@ -45,11 +45,16 @@ public class LevelManager : MonoBehaviour {
 		
 		//currentTech = Vehicles;
 
-		difficultyBars.value = LevelData.getDifficulty () - 1;
+	
 	
 		changeMoney (0);
 
 	}
+	void Start()
+	{
+		difficultyBars.value = LevelData.getDifficulty () - 1;
+	}
+
 		
 	public void closeLevelIntro()
 	{

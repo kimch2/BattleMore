@@ -89,9 +89,12 @@ public class UiAbilityManager : MonoBehaviour {
 	}
 
 	IEnumerator delayedClick(int n)
-	{var pointer = new PointerEventData (EventSystem.current);
+	{
+		//UISoundManager.interfaceClick (true);
+
+		var pointer = new PointerEventData (EventSystem.current);
 		CostBox.instance.turnOff ();
-		yield return new WaitForSeconds (.1f);
+		yield return new WaitForSeconds (.06f);
 		ExecuteEvents.Execute (quickButtons [n].gameObject, pointer, ExecuteEvents.pointerClickHandler);
 		ExecuteEvents.Execute (quickButtons [n].gameObject, pointer, ExecuteEvents.pointerExitHandler);
 
@@ -1305,6 +1308,8 @@ public class UiAbilityManager : MonoBehaviour {
 
 			
 			}
+		} else {
+			UISoundManager.interfaceClick (false);
 		}
 		//EventSystem.current.SetSelectedGameObject (null);
 		

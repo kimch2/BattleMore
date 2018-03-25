@@ -15,6 +15,10 @@ public class DayNight : MonoBehaviour {
 	public Vector3 DayEndRotation;
 	bool inDay = false;
 	public UnityEngine.UI.Text myText;
+	public AudioSource mySrc;
+	public AudioClip NightSound;
+	public AudioClip MorningSound;
+
 	void Start()
 	{
 		StartCoroutine (NightToDay ());
@@ -26,10 +30,34 @@ public class DayNight : MonoBehaviour {
 	int dayCount = 1;
 	float timeLeft;
 
+	Coroutine currentDayShift = null;
 
 	void UpdateTime()
 	{
 		timeLeft--;
+		if (timeLeft < 1) {
+			inDay = !inDay;
+
+			if (currentDayShift != null) {
+				StopCoroutine (currentDayShift);
+			}
+
+			if (inDay) {
+				dayCount++;
+				timeLeft = normalDayLength;
+				myText.GetComponentInParent<UnityEngine.UI.Image> ().color = Color.red;
+				if (MorningSound) {
+					mySrc.PlayOneShot (MorningSound);}
+				StartCoroutine (DayToNight ());
+			} else {
+
+				if (NightSound) {
+					mySrc.PlayOneShot (NightSound);}
+				timeLeft = normalNightLength;
+				myText.GetComponentInParent<UnityEngine.UI.Image> ().color = Color.white;
+				StartCoroutine (NightToDay());
+			}
+		}
 		if (inDay) {
 			myText.text = "Day: " + dayCount + "\n" + Clock.convertToString (timeLeft);
 			
@@ -56,35 +84,29 @@ public class DayNight : MonoBehaviour {
 
 	IEnumerator NightToDay()
 	{
-		float duration = normalNightLength / 2;
-		yield return new WaitForSeconds (duration);
+		float duration = normalNightLength / 3;
+		yield return new WaitForSeconds (duration*2);
 		for (float i = 0; i < duration; i += Time.deltaTime) {
 			
 			dimmerLight.color = Color.Lerp (nightColor, dayColor, i / duration);
 			dimmerLight.shadowStrength =  Mathf.Clamp((i / duration) + .2f,.3f,1);
 			yield return null;
 		}	
+			
 
-		StartCoroutine (DayToNight ());
-		inDay = true;
-		dayCount++;
-		timeLeft = normalNightLength;
-		myText.GetComponentInParent<UnityEngine.UI.Image> ().color = Color.red;
 	}
 
 	IEnumerator DayToNight()
-	{	float duration = normalDayLength / 2;
-		yield return new WaitForSeconds (duration);
+	{	float duration = normalDayLength / 3;
+		yield return new WaitForSeconds (duration*2);
 		for (float i = 0; i < duration; i += Time.deltaTime) {
 			
 			dimmerLight.color = Color.Lerp ( dayColor, nightColor, i / duration);
 			dimmerLight.shadowStrength =  Mathf.Clamp((1- i / duration) + .2f,.3f,1);
 			yield return null;
 		}	
-		StartCoroutine (NightToDay());
-		inDay = false;
-		timeLeft = normalDayLength;
-		myText.GetComponentInParent<UnityEngine.UI.Image> ().color = Color.white;
+
+
 
 	}
 

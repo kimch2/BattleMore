@@ -355,10 +355,13 @@ public class SelectedManager : MonoBehaviour, ISelectedManager
 			
 			} else if (UIPages [currentPage].isBuildingAbility (n)) {
 				//Debug.Log ("In here 2 ");
-				if (UIPages [currentPage].canCast(n)) {
+				if (UIPages [currentPage].canCast (n)) {
 					UISoundManager.interfaceClick (true);
 					uiManage.UserPlacingBuilding (((UnitProduction)UIPages [currentPage].getAbility (n)).unitToBuild, n);
 					
+				} else {
+					
+					UISoundManager.interfaceClick (false);
 				}
 
 			}

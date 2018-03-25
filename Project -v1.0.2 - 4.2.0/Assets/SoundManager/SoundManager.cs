@@ -547,10 +547,11 @@ namespace DigitalRuby.SoundManagerNamespace
                 requestedVolume = (minVolume + maxVolume) / (float)(volumes.Count + 2);
             }
             // else requestedVolume can stay as is
-
-            volumes.Add(requestedVolume);
-            source.PlayOneShot(clip, requestedVolume);
-            instance.StartCoroutine(RemoveVolumeFromClip(clip, requestedVolume));
+			if (source) {
+				volumes.Add (requestedVolume);
+				source.PlayOneShot (clip, requestedVolume);
+				instance.StartCoroutine (RemoveVolumeFromClip (clip, requestedVolume));
+			}
         }
 
         /// <summary>
