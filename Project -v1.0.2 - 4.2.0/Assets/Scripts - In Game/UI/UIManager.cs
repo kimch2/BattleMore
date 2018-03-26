@@ -97,11 +97,17 @@ public class UIManager : MonoBehaviour, IUIManager {
 		formationLight = Resources.Load<GameObject> ("FormationLight");
 
 	}
-	
+
+	// Chached Refs to save on Garbage COllection
+	Ray rayb;
+
+
 	// Update is called once per frame
 	void Update () 
 	{
+
 		clickOverUI = isPointerOverUIObject ();
+		rayb = Camera.main.ScreenPointToRay (Input.mousePosition);
 
 		if (Input.GetMouseButtonDown (1)) {
 
@@ -110,7 +116,7 @@ public class UIManager : MonoBehaviour, IUIManager {
 				rightClickOrigin = Input.mousePosition;
 				//lineRender.enabled = true;
 
-				Ray rayb = Camera.main.ScreenPointToRay (Input.mousePosition);
+
 				RaycastHit hitb;
 
 				if (Physics.Raycast (rayb, out hitb, Mathf.Infinity, ~((1 << 16) | (1 << 20)))) {
@@ -125,22 +131,14 @@ public class UIManager : MonoBehaviour, IUIManager {
 				}
 
 				formationCoroutine = StartCoroutine (formationDisplay());
-
-
 			}
 
-		
 		} 
-
-
+	
 		if (rightClickDrag) {
-			if (Vector2.Distance (Input.mousePosition, rightClickOrigin) > 45) {
+			if (Vector2.Distance (Input.mousePosition, rightClickOrigin) > 50) {
 				lineRender.enabled = true;
 			
-
-
-
-				Ray rayb = Camera.main.ScreenPointToRay (Input.mousePosition);
 				RaycastHit hitb;
 				Vector3 b = Vector3.zero;
 				if (Physics.Raycast (rayb, out hitb, Mathf.Infinity, 1 << 8)){
@@ -153,12 +151,14 @@ public class UIManager : MonoBehaviour, IUIManager {
 
 		}
 		bool hitSomething;
-
+	
 		switch (m_Mode)
 		{
 
 		case Mode.Normal:
+			
 			CursorManager.main.normalMode ();
+
 			ModeNormalBehaviour ();
 			break;
 			
@@ -167,13 +167,13 @@ public class UIManager : MonoBehaviour, IUIManager {
 			break;
 		case Mode.targetAbility:
 			ModeNormalBehaviour ();
-			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
+		
 			RaycastHit hit;
 
 			if (currentAbility.myTargetType == TargetAbility.targetType.ground) {
-				hitSomething = Physics.Raycast (ray, out hit, Mathf.Infinity, 1 << 8);
+				hitSomething = Physics.Raycast (rayb, out hit, Mathf.Infinity, 1 << 8);
 			} else {
-				hitSomething = Physics.Raycast (ray, out hit, Mathf.Infinity, ~((1 << 16) | (1 << 20)));
+				hitSomething = Physics.Raycast (rayb, out hit, Mathf.Infinity, ~((1 << 16) | (1 << 20)));
 			}
 
 			if (hitSomething) {
@@ -214,14 +214,12 @@ public class UIManager : MonoBehaviour, IUIManager {
 
 		case Mode.globalAbility:
 			ModeNormalBehaviour ();
-			 ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
 
 		
 			if (currentAbility.myTargetType == TargetAbility.targetType.ground) {
-				hitSomething = Physics.Raycast (ray, out hit, Mathf.Infinity, 1 << 8);
+				hitSomething = Physics.Raycast (rayb, out hit, Mathf.Infinity, 1 << 8);
 			} else {
-				hitSomething = Physics.Raycast (ray, out hit, Mathf.Infinity, ~((1 << 16) | (1 << 20)));
+				hitSomething = Physics.Raycast (rayb, out hit, Mathf.Infinity, ~((1 << 16) | (1 << 20)));
 			}
 
 			if (hitSomething)
@@ -266,14 +264,14 @@ public class UIManager : MonoBehaviour, IUIManager {
 			break;
 		}
 
-	
 	}
-	
+
+	InteractionState interactionState;
 	private void ModeNormalBehaviour()
 	{
 		//Handle all non event, and non gui UI elements here
 		hoverOver = HoverOver.Terrain;
-		InteractionState interactionState = InteractionState.Nothing;
+
 		
 
 			//We're over the main screen, let's raycast
@@ -318,15 +316,14 @@ public class UIManager : MonoBehaviour, IUIManager {
 
 		}
 
-		if (hoverOver == HoverOver.Menu || m_SelectedManager.ActiveObjectsCount() == 0 )
-		{
+		if (hoverOver == HoverOver.Menu || m_SelectedManager.ActiveObjectsCount () == 0) {
 			//Nothing orderable Selected or mouse is over menu 
 			CalculateInteraction (hoverOver, ref interactionState);
-		}
-		else if (m_SelectedManager.ActiveObjectsCount() >0 && (hoverOver == HoverOver.Unit ||hoverOver == HoverOver.Building) )
-		{
+		} else if (m_SelectedManager.ActiveObjectsCount () > 0 && (hoverOver == HoverOver.Unit || hoverOver == HoverOver.Building)) {
 			//One object selected
 			CalculateInteraction (m_SelectedManager.FirstActiveObject (), hoverOver, ref interactionState);
+		} else {
+			interactionState = InteractionState.Nothing;
 		}
 
 				
@@ -340,10 +337,10 @@ public class UIManager : MonoBehaviour, IUIManager {
 			
 			interactionState = InteractionState.Nothing;
 		} else {
-			if (!isPointerOverUIObject()) {
+			if (! clickOverUI) {
 				Selected sel = currentObject.GetComponentInParent<Selected> ();
 				if (sel) {
-				sel.tempSelect ();
+					sel.tempSelect ();
 				}
 			
 				CursorManager.main.selectMode ();
@@ -355,27 +352,20 @@ public class UIManager : MonoBehaviour, IUIManager {
 	private void CalculateInteraction(RTSObject obj, HoverOver hoveringOver, ref InteractionState interactionState)
 	{	interactionState = InteractionState.Select;
 
-		if (currentObject != null) {
-
-			Selected select = currentObject.GetComponent<Selected> ();
-			if(!select){
-				select = currentObject.GetComponentInParent<Selected> ();
-			}
-
-			if(select)
-			{select.tempSelect ();}
-			UnitManager manag = currentObject.GetComponentInParent<UnitManager> ();
-			if (manag && manag.PlayerOwner != raceManager.playerNumber) {
-				interactionState = InteractionState.Attack;
-				CursorManager.main.attackMode ();
-				return;
-			}
-
-
-
+		if (currentObject == null) {
+			return;
 		}
 
+		Selected select = currentObject.GetComponentInParent<Selected> ();
 
+		if(select)
+			{select.tempSelect ();}
+
+		UnitManager manag = currentObject.GetComponentInParent<UnitManager> ();
+		if (manag && manag.PlayerOwner != raceManager.playerNumber) {
+			interactionState = InteractionState.Attack;
+			CursorManager.main.attackMode ();
+		}
 	}
 
 

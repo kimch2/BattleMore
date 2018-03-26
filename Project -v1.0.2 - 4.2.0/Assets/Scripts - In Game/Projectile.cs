@@ -209,7 +209,7 @@ public  class Projectile : MonoBehaviour {
 
 		if (other.gameObject == target || other.gameObject.transform.IsChildOf(target.transform)) {
 			Terminate (other.gameObject.GetComponent<UnitManager> ());
-			Debug.Log (" COLLIDER HIT ENEMY");
+			//Debug.Log (" COLLIDER HIT ENEMY");
 
 			return;
 			}
@@ -217,7 +217,7 @@ public  class Projectile : MonoBehaviour {
 
 		if(!trackTarget && (other.gameObject!= Source || !other.gameObject.transform.IsChildOf(Source.transform) ))
 			{Terminate(null);
-			Debug.Log (" COLLIDER HIT ENEMY");
+			//Debug.Log (" COLLIDER HIT ENEMY");
 
 		}
 		

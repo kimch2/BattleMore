@@ -19,6 +19,8 @@ public class DayNight : MonoBehaviour {
 	public AudioClip NightSound;
 	public AudioClip MorningSound;
 
+	public UnityEngine.Events.UnityEvent OnDay;
+	public UnityEngine.Events.UnityEvent OnNight;
 	void Start()
 	{
 		StartCoroutine (NightToDay ());

@@ -284,8 +284,7 @@ public class IWeapon : MonoBehaviour {
 	{if (myAnimator) {
 			myAnimator.Play (AnimationName);
 		}
-
-		if (myManager) {
+		else if (myManager) { // Adding an Else to the IF here, so we don't play the same animation twice
 			myManager.animAttack ();
 		}
 
