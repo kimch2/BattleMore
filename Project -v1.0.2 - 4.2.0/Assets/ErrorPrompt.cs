@@ -118,13 +118,13 @@ public class ErrorPrompt : MonoBehaviour {
 
 	public void UltTwoDone()
 	{
-		showError( "", myVoicePack.getUltTwoComplete());
+		showError( "Nimbus Deployment Ready", myVoicePack.getUltTwoComplete());
 
 	}
 
 	public void UltFourDone()
 	{
-		showError( "", myVoicePack.getUltFourComplete());
+		showError( "FireStorm Ready", myVoicePack.getUltFourComplete());
 	
 	}
 	public void invalidGroundLocation()

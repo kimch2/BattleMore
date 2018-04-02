@@ -60,6 +60,7 @@ public class explosion : MonoBehaviour {
 
 		if (manager) {
 			if(!hitStuff.Contains(manager)) {
+	
 				hitStuff.Add (manager);
 		
 					float amount = damageAmount	;
@@ -80,7 +81,7 @@ public class explosion : MonoBehaviour {
 				
 					float total = 0;
 
-
+			
 					total = stats.TakeDamage (amount, source, type);
 					
 
@@ -89,7 +90,6 @@ public class explosion : MonoBehaviour {
 					}
 
 					foreach (Notify not in triggers) {
-					
 						not.trigger(source,  null, manager, amount);
 					}
 

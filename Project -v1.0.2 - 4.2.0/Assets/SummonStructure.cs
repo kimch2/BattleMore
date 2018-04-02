@@ -10,15 +10,19 @@ public class SummonStructure :  UnitProduction{
 	Coroutine currentCharger;
 	UnitManager myManager;
 	Vector3 targetLocation;
-
+	float supplyNeeded;
 	public Animator myAnim;
 	public float Range;
+
+	RaceManager racer;
+
 	// Use this for initialization
 	void Start () {
 		myType = type.building;
 		mySelect = GetComponent<Selected> ();
 		myManager = GetComponent<UnitManager> ();
-
+		supplyNeeded = unitToBuild.GetComponent<UnitStats> ().supply;
+		racer = GameManager.getInstance ().playerList [myManager.PlayerOwner - 1];
 	}
 		
 
@@ -34,6 +38,10 @@ public class SummonStructure :  UnitProduction{
 			}
 		}
 */
+
+		if (racer.currentSupply + supplyNeeded > racer.supplyMax) {
+			order.canCast = false;
+		}
 		if (!myCost.canActivate (this)) {
 			order.canCast = false;
 

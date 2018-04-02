@@ -1,4 +1,4 @@
-WindowsStandalone
+OSXStandalone
 543cd181ffbb9b35c22ff1945da48c61 Assembly-CSharp.dll:.MouseOver
 3bcfc88066d6615087556969a25bbb76 Assembly-CSharp.dll:.EmpMissile
 8e75c7ff572e377afe5aec0a3c77276b Assembly-UnityScript.dll:.ThirdPersonCamera
@@ -7,7 +7,7 @@ d67a4b1041b27e3aacb5e5506cb181af Assembly-CSharp.dll:.TempInvulnerable
 9b05f80360d806c18f9533e2ba1be355 Assembly-CSharp.dll:.UIHighLight
 54d132ac0027b54aa651b728e8a081e1 Assembly-CSharp.dll:.PrismTower
 a378cbb789e229dfa2d727712b9840f7 Assembly-CSharp-firstpass.dll:.ProceduralGridMover
-b608cdf533ba6c60aec8adb0e15e892e Assembly-CSharp.dll:.SoundTrackPlayer
+21c76d0738864389ffdd8f845122b43c Assembly-CSharp.dll:.SoundTrackPlayer
 4992ded8faabd4d948d50d91a319dff1 Assembly-CSharp.dll:.MissileArmer
 e618324527be86a93fc20a9a1977a79e Assembly-CSharp.dll:.BuildingInteractor
 408ae38a455484d0908db2fb5a009058 Assembly-CSharp.dll:.UnitAppear
@@ -52,7 +52,7 @@ d955a471031f6510ed4caa1ed173dcc3 Assembly-CSharp.dll:.PopUpMaker
 e1d4b2db2ae636935afda6208b11e289 Assembly-CSharp.dll:.BeamWave
 a30beadf4d109f44144b9a9f42e61cbf Assembly-CSharp-firstpass.dll:UnityStandardAssets.ImageEffects.BlurOptimized
 25c738dbfeaf0631b2476f9352333df3 Assembly-CSharp.dll:.LaserNode
-e56b6d8b8d78b7ec4f67ff8c3b0c8bfa Assembly-CSharp.dll:.SoundOptions
+d4d3c305180d9383b973f4c8b60372cc Assembly-CSharp.dll:.SoundOptions
 535d81514240a724cd56537b8084b2fe Assembly-CSharp.dll:.RaceInfo
 1ce4dac79c019ef4e6ffe272a5656177 Assembly-CSharp.dll:.StatDisplayer
 e623abb5224c3ed1cc97f4281cee1bb2 Assembly-CSharp.dll:.ConstructionUpgrade
@@ -115,6 +115,7 @@ f61c0793411f10cf5fbfa1473fef5ef2 UnityEngine.UI.dll:UnityEngine.UI.ToggleGroup
 5b7b753eee101a671e10b27629dfdccf Assembly-CSharp.dll:.UnitCardCreater
 e7cbfe58006ffb291249e867db6ade63 Assembly-CSharp.dll:.MissionMapManager
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:DigitalRuby.SoundManagerNamespace.SoundManager
+0bc943e390a2511e6fb0219ff435cef5 Assembly-CSharp.dll:.Zoomer
 7c531786c4e57c653910312f37e1dd99 Assembly-CSharp.dll:.TuretBuildHelper
 f09bd21d99862f9b3a05f9f8b658ce8a Assembly-CSharp.dll:.WayPointInteracter
 907a5c85ab9a704bea622556ca1446d1 Assembly-CSharp.dll:.ArmoryInteractor
@@ -163,7 +164,7 @@ a9a67f48f3149afcd022fdc53a942823 Assembly-CSharp.dll:.RecoilUpgrade
 71778c9b45c50a65b865c5bc42204043 Assembly-CSharp-firstpass.dll:UnityStandardAssets.ImageEffects.NoiseAndScratches
 966cf06739b32f807ccf329b4b2b14a6 Assembly-CSharp.dll:.BuildUnitObjective
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.simpleROV
-dd240d1cabf97516528d4153a231ba64 Assembly-CSharp.dll:.BuildManager
+2dacc8366cdcb654e103531981022000 Assembly-CSharp.dll:.BuildManager
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.DragSelect
 cc897e31f90a455da1ad6fffc97043f1 Assembly-CSharp-firstpass.dll:UnityStandardAssets.ImageEffects.Antialiasing
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp-firstpass.dll:.RecastTileUpdate
@@ -204,6 +205,7 @@ f5ce04d51633a5a2e05a731aa45ef200 Assembly-CSharp-firstpass.dll:UnityStandardAsse
 0baf924f5d15b492b16af811c7171a01 Assembly-CSharp-firstpass.dll:Pathfinding.RVO.RVONavmesh
 f10748fda4c25dad547b26231daa4d73 Assembly-CSharp.dll:.BuildStructure
 6ff4030a9ecf01e7f3be55a41dfcc42c Assembly-CSharp.dll:.MissionLogger
+6e8edee653bc834e977fecef387a8251 Assembly-CSharp.dll:.CameraFirstTimePlayer
 72a8b889d88f4b029338949ac3990699 Assembly-CSharp.dll:.LevelIntroMaker
 ba40b843101ec5ad1fb111ecf9a4ae83 Assembly-CSharp.dll:.newWorkerInteract
 0ce2923aff495a5c41a99e95d4df6061 Assembly-CSharp-firstpass.dll:.PathTypesDemo
@@ -229,7 +231,7 @@ e9bdabf9265d758d56f01bb188916fa8 UnityEngine.Networking.dll:UnityEngine.Networki
 d66097302a5ada750e699acf0a59f4aa Assembly-CSharp.dll:.SplitterShot
 40d41f498420a9b3985f6fc7e5763447 Assembly-CSharp-firstpass.dll:UnityStandardAssets.ImageEffects.Bloom
 7d174805625a4a31ccfdb91a8c1bcf8b Assembly-CSharp.dll:.UltCooldown
-467b58551a377c63073e50b124928ab4 Assembly-CSharp.dll:.ErrorPrompt
+4e229734e725eb88e6b5221de0c2fd55 Assembly-CSharp.dll:.ErrorPrompt
 de671250ebe46d16fb6beec666d4e9f2 Assembly-CSharp.dll:.RabbitEgg
 3e15098d2ced9840aafad2ee6b48a826 Assembly-CSharp.dll:.VoicePackUI
 d519b039d6896edc9248947ccc2ba738 Assembly-CSharp.dll:.ChimeraDamUp
@@ -258,7 +260,7 @@ b8d9ce347ff685385bfdbda972d1b66f Assembly-CSharp.dll:.CampaignUpgrade
 56b5c9d726fbfc65dea98a226e76098d Assembly-CSharp.dll:.attackSpeedUpgrade
 42a611700783cf06d9d12db8b6cb1220 Assembly-CSharp.dll:.Recall
 b0b3ee7aa0c2e67b2614f6849e331869 Assembly-CSharp.dll:.ArmorBackHeal
-51acc919c93471867e0d9a2dd5016b7a Assembly-CSharp.dll:.explosion
+ac377df1bfc852efbae12c8c1e4b3e36 Assembly-CSharp.dll:.explosion
 f76982c00ef297e03c3f23959eb30fa7 Assembly-CSharp.dll:.TurretPickUp
 a87d406b96c4d321f318f60e4bd628a8 Assembly-CSharp.dll:.PulseCannon
 538256411f60c3e670ffb9fb889fbfe5 Assembly-CSharp-firstpass.dll:.AILerp
@@ -266,14 +268,14 @@ a87d406b96c4d321f318f60e4bd628a8 Assembly-CSharp.dll:.PulseCannon
 9865a0db77364f8930077972a1d5efab Assembly-CSharp-firstpass.dll:UnityStandardAssets.ImageEffects.BloomOptimized
 71d0101d437144c1c39863618116bce7 Assembly-CSharp.dll:.Unit
 a75a3cf4d31782436c995d340284b0e7 Assembly-CSharp-firstpass.dll:Pathfinding.NodeLink
-3b80518bd186af6e6b9b1c4b1bf91d08 Assembly-CSharp.dll:.RaceUIManager
+da8e7592b54878f18b1ac58eeadcfc16 Assembly-CSharp.dll:.RaceUIManager
 5fb46ba11082d6162d02b56718e81abc Assembly-CSharp.dll:.GarataiManager
 bc68edb0af574bf79f9550ead8ebae5c UnityEngine.HoloLens.dll:UnityEngine.Audio.AudioSpatializerMicrosoft
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.HoloLens.dll:UnityEngine.EventSystems.HoloLensInput
 463516d5b5fe8e67a0a24c48f2095b04 UnityEngine.HoloLens.dll:UnityEngine.EventSystems.HoloLensInputModule
 c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.VR.WSA.SpatialMappingCollider
 45f3431f0103c41611e8d4eec3d439df UnityEngine.HoloLens.dll:UnityEngine.VR.WSA.SpatialMappingRenderer
-3a9abc1132374b636ad4bd5436ca6370 Assembly-CSharp.dll:.Augmentor
+a9e24221f5fad4775b6a32a9fbce6ca1 Assembly-CSharp.dll:.Augmentor
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.BasicBullet
 c5b8cea0c9d619f2e0c37ac39114aa32 Assembly-CSharp.dll:.AttackMoveAngled
 98a2d74388f975b531373f249228311a Assembly-CSharp.dll:.barrierShield
@@ -314,6 +316,7 @@ b6bbac9fffe75e5e66499241fd3c8cab Assembly-CSharp.dll:.APMAchieve
 8ce2a6ff69b0bec13615f20f4ff6c2d2 Assembly-CSharp.dll:.BeamParam
 5fe8e12e25d388aa93f66f54e2703179 Assembly-CSharp.dll:.PayloadFirendlyEndZone
 8450bb4876cfbe1577f70a2e9c612e1b Assembly-CSharp-firstpass.dll:.RVOAgentPlacer
+660a80190c7c0679907228404ccc24bf Assembly-CSharp.dll:.InteractableRobot
 1375de5b9f4a6c68e49f0f8f5b3929bf Assembly-CSharp.dll:.laserGun
 99093988031b2a700edf7f8967f1c4fb Assembly-CSharp.dll:.AetherCapture
 7903b9a54ecb51800fac336136700c2d Assembly-CSharp.dll:.KillUnitAch
@@ -332,11 +335,11 @@ f66d73d9fa6115eba3eab09404e8cefd Assembly-CSharp.dll:.AchievementUI
 9a73175c9687d72ff2ddd7cc71a63606 Assembly-CSharp-firstpass.dll:.AstarPath
 8cb1babadc0ab0bcb7864647b0c624c0 Assembly-CSharp.dll:.MainCamera
 16492c5df59345b2c1f2df99b61eefd1 Assembly-CSharp.dll:.HalfLifeStarter
-a3e5aa040741b4a172264305e0d84600 Assembly-CSharp.dll:.UiAbilityManager
+5336beadf6d71bdbd6ee33aca9b8ccf6 Assembly-CSharp.dll:.UiAbilityManager
 c7c2ba7994ec3cfe434b9e17103cb356 Assembly-CSharp.dll:.FusionWeld
 185f57b7db7edc6629cadb4935bd2eac Assembly-CSharp.dll:.BonusObjectiverTimer
 7193b5bbce6b7ef9ccdcc330aeb792e7 Assembly-CSharp.dll:.UIManager
-fd160d0db2a9f8a74fcc26d148750887 Assembly-CSharp.dll:.deathTrigger
+3af82ba286debec6d8f6424d58f0ab3a Assembly-CSharp.dll:.deathTrigger
 2a9a6e82837bdfc33d524fcc1ef85eb0 Assembly-CSharp-firstpass.dll:Pathfinding.RichAI
 ce2c13bb83fb67a58acf029b71f5594f Assembly-CSharp.dll:.UnitStats
 ad9b8bb88cba922270d1d9f41edc443c Assembly-CSharp.dll:.DropDownDudeFinder
@@ -376,6 +379,7 @@ db8b806e6c3e76ac08416579897e8f87 Assembly-CSharp.dll:.ExpositionTexts
 3411efbb665e273fa5b6179568a4f3fd Assembly-CSharp-firstpass.dll:Pathfinding.NavmeshAdd
 64b238a4fc7d3096d817160bcd4d4737 Assembly-CSharp.dll:.AllDestroyed
 3fbf8f1cbf5464fe58bf72ac22a6cf06 Assembly-CSharp.dll:.DeathCubeVulnerable
+58f5d9294ded5e4e053cd1ad70293bea Assembly-CSharp.dll:.EventManager
 673b4a84c73ceacf6572fd26814defd0 Assembly-CSharp.dll:.StandardInteract
 fdf8be172cd550e6d793fa7ac9affa15 Assembly-CSharp.dll:.VulcanChargeUp
 d87d66fc27a87bf26424d7a0c692f734 Assembly-CSharp.dll:.TextTrigger
@@ -384,6 +388,7 @@ d87d66fc27a87bf26424d7a0c692f734 Assembly-CSharp.dll:.TextTrigger
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.Squirrel
 a2e4449a3381e6a5d00febf346240673 Assembly-CSharp.dll:.Bombardment
 94697053308edb8e97ce9a4a0b161ab8 Assembly-CSharp.dll:.StatsUI
+8823cedfd33faaa8f7af7e9b68232142 Assembly-CSharp.dll:.DayNight
 1b1303c7752d0a50b4d2ab3d7d140305 Assembly-CSharp-firstpass.dll:Pathfinding.SimpleSmoothModifier
 2cbc152babc64a2ef300d5d7aea9320f Assembly-CSharp.dll:.AugmentAttachPoint
 09ec7298d05661add9eceb14b411babd Assembly-CSharp.dll:.TutorialManager
@@ -402,7 +407,7 @@ cd36fb3bd2bdc4e20ca6c4f19c8e4237 Assembly-CSharp.dll:.DetachAugment
 020b460d3ad072a5efd37a0683b20ea8 Assembly-CSharp.dll:.RocketBooster
 30db6bf1abfbd17c6cdd1385b9eba6ca Assembly-CSharp-firstpass.dll:UnityStandardAssets.ImageEffects.DepthOfField
 b434c24f95976c8ae8771cb22d9c2928 Assembly-CSharp.dll:.MenuAnimationPlayer
-5025b29db1c10147fd378fd0cbcdd95e Assembly-CSharp.dll:.CinematicCamera
+c68d5134f0ecece901e3b637c4ac42c4 Assembly-CSharp.dll:.CinematicCamera
 a3909a1b753ba7e88dae3ecba057d338 Assembly-CSharp.dll:.EMPblast
 433fe566950828e2c109be7843604328 Assembly-CSharp-firstpass.dll:Pathfinding.AlternativePath
 d5ae6f330fb590d8f6438817fe57789f Assembly-CSharp.dll:.TunnelSpawner
@@ -426,7 +431,7 @@ a89c627dd7df29fb13505fa1291c1d30 Assembly-CSharp.dll:.UltTip
 fdf8be172cd550e6d793fa7ac9affa15 Assembly-CSharp.dll:.MenuverUpgrade
 86e1fac2c1e5a26cb1ca84e35c3c675c Assembly-CSharp.dll:.DayexaShield
 7903b9a54ecb51800fac336136700c2d Assembly-CSharp.dll:.UnitExistAchievement
-acb7328a68aaa44f2db3438d510c08b5 Assembly-CSharp.dll:.WaveManager
+d8856cc88eb6cca950d35e47fbefe9d1 Assembly-CSharp.dll:.WaveManager
 e643aa4c654731ed65c3817028c2c0ef Assembly-CSharp.dll:.LocationObjective
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.CoagulateAura
 fdf8be172cd550e6d793fa7ac9affa15 Assembly-CSharp.dll:.TritonBarrierUpgrade
@@ -496,6 +501,7 @@ efbdb100838fee927ffe903c1c43d64d Assembly-CSharp.dll:.SalvageTarget
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.SceneMaster
 8d5ee5b2f2a5756823919aac853896d6 Assembly-CSharp.dll:.BarrierAch
 ec81465c080b2a1901009d2ffd72b9b4 Assembly-CSharp.dll:.FButtonManager
+0c68f207a857da4c05430c3f3120fd8b Assembly-CSharp.dll:.UISoundManager
 0ed942a4ef26771d08a77579e57fc253 Assembly-CSharp.dll:.ParticleAn
 576d3a03a80e86d1d509a0d495957e5e Assembly-CSharp.dll:.Thornmail
 05bc14e065652ba9bf6bda6737e23c27 Assembly-CSharp.dll:.ShieldGlobe
@@ -506,6 +512,7 @@ ec81465c080b2a1901009d2ffd72b9b4 Assembly-CSharp.dll:.FButtonManager
 abacb7eebc5cff66098fe4c5855dd7b3 Assembly-CSharp-firstpass.dll:Pathfinding.RVO.RVOSquareObstacle
 89462f92a061291ef0e2f5191a3badc7 Assembly-CSharp.dll:.FullMetalAchieve
 d31d5213052fc75a250983baf8d29da8 Assembly-CSharp.dll:.PayLoadCreator
+6a9a6db43f824088e5372ba82ffec29b Assembly-CSharp.dll:.canvasFader
 7df277594ad373127e6e58a08e1cf021 Assembly-CSharp.dll:.Masochism
 4fd7e0706d901c369637364461ded683 Assembly-CSharp.dll:.ShieldSpeedBoost
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.IconAttacker
@@ -551,7 +558,7 @@ abd3ecc29b767de54eac542a63667a34 Assembly-CSharp.dll:.LevelSelectmanager
 cee4e626bb2bbece416c48fd8087c246 Assembly-CSharp.dll:.ResourceGenerator
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.BackLashAura
 2f264043a6bb59ca3369df5a4d180e17 Assembly-CSharp-firstpass.dll:UnityStandardAssets.ImageEffects.CameraMotionBlur
-9768eb36cc7e5bd65c0d8a13a0170235 Assembly-CSharp.dll:.TimedObjective
+5a96f385bde26a881f5ee30b1f14d0e3 Assembly-CSharp.dll:.TimedObjective
 399822cb81bb60f3c740d93775d3e00a Assembly-CSharp.dll:.GamePlayMenu
 a9a67f48f3149afcd022fdc53a942823 Assembly-CSharp.dll:.ConcussiveUpgrade
 ee5f792a3123a95defad607d650806b7 Assembly-CSharp.dll:.ActivateObject
@@ -584,7 +591,7 @@ b1a3ad5368292866ce0a612638dc94ac Assembly-CSharp-firstpass.dll:.ProceduralWorld
 28630335f423618616aa0f5c9c0ed6f3 Assembly-CSharp.dll:.Gigapede
 4cecc19edc308ad72d0265ab809e3b09 Assembly-CSharp.dll:.CampTechCamManager
 18759df54ffb3460be26f2d9a2ad728e Assembly-CSharp.dll:Smaa.SMAA
-fd30fc8d52d8d53bfdc7dbc91a18223c Assembly-CSharp.dll:.RaceManager
+6c22900f54fa5913e123819b4bc73b22 Assembly-CSharp.dll:.RaceManager
 89462f92a061291ef0e2f5191a3badc7 Assembly-CSharp.dll:.NimbusAch
 cb0d6815111795bcad6ddec124a02a75 Assembly-CSharp.dll:.CampaignUltUpgrade
 8b13d42961205504f0723439239890f7 Assembly-CSharp.dll:.TurretScreenDisplayer
@@ -632,11 +639,11 @@ d4d5737df5d2b21d3597ef68ffe90d71 Assembly-CSharp.dll:.AbilityDisabler
 ad7f305e507ec22e8723b6438c1f4016 Assembly-CSharp.dll:.Grinder
 904647fb4274ed267fc3eb4c220130d8 Assembly-CSharp.dll:.Selected
 f7b9791331243ba73057149cda5352a4 Assembly-CSharp-firstpass.dll:.LightweightRVO
-7a19c963c6bd00e2d0dd8a4dbcb373b5 Assembly-CSharp.dll:.FadeOut
+6b5e9c6a23989221c89ea6b735a69298 Assembly-CSharp.dll:.FadeOut
 b319820c766ea14007e48bda852c7f5c Assembly-CSharp.dll:.MeteorStorm
 585e90afbd19ac2075358123710741ee Assembly-CSharp.dll:.BillBoard
 399b71903851f5132b3fd4bf538be654 Assembly-CSharp.dll:.UnitIconInfo
-2e65fa37c4bd559eee4d8d8e0bb5c165 Assembly-CSharp.dll:.LevelCompilation
+0c911d5a79045319414be74c0a35ff79 Assembly-CSharp.dll:.LevelCompilation
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.wayPointGizmo
 eb4efe89b3cbc605a4b8209427abd739 Assembly-CSharp.dll:.TargetCircle
 f5f2a10d0c97827395c48e2f0bcedb81 Assembly-CSharp.dll:.ShotBase
@@ -671,7 +678,7 @@ e73e2ccb01b7be916a009e2f53a255fb Assembly-CSharp.dll:.OreExtractor
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp-firstpass.dll:.LocalSpaceGraph
 c7d556a07da4b178c7f6632ca69a1bcd Assembly-CSharp.dll:.ObjectiveTrigger
 563daf171b5d1c7c75b1108951401223 Assembly-UnityScript.dll:.CharacterMotor
-5d9f1424d94039620385eefc789448ed Assembly-CSharp.dll:.SurviveVictory
+f461a33f33f57408e39e9483d3124925 Assembly-CSharp.dll:.SurviveVictory
 0514d5dbbfe2732f8b834c646794176c Assembly-CSharp.dll:.ImmortalityProtocol
 02c34240099ba069d6a25457131f0643 Assembly-CSharp.dll:.TurretPlacerManager
 177f65a35edc37e637218c6f0d66f601 Assembly-CSharp.dll:.DifficultyManager

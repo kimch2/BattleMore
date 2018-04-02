@@ -30,7 +30,7 @@ public class LevelManager : MonoBehaviour {
 	void Awake () {
 		main = this;
 
-			//currentTech = Vehicles;
+			
 		if (LevelData.getHighestLevel() == 0) {
 			techButton.interactable = false;
 			UltButton.gameObject.SetActive (false);
@@ -43,7 +43,7 @@ public class LevelManager : MonoBehaviour {
 			UltButton.gameObject.SetActive (true);
 		}
 		
-		//currentTech = Vehicles;
+		currentTech = Vehicles;
 
 	
 	

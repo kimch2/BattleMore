@@ -15,9 +15,12 @@ public class stunStrike : MonoBehaviour, Notify {
 		if (GetComponent<Projectile> ()) {
 			GetComponent<Projectile> ().triggers.Add (this);
 		}
-		if (this.gameObject.GetComponent<explosion> ()) {
-			myexplode = this.gameObject.GetComponent<explosion>();
+
+		myexplode = this.gameObject.GetComponent<explosion>();
+		if (myexplode) {
+			Debug.Log ("Adding to " + this.gameObject);
 			myexplode.triggers.Add (this);
+
 		}
 
 
@@ -38,6 +41,7 @@ public class stunStrike : MonoBehaviour, Notify {
 				if (!target.myStats.isUnitType (mustTarget)) {
 					return damage;}
 			}
+			Debug.Log ("Stunning " + target);
 
 			target.StunForTime (source, stunTime);
 
