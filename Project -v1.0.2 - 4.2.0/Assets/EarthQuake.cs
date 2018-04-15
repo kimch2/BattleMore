@@ -13,7 +13,6 @@ public class EarthQuake : MonoBehaviour {
 	public Text percentage;
 	public float CameraShakeIntensity = 8;
 	int lastPercent;
-	public SurviveVictory survival;
 
 	public MultiShotParticle myParticle;
 	public GameObject QuakeBuilding;
@@ -77,9 +76,7 @@ public class EarthQuake : MonoBehaviour {
 			if (myParticle) {
 				myParticle.playEffect ();
 			}
-			if (survival) {
-				survival.increaseWait ();
-			}
+
 			PlayerPrefs.SetInt ("EarthQuake", PlayerPrefs.GetInt ("EarthQuake") + 1);
 			if (QuakeBuilding) {try{
 					QuakeBuilding.GetComponentInChildren<Animator> ().SetTrigger("Pulse");}catch{

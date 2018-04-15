@@ -98,10 +98,10 @@ public class DeployTurret  : TargetAbility{
 
 
 		//turrManage.enabled = false;
+		if (chargeCount < maxChargeCount) {
+			currentReplciation = StartCoroutine (replicateTurrets ());
 
-		currentReplciation = StartCoroutine (replicateTurrets());
-
-
+		}
 		if (turrManage.UnitName.Contains("Mini")) {
 			iconPic = turretIcons [1];
 		}
