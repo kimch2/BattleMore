@@ -11,7 +11,7 @@ public class IWeapon : MonoBehaviour {
 	public UnitManager myManager;
 
 	public GameObject OnHitEffect;
-	MultiShotParticle fireEffect;
+	protected MultiShotParticle fireEffect;
 
 	public AudioClip attackSoundEffect;
 	protected AudioSource audioSrc;
@@ -116,7 +116,7 @@ public class IWeapon : MonoBehaviour {
 		}
 	}
 	// Use this for initialization
-	void Start () {
+	public virtual void Start () {
 		audioSrc = GetComponent<AudioSource> ();
 		if (audioSrc) {
 			audioSrc.priority += Random.Range (-60, 0);
@@ -281,7 +281,7 @@ public class IWeapon : MonoBehaviour {
 
 
 	IEnumerator Fire (float time, UnitManager target)
-	{if (myAnimator) {
+	{if (myAnimator && AnimationName != "") {
 			myAnimator.Play (AnimationName);
 		}
 		else if (myManager) { // Adding an Else to the IF here, so we don't play the same animation twice
@@ -302,36 +302,7 @@ public class IWeapon : MonoBehaviour {
 				}
 			}
 
-
-			GameObject proj = null;
-			if (projectile != null) {
-
-				proj = createBullet ();
-
-
-				damage = fireTriggers (this.gameObject, proj, target, damage);
-
-				Projectile script = proj.GetComponent<Projectile> ();
-
-				//Debug.Log ("Creating " + script);
-				if (script) {
-					script.Initialize (target, damage, myManager);
-					script.setup ();
-				} else {
-
-					proj.SendMessage ("setSource", this.gameObject, SendMessageOptions.DontRequireReceiver);
-					proj.SendMessage ("setTarget", target, SendMessageOptions.DontRequireReceiver);
-					proj.SendMessage ("setDamage", damage, SendMessageOptions.DontRequireReceiver);
-				}
-			} else {
-				
-				damage = fireTriggers (this.gameObject, proj, target, damage); 
-				if (damage > 0) {
-					damage = target.myStats.TakeDamage (damage, this.gameObject, DamageTypes.DamageType.Regular);
-					myManager.myStats.veteranDamage (damage);
-				}
-
-			}
+			DealDamage (damage, target);
 
 
 			if (firePoints[originIndex].myParticle) {
@@ -367,6 +338,40 @@ public class IWeapon : MonoBehaviour {
 					fireEffect.transform.position = target.transform.position + Vector3.up;
 					fireEffect.playEffect ();
 				}
+			}
+
+		}
+	}
+
+
+	protected virtual void DealDamage(float damage, UnitManager target)
+	{
+		GameObject proj = null;
+		if (projectile != null) {
+
+			proj = createBullet ();
+
+
+			damage = fireTriggers (this.gameObject, proj, target, damage);
+
+			Projectile script = proj.GetComponent<Projectile> ();
+
+			//Debug.Log ("Creating " + script);
+			if (script) {
+				script.Initialize (target, damage, myManager);
+				script.setup ();
+			} else {
+
+				proj.SendMessage ("setSource", this.gameObject, SendMessageOptions.DontRequireReceiver);
+				proj.SendMessage ("setTarget", target, SendMessageOptions.DontRequireReceiver);
+				proj.SendMessage ("setDamage", damage, SendMessageOptions.DontRequireReceiver);
+			}
+		} else {
+
+			damage = fireTriggers (this.gameObject, proj, target, damage); 
+			if (damage > 0) {
+				damage = target.myStats.TakeDamage (damage, this.gameObject, DamageTypes.DamageType.Regular);
+				myManager.myStats.veteranDamage (damage);
 			}
 
 		}

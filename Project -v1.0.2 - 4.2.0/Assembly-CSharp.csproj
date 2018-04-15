@@ -92,6 +92,7 @@
      <Compile Include="Assets\BarrierAch.cs" />
      <Compile Include="Assets\barrierShield.cs" />
      <Compile Include="Assets\BeamCannon.cs" />
+     <Compile Include="Assets\BeamWeapon.cs" />
      <Compile Include="Assets\Behavior.cs" />
      <Compile Include="Assets\BloodFury.cs" />
      <Compile Include="Assets\BloodMist.cs" />
@@ -147,6 +148,7 @@
      <Compile Include="Assets\DaexaSupplyDrop.cs" />
      <Compile Include="Assets\DaexaWorkerInteract.cs" />
      <Compile Include="Assets\DamagedLook.cs" />
+     <Compile Include="Assets\DamageNonStacker.cs" />
      <Compile Include="Assets\DamageUpgrade.cs" />
      <Compile Include="Assets\DataChecker.cs" />
      <Compile Include="Assets\DayexaShield.cs" />

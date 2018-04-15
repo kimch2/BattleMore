@@ -460,7 +460,9 @@ public class UnitStats : MonoBehaviour {
 	{deathTriggers.Remove (mod);
 	}
 	public void addDeathTrigger( Modifier mod)//Method method)
-	{deathTriggers.Add(mod);
+	{if (!deathTriggers.Contains (mod)) {
+			deathTriggers.Add (mod);
+		}
 		//deathTriggers.Add (method);
 
 	}

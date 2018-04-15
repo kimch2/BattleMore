@@ -142,7 +142,9 @@ public class DeployTurret  : TargetAbility{
 		active = true;
 		changeCharge (1);
 		if (chargeCount < maxChargeCount) {
-			StartCoroutine (replicateTurrets());
+			currentReplciation =	StartCoroutine (replicateTurrets ());
+		} else {
+			currentReplciation = null;
 		}
 	}
 

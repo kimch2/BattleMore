@@ -851,8 +851,9 @@ public class RaceManager : MonoBehaviour, ManagerWatcher {
 		yield return new WaitForSeconds (UltTwo.myCost.cooldown);
 		if (!playUltTwoWarningFirstTime) {
 			playUltTwoWarningFirstTime = true;
+		} else {
+			ErrorPrompt.instance.UltTwoDone ();
 		}
-		ErrorPrompt.instance.UltTwoDone ();
 	}
 
 	IEnumerator UltFourNotif()
@@ -860,8 +861,9 @@ public class RaceManager : MonoBehaviour, ManagerWatcher {
 		yield return new WaitForSeconds (UltFour.myCost.cooldown);
 		if (!playUltFourWarningFirstTime) {
 			playUltFourWarningFirstTime = true;
+		} else {
+			ErrorPrompt.instance.UltFourDone ();
 		}
-		ErrorPrompt.instance.UltFourDone ();
 	}
 
 

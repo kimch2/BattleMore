@@ -13,11 +13,39 @@ public class LaserDrill : MonoBehaviour {
 	public Vector3 LaserStartPoint;
 	public  GameObject particle;
 
+
 	// Use this for initialization
 	void Start () {
 		instance = this;
 		
+
 	}
+	public GameObject EndEffect;
+	protected MultiShotParticle fireEffect;
+
+	void CreateEndEffect(Vector3 location)
+	{
+		if (EndEffect) {
+
+			if (!fireEffect) {
+				GameObject temp = (GameObject)Instantiate (EndEffect,location, Quaternion.identity);
+				fireEffect =temp.GetComponent<MultiShotParticle> ();
+				if (fireEffect) {
+					fireEffect.playEffect ();
+				}
+			} else {
+				if (!fireEffect.gameObject.activeSelf) {
+
+
+					fireEffect.gameObject.SetActive (true);
+					fireEffect.playEffect ();
+				}
+				fireEffect.transform.position = location;
+
+			}
+		}
+	}
+
 
 
 	Coroutine firing;
@@ -64,6 +92,7 @@ public class LaserDrill : MonoBehaviour {
 		if (particle) {
 			particle.SetActive (false);
 		}
+		fireEffect.gameObject.SetActive (false);
 		if (firing != null) {
 			StopCoroutine (firing);	
 		}	
@@ -95,13 +124,8 @@ public class LaserDrill : MonoBehaviour {
 
 				if (Physics.Raycast (this.gameObject.transform.position, towards, out objecthit, 20000, 1 << 20)) {
 					if (objecthitB.distance > objecthit.distance) {
-						barrierShield shield = objecthit.transform.gameObject.GetComponent<barrierShield> ();
-						if (!shield && objecthit.transform && objecthit.transform.parent) {
-							shield = objecthit.transform.parent.gameObject.GetComponent<barrierShield> ();
-						}
-						if (!shield && objecthit.transform && objecthit.transform.parent&& objecthit.transform.parent.parent) {
-							shield = objecthit.transform.parent.parent.gameObject.GetComponent<barrierShield> ();
-						}
+						barrierShield shield = objecthit.transform.gameObject.GetComponentInParent<barrierShield> ();
+
 						if (shield) {
 							shield.takeDamage (50);
 						}
@@ -139,11 +163,14 @@ public class LaserDrill : MonoBehaviour {
 					line.SetPositions (new Vector3[] {
 						(transform.rotation) * LaserStartPoint + this.gameObject.transform.position,
 						objecthit.point});
+					CreateEndEffect (objecthit.point + Vector3.up*2);
+				
 				} else {
 					line.SetPositions (new Vector3[] {
 						(transform.rotation) * LaserStartPoint + this.gameObject.transform.position,
 						currentTarget.transform.position + Vector3.up * 2
 					});
+					CreateEndEffect (currentTarget.transform.position + Vector3.up*2);
 				}
 
 			} else {
@@ -152,6 +179,7 @@ public class LaserDrill : MonoBehaviour {
 					(transform.rotation) * LaserStartPoint + this.gameObject.transform.position,
 					currentTarget.transform.position + Vector3.up * 2
 				});
+				CreateEndEffect (currentTarget.transform.position + Vector3.up*2);
 			}
 				
 				spotter = currentTarget.transform.position;

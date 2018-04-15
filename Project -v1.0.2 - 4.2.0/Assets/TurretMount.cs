@@ -10,31 +10,33 @@ public class TurretMount : MonoBehaviour, Modifier {
 	public bool rapidArms;
 	public float lastUnPlaceTime = 0;
 	// Use this for initialization
-	void Start () {
+	public void Start () {
 	
 		GetComponentInParent<UnitStats> ().addDeathTrigger (this);
 
 		FButtonManager.main.updateTankNumber ();
 
-
-		if (GameManager.main.activePlayer.upgradeBall.GetComponent<RapidArmsUpgrade>()) {
+		rapidArms = GameManager.main.activePlayer.upgradeBall.GetComponent<RapidArmsUpgrade> ();
+		if (rapidArms &&  GetComponentInParent<UnitManager> ().PlayerOwner !=3) {
 		
 			foreach (buildTurret bt in GameObject.FindObjectsOfType<buildTurret>()) {
-
-				bt.addMount (this);
+				if (bt.manager.PlayerOwner == GetComponentInParent<UnitManager> ().PlayerOwner) {
+					bt.addMount (this);
+				}
 			}
 		
 
 			foreach (TurretScreenDisplayer tm in  GameObject.FindObjectsOfType<TurretScreenDisplayer>()) {
-				if (!tm.mounts.Contains (this)) {
-					tm.mounts.Add (this);
-					addShop (tm);
+				if (tm.GetComponent<UnitManager>().PlayerOwner == GetComponentInParent<UnitManager> ().PlayerOwner) {
+					if (!tm.mounts.Contains (this)) {
+					
+						tm.mounts.Add (this);
+						addShop (tm);
 				
+					}
 				}
 			}
 		}
-
-
 	}
 
 

@@ -56,6 +56,7 @@ public class CapturableUnit : MonoBehaviour, Modifier  {
 				}
 			}
 
+
 			OnCapture.Invoke ();
 			if (cutscene) {
 				MainCamera.main.setCutScene (this.gameObject.transform.position, 120);
@@ -122,6 +123,15 @@ public class CapturableUnit : MonoBehaviour, Modifier  {
 		GameManager.main.activePlayer.addUnit (manage);
 		GameManager.main.activePlayer.addVeteranStat (manage.myStats.veternStat);
 		Selected sel =  manage.GetComponent<Selected> ();
+		foreach (TurretMount tm in GetComponentsInChildren<TurretMount>()) {
+			tm.Start ();
+		}
+		foreach (buildTurret tm in GetComponents<buildTurret>()) {
+			tm.Start ();
+		}
+		foreach (TurretScreenDisplayer tm in GetComponents<TurretScreenDisplayer>()) {
+			tm.Start ();
+		}
 		sel.interact();
 		yield return null;
 		Destroy (this);

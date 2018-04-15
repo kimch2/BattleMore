@@ -23,7 +23,8 @@ public class PrismTower : MonoBehaviour , Notify{
 	public float trigger(GameObject source, GameObject proj, UnitManager target, float damage)
 	{
 		float toAdd = sendForAid (this, this);
-		StartCoroutine( DisplayLine (target.gameObject,15,1));
+	
+		StartCoroutine( DisplayLine (target.gameObject,10,1));
 		return toAdd + damage;
 	}
 
@@ -36,7 +37,7 @@ public class PrismTower : MonoBehaviour , Notify{
 
 			if (origin != this) {
 				if (Asker.gameObject) {
-					StartCoroutine (DisplayLine (Asker.gameObject, 15, 15));
+					StartCoroutine (DisplayLine (Asker.gameObject, 10, 10));
 				}
 				toReturn = lendDamage;
 			}
@@ -52,18 +53,20 @@ public class PrismTower : MonoBehaviour , Notify{
 
 	IEnumerator DisplayLine(GameObject target, float StartUp, float endUp)
 	{
+		yield return null;
+		if (target) {
+			ParticleEffect.SetActive (true);
 
-		ParticleEffect.SetActive (true);
-
-		Vector3[] lines = new Vector3 [2];
-		lines [0] = this.transform.position + StartUp*Vector3.up;
-		lines [1] = new Vector3 (target.transform.position.x, target.transform.position.y + endUp, target.transform.position.z);
-		ParticleEffect.transform.LookAt (lines[1]);
-		lineRender.SetPositions (lines);
-		yield return new WaitForSeconds(.45f);
+			Vector3[] lines = new Vector3 [2];
+			lines [0] = this.transform.position + StartUp * Vector3.up;
+			lines [1] = new Vector3 (target.transform.position.x, target.transform.position.y + endUp, target.transform.position.z);
+			ParticleEffect.transform.LookAt (lines [1]);
+			lineRender.SetPositions (lines);
+			yield return new WaitForSeconds (.45f);
 
 	
-		ParticleEffect.SetActive (false);
+			ParticleEffect.SetActive (false);
+		}
 	}
 
 

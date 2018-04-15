@@ -18,7 +18,7 @@ public class AreaDamage : MonoBehaviour {
 	public bool showPop = true;
 
 	private int iter = 0;
-
+	public bool NonStack = false;
 
 	// Use this for initialization
 	void Start () {
@@ -35,6 +35,11 @@ public class AreaDamage : MonoBehaviour {
 			enemies.RemoveAll (item => item == null);
 			foreach (UnitStats s in enemies) {
 
+				if (NonStack) {
+					if (!DamageNonStacker.instance.DealDamage (gameObject.name, s, damage)) {
+						return;
+					}
+				}
 		
 				s.TakeDamage (damage, this.gameObject.gameObject.gameObject, myType);
 				if (showPop) {

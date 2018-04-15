@@ -25,25 +25,32 @@ public class buildTurret :UnitProduction{
 	void Awake()
 	{audioSrc = GetComponent<AudioSource> ();
 		myType = type.activated;
-	}
-
-
-	// Use this for initialization
-	void Start () {
 		buildMan = GetComponent<BuildManager> ();
 		manager = GetComponent<UnitManager> ();
 		mySelect = GetComponent<Selected> ();
+	}
+
+
+
+	// Use this for initialization
+	public void Start () {
+
 
 	//	myCost.cooldown = buildTime;
 		racer = GameManager.main.playerList [manager.PlayerOwner - 1]; 
 		HD = GetComponentInChildren<HealthDisplay>();
 
-		if (rapidArms) {
+		turretMounts.Clear ();
+		rapidArms = GameManager.main.activePlayer.upgradeBall.GetComponent<RapidArmsUpgrade> ();
+		if (rapidArms && manager.PlayerOwner != 3) {
 			foreach (TurretMount tm in GameObject.FindObjectsOfType<TurretMount>()) {
-				if (!turretMounts.Contains (tm)) {
-					turretMounts.Add (tm);
+				
+				if (tm.GetComponentInParent<UnitManager> ().PlayerOwner == manager.PlayerOwner) {
+					if (!turretMounts.Contains (tm)) {
+						
+						turretMounts.Add (tm);
+					}
 				}
-			
 			}
 		}
 	}

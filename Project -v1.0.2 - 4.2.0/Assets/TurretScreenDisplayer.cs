@@ -18,21 +18,25 @@ public class TurretScreenDisplayer : MonoBehaviour {
 
 
 	// Use this for initialization
-	void Start () {
+	public void Start () {
 		manage = GetComponent<UnitManager> ();
 	
-
-		if (rapidArms) {
+		mounts.Clear ();
+		rapidArms = GameManager.main.activePlayer.upgradeBall.GetComponent<RapidArmsUpgrade> ();
+		if (rapidArms && manage.PlayerOwner != 3) {
 			foreach (TurretMount tm in GameObject.FindObjectsOfType<TurretMount>()) {
-				if (!mounts.Contains (tm)) {
-					mounts.Add (tm);
-					tm.addShop (this);
+				if (tm.GetComponentInParent<UnitManager> ().PlayerOwner == manage.PlayerOwner) {
+					if (!mounts.Contains (tm)) {
+						
+						mounts.Add (tm);
+						tm.addShop (this);
+					}
 				}
 
 			}
 		}
 
-
+		CancelInvoke("UpdateButts");
 		InvokeRepeating ("UpdateButts", .2f, .16f);
 	}
 

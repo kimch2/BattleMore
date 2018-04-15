@@ -1,15 +1,16 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\SummonStructure.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\evasiveMenuvers.cs">
     <Files>
       <File FileName="Assets\Scripts - In Game\UI\UIManager.cs" Line="1" Column="1" />
-      <File FileName="Assets\LevelManager.cs" Line="29" Column="32" />
-      <File FileName="Assets\Scripts - In Game\RaceManager.cs" Line="354" Column="52" />
-      <File FileName="Assets\ErrorPrompt.cs" Line="43" Column="3" />
-      <File FileName="Assets\stunStrike.cs" Line="27" Column="3" />
-      <File FileName="Assets\explosion.cs" Line="34" Column="29" />
-      <File FileName="Assets\AudioPlayer.cs" Line="18" Column="1" />
-      <File FileName="Assets\SummonStructure.cs" Line="48" Column="56" />
+      <File FileName="Assets\BeamWeapon.cs" Line="81" Column="27" />
+      <File FileName="Assets\Scripts - In Game\IWeapon.cs" Line="14" Column="1" />
+      <File FileName="Assets\LaserDrill.cs" Line="89" Column="21" />
+      <File FileName="Assets\PrismTower.cs" Line="58" Column="18" />
+      <File FileName="Assets\Scripts - In Game\Projectile.cs" Line="235" Column="17" />
+      <File FileName="Assets\AreaDamage.cs" Line="39" Column="31" />
+      <File FileName="Assets\DamageNonStacker.cs" Line="9" Column="2" />
+      <File FileName="Assets\evasiveMenuvers.cs" Line="47" Column="18" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
