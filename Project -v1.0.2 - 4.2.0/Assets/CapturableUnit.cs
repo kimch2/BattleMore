@@ -73,6 +73,8 @@ public class CapturableUnit : MonoBehaviour, Modifier  {
 
 		List<UnitManager> newAllies = new List<UnitManager> ();
 		List<UnitManager> newEnemies = new List<UnitManager> ();
+		List<GameObject> removeFromNuetral = new List<GameObject> ();
+
 		foreach (UnitManager unit in manage.enemies) {
 			if (unit.PlayerOwner == 2) {
 				newEnemies.Add (unit);
@@ -102,9 +104,27 @@ public class CapturableUnit : MonoBehaviour, Modifier  {
 				}
 			}
 		}
+
+		foreach (GameObject unit in manage.neutrals) {
+			UnitManager manners = unit.GetComponent<UnitManager> ();
+			if (manners) {
+				if (manners.PlayerOwner == 2) {
+					newEnemies.Add (manners);
+					removeFromNuetral.Add (unit);
+			
+				} else if (manners.PlayerOwner == 1) {
+					newAllies.Add (manners);
+					removeFromNuetral.Add (unit);
+				}
+			}	
+		}
+
 		manage.allies = newAllies;
 		manage.enemies = newEnemies;
 
+			foreach (GameObject ob in removeFromNuetral) {
+				manage.neutrals.Remove (ob);
+			}
 
 
 		manage.getVisionSphere ().radius = manage.visionRange;

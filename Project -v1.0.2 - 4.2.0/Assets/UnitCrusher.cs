@@ -42,7 +42,9 @@ public class UnitCrusher : MonoBehaviour, Notify {
 
 		if (target && source != target) {
 	
-
+			if (source) {
+				source.GetComponent<UnitStats> ().upKills ();
+			}
 			UnitCrusher crusher = target.gameObject.AddComponent<UnitCrusher> ();
 
 			crusher.onTarget = true;

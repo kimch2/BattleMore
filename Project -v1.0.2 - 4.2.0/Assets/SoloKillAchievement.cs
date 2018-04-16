@@ -5,7 +5,7 @@ using UnityEngine;
 public class SoloKillAchievement : Achievement{
 
 	public string UnitName;
-	public int levelNum;
+
 	public override string GetDecription()
 	{return Description;
 	}
@@ -15,12 +15,8 @@ public class SoloKillAchievement : Achievement{
 
 
 	public override void CheckEnd (){
-		if (!IsAccomplished ()) {
-			//Debug.Log ("level " + GameObject.FindObjectOfType<VictoryTrigger> ().levelNumber == 0 +"     difficulty " + LevelData.getDifficulty ());
-			if (GameObject.FindObjectOfType<VictoryTrigger> ().levelNumber != levelNum) {
-				return;
-			}
-
+		if (!IsAccomplished () && isCorrectLevel()) {
+	
 
 			foreach (VeteranStats vets in  GameObject.FindObjectOfType<GameManager> ().playerList[1].getUnitStats()) {
 				if (vets.Died && vets.UnitName != UnitName) {

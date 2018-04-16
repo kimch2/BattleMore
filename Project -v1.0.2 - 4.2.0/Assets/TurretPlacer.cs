@@ -41,8 +41,9 @@ public class TurretPlacer : MonoBehaviour {
 
 	public bool addFact(TurretScreenDisplayer fact)
 	{
-
-		myFactories.Add (fact);
+		if (!myFactories.Contains (fact)) {
+			myFactories.Add (fact);
+		}
 		center.image.sprite = armImage;
 		//center.interactable = true;
 

@@ -34,7 +34,17 @@ public class TurretScreenDisplayer : MonoBehaviour {
 				}
 
 			}
+		} 
+		else {
+			foreach (UnitManager manage in manage.allies) {
+				TurretMount tm = manage.GetComponentInChildren<TurretMount> ();
+				if(tm && !mounts.Contains(tm)){
+					mounts.Add (tm);
+					tm.addShop (this);
+				}
+			}
 		}
+
 
 		CancelInvoke("UpdateButts");
 		InvokeRepeating ("UpdateButts", .2f, .16f);

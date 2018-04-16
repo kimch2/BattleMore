@@ -3,7 +3,6 @@ using System.Collections;
 
 public class AllLevelAch: Achievement{
 
-	public int LevelNum;
 
 	public override string GetDecription()
 	{return Description;
@@ -13,13 +12,10 @@ public class AllLevelAch: Achievement{
 	}
 
 	public override void CheckEnd (){
-		if (!IsAccomplished ()) {
-			if (GameObject.FindObjectOfType<VictoryTrigger> ().levelNumber >= LevelNum) {
-				
+		if (!IsAccomplished () && isCorrectLevel()) {
+
 					Accomplished ();
 
-
-			}
 		}
 	}
 

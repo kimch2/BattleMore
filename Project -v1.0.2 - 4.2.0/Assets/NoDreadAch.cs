@@ -11,8 +11,8 @@ public class NoDreadAch: Achievement{
 	}
 
 	public override void CheckEnd (){
-		if (!IsAccomplished ()) {
-			if (GameObject.FindObjectOfType<VictoryTrigger> ().levelNumber == 3) {
+		if (!IsAccomplished () && isCorrectLevel()) {
+
 				foreach (VeteranStats vets in  GameObject.FindObjectOfType<GameManager> ().playerList[1].getUnitStats()) {
 					if (vets.unitType == "DreadNaught") {
 						return;
@@ -21,7 +21,7 @@ public class NoDreadAch: Achievement{
 
 				}
 				Accomplished ();
-			}
+
 		}
 	}
 

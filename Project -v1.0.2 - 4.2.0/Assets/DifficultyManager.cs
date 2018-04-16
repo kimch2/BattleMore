@@ -4,6 +4,9 @@ using System.Collections.Generic;
 
 public class DifficultyManager : MonoBehaviour {
 
+	public static DifficultyManager instance;
+
+
 	[Tooltip("Percentage of health enemies will have on easy mode")]
 	public float EasyHealth;
 	[Tooltip("Percentage of Damage enemies will have on easy mode")]
@@ -29,6 +32,7 @@ public class DifficultyManager : MonoBehaviour {
 	int difficulty;
 	// Use this for initialization
 	void Awake () {
+		instance = this;
 		difficulty = LevelData.getDifficulty ();
 		Debug.Log (" Difficulty " + difficulty);
 

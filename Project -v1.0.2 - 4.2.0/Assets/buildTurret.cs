@@ -28,6 +28,7 @@ public class buildTurret :UnitProduction{
 		buildMan = GetComponent<BuildManager> ();
 		manager = GetComponent<UnitManager> ();
 		mySelect = GetComponent<Selected> ();
+		HD = GetComponentInChildren<HealthDisplay>();
 	}
 
 
@@ -38,9 +39,11 @@ public class buildTurret :UnitProduction{
 
 	//	myCost.cooldown = buildTime;
 		racer = GameManager.main.playerList [manager.PlayerOwner - 1]; 
-		HD = GetComponentInChildren<HealthDisplay>();
+	
+
 
 		turretMounts.Clear ();
+		
 		rapidArms = GameManager.main.activePlayer.upgradeBall.GetComponent<RapidArmsUpgrade> ();
 		if (rapidArms && manager.PlayerOwner != 3) {
 			foreach (TurretMount tm in GameObject.FindObjectsOfType<TurretMount>()) {
@@ -50,6 +53,13 @@ public class buildTurret :UnitProduction{
 						
 						turretMounts.Add (tm);
 					}
+				}
+			}
+		} else {
+			foreach (UnitManager manage in manager.allies) {
+				TurretMount tm = manage.GetComponentInChildren<TurretMount> ();
+				if(tm && !turretMounts.Contains(tm)){
+					turretMounts.Add (tm);
 				}
 			}
 		}

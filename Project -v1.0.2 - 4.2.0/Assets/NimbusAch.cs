@@ -16,10 +16,11 @@ public class NimbusAch  : Achievement{
 			float counter = 0;
 			foreach (VeteranStats vets in  GameObject.FindObjectOfType<GameManager> ().activePlayer.getUnitStats()) {
 				if (vets.UnitName == "Nimbus") {
-					counter++;
+
+					counter += vets.kills ;
 				}
 			}
-			if (counter >= 5) {
+			if (counter >= 20) {
 				Accomplished ();
 			}
 		}

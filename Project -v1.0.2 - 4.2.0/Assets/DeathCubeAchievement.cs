@@ -14,23 +14,17 @@ public class DeathCubeAchievement : Achievement{
 	public override void CheckEnd (){
 
 		float lastDeathTime =0;
-		if (!IsAccomplished ()) {
-			if (GameObject.FindObjectOfType<VictoryTrigger> ().levelNumber == 6) {
-				foreach (VeteranStats vets in  GameObject.FindObjectOfType<GameManager> ().playerList[1].getUnitStats()) {
+		if (!IsAccomplished () && isCorrectLevel()) {
+
+			foreach (VeteranStats vets in GameManager.main.playerList[1].getUnitStats()) {
 					
 					if (vets.unitType == "Death Cube" && vets.Died) {
-						if (lastDeathTime != 0) {
-							if (Mathf.Abs (lastDeathTime - vets.DeathTime) < 60) {
-								Accomplished ();
-							}
-						} else {
-							lastDeathTime = vets.DeathTime;
-						}
+						if (vets.kills == 0) {
+							Accomplished ();
+						}	
 
 					}
 
-
-				}
 			}
 		}
 	}

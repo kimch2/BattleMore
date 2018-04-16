@@ -5,8 +5,7 @@ public class HadrianLifeAch : Achievement{
 
 	public string UnitName;
 	public float maxDamage;
-	public int levelNum;
-	public int lowestDifficulty;
+
 	public override string GetDecription()
 	{return Description;
 	}
@@ -16,12 +15,8 @@ public class HadrianLifeAch : Achievement{
 
 
 	public override void CheckEnd (){
-		if (!IsAccomplished ()) {
-			//Debug.Log ("level " + GameObject.FindObjectOfType<VictoryTrigger> ().levelNumber == 0 +"     difficulty " + LevelData.getDifficulty ());
-			if (GameObject.FindObjectOfType<VictoryTrigger> ().levelNumber != levelNum || LevelData.getDifficulty() < lowestDifficulty) {
-				return;
-
-			}
+		if (!IsAccomplished () && isCorrectLevel()) {
+			
 			float totalDamage = 0;
 			foreach (VeteranStats vets in  GameObject.FindObjectOfType<GameManager> ().playerList[0].getUnitStats()) {
 				if (vets.UnitName == UnitName) {

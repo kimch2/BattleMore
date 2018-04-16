@@ -10,9 +10,14 @@ public abstract class Achievement : MonoBehaviour {
 
 	public enum Earnings{all, unearned, earned}
 	public enum Level{all, campaign, one, two,three, four,five, six,seven,eight,nine,ten,eleven,twelve,thirteen,fourteen,fiftteen,sixteen, anyLevel}
+	public enum MinimumDiff{easy, medium, hard}
+
+
+
 	public abstract void CheckBeginning ();
 	public abstract string GetDecription ();
 	public Level myLevel;
+	public MinimumDiff minimumDifficulty = MinimumDiff.easy;
 	public int TechReward = 2;
 
 	public abstract void CheckEnd ();
@@ -98,5 +103,28 @@ public abstract class Achievement : MonoBehaviour {
 	public virtual void Reset()
 	{
 		PlayerPrefs.SetInt (Title, 0);
+	}
+
+	public bool isCorrectLevel()
+	{
+		if (VictoryTrigger.instance.levelNumber != getLevelNumber ()) {
+			return false;}
+		int n = LevelData.getDifficulty ();
+		if (minimumDifficulty == MinimumDiff.easy) {
+			return true;
+		} else if (n == 2) {
+			if (minimumDifficulty == MinimumDiff.easy) {
+				return false;
+			}
+		} else {
+			if (minimumDifficulty == MinimumDiff.easy) {
+				return false;
+			}
+			if (minimumDifficulty == MinimumDiff.medium) {
+				return false;
+			}
+		}
+		return true;
+	
 	}
 }
