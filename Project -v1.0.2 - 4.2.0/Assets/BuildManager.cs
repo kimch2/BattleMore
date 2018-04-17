@@ -42,15 +42,21 @@ public class BuildManager : MonoBehaviour {
 				buildOrder.RemoveAt (0);
 
 			if (buildOrder.Count > 0) {
-				float Sup = buildOrder [0].unitToBuild.GetComponent<UnitStats> ().supply;
+				float Sup = 0;
 
+				if (buildOrder [0].unitToBuild) {
+					Sup = buildOrder [0].unitToBuild.GetComponent<UnitStats> ().supply;
+				}
+					
 				if (Sup == 0 || raceMan.hasSupplyAvailable (Sup)) {
+
 					buildOrder [0].startBuilding ();
 					build.hasSupply ();
 				} else {
 					build.NoSupply ();
 					StartCoroutine (waitOnSupply (Sup));
 				}
+
 
 			} else {
 				if (augmenter) {

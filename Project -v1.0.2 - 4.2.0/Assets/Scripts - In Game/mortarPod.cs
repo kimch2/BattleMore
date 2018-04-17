@@ -19,12 +19,13 @@ public class mortarPod : MonoBehaviour, Notify {
 
 	void Awake ()
 	{
+		shotCount = totalShots;
 		HealthD = GetComponentInChildren<Selected> ();
 	}
 	void Start () {
 
 	
-		shotCount = totalShots;
+
 		weapon = this.gameObject.GetComponent<IWeapon> ();
 
 		weapon.triggers.Add (this);

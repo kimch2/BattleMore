@@ -53,27 +53,24 @@ public class barrierShield : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other)
 	{
-		if (other.gameObject.tag == "Projectile") {
 
+		if (other.gameObject.layer == 15) {
+			if (other.isTrigger) {
+				return;
+			}
 		
 			Projectile proj = other.GetComponent<Projectile> ();
+
 			if (proj.sourceInt != 1) {
-
-				float dist = Vector3.Distance (this.gameObject.transform.position, other.transform.position);
-
-				if (dist > radius - 5 && dist < radius + 5) {
-					
-					Health -= proj.damage;
-					TotalAbsorbed += proj.damage;
-					Instantiate (Effect, other.gameObject.transform.position, other.gameObject.transform.rotation);
-					proj.selfDestruct ();
-
-
-
-					if (Health <= 0) {
-						StartCoroutine (RunTime (0));
+				if (proj.Source) {
+					float dist = Vector3.Distance ( this.gameObject.transform.position,proj.Source.transform.position);
+					if (dist > radius ) {
+						AbsorbShot (proj);
 					}
-				
+				}
+				else
+				{					
+					AbsorbShot (proj);
 				}
 
 
@@ -84,45 +81,59 @@ public class barrierShield : MonoBehaviour {
 
 	}
 
-	public void takeDamage(float amount)
+
+	void OnTriggerExit(Collider other)
 	{
-		Health -= amount;
-		TotalAbsorbed += amount;
-	
+		if (other.gameObject.layer != 15) {
+			return;
+		}
+		if (other.isTrigger) {
+			return;
+		}
+
+		Projectile proj = other.GetComponent<Projectile> ();
+
+		if (proj.sourceInt != 1) {
+				
+			if (proj.Source) {
+				float dist = Vector3.Distance ( this.gameObject.transform.position,proj.Source.transform.position);
+				if (dist < radius ) {
+					AbsorbShot (proj);
+				}
+			}
+			else
+			{					
+				AbsorbShot (proj);
+			}
+			
+			}
+
+	}
+
+
+	void AbsorbShot(Projectile proj)
+	{
+		Health -= proj.damage;
+		TotalAbsorbed += proj.damage;
+		Vector3 location = gameObject.transform.position + (proj.gameObject.transform.position - gameObject.transform.position).normalized * radius;
+		Instantiate (Effect,   location, proj.gameObject.transform.rotation);
+		proj.selfDestruct ();
+
+
 		if (Health <= 0) {
 			StartCoroutine (RunTime (0));
 		}
 	}
 
-	void OnTriggerExit(Collider other)
+
+	public void takeDamage(float amount)
 	{
-		if (other.gameObject.tag == "Projectile") {
+		Health -= amount;
+		TotalAbsorbed += amount;
 
-
-			Projectile proj = other.GetComponent<Projectile> ();
-
-			if (proj.sourceInt != 1) {
-				
-				float dist = Vector3.Distance (this.gameObject.transform.position, other.transform.position);
-
-				if (dist > radius - 5 && dist < radius + 5) {
-					Health -= proj.damage;
-					TotalAbsorbed += proj.damage;
-					Instantiate (Effect, other.gameObject.transform.position,  other.gameObject.transform.rotation);
-					proj.selfDestruct ();
-
-					if (Health <= 0) {
-						StartCoroutine (RunTime (0));
-					}
-
-				}
-
-
-
-			}
+		if (Health <= 0) {
+			StartCoroutine (RunTime (0));
 		}
-
-
 	}
 
 
