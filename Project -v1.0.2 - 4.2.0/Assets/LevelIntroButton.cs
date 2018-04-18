@@ -42,6 +42,7 @@ public class LevelIntroButton : MonoBehaviour {
 		}
 
 		foreach (int i in  myComp.MyLevels[LevelIndex].UnlockedBy) {
+
 			if (myComp.MyLevels [i].getCompletionCount () == 0) {
 				gameObject.SetActive (false);
 				//return;

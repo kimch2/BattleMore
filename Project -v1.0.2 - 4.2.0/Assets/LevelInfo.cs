@@ -47,7 +47,7 @@ public class LevelInfo {
 
 	public int getCompletionCount()
 	{
-		return PlayerPrefs.GetInt ("L" + SceneNumber +"Win", 0);
+		return PlayerPrefs.GetInt ("L" + LevelName +"Win", 0);
 
 		//LevelCompilation.loadGameStatic ();
 		//Resources.Load<LevelCompilation> ("LevelEditor").loadGame ();
@@ -56,8 +56,8 @@ public class LevelInfo {
 
 	public void increaseCompCount()
 	{
-
-		PlayerPrefs.SetInt ("L" + SceneNumber +"Win", PlayerPrefs.GetInt ("L" + SceneNumber+"Win") + 1);
+		Debug.Log ("INcreasing amount on " + LevelName);
+		PlayerPrefs.SetInt ("L" +  LevelName +"Win", PlayerPrefs.GetInt ("L" + SceneNumber+"Win") + 1);
 
 		//CompletionCount++;
 		//LevelCompilation.saveGameStatic ();
@@ -67,24 +67,24 @@ public class LevelInfo {
 
 	public int getHighestDiff()
 	{
-		return PlayerPrefs.GetInt ("L" +SceneNumber + "Dif", 1);
+		return PlayerPrefs.GetInt ("L" + LevelName + "Dif", 1);
 	}
 
 	public void setHighestDiff(int n)
 	{
 
 		int diff = LevelData.getDifficulty ()-1;
-		if (diff > PlayerPrefs.GetInt ("L" + SceneNumber + "Dif", -1)) {
+		if (diff > PlayerPrefs.GetInt ("L" +  LevelName + "Dif", -1)) {
 
-			PlayerPrefs.SetInt ("L" +SceneNumber + "Dif", diff);
+			PlayerPrefs.SetInt ("L" + LevelName + "Dif", diff);
 		}
 
 	}
 
 	public void Reset()
 	{
-		PlayerPrefs.SetInt ("L" + SceneNumber +"Win", 0);
-		PlayerPrefs.SetInt ("L" +SceneNumber + "Dif", 1);
+		PlayerPrefs.SetInt ("L" +  LevelName +"Win", 0);
+		PlayerPrefs.SetInt ("L" + LevelName + "Dif", 1);
 	}
 
 	//int diff = LevelData.getDifficulty ()-1;
