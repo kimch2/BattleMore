@@ -35,6 +35,7 @@ public class GameMenu : MonoBehaviour {
 	private Canvas currentMenu;
 
 	private UIManager uimanage;
+	public KeyCode escapekey = KeyCode.Backspace;
 
 	public ExpositionDisplayer displayer;
 	//to be deactivated when the game is paused to halt their inputs.
@@ -60,7 +61,7 @@ public class GameMenu : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if (Input.GetKeyUp (KeyCode.Backspace)) {
+		if (Input.GetKeyUp (escapekey)) {
 			
 			openMenu ();
 			if (CursorManager.main) {

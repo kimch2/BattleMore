@@ -80,8 +80,8 @@ public class Bombardment : TargetAbility{
 
 
 		Vector3 hitzone = location;
-		float radius = ((float)index/(float)shotCount )* 43;// Random.Range (0, 40);
-		float angle = index * 15;// Random.Range (0, 360);
+		float radius = Mathf.Sqrt( ((float)index/(float)shotCount ))* 43;
+		float angle = index * 15;
 
 		if (index % 2 == 1) {
 			angle += 180;

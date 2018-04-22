@@ -202,6 +202,7 @@
      <Compile Include="Assets\Effects\Elemental Free\Scripts\GE_ELF_Demo.cs" />
      <Compile Include="Assets\Effects\LightningBolt\LightningBoltScript.cs" />
      <Compile Include="Assets\EggAchievement.cs" />
+     <Compile Include="Assets\Email.cs" />
      <Compile Include="Assets\EMPblast.cs" />
      <Compile Include="Assets\EmpMissile.cs" />
      <Compile Include="Assets\EnableAbility.cs" />
@@ -927,19 +928,19 @@
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll</HintPath>
  </Reference>
  <Reference Include="Pathfinding.ClipperLib">
- <HintPath>C:/Users/Matthew Johnson/Desktop/BattleMoreNov/Nested/Project -v1.0.2 - 4.2.0/Assets/Plugins/AstarPathfindingProject/Plugins/Clipper/Pathfinding.ClipperLib.dll</HintPath>
+ <HintPath>C:/Users/Matthew Johnson/Desktop/BattleTrifecta/Project -v1.0.2 - 4.2.0/Assets/Plugins/AstarPathfindingProject/Plugins/Clipper/Pathfinding.ClipperLib.dll</HintPath>
  </Reference>
  <Reference Include="Pathfinding.Ionic.Zip.Reduced">
- <HintPath>C:/Users/Matthew Johnson/Desktop/BattleMoreNov/Nested/Project -v1.0.2 - 4.2.0/Assets/Plugins/AstarPathfindingProject/Plugins/DotNetZip/Pathfinding.Ionic.Zip.Reduced.dll</HintPath>
+ <HintPath>C:/Users/Matthew Johnson/Desktop/BattleTrifecta/Project -v1.0.2 - 4.2.0/Assets/Plugins/AstarPathfindingProject/Plugins/DotNetZip/Pathfinding.Ionic.Zip.Reduced.dll</HintPath>
  </Reference>
  <Reference Include="Pathfinding.JsonFx">
- <HintPath>C:/Users/Matthew Johnson/Desktop/BattleMoreNov/Nested/Project -v1.0.2 - 4.2.0/Assets/Plugins/AstarPathfindingProject/Plugins/JsonFx/Pathfinding.JsonFx.dll</HintPath>
+ <HintPath>C:/Users/Matthew Johnson/Desktop/BattleTrifecta/Project -v1.0.2 - 4.2.0/Assets/Plugins/AstarPathfindingProject/Plugins/JsonFx/Pathfinding.JsonFx.dll</HintPath>
  </Reference>
  <Reference Include="Pathfinding.Poly2Tri">
- <HintPath>C:/Users/Matthew Johnson/Desktop/BattleMoreNov/Nested/Project -v1.0.2 - 4.2.0/Assets/Plugins/AstarPathfindingProject/Plugins/Poly2Tri/Pathfinding.Poly2Tri.dll</HintPath>
+ <HintPath>C:/Users/Matthew Johnson/Desktop/BattleTrifecta/Project -v1.0.2 - 4.2.0/Assets/Plugins/AstarPathfindingProject/Plugins/Poly2Tri/Pathfinding.Poly2Tri.dll</HintPath>
  </Reference>
  <Reference Include="UIAddons">
- <HintPath>C:/Users/Matthew Johnson/Desktop/BattleMoreNov/Nested/Project -v1.0.2 - 4.2.0/Assets/UIAddons/Plugins/UIAddons/UIAddons.dll</HintPath>
+ <HintPath>C:/Users/Matthew Johnson/Desktop/BattleTrifecta/Project -v1.0.2 - 4.2.0/Assets/UIAddons/Plugins/UIAddons/UIAddons.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>
