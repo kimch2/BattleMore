@@ -102,9 +102,11 @@ public class AetherRelay : Ability, AllySighted,EnemySighted{
 
 	public void allyLeft (UnitManager otherManager)
 	{
-		DayexaShield s = otherManager.gameObject.GetComponent<DayexaShield> ();
-		if (s) {
-			shieldList.Remove (s);
+		if (otherManager) {
+			DayexaShield s = otherManager.gameObject.GetComponent<DayexaShield> ();
+			if (s) {
+				shieldList.Remove (s);
+			}
 		}
 	}
 
