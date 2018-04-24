@@ -61,7 +61,7 @@ public class UltimateApplier : MonoBehaviour {
 
 
 		Bombardment bm = (Bombardment)myRace.UltFour;
-		bm.myDamage += FireOne * 15;
+		bm.myDamage = 60 + FireOne * 15;
 	
 		bm.FriendlyFire = 1 - FireTwo * .5f;
 	

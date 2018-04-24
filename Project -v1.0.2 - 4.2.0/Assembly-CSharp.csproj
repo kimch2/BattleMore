@@ -640,6 +640,7 @@
      <Compile Include="Assets\UnitUtility.cs" />
      <Compile Include="Assets\Upgradable.cs" />
      <Compile Include="Assets\Upgrade.cs" />
+     <Compile Include="Assets\UpgradeCenterTag.cs" />
      <Compile Include="Assets\VeteranStats.cs" />
      <Compile Include="Assets\VeteranVicDisplayer.cs" />
      <Compile Include="Assets\VictoryScreen.cs" />

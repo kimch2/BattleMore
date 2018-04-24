@@ -18,6 +18,8 @@ public class DifficultyManager : MonoBehaviour {
 	public float LevelTwoUpgradeTime;
 	public float LevelThreeUpgradeTime;
 
+	public int UpgradeCenterCount = 0;
+
 	[Tooltip("1 is normal time, 0-1 makes waves come faster, above 1 makes them come slower.")]
 	public float EasyWaveTimeMod = 1.2f;
 	[Tooltip("1 is normal time, 0-1 makes waves come faster, above 1 makes them come slower.")]
@@ -104,25 +106,36 @@ public class DifficultyManager : MonoBehaviour {
 		}
 	}
 
+	public void UpgradeDied ()
+	{
+		UpgradeCenterCount--;
+	}
+
+	public void UpgradeCounter()
+	{
+		UpgradeCenterCount++;
+	}
+
 	IEnumerator UpgradeTimer(float time)
 	{
 		yield return new WaitForSeconds (time * 60);
-		upgradeCount++;
-		foreach (UnitManager man in GameObject.FindObjectsOfType<UnitManager>()) {
-			if (man.PlayerOwner == 2) {
-				if (man.myStats) {
-					man.myStats.armor += 1;
-					foreach (IWeapon weap in man.myWeapon) {
-						if (weap) {
-							weap.changeAttack (0, 1 * (int)(weap.baseDamage / 10), true, null);
+		if (UpgradeCenterCount > upgradeCount) {
+			upgradeCount++;
+			foreach (UnitManager man in GameObject.FindObjectsOfType<UnitManager>()) {
+				if (man.PlayerOwner == 2) {
+					if (man.myStats) {
+						man.myStats.armor += 1;
+						foreach (IWeapon weap in man.myWeapon) {
+							if (weap) {
+								weap.changeAttack (0, 1 * (int)(weap.baseDamage / 10), true, null);
+							}
 						}
 					}
+
 				}
 
 			}
-
 		}
-
 	}
 
 
@@ -139,16 +152,6 @@ public class DifficultyManager : MonoBehaviour {
 						man.myStats.Maxhealth *= EasyHealth;
 						man.myStats.health *= EasyHealth;
 					}
-
-		} else if (difficulty == 2) {
-			
-		} else if (difficulty == 3) {
-
-
-			if (man.myStats) {
-				man.myStats.Maxhealth += EasyHealth;
-				man.myStats.health += EasyHealth;
-			}
 
 		}
 
