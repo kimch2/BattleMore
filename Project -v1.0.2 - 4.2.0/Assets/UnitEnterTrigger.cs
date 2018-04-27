@@ -18,11 +18,11 @@ public class UnitEnterTrigger : MonoBehaviour {
 
 	public UnityEngine.Events.UnityEvent OnEnter;
 	bool alreadyTriggered;
-
+	public bool repeatable;
 
 	void OnTriggerEnter(Collider other)
 	{
-		if (!alreadyTriggered) {
+		if (!alreadyTriggered || repeatable) {
 		
 			if (other.isTrigger) {
 				return;
@@ -55,11 +55,12 @@ public class UnitEnterTrigger : MonoBehaviour {
 			trig.trigger (index, input, location, target, doIt);
 		}
 		OnEnter.Invoke ();
-		GetComponent<Collider> ().enabled = false;
-
-		yield return new WaitForSeconds (15);
-		Destroy (this.gameObject);
-
+		if (!repeatable) {
+			GetComponent<Collider> ().enabled = false;
+		
+			yield return new WaitForSeconds (15);
+			Destroy (this.gameObject);
+		}
 	}
 
 

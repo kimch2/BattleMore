@@ -66,6 +66,9 @@ public class ProxySpawner :VisionTrigger {
 
 			currentCharges--;
 			spawnedUnits.Add ((GameObject)Instantiate (CurrentWaves[3].waveType[UnityEngine.Random.Range (0,CurrentWaves[3].waveType.Count)], spawnLocation, Quaternion.identity));
+			if (spawnedUnits [spawnedUnits.Count - 1].GetComponent<airmover>()) {
+				spawnedUnits [spawnedUnits.Count - 1].transform.position = spawnedUnits [spawnedUnits.Count - 1].transform.position + Vector3.up * 10;
+			}
 			if (currenCharger == null) {
 				currenCharger = StartCoroutine (ReCharge ());
 			}

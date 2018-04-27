@@ -272,6 +272,9 @@ public class WaveManager : MonoBehaviour {
 		}
 
 		GameObject unit = (GameObject)Instantiate (obj, hitzone, Quaternion.identity);
+		if (unit.GetComponent<airmover>()) {
+			unit.transform.position = unit.transform.position + Vector3.up * 10;
+		}
 
 		unit.AddComponent<EnemySearchAI> ();
 		//Debug.Log ("Making new guys! " + nextActionTime);
