@@ -19,10 +19,13 @@ public class AchievementUI : MonoBehaviour {
 	Achievement.Earnings myEarning = Achievement.Earnings.all;
 	Achievement.Level myLevel = Achievement.Level.all;
 
-
+	LevelCompilation myComp;
 	List<Achievement> currentAchievments;
 	void Start()
 	{
+		myComp = Resources.Load<LevelCompilation> ("LevelEditor");
+	
+
 		currentAchievments = myAchievements.myAchievements;
 		setEarnings ();
 
@@ -76,9 +79,33 @@ public class AchievementUI : MonoBehaviour {
 			myLevel = Achievement.Level.eight;
 			break;
 		case 9:
-			myLevel = Achievement.Level.anyLevel;
+			myLevel = Achievement.Level.nine;
 			break;
 		case 10:
+			myLevel = Achievement.Level.ten;
+			break;
+		case 11:
+			myLevel = Achievement.Level.eleven;
+			break;
+		case 12:
+			myLevel = Achievement.Level.twelve;
+			break;
+		case 13:
+			myLevel = Achievement.Level.thirteen;
+			break;
+		case 14:
+			myLevel = Achievement.Level.fourteen;
+			break;
+		case 15:
+			myLevel = Achievement.Level.fiftteen;
+			break;
+		case 16:
+			myLevel = Achievement.Level.sixteen;
+			break;
+		case 18:
+			myLevel = Achievement.Level.anyLevel;
+			break;
+		case 19:
 			myLevel = Achievement.Level.campaign;
 			break;
 
@@ -91,11 +118,28 @@ public class AchievementUI : MonoBehaviour {
 	{setSettings ();
 		currentPage = 0;
 		List<Achievement> newAchievements = new List<Achievement> ();
+
 		foreach (Achievement ach in myAchievements.myAchievements) {
 
-			if ((int)ach.myLevel < LevelData.getHighestLevel () +2) {
+		
+			if (ach.myLevel == Achievement.Level.all || ach.myLevel == Achievement.Level.anyLevel || ach.myLevel == Achievement.Level.campaign) {
 				if (AddForLevel (ach) && AddForEarning (ach)) {
 					newAchievements.Add (ach);
+				}
+			
+			} else {
+				bool foundOne = true;
+				foreach (int i in  myComp.MyLevels[(int)ach.myLevel -2].UnlockedBy) {
+
+					if (myComp.MyLevels [i].getCompletionCount () == 0) {
+						foundOne = false;
+					}
+				}
+				if (foundOne) {
+					if (AddForLevel (ach) && AddForEarning (ach)) {
+						newAchievements.Add (ach);
+					
+					}
 				}
 			}
 		}
@@ -159,8 +203,9 @@ public class AchievementUI : MonoBehaviour {
 			Destroy (obj);
 		}
 		myPanels.Clear ();
-	
+	//	Debug.Log ("Current count " + currentAchievments.Count);
 		for (int i =num*6; i < num*6+Mathf.Min (currentAchievments.Count - num*6, 6); i++) {
+			//Debug.Log ("Adding " + currentAchievments[i].Title);
 			GameObject obj = (GameObject)Instantiate (Panel, this.transform);
 			obj.transform.Find ("Title").GetComponent<Text> ().text = currentAchievments [i].Title;
 			obj.transform.Find ("Description").GetComponent<Text> ().text = currentAchievments [i].GetDecription();

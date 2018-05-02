@@ -11,18 +11,22 @@ public class FogOfWarUnit : MonoBehaviour
     public LayerMask lineOfSightMask = 0;
 
 
-	private bool hasMoved = true;
+	public bool hasMoved = true;
+	[Tooltip("Will clear fog even if a mover has not marked this thing as having moved")]
 	public bool autoUpdate;
     void Start()
     {
 		//Debug.Log ("Fog");
 		hasMoved = true;
-		InvokeRepeating ("clearFog", Random.Range(0, updateFrequency), updateFrequency);
+
+		if (autoUpdate) {
+			InvokeRepeating ("AutoUpdate", Random.Range (0, updateFrequency), updateFrequency + .2f);
+		} else {
+			InvokeRepeating ("clearFog", Random.Range (.05f, updateFrequency) + .1f, updateFrequency);
+		}
 		//Invoke ("move", 1.9f);
 		//Invoke ("clearFog", 2);
-		if (autoUpdate) {
-			InvokeRepeating ("AutoUpdate", Random.Range(0, updateFrequency), updateFrequency + .2f);
-		}
+
     }
 
 
@@ -36,6 +40,7 @@ public class FogOfWarUnit : MonoBehaviour
 		if (hasMoved) {
 			hasMoved = false;
 			FogOfWar.current.Unfog (transform.position, radius, lineOfSightMask);
+		
 
 		}
 	}

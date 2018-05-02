@@ -142,8 +142,8 @@ public class MiniMapUIController : MonoBehaviour, IPointerDownHandler , IPointer
 
 
 
-		_texture = new Texture2D (fog.texture.width, fog.texture.height);
-		_texture.wrapMode = TextureWrapMode.Clamp;
+		_texture = fog.getTexture (); //new Texture2D (fog.texture.width, fog.texture.height);
+		//_texture.wrapMode = TextureWrapMode.Clamp;
 		setFog ();
 		fogger.sprite = Sprite.Create (_texture as Texture2D, new Rect (0f, 0f, fog.texture.width, fog.texture.height), Vector2.zero);
 

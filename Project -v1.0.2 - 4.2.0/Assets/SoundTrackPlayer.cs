@@ -47,7 +47,7 @@ public class SoundTrackPlayer : MonoBehaviour {
 
 
 		mySrc.clip = myPlayList.myTracks [ (int)levelPlayList[ currentIndex]];
-		Debug.Log ("Sound track " + mySrc.clip.name);
+		//Debug.Log ("Sound track " + mySrc.clip.name);
 		mySrc.Play ();
 	
 		currentIndex++;
@@ -60,7 +60,7 @@ public class SoundTrackPlayer : MonoBehaviour {
 	void Update(){
 
 		if(ShowSoundTrackDebug){
-		Debug.Log ("Sound " + mySrc.isPlaying + "  " + mySrc.time);
+		//Debug.Log ("Sound " + mySrc.isPlaying + "  " + mySrc.time);
 		}
 		if(!mySrc.isPlaying){
 			if(mySrc.time > mySrc.clip.length -1 || mySrc.time == 0){

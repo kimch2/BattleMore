@@ -5,9 +5,14 @@ public class KillUnitAch :Achievement {
 
 	public string UnitName;
 	public int MinNumber;
+	public bool OnlyInOneLevel;
 
 	public override string GetDecription()
-	{return Description + "          " + PlayerPrefs.GetInt (UnitName + "Deaths", 0)  + "/" + MinNumber;
+	{if (OnlyInOneLevel) {
+			return Description;
+		}
+	return Description + "          " + PlayerPrefs.GetInt (UnitName + "Deaths", 0)  + "/" + MinNumber;
+	
 	}
 
 	public override void CheckBeginning (){
@@ -16,19 +21,28 @@ public class KillUnitAch :Achievement {
 	public override void CheckEnd ()
 	{
 		if (!IsAccomplished ()) {
-			int counter = 0;
+			if (isCorrectLevel ()) {
 
-			foreach (VeteranStats vets in  GameObject.FindObjectOfType<GameManager> ().playerList[1].getVeteranStats()) {
-				if (vets.UnitName.Contains (UnitName) && vets.Died) {
-					counter++;
+				int counter = 0;
 
+				foreach (VeteranStats vets in  GameObject.FindObjectOfType<GameManager> ().playerList[1].getVeteranStats()) {
+
+					if (vets.unitType.Contains (UnitName) && vets.Died) {
+						counter++;
+
+					}
 				}
-			}
-
-			int total = PlayerPrefs.GetInt (UnitName + "Deaths", 0) + counter;
-			PlayerPrefs.SetInt (UnitName + "Deaths", total);
-			if (total >= MinNumber) {
-				Accomplished ();
+				if (OnlyInOneLevel) {
+					if (counter >= MinNumber) {
+						Accomplished ();
+					}
+				} else {
+					int total = PlayerPrefs.GetInt (UnitName + "Deaths", 0) + counter;
+					PlayerPrefs.SetInt (UnitName + "Deaths", total);
+					if (total >= MinNumber) {
+						Accomplished ();
+					}
+				}
 			}
 		}
 

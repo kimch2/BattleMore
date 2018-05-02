@@ -24,6 +24,7 @@ public class AugmentAetherVictory  : Objective {
 	{base.Start ();
 	
 		StartCoroutine (checkForVictory ());
+		PlayerPrefs.SetInt ("DoubleAgment", 0);
 	}
 
 	IEnumerator checkForVictory()
@@ -35,7 +36,15 @@ public class AugmentAetherVictory  : Objective {
 			if (TimeLeft <= 0) {
 				break;
 			}
+
 			if (actualAetherCore.GetComponent<AugmentAttachPoint> ().myAugment) {
+
+				foreach (AugmentAetherVictory aug in GameObject.FindObjectsOfType<AugmentAetherVictory> ()) {
+					if (aug != this && aug.actualAetherCore.GetComponent<AugmentAttachPoint> ().myAugment) {
+
+						PlayerPrefs.SetInt ("DoubleAugment", 1);
+					}
+				}
 				StartCoroutine (cooldownBar ());
 				spawnWave ();
 

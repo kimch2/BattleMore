@@ -234,9 +234,11 @@ public class FogOfWar : MonoBehaviour
     public Texture2D texture { get; private set; }
     byte[] _values;
 
+
 	public Texture2D getTexture()
 	{
-		HasUnFogged = false;
+		//HasUnFogged = false;
+	
 		return texture;
 
 	}
@@ -352,6 +354,7 @@ public class FogOfWar : MonoBehaviour
 
 
 	public bool HasUnFogged;
+	public int FogIndex = 0;
     public void Unfog(Vector3 position, float radius, int layermask = 0)
     {
 		HasUnFogged = true;
@@ -360,12 +363,14 @@ public class FogOfWar : MonoBehaviour
         ColliderFogRectList colliderrects = GetExtendedColliders(fogfill, layermask);
         if (colliderrects == null)
         {
+
             fogfill.UnfogCircle(_values);
             return;
         }
 
         //if (colliderrects.Count != 1 || !colliderrects[0].ContainsCircle(fogfill.position, fogfill.radius))
         //    fogfill.UnfogCircle(_values, colliderrects);
+	
         fogfill.UnfogCircleLineOfSight(_values, colliderrects, layermask);
     }
 
@@ -383,6 +388,8 @@ public class FogOfWar : MonoBehaviour
 
     void UpdateTexture()
 		{if (HasUnFogged) {
+		
+			HasUnFogged = false;
 		
 			texture.LoadRawTextureData (_values);
 			texture.filterMode = filterMode;

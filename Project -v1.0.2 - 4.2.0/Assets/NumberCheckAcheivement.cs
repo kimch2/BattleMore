@@ -17,7 +17,7 @@ public class NumberCheckAcheivement: Achievement{
 
 	public override void CheckEnd (){
 		if (!IsAccomplished ()) {
-			if (GameObject.FindObjectOfType<VictoryTrigger> ().levelNumber == getLevelNumber ()) {
+			if (isCorrectLevel()) {
 				if (!lessThan) {
 					if (PlayerPrefs.GetInt (PlayerPrefTag, 0) > number) {
 						Accomplished ();
