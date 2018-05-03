@@ -19,24 +19,24 @@ public class NumberCheckAcheivement: Achievement{
 		if (!IsAccomplished ()) {
 			if (isCorrectLevel()) {
 				if (!lessThan) {
-					if (PlayerPrefs.GetInt (PlayerPrefTag, 0) > number) {
+					if (PlayerPrefs.GetFloat (PlayerPrefTag, 0) > number) {
 						Accomplished ();
 					}
 				} else {
-					if (PlayerPrefs.GetInt (PlayerPrefTag, 0) < number) {
+					if (PlayerPrefs.GetFloat (PlayerPrefTag, 0) < number) {
 						Accomplished ();
 					}
 				}
 			}
 		}
-		PlayerPrefs.SetInt (PlayerPrefTag,0);
+		PlayerPrefs.SetFloat (PlayerPrefTag,0);
 
 	}
 
 	public override void Reset()
 	{
-		PlayerPrefs.SetInt (Title, 0);
-		PlayerPrefs.SetInt (PlayerPrefTag, 0);
+		PlayerPrefs.SetFloat (Title, 0);
+		PlayerPrefs.SetFloat (PlayerPrefTag, 0);
 
 	}
 

@@ -74,6 +74,7 @@
      <Compile Include="Assets\APMCounter.cs" />
      <Compile Include="Assets\ApplyBuffUpgrade.cs" />
      <Compile Include="Assets\AreaDamage.cs" />
+     <Compile Include="Assets\AreaDamageRecorder.cs" />
      <Compile Include="Assets\ArmorBackHeal.cs" />
      <Compile Include="Assets\ArmoryInteractor.cs" />
      <Compile Include="Assets\ArmyOfOneAch.cs" />
@@ -114,6 +115,7 @@
      <Compile Include="Assets\BuildUnitObjective.cs" />
      <Compile Include="Assets\bunnyManager.cs" />
      <Compile Include="Assets\bunnyPopulate.cs" />
+     <Compile Include="Assets\BunnyPopulationAchievement.cs" />
      <Compile Include="Assets\CameraFirstTimePlayer.cs" />
      <Compile Include="Assets\CampaignUltUpgrade.cs" />
      <Compile Include="Assets\CampaignUpgrade.cs" />

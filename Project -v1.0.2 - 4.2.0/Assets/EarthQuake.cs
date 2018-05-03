@@ -77,7 +77,7 @@ public class EarthQuake : MonoBehaviour {
 				myParticle.playEffect ();
 			}
 
-			PlayerPrefs.SetInt ("EarthQuake", PlayerPrefs.GetInt ("EarthQuake") + 1);
+			PlayerPrefs.SetFloat ("EarthQuake", PlayerPrefs.GetFloat ("EarthQuake") + 1);
 			if (QuakeBuilding) {try{
 					QuakeBuilding.GetComponentInChildren<Animator> ().SetTrigger("Pulse");}catch{
 				}}

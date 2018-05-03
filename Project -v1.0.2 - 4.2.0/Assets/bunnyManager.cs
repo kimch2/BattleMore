@@ -20,6 +20,8 @@ public class bunnyManager : Objective {
 
 	Coroutine flashing;
 
+	public int highestAmountSoFar;
+
 	public List<voiceLineRandomizer> lineTriggers;
 
 	[System.Serializable]
@@ -90,6 +92,10 @@ public class bunnyManager : Objective {
 		} else {
 			flash = false;
 			myPanel.color = green;
+		}
+
+		if (currAmount > highestAmountSoFar) {
+			highestAmountSoFar = currAmount;
 		}
 
 		bunnyCount.text = "Vicious Bunnies Left \n" + currAmount + " / " + maxAmount;

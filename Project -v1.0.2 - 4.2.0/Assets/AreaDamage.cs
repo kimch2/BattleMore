@@ -13,11 +13,11 @@ public class AreaDamage : MonoBehaviour {
 	public GameObject cutEffect;
 
 	public float damage = 5;
-	private AudioSource myAudio;
+	protected AudioSource myAudio;
 	public AudioClip chopSound;
 	public bool showPop = true;
 
-	private int iter = 0;
+	protected int iter = 0;
 	public bool NonStack = false;
 
 	// Use this for initialization
@@ -28,7 +28,7 @@ public class AreaDamage : MonoBehaviour {
 	}
 
 	// Update is called once per frame
-	void UpdateDamage () {
+public	virtual void UpdateDamage () {
 
 		if (enemies.Count > 0) {
 

@@ -56,7 +56,6 @@ public class LevelInfo {
 
 	public void increaseCompCount()
 	{
-		Debug.Log ("INcreasing amount on " + LevelName);
 		PlayerPrefs.SetInt ("L" +  LevelName +"Win", PlayerPrefs.GetInt ("L" + SceneNumber+"Win") + 1);
 
 		//CompletionCount++;

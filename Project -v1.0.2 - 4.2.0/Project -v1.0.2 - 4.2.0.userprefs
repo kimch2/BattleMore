@@ -1,14 +1,18 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\KillUnitAch.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\UnitExistAchievement.cs">
     <Files>
       <File FileName="Assets\Scripts - In Game\UI\UIManager.cs" Line="1" Column="1" />
       <File FileName="Assets\TurretScreenDisplayer.cs" Line="1" Column="1" />
       <File FileName="Assets\AchievementUI.cs" Line="206" Column="4" />
-      <File FileName="Assets\Achievement.cs" Line="12" Column="58" />
-      <File FileName="Assets\LevelIntroButton.cs" Line="50" Column="4" />
-      <File FileName="Assets\KillUnitAch.cs" Line="29" Column="1" />
-      <File FileName="Assets\SoundTrackPlayer.cs" Line="63" Column="5" />
+      <File FileName="Assets\AreaDamage.cs" Line="17" Column="29" />
+      <File FileName="Assets\AreaDamageRecorder.cs" Line="35" Column="59" />
+      <File FileName="Assets\selfDestructTimer.cs" Line="50" Column="30" />
+      <File FileName="Assets\LevelInfo.cs" Line="57" Column="33" />
+      <File FileName="Assets\NumberCheckAcheivement.cs" Line="36" Column="30" />
+      <File FileName="Assets\EarthQuake.cs" Line="76" Column="21" />
+      <File FileName="Assets\AugmentAetherVictory.cs" Line="97" Column="4" />
+      <File FileName="Assets\UnitExistAchievement.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

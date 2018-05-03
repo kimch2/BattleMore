@@ -14,10 +14,10 @@ public class EggAchievement: Achievement{
 
 
 	public override void CheckEnd (){
-		if (!IsAccomplished () && LevelData.getDifficulty() > 1) {
+		if (!IsAccomplished () && isCorrectLevel()) {
 
 			int count = 0;
-			foreach (VeteranStats vets in  GameObject.FindObjectOfType<GameManager> ().playerList[0].getVeteranStats()) {
+			foreach (VeteranStats vets in  GameManager.main.playerList[1].getVeteranStats()) {
 				if (vets.Died && vets.UnitName == "Bunny Egg" && vets.damageTaken >= 119) {
 					count++;
 				}
