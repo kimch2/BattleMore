@@ -196,6 +196,11 @@ public class RaceManager : MonoBehaviour, ManagerWatcher {
 
 
 
+	/// <summary>
+	/// The unitname is the name of the unit that just finished researchign this, it can be blank if its some default upgrade
+	/// </summary>
+	/// <param name="upgrade">Upgrade.</param>
+	/// <param name="unitname">Unitname.</param>
 	public void addUpgrade(Upgrade upgrade, string unitname)
 	{
 		
@@ -750,6 +755,7 @@ public class RaceManager : MonoBehaviour, ManagerWatcher {
 	public void addVeteranStat(VeteranStats input)
 	{if (MVP == null) {
 			MVP = new MVPCalculator ();}
+	
 		MVP.addVet (input);
 	}
 

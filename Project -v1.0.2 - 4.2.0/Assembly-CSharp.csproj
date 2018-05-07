@@ -146,6 +146,7 @@
      <Compile Include="Assets\ControlGroupUI.cs" />
      <Compile Include="Assets\CooldownUpgrade.cs" />
      <Compile Include="Assets\CostBox.cs" />
+     <Compile Include="Assets\CostReductionUpgrade.cs" />
      <Compile Include="Assets\CustomRVO.cs" />
      <Compile Include="Assets\DaexaSupplyDrop.cs" />
      <Compile Include="Assets\DaexaWorkerInteract.cs" />
@@ -289,6 +290,7 @@
      <Compile Include="Assets\LevelStartPlacer.cs" />
      <Compile Include="Assets\LifeSteal.cs" />
      <Compile Include="Assets\LocationObjective.cs" />
+     <Compile Include="Assets\LogisticsAdvisory.cs" />
      <Compile Include="Assets\LootDrop.cs" />
      <Compile Include="Assets\MainMenuManager.cs" />
      <Compile Include="Assets\Masochism.cs" />
@@ -586,6 +588,7 @@
      <Compile Include="Assets\stunZone.cs" />
      <Compile Include="Assets\SuicideAttack.cs" />
      <Compile Include="Assets\SummonStructure.cs" />
+     <Compile Include="Assets\SupplyUpgrade.cs" />
      <Compile Include="Assets\SurviveVictory.cs" />
      <Compile Include="Assets\TargetAbility.cs" />
      <Compile Include="Assets\TargetCircle.cs" />
@@ -602,6 +605,7 @@
      <Compile Include="Assets\ThrasherBlade.cs" />
      <Compile Include="Assets\TimeDelayTrigger.cs" />
      <Compile Include="Assets\TimedObjective.cs" />
+     <Compile Include="Assets\TimeKillAchievement.cs" />
      <Compile Include="Assets\ToolTip.cs" />
      <Compile Include="Assets\TritonBarrierUpgrade.cs" />
      <Compile Include="Assets\TrueUpgradeManager.cs" />
@@ -638,6 +642,7 @@
      <Compile Include="Assets\UnitIconInfo.cs" />
      <Compile Include="Assets\UnitLostDefeat.cs" />
      <Compile Include="Assets\UnitProduction.cs" />
+     <Compile Include="Assets\UnitRevealer.cs" />
      <Compile Include="Assets\UnitSlower.cs" />
      <Compile Include="Assets\UnitUIBox.cs" />
      <Compile Include="Assets\UnitUtility.cs" />

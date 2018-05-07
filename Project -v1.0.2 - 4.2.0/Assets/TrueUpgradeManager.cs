@@ -10,6 +10,7 @@ public class TrueUpgradeManager : MonoBehaviour {
 	public AudioSource mySource;
 
 	public AudioClip simpleButtonPress;
+	public AudioClip badButtonPress;
 
 	[Tooltip("List of all possible upgrades")]
 	public List<CampaignUpgrade> CampUpRef;
@@ -25,6 +26,8 @@ public class TrueUpgradeManager : MonoBehaviour {
 
 	[Tooltip("0 should be vehicles, 1 should be buildings, 2 should be turrets")]
 	public List<UnityEngine.UI.Text> UnAppliedExclam;
+
+	public List<Upgrade> otherUpgrades = new List<Upgrade>();
 
 	void Awake()
 	{instance = this;
@@ -93,7 +96,7 @@ public class TrueUpgradeManager : MonoBehaviour {
 	void LevelWasLoaded(Scene myScene, LoadSceneMode mode)
 	{
 		if (SceneManager.GetActiveScene ().buildIndex != 1 && SceneManager.GetActiveScene ().buildIndex != 0) {
-			RaceManager racer = GameObject.FindObjectOfType<GameManager> ().activePlayer;
+			RaceManager racer = GameManager.main.activePlayer;
 			hasBeenToLevel = true;
 	
 			foreach (CampaignUpgrade.UpgradesPiece cu in myUpgrades) {
@@ -101,6 +104,11 @@ public class TrueUpgradeManager : MonoBehaviour {
 					racer.addUpgrade (cu.pointer, "");
 				}
 			}
+
+			foreach (Upgrade up in otherUpgrades) {
+				racer.addUpgrade (up,"");
+			}
+
 		} else {
 			if (hasBeenToLevel) {
 				Destroy (this.gameObject);
@@ -121,6 +129,14 @@ public class TrueUpgradeManager : MonoBehaviour {
 	{
 		if (Time.timeSinceLevelLoad > 1 &&  Time.time > lastSound +.5f) {
 			mySource.PlayOneShot (simpleButtonPress);
+		}
+		lastSound = Time.time;
+	}
+
+	public void playBadSound ()
+	{
+		if (Time.timeSinceLevelLoad > 1 &&  Time.time > lastSound +.5f) {
+			mySource.PlayOneShot (badButtonPress);
 		}
 		lastSound = Time.time;
 	}

@@ -3,6 +3,10 @@ using System.Collections;
 
 public class NimbusAch  : Achievement{
 
+
+	public string UnitName = "Nimbus";
+	public int minimumKillAmount = 20;
+	public bool AllOnOne = false;
 	public override string GetDecription()
 	{return Description;
 	}
@@ -11,16 +15,23 @@ public class NimbusAch  : Achievement{
 	}
 
 	public override void CheckEnd (){
-		if (!IsAccomplished ()) {
+		if (!IsAccomplished () && isCorrectLevel()) {
 
 			float counter = 0;
-			foreach (VeteranStats vets in  GameObject.FindObjectOfType<GameManager> ().activePlayer.getUnitStats()) {
-				if (vets.UnitName == "Nimbus") {
+			foreach (VeteranStats vets in GameManager.main.activePlayer.getUnitStats()) {
+				if (vets.UnitName == UnitName) {
 
-					counter += vets.kills ;
+					if (AllOnOne) {
+						
+						if (vets.kills >= minimumKillAmount) {
+							Accomplished ();
+						}
+					} else {
+						counter += vets.kills;
+					}
 				}
 			}
-			if (counter >= 20) {
+			if (counter >= minimumKillAmount) {
 				Accomplished ();
 			}
 		}
