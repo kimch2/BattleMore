@@ -67,7 +67,7 @@ public class LogisticsAdvisory : MonoBehaviour {
 
 	public void HireAdvisor(string tab)
 	{
-		if (LevelData.getMoney () > 9) {
+		if (LevelData.getMoney () > 14) {
 
 			foreach (LogisticsAdvisor la in myAdvisors) {
 				if (la.AdvisorName == tab) {

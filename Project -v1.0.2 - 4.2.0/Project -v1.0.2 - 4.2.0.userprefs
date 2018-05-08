@@ -1,21 +1,26 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\TrueUpgradeManager.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\NoBuildingDeadAchievement.cs">
     <Files>
       <File FileName="Assets\Scripts - In Game\UI\UIManager.cs" Line="1" Column="1" />
-      <File FileName="Assets\UnitRevealer.cs" Line="33" Column="1" />
-      <File FileName="Assets\CostReductionUpgrade.cs" Line="28" Column="41" />
-      <File FileName="Assets\Scripts - In Game\UnitManager.cs" Line="62" Column="7" />
-      <File FileName="Assets\attackSpeedUpgrade.cs" Line="21" Column="67" />
-      <File FileName="Assets\DamageUpgrade.cs" Line="5" Column="27" />
-      <File FileName="Assets\TrueUpgradeManager.cs" Line="139" Column="17" />
-      <File FileName="Assets\Scripts - In Game\RaceManager.cs" Line="197" Column="2" />
-      <File FileName="Assets\LogisticsAdvisory.cs" Line="81" Column="11" />
-      <File FileName="Assets\SupplyUpgrade.cs" Line="27" Column="3" />
+      <File FileName="Assets\UnitRevealer.cs" Line="1" Column="1" />
+      <File FileName="Assets\CostReductionUpgrade.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts - In Game\UnitManager.cs" Line="1" Column="1" />
+      <File FileName="Assets\attackSpeedUpgrade.cs" Line="1" Column="1" />
+      <File FileName="Assets\DamageUpgrade.cs" Line="1" Column="1" />
+      <File FileName="Assets\TrueUpgradeManager.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts - In Game\RaceManager.cs" Line="1" Column="1" />
+      <File FileName="Assets\LogisticsAdvisory.cs" Line="71" Column="4" />
+      <File FileName="Assets\SupplyUpgrade.cs" Line="1" Column="1" />
+      <File FileName="Assets\UnitExistAchievement.cs" Line="37" Column="3" />
+      <File FileName="Assets\TurretScreenDisplayer.cs" Line="39" Column="25" />
+      <File FileName="Assets\NoBuildingDeadAchievement.cs" Line="31" Column="5" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <RunToCursorBreakpoint file="C:\Users\Matthew Johnson\Desktop\BattleTrifecta\Project -v1.0.2 - 4.2.0\Assets\UnitExistAchievement.cs" line="25" column="89" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>
