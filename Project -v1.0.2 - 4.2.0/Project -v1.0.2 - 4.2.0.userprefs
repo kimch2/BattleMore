@@ -1,6 +1,6 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\NoBuildingDeadAchievement.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\LevelData.cs">
     <Files>
       <File FileName="Assets\Scripts - In Game\UI\UIManager.cs" Line="1" Column="1" />
       <File FileName="Assets\UnitRevealer.cs" Line="1" Column="1" />
@@ -10,17 +10,16 @@
       <File FileName="Assets\DamageUpgrade.cs" Line="1" Column="1" />
       <File FileName="Assets\TrueUpgradeManager.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts - In Game\RaceManager.cs" Line="1" Column="1" />
-      <File FileName="Assets\LogisticsAdvisory.cs" Line="71" Column="4" />
+      <File FileName="Assets\LogisticsAdvisory.cs" Line="1" Column="1" />
       <File FileName="Assets\SupplyUpgrade.cs" Line="1" Column="1" />
-      <File FileName="Assets\UnitExistAchievement.cs" Line="37" Column="3" />
-      <File FileName="Assets\TurretScreenDisplayer.cs" Line="39" Column="25" />
-      <File FileName="Assets\NoBuildingDeadAchievement.cs" Line="31" Column="5" />
+      <File FileName="Assets\UnitExistAchievement.cs" Line="1" Column="1" />
+      <File FileName="Assets\TurretScreenDisplayer.cs" Line="1" Column="1" />
+      <File FileName="Assets\NoBuildingDeadAchievement.cs" Line="1" Column="1" />
+      <File FileName="Assets\LevelData.cs" Line="218" Column="45" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore>
-      <RunToCursorBreakpoint file="C:\Users\Matthew Johnson\Desktop\BattleTrifecta\Project -v1.0.2 - 4.2.0\Assets\UnitExistAchievement.cs" line="25" column="89" />
-    </BreakpointStore>
+    <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>

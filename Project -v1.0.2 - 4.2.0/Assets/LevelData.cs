@@ -160,7 +160,7 @@ public class LevelData  {
 
 		PlayerPrefs.SetInt ("HighestLevel", 0);
 		//Debug.Log ("Hieghest level is 0");
-		setMoney (0);
+		setMoney (15);
 		currentInfo = new saveInfo ();
 		saveGame ();
 		PlayerPrefs.SetInt ("VoicePack", 0);
@@ -230,7 +230,7 @@ public class LevelData  {
 	public static int getMoney()
 	{
 	//	Debug.Log ("Money left" + PlayerPrefs.GetInt ("Money"));
-		return PlayerPrefs.GetInt ("Money");
+		return PlayerPrefs.GetInt ("Money", 15);
 	}
 
 	public static int getArbitronium()
