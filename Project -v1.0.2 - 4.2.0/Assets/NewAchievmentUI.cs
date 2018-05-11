@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
-
+using System.Collections.Generic;
 public class NewAchievmentUI : MonoBehaviour {
 
 
@@ -21,6 +21,7 @@ public class NewAchievmentUI : MonoBehaviour {
 					GameObject.FindObjectOfType<LevelManager> ().changeMoney (ach.TechReward);
 
 					GameObject obj = (GameObject)Instantiate (AchievePanel, this.transform);
+					OpenAchievements.Add (obj);
 					obj.transform.Find ("Title").GetComponent<Text> ().text = ach.Title;
 					obj.transform.Find ("Description").GetComponent<Text> ().text = ach.GetDecription ();
 					obj.transform.Find ("Icon").GetComponent<Image> ().sprite = ach.myIcon;
@@ -40,5 +41,34 @@ public class NewAchievmentUI : MonoBehaviour {
 
 			}
 		}
+		Invoke ("closeAchievements",12);
 	}
+
+	List<GameObject> OpenAchievements = new List<GameObject>();
+
+
+	public void closeAchievements()
+	{
+		CancelInvoke ("closeAchievements");
+		StartCoroutine (CloseAchievement());
+	}
+
+	IEnumerator CloseAchievement()
+	{
+		GetComponent<GridLayoutGroup> ().enabled = false;
+		for (float i = 0; i < 1.4f; i += Time.deltaTime) {
+			foreach (GameObject ob in OpenAchievements) {
+				if (ob) {
+					((RectTransform)ob.transform).anchoredPosition3D += (Vector3.right * Time.deltaTime * 600);
+				} 
+			}
+			yield return null;
+		}
+		foreach (GameObject ob in OpenAchievements) {
+			if (ob) {
+				Destroy (ob);
+			}
+		}
+	}
+
 }

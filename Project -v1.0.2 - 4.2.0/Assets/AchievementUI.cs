@@ -197,6 +197,7 @@ public class AchievementUI : MonoBehaviour {
 		LoadPage (currentPage);
 	}
 
+
 	void LoadPage(int num)
 	{
 		foreach (GameObject obj in myPanels) {
@@ -207,6 +208,7 @@ public class AchievementUI : MonoBehaviour {
 		for (int i =num*6; i < num*6+Mathf.Min (currentAchievments.Count - num*6, 6); i++) {
 			//Debug.Log ("Adding " + currentAchievments[i].Title);
 			GameObject obj = (GameObject)Instantiate (Panel, this.transform);
+		
 			obj.transform.Find ("Title").GetComponent<Text> ().text = currentAchievments [i].Title;
 			obj.transform.Find ("Description").GetComponent<Text> ().text = currentAchievments [i].GetDecription();
 			obj.transform.Find ("Icon").GetComponent<Image> ().sprite = currentAchievments [i].myIcon;
@@ -224,6 +226,7 @@ public class AchievementUI : MonoBehaviour {
 
 		SetButtons ();
 	}
+
 
 	void SetButtons()
 	{
