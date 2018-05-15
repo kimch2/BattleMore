@@ -1,6 +1,6 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\NewAchievmentUI.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\BuildUnitObjective.cs">
     <Files>
       <File FileName="Assets\Scripts - In Game\UI\UIManager.cs" Line="1" Column="1" />
       <File FileName="Assets\UnitRevealer.cs" Line="1" Column="1" />
@@ -11,10 +11,11 @@
       <File FileName="Assets\TrueUpgradeManager.cs" Line="1" Column="1" />
       <File FileName="Assets\NoBuildingDeadAchievement.cs" Line="1" Column="1" />
       <File FileName="Assets\LevelData.cs" Line="1" Column="1" />
-      <File FileName="Assets\AchievementUI.cs" Line="226" Column="3" />
-      <File FileName="Assets\NewAchievmentUI.cs" Line="44" Column="35" />
-      <File FileName="Assets\Tweener.cs" Line="546" Column="13" />
-      <File FileName="Assets\Scripts - In Game\RaceManager.cs" Line="207" Column="1" />
+      <File FileName="Assets\AchievementUI.cs" Line="1" Column="1" />
+      <File FileName="Assets\NewAchievmentUI.cs" Line="1" Column="1" />
+      <File FileName="Assets\Tweener.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts - In Game\RaceManager.cs" Line="1" Column="1" />
+      <File FileName="Assets\BuildUnitObjective.cs" Line="26" Column="49" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
