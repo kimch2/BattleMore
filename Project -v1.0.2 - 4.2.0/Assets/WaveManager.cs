@@ -185,6 +185,7 @@ public class WaveManager : MonoBehaviour {
 
 			Debug.Log ("Spawning wave " + this.gameObject + "  " + currentWaveIndex);
 
+			myWaves [currentWaveIndex].WaveAdvancement = Mathf.Clamp (myWaves [currentWaveIndex].WaveAdvancement, 0, CurrentWaves.Count - 1);
 			foreach (GameObject obj in CurrentWaves[myWaves[currentWaveIndex].WaveAdvancement].waveType) {
 
 				StartCoroutine (MyCoroutine (delay, obj, spawner, myWaves [currentWaveIndex].RallyPointIndex == -1 ? firstRallyPoint : alternateRallyPoints[myWaves [currentWaveIndex].RallyPointIndex]));

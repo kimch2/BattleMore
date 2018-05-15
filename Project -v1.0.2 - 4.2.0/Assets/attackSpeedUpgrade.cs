@@ -42,18 +42,18 @@ public class attackSpeedUpgrade  : Upgrade {
 
 
 
-				for (int i = 0; i < manager.myWeapon.Count; i++)
-
+				for (int i = 0; i < manager.myWeapon.Count; i++) {
 
 					if (manager.myWeapon [i]) {
 
 
-						manager.myWeapon [ i].changeAttackSpeed( ua.percentageAmount[AllUnits? 0: i],ua.flatAmount[AllUnits? 0: i],true,null);
-						manager.gameObject.SendMessage ("upgrade", Name,SendMessageOptions.DontRequireReceiver);
+						manager.myWeapon [i].changeAttackSpeed (ua.percentageAmount [AllUnits ? 0 : i], ua.flatAmount [AllUnits ? 0 : i], true, null);
+						manager.gameObject.SendMessage ("upgrade", Name, SendMessageOptions.DontRequireReceiver);
 					}
-
+				
 				if (manager.GetComponent<Selected> ().IsSelected) {
 					//RaceManager.upDateUI ();
+					}
 				}
 
 			}
