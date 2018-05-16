@@ -44,6 +44,7 @@ public class UltUpgradeUI : MonoBehaviour {
 			BuyButton.interactable = false;
 			notEnoughMoney.enabled = true;
 		}
+		TrueUpgradeManager.instance.playSimpleSound ();
 	}
 
 	public void increaseUltLevel(int index)
@@ -79,6 +80,7 @@ public class UltUpgradeUI : MonoBehaviour {
 		LevelData.addArbitronium (1);
 		updateArbText ();
 		openBuyArbWindow ();
+		TrueUpgradeManager.instance.playSimpleSound ();
 	}
 
 	public void ToggleUlt(int index)

@@ -27,7 +27,7 @@ public class PageUIManager : MonoBehaviour {
 		}
 		pageList [n].image.material = null;
 		currentPage = n;
-		selectM.setPage (n);
+		//selectM.setPage (n);
 
 		for (int i = 0; i < pageList.Count; i++) {
 			if (pageList [i].gameObject.activeSelf) {

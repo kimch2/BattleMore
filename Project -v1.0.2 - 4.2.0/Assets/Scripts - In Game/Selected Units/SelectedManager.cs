@@ -281,8 +281,7 @@ public class SelectedManager : MonoBehaviour, ISelectedManager
             else {
                 currentPage = 0;
             }
-			pageUI.selectPage (currentPage);
-			abilityManager.loadUI(UIPages[currentPage]);
+			setPage (currentPage);
 
         }
 			

@@ -186,7 +186,7 @@ public class VictoryTrigger : MonoBehaviour {
 		if (bonusTech == 1) {
 			bonusTech = 0;
 		} else if (bonusTech == 3) {
-			bonusTech = 5;}
+			bonusTech = 4;}
 		//Set my victory screen
 		//LevelData.loadVetStats (GameManager.main.playerList [0].getUnitStats());
 		LevelData.levelInfo Ldata = createLevelInfo(levelNumber , GameManager.main.playerList [1].UnitsLost(),GameManager.main.playerList [0].UnitsLost(), GameManager.main.playerList [0].totalResO() +  GameManager.main.playerList [0].totalResT(),

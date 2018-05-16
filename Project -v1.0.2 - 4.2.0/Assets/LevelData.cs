@@ -230,7 +230,7 @@ public class LevelData  {
 	public static int getMoney()
 	{
 	//	Debug.Log ("Money left" + PlayerPrefs.GetInt ("Money"));
-		return PlayerPrefs.GetInt ("Money", 15);
+		return PlayerPrefs.GetInt ("Money", 0);
 	}
 
 	public static int getArbitronium()

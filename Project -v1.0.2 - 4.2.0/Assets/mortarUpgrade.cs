@@ -10,10 +10,12 @@ public class mortarUpgrade : Upgrade {
 	public void applyUpgrade(GameObject obj)
 	{
 
-		//UnitManager manager = obj.GetComponent<UnitManager>();
+		UnitManager manager = obj.GetComponent<UnitManager>();
 		mortarPod pod = obj.GetComponent<mortarPod> ();
-		if (pod)
-		{Debug.Log ("Before Mortar " + pod.totalShots + "   "+ pod.shotCount);
+
+		if (pod && manager && manager.myWeapon.Contains(pod.GetComponent<IWeapon>()))
+		{
+			Debug.Log ("Before Mortar " + pod.totalShots + "   "+ pod.shotCount);
 			
 			pod.totalShots += podIncrease;
 			pod.shotCount += podIncrease;
