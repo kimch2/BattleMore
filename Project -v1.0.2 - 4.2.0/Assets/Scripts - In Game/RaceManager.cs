@@ -424,7 +424,11 @@ public class RaceManager : MonoBehaviour, ManagerWatcher {
 			//StartCoroutine (DeathRescan (b));
 		//} 
 
-		applyUpgrade (obj);
+		if(!obj.myStats.upgradesApplied)
+		{
+			obj.myStats.upgradesApplied = true;
+			applyUpgrade (obj);
+		}
 
 		foreach (BuildUnitObjective objective in buildUnitObjectList) {
 			objective.buildUnit (obj);

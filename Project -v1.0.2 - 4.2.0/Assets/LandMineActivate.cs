@@ -46,10 +46,56 @@ public class LandMineActivate : VisionTrigger {
 	{
 	}
 
-	public override void UnitEnterTrigger(UnitManager manager)
-	{
-		if (manager.getUnitStats ()) {
+	bool triggered = false;
 
+	public override void UnitEnterTrigger(UnitManager manager)
+	{	
+		if (!triggered) {
+			if (manager.getUnitStats ()) {
+
+
+				triggered = true;
+
+				target = manager.transform;
+				StartCoroutine (Attack (manager));
+			}
+		}
+	}
+
+	Transform target;
+	Vector3 lastPosition;
+
+	IEnumerator Attack(UnitManager manager)
+	{
+		float radius = target.GetComponent<CharacterController> ().radius + .5f;
+		yield return null;
+		float Speed = 0;
+
+		float goingUp = 0;
+
+		float distance = 0;
+		while (true){
+
+			if (target) {
+				lastPosition = target.position;
+			}
+			distance = Vector3.Distance (transform.position, lastPosition);
+			if (distance <= radius ) {
+				break;
+			}
+
+			if (goingUp < .2f) {
+				goingUp += Time.deltaTime;
+				transform.Translate (Vector3.up * Time.deltaTime * 30 );
+			}
+
+			Speed += Time.deltaTime * 15;
+			transform.Translate ((lastPosition - transform.position).normalized * Mathf.Min(distance, Speed) );
+
+			yield return null;
+		}
+
+		if (target) {
 			float amount;
 			if (myVet) {
 				amount = manager.getUnitStats ().TakeDamage (currentDamage, myVet.gameObject, DamageTypes.DamageType.True);
@@ -60,36 +106,16 @@ public class LandMineActivate : VisionTrigger {
 			if (PlayerNumber == 1) {
 				PlayerPrefs.SetInt ("TotalPlasmaMineDamage", PlayerPrefs.GetInt ("TotalPlasmaMineDamage") + (int)amount);
 			}
-			GameObject obj = Instantiate (explosionEffect, this.gameObject.transform.position, Quaternion.identity);
-			if (explosionSound) {
-				obj.GetComponentInChildren<AudioPlayer> ().myClip = explosionSound;
-			}
-			Destroy (this.gameObject);	
 		}
+		GameObject obj = Instantiate (explosionEffect, this.gameObject.transform.position, Quaternion.identity);
+		if (explosionSound) {
+			obj.GetComponentInChildren<AudioPlayer> ().myClip = explosionSound;
+		}
+		Destroy (this.gameObject);	
+	
 	}
 
-	/*
 
-	void OnTriggerEnter(Collider other) {
-
-		UnitManager otherManager = other.gameObject.GetComponent<UnitManager> ();
-		if (otherManager && !otherManager.PlayerOwner.Equals (playerOwner) && otherManager.getUnitStats()) {
-
-			float amount;
-			if (myVet) {
-				amount = otherManager.getUnitStats ().TakeDamage (currentDamage,myVet.gameObject,DamageTypes.DamageType.True);
-				myVet.veteranDamage (amount);
-			}
-			else
-			{amount = otherManager.getUnitStats ().TakeDamage (currentDamage,null,DamageTypes.DamageType.True);}
-			PlayerPrefs.SetInt ("TotalPlasmaMineDamage", PlayerPrefs.GetInt("TotalPlasmaMineDamage") +  (int)amount);
-			Instantiate (explosionEffect, this.gameObject.transform.position, Quaternion.identity);
-			Destroy (this.gameObject);
-
-		}
-
-	}
-*/
 	public void setSource(GameObject obj)
 	{
 		myVet = obj.GetComponent<UnitStats> ();

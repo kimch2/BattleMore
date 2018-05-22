@@ -193,6 +193,13 @@ public class BuildingInteractor : MonoBehaviour, Iinteract {
 		return underConstruction;
 	}
 
+	public void Dying()
+	{
+		
+		//GraphUpdateObject b = new GraphUpdateObject (GetComponent<CharacterController> ().bounds); 
+		//AstarPath.active.UpdateGraphs (b);
+	}
+
 	IEnumerator DeathRescan(GraphUpdateObject b)
 	{	
 		yield return new WaitForSeconds (.2f);

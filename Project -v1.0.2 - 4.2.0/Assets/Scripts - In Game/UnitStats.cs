@@ -52,6 +52,9 @@ public class UnitStats : MonoBehaviour {
 	//Tags the units can have
 	private Selected mySelection;
 
+	[HideInInspector]
+	public bool upgradesApplied;
+
 	public SphereCollider visionRange;
 
 
