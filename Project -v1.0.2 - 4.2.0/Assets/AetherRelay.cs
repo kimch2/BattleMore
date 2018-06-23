@@ -9,7 +9,7 @@ public class AetherRelay : Ability, AllySighted,EnemySighted{
 	public float energyChargeRate;
 	UnitManager manager;
 
-	private Selected select;
+
 	public MultiShotParticle myEffect;
 	public GameObject chargeEffect;
 
@@ -18,7 +18,6 @@ public class AetherRelay : Ability, AllySighted,EnemySighted{
 	// Use this for initialization
 	void Start () {
 		myType = type.activated;
-		select = GetComponent<Selected> ();
 		manager = GetComponent<UnitManager> ();
 		manager.AddAllySighted (this);
 		manager.AddEnemySighted (this);
@@ -39,9 +38,8 @@ public class AetherRelay : Ability, AllySighted,EnemySighted{
 					turnedOn = !turnedOn;
 					autocast = false;
 					myEffect.stopEffect ();
-					if (select.IsSelected) {
-						RaceManager.upDateAutocast();
-					}
+				updateAutocastCommandCard ();
+
 
 				}
 				else{
@@ -109,34 +107,7 @@ public class AetherRelay : Ability, AllySighted,EnemySighted{
 			}
 		}
 	}
-
-	/*
-	void OnTriggerExit(Collider other)
-	{
-		if (other.isTrigger) {
-			return;}
-
-
-		UnitManager manage = other.gameObject.GetComponent<UnitManager>();
-
-		if (manage == null) {
-			return;
-		}
-
-		if (manage.PlayerOwner == manager.PlayerOwner) {
-
-			DayexaShield s = other.gameObject.GetComponent<DayexaShield> ();
-			if (s) {
-				shieldList.Remove (s);
-			}
-
-
-		} else if (enemyStats.Contains (manage.getUnitStats ())) {
-			enemyStats.Remove (manage.getUnitStats ());
 		
-		}
-	}
-*/
 
 	public override void setAutoCast(bool offOn){
 	}
@@ -173,9 +144,7 @@ public class AetherRelay : Ability, AllySighted,EnemySighted{
 		
 		}
 
-		if (select.IsSelected) {
-			RaceManager.upDateAutocast();
-		}
+		updateAutocastCommandCard ();
 
 		//return true;//next unit should also do this.
 	}

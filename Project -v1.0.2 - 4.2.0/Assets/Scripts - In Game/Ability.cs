@@ -36,13 +36,14 @@ public abstract class Ability : MonoBehaviour {
 	public abstract void setAutoCast(bool offOn);
 	public AudioClip soundEffect;
 	protected AudioSource audioSrc;
+	private Selected select;
 
 	private bool initialized;
 
 	private void initialize()
 		{
 		initialized = true;
-
+		select = GetComponent<Selected> ();
 		foreach (string s in RequiredUnit) {
 
 			requirementList.Add (s, false);
@@ -120,5 +121,40 @@ public abstract class Ability : MonoBehaviour {
 		}
 
 	}
+
+	protected void updateAutocastCommandCard()
+	{
+		if (!select) {
+			select = GetComponent<Selected> ();
+		}
+		if (select.IsSelected) {
+			RaceManager.upDateAutocast ();
+		}
+
+	}
+
+
+	protected void updateActiveCommandCard()
+	{
+		if (!select) {
+			select = GetComponent<Selected> ();
+		}
+		if (select.IsSelected) {
+				RaceManager.updateActivity();
+		}
+
+	}
+		protected void updateUICommandCard()
+		{
+		if (!select) {
+			select = GetComponent<Selected> ();
+		}
+			if (select.IsSelected) {
+				RaceManager.upDateUI();
+			}
+
+		}
+
+
 
 }

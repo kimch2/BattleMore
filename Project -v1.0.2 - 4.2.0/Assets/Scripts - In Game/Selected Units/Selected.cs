@@ -304,9 +304,12 @@ public class Selected : MonoBehaviour {
 				decalCircle.GetComponent<MeshRenderer> ().enabled = false;
 			}
 			if (RallyPoint) {
-				myLine.enabled = false;
 				RallyPoint.SetActive (false);
 			}
+			if (myLine) {
+				myLine.enabled = false;
+			}
+
 
 			foreach (Transform obj in this.transform) {
 

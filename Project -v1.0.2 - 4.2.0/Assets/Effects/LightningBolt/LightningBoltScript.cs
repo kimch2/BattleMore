@@ -308,22 +308,27 @@ namespace DigitalRuby.LightningBolt
                 }
                 else
                 {
+
                     Trigger();
                 }
             }
             timer -= Time.deltaTime;
-        }
+
+		}
 
 
 		Coroutine currentLightning;
 
 		IEnumerator ManualLightning( float maxDuration)
-		{float dur = .05f;
-			yield return new WaitForSeconds (.05f);
+		{float dur = .0f;
+			//for (float i = 0; i < maxDuration; i += .05f) {
+			
+				//yield return new WaitForSeconds(.05f);
+		//	}//
 			while(dur <maxDuration)
 			{dur += .05f;
 				Vector3 start, end;
-				timer = Duration + Mathf.Min(0.0f, timer);
+				//timer = Duration + Mathf.Min(0.0f, timer);
 				if (StartObject == null)
 				{
 					start = StartPosition;
@@ -345,6 +350,8 @@ namespace DigitalRuby.LightningBolt
 				UpdateLineRenderer();
 				yield return new WaitForSeconds(.05f);
 			}
+			yield return new WaitForSeconds (.01f);
+		
 			lineRenderer.positionCount = 0;//.SetVertexCount(0);
 		}
 

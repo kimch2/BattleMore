@@ -6,8 +6,6 @@ public class ChangeAmmo : Ability {
 
 
 
-	public Selected select;
-
 	//UnitManager myManager;
 	public GameObject myAmmo;
 	public IWeapon myWeapon;
@@ -24,7 +22,7 @@ public class ChangeAmmo : Ability {
 
 	void Awake()
 	{audioSrc = GetComponent<AudioSource> ();
-		//select = GetComponent<Selected> ();
+
 		myType = type.activated;
 	}
 
@@ -85,10 +83,8 @@ public class ChangeAmmo : Ability {
 				ca.autocast = false;
 			}
 		}
-		if (select.IsSelected) {
-			
-				RaceManager.upDateAutocast ();
-			}
+		updateAutocastCommandCard ();
+
 
 	
 

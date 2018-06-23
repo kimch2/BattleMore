@@ -79,6 +79,7 @@
      <Compile Include="Assets\ArmoryInteractor.cs" />
      <Compile Include="Assets\ArmyOfOneAch.cs" />
      <Compile Include="Assets\ArmyUIManager.cs" />
+     <Compile Include="Assets\ArtilleryBastion.cs" />
      <Compile Include="Assets\AttachGrinder.cs" />
      <Compile Include="Assets\AttackMoveAngled.cs" />
      <Compile Include="Assets\attackSpeedUpgrade.cs" />
@@ -158,6 +159,7 @@
      <Compile Include="Assets\DayFFUpgrade.cs" />
      <Compile Include="Assets\DayNight.cs" />
      <Compile Include="Assets\DeathCubeAchievement.cs" />
+     <Compile Include="Assets\DeathCubeDeactivator.cs" />
      <Compile Include="Assets\DeathCubeVulnerable.cs" />
      <Compile Include="Assets\DeathInjector.cs" />
      <Compile Include="Assets\deathTrigger.cs" />
@@ -265,6 +267,7 @@
      <Compile Include="Assets\InstructionHelper.cs" />
      <Compile Include="Assets\InstructionHelperManager.cs" />
      <Compile Include="Assets\InteractableRobot.cs" />
+     <Compile Include="Assets\InversionBarrier.cs" />
      <Compile Include="Assets\ItemDropper.cs" />
      <Compile Include="Assets\KillModifier.cs" />
      <Compile Include="Assets\KillUnitAch.cs" />
@@ -318,6 +321,7 @@
      <Compile Include="Assets\MouseClicker.cs" />
      <Compile Include="Assets\MouseOver.cs" />
      <Compile Include="Assets\mousetracker.cs" />
+     <Compile Include="Assets\MoveDamageBoost.cs" />
      <Compile Include="Assets\MultiShotParticle.cs" />
      <Compile Include="Assets\MVPCalculator.cs" />
      <Compile Include="Assets\NewAchievmentUI.cs" />
@@ -550,6 +554,7 @@
      <Compile Include="Assets\Scripts - In Game\WeaponScripts\MortarWeapon.cs" />
      <Compile Include="Assets\SelectionNotifier.cs" />
      <Compile Include="Assets\selfDestructTimer.cs" />
+     <Compile Include="Assets\ShellMaker.cs" />
      <Compile Include="Assets\ShieldExplosion.cs" />
      <Compile Include="Assets\ShieldGlobe.cs" />
      <Compile Include="Assets\ShieldSpeedBoost.cs" />
@@ -569,6 +574,7 @@
      <Compile Include="Assets\SMAA-master\SMAA-master\SMAA\Scripts\QualityPreset.cs" />
      <Compile Include="Assets\SMAA-master\SMAA-master\SMAA\Scripts\SMAA.cs" />
      <Compile Include="Assets\SoloKillAchievement.cs" />
+     <Compile Include="Assets\SoulBond.cs" />
      <Compile Include="Assets\SoundManager\Demo\SoundManagerDemo.cs" />
      <Compile Include="Assets\SoundManager\SoundManager.cs" />
      <Compile Include="Assets\SoundOptions.cs" />
@@ -637,6 +643,7 @@
      <Compile Include="Assets\UnitCardCreater.cs" />
      <Compile Include="Assets\UnitCrusher.cs" />
      <Compile Include="Assets\UnitDisappear.cs" />
+     <Compile Include="Assets\UnitEffectTag.cs" />
      <Compile Include="Assets\UnitEnterTrigger.cs" />
      <Compile Include="Assets\UnitExistAchievement.cs" />
      <Compile Include="Assets\UnitIconInfo.cs" />

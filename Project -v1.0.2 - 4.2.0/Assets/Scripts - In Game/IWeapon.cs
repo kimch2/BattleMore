@@ -258,7 +258,11 @@ public class IWeapon : MonoBehaviour {
 
 
 
-
+	public void ResetAttackCooldown()
+	{
+		offCooldown = true;
+		StopAllCoroutines ();
+	}
 
 	public void attack(UnitManager target, UnitManager toStun)
 	{

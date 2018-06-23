@@ -166,7 +166,10 @@ public class AbstractCost : MonoBehaviour {
 	{cooldownTimer = 0;
 	}
 		
-
+	/// <summary>
+	/// Cooldowns the progress. 0 = cooldown just started, 1 = its done
+	/// </summary>
+	/// <returns>The progress.</returns>
 	public float cooldownProgress()
 	{
 		return (1 - cooldownTimer / cooldown);

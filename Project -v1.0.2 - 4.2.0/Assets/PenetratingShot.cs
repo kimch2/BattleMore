@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PenetratingShot : Projectile {
 
-	List<GameObject> hitGuys = new List<GameObject>();
+	public List<GameObject> hitGuys = new List<GameObject>();
 
 	public int NumGuysHit;
 
@@ -124,7 +124,7 @@ public class PenetratingShot : Projectile {
 
 			return;}
 
-		if (!hitGuys.Contains (col.gameObject) && currentDistance >0) {
+		if (!hitGuys.Contains (col.gameObject) && currentDistance > 0) {
 			
 
 			hitGuys.Add (col.gameObject);
@@ -132,8 +132,8 @@ public class PenetratingShot : Projectile {
 			if (manage && manage.PlayerOwner != sourceInt && manage.PlayerOwner != 3) {
 				
 			
-				manage.getUnitStats ().TakeDamage (damage * (1 - NumGuysHit * PercDamLost * .01f),Source,GetComponent<Projectile>().damageType);
-			//	Debug.Log ("Dealing " + damage * (1 - NumGuysHit * PercDamLost*.01f) + " to  "+ manage.gameObject );
+				manage.getUnitStats ().TakeDamage (damage * (1 - NumGuysHit * PercDamLost * .01f), Source, GetComponent<Projectile> ().damageType);
+				//	Debug.Log ("Dealing " + damage * (1 - NumGuysHit * PercDamLost*.01f) + " to  "+ manage.gameObject );
 				NumGuysHit++;
 				if (SpecialEffect) {
 					Instantiate (SpecialEffect, transform.position, Quaternion.identity);

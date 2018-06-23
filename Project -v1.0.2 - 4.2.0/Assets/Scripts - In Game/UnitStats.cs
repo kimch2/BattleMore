@@ -471,10 +471,15 @@ public class UnitStats : MonoBehaviour {
 	}
 
 
-	public void addModifier(Modifier mod)
+	public void addModifier(Modifier mod, int priority = -1)
 	{
 		if (!damageModifiers.Contains (mod)) {
-			damageModifiers.Add (mod);
+			if (priority != -1) {
+				
+				damageModifiers.Insert (priority, mod);
+			} else {
+				damageModifiers.Add (mod);
+			}
 		}
 	}
 

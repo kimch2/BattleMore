@@ -248,7 +248,7 @@ public  class Projectile : MonoBehaviour {
 			
 			foreach (Notify not in triggers) {
 				if (not != null) {
-					not.trigger (this.gameObject, this.gameObject, target, damage);
+					not.trigger (Source, this.gameObject, target, damage);
 				}
 			}
 			if (target != null && target.myStats != null) {

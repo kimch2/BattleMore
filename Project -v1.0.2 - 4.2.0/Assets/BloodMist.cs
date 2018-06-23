@@ -165,11 +165,9 @@ public class BloodMist : TargetAbility {
 		if (chargeCount > maxChargeCount) {
 			chargeCount = maxChargeCount;
 		}
-		if (mySelect.IsSelected) {
-			RaceManager.upDateUI ();
-			RaceManager.updateActivity ();
+		updateActiveCommandCard ();
+		updateAutocastCommandCard ();
 
-		}
 	}
 
 }

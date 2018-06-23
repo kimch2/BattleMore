@@ -24,7 +24,7 @@ public class UnitCrusher : MonoBehaviour, Notify {
 	IEnumerator CrushGuy()
 	{	GetComponent<UnitManager> ().StunForTime (null, 15);
 		float startY = transform.localScale.y;
-		for (float i = 0; i < 8; i += Time.deltaTime) {
+		for (float i = 0; i < 6; i += Time.deltaTime) { 
 			yield return null;
 		//	transform.position += Vector3.up * Time.deltaTime;
 			transform.localScale = new Vector3 (transform.localScale.x, startY * (1 - (i/8f)), transform.localScale.z);
@@ -45,11 +45,13 @@ public class UnitCrusher : MonoBehaviour, Notify {
 			if (source) {
 				source.GetComponent<UnitStats> ().upKills ();
 			}
-			UnitCrusher crusher = target.gameObject.AddComponent<UnitCrusher> ();
+			if (!target.GetComponent<UnitCrusher> ()) {
+				UnitCrusher crusher = target.gameObject.AddComponent<UnitCrusher> ();
 
-			crusher.onTarget = true;
-			crusher.stunTime = stunTime;
-			crusher.startCrush();
+				crusher.onTarget = true;
+				crusher.stunTime = stunTime;
+				crusher.startCrush ();
+			}
 		}
 		return damage;
 	}
