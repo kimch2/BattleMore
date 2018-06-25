@@ -27,6 +27,9 @@ public abstract class VisionTrigger : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other) {
 
+		if (other.isTrigger) {
+			return;
+		}
 		UnitManager otherManager = other.gameObject.GetComponent<UnitManager> ();
 		if (otherManager && otherManager.PlayerOwner.Equals (PlayerNumber)) {
 
@@ -37,7 +40,9 @@ public abstract class VisionTrigger : MonoBehaviour {
 	}
 
 	void OnTriggerExit(Collider other) {
-
+		if (other.isTrigger) {
+			return;
+		}
 		UnitManager otherManager = other.gameObject.GetComponent<UnitManager> ();
 		if (otherManager) {
 

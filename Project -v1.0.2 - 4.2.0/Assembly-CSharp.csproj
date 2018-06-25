@@ -73,6 +73,11 @@
      <Compile Include="Assets\APMAchieve.cs" />
      <Compile Include="Assets\APMCounter.cs" />
      <Compile Include="Assets\ApplyBuffUpgrade.cs" />
+     <Compile Include="Assets\AQUAS-Lite\Demo\SplineController\MathUtils.cs" />
+     <Compile Include="Assets\AQUAS-Lite\Demo\SplineController\SplineController.cs" />
+     <Compile Include="Assets\AQUAS-Lite\Demo\SplineController\SplineInterpolator.cs" />
+     <Compile Include="Assets\AQUAS-Lite\Scripts\AQUAS_Camera.cs" />
+     <Compile Include="Assets\AQUAS-Lite\Scripts\AQUAS_Reflection.cs" />
      <Compile Include="Assets\AreaDamage.cs" />
      <Compile Include="Assets\AreaDamageRecorder.cs" />
      <Compile Include="Assets\ArmorBackHeal.cs" />
@@ -475,6 +480,7 @@
      <Compile Include="Assets\Scripts - In Game\GameManager.cs" />
      <Compile Include="Assets\Scripts - In Game\GarataiManager.cs" />
      <Compile Include="Assets\Scripts - In Game\GatlingGun.cs" />
+     <Compile Include="Assets\Scripts - In Game\GridMaker.cs" />
      <Compile Include="Assets\Scripts - In Game\GUI\Events\GUIEvents.cs" />
      <Compile Include="Assets\Scripts - In Game\GUI\GUIManager.cs" />
      <Compile Include="Assets\Scripts - In Game\GUI\Modules\Drag Select\DragSelect.cs" />
@@ -790,6 +796,7 @@
      <None Include="Assets\Materials\Bit2Good\SFS\Shaders\Mobile\SFS_M_N.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\MobileBlur.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\SSAOShader.shader" />
+     <None Include="Assets\AQUAS-Lite\Shaders\AQUAS-Lite.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\ConvertDepth.shader" />
      <None Include="Assets\Standard Assets\VolumetricLights-master\Assets\Shaders\BlitAdd.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\ColorCorrectionCurvesSimple.shader" />
@@ -813,6 +820,7 @@
      <None Include="Assets\Plugins\AstarPathfindingProject\Plugins\Clipper\ClipperLicense.txt" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\ChromaticAberrationShader.shader" />
      <None Include="Assets\Materials\Bit2Good\SFS\Shaders\SFS_St_N_S_T.shader" />
+     <None Include="Assets\AQUAS-Lite\Readme.txt" />
      <None Include="Assets\Materials\Bit2Good\SFS\Shaders\Terrain\SFS_Te_Nt.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\GlobalFog.shader" />
      <None Include="Assets\SMAA-master\SMAA-master\SMAA\Shaders\SMAA.cginc" />
