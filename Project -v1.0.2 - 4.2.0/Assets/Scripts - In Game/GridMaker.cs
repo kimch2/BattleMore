@@ -35,7 +35,7 @@ public class GridMaker : MonoBehaviour {
 	{
 		Vector3 startPosition = child.transform.localPosition;
 
-		while (Vector3.Distance (transform.position, source.transform.position) > 50) {
+		while (source && Vector3.Distance (transform.position, source.transform.position) > 56) {
 			yield return null;
 			yield return null;
 		}

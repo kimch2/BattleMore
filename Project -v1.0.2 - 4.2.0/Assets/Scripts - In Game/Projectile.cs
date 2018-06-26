@@ -41,7 +41,7 @@ public  class Projectile : MonoBehaviour {
 	GameObject myEffect;
 	MultiShotParticle multiParticle;
 
-	Lean.LeanPool myBulletPool;
+	protected Lean.LeanPool myBulletPool;
 
 	List<TrailRenderer> renders = new List<TrailRenderer>();
 	// Use this for initialization
@@ -83,6 +83,7 @@ public  class Projectile : MonoBehaviour {
 			
 	public void Initialize(UnitManager targ, float dam, UnitManager src)
 	{
+		Debug.Log ("Setting target " + targ);
 		target = targ;
 		damage = dam;
 		Source = src.gameObject;
@@ -184,7 +185,7 @@ public  class Projectile : MonoBehaviour {
 	{
 		if (!target) {
 			return;}
-		if (other.gameObject == target || other.gameObject.transform.IsChildOf(target.transform)) {
+		if (other.gameObject == target || other.gameObject.transform.IsChildOf(target.transform)|| Source.transform.IsChildOf(other.transform)) {
 			Terminate (other.gameObject.GetComponent<UnitManager>());
 		}
 
@@ -192,11 +193,12 @@ public  class Projectile : MonoBehaviour {
 			return;
 		}
 
-		if(!trackTarget && (other.gameObject!= Source || !other.gameObject.transform.IsChildOf(Source.transform) ))
+		if(!trackTarget && (other.gameObject!= Source && !other.gameObject.transform.IsChildOf(Source.transform) && !Source.transform.IsChildOf(other.transform)))
 		{
 			Terminate(null);}
 	}
 
+	/*
 	//DO I NEED THIS?
 	public virtual void OnTriggerEnter(Collider other)
 	{if (!target) {
@@ -207,7 +209,7 @@ public  class Projectile : MonoBehaviour {
 			return;}
 	
 
-		if (other.gameObject == target || other.gameObject.transform.IsChildOf(target.transform)) {
+		if (other.gameObject == target || other.gameObject.transform.IsChildOf(target.transform) || Source.transform.IsChildOf(other.transform)) {
 			Terminate (other.gameObject.GetComponent<UnitManager> ());
 			//Debug.Log (" COLLIDER HIT ENEMY");
 
@@ -215,19 +217,20 @@ public  class Projectile : MonoBehaviour {
 			}
 
 
-		if(!trackTarget && (other.gameObject!= Source || !other.gameObject.transform.IsChildOf(Source.transform) ))
+		if(!trackTarget && (other.gameObject != Source && !other.gameObject.transform.IsChildOf(Source.transform)  && !Source.transform.IsChildOf(other.transform)))
 			{Terminate(null);
-			//Debug.Log (" COLLIDER HIT ENEMY");
+			Debug.Log (" COLLIDER HIT ENEMY " + other.gameObject + "  " + Source);
 
 		}
 		
 	}
-
+	*/
 
 
 	public virtual void Terminate(UnitManager target)
 	{
-		if (!gameObject.activeSelf) {
+		Debug.Log ("Terminating on " + target + "   Source is " + Source);
+		if (!gameObject.activeSelf) { 
 		
 			return;
 		}

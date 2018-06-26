@@ -17,6 +17,9 @@ public class PenetratingShot : Projectile {
 		control = GetComponent<CharacterController> ();
 		//transform.LookAt (target.transform.position+ randomOffset);
 
+		if (!myBulletPool) {
+			myBulletPool = Lean.LeanPool.getSpawnPool (this.gameObject);
+		}
 	}
 
 	new void OnSpawn()
@@ -117,7 +120,7 @@ public class PenetratingShot : Projectile {
 	}
 
 
-	public override void OnTriggerEnter(Collider col)
+	public  void OnTriggerEnter(Collider col)
 	{
 
 		if (col.isTrigger) {
