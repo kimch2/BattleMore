@@ -47,6 +47,13 @@ public class inflectionBarrier : MonoBehaviour, Notify {
 
 	}
 
+	public void castAgain()
+	{
+
+		Health = Health/2 + 150;
+		duration = duration/2 + 10;
+	}
+
 
 	public float trigger(GameObject source, GameObject projectile,UnitManager target, float damage)
 	{
@@ -61,11 +68,6 @@ public class inflectionBarrier : MonoBehaviour, Notify {
 			if (proj) {
 				proj.Despawn ();
 				if (proj.explosionO) {
-
-
-
-					//GameObject explode = (GameObject)Instantiate (proj.explosionO , transform.transform.position, Quaternion.identity);
-					//Debug.Log ("INstantiating explosion");
 
 					attachedUnit.myStats.TakeDamage (damage,source,DamageTypes.DamageType.Regular);
 					explosion Escript =proj.explosionO.GetComponent<explosion> ();
@@ -95,49 +97,6 @@ public class inflectionBarrier : MonoBehaviour, Notify {
 		}
 		return 0;
 	}
-	/*
-	void OnTriggerEnter(Collider other)
-	{
-		if (other.gameObject.tag == "Projectile") {
-
-
-			Projectile proj = other.GetComponent<Projectile> ();
-			if (proj.Source.GetComponent<UnitManager> ().PlayerOwner != 1) {
-
-				//float dist = Vector3.Distance (this.gameObject.transform.position, other.transform.position);
-
-					Health -= proj.damage;
-					Instantiate (Effect, other.gameObject.transform.position, Quaternion.identity);
-					Destroy (other.gameObject);
-				if (proj.explosionO) {
-				
-
-				
-					GameObject explode = (GameObject)Instantiate (proj.explosionO, transform.transform.position, Quaternion.identity);
-						//Debug.Log ("INstantiating explosion");
-
-						explosion Escript = explode.GetComponent<explosion> ();
-						if (Escript) {
-							explode.GetComponent<explosion> ().source = source;
-						explode.GetComponent<explosion> ().damageAmount = proj.damage;
-						}
-
-
-
-				}
-
-					if (Health <= 0) {
-						Destroy (this.gameObject);
-					}
-
-				
-
-			}
-		}
-
-
-	}
-*/
 
 
 }

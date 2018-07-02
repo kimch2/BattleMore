@@ -15,17 +15,21 @@ public class inflectionStarter: MonoBehaviour, Notify{
 
 
 
+
+
 	public float trigger(GameObject source,GameObject proj, UnitManager target, float damage)
 	{
 		if (myType == AbilityCastType.inflectionBarrier) {
 			inflectionBarrier existingShield = target.GetComponentInChildren<inflectionBarrier> ();
 			if (existingShield) {
-				Destroy (existingShield.gameObject);
+				existingShield.castAgain ();
+
+			} else {
+				GameObject obj = (GameObject)Instantiate (barrier, target.transform.position, target.transform.rotation);
+				obj.transform.SetParent (target.transform);
+				obj.GetComponent<inflectionBarrier> ().setSource (GetComponent<Projectile> ().Source);
+				obj.GetComponent<inflectionBarrier> ().initialize (target);
 			}
-			GameObject obj = (GameObject)Instantiate (barrier, target.transform.position, target.transform.rotation);
-			obj.transform.SetParent (target.transform);
-			obj.GetComponent<inflectionBarrier> ().setSource (GetComponent<Projectile> ().Source);
-			obj.GetComponent<inflectionBarrier> ().initialize (target);
 		} else {
 		
 			InversionBarrier existingShield = target.GetComponentInChildren<InversionBarrier> ();
