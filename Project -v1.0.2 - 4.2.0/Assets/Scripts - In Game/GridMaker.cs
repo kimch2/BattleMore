@@ -6,18 +6,27 @@ public class GridMaker : MonoBehaviour {
 
 	public bool triggered;
 
+	public AudioSource src;
+
 	GameObject child;
 	public bool OnUnit;
-	bool NotNuetral;
+	public bool NotNuetral;
 	void Start()
 	{	child = transform.GetComponentInChildren<MeshRenderer>().gameObject;
 		UnitManager manager = GetComponent<UnitManager> ();
 		if (manager &&  manager.PlayerOwner == 1) {
 			NotNuetral = true;
 		}
+		if (!src) {
+			src = GetComponent<AudioSource> ();
+		}
 	
 	}
 
+	public void MakeNotNuetral()
+	{
+		NotNuetral = true;
+	}
 	public void Trigger(GameObject source)
 	{
 		if (triggered) {
@@ -51,6 +60,11 @@ public class GridMaker : MonoBehaviour {
 		
 			}
 			child.transform.localPosition = Vector3.zero;
+			if (src) {
+				src.Play ();
+
+				yield return new WaitForSeconds (1);
+			}
 			Destroy (this);
 		}
 	}

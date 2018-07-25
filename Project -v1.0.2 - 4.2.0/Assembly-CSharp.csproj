@@ -562,6 +562,7 @@
      <Compile Include="Assets\SelectionNotifier.cs" />
      <Compile Include="Assets\selfDestructTimer.cs" />
      <Compile Include="Assets\ShellMaker.cs" />
+     <Compile Include="Assets\ShieldBattery.cs" />
      <Compile Include="Assets\ShieldExplosion.cs" />
      <Compile Include="Assets\ShieldGlobe.cs" />
      <Compile Include="Assets\ShieldSpeedBoost.cs" />

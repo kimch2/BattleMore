@@ -75,6 +75,34 @@ public class GridMakerEditor : Editor {
 			}
 		}
 
+		if (GUILayout.Button ("Add Audio")) {
+			bool everyOther = true;
+			foreach (GridMaker g in GameObject.FindObjectsOfType<GridMaker>()) {
+				if (!g.OnUnit) {
+					if (everyOther) {
+						AudioSource s = g.gameObject.AddComponent<AudioSource> ();
+						s.playOnAwake = false;
+						g.src = s;
+						s.clip = ((GridMaker)target).src.clip;
+
+					}
+					everyOther = !everyOther;
+				}
+			}
+		}
+
+		if (GUILayout.Button ("Apply new Sound")) {
+
+
+			foreach (GridMaker g in GameObject.FindObjectsOfType<GridMaker>()) {
+
+				if (g.gameObject.GetComponent<AudioSource> ()) {
+					g.gameObject.GetComponent<AudioSource> ().clip = ((GridMaker)target).src.clip;
+				}
+
+			}
+		}
+
 		serializedObject.ApplyModifiedProperties ();
 	}
 

@@ -83,7 +83,7 @@ public  class Projectile : MonoBehaviour {
 			
 	public void Initialize(UnitManager targ, float dam, UnitManager src)
 	{
-		Debug.Log ("Setting target " + targ);
+		//Debug.Log ("Setting target " + targ);
 		target = targ;
 		damage = dam;
 		Source = src.gameObject;
@@ -229,7 +229,7 @@ public  class Projectile : MonoBehaviour {
 
 	public virtual void Terminate(UnitManager target)
 	{
-		Debug.Log ("Terminating on " + target + "   Source is " + Source);
+		//Debug.Log ("Terminating on " + target + "   Source is " + Source);
 		if (!gameObject.activeSelf) { 
 		
 			return;

@@ -4,18 +4,18 @@ Brush Size: 5
 Fill Mode: True
 Fill Rate: 0.5
 
-Game Object: Assets/Environment/EnvironmentModels/Larch01.prefab
+Game Object: Assets/Environment/SkythianCat/Hand_Painted_Nature_Kit_LITE/Prefabs/HABITATS/HABITAT_Other/Flowers/Plantain.prefab
 Layer: Default
 Toggle: True
 Slider: 1
-Lock Orientation Toggle: True
-Random Rotation Toggle: False
+Lock Orientation Toggle: False
+Random Rotation Toggle: True
 Random Rotation X: False
-Random Rotation Y: False
+Random Rotation Y: True
 Random Rotation Z: False
 Random Scale Toggle: True
-Random Scale Min: 0.2
-Random Scale Max: 1
+Random Scale Min: 4
+Random Scale Max: 7
 Fixed Rotation Toggle: False
 Fixed Rotation X: 0
 Fixed Rotation Y: 0

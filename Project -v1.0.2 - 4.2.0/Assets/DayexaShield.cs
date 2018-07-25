@@ -67,12 +67,12 @@ public class DayexaShield : Ability,Modifier , Notify{
 
 	}
 
-	public void startRecharge()
+	public void startRecharge(float delayTime = .1f)
 	{
 		if (currentCharging != null) {
 			StopCoroutine (currentCharging);
 		}
-			currentCharging = StartCoroutine (chargeShields (.1f));
+		currentCharging = StartCoroutine (chargeShields (delayTime));
 
 	}
 

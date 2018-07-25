@@ -85,9 +85,10 @@ public class Augmentor : TargetAbility, Iinteract, Modifier {
 		this.gameObject.transform.position = target.transform.position+  target.transform.rotation * AAP.attachPoint;
 
 
-		SoulBond armer = attached.GetComponent<SoulBond> ();
+		ShieldBattery armer = attached.GetComponent<ShieldBattery> ();
 
 		if (armer) {
+			armer.stopRecharging ();
 			foreach (IWeapon w in GetComponents<IWeapon>()) {
 				if (!manager.myWeapon.Contains (w)) {
 

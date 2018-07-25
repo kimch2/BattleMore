@@ -347,7 +347,7 @@ f66d73d9fa6115eba3eab09404e8cefd Assembly-CSharp.dll:.AchievementUI
 5336beadf6d71bdbd6ee33aca9b8ccf6 Assembly-CSharp.dll:.UiAbilityManager
 c7c2ba7994ec3cfe434b9e17103cb356 Assembly-CSharp.dll:.FusionWeld
 185f57b7db7edc6629cadb4935bd2eac Assembly-CSharp.dll:.BonusObjectiverTimer
-3c0a97f26f10c1fb7cbb70306467b0f8 Assembly-CSharp.dll:.GridMaker
+9ea40a8bd1f641d0ced11de20419674c Assembly-CSharp.dll:.GridMaker
 4811acda3810b352fcd7f09a83cd5f33 Assembly-CSharp.dll:.UnitEffectTag
 7193b5bbce6b7ef9ccdcc330aeb792e7 Assembly-CSharp.dll:.UIManager
 3af82ba286debec6d8f6424d58f0ab3a Assembly-CSharp.dll:.deathTrigger
@@ -488,6 +488,7 @@ eaa1f7a4563a9a63282ffa19e23933c9 Assembly-CSharp.dll:.FrontalShield
 783bf6d659235f53a950684dd61ab5b9 Assembly-CSharp.dll:.MouseLook
 ce5aa45865c89349a3852e59afe0a30e Assembly-CSharp-firstpass.dll:.GroupController
 915f7d01b710f6bccab1711cb4619032 Assembly-CSharp.dll:.UltUpgradeUI
+ab2fbf8cbf43629e1d342a2c9c898583 Assembly-CSharp.dll:.ShieldBattery
 0e746521293d8f7a9de09d35632038b9 Assembly-CSharp.dll:.UISetter
 0616787da0721437b00783a317b5cbd0 Assembly-CSharp.dll:.selfDestructTimer
 4d0fe3e6c6c50ce6b9d358faf811e3d1 Assembly-CSharp.dll:.GatlingGun
@@ -686,6 +687,7 @@ b3432dfe180f02232d7612fb366593d3 Assembly-CSharp-firstpass.dll:UnityStandardAsse
 5a7e5fb3120f745121070634d52bf4c6 Assembly-CSharp.dll:.TurretUIPanel
 ea209987eb4d1c95b07f176197afd133 Assembly-CSharp-firstpass.dll:Pathfinding.DebugUtility
 f66446ac68f455e990c4b7700878e14b Assembly-CSharp.dll:.TimeKillAchievement
+2c9fbd7220da6edf1a0600c12d7c50ac Assembly-CSharp.dll:.HealArea
 53882909ddbd5de27cbec913375ebb66 Assembly-CSharp.dll:.HotkeyPicSetter
 859eced5a6215df6eeb538e923aa9442 Assembly-CSharp.dll:.SimplePoolBenchmark
 3ae0dad0b55a80319e1d57c2dce28da7 Assembly-CSharp-firstpass.dll:UnityStandardAssets.ImageEffects.Tonemapping
@@ -711,4 +713,3 @@ d6174cc658e20f69c5f9cfb436a2cc97 Assembly-CSharp.dll:.HarpyLandingPad
 ded254708cf8a25d4e9b097c88e64762 Assembly-CSharp.dll:.buildTurret
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.EnemySearchAI
 5514cc0c9b816f6bbf8876eb60801ee1 Assembly-CSharp.dll:.TurretHealthDisplay
-2c9fbd7220da6edf1a0600c12d7c50ac Assembly-CSharp.dll:.HealArea

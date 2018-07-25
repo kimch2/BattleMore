@@ -93,6 +93,7 @@ public class Email : MonoBehaviour {
 	public void ReadEmail(mail m)
 	{
 		ReadEmailObj.SetActive (true);
+		m.Message.Replace ("{Player}", PlayerPrefs.GetString ("PlayerName") );
 		ReadEmailObj.GetComponentInChildren<Text> ().text = "To: " + m.To+ "\nFrom: "+ m.From + "\n\n"+m.Message;
 
 	}
@@ -233,7 +234,7 @@ public class mail
 	public string Header;
 	public string From;
 	public string To;
-	[TextArea(2,3)]
+	[TextArea(2,6)]
 	public string Message;
 
 	public int LevelUnLocked;
