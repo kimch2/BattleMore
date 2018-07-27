@@ -24,7 +24,9 @@ public class TimeDelayTrigger : MonoBehaviour {
 
 
 	void DelayedUpdate () {
+		if (gameObject.activeInHierarchy) {
 			StartCoroutine (Fire ());
+		}
 	}
 
 

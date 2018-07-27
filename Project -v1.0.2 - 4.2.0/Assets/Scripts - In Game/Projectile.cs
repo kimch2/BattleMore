@@ -183,9 +183,10 @@ public  class Projectile : MonoBehaviour {
 
 	protected virtual void OnControllerColliderHit(ControllerColliderHit other)
 	{
-		if (!target) {
+		if (!target ) {
 			return;}
-		if (other.gameObject == target || other.gameObject.transform.IsChildOf(target.transform)|| Source.transform.IsChildOf(other.transform)) {
+		
+		if (other.gameObject == target || other.gameObject.transform.IsChildOf(target.transform)|| (Source && Source.transform.IsChildOf(other.transform))) {
 			Terminate (other.gameObject.GetComponent<UnitManager>());
 		}
 
@@ -193,7 +194,7 @@ public  class Projectile : MonoBehaviour {
 			return;
 		}
 
-		if(!trackTarget && (other.gameObject!= Source && !other.gameObject.transform.IsChildOf(Source.transform) && !Source.transform.IsChildOf(other.transform)))
+		if(!trackTarget && (other.gameObject!= Source && !other.gameObject.transform.IsChildOf(Source.transform) &&  (Source && !Source.transform.IsChildOf(other.transform))))
 		{
 			Terminate(null);}
 	}

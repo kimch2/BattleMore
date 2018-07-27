@@ -47,8 +47,9 @@ public class MainMenuManager : MonoBehaviour {
 
 	public void startMatch(Dropdown dropper)
 	{
-		setDifficulty (dropper);
+		
 		resetProgress ();
+		setDifficulty (dropper);
 		audioSource.Stop ();
 		if (LoadingScreen) {
 			LoadingScreen.enabled = true;
@@ -116,6 +117,7 @@ public class MainMenuManager : MonoBehaviour {
 
 	public void setDifficulty(Dropdown dropper)
 	{
+
 		LevelData.setDifficulty (dropper.value + 1);
 
 	}

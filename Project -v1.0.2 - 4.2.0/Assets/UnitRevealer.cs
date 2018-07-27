@@ -14,13 +14,16 @@ public class UnitRevealer : Upgrade {
 			return;
 		}
 		applied = true;
+		Invoke ("WaitAbit", .01f);
+	}
+
+	void WaitAbit()
+	{
 		foreach (UpgradeCenterTag tag in GameObject.FindObjectsOfType<UpgradeCenterTag>()) {
-			FogOfWar.current.Unfog (tag.gameObject.transform.position,6);
-			MiniMapUIController.main.showWarning (tag.gameObject.transform.position, upgradeIcon);
+			FogOfWar.current.Unfog (tag.gameObject.transform.position,16);
+
+			MiniMapUIController.main.showWarning(tag.gameObject.transform.position, upgradeIcon, 35);
 		}
-	
-
-
 
 	}
 

@@ -15,7 +15,7 @@ namespace UnityEngine.PostProcessing
     {
         // Inspector fields
         public PostProcessingProfile profile;
-
+		public Shader uberShader;
         public Func<Vector2, Matrix4x4> jitteredMatrixFunc;
 
         // Internal helpers
@@ -196,7 +196,7 @@ namespace UnityEngine.PostProcessing
             bool taaActive = m_Taa.active && !m_RenderingInSceneView;
             bool dofActive = m_DepthOfField.active && !m_RenderingInSceneView;
 
-            var uberMaterial = m_MaterialFactory.Get("Hidden/Post FX/Uber Shader");
+            var uberMaterial = m_MaterialFactory.Get("Hidden/Post FX/Uber");
             uberMaterial.shaderKeywords = null;
 
             var src = source;
@@ -245,9 +245,9 @@ namespace UnityEngine.PostProcessing
             uberActive |= TryPrepareUberImageEffect(m_UserLut, uberMaterial);
 
             var fxaaMaterial = fxaaActive
-                ? m_MaterialFactory.Get("Hidden/Post FX/FXAA")
+				? m_MaterialFactory.Get("Hidden/Post FX/FXAA")
                 : null;
-
+			
             if (fxaaActive)
             {
                 fxaaMaterial.shaderKeywords = null;

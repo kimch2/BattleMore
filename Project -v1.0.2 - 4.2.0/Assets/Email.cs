@@ -32,6 +32,7 @@ public class Email : MonoBehaviour {
 	public GameObject ReadEmailObj;
 
 
+	public GameObject AlreadyExists;
 
 	void Awake()
 	{
@@ -84,22 +85,38 @@ public class Email : MonoBehaviour {
 
 	public void FirstTimeLogIn(InputField input)
 	{
-		accounts [0].Username = input.text;
-		PlayerPrefs.SetString ("PlayerName" , input.text);
-		AttemptLogin (input);
+		if (input.text.ToLower () == "jarvis" || input.text.ToLower () == "katrina" || input.text.ToLower () == "hadrian" || input.text.ToLower () == "ludacrus") {
+			AlreadyExists.SetActive (true);
+			Invoke ("turnOffAlready", 4);
+		} else {
+			accounts [0].Username = input.text;
+			UserNameDropDown.options [0].text = accounts [0].Username;
+			PlayerPrefs.SetString ("PlayerName", input.text);
+			AttemptLogin (input);
+		}
+	}
+
+	void turnOffAlready()
+	{
+		AlreadyExists.SetActive (false);
+
 	}
 
 
 	public void ReadEmail(mail m)
 	{
 		ReadEmailObj.SetActive (true);
-		m.Message.Replace ("{Player}", PlayerPrefs.GetString ("PlayerName") );
+		m.Message = m.Message.Replace ("{Player}", PlayerPrefs.GetString ("PlayerName") );
 		ReadEmailObj.GetComponentInChildren<Text> ().text = "To: " + m.To+ "\nFrom: "+ m.From + "\n\n"+m.Message;
 
 	}
 
 	public void AttemptLogin(InputField input)
 	{
+		if (input.text == "" && currentAccount != accounts[0]) {
+			return;
+		}
+
 		if (currentAccount.checkPassword (input.text) || currentAccount == accounts[0]) {
 
 			PlayerPrefs.SetString (currentAccount.Username + "Rem", rememberPassword.isOn? "true": "false");
@@ -110,7 +127,8 @@ public class Email : MonoBehaviour {
 			Invoke ("closeIncorrect", 3);
 
 		}
-		Debug.Log ("Checked");
+		FirstTimeScreen.SetActive (false);
+
 	}
 
 	List<mail> Sent = new List<mail> ();
@@ -149,36 +167,37 @@ public class Email : MonoBehaviour {
 			if (m.To == "Player") {
 				m.To = accounts [0].Username;
 			}
+			//Debug.Log ("Highest " + m.LevelUnLocked + "   " + LevelData.getHighestLevel());
+			if (m.LevelUnLocked <= LevelData.getHighestLevel ()) {
 
-			if (m.From == currentAccount.Username ) {
-				GameObject obj = Instantiate<GameObject> (EmailHeaderTemplate, sentBox.transform);
-				obj.GetComponent<Button> ().onClick.AddListener (delegate() {
-					ReadEmail(m);
-				});
-				obj.transform.Find ("From").GetComponent<Text> ().text = "To: " +m.To;
+				if (m.From == currentAccount.Username) {
+					GameObject obj = Instantiate<GameObject> (EmailHeaderTemplate, sentBox.transform);
+					obj.GetComponent<Button> ().onClick.AddListener (delegate() {
+						ReadEmail (m);
+					});
+					obj.transform.Find ("From").GetComponent<Text> ().text = "To: " + m.To;
 
 
-				obj.transform.Find ("Header Line").GetComponent<Text> ().text = m.Header;
-				Sent.Add (m);
-			} 
-			if (m.To == currentAccount.Username) {
-				Received.Add (m);
-				GameObject obj = Instantiate<GameObject> (EmailHeaderTemplate, inbox.transform);
-				obj.GetComponent<Button> ().onClick.AddListener (delegate() {
-					ReadEmail(m);
-				});
-				obj.transform.Find ("From").GetComponent<Text> ().text = "From: " +m.From;
-				obj.transform.Find ("Header Line").GetComponent<Text> ().text = m.Header;
-				if (m.LevelUnLocked == LevelData.getHighestLevel ()) {
-					appendMailMessage = true;
+					obj.transform.Find ("Header Line").GetComponent<Text> ().text = m.Header;
+					Sent.Add (m);
+				} 
+				if (m.To == currentAccount.Username) {
+					Received.Add (m);
+					GameObject obj = Instantiate<GameObject> (EmailHeaderTemplate, inbox.transform);
+					obj.GetComponent<Button> ().onClick.AddListener (delegate() {
+						ReadEmail (m);
+					});
+					obj.transform.Find ("From").GetComponent<Text> ().text = "From: " + m.From;
+					obj.transform.Find ("Header Line").GetComponent<Text> ().text = m.Header;
+					if (m.LevelUnLocked == LevelData.getHighestLevel ()) {
+						appendMailMessage = true;
+					}
 				}
 			}
 		}
-
 		if (appendMailMessage) {
 			WelcomeScreen.GetComponentInChildren<Text> ().text += "\n You Got Mail!";
 		}
-
 
 	}
 
@@ -195,6 +214,7 @@ public class Email : MonoBehaviour {
 
 	public void Logout()
 	{
+		LogInScreen.SetActive (true);
 		MainEmailScreen.SetActive (false);
 	}
 

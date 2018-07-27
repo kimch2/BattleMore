@@ -10,11 +10,11 @@ public class GameSettings {
 
 	public static float getUnitResponseFreq()
 	{
-		return PlayerPrefs.GetFloat ("UnitResponse",3);
+		return PlayerPrefs.GetFloat ("UnitResponse",1);
 	}
 	public static float getBaseAlertFreq()
 	{
-		return PlayerPrefs.GetFloat ("BaseAlert",6);
+		return PlayerPrefs.GetFloat ("BaseAlert",3);
 	}
 
 	public static void setUnitResponseFreq(float amount)

@@ -164,7 +164,8 @@ public class UnitManager : Unit,IOrderable{
 	protected void Start()
 	{
 		if (!hasStarted) {
-			if (startingCommand.Count > 0) {
+
+			if (startingCommand.Count > 0 || cMover) {
 
 				Invoke ("GiveStartCommand", .1f);
 			}
@@ -207,6 +208,14 @@ public class UnitManager : Unit,IOrderable{
 
 			} else {
 				GiveOrder (Orders.CreatePatrol (newLocation, startingCommand.Count > 1));
+			}
+		}
+
+		if (startingCommand.Count == 0 && PlayerOwner == 1) {
+
+			if (cMover && cMover is CustomRVO) {
+				GiveOrder (Orders.CreateMoveOrder (transform.position, false));
+
 			}
 		}
 	}

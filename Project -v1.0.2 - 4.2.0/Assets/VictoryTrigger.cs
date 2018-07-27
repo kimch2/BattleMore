@@ -136,9 +136,6 @@ public class VictoryTrigger : MonoBehaviour {
 			myComp.MyLevels [levelNumber].increaseCompCount ();
 			int numTimesWon = PlayerPrefs.GetInt ("L" + levelNumber + "Win");
 
-			TechCredits -= numTimesWon * 2; // Reduces the reward each time you replay a level
-			if (TechCredits < 0) {
-				TechCredits = 0;}
 			PlayerPrefs.SetInt ("L" + levelNumber+"Win", numTimesWon + 1);
 
 			int diff = LevelData.getDifficulty ()-1;
@@ -185,18 +182,31 @@ public class VictoryTrigger : MonoBehaviour {
 		int bonusTech =LevelData.getDifficulty ();
 		if (bonusTech == 1) {
 			bonusTech = 0;
-		} else if (bonusTech == 3) {
-			bonusTech = 4;}
+		} else if (bonusTech == 2) {
+			bonusTech = 1;}
+		else if (bonusTech == 3) {
+			bonusTech = 3;}
+
+
+		int numTimesWon = PlayerPrefs.GetInt ("L" + levelNumber + "Win") -1 ;
+
+		int totalReward = TechCredits + techRewards + bonusTech;
+		Debug.Log ("Times won " + numTimesWon);
+		totalReward -= numTimesWon * 3; // Reduces the reward each time you replay a level
+		if (totalReward < 0) {
+			totalReward = bonusTech;}
+		
 		//Set my victory screen
 		//LevelData.loadVetStats (GameManager.main.playerList [0].getUnitStats());
+		Debug.Log("COmpleting with "+ TechCredits +"  " +techRewards + "  " + bonusTech);
 		LevelData.levelInfo Ldata = createLevelInfo(levelNumber , GameManager.main.playerList [1].UnitsLost(),GameManager.main.playerList [0].UnitsLost(), GameManager.main.playerList [0].totalResO() +  GameManager.main.playerList [0].totalResT(),
-			Clock.main.getTime(), TechCredits + techRewards + bonusTech, completeBonusObj + "/" + totalBonusObj);
+			Clock.main.getTime(), totalReward, completeBonusObj + "/" + totalBonusObj);
 		foreach (VictoryScreen vs in GameObject.FindObjectsOfType<VictoryScreen> ()) {
 			vs.SetResults (Ldata, true);
 		}
 
 		LevelData.addLevelInfo (levelNumber , GameManager.main.playerList [1].UnitsLost(),GameManager.main.playerList [0].UnitsLost(), GameManager.main.playerList [0].totalResO() +  GameManager.main.playerList [0].totalResT(),
-			Clock.main.getTime(), TechCredits + techRewards + bonusTech, completeBonusObj + "/" + totalBonusObj);
+			Clock.main.getTime(), totalReward, completeBonusObj + "/" + totalBonusObj);
 		
 
 

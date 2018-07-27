@@ -94,6 +94,11 @@ public class MiniMapUIController : MonoBehaviour, IPointerDownHandler , IPointer
 	
 	}
 
+	void Awake()
+	{
+
+		main = this;
+	}
 
 	public void Initialize ()
 	{
@@ -171,28 +176,27 @@ public class MiniMapUIController : MonoBehaviour, IPointerDownHandler , IPointer
 	public void showWarning (Vector3 location)
 	{
 		if (this.gameObject.activeInHierarchy) {
-			StartCoroutine (displayWarning (location, defaultWarning));
+			StartCoroutine (displayWarning (location, defaultWarning, 10));
 		}
 	}
 
-	public void showWarning (Vector3 location, Sprite myImage)
+	public void showWarning (Vector3 location, Sprite myImage, float time = 10)
 	{
 		if (this.gameObject.activeInHierarchy) {
-			StartCoroutine (displayWarning (location, myImage));
+			StartCoroutine (displayWarning (location, myImage, time));
 		}
 	}
 
-	IEnumerator displayWarning (Vector3 location, Sprite symbol)
+	IEnumerator displayWarning (Vector3 location, Sprite symbol, float time)
 	{
 		int iCoord = (int)(((location.x - Left) / (WorldWidth)) * UIWidth);
 		int jCoord = (int)(((location.z - bottom) / (WorldHeight)) * UIHeight);
-	//	Debug.Log ("Creating warningA");
-
 
 		GameObject obj = (GameObject)Instantiate (warningSymbol, new Vector2 (iCoord, jCoord), Quaternion.identity, newParent);
+		obj.name += symbol.name;
 		obj.GetComponent<Image> ().sprite = symbol;
 		obj.transform.localPosition = new Vector2 (iCoord - UIWidth / 2, jCoord - UIHeight / 2);
-		yield return new WaitForSeconds (10);
+		yield return new WaitForSeconds (time);
 		Destroy (obj);
 	}
 

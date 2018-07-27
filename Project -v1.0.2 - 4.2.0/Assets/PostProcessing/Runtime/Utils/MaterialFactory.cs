@@ -23,7 +23,7 @@ namespace UnityEngine.PostProcessing
                 var shader = Shader.Find(shaderName);
 
                 if (shader == null)
-                    throw new ArgumentException(string.Format("Shader not found ({0})", shaderName));
+                    throw new ArgumentException(string.Format("Shader not found ({0}) ", shaderName));
 
                 material = new Material(shader)
                 {

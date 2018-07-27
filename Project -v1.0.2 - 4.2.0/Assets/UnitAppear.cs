@@ -57,6 +57,7 @@ public class UnitAppear  : SceneEventTrigger {
 			if (man) {
 				if (man.myStats.isUnitType (UnitTypes.UnitTypeTag.Invulnerable)) {
 					man.myStats.otherTags.Remove (UnitTypes.UnitTypeTag.Invulnerable);
+					man.myStats.SetTags ();
 				}
 			//	Debug.Log ("Killing " + man.gameObject);
 				man.myStats.kill (null);

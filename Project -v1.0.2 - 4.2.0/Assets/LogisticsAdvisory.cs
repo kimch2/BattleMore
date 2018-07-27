@@ -72,10 +72,11 @@ public class LogisticsAdvisory : MonoBehaviour {
 			foreach (LogisticsAdvisor la in myAdvisors) {
 				if (la.AdvisorName == tab) {
 					PlayerPrefs.SetInt (la.AdvisorName, 1);
-					LevelManager.main.changeMoney (-10);
+					LevelManager.main.changeMoney (-15);
 					Start ();
 					SelectCharacterTab (la.AdvisorName);	
 					TrueUpgradeManager.instance.playSound();
+					assignAsAdvisor (tab);
 				}
 			}
 		} else {

@@ -73,6 +73,8 @@ public class HotkeyMenu : MonoBehaviour {
 			}
 			toSave += s;
 		}
+		if (GroupOne)
+			GroupOne.text = GroupOne.text.Substring(0,GroupOne.text.Length-2);
 
 		toSave +=";";
 		if (GroupTwo) {
@@ -84,6 +86,8 @@ public class HotkeyMenu : MonoBehaviour {
 			}
 			toSave += s;
 		}
+		if (GroupTwo)
+			GroupTwo.text =GroupTwo.text.Substring(0,GroupTwo.text.Length-2);
 		toSave +=";";
 
 		if (GroupThree) {
@@ -95,6 +99,8 @@ public class HotkeyMenu : MonoBehaviour {
 			}
 			toSave += s;
 		}
+		if (GroupThree)
+			GroupThree.text = GroupThree.text.Substring(0,GroupThree.text.Length-2);
 		toSave +=";";
 
 		if (GroupFour) {
@@ -106,6 +112,8 @@ public class HotkeyMenu : MonoBehaviour {
 			}
 			toSave += s;
 		}
+		if (GroupFour)
+			GroupFour.text = GroupFour.text.Substring(0,GroupFour.text.Length-2);
 		toSave +=";";
 
 		// Change this when future levels are added.
@@ -124,7 +132,7 @@ public class HotkeyMenu : MonoBehaviour {
 		char[] separator = {';'};
 		//fManager = GameObject.Find ("F-Buttons").GetComponent<FButtonManager>();
 
-		string loaded = PlayerPrefs.GetString ("FHotkey", "");//+ Mathf.Min(3, VictoryTrigger.instance.levelNumber), "");
+		string loaded = PlayerPrefs.GetString ("FHotkey", "Manticore,Zephyr,Vulcan,Triton,Chimera;Zephyr;Augmentor;SteelCrafter");//+ Mathf.Min(3, VictoryTrigger.instance.levelNumber), "");
 		string[] separated = loaded.Split (separator,System.StringSplitOptions.RemoveEmptyEntries);
 
 	
@@ -165,6 +173,9 @@ public class HotkeyMenu : MonoBehaviour {
 					GameObject tog = (GameObject)Instantiate (toggle, this.gameObject.transform.position, Quaternion.identity);
 					tog.transform.SetParent (grid.transform);
 					toggles.Add (tog);
+
+
+
 				if (loaded == "" && n != i) {
 					tog.GetComponent<Toggle> ().isOn = false;
 

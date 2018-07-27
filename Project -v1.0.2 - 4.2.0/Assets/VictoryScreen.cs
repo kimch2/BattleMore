@@ -54,8 +54,11 @@ public class VictoryScreen : MonoBehaviour {
 
 				if (bonusTech == 1) {
 					bonusTech = 0;
-				} else if (bonusTech == 3) {
-					bonusTech = 5;
+				} else if (bonusTech == 2) {
+					bonusTech = 1;
+				}
+				else if (bonusTech == 3) {
+					bonusTech = 3;
 				}
 			} else {
 				bonusTech = 0;

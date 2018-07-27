@@ -54,7 +54,8 @@ public class FButtonManager : MonoBehaviour {
 
 	// THis will need to be changed for future race workers.
 	public void changeWorkers ()
-	{int workerCount = 0;
+	{
+		int workerCount = 0;
 
 		if(GameManager.main.activePlayer.getFastUnitList().ContainsKey("SteelCrafter"))
 		foreach (UnitManager manage in GameManager.main.activePlayer.getFastUnitList()["SteelCrafter"]){// newWorkerInteract worker in GameObject.FindObjectsOfType<newWorkerInteract>()) {

@@ -1,18 +1,17 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Email.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\UnitRevealer.cs">
     <Files>
-      <File FileName="Assets\Scripts - In Game\UnitManager.cs" Line="1" Column="1" />
-      <File FileName="Assets\Editor\TextTrigEditor.cs" Line="1" Column="1" />
-      <File FileName="Assets\ShieldBattery.cs" Line="1" Column="1" />
-      <File FileName="Assets\SoulBond.cs" Line="1" Column="1" />
-      <File FileName="Assets\MissileArmer.cs" Line="1" Column="1" />
-      <File FileName="Assets\DayexaShield.cs" Line="1" Column="1" />
-      <File FileName="Assets\Augmentor.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts - In Game\Selected Units\Selected.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts - In Game\GridMaker.cs" Line="1" Column="1" />
-      <File FileName="Assets\Editor\GridMakerEditor.cs" Line="1" Column="1" />
-      <File FileName="Assets\Email.cs" Line="95" Column="33" />
+      <File FileName="Assets\Scripts - In Game\UnitManager.cs" Line="216" Column="40" />
+      <File FileName="Assets\VictoryTrigger.cs" Line="194" Column="42" />
+      <File FileName="Assets\DataChecker.cs" Line="17" Column="26" />
+      <File FileName="Assets\LogisticsAdvisory.cs" Line="91" Column="65" />
+      <File FileName="Assets\TrueUpgradeManager.cs" Line="1" Column="1" />
+      <File FileName="Assets\UnitRevealer.cs" Line="17" Column="29" />
+      <File FileName="Assets\MiniMapUIController.cs" Line="199" Column="42" />
+      <File FileName="Assets\MiniMapIconer.cs" Line="55" Column="81" />
+      <File FileName="Assets\DifficultyManager.cs" Line="39" Column="1" />
+      <File FileName="Assets\CameraFirstTimePlayer.cs" Line="16" Column="43" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
