@@ -21,6 +21,3 @@ Fixed Rotation X: 0
 Fixed Rotation Y: 0
 Fixed Rotation Z: 0
 Depth: 0
-
-Group Names:
-Trees

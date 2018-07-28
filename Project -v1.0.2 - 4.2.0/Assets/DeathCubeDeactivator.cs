@@ -32,7 +32,6 @@ public class DeathCubeDeactivator : Ability,EnemySighted{
 		if (otherManager.UnitName == "Death Cube") {
 			otherManager.cMover.changeSpeed (-.5f,0,false,this);
 			otherManager.getUnitStats ().armor -= 99;
-			otherManager.myWeapon [0].changeAttackSpeed (0,100,false,this);
 
 			if (enemyOne == null) {
 				enemyOne = otherManager;
@@ -50,8 +49,6 @@ public class DeathCubeDeactivator : Ability,EnemySighted{
 		if (otherManager.UnitName == "Death Cube") {
 			otherManager.getUnitStats ().armor += 99;
 			otherManager.cMover.removeSpeedBuff(this);
-			otherManager.myWeapon [0].removeAttackSpeedBuff (this);
-			otherManager.myWeapon [0].ResetAttackCooldown ();
 			if (enemyOne == otherManager) {
 				enemyOne = null;
 			} else if (enemyTwo == otherManager) {

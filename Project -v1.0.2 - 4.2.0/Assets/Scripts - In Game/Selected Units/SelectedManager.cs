@@ -239,7 +239,9 @@ public class SelectedManager : MonoBehaviour, ISelectedManager
 
 		if (Input.GetKeyUp (KeyCode.Delete)) {
 			if (SelectedObjects.Count > 0 && SelectedObjects [0] != null) {
-				SelectedObjects [0].getUnitStats().kill (null);
+				if (SelectedObjects [0].getUnitManager ().PlayerOwner == 1 || Input.GetKey (KeyCode.Backslash)) {
+					SelectedObjects [0].getUnitStats ().kill (null);
+				}
 			}
 		}
 

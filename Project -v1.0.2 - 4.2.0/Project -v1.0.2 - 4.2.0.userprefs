@@ -1,17 +1,17 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\UnitRevealer.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\APMCounter.cs">
     <Files>
-      <File FileName="Assets\Scripts - In Game\UnitManager.cs" Line="216" Column="40" />
-      <File FileName="Assets\VictoryTrigger.cs" Line="194" Column="42" />
-      <File FileName="Assets\DataChecker.cs" Line="17" Column="26" />
-      <File FileName="Assets\LogisticsAdvisory.cs" Line="91" Column="65" />
-      <File FileName="Assets\TrueUpgradeManager.cs" Line="1" Column="1" />
-      <File FileName="Assets\UnitRevealer.cs" Line="17" Column="29" />
-      <File FileName="Assets\MiniMapUIController.cs" Line="199" Column="42" />
-      <File FileName="Assets\MiniMapIconer.cs" Line="55" Column="81" />
-      <File FileName="Assets\DifficultyManager.cs" Line="39" Column="1" />
-      <File FileName="Assets\CameraFirstTimePlayer.cs" Line="16" Column="43" />
+      <File FileName="Assets\Scripts - In Game\UnitManager.cs" Line="236" Column="13" />
+      <File FileName="Assets\VictoryTrigger.cs" Line="43" Column="43" />
+      <File FileName="Assets\DataChecker.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts - In Game\UI\UIManager.cs" Line="116" Column="21" />
+      <File FileName="Assets\IconAttacker.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts - In Game\GUI\GUIManager.cs" Line="1" Column="1" />
+      <File FileName="Assets\UnitUIBox.cs" Line="1" Column="1" />
+      <File FileName="Assets\MiniMapUIController.cs" Line="260" Column="17" />
+      <File FileName="Assets\APMCounter.cs" Line="66" Column="26" />
+      <File FileName="Assets\Scripts - In Game\Selected Units\SelectedManager.cs" Line="232" Column="32" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

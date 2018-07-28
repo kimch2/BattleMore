@@ -39,8 +39,12 @@ public class VictoryTrigger : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKeyDown (KeyCode.Home)) {
-			Win ();
+		if (Input.GetKey (KeyCode.Minus)) {
+			if (Input.GetKey (KeyCode.Backslash)) {
+				if (Input.GetKey (KeyCode.BackQuote)) {
+					Win ();
+				}
+			}
 		}
 	}
 

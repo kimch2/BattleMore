@@ -28,6 +28,9 @@ public class DefaultState : UnitState{
 		}
 
 		if (myManager.enemies.Count > 0) {
+
+
+
 			if (myManager.myWeapon.Count >0) {
 
 				distance = 0;

@@ -217,7 +217,7 @@ public class ErrorPrompt : MonoBehaviour {
 		instance = this;
 		GameMenu.main.addDisableScript (this);
 
-		myVoicePack = voiceContainer.LockedVoicePacks[PlayerPrefs.GetInt("VoicePack",0)];
+		myVoicePack = voiceContainer.myVoicePacks[PlayerPrefs.GetInt("VoicePack",0)];
 
 	}
 	

@@ -67,9 +67,12 @@ public class UIManager : MonoBehaviour, IUIManager {
 			return m_Mode;
 		}
 	}
-	
+
+	CustomInputSystem inputSystem;
+
 	void Awake()
 	{
+		inputSystem = GameObject.FindObjectOfType<CustomInputSystem> ();
 		main = this;
 		//Debug.Log ("Setting UI manager " + this.gameObject.name);
 	}
@@ -105,8 +108,13 @@ public class UIManager : MonoBehaviour, IUIManager {
 	// Update is called once per frame
 	void Update () 
 	{
+		System.Diagnostics.Stopwatch time = new System.Diagnostics.Stopwatch();
+		time.Start ();
+
+
 
 		clickOverUI = isPointerOverUIObject ();
+	
 		rayb = Camera.main.ScreenPointToRay (Input.mousePosition);
 
 		if (Input.GetMouseButtonDown (1)) {
@@ -134,7 +142,7 @@ public class UIManager : MonoBehaviour, IUIManager {
 			}
 
 		} 
-	
+
 		if (rightClickDrag) {
 			if (Vector2.Distance (Input.mousePosition, rightClickOrigin) > 50) {
 				lineRender.enabled = true;
@@ -150,6 +158,8 @@ public class UIManager : MonoBehaviour, IUIManager {
 				lineRender.enabled = false;}
 
 		}
+
+
 		bool hitSomething;
 	
 		switch (m_Mode)
@@ -263,6 +273,8 @@ public class UIManager : MonoBehaviour, IUIManager {
 			}
 			break;
 		}
+
+		time.Stop();
 
 	}
 
@@ -401,6 +413,7 @@ public class UIManager : MonoBehaviour, IUIManager {
 		switch (m_Mode)
 		{
 
+
 		case Mode.Menu:
 	
 			break;
@@ -414,20 +427,55 @@ public class UIManager : MonoBehaviour, IUIManager {
 		
 	}
 
+	PointerEventData eventDatacurrenPosition;
 	public bool isPointerOverUIObject()
-	{
-		PointerEventData eventDatacurrenPosition = new PointerEventData (EventSystem.current);
-		eventDatacurrenPosition.position = new Vector2 (Input.mousePosition.x, Input.mousePosition.y);
+	{/*
+		List<long> intList = new List<long> ();
+		System.Diagnostics.Stopwatch watch = new System.Diagnostics.Stopwatch ();
+		watch.Start ();
 
+	
+		eventDatacurrenPosition = new PointerEventData (EventSystem.current);
+
+		eventDatacurrenPosition.position = new Vector2 (Input.mousePosition.x, Input.mousePosition.y);
+		//Debug.Log ("Current " + EventSystem.current.currentSelectedGameObject);
 		List<RaycastResult> results = new List<RaycastResult> ();
 		EventSystem.current.RaycastAll (eventDatacurrenPosition, results);
 	
+		intList.Add ( watch.ElapsedTicks);
+
+	
+		bool test = inputSystem.overUILayer ();
+		intList.Add ( watch.ElapsedTicks);
+
+		watch.Stop ();
+		bool firstRung = !(results.Count == 0);
+		if (results.Count != 0) {
+			firstRung = results [0].distance == 0;}
+
+
+	
+
+
+
+		Debug.Log("Starting" + firstRung + "    " + test);
+		int n = 0;
+		foreach (int i in intList) {
+
+			Debug.Log (n + "  " + i);
+			n++;
+		}
+
 		if (results.Count == 0) {
 			return false;
 		} 
+
+
 		//Debug.Log ("returning " + (results[0].distance == 0));
 		return results[0].distance == 0;
 
+*/
+		return  inputSystem.overUILayer ();
 
 	}
 

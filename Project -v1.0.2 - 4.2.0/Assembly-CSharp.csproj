@@ -153,6 +153,7 @@
      <Compile Include="Assets\CooldownUpgrade.cs" />
      <Compile Include="Assets\CostBox.cs" />
      <Compile Include="Assets\CostReductionUpgrade.cs" />
+     <Compile Include="Assets\CustomInputSystem.cs" />
      <Compile Include="Assets\CustomRVO.cs" />
      <Compile Include="Assets\DaexaSupplyDrop.cs" />
      <Compile Include="Assets\DaexaWorkerInteract.cs" />

@@ -92,7 +92,7 @@ public class LogisticsAdvisory : MonoBehaviour {
 			la.TabCheck.SetActive (false);
 
 			if (la.AdvisorName == character) {
-				PlayerPrefs.GetInt ("VoicePack", myAdvisors.IndexOf(la));
+				PlayerPrefs.SetInt ("VoicePack", myAdvisors.IndexOf(la));
 				TrueUpgradeManager.instance.otherUpgrades.Add (la.myUpgrade);
 				PlayerPrefs.SetString ("CurrentAdvisor", character);			
 				currentPage.transform.Find ("SelectasAdvisor").gameObject.GetComponent<UnityEngine.UI.Button>().interactable = (false);

@@ -253,10 +253,6 @@ public class MiniMapUIController : MonoBehaviour, IPointerDownHandler , IPointer
 		if (Input.GetKeyUp (KeyCode.T)) {
 			attackMoveMinimap ();
 		}
-
-		if (Input.GetKeyDown (KeyCode.M)) {
-			toggleMegaMap ();
-	}
 	}
 
 	public void toggleMegaMap ()
