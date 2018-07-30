@@ -379,7 +379,7 @@ public class RaceManager : MonoBehaviour, ManagerWatcher {
 
 	IEnumerator DeathRescan(GraphUpdateObject b)
 	{	
-		yield return new WaitForSeconds (.2f);
+		yield return new WaitForSeconds (.25f);
 
 			AstarPath.active.UpdateGraphs (b);
 

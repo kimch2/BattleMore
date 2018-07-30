@@ -141,10 +141,14 @@ public class BuildStructure:  UnitProduction {
 		continueOrder order = new continueOrder();
 		if (Morphing) {
 
+			//order.nextUnitCast = true;
+			//order.canCast = true;
+			//return order;
+		}
 
-			order.nextUnitCast = true;
-			order.canCast = true;
-			return order;
+		if (myManager.getState() is ChannelState) {
+			
+			order.canCast = false;
 		}
 
 		if (!myCost.canActivate (this, order,showError)) {
@@ -172,13 +176,12 @@ public class BuildStructure:  UnitProduction {
 
 	override
 	public void Activate()
-	{//Debug.Log ("Activating");
+	{
 
 		if (!Morphing) {
 			HD.loadIMage (iconPic);
 
-	
-			//Debug.Log ("Activating");
+
 			//myCost.payCost ();
 			buildMan.buildUnit (this);
 			myManager.cMover.stop ();

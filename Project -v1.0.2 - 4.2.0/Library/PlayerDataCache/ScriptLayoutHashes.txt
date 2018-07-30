@@ -533,7 +533,7 @@ d31d5213052fc75a250983baf8d29da8 Assembly-CSharp.dll:.PayLoadCreator
 4fd7e0706d901c369637364461ded683 Assembly-CSharp.dll:.ShieldSpeedBoost
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.IconAttacker
 dc6dd054cc9d67251f4701a0d825c5a3 Assembly-CSharp.dll:.InstructionHelper
-6d421421dbb620c63ee1146c0dea3d74 Assembly-CSharp.dll:.Email
+d5d53ac973fd8bc54b1b271b7c19a5fb Assembly-CSharp.dll:.Email
 2138b61fb9d062e0a14d848f75b25c4f Assembly-CSharp.dll:.ResourceDropOff
 b5173ae6ac2cb5b01a075273bbd9833e Assembly-CSharp.dll:.HookFury
 295108fac843180364f250e90332e27b Assembly-CSharp.dll:.PayLoadEndZone
@@ -582,6 +582,7 @@ a9a67f48f3149afcd022fdc53a942823 Assembly-CSharp.dll:.ConcussiveUpgrade
 ee5f792a3123a95defad607d650806b7 Assembly-CSharp.dll:.ActivateObject
 e8084d8c42df17fff08323c2535d70ed Assembly-CSharp.dll:.LevelIntroButton
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.ChildDeathTrigger
+a4ef7c59ab7201ab109de36901ceb49b Assembly-CSharp.dll:.CustomInputSystem
 7fa0421e8511a7309c250aff36fbaedb Assembly-CSharp.dll:.ThrasherBlade
 1535086a9ecd45e2f0b61d8e7b7410e3 Assembly-CSharp-firstpass.dll:.VolumetricLightRenderer
 5d8947d33a605e81273ffc0ede91a002 Assembly-CSharp.dll:.PrefabDrop
@@ -707,7 +708,7 @@ c7d556a07da4b178c7f6632ca69a1bcd Assembly-CSharp.dll:.ObjectiveTrigger
 f461a33f33f57408e39e9483d3124925 Assembly-CSharp.dll:.SurviveVictory
 0514d5dbbfe2732f8b834c646794176c Assembly-CSharp.dll:.ImmortalityProtocol
 02c34240099ba069d6a25457131f0643 Assembly-CSharp.dll:.TurretPlacerManager
-6580668f915bbfefed5b49338f07fd6c Assembly-CSharp.dll:.DifficultyManager
+86361c81defdbbcf4d810334ce685cd2 Assembly-CSharp.dll:.DifficultyManager
 7d474b4df6c03074cefccec01c267a78 Assembly-CSharp.dll:.ScrollTexture
 d6174cc658e20f69c5f9cfb436a2cc97 Assembly-CSharp.dll:.HarpyLandingPad
 ded254708cf8a25d4e9b097c88e64762 Assembly-CSharp.dll:.buildTurret

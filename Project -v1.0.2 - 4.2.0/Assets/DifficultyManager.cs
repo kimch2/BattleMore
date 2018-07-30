@@ -19,6 +19,8 @@ public class DifficultyManager : MonoBehaviour {
 	public float LevelThreeUpgradeTime;
 
 	public int UpgradeCenterCount = 0;
+	public UnityEngine.Events.UnityEvent OnEasy;
+	public UnityEngine.Events.UnityEvent OnHard;
 
 	[Tooltip("1 is normal time, 0-1 makes waves come faster, above 1 makes them come slower.")]
 	public float EasyWaveTimeMod = 1.2f;
@@ -34,20 +36,27 @@ public class DifficultyManager : MonoBehaviour {
 	int difficulty;
 	// Use this for initialization
 	void Awake () {
+
+
 		instance = this;
 		difficulty = LevelData.getDifficulty ();
+
+
 		Debug.Log (" Difficulty " + difficulty);
 
 		if (difficulty == 1) {
 			LevelOneUpgradeTime *= 1.5f; 
 			LevelTwoUpgradeTime *= 1.5f;
 			LevelThreeUpgradeTime *= 1.5f;
+			OnEasy.Invoke ();
+		
 		} else if (difficulty == 2) {
 			
 		} else if (difficulty == 3) {
 			LevelOneUpgradeTime *= .7f;
 			LevelTwoUpgradeTime *= .7f;
 			LevelThreeUpgradeTime *= .7f;
+			OnHard.Invoke ();
 		}
 
 

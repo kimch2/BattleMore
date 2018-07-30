@@ -93,7 +93,7 @@ public class Page  {
 				if (unit) {
 					continueOrder ord = unit.abilityList [X].canActivate (true);
 
-				
+			
 					if (!ord.nextUnitCast) {
 
 						if (ord.canCast) {
@@ -121,8 +121,7 @@ public class Page  {
 							queue = true;
 						}
 						unit.UseTargetAbility (obj, loc, X, queue);
-						Debug.Log ("Using ability");
-
+				
 					}
 
 				}

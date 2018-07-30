@@ -285,7 +285,7 @@ public class UiAbilityManager : MonoBehaviour {
 
 				if (n > maxA) {
 					maxA = n;
-					if (n > .99f) {
+					if (n > .995f) {
 						break;
 					}
 				}
@@ -293,7 +293,7 @@ public class UiAbilityManager : MonoBehaviour {
 		}
 
 		slide.value = maxA;
-		slide.gameObject.SetActive (maxA < .98 && maxA!= 0);	
+		slide.gameObject.SetActive (maxA < .99 && maxA!= 0);	
 	}
 
 	public void IconClick(GameObject obj)
@@ -854,6 +854,11 @@ public class UiAbilityManager : MonoBehaviour {
 				continue;
 			}
 
+			if (j >0 && uiPage.rows [j] == uiPage.rows[j-1]) {
+
+				continue;
+			}
+
 			n = uiPage.rows[j][0].AbilityStartingRow;
 
 			//Sets the unit's stats and count
@@ -862,13 +867,13 @@ public class UiAbilityManager : MonoBehaviour {
 
 			int AbilityX = 0;
 
-			for (int m = 0; m < man.abilityList.Count / 4 +1; m++) {
 
+			for (int m = 0; m < (man.abilityList.Count + 3) / 4; m++) {
 
 					if(man.abilityList.Count > AbilityX * 4){
 						if (man.abilityList [AbilityX * 4] != null) {
 			
-						certainButtons [j].QAuto.enabled = man.abilityList [0 + AbilityX * 4].autocast;
+						certainButtons [AbilityX].QAuto.enabled = man.abilityList [0 + AbilityX * 4].autocast;
 
 						}
 					}
@@ -876,7 +881,7 @@ public class UiAbilityManager : MonoBehaviour {
 					if(man.abilityList.Count >1+( AbilityX * 4)){
 						if (man.abilityList [1 + AbilityX * 4] != null) {
 	
-						certainButtons [j].WAuto.enabled = man.abilityList [1 + AbilityX * 4].autocast;
+						certainButtons [AbilityX].WAuto.enabled = man.abilityList [1 + AbilityX * 4].autocast;
 					
 						}
 					}
@@ -884,7 +889,7 @@ public class UiAbilityManager : MonoBehaviour {
 					if(man.abilityList.Count > 2+(AbilityX * 4)){
 						if (man.abilityList [2 + AbilityX * 4] != null) {
 		
-						certainButtons [j].EAuto.enabled = man.abilityList [2 + AbilityX * 4].autocast;
+						certainButtons [AbilityX].EAuto.enabled = man.abilityList [2 + AbilityX * 4].autocast;
 			
 						}
 					}
@@ -892,14 +897,14 @@ public class UiAbilityManager : MonoBehaviour {
 					if(man.abilityList.Count >3+( AbilityX * 4)){
 						if (man.abilityList [3 +AbilityX * 4] != null) {
 
-						certainButtons [j].RAuto.enabled = man.abilityList [3 + AbilityX * 4].autocast;
+						certainButtons [AbilityX].RAuto.enabled = man.abilityList [3 + AbilityX * 4].autocast;
 				
 						}
 					}
 
-
-				}
 				AbilityX++;
+				}
+
 				n++;
 			
 		}
