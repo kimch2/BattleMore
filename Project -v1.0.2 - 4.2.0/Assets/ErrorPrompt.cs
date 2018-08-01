@@ -150,7 +150,7 @@ public class ErrorPrompt : MonoBehaviour {
 
 	public void setErrorFreq(float Amount)
 	{
-		errorFreq = (10 / Amount);
+		errorFreq = (10 / Amount) + 4;
 	}
 	public void underAttack(Vector3 location)
 	{	

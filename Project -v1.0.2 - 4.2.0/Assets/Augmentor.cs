@@ -203,13 +203,13 @@ public class Augmentor : TargetAbility, Iinteract, Modifier {
 		Swirly.GoToPose ("Off");
 		manager.myStats.myHeight = UnitTypes.HeightType.Air;
 		attached.GetComponent<UnitManager> ().myStats.removeDeathTrigger (this);
-		MissileArmer armer = attached.GetComponent<MissileArmer> ();
+		ShieldBattery armer = attached.GetComponent<ShieldBattery> ();
 		UnitManager man = attached.GetComponent<UnitManager> ();
 		manager.myStats.otherTags.Remove(UnitTypes.UnitTypeTag.Structure);
 		manager.myStats.SetTags ();
 
 		if (armer) {
-			armer.shields = true;
+			
 			manager.myWeapon.Clear ();
 		}
 

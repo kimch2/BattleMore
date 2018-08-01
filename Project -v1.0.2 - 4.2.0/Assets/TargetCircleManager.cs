@@ -9,13 +9,13 @@ public class TargetCircleManager : MonoBehaviour {
 	public List<TargetCircle> currentCircles = new List<TargetCircle> ();
 
 	public bool working;
-	private float nextActionTime;
 
 
 	// Use this for initialization
 	void Start () {
 
-		nextActionTime = Time.time + .1f;
+		InvokeRepeating ("UpdateMe", .1f, .1f);
+
 		foreach (TargetCircle c in circles) {
 			c.gameObject.SetActive (false);
 		}
@@ -37,7 +37,7 @@ public class TargetCircleManager : MonoBehaviour {
 		turnOff ();
 		currentCircles.Add (circles [0]);
 		currentCircles [0].Initialize (r, obj.gameObject);
-
+		UpdateMe ();
 	}
 
 
@@ -57,6 +57,7 @@ public class TargetCircleManager : MonoBehaviour {
 
 		
 		}
+		UpdateMe ();
 
 	}
 
@@ -66,12 +67,10 @@ public class TargetCircleManager : MonoBehaviour {
 
 	
 	// Update is called once per frame
-	void Update () {
+	void UpdateMe () {
 		if (!working) {
 			return;}
-			if (Time.time > nextActionTime) {
-				nextActionTime = Time.time + .1f;
-		
+
 			foreach (TargetCircle cir in currentCircles) {
 					foreach (GameObject obj in cir.points) {
 						
@@ -94,10 +93,6 @@ public class TargetCircleManager : MonoBehaviour {
 			
 				}
 
-		
-			}
-
-	
 	}
 
 

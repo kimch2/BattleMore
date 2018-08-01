@@ -211,7 +211,7 @@ public class UnitManager : Unit,IOrderable{
 			}
 		}
 
-		if (startingCommand.Count == 0 && PlayerOwner == 1) {
+		if (startingCommand.Count == 0 && PlayerOwner == 1 && Time.timeSinceLevelLoad < 1) {
 
 			if (cMover && cMover is CustomRVO) {
 				GiveOrder (Orders.CreateMoveOrder (transform.position, false));
