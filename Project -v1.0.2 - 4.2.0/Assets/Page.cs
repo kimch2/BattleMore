@@ -90,13 +90,18 @@ public class Page  {
 		rows [n / 4].RemoveAll (item => item == null);
 		if (rows [n / 4] [0].abilityList [X] is BuildStructure || rows [n / 4] [0].abilityList [X] is SummonStructure) {
 			foreach (RTSObject unit in rows[n/4]) {
-				if (unit) {
+				if (unit)
+				{
+					if (unit.abilityList [X] is TargetAbility && !((TargetAbility)unit.abilityList [X]).isValidTarget (obj, loc)) {
+						continue;
+					}
+
 					continueOrder ord = unit.abilityList [X].canActivate (true);
 
 			
 					if (!ord.nextUnitCast) {
 
-						if (ord.canCast) {
+						if (ord.canCast  && (unit.abilityList [X]).canActivate(false).canCast) {
 							canCast = true;
 							if (((UnitManager)unit).getState () is PlaceBuildingState && foundNonFollow) {
 							//	Debug.Log ("Continuing");
@@ -115,7 +120,7 @@ public class Page  {
 							}
 								
 						}		
-					} else if (ord.canCast) {
+					} else if (ord.canCast  && (unit.abilityList [X]).canActivate(false).canCast) {
 						canCast = true;
 						if (((UnitManager)unit).getState () is ChannelState) {
 							queue = true;
@@ -135,10 +140,14 @@ public class Page  {
 		else {
 			foreach (RTSObject unit in rows[n/4]) {
 				if (unit) {
+					if (unit.abilityList [X] is TargetAbility && !((TargetAbility)unit.abilityList [X]).isValidTarget (obj, loc)) {
+						continue;
+					}
+
 					continueOrder ord = unit.abilityList [X].canActivate (true);
 					if (!ord.nextUnitCast) {
 
-						if (ord.canCast) {
+						if (ord.canCast && (unit.abilityList [X]).canActivate(false).canCast) {
 							if (((UnitManager)unit).getState () is AbilityFollowState && foundNonFollow) {
 
 								continue;
@@ -156,7 +165,7 @@ public class Page  {
 							}
 
 						}		
-					} else if (ord.canCast) {
+					} else if (ord.canCast && (unit.abilityList [X]).canActivate(false).canCast) {
 
 						unit.UseTargetAbility (obj, loc, X, queue);
 
@@ -229,7 +238,7 @@ public class Page  {
 
 		foreach (RTSObject rts in rows[n/4]) {
 			try{
-			if(((TargetAbility)rts.abilityList [X]).isValidTarget ( target,location))
+				if(((TargetAbility)rts.abilityList [X]).isValidTarget ( target,location) && rts.abilityList [X].canActivate(false).canCast)
 			{
 				return true;
 			}

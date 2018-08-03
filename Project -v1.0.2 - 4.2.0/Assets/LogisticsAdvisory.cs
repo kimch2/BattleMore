@@ -96,8 +96,15 @@ public class LogisticsAdvisory : MonoBehaviour {
 				TrueUpgradeManager.instance.otherUpgrades.Add (la.myUpgrade);
 				PlayerPrefs.SetString ("CurrentAdvisor", character);			
 				currentPage.transform.Find ("SelectasAdvisor").gameObject.GetComponent<UnityEngine.UI.Button>().interactable = (false);
-				TrueUpgradeManager.instance.playSimpleSound ();
+
 				la.TabCheck.SetActive (true);
+
+				if (Time.timeSinceLevelLoad > 1) {
+
+					VoiceContainer container = Resources.Load<GameObject> ("VoiceContainer").GetComponent<VoiceContainer>();
+					TrueUpgradeManager.instance.mySource.PlayOneShot (
+						container.myVoicePacks[myAdvisors.IndexOf(la)].getVoicePackLine());
+				}
 
 			}
 		}

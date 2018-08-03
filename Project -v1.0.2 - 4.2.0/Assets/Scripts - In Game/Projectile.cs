@@ -235,7 +235,7 @@ public  class Projectile : MonoBehaviour {
 		
 			return;
 		}
-
+		try{
 		if (explosionO) {
 
 			GameObject explode = (GameObject)Instantiate (explosionO, transform.position, Quaternion.identity);
@@ -245,6 +245,8 @@ public  class Projectile : MonoBehaviour {
 				Escript.setSource (Source);
 				Escript.damageAmount = this.damage;
 				Escript.friendlyFireRatio = FriendlyFire;
+			} else {
+				explode.SendMessage("setSource", Source,SendMessageOptions.DontRequireReceiver);
 			}
 		}
 
@@ -292,6 +294,9 @@ public  class Projectile : MonoBehaviour {
 		} 
 
 		onHit ();
+		}catch(System.Exception e) {
+			Debug.Log ("Projectile Broke: " + e);
+		}
 		CancelInvoke ("lookAtTarget");
 		myBulletPool.FastDespawn (this.gameObject, 0);
 

@@ -44,7 +44,7 @@ public class AbilityDisabler : Upgrade {
 			foreach (unitToAffect affect in ToDisable) {
 				if (affect.Unit.GetComponent<UnitManager> ().UnitName == manager.UnitName) {
 					foreach (int i in affect.index) {
-						if (i < manager.abilityList.Count && manager.abilityList [i]) {
+						if (i < manager.abilityList.Count && manager.abilityList [i] && manager.abilityList [i]) {
 							manager.abilityList [i].enabled = false;
 							manager.abilityList [i] = null;
 

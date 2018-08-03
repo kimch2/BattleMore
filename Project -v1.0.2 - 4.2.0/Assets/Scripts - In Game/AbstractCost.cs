@@ -194,7 +194,6 @@ public class AbstractCost : MonoBehaviour {
 
 	public void payCost ()
 	{
-		Debug.Log ( this.gameObject + " Paying " );
 		myGame.updateResources (-ResourceOne, -ResourceTwo, false);
 		if (stats) {
 

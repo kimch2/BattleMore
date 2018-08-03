@@ -149,17 +149,17 @@ public class Squirrel : MonoBehaviour {
     }
     IEnumerator stand()
     {
-        print(Time.time);
+       // print(Time.time);
         yield return new WaitForSeconds(0.5f);
-        print(Time.time);
+       // print(Time.time);
         squirrel.SetBool("stand", true);
         squirrel.SetBool("up", false);
     }
     IEnumerator idle()
     {
-        print(Time.time);
+       // print(Time.time);
         yield return new WaitForSeconds(0.5f);
-        print(Time.time);
+      //  print(Time.time);
         squirrel.SetBool("idle", true);
         squirrel.SetBool("down", false);
     }

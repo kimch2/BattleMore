@@ -50,6 +50,12 @@ public class BuildingInteractor : MonoBehaviour, Iinteract {
 			if (!myAnim) {
 				myAnim = GetComponentInChildren<Animator> ();
 			}
+			if (GameManager.main.playerList [myManager.PlayerOwner - 1].upgradeBall) {
+				AbilityDisabler disa = GameManager.main.playerList [myManager.PlayerOwner - 1].upgradeBall.GetComponent<AbilityDisabler> ();
+				if (disa) {
+					disa.applyUpgrade (this.gameObject);
+				}
+			}
 		}
 	}
 

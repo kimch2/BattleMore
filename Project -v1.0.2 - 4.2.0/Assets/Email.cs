@@ -214,6 +214,7 @@ public class Email : MonoBehaviour {
 
 	public void Logout()
 	{
+		ReadEmailObj.SetActive (false);
 		LogInScreen.SetActive (true);
 		MainEmailScreen.SetActive (false);
 	}

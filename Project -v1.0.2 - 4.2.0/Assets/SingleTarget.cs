@@ -49,6 +49,7 @@ public class SingleTarget:  TargetAbility {
 			order.canCast = false;
 			if (myCost.energy == 0 && myCost.ResourceOne == 0 && chargeCount > 0) {
 				order.canCast = true;
+				order.nextUnitCast = false;
 			}
 		} else {
 			order.nextUnitCast = false;
@@ -66,6 +67,7 @@ public class SingleTarget:  TargetAbility {
 	public  void setAutoCast( bool offOn){}
 
 	public override bool isValidTarget (GameObject target, Vector3 location){
+
 		if (target == null) {
 			return false;
 		}

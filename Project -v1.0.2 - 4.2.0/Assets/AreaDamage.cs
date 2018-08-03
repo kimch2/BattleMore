@@ -59,6 +59,14 @@ public	virtual void UpdateDamage () {
 
 	}
 
+	public void setSource(GameObject obj)
+	{
+		UnitManager manage = obj.GetComponent<UnitManager> ();
+		if (manage) {
+		
+			Owner = manage.PlayerOwner;
+		}
+	}
 
 	public void turnOn()
 	{

@@ -165,9 +165,9 @@ public class BloodMist : TargetAbility {
 		if (chargeCount > maxChargeCount) {
 			chargeCount = maxChargeCount;
 		}
-		updateActiveCommandCard ();
-		updateAutocastCommandCard ();
+		updateUICommandCard ();
 
+		updateActiveCommandCard ();
 	}
 
 }
