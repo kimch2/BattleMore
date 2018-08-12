@@ -83,9 +83,8 @@ public class ChangeAmmo : Ability {
 				ca.autocast = false;
 			}
 		}
-		updateAutocastCommandCard ();
 
-
+		updateUICommandCard ();
 	
 
 	}

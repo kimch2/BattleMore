@@ -103,6 +103,7 @@ public class LevelData  {
 			currentInfo.myLevels = new List<levelInfo> ();
 		}
 		currentInfo.myLevels.Add (myL);
+
 		addMoney (Tech);
 
 		setHighestLevel (levelN + 1);
@@ -241,6 +242,8 @@ public class LevelData  {
 
 	public static void addMoney(int amount)
 	{
+		Debug.Log ("Adding money " + amount);
+
 		PlayerPrefs.SetInt ("Money", PlayerPrefs.GetInt ("Money") + amount);
 	}
 	public static void addArbitronium(int amount)

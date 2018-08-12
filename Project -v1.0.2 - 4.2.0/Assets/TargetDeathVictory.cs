@@ -21,7 +21,8 @@ public class TargetDeathVictory : Objective {
 		base.Start ();
 		//Debug.Log ("Death" + this.gameObject);
 		foreach (GameObject obj in targets) {
-			obj.AddComponent<DeathWinTrigger> ();
+			DeathWinTrigger trigger = obj.AddComponent<DeathWinTrigger> ();
+			trigger.myTargetDeath = this;
 		}
 		totalTargetCount = targets.Count;
 		initialDescription = description;

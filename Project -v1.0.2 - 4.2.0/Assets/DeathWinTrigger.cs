@@ -11,14 +11,16 @@ public class DeathWinTrigger : MonoBehaviour,Modifier {
 		//Debug.Log ("Adding to " + this.gameObject);
 	}
 
+	public TargetDeathVictory myTargetDeath;
+	public BonusObjectiverTimer myObjective;
 
 
 	public float modify(float num, GameObject obj, DamageTypes.DamageType theType)
 	{
-		foreach (TargetDeathVictory vict in GameObject.FindObjectsOfType<TargetDeathVictory> ()) {
-			vict.IDied (this.gameObject);
+		if (myTargetDeath) {
+			myTargetDeath.IDied (this.gameObject);
 		}
-
+			
 		foreach (BonusObjectiverTimer vict in GameObject.FindObjectsOfType<BonusObjectiverTimer> ()) {
 			vict.IDied (this.gameObject);
 		}

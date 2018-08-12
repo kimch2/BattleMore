@@ -12,7 +12,7 @@ public class BuildingPlacer : MonoBehaviour {
 
 	private SphereCollider coll;
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 		coll = GetComponent<SphereCollider> ();
 
 	}
@@ -122,6 +122,13 @@ public class BuildingPlacer : MonoBehaviour {
 				Destroy (mf.gameObject);
 			}
 		}
+
+		foreach (SpriteRenderer mf in building.GetComponentsInChildren<SpriteRenderer>()) {
+			mf.enabled = false;
+		}
+
+		coll = GetComponent<SphereCollider> ();
+		Update ();
 	}
 
 	void OnTriggerExit(Collider other)

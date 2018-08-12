@@ -47,6 +47,8 @@ public class UIManager : MonoBehaviour, IUIManager {
 	private LineRenderer lineRender;
 	private Vector3 rightClickOrThree = Vector3.zero;
 
+	public bool fastCast;
+
 	private float lastClickDouble;
 	public bool IsShiftDown
 	{
@@ -98,6 +100,7 @@ public class UIManager : MonoBehaviour, IUIManager {
 
 		raceManager = GameManager.main.activePlayer;
 		formationLight = Resources.Load<GameObject> ("FormationLight");
+		fastCast  =  PlayerPrefs.GetInt ("FastCast",0) == 1;
 
 	}
 
@@ -1048,6 +1051,10 @@ public class UIManager : MonoBehaviour, IUIManager {
 			CursorManager.main.targetMode ();
 			m_Mode = Mode.targetAbility;
 
+			if (fastCast) { //MouseEventArgs
+				StartCoroutine(fastCastMe());
+			}
+
 			//AbilityTargeter.SetActive (true);
 			break;
 			
@@ -1063,6 +1070,12 @@ public class UIManager : MonoBehaviour, IUIManager {
 
 		}
 	
+	}
+
+	IEnumerator fastCastMe()
+	{
+		yield return null;
+		LeftButton_SingleClickUp (new LeftButton_Handler((int)Input.mousePosition.x,(int)Input.mousePosition.y, 0 ));
 	}
 
 

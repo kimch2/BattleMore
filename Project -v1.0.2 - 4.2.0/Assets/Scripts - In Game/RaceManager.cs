@@ -237,8 +237,8 @@ public class RaceManager : MonoBehaviour, ManagerWatcher {
 
 
 	public static void upDateUI()
-	{
-		SelectedManager.main.reImageUI ();
+	{	SelectedManager.main.updateUI ();
+		//SelectedManager.main.reImageUI ();
 	}
 
 	public static void upDateSingleCard()

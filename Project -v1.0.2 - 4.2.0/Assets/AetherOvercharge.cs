@@ -134,7 +134,7 @@ public class AetherOvercharge : Buff, Notify{
 				if (man.gameObject.GetComponent<AetherOvercharge> ()) {
 					return;}
 
-				if (man.gameObject.GetComponent<DayexaShield> ()) {
+				if (man.gameObject.GetComponent<DayexaShield> () && man.myWeapon.Count > 0) {
 					AetherOvercharge charge = man.gameObject.AddComponent<AetherOvercharge> ();
 					charge.initialize (man, rechargeAmount, duration, attackSpeed, attackDamage,AetherEffect, toolDescription, HelpIcon);
 				}

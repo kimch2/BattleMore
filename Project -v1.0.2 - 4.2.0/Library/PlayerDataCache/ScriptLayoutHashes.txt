@@ -349,7 +349,7 @@ c7c2ba7994ec3cfe434b9e17103cb356 Assembly-CSharp.dll:.FusionWeld
 185f57b7db7edc6629cadb4935bd2eac Assembly-CSharp.dll:.BonusObjectiverTimer
 9ea40a8bd1f641d0ced11de20419674c Assembly-CSharp.dll:.GridMaker
 4811acda3810b352fcd7f09a83cd5f33 Assembly-CSharp.dll:.UnitEffectTag
-7193b5bbce6b7ef9ccdcc330aeb792e7 Assembly-CSharp.dll:.UIManager
+ab670f4c2b79ad06b1842f4b0f7759cd Assembly-CSharp.dll:.UIManager
 3af82ba286debec6d8f6424d58f0ab3a Assembly-CSharp.dll:.deathTrigger
 2a9a6e82837bdfc33d524fcc1ef85eb0 Assembly-CSharp-firstpass.dll:Pathfinding.RichAI
 0f19a394102099f5ca9e52720326db8f Assembly-CSharp.dll:.UnitStats
@@ -576,7 +576,7 @@ cee4e626bb2bbece416c48fd8087c246 Assembly-CSharp.dll:.ResourceGenerator
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.BackLashAura
 2f264043a6bb59ca3369df5a4d180e17 Assembly-CSharp-firstpass.dll:UnityStandardAssets.ImageEffects.CameraMotionBlur
 5a96f385bde26a881f5ee30b1f14d0e3 Assembly-CSharp.dll:.TimedObjective
-399822cb81bb60f3c740d93775d3e00a Assembly-CSharp.dll:.GamePlayMenu
+f8205f708323c03ed12c9bbba4fb1384 Assembly-CSharp.dll:.GamePlayMenu
 748e78cb610bea63d1cd0196a03b5bae Assembly-CSharp.dll:.BeamWeapon
 a9a67f48f3149afcd022fdc53a942823 Assembly-CSharp.dll:.ConcussiveUpgrade
 ee5f792a3123a95defad607d650806b7 Assembly-CSharp.dll:.ActivateObject

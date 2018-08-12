@@ -20,7 +20,7 @@ public class GamePlayMenu : MonoBehaviour {
 	public List<GameObject> SimpleObjects;
 	public List<Canvas> SimpleCanvas;
 	public List<GameObject> SuperSimpleObjects;
-
+	public Toggle fastCast;
 
 	public static GamePlayMenu getInstance()
 	{
@@ -37,7 +37,7 @@ public class GamePlayMenu : MonoBehaviour {
 		instance = this;
 		simpleToggle.isOn =  PlayerPrefs.GetInt ("SimpleUI",0)  == 1;
 
-
+		fastCast.isOn = PlayerPrefs.GetInt ("FastCast", 0) ==1;
 		ControlToggle.isOn =  PlayerPrefs.GetInt ("SuperSimpleUI",0)  == 1;
 
 
@@ -75,6 +75,16 @@ public class GamePlayMenu : MonoBehaviour {
 			}
 		}
 	}
+
+	public void toggleFastCast()
+	{
+
+		PlayerPrefs.SetInt ("FastCast", fastCast.isOn ? 1:0);
+		if (UIManager.main) {
+			UIManager.main.fastCast = fastCast.isOn;
+		}
+	}
+
 
 	public void toggleAbilities()
 	{

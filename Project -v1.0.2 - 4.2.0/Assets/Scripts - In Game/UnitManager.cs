@@ -410,6 +410,7 @@ public class UnitManager : Unit,IOrderable{
 			//Debug.Log (this.gameObject + " hit " + other.gameObject);
 			UnitManager manage = other.gameObject.GetComponent<UnitManager>();
 
+		
 			if (manage) {
 				if (manage.PlayerOwner == 3) {
 					neutrals.Add (other.gameObject);

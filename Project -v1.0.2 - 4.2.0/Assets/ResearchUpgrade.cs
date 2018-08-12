@@ -188,7 +188,7 @@ public class ResearchUpgrade: UnitProduction, Upgradable{
 
 	public void researched (Upgrade otherUpgrade)
 	{
-
+	//	Debug.Log (Name +"   "+ otherUpgrade.Name);
 		if (Name == otherUpgrade.Name) {
 
 			if (upgrades.Count > currentUpgrade + 1) {
