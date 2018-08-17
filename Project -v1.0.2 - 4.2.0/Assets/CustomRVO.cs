@@ -189,9 +189,11 @@ public class CustomRVO : IMover {
 			}
 		}
 
+	
 		//Direction to the next waypoint
 	
-		Vector3 dir = (path.vectorPath[currentWaypoint]-this.transform.position).normalized * myspeed;
+		Vector3 dir = (path.vectorPath[currentWaypoint] -this.transform.position).normalized * myspeed;
+	
 		if (myFogger) {
 			myFogger.move ();
 		}

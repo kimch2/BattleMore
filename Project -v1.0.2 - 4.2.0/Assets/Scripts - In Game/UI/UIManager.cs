@@ -1080,14 +1080,19 @@ public class UIManager : MonoBehaviour, IUIManager {
 
 
 
-	public void SwitchToModeNormal()
+	public void SwitchToModeNormal(bool destroyPlacer =  false)
 	{//buildingPlacer.SetActive (false);
 		if (m_Mode != Mode.Normal) {
 			AbilityTargeter.SetActive (false);
 			CursorManager.main.normalMode ();
 			m_Mode = Mode.Normal;
+			if (destroyPlacer &&  m_ObjectBeingPlaced) {
+				Destroy (m_ObjectBeingPlaced);
+			}
 		}
 	}
+
+
 
 
 

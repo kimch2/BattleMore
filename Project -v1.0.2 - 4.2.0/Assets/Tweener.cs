@@ -147,8 +147,8 @@ public class Tweener : MonoBehaviour {
 	{
 		pose.setStartPoses ();
 
-		//Time.unscaledDeltaTime.captureFramerate
-		for (float i = 0; i < tweenTime; i += Time.timeScale == 0 ?  (1/Time.unscaledDeltaTime) : Time.deltaTime) {
+		//Time.unscaledDeltaTime.captureFramerate, .13f is the time it takes to tween most buttons
+		for (float i = 0; i < tweenTime; i += (Time.timeScale == 0 && tweenTime == .13f) ?  (1/Time.unscaledDeltaTime) : Time.deltaTime) {
 			pose.updateTween (i / tweenTime);
 		
 			//Debug.Log ("SHifting");

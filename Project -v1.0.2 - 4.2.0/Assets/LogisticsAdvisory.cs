@@ -73,7 +73,7 @@ public class LogisticsAdvisory : MonoBehaviour {
 				if (la.AdvisorName == tab) {
 					PlayerPrefs.SetInt (la.AdvisorName, 1);
 					LevelManager.main.changeMoney (-15);
-					Start ();
+
 					SelectCharacterTab (la.AdvisorName);	
 					TrueUpgradeManager.instance.playSound();
 					assignAsAdvisor (tab);
@@ -102,6 +102,7 @@ public class LogisticsAdvisory : MonoBehaviour {
 				if (Time.timeSinceLevelLoad > 1) {
 
 					VoiceContainer container = Resources.Load<GameObject> ("VoiceContainer").GetComponent<VoiceContainer>();
+					Debug.Log ("Playing " + character + " " +  container.myVoicePacks[myAdvisors.IndexOf(la)].name);
 					TrueUpgradeManager.instance.mySource.PlayOneShot (
 						container.myVoicePacks[myAdvisors.IndexOf(la)].getVoicePackLine());
 				}

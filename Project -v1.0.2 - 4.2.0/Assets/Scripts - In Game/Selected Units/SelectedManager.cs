@@ -634,7 +634,7 @@ public class SelectedManager : MonoBehaviour, ISelectedManager
 
     public void DeselectAll()
 	{
-		uiManage.SwitchToModeNormal ();
+		uiManage.SwitchToModeNormal (true);
 
         if (SelectedObjects.Count == 0)
             return;
@@ -1042,7 +1042,7 @@ public class SelectedManager : MonoBehaviour, ISelectedManager
 
 
     public void SelectGroup(int groupNumber)
-	{uiManage.SwitchToModeNormal ();
+	{uiManage.SwitchToModeNormal (true);
         DeselectAll();
         foreach (RTSObject obj in Group[groupNumber])
         {
@@ -1073,7 +1073,7 @@ public class SelectedManager : MonoBehaviour, ISelectedManager
     }
 
     public void selectAllArmy()
-	{ uiManage.SwitchToModeNormal ();
+	{ uiManage.SwitchToModeNormal (true);
 		DeselectAll ();
 
 		foreach (KeyValuePair<string, List<UnitManager>> pair in raceMan.getUnitList()) {
@@ -1131,7 +1131,7 @@ public class SelectedManager : MonoBehaviour, ISelectedManager
     }
 
 	public void selectAllUnArmedTanks()
-	{uiManage.SwitchToModeNormal ();
+	{uiManage.SwitchToModeNormal (true);
 		DeselectAll();
 
 		foreach (KeyValuePair<string, List<UnitManager>> pair in raceMan.getUnitList()) {
@@ -1163,7 +1163,7 @@ public class SelectedManager : MonoBehaviour, ISelectedManager
 
 
     public void selectIdleWorker()
-	{uiManage.SwitchToModeNormal ();
+	{uiManage.SwitchToModeNormal (true);
 		List<UnitManager> idleWorkers = new List<UnitManager> ();
         
 
@@ -1206,7 +1206,7 @@ public class SelectedManager : MonoBehaviour, ISelectedManager
 
 	public void globalSelect(int n )
 	{ DeselectAll();
-		uiManage.SwitchToModeNormal ();
+		uiManage.SwitchToModeNormal (true);
 		foreach (KeyValuePair<string, List<UnitManager>> pair in raceMan.getUnitList()) {
 
 			if (globalSelection [n].Contains (pair.Key)) {
@@ -1267,7 +1267,7 @@ public class SelectedManager : MonoBehaviour, ISelectedManager
 
 	public void selectAllBuildings ()
 	{DeselectAll();
-		uiManage.SwitchToModeNormal ();
+		uiManage.SwitchToModeNormal (true);
 		foreach (KeyValuePair<string, List<UnitManager>> pair in raceMan.getUnitList()) {
 			foreach (UnitManager manager in pair.Value) {
 				

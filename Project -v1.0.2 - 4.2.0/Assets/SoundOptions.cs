@@ -69,7 +69,7 @@ public class SoundOptions : MonoBehaviour {
 			GameSettings.setMasterVolume (GameSettings.getMasterVolume () + .15f);
 			masterSLider.value = GameSettings.getMasterVolume();
 			AudioListener.volume = masterSLider.value;
-			Debug.Log ("Volume is " + AudioListener.volume);
+		
 
 		} else if (Input.GetKeyDown (KeyCode.KeypadMinus)) {
 			GameSettings.setMasterVolume (GameSettings.getMasterVolume () - .15f);

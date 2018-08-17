@@ -416,13 +416,7 @@ public class RaceManager : MonoBehaviour, ManagerWatcher {
 			Selected sel = obj.GetComponent<Selected> ();
 			sel.decalCircle.GetComponent<MeshRenderer> ().material = myDecal;
 		}
-
-
-		//if (obj.gameObject.layer == 10) {//BUilding layer
-			//This rescans the Astar graph after the building dies
-			//GraphUpdateObject b = new GraphUpdateObject (obj.GetComponent<CharacterController> ().bounds); 
-			//StartCoroutine (DeathRescan (b));
-		//} 
+			
 
 		if(!obj.myStats.upgradesApplied)
 		{

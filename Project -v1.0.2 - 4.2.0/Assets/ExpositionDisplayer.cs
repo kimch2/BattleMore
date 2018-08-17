@@ -117,9 +117,11 @@ public class ExpositionDisplayer : MonoBehaviour {
 		if (!acceptMessages) {
 			return;
 		}
+
+
 		SoundMessage newMessage = new SoundMessage (sound, duration,pic,input, Priority, volume);
 
-	//	Debug.Log ("Getting new mesage " + input + "  " + sound.name);
+		//  Debug.Log ("Getting new mesage " + input + "  " + sound.name);
 		if (inMessage) {
 
 			//Debug.Log ("In a message " + input);

@@ -117,4 +117,10 @@ public class BeamWeapon : IWeapon{
 
 	}
 
+	public void Dying()
+	{
+		Destroy (fireEffect.gameObject);
+
+	}
+
 }

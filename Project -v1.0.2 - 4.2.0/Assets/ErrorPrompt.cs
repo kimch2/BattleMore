@@ -150,11 +150,13 @@ public class ErrorPrompt : MonoBehaviour {
 
 	public void setErrorFreq(float Amount)
 	{
+
 		errorFreq = (10 / Amount) + 4;
 	}
 	public void underAttack(Vector3 location)
 	{	
-			if (lastAttackAlert + errorFreq < Time.time && !checkIfOnScreen(location)) {
+
+			if (lastAttackAlert + errorFreq > Time.time && !checkIfOnScreen(location)) {
 			showError ("Under Attack!", myVoicePack.getTroopAttackLine());
 			addAlertLocation( location);
 		
@@ -176,7 +178,7 @@ public class ErrorPrompt : MonoBehaviour {
 	public void underBaseAttack(Vector3 location)
 	{
 
-		if (lastAttackAlert +  errorFreq < Time.time &&!checkIfOnScreen(location)) {
+		if (lastAttackAlert +  errorFreq < Time.time &&!checkIfOnScreen(location) && Time.timeSinceLevelLoad > 15) {
 			showError ("Base Under Attack!", myVoicePack.getbaseAttackedLine());
 			addAlertLocation( location);
 
@@ -218,6 +220,7 @@ public class ErrorPrompt : MonoBehaviour {
 		GameMenu.main.addDisableScript (this);
 
 		myVoicePack = voiceContainer.myVoicePacks[PlayerPrefs.GetInt("VoicePack",0)];
+		setErrorFreq(PlayerPrefs.GetFloat ("BaseAlert",10));
 
 	}
 	

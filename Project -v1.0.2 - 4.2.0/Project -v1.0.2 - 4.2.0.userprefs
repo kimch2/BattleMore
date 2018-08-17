@@ -1,16 +1,16 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts - In Game\GridMaker.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\ExpositionDisplayer.cs">
     <Files>
-      <File FileName="Assets\Scripts - In Game\UnitManager.cs" Line="413" Column="3" />
-      <File FileName="Assets\ClickableButton.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts - In Game\Selected Units\SelectedManager.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts - In Game\UiAbilityManager.cs" Line="1" Column="1" />
-      <File FileName="Assets\VictoryTrigger.cs" Line="212" Column="23" />
-      <File FileName="Assets\LevelData.cs" Line="240" Column="3" />
-      <File FileName="Assets\ResearchUpgrade.cs" Line="191" Column="4" />
-      <File FileName="Assets\CostReductionUpgrade.cs" Line="21" Column="69" />
-      <File FileName="Assets\Scripts - In Game\GridMaker.cs" Line="1" Column="1" />
+      <File FileName="Assets\DeathCubeDeactivator.cs" Line="1" Column="1" />
+      <File FileName="Assets\WayPointInteracter.cs" Line="1" Column="1" />
+      <File FileName="Assets\airmover.cs" Line="1" Column="1" />
+      <File FileName="Assets\BeamWeapon.cs" Line="121" Column="3" />
+      <File FileName="Assets\Scripts - In Game\UnitStats.cs" Line="416" Column="27" />
+      <File FileName="Assets\MoneyPickUp.cs" Line="25" Column="6" />
+      <File FileName="Assets\TextTrigger.cs" Line="38" Column="43" />
+      <File FileName="Assets\Scripts - In Game\Selected Units\SelectedManager.cs" Line="732" Column="101" />
+      <File FileName="Assets\ExpositionDisplayer.cs" Line="116" Column="4" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

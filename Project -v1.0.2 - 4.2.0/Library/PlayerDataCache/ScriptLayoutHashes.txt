@@ -647,7 +647,7 @@ cfb269d6c88719d7c722677501b06b59 Assembly-CSharp.dll:.LevelStartPlacer
 71b72d113e1edcdbb390ce00910a011d Assembly-CSharp.dll:.MegaMap
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.ShotParticle_Scale
 8e4505ecbd336bfec3142f6d3d854d8f Assembly-CSharp.dll:.AudioPlayer
-05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.DeathWinTrigger
+45150f212987709d2064164b8b7b24f1 Assembly-CSharp.dll:.DeathWinTrigger
 467a5300d78b83ab89df1fbbc9f2c226 Assembly-CSharp.dll:.inflectionBarrier
 7927962aae4d51500a54d8f896c569c7 Assembly-CSharp-firstpass.dll:.RecastTileUpdateHandler
 dd5481137759597d614818793c90a7fe Assembly-CSharp.dll:.SpaceDrop
