@@ -23,9 +23,12 @@ public class FadeOut : MonoBehaviour {
 			main = this;
 			fadeStartTime = blackTime;
 			myImage.enabled = true;
-			myText.enabled = true;
-			if (textfadeInTime > 0) {
-				StartCoroutine (fadeInText ());
+			if (myText) {
+				myText.enabled = true;
+			
+				if (textfadeInTime > 0) {
+					StartCoroutine (fadeInText ());
+				}
 			}
 		}
 	
@@ -37,6 +40,7 @@ public class FadeOut : MonoBehaviour {
 		if (Time.timeSinceLevelLoad > fadeStartTime) {
 			
 			myImage.color = new Color (0, 0, 0, 1 - (Time.timeSinceLevelLoad -  fadeStartTime) / fadeLength);
+
 			myText.color = new Color (myText.color.r, myText.color.g, myText.color.b, 1 - (Time.timeSinceLevelLoad -  fadeStartTime +1f) / fadeLength);
 
 			if (Time.timeSinceLevelLoad >fadeStartTime + fadeLength) {

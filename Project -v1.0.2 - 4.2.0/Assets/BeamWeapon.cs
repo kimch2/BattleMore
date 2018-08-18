@@ -23,7 +23,7 @@ public class BeamWeapon : IWeapon{
 			Vector3 towards =  target.transform.position - transform.position; 
 			float distance = Vector3.Distance (transform.position,  target.transform.position) -5; 
 
-				if (Physics.Raycast (this.gameObject.transform.position, towards, out objecthit, 20000, 1 << 20)) {
+			if (Physics.Raycast (this.gameObject.transform.position, towards, out objecthit, 20000, 1 << 20, QueryTriggerInteraction.Collide)) {
 					if (objecthit.distance < distance) {
 					barrierShield shield = objecthit.transform.gameObject.GetComponentInParent<barrierShield> ();
 						
@@ -88,7 +88,7 @@ public class BeamWeapon : IWeapon{
 				Vector3 towards =  target.transform.position - transform.position; 
 				float distance = Vector3.Distance (transform.position,  target.transform.position) -5; 
 
-				if (Physics.Raycast (this.gameObject.transform.position, towards, out objecthit, 20000, 1 << 20)) {
+				if (Physics.Raycast (this.gameObject.transform.position, towards, out objecthit, 20000, 1 << 20, QueryTriggerInteraction.Collide)) {
 					if (objecthit.distance < distance) {
 						fireEffect.transform.position = objecthit.point+ Vector3.up *2;
 						line.SetPositions (new Vector3[] {line.transform.position,objecthit.point + Vector3.up *2+ towards.normalized*2});
@@ -119,8 +119,9 @@ public class BeamWeapon : IWeapon{
 
 	public void Dying()
 	{
-		Destroy (fireEffect.gameObject);
-
+		if (fireEffect) {
+			Destroy (fireEffect.gameObject);
+		}
 	}
 
 }

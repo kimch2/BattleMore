@@ -1,16 +1,14 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\ExpositionDisplayer.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\FadeOut.cs">
     <Files>
       <File FileName="Assets\DeathCubeDeactivator.cs" Line="1" Column="1" />
       <File FileName="Assets\WayPointInteracter.cs" Line="1" Column="1" />
       <File FileName="Assets\airmover.cs" Line="1" Column="1" />
-      <File FileName="Assets\BeamWeapon.cs" Line="121" Column="3" />
-      <File FileName="Assets\Scripts - In Game\UnitStats.cs" Line="416" Column="27" />
-      <File FileName="Assets\MoneyPickUp.cs" Line="25" Column="6" />
-      <File FileName="Assets\TextTrigger.cs" Line="38" Column="43" />
-      <File FileName="Assets\Scripts - In Game\Selected Units\SelectedManager.cs" Line="732" Column="101" />
-      <File FileName="Assets\ExpositionDisplayer.cs" Line="116" Column="4" />
+      <File FileName="Assets\BeamWeapon.cs" Line="21" Column="25" />
+      <File FileName="Assets\LaserDrill.cs" Line="117" Column="78" />
+      <File FileName="Assets\SoundManager\SoundManager.cs" Line="552" Column="1" />
+      <File FileName="Assets\FadeOut.cs" Line="49" Column="5" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

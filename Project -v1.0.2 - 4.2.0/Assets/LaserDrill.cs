@@ -114,16 +114,12 @@ public class LaserDrill : MonoBehaviour {
 			if (currentTarget) {
 				
 				RaycastHit objecthit;
-				RaycastHit objecthitB;
 				Vector3 towards = currentTarget.transform.position - transform.position; 
 				Ray poniter = new Ray (transform.position,towards);
 
-				if (currentTarget.GetComponent<CharacterController>().Raycast (poniter,out objecthitB,10000)) {
-
-				}
-
-				if (Physics.Raycast (this.gameObject.transform.position, towards, out objecthit, 20000, 1 << 20)) {
-					if (objecthitB.distance > objecthit.distance) {
+	
+				if (Physics.Raycast (this.gameObject.transform.position, towards, out objecthit, 20000, 1 << 20, QueryTriggerInteraction.Collide)) {
+					if (Vector3.Distance(this.transform.position, currentTarget.transform.position)  > objecthit.distance) {
 						barrierShield shield = objecthit.transform.gameObject.GetComponentInParent<barrierShield> ();
 
 						if (shield) {
@@ -150,16 +146,13 @@ public class LaserDrill : MonoBehaviour {
 		while(currentTarget){
 	
 			RaycastHit objecthit;
-			RaycastHit objecthitB;
 			Vector3 towards = currentTarget.transform.position - transform.position; 
 			Ray poniter = new Ray (transform.position,towards);
 
-			if (currentTarget.GetComponent<CharacterController>().Raycast (poniter,out objecthitB,10000)) {
 
-			}
+			if (Physics.Raycast (this.gameObject.transform.position, towards, out objecthit, 20000, 1 << 20, QueryTriggerInteraction.Collide)) {
 
-			if (Physics.Raycast (this.gameObject.transform.position, towards, out objecthit, 20000, 1 << 20)) {
-				if (objecthitB.distance > objecthit.distance) {
+				if (Vector3.Distance(transform.position, currentTarget.transform.position) > objecthit.distance) {
 					line.SetPositions (new Vector3[] {
 						(transform.rotation) * LaserStartPoint + this.gameObject.transform.position,
 						objecthit.point});
