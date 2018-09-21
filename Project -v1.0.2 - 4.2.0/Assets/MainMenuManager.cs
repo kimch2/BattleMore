@@ -24,13 +24,15 @@ public class MainMenuManager : MonoBehaviour {
 	}
 
 	public void loadScreen(Canvas can)
-	{currentScreen.enabled = false;
+	{
+		Cursor.lockState = CursorLockMode.Confined;
+		currentScreen.enabled = false;
 		currentScreen = can;
 		can.enabled = true;
 	}
 
 	public void toMultiplayer()
-	{
+	{	Cursor.lockState = CursorLockMode.Confined;
 		multiplayer.GetComponent<RaceSelectionManger> ().initialize ();
 		loadScreen (multiplayer);
 		multiplayer.GetComponent<RaceSelectionManger> ().initialize ();
@@ -47,7 +49,7 @@ public class MainMenuManager : MonoBehaviour {
 
 	public void startMatch(Dropdown dropper)
 	{
-		
+		Cursor.lockState = CursorLockMode.Confined;
 		resetProgress ();
 		setDifficulty (dropper);
 		audioSource.Stop ();
@@ -61,7 +63,9 @@ public class MainMenuManager : MonoBehaviour {
 	{	if (LoadingScreen) {
 			LoadingScreen.enabled = true;
 		}
+		Cursor.lockState = CursorLockMode.Confined;
 		SceneManager.LoadScene (1);
+
 	}
 
 	public void toCampaign()
@@ -94,7 +98,9 @@ public class MainMenuManager : MonoBehaviour {
 		if (LoadingScreen) {
 			LoadingScreen.enabled = true;
 		}
+		Cursor.lockState = CursorLockMode.Confined;
 		SceneManager.LoadScene (3);
+	
 	}
 
 	public void toCredits()

@@ -176,6 +176,7 @@
      <Compile Include="Assets\dialogManager.cs" />
      <Compile Include="Assets\DifficultyManager.cs" />
      <Compile Include="Assets\DirectUpgradeApplier.cs" />
+     <Compile Include="Assets\DisplayBar.cs" />
      <Compile Include="Assets\DoubleUpgrade.cs" />
      <Compile Include="Assets\DoubleUpgradeApp.cs" />
      <Compile Include="Assets\DrillSpotter.cs" />
@@ -681,6 +682,7 @@
      <Compile Include="Assets\WaveSpawner.cs" />
      <Compile Include="Assets\WayPoint.cs" />
      <Compile Include="Assets\WayPointInteracter.cs" />
+     <Compile Include="Assets\WorldRecharger.cs" />
      <Compile Include="Assets\ZephyrInteract.cs" />
      <Compile Include="Assets\Zoomer.cs" />
      <None Include="Assets\Materials\Bit2Good\SFS\Shaders\SFS_Pr_Dt.shader" />

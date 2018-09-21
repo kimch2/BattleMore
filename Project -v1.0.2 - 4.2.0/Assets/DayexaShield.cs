@@ -13,6 +13,8 @@ public class DayexaShield : Ability,Modifier , Notify{
 	public float rechargeRate;
 
 	public GameObject shieldEffect;
+	ParticleSystem myEffect;
+
 	public bool AbsorbRecoil;
 	public float maxDamagePerSec = 100000;
 
@@ -41,6 +43,7 @@ public class DayexaShield : Ability,Modifier , Notify{
 			InvokeRepeating ("UpdateShield", 1, 1);
 		}
 		changeAbsorption (0);
+		myStats.setEnergyRegen (rechargeRate);
 	}
 
 	public void ApplyMaxDamageUpgrade(float max)
@@ -69,10 +72,15 @@ public class DayexaShield : Ability,Modifier , Notify{
 
 	public void startRecharge(float delayTime = .1f)
 	{
+
+	
 		if (currentCharging != null) {
-			StopCoroutine (currentCharging);
+			beginRechargeTime = Time.time + delayTime;
+		} else {
+			myStats.EnergyRegenPerSec = rechargeRate;
+
 		}
-		currentCharging = StartCoroutine (chargeShields (delayTime));
+
 
 	}
 
@@ -88,11 +96,13 @@ public class DayexaShield : Ability,Modifier , Notify{
 
 
 	float lastShieldEffect;
+	float StartRechargeTime;
 
 	public float modify(float amount, GameObject src, DamageTypes.DamageType theType)
-	{	
+	{
 		
-		if (myStats.currentEnergy > 0) {
+		 if (myStats.currentEnergy > 0) {
+			
 			float energyLost = Mathf.Min (Absorbtion, myStats.currentEnergy);
 
 			if (energyLost > amount) {
@@ -112,18 +122,23 @@ public class DayexaShield : Ability,Modifier , Notify{
 
 			myStats.changeEnergy (-energyLost);
 
-
-			if (currentCharging != null) {
-				StopCoroutine (currentCharging);
+			beginRechargeTime = Time.time + RechargeDelay;
+			if (currentCharging == null) {
+				currentCharging = StartCoroutine (chargeShields ());
 			}
-			currentCharging = StartCoroutine (chargeShields (RechargeDelay));
 
-
+		
+	
 			if (shieldEffect && damageReduction > 0 && lastShieldEffect < Time.time - .6f) {
 				lastShieldEffect = Time.time;
 
-				Instantiate (shieldEffect, this.gameObject.transform.position, this.gameObject.transform.rotation, this.transform);
+				if (myEffect == null) {
+					myEffect =	Instantiate (shieldEffect, this.gameObject.transform.position, this.gameObject.transform.rotation, this.transform).GetComponent<ParticleSystem> ();
+				} else {
+					myEffect.Play ();
+				}
 			}
+
 			return (amount - damageReduction);
 		}
 		else {
@@ -158,16 +173,16 @@ public class DayexaShield : Ability,Modifier , Notify{
 	}
 
 	Coroutine currentCharging;
+	float beginRechargeTime;
 
-	IEnumerator chargeShields(float delay)
+	IEnumerator chargeShields()
 	{
-		yield return new WaitForSeconds (delay);
-		while(true){
-
-			myStats.changeEnergy (rechargeRate / 2);
-			myStats.veternStat.UpEnergy(rechargeRate / 2);
+		myStats.setEnergyRegen (0);
+		while( Time.time < beginRechargeTime){
 			yield return new WaitForSeconds (.5f);
 			}
+		myStats.setEnergyRegen (rechargeRate);
+		currentCharging = null;
 	}
 
 }

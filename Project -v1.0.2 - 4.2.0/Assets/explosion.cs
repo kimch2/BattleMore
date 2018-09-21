@@ -82,7 +82,7 @@ public class explosion : MonoBehaviour {
 					float total = 0;
 
 			
-					total = stats.TakeDamage (amount, source, type);
+				total = stats.TakeDamage (amount, source, type, mySrcMan);
 					
 
 					if (mySrcMan) {

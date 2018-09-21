@@ -13,6 +13,12 @@ public class Selected : MonoBehaviour {
 		private set;
 	}
 
+	public DisplayBar healthBar;
+	public DisplayBar EnergyBar;
+	public DisplayBar Cooldownbar;
+
+
+
 	public HealthDisplay buffDisplay;
 	public TurretHealthDisplay turretDisplay;
 
@@ -21,21 +27,18 @@ public class Selected : MonoBehaviour {
 
 	private Slider IconSlider;
 
-	public Slider healthslider;
-	private Image healthFill;
 	public GameObject RallyPoint;
 	public GameObject RallyUnit;
-	public Slider energySlider;
-	//private Image energyFill;
 
-	public Slider coolDownSlider;
-	private Image coolFill;
+
 
 	private float tempSelectTime;
 	private bool tempSelectOn;
 	private bool interactSelect;
 	public List<SelectionNotifier> selectionNotifiers = new List<SelectionNotifier>();
 	public LineRenderer myLine;
+
+	List<GameObject> UsableBars = new List<GameObject>();
 
 
 	public enum displayType
@@ -53,6 +56,7 @@ public class Selected : MonoBehaviour {
 	void Awake () 
 	{		
 		Initialize ();
+	
 	}
 
 
@@ -71,44 +75,40 @@ public class Selected : MonoBehaviour {
 		if (!buffDisplay) {
 			buffDisplay = GetComponentInChildren<HealthDisplay> ();
 		}
-		try{
 
-			Transform healthDisplay = transform.Find("HealthDisplay");
-			turretDisplay = healthDisplay.GetComponent<TurretHealthDisplay> ();
+		turretDisplay = GetComponentInChildren<TurretHealthDisplay> ();
+		if (turretDisplay && turretDisplay.transform.parent != this.transform) {
+			turretDisplay = null;
+		}
+		
 		if (!turretDisplay) {
-				if(!healthslider){
-					healthslider =  healthDisplay.Find ("HealthBar").GetComponent<Slider> ();}
 				
-				healthFill =  healthDisplay.Find ("HealthBar").transform.Find ("Fill Area").Find ("Fill").GetComponent<Image> ();
-		} 
-			if(!energySlider){
-				energySlider = healthDisplay.Find ("EnergyBar").GetComponent<Slider> ();
+			if (healthBar) {
+				UsableBars.Add (healthBar.gameObject);
 			}
-			//energyFill= transform.FindChild("HealthDisplay").FindChild("EnergyBar").transform.FindChild("Fill Area").FindChild("Fill").GetComponent<Image>();
-
-			if(!coolDownSlider){
-				coolDownSlider =  healthDisplay.Find ("Cooldown").GetComponent<Slider> ();
-			}
-			coolFill= coolDownSlider.transform.Find("Fill Area").Find("Fill").GetComponent<Image>();
-	
-
-
-
-	
-		if (myStats.MaxEnergy == 0) {
-			energySlider.gameObject.SetActive (false);
 		} else {
+			healthBar.gameObject.SetActive (false);
+		}
 
+	
+		if(EnergyBar){
+			UsableBars.Add(EnergyBar.gameObject);
+		}
+
+		if(Cooldownbar){
+			UsableBars.Add(Cooldownbar.gameObject);
+		}
+
+		if (myStats.MaxEnergy == 0) {
+			updateEnergyBar (1);
+		} else {
 			updateEnergyBar (myStats.currentEnergy / myStats.MaxEnergy);
-
-
 		}
+
+		updateCoolDown (1);
 		updateHealthBar (myStats.health / myStats.Maxhealth);
-			coolDownSlider.gameObject.SetActive (false);}
-		catch(Exception) {
-			
-		}
-		setDisplayType (GamePlayMenu.getInstance().getDisplayType ());
+		mydisplayType = displayType.damaged;
+		//setDisplayType (GamePlayMenu.getInstance().getDisplayType ());
 
 	}
 
@@ -117,7 +117,7 @@ public class Selected : MonoBehaviour {
 	public void setDisplayType(displayType t)
 	{mydisplayType = t;
 		
-
+		/*
 		try{
 		if (!turretDisplay) {
 
@@ -171,6 +171,7 @@ public class Selected : MonoBehaviour {
 		}
 		}catch(Exception) {
 		}
+		*/
 	}
 
 	public void updateIconNum()
@@ -189,26 +190,14 @@ public class Selected : MonoBehaviour {
 
 		IconInfo = unitIcon.GetComponent<UnitIconInfo> ();
 		IconSlider = obj.transform.Find ("Slider").gameObject.GetComponent<Slider>();
+
+		updateHealthBar (myStats.health / myStats.Maxhealth);
 		if (!turretDisplay) {
 			//Debug.Log (this.gameObject);
-			if (healthslider.value > .6) {
-
-				IconInfo.changeColor (Color.green);
-
-			} else if (healthslider.value > .35) {
-			
-				IconInfo.changeColor (Color.yellow);
 
 
-			} else if (healthslider.value > .15) {
-				IconInfo.changeColor (new Color (1, .4f, 0));
-
-			}else {
-				IconInfo.changeColor (Color.red);
-
-			}
 			if (IconSlider) {
-				IconSlider.value = coolDownSlider.value;
+				IconSlider.value = Cooldownbar.getRatio();
 				if (IconSlider.value <= 0 || IconSlider.value >= .99f) {
 					//buffDisplay.isOn = false;
 
@@ -324,122 +313,46 @@ public class Selected : MonoBehaviour {
 
 		}
 
-
-
 	public void updateHealthBar(float ratio)
-	{//try{
+	{
 		if (!turretDisplay) {
-		
-			healthslider.value = ratio; 
-
-			if (mydisplayType == displayType.damaged) {
-	
-				if (ratio > .99) {
-					//buffDisplay.isOn = false;
-					healthslider.gameObject.SetActive (false);
-				} else {
-					//buffDisplay.isOn = true;
-					healthslider.gameObject.SetActive (true);
-				}
-	
-
-			}
-
-			if (ratio > .6) {
-				healthFill.color = Color.green;
-				if (unitIcon) {
-						IconInfo.changeColor(Color.green);	
-				
-				}
-			} else if (ratio > .35) {
-				healthFill.color = Color.yellow;
-				if (unitIcon) {
-						IconInfo.changeColor(Color.yellow);
-					
-				}
-			} 
-			else if (healthslider.value > .15) {
-				healthFill.color =new Color (1, .4f, 0);
-				if (unitIcon) {
-						IconInfo.changeColor(new Color (1, .4f, 0));
-					
-				}
-			}
-			else {
-				healthFill.color = Color.red;
-				if (unitIcon) {
-						IconInfo.changeColor(Color.red);
-					
-				}
-			}
-				checkOn ();
+			healthBar.updateRatio (ratio, IconInfo);
 		} else {
 			turretDisplay.updateHealth (ratio);
 		}
+
 		checkOn ();
-	//}
-		//catch(MissingReferenceException) {}
-			
 
 
 	}
 
 	public void updateEnergyBar(float ratio)
-	{//Debug.Log (this.gameObject + "   " + energySlider);
-		energySlider.value = ratio;
-		if (ratio > .99 || ratio < .01) {
-
-			energySlider.gameObject.SetActive (false);
-		} else {
-
-			energySlider.gameObject.SetActive (true);
-		}
+	{
+		EnergyBar.updateRatio(ratio, null);
 		checkOn ();
 	}
 
 	public void checkOn()
 	{
-		//Debug.Log ("Checkign on " + coolDownSlider.value +"   "+ energySlider.value  +"   "+healthslider.value);
-		if (coolDownSlider && coolDownSlider.gameObject.activeSelf || energySlider && energySlider.gameObject.activeSelf || healthslider && healthslider.gameObject.activeSelf) {//.value < .99 || (healthslider.value < .99)) {
-			buffDisplay.enabled = true;
-		} else {
-			buffDisplay.enabled = false;
+		foreach (GameObject obj in UsableBars) {
+			if (obj.activeSelf) {
+				buffDisplay.enabled = true;
+				return;
+			}
+		
 		}
-
 	}
 
 	public void updateCoolDown(float ratio)
 	{
-		coolDownSlider.value = ratio;
-		if (ratio <= 0 || ratio >=.999f) {
-
-
-			coolDownSlider.gameObject.SetActive (false);
-		} else {
-			
-			//buffDisplay.isOn = true;
-			coolDownSlider.gameObject.SetActive (true);
-		}
-		if (IconSlider) {
-			IconSlider.value = ratio;
-			if (IconSlider.value <= 0|| IconSlider.value >= .99f) {
-				//buffDisplay.isOn = false;
-
-				IconSlider.gameObject.SetActive (false);
-			}
-			else{
-
-				//buffDisplay.isOn = true;
-				IconSlider.gameObject.SetActive (true);
-			}
-		}
+		Cooldownbar.updateRatio (ratio, IconInfo);
 		checkOn ();
 
 	}
 
 	public void setCooldownColor(Color c)
 	{
-		coolFill.color = c;
+		Cooldownbar.RatioLevels[0].HPBarColor = c;
 	}
 
 
@@ -456,15 +369,7 @@ public class Selected : MonoBehaviour {
 				myLine.enabled = true;
 			}
 		}
-
-		if (displayType.selected == mydisplayType) {
-			buffDisplay.enabled = true;
-			healthslider.gameObject.SetActive (true);
-			if (myStats.MaxEnergy > 0) {
-				energySlider.gameObject.SetActive (true);
-			}
-		}
-
+			
 		//foreach (Transform obj in this.transform) {
 
 			//obj.SendMessage ("setSelect", SendMessageOptions.DontRequireReceiver);
@@ -496,14 +401,7 @@ public class Selected : MonoBehaviour {
 				myLine.enabled = false;
 			}
 		}
-
-		if (displayType.selected == mydisplayType) {
-			buffDisplay.enabled = false;
-			healthslider.gameObject.SetActive (false);
-			if (myStats.MaxEnergy > 0) {
-				energySlider.gameObject.SetActive (false);
-			}
-		}
+			
 
 		foreach (Transform obj in this.transform) {
 

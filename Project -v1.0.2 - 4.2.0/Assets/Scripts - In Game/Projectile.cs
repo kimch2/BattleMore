@@ -260,7 +260,7 @@ public  class Projectile : MonoBehaviour {
 			if (target != null && target.myStats != null) {
 
 				//Debug.Log ("Giveing damage");
-				float total =  target.myStats.TakeDamage (damage, Source,damageType);
+					float total =  target.myStats.TakeDamage (damage, Source,damageType, SourceMan);
 				if (SourceMan)
 					{
 					SourceMan.myStats.veteranDamage (total);

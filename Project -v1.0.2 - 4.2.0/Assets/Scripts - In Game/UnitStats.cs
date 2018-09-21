@@ -14,14 +14,15 @@ public class UnitStats : MonoBehaviour {
 	public float Maxhealth;
 	public float health;
 	public float HealthRegenPerSec;
-
-
-
+	[HideInInspector]
+	public float HealthRegenPerHalf;
 
 	public float MaxEnergy;
 	public float currentEnergy;
 
 	public float EnergyRegenPerSec;
+	[HideInInspector]
+	public float EnergyRegenPerHalf;
 	public Sprite Icon;
 
 	public float supply;    //positive gives supply, negative uses it
@@ -64,6 +65,7 @@ public class UnitStats : MonoBehaviour {
 
 	public GameObject deathCorpse;
 	public GameObject deathEffect;
+	[Tooltip("Not surrently used")]
 	public GameObject takeDamageEffect;
 	public Sprite UnitPortrait;
 	bool tagSet = false;
@@ -77,9 +79,7 @@ public class UnitStats : MonoBehaviour {
 
 	void Awake()
 	{
-
 		Initialize ();
-
 	}
 
 	public void SetTags()
@@ -145,17 +145,14 @@ public class UnitStats : MonoBehaviour {
 		if (isHero) {
 			veternStat.UnitName = myManager.UnitName;
 		}
+			
+		if (EnergyRegenPerSec > 0 && !WorldRecharger.main.ToEnergize.Contains(this)) {
+			WorldRecharger.main.addEnergy(this);
+		} 
+		if (HealthRegenPerSec > 0 && !WorldRecharger.main.ToHeal.Contains(this)) {
+			WorldRecharger.main.addHeal(this);
+		} 
 
-		// FIX THIS REPEATING INEUMERNATER
-		if (EnergyRegenPerSec > 0) {
-
-			 setEnergyRegen (EnergyRegenPerSec);
-		//	StartCoroutine (HealthEnergy());
-		}
-		if (HealthRegenPerSec > 0) {
-			StartCoroutine (regenHealth());
-		}
-		Invoke ("firstHealth", .3f);
 	}
 
 	void firstHealth()
@@ -165,59 +162,32 @@ public class UnitStats : MonoBehaviour {
 	}
 
 
-	Coroutine EnergyUpdater;
-
 	public void setEnergyRegen(float amount)
 	{
+		if (amount == 0 && EnergyRegenPerSec > 0) {
+			WorldRecharger.main.removeEnergy (this);
+		} 
+		else if (amount > 0 && EnergyRegenPerSec == 0) {
+			WorldRecharger.main.addEnergy (this);
+		}
+	
 		EnergyRegenPerSec = amount;
-		if (amount == 0) {
-			if (EnergyUpdater != null) {
-				StopCoroutine (EnergyUpdater);
-			}
-		}
-		else if (EnergyUpdater == null) {
-			//Debug.Log ("Starting energy regen " + Time.time);
-			EnergyUpdater = StartCoroutine (EnergyReg ());
-		}
+		EnergyRegenPerHalf = amount / 2;
 	}
 
-
-	IEnumerator EnergyReg()
+	public void setHealRate(float amount)
 	{
-		float regenPerHalfSecond = EnergyRegenPerSec / 2;
-
-		while(true){
-			yield return new WaitForSeconds (.5f);
-
-			//Regenerate Energy
-			if (currentEnergy < MaxEnergy ) { //&& EnergyRegenPerSec >0
-				
-				float actual = changeEnergy (regenPerHalfSecond);
-				veternStat.UpEnergy (actual);
-			}
+		if (amount == 0 && HealthRegenPerSec > 0) {
+			WorldRecharger.main.removeHeal (this);
+		} 
+		else if (amount > 0 && HealthRegenPerSec == 0) {
+			WorldRecharger.main.addHeal (this);
 		}
+
+		HealthRegenPerSec = amount;
+		HealthRegenPerHalf = amount / 2;
 	}
-
-
-	IEnumerator regenHealth(){
-
-		float regenPerHalfSecond = HealthRegenPerSec;
-
-		float waitTime = 1;
-		if (HealthRegenPerSec > 2) {
-			regenPerHalfSecond = HealthRegenPerSec / 2;
-			waitTime = .5f;
-		}
-
-		while(true){
-			yield return new WaitForSeconds (waitTime);
-
-		if (health < Maxhealth) { //&& HealthRegenPerSec > 0
-			float actual = heal (regenPerHalfSecond);;
-			veternStat.UpHealing (actual);
-			}
-		}
-	}
+		
 
 
 	int n = 0;
@@ -273,25 +243,23 @@ public class UnitStats : MonoBehaviour {
 
 
 
-	public float TakeDamage(float amount, GameObject source, DamageTypes.DamageType type)
+	public float TakeDamage(float amount, GameObject source, DamageTypes.DamageType type, UnitManager srcManager = null)
 	{
+
 		if (isUnitType(UnitTypes.UnitTypeTag.Invulnerable)) {
 			return 0;
 		}
 			
-		//bool setToZero = false;
 		if (type != DamageTypes.DamageType.True) {
 			foreach (Modifier mod in damageModifiers) {
 				if (mod != null) {
 					amount = mod.modify (amount, source, type);
 					if (amount <= 0) {
-						//setToZero = true;
 						return 0;
 						}
 					}
 				}
 		}
-	//	if (!setToZero) {
 
 		if (type == DamageTypes.DamageType.Regular || type == DamageTypes.DamageType.Wound ) {
 
@@ -306,10 +274,9 @@ public class UnitStats : MonoBehaviour {
 			}
 		}
 
-		if (takeDamageEffect) {
-
-			Instantiate (takeDamageEffect, this.gameObject.transform.position, new Quaternion ());
-		}
+		//if (takeDamageEffect) {
+		//	Instantiate (takeDamageEffect, this.gameObject.transform.position, new Quaternion ());
+		//}
 		if (veternStat != null) {
 			veternStat.UpMitigated(armor);
 			veternStat.UpdamTaken (amount);
@@ -317,17 +284,25 @@ public class UnitStats : MonoBehaviour {
 
 			//	Debug.Log ("Actual " + amount);
 		health -= amount;
-			
+
 		if ((int)health <= 0) {
 			kill (source);
 		} else {
 			updateHealthBar ();
 
-			if (source) {
-				myManager.Attacked (source.GetComponent<UnitManager> ());
-				} 
-		}
 
+			if (source) {
+				UnitManager damSource;
+				if (!srcManager) {
+					srcManager = source.GetComponent<UnitManager> ();
+				}
+
+				if (srcManager) {
+					myManager.Attacked (srcManager);
+					}
+			} 
+		}
+	
 		return amount;
 
 	}
@@ -391,6 +366,12 @@ public class UnitStats : MonoBehaviour {
 
 				GameObject.Instantiate (deathCorpse, spawnLoc, this.gameObject.transform.rotation);
 
+			}
+			if (EnergyRegenPerSec > 0) {
+				WorldRecharger.main.removeEnergy (this);
+			}
+			if (HealthRegenPerSec > 0) {
+				WorldRecharger.main.removeHeal(this);
 			}
 
 			if (deathSource) {
@@ -522,9 +503,11 @@ public class UnitStats : MonoBehaviour {
 
 	public float changeEnergy(float n)
 	{//Debug.Log ("Recharging " + n);
-		if (MaxEnergy == 0) {
+		if (MaxEnergy == 0 ||  (n > 0 && currentEnergy == MaxEnergy)) {
 		
 			return 0;}
+
+
 		float amount = 0;
 
 	
@@ -567,6 +550,9 @@ public class UnitStats : MonoBehaviour {
 	/// <param name="type">Type.</param>
 	public float heal(float n, DamageTypes.DamageType type = DamageTypes.DamageType.Regular)
 	{
+		if (health == Maxhealth) {
+			return 0;
+		}
 
 		foreach (Modifier mod in HealModifiers) {
 			n = mod.modify (n, null,type);

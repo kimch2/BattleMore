@@ -202,7 +202,7 @@ ff05dcdf90651c3d98a9cad3df5e471e UnityEngine.Timeline.dll:UnityEngine.Timeline.C
 c24a21b131bfa67be1162db2cba4b52b UnityEngine.Timeline.dll:UnityEngine.Timeline.TimelineAsset
 1ffcf58f778b985e67029bfa1be81601 Assembly-CSharp.dll:.AetherRelay
 673b4a84c73ceacf6572fd26814defd0 Assembly-CSharp.dll:.ZephyrInteract
-10bf3d7589e7ab4b2534cf3d77bdb540 Assembly-CSharp.dll:.MoneyPickUp
+a572a3528d91af718a23e212a2c64a97 Assembly-CSharp.dll:.MoneyPickUp
 6da35707e7742344e4ed298424d5d162 Assembly-CSharp.dll:.WaveSpawner
 38f2aefc9dcf0f8107e7bd37238b3096 Assembly-CSharp-firstpass.dll:UnityStandardAssets.ImageEffects.Blur
 f5ce04d51633a5a2e05a731aa45ef200 Assembly-CSharp-firstpass.dll:UnityStandardAssets.ImageEffects.MotionBlur

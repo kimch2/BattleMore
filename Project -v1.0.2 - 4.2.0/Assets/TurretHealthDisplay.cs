@@ -6,7 +6,7 @@ public class TurretHealthDisplay : HealthDisplay {
 
 	private GameObject camy;
 
-	public Image Icon;
+	public SpriteRenderer Icon;
 
 
 	private bool flashing;
@@ -20,8 +20,16 @@ public class TurretHealthDisplay : HealthDisplay {
 	private bool pointerIn;
 
 	// Use this for initialization
+	void Awake()
+	{
+		if (!Icon) {
+			Icon = transform.Find ("Center").GetComponent<SpriteRenderer>();
+		}
+	}
+
 	void Start () {
-		updateHealth (currentHealth);
+		
+		//updateHealth (currentHealth);
 		camy = GameObject.FindObjectOfType<MainCamera> ().gameObject;
 
 	}
@@ -72,7 +80,6 @@ public class TurretHealthDisplay : HealthDisplay {
 
 	public void updateHealth(float input)
 	{currentHealth = input;
-
 
 		Icon.enabled = (input < .98f);
 		if (!flashing) {
