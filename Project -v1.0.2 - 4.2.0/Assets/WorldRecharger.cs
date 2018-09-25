@@ -7,6 +7,7 @@ public class WorldRecharger : MonoBehaviour {
 
 	public List<UnitStats> ToHeal;
 	public List<UnitStats> ToEnergize;
+	public List<RoamAI> ToRoam;
 
 	public static WorldRecharger main;
 
@@ -18,6 +19,7 @@ public class WorldRecharger : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		InvokeRepeating ("Charge",.5f,.5f);
+		InvokeRepeating ("Roam",1,3);
 	}
 
 
@@ -41,6 +43,17 @@ public class WorldRecharger : MonoBehaviour {
 		ToEnergize.Remove (target);
 	}
 
+	public void addRoam(RoamAI target)
+	{
+		ToRoam.Add (target);
+	}
+
+	public void removeRoam(RoamAI target)
+	{
+		ToRoam.Remove (target);
+	}
+
+
 	float healAmount = 0;
 	float energyAmount = 0;
 
@@ -58,6 +71,19 @@ public class WorldRecharger : MonoBehaviour {
 			}
 
 		}
+	}
+
+	int indexMod; // Makes it so only 1/3 roam each update to give it random look
+
+	void Roam()
+	{
+		for (int i = 0;i < ToRoam.Count; i++) {
+			if (ToRoam[i] && i%3 == indexMod) {
+				ToRoam [i].setnewLocation ();
+			}
+		}
+		indexMod++;
+		indexMod %= 3;
 	}
 
 }

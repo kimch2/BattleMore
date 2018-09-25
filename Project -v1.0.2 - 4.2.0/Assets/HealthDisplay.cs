@@ -13,16 +13,21 @@ public class HealthDisplay : MonoBehaviour {
 	Vector3 LookLocation;
 
 
-
-	// Use this for initialization
-	void Start () {
-		cam = MainCamera.main.transform;// GameObject.FindObjectOfType<MainCamera> ().gameObject;
+	protected virtual void Awake()
+	{
 		if (BuildingUnit) {
 			BuildingUnit.gameObject.SetActive (false);
 		}
 		if (background) {
 			background.gameObject.SetActive (false);
 		}
+
+	}
+
+	// Use this for initialization
+	void Start () {
+		cam = MainCamera.main.transform;// GameObject.FindObjectOfType<MainCamera> ().gameObject;
+
 	}
 	
 	// Update is called once per frame

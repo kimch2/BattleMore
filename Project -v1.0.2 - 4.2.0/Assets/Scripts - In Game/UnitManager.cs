@@ -231,10 +231,14 @@ public class UnitManager : Unit,IOrderable{
 	
 	// Update is called once per frame
 	new void Update () {
-		if (myState != null){// && !isStunned) {
+
+		if (myState != null) {
 			//Debug.Log ("This " + this.gameObject  + "  " + myState);
 			myState.Update ();
-		} 
+		} else {
+			enabled = false;
+		}
+
 	}
 
 
@@ -477,28 +481,35 @@ public class UnitManager : Unit,IOrderable{
 	}
 
 
+	bool erase = false;
 	// Called from some of the states (ie, DefaultState, AttackMoveState)
 	public UnitManager findClosestEnemy()
 	{
 
-		enemies.RemoveAll(item => item == null);
 		UnitManager best = null;
 		float currDistance = 0;
 		float distance = float.MaxValue;
 	
 		
 		for (int i = 0; i < enemies.Count; i ++) {
-			if (enemies[i] != null) {
+			if (enemies [i] != null) {
 				
-				currDistance = Vector3.Distance(enemies[i].transform.position, this.gameObject.transform.position);
-				if(currDistance < distance)
-					{best = enemies[i];
+				currDistance = Vector3.Distance (enemies [i].transform.position, this.gameObject.transform.position);
+				if (currDistance < distance) {
+					best = enemies [i];
 					
 					distance = currDistance;
 				}
 				
+			} else {
+				erase = true;
 			}
 		}
+		if (erase) {
+			enemies.RemoveAll(item => item == null);
+			erase = false;
+		}
+
 		return best;
 
 	}
@@ -603,6 +614,11 @@ public class UnitManager : Unit,IOrderable{
 	// make sure that Queue front and queueback are never both true
 	public void changeState(UnitState nextState, bool Queuefront, bool QueueBack)
 	{//Debug.Log ("Next state is " + nextState + "    " + queuedStates.Count);
+
+		if (nextState != null) {
+			enabled = true;
+		} // THIS MAY BREAK THINGS
+
 		if (myState is  ChannelState && !(nextState is DefaultState)) {
 			queuedStates.AddLast (nextState);
 			//Debug.Log ("Queuing " + nextState + "   " + queuedStates.Count);

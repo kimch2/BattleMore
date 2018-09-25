@@ -18,8 +18,8 @@ public class DetachAugment : Ability {
 	{
 		active = canDoit;
 		if (GetComponent<Selected> ().IsSelected) {
-			SelectedManager.main.abilityManager.UpdateSingleButton (9,1,"Augmentor");
-			//RaceManager.updateActivity ();
+			
+			RaceManager.updateActivity ();
 		}
 
 	}

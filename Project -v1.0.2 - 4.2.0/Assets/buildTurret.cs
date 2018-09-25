@@ -131,12 +131,12 @@ public class buildTurret :UnitProduction{
 
 	public void turnOffAutoCast()
 	{autocast = false;
-		
+		updateUICommandCard ();
 	}
 
 	public override void setAutoCast(bool offOn)
 	{autocast = offOn;
-		
+		updateUICommandCard ();
 	}
 
 	void OnTriggerEnter(Collider other)

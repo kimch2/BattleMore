@@ -29,11 +29,7 @@ public class turretState : UnitState {
 		
 		if (myManager.myWeapon.Count ==0) {
 			return;}
-		//if (!myWeapon.isOffCooldown()) {
-		//	return;
-		//}
 
-		//Debug.Log ("Turret Update " + myManager.gameObject + "  " + myManager.myWeapon.Count);
 		if (myManager.enemies.Count > 0) {
 			enemy = findBestEnemy ();
 
@@ -62,16 +58,15 @@ public class turretState : UnitState {
 	{}
 
 
-
+	bool erase = false;
 	public UnitManager findBestEnemy()
-	{myManager.enemies.RemoveAll(item => item == null);
+	{
 		UnitManager best = null;
-
 
 		float bestPriority = -1;
 
 		for (int i = 0; i < myManager.enemies.Count; i ++) {
-			if (myManager.enemies[i] != null) {
+			if (myManager.enemies [i] != null) {
 
 				//float currDistance = Vector3.Distance(myManager.enemies[i].transform.position, this.myManager.gameObject.transform.position);
 
@@ -80,21 +75,27 @@ public class turretState : UnitState {
 
 					continue;
 				}
-				if (!myWeap.inRange(myManager.enemies[i])) {
-
-					continue;}
-
-				if (myManager.enemies[i].myStats.attackPriority < bestPriority) {
+				if (!myWeap.inRange (myManager.enemies [i])) {
 
 					continue;
 				}
-				else 
-				{best = myManager.enemies[i];
 
-					bestPriority = myManager.enemies[i].myStats.attackPriority;
+				if (myManager.enemies [i].myStats.attackPriority < bestPriority) {
+
+					continue;
+				} else {
+					best = myManager.enemies [i];
+
+					bestPriority = myManager.enemies [i].myStats.attackPriority;
 				}
 
+			} else {
+				erase = true;
 			}
+		}
+		if (erase) {
+			myManager.enemies.RemoveAll(item => item == null);
+			erase = false;
 		}
 
 		return best;

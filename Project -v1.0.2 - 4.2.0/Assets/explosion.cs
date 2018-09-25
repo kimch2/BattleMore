@@ -12,7 +12,7 @@ public class explosion : MonoBehaviour {
 	public float damageAmount;
 	public DamageTypes.DamageType type;
 	public float maxSize= 5.0f;
-	private float scale = 1.0f;
+
 	public List<Notify> triggers = new List<Notify> ();
 
 	private List<UnitManager> hitStuff= new List<UnitManager>();

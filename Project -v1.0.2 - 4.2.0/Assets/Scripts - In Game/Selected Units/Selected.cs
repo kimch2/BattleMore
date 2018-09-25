@@ -316,7 +316,7 @@ public class Selected : MonoBehaviour {
 	public void updateHealthBar(float ratio)
 	{
 		if (!turretDisplay) {
-			healthBar.updateRatio (ratio, IconInfo);
+			healthBar.updateRatio (ratio, IconInfo, null);
 		} else {
 			turretDisplay.updateHealth (ratio);
 		}
@@ -328,7 +328,7 @@ public class Selected : MonoBehaviour {
 
 	public void updateEnergyBar(float ratio)
 	{
-		EnergyBar.updateRatio(ratio, null);
+		EnergyBar.updateRatio(ratio, null, null);
 		checkOn ();
 	}
 
@@ -341,11 +341,12 @@ public class Selected : MonoBehaviour {
 			}
 		
 		}
+		buffDisplay.enabled = false;
 	}
 
 	public void updateCoolDown(float ratio)
 	{
-		Cooldownbar.updateRatio (ratio, IconInfo);
+		Cooldownbar.updateRatio (ratio, null, IconInfo);
 		checkOn ();
 
 	}

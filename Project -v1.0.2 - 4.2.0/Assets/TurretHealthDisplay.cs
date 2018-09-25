@@ -22,6 +22,7 @@ public class TurretHealthDisplay : HealthDisplay {
 	// Use this for initialization
 	void Awake()
 	{
+		base.Awake ();
 		if (!Icon) {
 			Icon = transform.Find ("Center").GetComponent<SpriteRenderer>();
 		}

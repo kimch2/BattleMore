@@ -10,8 +10,8 @@ public class DefaultState : UnitState{
 		//myManager = man;
 		//myMover = move;
 		//myWeapon = weapon;
-
-		updateTime = Time.time + Random.value;
+	
+		//updateTime = Time.time + Random.value;
 	}
 
 	float updateTime;
@@ -20,16 +20,14 @@ public class DefaultState : UnitState{
 	UnitManager target;
 	override
 	public void Update () { // change this later so t will only check for attackable enemies.
-	
+	/*
 		if (Time.time < updateTime) {
 			return;
 		} else {
 			updateTime += .15f;
 		}
-
+*/
 		if (myManager.enemies.Count > 0) {
-
-
 
 			if (myManager.myWeapon.Count >0) {
 
@@ -56,7 +54,7 @@ public class DefaultState : UnitState{
 	{if (myManager.cMover) {
 			myManager.cMover.stop ();
 		}
-
+		myManager.enemies.RemoveAll(item => item == null);
 
 	}
 

@@ -74,6 +74,10 @@ public class UIManager : MonoBehaviour, IUIManager {
 
 	void Awake()
 	{
+		if (!GetComponent<WorldRecharger> ()) {
+			gameObject.AddComponent<WorldRecharger> ();
+		}
+
 		inputSystem = GameObject.FindObjectOfType<CustomInputSystem> ();
 		main = this;
 		//Debug.Log ("Setting UI manager " + this.gameObject.name);

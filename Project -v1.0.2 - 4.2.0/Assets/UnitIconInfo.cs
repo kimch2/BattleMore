@@ -13,7 +13,7 @@ public class UnitIconInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 	public Text energyText;
 	private UnitStats myStats;
 	public Image myImage;
-
+	public Slider mySlide;
 
 	BuildManager buildMan;
 	public Text BuildNum;
@@ -67,7 +67,12 @@ public class UnitIconInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 	}
 
 
-
+	public void updateSlider(float ratio)
+	{
+		mySlide.gameObject.SetActive(ratio > 0 || ratio < .99f);
+		mySlide.value = ratio;
+	
+	}
 
 
 	public void OnPointerEnter(PointerEventData eventd)
