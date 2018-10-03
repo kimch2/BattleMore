@@ -68,7 +68,12 @@ public class CostBox : MonoBehaviour {
 					time.color =teal;
 				}
 				clocker.enabled = true;
-				time.text = "" + input.myCost.cooldown;
+
+				if (input.myCost.cooldownTimer > 0) {
+					time.text =  (int)(input.myCost.cooldown - input.myCost.cooldownTimer) + "/" + input.myCost.cooldown;
+				} else {
+					time.text = "" + input.myCost.cooldown;
+				}
 			}
 			if (input is UnitProduction && ((UnitProduction)input).unitToBuild) {
 				UnitStats mwertqert = ((UnitProduction)input).unitToBuild.GetComponent<UnitStats> ();

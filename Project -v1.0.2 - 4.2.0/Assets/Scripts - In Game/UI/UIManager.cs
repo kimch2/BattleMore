@@ -78,6 +78,10 @@ public class UIManager : MonoBehaviour, IUIManager {
 			gameObject.AddComponent<WorldRecharger> ();
 		}
 
+		if (!GetComponent<PhysicsSimulator> ()) {
+			gameObject.AddComponent<PhysicsSimulator> ();
+		}
+
 		inputSystem = GameObject.FindObjectOfType<CustomInputSystem> ();
 		main = this;
 		//Debug.Log ("Setting UI manager " + this.gameObject.name);

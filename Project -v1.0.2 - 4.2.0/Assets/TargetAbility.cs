@@ -7,6 +7,7 @@ public abstract class TargetAbility : Ability {
 	public float range;
 
 	public GameObject target;
+	[HideInInspector]
 	public Vector3 location;
 	public Texture targetArea;
 	public float areaSize;

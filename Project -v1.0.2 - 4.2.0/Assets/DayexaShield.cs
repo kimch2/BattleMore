@@ -149,7 +149,7 @@ public class DayexaShield : Ability,Modifier , Notify{
 	public void changeAbsorption(float amount)
 	{
 		Absorbtion += amount;
-		Descripton = "[Passive]\nIncominng damage is reduced by " + Absorbtion + " as long as there is energy available. Regenerates " + rechargeRate + " energy per second out of combat.";
+		Descripton = "[Passive]\nConsumes energy to reduce incominng damage by " + Absorbtion + ".\nRegenerates " + rechargeRate + " energy per second out of combat.";
 	
 	}
 		

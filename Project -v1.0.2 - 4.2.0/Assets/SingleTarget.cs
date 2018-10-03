@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class SingleTarget:  TargetAbility {
 
-	private UnitManager manage;
+	protected UnitManager manage;
 	public GameObject missile;
 	protected Selected mySelect;
 	public List<UnitTypes.UnitTypeTag> cantTarget = new List<UnitTypes.UnitTypeTag>();
@@ -138,11 +138,14 @@ public class SingleTarget:  TargetAbility {
 				proj = (GameObject)Instantiate (missile, pos, Quaternion.identity);
 
 				Projectile script = proj.GetComponent<Projectile> ();
-				proj.SendMessage ("setSource", this.gameObject);
-				proj.SendMessage ("setTarget", tar);
+
 				if (script) {
-					script.target = target.GetComponent<UnitManager>();
+					script.target = target.GetComponent<UnitManager> ();
 					script.Source = this.gameObject;
+					script.Initialize (target.GetComponent<UnitManager>(),0,manage);
+				} else {
+					proj.SendMessage ("setSource", this.gameObject,SendMessageOptions.DontRequireReceiver);
+					proj.SendMessage ("setTarget", tar,SendMessageOptions.DontRequireReceiver);
 				}
 
 			} else {
@@ -195,8 +198,6 @@ public class SingleTarget:  TargetAbility {
 				myEffect.apply (this.gameObject, target);
 			}
 		}
-
-
 
 	}
 

@@ -14,7 +14,7 @@ public class InversionBarrier : MonoBehaviour, Modifier{
 
 	// Use this for initialization
 	void Start () {
-		myStats =	GetComponentInParent<UnitStats> ();
+		myStats = GetComponentInParent<UnitStats> ();
 		myStats.addModifier (this, 0);
 		myShield = GetComponentInParent<DayexaShield> ();
 		Invoke ("TurnOff",duration);

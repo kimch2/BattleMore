@@ -59,6 +59,7 @@
      <Compile Include="Assets\AchievementChecker.cs" />
      <Compile Include="Assets\AchievementManager.cs" />
      <Compile Include="Assets\AchievementUI.cs" />
+     <Compile Include="Assets\ActivatableShield.cs" />
      <Compile Include="Assets\ActivateObjAbil.cs" />
      <Compile Include="Assets\ActivateObject.cs" />
      <Compile Include="Assets\AetherCapture.cs" />
@@ -146,6 +147,7 @@
      <Compile Include="Assets\CloseScene.cs" />
      <Compile Include="Assets\Coagulate.cs" />
      <Compile Include="Assets\CoagulateAura.cs" />
+     <Compile Include="Assets\ComboTag.cs" />
      <Compile Include="Assets\ConcussiveUpgrade.cs" />
      <Compile Include="Assets\ConstructionUpgrade.cs" />
      <Compile Include="Assets\continueOrder.cs" />
@@ -221,6 +223,7 @@
      <Compile Include="Assets\EnemySearchAI.cs" />
      <Compile Include="Assets\EnergyAchievement.cs" />
      <Compile Include="Assets\energyDrain.cs" />
+     <Compile Include="Assets\EnergyRestoreAbility.cs" />
      <Compile Include="Assets\ErrorPrompt.cs" />
      <Compile Include="Assets\evasiveMenuvers.cs" />
      <Compile Include="Assets\EventManager.cs" />
@@ -279,6 +282,7 @@
      <Compile Include="Assets\ItemDropper.cs" />
      <Compile Include="Assets\KillModifier.cs" />
      <Compile Include="Assets\KillUnitAch.cs" />
+     <Compile Include="Assets\KineticBarrier.cs" />
      <Compile Include="Assets\LandMineActivate.cs" />
      <Compile Include="Assets\LaserDrill.cs" />
      <Compile Include="Assets\laserGun.cs" />
@@ -355,6 +359,7 @@
      <Compile Include="Assets\PayLoadEndZone.cs" />
      <Compile Include="Assets\PayloadFirendlyEndZone.cs" />
      <Compile Include="Assets\PenetratingShot.cs" />
+     <Compile Include="Assets\PhysicsSimulator.cs" />
      <Compile Include="Assets\Pillage.cs" />
      <Compile Include="Assets\PlaceBuildingState.cs" />
      <Compile Include="Assets\PlasmaDischarge.cs" />
@@ -416,6 +421,7 @@
      <Compile Include="Assets\ProxySpawner.cs" />
      <Compile Include="Assets\PulseCannon.cs" />
      <Compile Include="Assets\pulsefieldupgrade.cs" />
+     <Compile Include="Assets\PunchAbility.cs" />
      <Compile Include="Assets\RabbitEgg.cs" />
      <Compile Include="Assets\RaceInfo.cs" />
      <Compile Include="Assets\RaceNames.cs" />
@@ -574,6 +580,7 @@
      <Compile Include="Assets\SimpleSpawner.cs" />
      <Compile Include="Assets\SimpleStats.cs" />
      <Compile Include="Assets\SingleTarget.cs" />
+     <Compile Include="Assets\SingleTargetCombo.cs" />
      <Compile Include="Assets\SkinUnlocker.cs" />
      <Compile Include="Assets\SMAA-master\SMAA-master\SMAA\Scripts\DebugPass.cs" />
      <Compile Include="Assets\SMAA-master\SMAA-master\SMAA\Scripts\EdgeDetectionMethod.cs" />

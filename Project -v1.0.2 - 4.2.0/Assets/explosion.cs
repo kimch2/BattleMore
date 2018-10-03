@@ -38,7 +38,6 @@ public class explosion : MonoBehaviour {
 
 	public void setSource(GameObject sr)
 	{
-
 		source = sr;
 		if (source) {
 			mySrcMan = source.GetComponent<UnitManager> ();
@@ -48,6 +47,22 @@ public class explosion : MonoBehaviour {
 		}
 	}
 
+	public void setVeteran(VeteranStats sr)
+	{
+
+		mySrcMan = sr.myUnit;
+
+
+		if (mySrcMan) {
+			source = sr.myUnit.gameObject;
+			sourceInt = mySrcMan.PlayerOwner;
+		}
+	}
+
+	public void setDamage(float amount)
+	{
+		damageAmount = amount;
+	}
 
 
 	void OnTriggerEnter(Collider other)

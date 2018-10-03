@@ -202,7 +202,8 @@ public class AbstractCost : MonoBehaviour {
 				stats.TakeDamage (health, this.gameObject, DamageTypes.DamageType.True);
 			}
 			if (energy > 0) {
-				stats.currentEnergy -= energy;
+				stats.changeEnergy (-energy);
+
 			}
 
 

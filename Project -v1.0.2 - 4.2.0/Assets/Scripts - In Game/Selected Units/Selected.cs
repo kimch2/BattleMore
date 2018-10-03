@@ -39,7 +39,8 @@ public class Selected : MonoBehaviour {
 	public LineRenderer myLine;
 
 	List<GameObject> UsableBars = new List<GameObject>();
-
+	[Tooltip("This is used if something else is piggybacking the UI display and will handle it turning on/off")]
+	public bool outsideAttchement;
 
 	public enum displayType
 	{
@@ -334,6 +335,12 @@ public class Selected : MonoBehaviour {
 
 	public void checkOn()
 	{
+
+		if (outsideAttchement) {
+			buffDisplay.enabled = true;
+			return;
+		}
+
 		foreach (GameObject obj in UsableBars) {
 			if (obj.activeSelf) {
 				buffDisplay.enabled = true;

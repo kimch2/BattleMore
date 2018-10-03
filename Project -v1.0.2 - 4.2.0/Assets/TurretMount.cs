@@ -90,7 +90,7 @@ public class TurretMount : MonoBehaviour, Modifier {
 
 	public void removeShop(TurretScreenDisplayer fact)
 	{
-		if (hasDisplayer.removeFact (fact)) {
+		if (hasDisplayer && hasDisplayer.removeFact (fact)) {
 		
 		}
 

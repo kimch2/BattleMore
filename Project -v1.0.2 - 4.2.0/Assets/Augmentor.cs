@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using System.Collections.Generic;
 public class Augmentor : TargetAbility, Iinteract, Modifier {
 
 
@@ -58,6 +58,8 @@ public class Augmentor : TargetAbility, Iinteract, Modifier {
 
 		myRotate.enabled = true;
 
+
+		//ComboTag.CastTag(target, ComboTag.AbilType.Hot, new List<ComboTag.AbilType>(){ComboTag.AbilType.Hot, ComboTag.AbilType.Hot}); //REMOVE ME
 		manager.myStats.myHeight = UnitTypes.HeightType.Ground;
 		manager.myStats.otherTags.Add(UnitTypes.UnitTypeTag.Structure);
 		manager.myStats.SetTags ();
@@ -289,7 +291,7 @@ public class Augmentor : TargetAbility, Iinteract, Modifier {
 		manager.myStats.otherTags.Add(UnitTypes.UnitTypeTag.Structure);
 		///myMover = manager.cMover;
 		/// 
-	
+		//ComboTag.CastTag(target, ComboTag.AbilType.Cold, new List<ComboTag.AbilType>(){ComboTag.AbilType.Cold, ComboTag.AbilType.Cold}); //REMOVE ME
 
 		return false;
 

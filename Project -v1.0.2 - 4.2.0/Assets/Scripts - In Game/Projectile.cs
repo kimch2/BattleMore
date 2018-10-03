@@ -19,7 +19,7 @@ public  class Projectile : MonoBehaviour {
 	//public ProjectileMover mover;
 	public GameObject Source;
 	public int sourceInt =1;
-
+	VeteranStats vetSource;
 	public DamageTypes.DamageType damageType = DamageTypes.DamageType.Regular;
 	public AudioClip mySound;
 	protected AudioSource AudSrc;
@@ -89,6 +89,7 @@ public  class Projectile : MonoBehaviour {
 		Source = src.gameObject;
 		SourceMan = src;
 		sourceInt = src.PlayerOwner;
+		vetSource = src.myStats.veternStat;
 	}
 
 	public virtual void setup()
@@ -227,6 +228,10 @@ public  class Projectile : MonoBehaviour {
 	}
 	*/
 
+	public VeteranStats getVet()
+	{
+		return vetSource;
+	}
 
 	public virtual void Terminate(UnitManager target)
 	{
@@ -246,7 +251,7 @@ public  class Projectile : MonoBehaviour {
 				Escript.damageAmount = this.damage;
 				Escript.friendlyFireRatio = FriendlyFire;
 			} else {
-				explode.SendMessage("setSource", Source,SendMessageOptions.DontRequireReceiver);
+					explode.SendMessage("setVeteran", vetSource ,SendMessageOptions.DontRequireReceiver);
 			}
 		}
 

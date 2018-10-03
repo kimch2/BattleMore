@@ -875,11 +875,11 @@ public class UnitManager : Unit,IOrderable{
 		StunRun = null;
 	}
 
-	public void StunForTime(Object source, float duration)
+	public void StunForTime(Object source, float duration, bool showIcon = true)
 	{
 
 		StartCoroutine (stunOverTime (source, duration));
-		if (isStunned && StunRun == null) {
+		if (showIcon && isStunned && StunRun == null) {
 			StunRun = StartCoroutine (stunnedIcon());
 		}
 

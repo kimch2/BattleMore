@@ -62,6 +62,7 @@ using UnityEngine.EventSystems;
 
 			}
 		}
+
 	IEnumerator toggleWindow(  bool onOrOff)
 	{
 		if (onOrOff) {

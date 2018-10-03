@@ -74,6 +74,7 @@
      <Compile Include="Assets\AstarPathfindingEditor\Editor\RVOSimulatorEditor.cs" />
      <Compile Include="Assets\AstarPathfindingEditor\Editor\RVOSquareObstacleEditor.cs" />
      <Compile Include="Assets\AstarPathfindingEditor\Editor\SeekerEditor.cs" />
+     <Compile Include="Assets\Editor\comboTagEditor.cs" />
      <Compile Include="Assets\Editor\Data\AssetDependencies.cs" />
      <Compile Include="Assets\Editor\Data\CacheManager.cs" />
      <Compile Include="Assets\Editor\Data\DependencyBase.cs" />

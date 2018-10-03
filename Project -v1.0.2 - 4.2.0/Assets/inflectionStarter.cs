@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class inflectionStarter: MonoBehaviour, Notify{
+public class inflectionStarter : MonoBehaviour, Notify{
 
 	public AbilityCastType myType;
 	public enum AbilityCastType
 	{
-		inflectionBarrier, InversionBarrier
+		inflectionBarrier, InversionBarrier, KineticBarrier
 	}
 	public GameObject barrier;
 	void Start () {
@@ -30,7 +30,21 @@ public class inflectionStarter: MonoBehaviour, Notify{
 				obj.GetComponent<inflectionBarrier> ().setSource (GetComponent<Projectile> ().Source);
 				obj.GetComponent<inflectionBarrier> ().initialize (target);
 			}
-		} else {
+		} 
+		else if (myType == AbilityCastType.KineticBarrier) {
+			KineticBarrier existingShield = target.GetComponentInChildren<KineticBarrier> ();
+			if (existingShield) {
+				existingShield.Reset();
+
+			} else {
+				GameObject obj = (GameObject)Instantiate (barrier, target.transform.position, target.transform.rotation);
+				obj.transform.SetParent (target.transform);
+				obj.GetComponent<KineticBarrier> ().source = GetComponent<Projectile>().getVet();
+
+			}
+		}
+		else
+		{
 		
 			InversionBarrier existingShield = target.GetComponentInChildren<InversionBarrier> ();
 			if (existingShield) {

@@ -177,6 +177,7 @@ namespace Pathfinding.RVO {
 
 		void Start(){
 			Vector3 realPos = rvoAgent.InterpolatedPosition;
+
 			realPos.y = adjustedY;
 
 			if (mask != 0 && Physics.Raycast (realPos + Vector3.up * 20f, Vector3.down, out hit, 100, 1<<8)) {
@@ -184,7 +185,7 @@ namespace Pathfinding.RVO {
 			} else {
 				adjustedY = 0;
 			}
-
+		
 			realPos.y = adjustedY;
 
 			rvoAgent.SetYPosition(adjustedY);
@@ -210,10 +211,12 @@ namespace Pathfinding.RVO {
 				
 			rvoAgent.DesiredVelocity = desiredVelocity + force*wallAvoidForce;
 		
+		
 			//tr.position = realPos + Vector3.up*height*0.5f - center - Vector3.up*.5f;
 			tr.position = realPos + Vector3.up*height*0.5f - center;
 
 			Move (Vector3.zero);
+		
 			/*
 
 			if (mask != 0 && Physics.Raycast (Vector3.up * height * 10f, Vector3.down, out hit, 55, mask)) {
@@ -225,17 +228,19 @@ namespace Pathfinding.RVO {
 		}
 
 		public void OnEnable () {
+			
 			if (simulator == null) return;
 
 			//We might have an rvoAgent
 			//which was disabled previously
 			//if so, we can simply add it to the simulation again
+
 			if (rvoAgent != null) {
 				simulator.AddAgent(rvoAgent);
 			} else {
 				rvoAgent = simulator.AddAgent(transform.position);
 			}
-
+		
 			rvoAgent.Radius = radius;
 			rvoAgent.MaxSpeed = maxSpeed;
 			rvoAgent.Height = height;
@@ -251,6 +256,7 @@ namespace Pathfinding.RVO {
 			UpdateAgentProperties();
 			rvoAgent.Teleport(transform.position);
 			adjustedY = rvoAgent.Position.y;
+
 		}
 
 		protected void UpdateAgentProperties () {

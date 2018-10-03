@@ -125,6 +125,7 @@ public class UnitStats : MonoBehaviour {
 		if (!mySelection) {
 			mySelection = this.gameObject.GetComponent<Selected>();
 		}
+		veternStat.myUnit = myManager;
 	}
 
 

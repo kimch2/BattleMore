@@ -31,6 +31,7 @@ public class DisplayBar : MonoBehaviour {
 	/// <returns><c>true</c>, if ratio was updated, <c>false</c> otherwise.</returns>
 	public bool updateRatio(float ratio, UnitIconInfo unitIcon, UnitIconInfo slider)
 	{
+		
 		gameObject.SetActive (ratio < .99 && ratio > 0);
 	
 		if (gameObject.activeSelf) {
