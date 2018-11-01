@@ -26,12 +26,14 @@ public class AetherOvercharge : Buff, Notify{
 			if (Time.time > startTime + duration) {
 				endSpell ();
 				Destroy (this);
+				return;
 			}
 
 			if (spellHasBegun && Time.time > nextActionTime) {
 	
 				nextActionTime += 1;
 
+				myman.myStats.setEnergyRegen (0);
 				GetComponent<DayexaShield> ().stopRecharge ();
 				myman.myStats.changeEnergy (-myman.myStats.MaxEnergy / duration);
 				if(myman.myStats.currentEnergy <= 0)
@@ -64,13 +66,9 @@ public class AetherOvercharge : Buff, Notify{
 		AetherEffect.transform.SetParent (this.gameObject.transform);
 
 		foreach (IWeapon weap in unitman.myWeapon) {
-			GatlingGun gg = weap.GetComponent<GatlingGun> ();
-			if (gg) {
-				gg.MinimumPeriod =  (.14f);
-			} else {
-	
-				weap.changeAttackSpeed (attackSpeed, 0, false, this);
-			}
+
+			weap.changeAttackSpeed (attackSpeed, 0, false, this);
+
 			weap.triggers.Add (this);
 			weap.changeAttack (attackDamage, 0, false, this);
 		}
@@ -103,19 +101,15 @@ public class AetherOvercharge : Buff, Notify{
 	public void endSpell()
 	{
 		//Debug.Log ("Ending spell");
-		GetComponent<DayexaShield> ().startRecharge ();
+		GetComponent<DayexaShield> ().startRecharge (1);
 		removeBuff();
 		Destroy (AetherEffect);
 		foreach (IWeapon weap in myman.myWeapon) {
 			if (weap) {
-				GatlingGun gg = weap.GetComponent<GatlingGun> ();
-				if (gg) {
-					gg.MinimumPeriod = .2f;
-				}
-				else{
+				
 
-					weap.removeAttackSpeedBuff (this);
-				}
+				weap.removeAttackSpeedBuff (this);
+
 				weap.triggers.Remove (this);
 				weap.removeAttackBuff (this);
 

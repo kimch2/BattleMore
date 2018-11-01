@@ -8,7 +8,7 @@ public class OreExtractor :Ability {
 	// Use this for initialization
 	void Start () {
 		myType = type.passive;
-		InvokeRepeating ("extractOre",20,3);
+		InvokeRepeating ("extractOre",3,3);
 	}
 
 	void extractOre()

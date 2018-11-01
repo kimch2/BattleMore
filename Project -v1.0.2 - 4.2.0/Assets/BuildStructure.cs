@@ -39,7 +39,7 @@ public class BuildStructure:  UnitProduction {
 
 	
 		racer = GameObject.FindObjectOfType<GameManager>().activePlayer;
-		HD = GetComponentInChildren<HealthDisplay>();
+		HD = GetComponentInChildren<HealthDisplay>(true);
 	}
 
 	// Update is called once per frame

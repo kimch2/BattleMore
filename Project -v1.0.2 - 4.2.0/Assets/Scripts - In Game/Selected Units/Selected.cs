@@ -177,7 +177,9 @@ public class Selected : MonoBehaviour {
 
 	public void updateIconNum()
 	{
-		IconInfo.updateNum ();
+		if (IconInfo) {
+			IconInfo.updateNum ();
+		}
 	}
 
 	public void setIcon(GameObject obj)
@@ -346,7 +348,6 @@ public class Selected : MonoBehaviour {
 				buffDisplay.enabled = true;
 				return;
 			}
-		
 		}
 		buffDisplay.enabled = false;
 	}
@@ -402,6 +403,7 @@ public class Selected : MonoBehaviour {
 		IsSelected = false;
 		unitIcon = null;
 		IconSlider = null;
+		IconInfo = null;
 		decalCircle.GetComponent<MeshRenderer> ().enabled = false;
 		if (RallyPoint) {
 			RallyPoint.SetActive (false);

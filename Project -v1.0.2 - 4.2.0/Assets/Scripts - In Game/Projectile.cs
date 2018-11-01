@@ -19,7 +19,7 @@ public  class Projectile : MonoBehaviour {
 	//public ProjectileMover mover;
 	public GameObject Source;
 	public int sourceInt =1;
-	VeteranStats vetSource;
+	protected VeteranStats vetSource;
 	public DamageTypes.DamageType damageType = DamageTypes.DamageType.Regular;
 	public AudioClip mySound;
 	protected AudioSource AudSrc;
@@ -142,27 +142,6 @@ public  class Projectile : MonoBehaviour {
 	float movementAmount;
 	// Update is called once per frame
 	protected virtual void Update () {
-		/*
-		if (distance - currentDistance < 1.5f  || speed * Time.deltaTime * 2) {
-			if (target && trackTarget) {
-				if (Vector3.Distance (transform.position, target.transform.position) < 2) {
-					Terminate (target);
-					return;
-				}
-
-				float trueDist = Vector3.Distance (transform.position, target.transform.position + randomOffset);
-				if (trueDist > 2) {
-					distance = trueDist;
-					currentDistance = 0;
-				} else {
-					Terminate (target);
-				}
-			} else {
-				Terminate (target);
-			}
-		}
-	
-*/
 
 		movementAmount = speed * Time.deltaTime;
 		gameObject.transform.Translate (Vector3.forward* movementAmount);
@@ -179,7 +158,6 @@ public  class Projectile : MonoBehaviour {
 			}
 		}
 
-	//	currentDistance += speed * Time.deltaTime;
 	}
 
 	protected virtual void OnControllerColliderHit(ControllerColliderHit other)
@@ -199,34 +177,7 @@ public  class Projectile : MonoBehaviour {
 		{
 			Terminate(null);}
 	}
-
-	/*
-	//DO I NEED THIS?
-	public virtual void OnTriggerEnter(Collider other)
-	{if (!target) {
-			return;}
 		
-		if (other.isTrigger) {
-			
-			return;}
-	
-
-		if (other.gameObject == target || other.gameObject.transform.IsChildOf(target.transform) || Source.transform.IsChildOf(other.transform)) {
-			Terminate (other.gameObject.GetComponent<UnitManager> ());
-			//Debug.Log (" COLLIDER HIT ENEMY");
-
-			return;
-			}
-
-
-		if(!trackTarget && (other.gameObject != Source && !other.gameObject.transform.IsChildOf(Source.transform)  && !Source.transform.IsChildOf(other.transform)))
-			{Terminate(null);
-			Debug.Log (" COLLIDER HIT ENEMY " + other.gameObject + "  " + Source);
-
-		}
-		
-	}
-	*/
 
 	public VeteranStats getVet()
 	{

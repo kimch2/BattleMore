@@ -77,7 +77,7 @@ public class DayexaShield : Ability,Modifier , Notify{
 		if (currentCharging != null) {
 			beginRechargeTime = Time.time + delayTime;
 		} else {
-			myStats.EnergyRegenPerSec = rechargeRate;
+			myStats.setEnergyRegen(rechargeRate);
 
 		}
 
@@ -90,6 +90,7 @@ public class DayexaShield : Ability,Modifier , Notify{
 	{
 		if (currentCharging != null) {
 			StopCoroutine (currentCharging);
+			currentCharging = null;
 		}
 	}
 

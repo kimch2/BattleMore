@@ -20,10 +20,10 @@ public override void CheckEnd (){
 		if (isCorrectLevel ()) {
 			int counter = 0;
 
-			foreach (VeteranStats vets in  GameObject.FindObjectOfType<GameManager> ().playerList[0].getVeteranStats()) {
+			foreach (VeteranStats vets in GameManager.main.playerList[0].getVeteranStats()) {
 				if (vets.Died) {
-					if (vets.UnitName == "Construction Yard" || vets.UnitName == "Aether Core" || vets.UnitName == "Aviatrix" ||
-					    vets.UnitName == "Engineering Bay" || vets.UnitName == "Flux Array" || vets.UnitName == "Academy") {
+					if (vets.unitType == "Construction Yard" || vets.unitType == "Aether Core" || vets.unitType == "Aviatrix" ||
+						vets.unitType == "Engineering Bay" || vets.unitType == "Flux Array" || vets.unitType == "Academy" || vets.unitType == "Armory") {
 						counter++;
 					}
 

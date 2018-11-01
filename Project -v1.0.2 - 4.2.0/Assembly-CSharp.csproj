@@ -319,7 +319,6 @@
      <Compile Include="Assets\MiniMapUIController.cs" />
      <Compile Include="Assets\MiningSawDamager.cs" />
      <Compile Include="Assets\MiningState.cs" />
-     <Compile Include="Assets\MissileArmer.cs" />
      <Compile Include="Assets\MissileProjectile.cs" />
      <Compile Include="Assets\missileSalvo.cs" />
      <Compile Include="Assets\MissionLogger.cs" />
@@ -440,7 +439,6 @@
      <Compile Include="Assets\RepairTurret.cs" />
      <Compile Include="Assets\RepairUpgrade.cs" />
      <Compile Include="Assets\ResearchUpgrade.cs" />
-     <Compile Include="Assets\ResourceGenerator.cs" />
      <Compile Include="Assets\RoamAI.cs" />
      <Compile Include="Assets\RocketBooster.cs" />
      <Compile Include="Assets\SalvageTarget.cs" />
@@ -572,7 +570,6 @@
      <Compile Include="Assets\ShellMaker.cs" />
      <Compile Include="Assets\ShieldBattery.cs" />
      <Compile Include="Assets\ShieldExplosion.cs" />
-     <Compile Include="Assets\ShieldGlobe.cs" />
      <Compile Include="Assets\ShieldSpeedBoost.cs" />
      <Compile Include="Assets\ShieldSpeedUpgrade.cs" />
      <Compile Include="Assets\ShieldUpgrade.cs" />
@@ -817,7 +814,7 @@
      <None Include="Assets\PostProcessing\Resources\Hidden\Post FX\Common.cginc" />
      <None Include="Assets\Effects\BasicBeamShot\sh\GeroBeam_sh.shader" />
      <None Include="Assets\Effects\BasicBeamShot\sh\BeamLine_sh.shader" />
-     <None Include="Assets\PostProcessing\Resources\Bluenoise64\COPYING.txt" />
+     <None Include="Assets\PostProcessing\COPYING.txt" />
      <None Include="Assets\Materials\Bit2Good\SFS\Shaders\Terrain\SFS_TeA_S.shader" />
      <None Include="Assets\Materials\Bit2Good\SFS\Shaders\SFS_St_D_S.shader" />
      <None Include="Assets\PrefabBrush\README.txt" />

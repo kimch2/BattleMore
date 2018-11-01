@@ -1,26 +1,26 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GatlingGun :  Ability,Notify, Validator, Modifier {
+public class GatlingGun :  Ability,Notify, Modifier {
 
 
 	public IWeapon myWeapon;
-	private float initalSpeed;
 
 	public float speedIncrease = .1f;
 
-	public float MinimumPeriod = .1f;
+	public float MinimumPeriod = .2f;
 
 	private float nextActionTime;
-	private float heatLevel = 2;
-	public float totalHeat = 2;
+
 	private float lastFired;
 	private float totalSpeed;
-	private bool Revved;
+	private bool Revved = false;
 
 	//private Selected healthD;
-	private bool cooldown = false; // weapon shuts down;
+
 	public Animator myAnim;
+
+
 
 
 	// Use this for initialization
@@ -29,13 +29,11 @@ public class GatlingGun :  Ability,Notify, Validator, Modifier {
 
 			myWeapon = this.gameObject.GetComponent<IWeapon> ();
 		}
-		initalSpeed = myWeapon.attackPeriod;
 
 		//healthD = GetComponent<Selected> ();
 	
 		myWeapon.triggers.Add (this);
-		myWeapon.validators.Add (this);
-		nextActionTime = Time.time;
+		nextActionTime = Time.time + 3;
 
 		//myWeapon.myManager.myStats.addDeathTrigger (this);
 	
@@ -46,49 +44,34 @@ public class GatlingGun :  Ability,Notify, Validator, Modifier {
 	// Update is called once per frame
 	void Update () {	
 
+		if (!Revved) {
+			return;
+		}
+
 		if (myWeapon) {
-			if (cooldown) {
-				if (heatLevel < totalHeat / 2) {
-					cooldown = false;
-				}
-
-			}
-			if (!Revved) {
-				return;
-			}
-
+			
 			if (Time.time > nextActionTime) {
-				nextActionTime += .5f;
-				heatLevel -= .12f;
-				if (heatLevel < 0) {
-					heatLevel = 0;
-				
-				}
-				//healthD.updateCoolDown (0);
-				if (Time.time - lastFired > 1.5f) {
+				nextActionTime += .4f;
+
+				if (Time.time - lastFired > 2.5f) {
 					if (myAnim) {
 						myAnim.SetInteger ("State", 2);
 					}
+					if (revCount > 0) {
 
-					myWeapon.removeAttackSpeedBuff (this);
-					totalSpeed -= speedIncrease;
-					if (totalSpeed <= 0) {
-						Revved = false;
-						totalSpeed = 0;
-					} else {
-
-						myWeapon.changeAttackSpeed (0, -totalSpeed, false, this);
+						myWeapon.removeAttackSpeedBuff (this);
+						myWeapon.changeAttackSpeed (.357f *revCount,0, false, this);
+						revCount--;
+					
+					
+					} else if (revCount == 0) {
+						myWeapon.removeAttackSpeedBuff (this);
 					}
+				
 
 				}
-
-
 			}
-
-			}
-	
-
-	
+		}
 	}
 
 	public float trigger(GameObject source, GameObject proj,UnitManager target,float damage)
@@ -96,38 +79,28 @@ public class GatlingGun :  Ability,Notify, Validator, Modifier {
 		return damage;
 	}
 
+
+
+	int revCount = 0;
+
 	public void IncreaseSpeed(float damage, GameObject source)
-	{nextActionTime = Time.time + .7f;
+	{	
+		nextActionTime = Time.time + 2.5f;
 		Revved = true;
-		totalSpeed += speedIncrease;
-		if (initalSpeed - totalSpeed < MinimumPeriod) {
-			totalSpeed = initalSpeed - MinimumPeriod;
-		}
-		cooldown = false;
-		myWeapon.removeAttackSpeedBuff (this);
-		myWeapon.changeAttackSpeed (0, -totalSpeed, false, this);
-		lastFired = Time.time;
-		if (myAnim) {
-			myAnim.SetInteger ("State", 1);
-		}
-		heatLevel += .1f;
 
+		if (revCount < 7) {
+			revCount++;
 
-		if (heatLevel > totalHeat) {
-			cooldown = true;
+			myWeapon.removeAttackSpeedBuff (this);
+
+			myWeapon.changeAttackSpeed (.357f * revCount, 0, false, this);
+			lastFired = Time.time;
+			if (myAnim) {
+				myAnim.SetInteger ("State", 1);
+			}
 		}
-
 	}
 
-
-	public bool validate(GameObject source, GameObject target)
-		{
-		if (cooldown) {
-		
-			return false;}
-		return true;
-
-	}		
 
 
 

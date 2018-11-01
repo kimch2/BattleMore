@@ -67,13 +67,14 @@ public class ShieldBattery  :Ability, AllySighted{
 	{
 		currentTarget = target;
 		myLineMover =  StartCoroutine (MoveLine());
-	
+
+
 		while(currentTarget&& Vector3.Distance(target.transform.position, transform.position) < range && !target.atFullEnergy() && myStats.currentEnergy > shieldRate)
 		{
 			float amount = Mathf.Min (target.MaxEnergy - target.currentEnergy, shieldRate);
 			amount = Mathf.Min (myStats.currentEnergy, amount);
 			target.changeEnergy (amount);
-			myStats.changeEnergy (-amount);
+			myStats.changeEnergy (- (amount + 5.5f));
 			mySHields.startRecharge (mySHields.RechargeDelay);
 			yield return new WaitForSeconds (.7f);
 		}

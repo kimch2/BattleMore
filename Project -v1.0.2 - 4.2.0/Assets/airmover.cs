@@ -39,6 +39,10 @@ public class airmover : IMover {
 		myspeed = .1f;
 	}
 
+
+	UnitManager collidingObject ; // This is used to help cache units we are tryingto navigate around
+
+
 	override
 	public bool move()
 	{
@@ -88,8 +92,22 @@ public class airmover : IMover {
 			Vector3 heading = lookAhead.collider.gameObject.transform.position- transform.position;
 			float dirNum = AngleDir (transform.forward, heading, transform.up);
 			dir -= this.gameObject.transform.TransformDirection (Vector3.right) * dirNum;
-		
+
+			if (!collidingObject || collidingObject.gameObject != lookAhead.collider.gameObject) {
+				collidingObject = lookAhead.collider.gameObject.GetComponent<UnitManager> ();
+
+				if (!collidingObject) {
+					collidingObject = lookAhead.collider.gameObject.GetComponentInParent<UnitManager> ();
+				}
+			}
+
+			if (collidingObject && collidingObject.getState() is DefaultState) {
+				if (Vector3.Distance (collidingObject.gameObject.transform.position, targetPosition) < collidingObject.CharController.radius  + .5f) {
+					return true;
+				}
+			}
 		}
+
 		dir *= myspeed * Time.deltaTime;
 
 		controller.Move (dir);

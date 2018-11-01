@@ -481,6 +481,8 @@ public class IWeapon : MonoBehaviour {
 
 	public void changeAttackSpeed(float perc, float flat, bool perm, Object obj )
 	{
+		
+	
 		if (!initialSpeedSet) {
 			baseAttackPeriod =attackPeriod;
 			initialSpeedSet = true;
@@ -504,7 +506,7 @@ public class IWeapon : MonoBehaviour {
 	}
 
 	private void adjustAttackSpeed()
-	{//Debug.Log ("Adjusting");
+	{
 
 
 		float speed = baseAttackPeriod;

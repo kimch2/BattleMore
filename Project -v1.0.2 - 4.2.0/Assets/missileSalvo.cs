@@ -76,7 +76,10 @@ public class missileSalvo :  Ability, Iinteract, Validator, Notify{
 			mySelect.updateCoolDown (fillHerUp + .05f);
 		
 		}
-
+		if (fillHerUp > .9f) {
+			fillHerUp = 1;
+			mySelect.updateCoolDown (1);
+		}
 	}
 
 		

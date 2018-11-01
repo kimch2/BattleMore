@@ -55,8 +55,8 @@ public class explosion : MonoBehaviour {
 
 		if (mySrcMan) {
 			source = sr.myUnit.gameObject;
-			sourceInt = mySrcMan.PlayerOwner;
 		}
+		sourceInt = sr.playerOwner;
 	}
 
 	public void setDamage(float amount)

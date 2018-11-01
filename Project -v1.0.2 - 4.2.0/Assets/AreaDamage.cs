@@ -20,6 +20,7 @@ public class AreaDamage : MonoBehaviour {
 	protected int iter = 0;
 	public bool NonStack = false;
 
+
 	// Use this for initialization
 	void Start () {
 		myAudio = GetComponent<AudioSource> ();
@@ -57,6 +58,15 @@ public	virtual void UpdateDamage () {
 		}
 
 
+	}
+
+	public void setVeteran(VeteranStats vet)
+	{
+
+		Debug.Log ("Setting me " + vet.playerOwner);
+		if (vet!= null) {
+			Owner = vet.playerOwner;
+		}
 	}
 
 	public void setSource(GameObject obj)

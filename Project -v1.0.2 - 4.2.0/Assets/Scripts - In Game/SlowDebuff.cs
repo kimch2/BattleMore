@@ -43,7 +43,7 @@ public class SlowDebuff : Behavior, Notify {
 
 		mover.changeSpeed (percent, speedDecrease, false, this);
 
-		setBuffStuff (Behavior.buffType.movement, true);
+		//setBuffStuff (Behavior.buffType.movement, true);
 		StopAllCoroutines ();
 		StartCoroutine (waitForTime());
 			
@@ -54,21 +54,23 @@ public class SlowDebuff : Behavior, Notify {
 	{
 		yield return new WaitForSeconds (duration);
 		mover.removeSpeedBuff (this);
+		Destroy (this);
 	}
 
 
 
 	public float trigger(GameObject source,GameObject proj, UnitManager target, float damage)
 	{
+		
 
 		if (proj && proj.GetComponent<Projectile>().triggers.Contains(this) && target.cMover) {
 			
 			SlowDebuff debuff = target.gameObject.GetComponent<SlowDebuff> ();
 			if (!debuff) {
-				target.gameObject.AddComponent<SlowDebuff> ();
+				debuff =  target.gameObject.AddComponent<SlowDebuff> ();
 			}
 			debuff.initialize (duration, speedDecrease, percent);
-		} else if (proj){
+		} else if (proj && !proj.GetComponent<Projectile>().triggers.Contains(this)){
 			proj.GetComponent<Projectile> ().triggers.Add (this);
 		}
 

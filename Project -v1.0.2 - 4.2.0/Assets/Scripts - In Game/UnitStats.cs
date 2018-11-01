@@ -126,6 +126,7 @@ public class UnitStats : MonoBehaviour {
 			mySelection = this.gameObject.GetComponent<Selected>();
 		}
 		veternStat.myUnit = myManager;
+	//	veternStat.playerOwner = myManager.PlayerOwner;
 	}
 
 
@@ -153,7 +154,7 @@ public class UnitStats : MonoBehaviour {
 		if (HealthRegenPerSec > 0 && !WorldRecharger.main.ToHeal.Contains(this)) {
 			WorldRecharger.main.addHeal(this);
 		} 
-
+		veternStat.playerOwner = myManager.PlayerOwner;
 	}
 
 	void firstHealth()
@@ -274,10 +275,7 @@ public class UnitStats : MonoBehaviour {
 				ErrorPrompt.instance.underAttack (this.transform.position);
 			}
 		}
-
-		//if (takeDamageEffect) {
-		//	Instantiate (takeDamageEffect, this.gameObject.transform.position, new Quaternion ());
-		//}
+			
 		if (veternStat != null) {
 			veternStat.UpMitigated(armor);
 			veternStat.UpdamTaken (amount);
@@ -286,22 +284,17 @@ public class UnitStats : MonoBehaviour {
 			//	Debug.Log ("Actual " + amount);
 		health -= amount;
 
-		if ((int)health <= 0) {
-			kill (source);
+		if (health < 1) {
+			kill (source, srcManager);
 		} else {
 			updateHealthBar ();
 
 
-			if (source) {
-				UnitManager damSource;
-				if (!srcManager) {
-					srcManager = source.GetComponent<UnitManager> ();
-				}
 
-				if (srcManager) {
-					myManager.Attacked (srcManager);
-					}
-			} 
+		if (srcManager) {
+			myManager.Attacked (srcManager);
+		}
+
 		}
 	
 		return amount;
@@ -330,7 +323,9 @@ public class UnitStats : MonoBehaviour {
 
 	private bool dead = false;
 
-	public void kill(GameObject deathSource)
+
+
+	public void kill(GameObject deathSource, UnitManager srcManager = null)
 	{
 		if (dead)
 			return;
@@ -343,6 +338,8 @@ public class UnitStats : MonoBehaviour {
 				}
 			}
 				
+			mySelection.buffDisplay.DeleteMe ();
+
 			dead = true;
 			deathTriggers.RemoveAll (item => item == null);
 			for (int i = deathTriggers.Count - 1; i > -1; i--) {
@@ -375,12 +372,12 @@ public class UnitStats : MonoBehaviour {
 				WorldRecharger.main.removeHeal(this);
 			}
 
-			if (deathSource) {
-				UnitStats sourceStats = deathSource.GetComponent<UnitStats> ();
-				if (sourceStats) {
-					sourceStats.upKills ();
-				}
+			//Testing this to see if it stops health bar stutter bug on death
+	
+			if (srcManager) {
+				srcManager.myStats.upKills ();
 			}
+
 			//fix this when we have multiplayer games, here for optimizations?
 			if (myManager.PlayerOwner == 1) {
 					

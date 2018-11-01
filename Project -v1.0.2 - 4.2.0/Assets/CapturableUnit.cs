@@ -130,7 +130,7 @@ public class CapturableUnit : MonoBehaviour, Modifier  {
 		manage.getVisionSphere ().radius = manage.visionRange;
 
 		manage.setStun (false, this, false);
-
+		manage.myStats.veternStat.playerOwner = 1;
 
 		manage.PlayerOwner = 1;
 
@@ -139,6 +139,7 @@ public class CapturableUnit : MonoBehaviour, Modifier  {
 			foggy.radius = myManagers [0].visionRange + 3;
 			foggy.enabled = true;
 		}
+		manage.myStats.upgradesApplied = false;
 		GameManager.main.activePlayer.UnitCreated (manage.myStats.supply);
 		GameManager.main.activePlayer.addUnit (manage);
 		GameManager.main.activePlayer.addVeteranStat (manage.myStats.veternStat);

@@ -14,6 +14,7 @@ public class OreDispenser : MonoBehaviour {
 	private Queue<GameObject> workers =  new Queue<GameObject >();
 	// used for increased mining
 	public float returnRate = 1;
+	public float efficiency = 1;
 
 
 
@@ -40,7 +41,7 @@ public class OreDispenser : MonoBehaviour {
 			}
 			Destroy (this.gameObject);
 		}
-		return Mathf.Min (OreRemaining, giveBack);
+		return Mathf.Min (OreRemaining, giveBack) * efficiency;
 
 	}
 

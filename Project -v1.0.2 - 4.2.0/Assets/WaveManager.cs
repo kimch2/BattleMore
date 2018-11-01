@@ -227,7 +227,7 @@ public class WaveManager : MonoBehaviour {
 		if (currentWaveIndex < myWaves.Count - 1) {
 			currentWaveIndex++;
 			nextActionTime = myWaves [currentWaveIndex].waveSpawnTime;
-			Debug.Log ("Launchign"  + currentWaveIndex + "   " + nextActionTime + "    " + CurrentWaves.Count ) ;
+		//	Debug.Log ("Launchign"  + currentWaveIndex + "   " + nextActionTime + "    " + CurrentWaves.Count ) ;
 		}
 		else{
 			nextActionTime += 180;

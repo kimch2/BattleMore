@@ -15,7 +15,7 @@ public class ChimeraRangeUpgrade : Upgrade {
 		UnitManager manager = obj.GetComponent<UnitManager>();
 		if (manager.UnitName == "Chimera") {
 			foreach (ChangeAmmo ca in manager.GetComponents<ChangeAmmo>()) {
-				if(ca.Name == "Ammo: Siege Rounds [Z]")
+				if(ca.Name == "Ammo: Siege Rounds [X]")
 				{ca.iconPic = replacementImage;
 					ca.myAmmo = newAmmo;
 					ca.resetBulletPool ();

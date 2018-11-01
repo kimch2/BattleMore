@@ -206,10 +206,11 @@ public class MainCamera : MonoBehaviour, ICamera {
 			}
 
 
-			float totalSpeed = e.duration*ScrollAcceleration *1.4f;
+			float totalSpeed = e.duration * ScrollAcceleration *2f + 150;
+			//Debug.Log ("Speed is " + totalSpeed);
 			float targetSpeed = totalSpeed < ScrollSpeed ? totalSpeed : ScrollSpeed;
 
-			transform.Translate (e.x*avgDeltaTime*targetSpeed, 0, e.y*avgDeltaTime*targetSpeed, Space.World);
+			transform.Translate (e.x*avgDeltaTime*targetSpeed * 1.5f, 0, e.y*avgDeltaTime*targetSpeed, Space.World);
 
 			//Check if we have scrolled past edge
 			if (transform.position.x < m_Boundries.xMin)
@@ -306,7 +307,7 @@ public class MainCamera : MonoBehaviour, ICamera {
 		}
 
 
-		transform.Translate (Vector3.down * e.ScrollValue * 28, Space.World);
+		transform.Translate (Vector3.down * e.ScrollValue * 35, Space.World);
 		transform.LookAt (hitb.point);
 
 		if (Input.GetKey (KeyCode.LeftShift) && e.ScrollValue > 0) {

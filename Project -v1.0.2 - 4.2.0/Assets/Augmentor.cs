@@ -108,7 +108,7 @@ public class Augmentor : TargetAbility, Iinteract, Modifier {
 
 		OreDispenser OD = target.GetComponent<OreDispenser> ();
 		if (OD) {
-			OD.returnRate = 1.3f;
+			OD.efficiency = 1.3f;
 		} 
 		else if (unitMan.UnitName.Contains("Yard") ||unitMan.UnitName == "Armory" ||unitMan.UnitName.Contains("Avi") || unitMan.UnitName.Contains("Bay") || unitMan.UnitName.Contains("Academy")|| unitMan.UnitName.Contains("Flux")  ) {
 			unitMan.GetComponent<Selected> ().setCooldownColor (Color.yellow);
@@ -117,7 +117,7 @@ public class Augmentor : TargetAbility, Iinteract, Modifier {
 				if (bu) {
 					if (bu is UnitProduction) {
 						((UnitProduction)bu).setBuildRate (SpeedPlus);
-						if(xxx>1 && !unitMan.UnitName.Contains("Yard"))
+						if (xxx > 1 && !unitMan.UnitName.Contains ("Yard") && !unitMan.UnitName.Contains ("Armory")) 
 						{
 							((UnitProduction)bu).active = true;
 							bu.SendMessage ("attachAddon", SendMessageOptions.DontRequireReceiver);
@@ -171,7 +171,7 @@ public class Augmentor : TargetAbility, Iinteract, Modifier {
 				if (bu) {
 					if (bu is UnitProduction) {
 						((UnitProduction)bu).setBuildRate (1);
-						if(xxx>1 && !unitMan.UnitName.Contains("Yard"))
+						if (xxx > 1 && ! unitMan.UnitName.Contains ("Yard") && !unitMan.UnitName.Contains ("Armory")) 
 						{
 							((UnitProduction)bu).active = false;
 						
@@ -217,7 +217,7 @@ public class Augmentor : TargetAbility, Iinteract, Modifier {
 
 		OreDispenser OD = attached.GetComponent<OreDispenser> ();
 		if (OD) {
-			OD.returnRate = 1;
+			OD.efficiency = 1;
 		} else if (man.UnitName.Contains ("Yard") || man.UnitName == "Armory" || man.UnitName.Contains ("Avi") || man.UnitName.Contains ("Engin") || man.UnitName.Contains ("Academy")|| man.UnitName.Contains("Flux")) {
 			man.GetComponent<Selected> ().setCooldownColor (Color.white);
 			int xxx = 0;
@@ -227,7 +227,7 @@ public class Augmentor : TargetAbility, Iinteract, Modifier {
 					if (bu is UnitProduction) {
 
 						((UnitProduction)bu).setBuildRate (1);
-						if (xxx > 1 && !man.UnitName.Contains ("Yard")) {
+						if (xxx > 1 && !man.UnitName.Contains ("Yard") && !man.UnitName.Contains ("Armory")) {
 							bu.SendMessage ("removeAddon", SendMessageOptions.DontRequireReceiver);
 							((UnitProduction)bu).active = false;
 						}
@@ -268,9 +268,14 @@ public class Augmentor : TargetAbility, Iinteract, Modifier {
 	{
 		if (attached) {
 			UnitManager man = attached.GetComponent<UnitManager> ();
-			if (man && (man.UnitName.Contains ("Yard") || man.UnitName == "Armory" || man.UnitName.Contains ("Avi") || man.UnitName.Contains ("Engin") || man.UnitName.Contains ("Academy")|| man.UnitName.Contains("Flux"))) {
+			if (man && (man.UnitName.Contains ("Yard") || man.UnitName == "Armory" || man.UnitName.Contains ("Avi") || man.UnitName.Contains ("Engin") || man.UnitName.Contains ("Academy") || man.UnitName.Contains ("Flux"))) {
 				
 				attached.GetComponent<Selected> ().setCooldownColor (Color.white);
+			} else if (man && man.UnitName.Contains ("Ore")) {
+				OreDispenser OD = attached.GetComponent<OreDispenser> ();
+				if (OD) {
+					OD.returnRate = 1;
+				} 
 			}
 		}
 	}

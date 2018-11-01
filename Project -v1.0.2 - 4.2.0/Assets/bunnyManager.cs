@@ -98,7 +98,7 @@ public class bunnyManager : Objective {
 			highestAmountSoFar = currAmount;
 		}
 
-		bunnyCount.text = "Vicious Bunnies Left \n" + currAmount + " / " + maxAmount;
+		bunnyCount.text = "White Bunnies Left \n" + currAmount + " / " + maxAmount;
 
 		if (currAmount >= maxAmount) {
 			VictoryTrigger.instance.Lose();

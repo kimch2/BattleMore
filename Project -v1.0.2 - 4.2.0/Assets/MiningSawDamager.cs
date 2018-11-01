@@ -10,14 +10,15 @@
 
 
 	public DamageTypes.DamageType myType = DamageTypes.DamageType.Regular;
-		public int Owner;
-		public GameObject cutEffect;
-		public GameObject impactEffect;
-		public float damage = 5;
-		public float turretRatio = .2f;
+	public int Owner;
+	public GameObject cutEffect;
+	public GameObject impactEffect;
+	public float damage = 5;
+	public float turretRatio = .2f;
 	private AudioSource myAudio;
 	public AudioClip chopSound;
 	public UnitManager myManager;
+	public VeteranStats myVets;
 	private int iter = 0;
 
 
@@ -39,11 +40,11 @@
 					foreach (UnitStats s in enemies) {
 
 					if (s.isUnitType (UnitTypes.UnitTypeTag.Turret)) {
-					amount += 	s.TakeDamage (damage * (turretRatio), this.gameObject.gameObject.gameObject, myType);
+					amount += 	s.TakeDamage (damage * (turretRatio), this.gameObject.gameObject.gameObject, myType,myManager);
 				
 					} else {
 
-					 amount += s.TakeDamage (damage, this.gameObject.gameObject.gameObject, myType);
+					amount += s.TakeDamage (damage, this.gameObject.gameObject.gameObject, myType,myManager);
 
 						iter++;
 						if (iter == 6) {
@@ -56,10 +57,12 @@
 					}
 					//obj.transform.SetParent (this.gameObject.transform);
 					}
-			if (myManager) {
-				myManager.myStats.veteranDamage (amount);
+
+			if (myVets!= null) {
+				myVets.UpdamageDone (amount);
 			}
-				}
+
+			}
 
 
 		}
@@ -102,7 +105,7 @@
 			}
 
 			if (manage.PlayerOwner != Owner) {
-			float amount = manage.myStats.TakeDamage (damage, this.gameObject.gameObject.gameObject, myType);
+			float amount = manage.myStats.TakeDamage (damage, this.gameObject.gameObject.gameObject, myType, myManager);
 			if (myManager) {
 				myManager.myStats.veteranDamage (amount);
 			}

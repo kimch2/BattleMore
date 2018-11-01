@@ -273,7 +273,7 @@
      <None Include="Assets\PostProcessing\Resources\Hidden\Post FX\Common.cginc" />
      <None Include="Assets\Effects\BasicBeamShot\sh\GeroBeam_sh.shader" />
      <None Include="Assets\Effects\BasicBeamShot\sh\BeamLine_sh.shader" />
-     <None Include="Assets\PostProcessing\Resources\Bluenoise64\COPYING.txt" />
+     <None Include="Assets\PostProcessing\COPYING.txt" />
      <None Include="Assets\Materials\Bit2Good\SFS\Shaders\Terrain\SFS_TeA_S.shader" />
      <None Include="Assets\Materials\Bit2Good\SFS\Shaders\SFS_St_D_S.shader" />
      <None Include="Assets\PrefabBrush\README.txt" />

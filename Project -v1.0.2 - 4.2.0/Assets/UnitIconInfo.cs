@@ -28,6 +28,7 @@ public class UnitIconInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 		buildMan = null;
 		myUnit = null;
 		myStats = null;
+		updateSlider (0);
 		GetComponent<Button> ().onClick.RemoveAllListeners ();
 		toolbox.enabled = false;
 	}
@@ -44,6 +45,11 @@ public class UnitIconInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 		}
 
 
+	}
+
+	public void changeSliderColor(Color c)
+	{
+		mySlide.fillRect.GetComponent<Image> ().color = c;
 	}
 
 	public void changeColor(Color c)
@@ -69,7 +75,8 @@ public class UnitIconInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
 	public void updateSlider(float ratio)
 	{
-		mySlide.gameObject.SetActive(ratio > 0 || ratio < .99f);
+		
+		mySlide.gameObject.SetActive(ratio > 0 && ratio < .99f);
 		mySlide.value = ratio;
 	
 	}

@@ -56,6 +56,9 @@ public class UltimateApplier : MonoBehaviour {
 		DomeOne = PlayerPrefs.GetInt ("BarrierDome0",0);
 		DomeTwo= PlayerPrefs.GetInt ("BarrierDome1",0);
 
+		myRace.UltThree.myCost.cooldown = 180 - 20 * DomeTwo;
+		myRace.UltThree.myCost.cooldownTimer = myRace.UltThree.myCost.cooldown;
+
 		FireOne = PlayerPrefs.GetInt ("Firestorm0");
 		FireTwo = PlayerPrefs.GetInt ("Firestorm1",0);
 
@@ -97,8 +100,9 @@ public class UltimateApplier : MonoBehaviour {
 			
 			barrierShield bs= thingy.GetComponent<barrierShield> ();
 
-			bs.duration *= 1 + DomeOne* .25f;
-			bs.Health *= 1 + DomeTwo * .25f;
+			bs.duration *= 1 + DomeOne* .33f;
+			bs.Health *= 1 + DomeTwo * .33f;
+
 
 		}
 		else if (myRace.UltFour == ab) {

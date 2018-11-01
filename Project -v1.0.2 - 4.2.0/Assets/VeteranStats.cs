@@ -17,6 +17,7 @@ public class VeteranStats : IComparable<VeteranStats>{
 	public float misc;
 	public bool isWarrior;
 	public string backstory;
+	public int playerOwner;
 
 	public bool Died = false;
 	public float DeathTime;

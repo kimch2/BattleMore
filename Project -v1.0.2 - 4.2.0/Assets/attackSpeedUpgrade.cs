@@ -19,7 +19,7 @@ public class attackSpeedUpgrade  : Upgrade {
 
 
 	public List<unitAmount> unitsToUpgrade = new List<unitAmount> ();
-
+	List<IWeapon> alreadyUpgraded = new List<IWeapon> ();
 
 	override
 	public void applyUpgrade (GameObject obj){
@@ -27,8 +27,6 @@ public class attackSpeedUpgrade  : Upgrade {
 		UnitManager manager = obj.GetComponent<UnitManager>();
 		//if (obj.GetComponentInChildren<TurretMount> ()) {
 		//return;}
-
-
 
 
 		foreach (unitAmount ua in unitsToUpgrade) {
@@ -44,8 +42,14 @@ public class attackSpeedUpgrade  : Upgrade {
 
 				for (int i = 0; i < manager.myWeapon.Count; i++) {
 
+
+
 					if (manager.myWeapon [i]) {
 
+						if (alreadyUpgraded.Contains (manager.myWeapon [i])) {
+							return;
+						}
+						alreadyUpgraded.Add (manager.myWeapon [i]);
 
 						manager.myWeapon [i].changeAttackSpeed (ua.percentageAmount [AllUnits ? 0 : i], ua.flatAmount [AllUnits ? 0 : i], true, null);
 						manager.gameObject.SendMessage ("upgrade", Name, SendMessageOptions.DontRequireReceiver);

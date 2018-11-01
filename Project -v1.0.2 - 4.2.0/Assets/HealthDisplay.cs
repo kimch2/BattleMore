@@ -27,6 +27,7 @@ public class HealthDisplay : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		cam = MainCamera.main.transform;// GameObject.FindObjectOfType<MainCamera> ().gameObject;
+		Update();
 
 	}
 	
@@ -55,6 +56,21 @@ public class HealthDisplay : MonoBehaviour {
 	public void activate(bool offOn)
 	{
 		this.gameObject.SetActive (offOn);
+	}
+
+	public void DeleteMe()
+	{
+		transform.SetParent (null);
+		transform.position = new Vector3 (0,-100,0);
+		enabled = false;
+	
+		StartCoroutine (delayedDelete());
+	}
+
+	IEnumerator delayedDelete()
+	{
+		yield return null;
+		Destroy (this.gameObject);
 	}
 
 }

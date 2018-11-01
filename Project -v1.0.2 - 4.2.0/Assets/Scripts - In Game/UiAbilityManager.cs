@@ -740,6 +740,12 @@ public class UiAbilityManager : MonoBehaviour {
 
 											Transform icontransform = unit.transform.Find ("UnitIconTemplate");
 											icontransform.GetComponent<UnitIconInfo> ().setInfo (currentPages[e].rows [p] [x].gameObject); //.myUnit = uiPage.rows [j] [k].gameObject;
+											icontransform.GetComponent<UnitIconInfo> ().changeSliderColor (currentPages[e].rows [p] [x].GetComponent<Selected>().Cooldownbar.getBarColor());
+											float cooldown = currentPages[e].rows [p] [x].GetComponent<Selected>().Cooldownbar.getRatio();
+									
+										
+											icontransform.GetComponent<UnitIconInfo> ().updateSlider (cooldown);
+
 
 											icontransform.GetComponent<Button> ().onClick.AddListener (delegate() {
 												IconClick (unit);
@@ -773,8 +779,16 @@ public class UiAbilityManager : MonoBehaviour {
 							//GameObject unit = (GameObject)Instantiate (buttonTemplate);
 							Transform icontransform = unit.transform.Find ("UnitIconTemplate");
 
+							UnitIconInfo iconInfo = icontransform.GetComponent<UnitIconInfo> ();
 
-							icontransform.GetComponent<UnitIconInfo> ().setInfo (uiPage.rows [j] [k].gameObject); //.myUnit = uiPage.rows [j] [k].gameObject;
+							iconInfo.setInfo (uiPage.rows [j] [k].gameObject); //.myUnit = uiPage.rows [j] [k].gameObject;
+
+							float cooldown = uiPage.rows [j] [k].GetComponent<Selected>().Cooldownbar.getRatio();
+							iconInfo.changeSliderColor (uiPage.rows [j] [k].GetComponent<Selected>().Cooldownbar.getBarColor());
+
+							iconInfo.updateSlider (cooldown);
+
+
 							unit.transform.localScale = this.transform.localScale;
 
 							unit.transform.rotation = this.transform.rotation;

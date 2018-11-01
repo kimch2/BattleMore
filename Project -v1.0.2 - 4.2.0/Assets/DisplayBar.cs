@@ -13,6 +13,14 @@ public class DisplayBar : MonoBehaviour {
 	Vector3 healthVector = new Vector3(1,1,1);
 	public float BarWidth = 9;
 
+	SpriteRenderer myColorSprite;
+
+	void Awake()
+	{
+		myColorSprite = colorBar.GetComponentInChildren<SpriteRenderer> (true);
+
+	}
+
 	void Start()
 	{
 		healthVector.y = colorBar.transform.parent.localScale.y;
@@ -20,7 +28,7 @@ public class DisplayBar : MonoBehaviour {
 		GetComponentInChildren<SpriteRenderer>().size =  new Vector2 (BarWidth, sprite.size.y);
 		sprite.transform.parent.localPosition = new Vector3 (BarWidth/2, 0,0);
 		sprite.transform.localPosition = new Vector2 (0-BarWidth/2, 0);
-
+	
 
 	}
 
@@ -31,15 +39,15 @@ public class DisplayBar : MonoBehaviour {
 	/// <returns><c>true</c>, if ratio was updated, <c>false</c> otherwise.</returns>
 	public bool updateRatio(float ratio, UnitIconInfo unitIcon, UnitIconInfo slider)
 	{
-		
+
 		gameObject.SetActive (ratio < .99 && ratio > 0);
 	
-		if (gameObject.activeSelf) {
-			healthVector.x = ratio;
-			colorBar.transform.localScale = healthVector; 
-			if (slider) {
-				slider.updateSlider (ratio);
-			}
+		healthVector.x = ratio;
+		colorBar.transform.localScale = healthVector; 
+
+
+		if (slider) {
+			slider.updateSlider (ratio);
 		}
 
 		foreach (HealthThreshHold hold in RatioLevels) {
@@ -57,10 +65,18 @@ public class DisplayBar : MonoBehaviour {
 
 	public float getRatio()
 	{
-		return gameObject.transform.localScale.x;
+		return colorBar.transform.localScale.x;
 	}
 
 
+	public Color getBarColor()
+	{
+		if (!myColorSprite) {
+			myColorSprite = colorBar.GetComponentInChildren<SpriteRenderer> (true);
+		}
+		return myColorSprite.color;
+
+	}
 
 
 }

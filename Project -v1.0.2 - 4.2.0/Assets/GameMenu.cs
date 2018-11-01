@@ -138,7 +138,7 @@ public class GameMenu : MonoBehaviour {
 	{
 	//	Debug.Log ("Pauseing");
 		ispaused = true;
-
+		Cursor.lockState = CursorLockMode.None;
 			Time.timeScale = 0;
 		if (displayer) {
 			displayer.pause ();
@@ -167,6 +167,7 @@ public class GameMenu : MonoBehaviour {
 	{
 		//	Debug.Log ("Pauseing");
 		ispaused = false;
+		Cursor.lockState = CursorLockMode.Confined;
 		if (displayer) {
 			displayer.resume ();
 		}

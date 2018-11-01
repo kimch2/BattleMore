@@ -29,7 +29,7 @@ public class AbilityUpgrade : SpecificUpgrade {
 	
 				foreach (ChangeAmmo ca in manager.GetComponents<ChangeAmmo>()) {
 
-					if (ca.Name.Contains("[X]")) {
+					if (ca.Name.Contains("[Z]")) {
 
 						//ca.myAmmo = SuperPenetrator;
 						ca.numOfShots = 3;

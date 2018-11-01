@@ -185,9 +185,9 @@ public class BuildManager : MonoBehaviour {
 
 
 	public bool unitFinished(UnitProduction prod)
-	{
-		buildOrder.RemoveAt(0);
-	
+	{if (buildOrder.Count > 0) {
+			buildOrder.RemoveAt (0);
+		}
 		if(buildOrder.Count > 0)
 		{
 			checkForSupply ();

@@ -241,6 +241,7 @@ public class VictoryTrigger : MonoBehaviour {
 
 	public void loadLevel(int levelNumber)
 	{
+		Debug.Log ("Loading " + levelNumber);
 		UnityEngine.SceneManagement.SceneManager.LoadScene (levelNumber);
 	}
 

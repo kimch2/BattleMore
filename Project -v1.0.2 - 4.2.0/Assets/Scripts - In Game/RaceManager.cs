@@ -57,7 +57,7 @@ public class RaceManager : MonoBehaviour, ManagerWatcher {
 
 	Dictionary<string, List<Ability>> UnitBuildTrigger =  new Dictionary<string, List<Ability>>();
 
-	private MVPCalculator MVP = new MVPCalculator();
+	public MVPCalculator MVP = new MVPCalculator();
 	//used for unit ability validation
 	private Dictionary<string, int > unitTypeCount = new Dictionary<string, int>();
 
