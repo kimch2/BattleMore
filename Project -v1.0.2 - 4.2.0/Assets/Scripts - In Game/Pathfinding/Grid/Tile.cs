@@ -225,12 +225,27 @@ public class Tile
 	}
 	
 	//Methods------------------------------------------------------------------------
-	
+
+	public float getHeight(Vector3 worldPoint)
+	{
+		if (Terrain.activeTerrain != null) {
+		
+			return Terrain.activeTerrain.SampleHeight (worldPoint);
+		}
+
+		RaycastHit hit;
+		if (Physics.Raycast (worldPoint + Vector3.up*200, Vector3.down, out hit, 1000, 1 << 8)) {
+			return  hit.point.y;
+		}
+		return 0;
+	}
+
 	public void Evaluate()
 	{
 		m_LayeredTiles.Clear ();
 		Status = Const.TILE_Unvisited;
-		m_Center.y = Terrain.activeTerrain.SampleHeight(m_Center);
+		m_Center.y = getHeight(m_Center);
+
 		EvaluateTile ();
 
 	}
@@ -265,10 +280,11 @@ public class Tile
 		
 		//Check steepness of terrain
 		//Calculate corner points		
-		Terrain terrain = Terrain.activeTerrain;
-		float minHeight = Mathf.Min (terrain.SampleHeight (m_Center), terrain.SampleHeight (bottomLeft), terrain.SampleHeight (bottomRight), terrain.SampleHeight (topRight), terrain.SampleHeight (topLeft));
-		float maxHeight = Mathf.Max (terrain.SampleHeight (m_Center), terrain.SampleHeight (bottomLeft), terrain.SampleHeight (bottomRight), terrain.SampleHeight (topRight), terrain.SampleHeight (topLeft));
-				
+
+		float minHeight = Mathf.Min (getHeight (m_Center), getHeight  (bottomLeft),getHeight  (bottomRight),getHeight  (topRight), getHeight (topLeft));
+		float maxHeight = Mathf.Max (getHeight  (m_Center),getHeight (bottomLeft),getHeight  (bottomRight), getHeight  (topRight), getHeight  (topLeft));
+
+
 		//Debug.Log ("Checking Steepness");
 		if (maxHeight-minHeight > Grid.main.MaxSteepness)
 		{

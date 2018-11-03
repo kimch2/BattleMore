@@ -10,18 +10,19 @@ public class bobble : MonoBehaviour {
 
 
 	Vector3 StartPosition;
-
+	Vector3 upVector;
 	float rand;
 
 	void Start()
 	{
 		StartPosition = transform.localPosition;
 		rand = Random.value *50;
+		upVector = Vector3.up * amplitude * 50;
 	}
         // Update is called once per frame
     void Update()
         {
-		transform.localPosition = StartPosition + ( Vector3.up *amplitude * Mathf.Sin(speed * Time.time + rand))  *50;
+		transform.localPosition = StartPosition + ( upVector * Mathf.Sin(speed * Time.time + rand));
             
         }
 

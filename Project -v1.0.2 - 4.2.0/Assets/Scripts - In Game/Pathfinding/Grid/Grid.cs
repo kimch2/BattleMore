@@ -146,9 +146,11 @@ public class Grid : MonoBehaviour, IGrid
 			{
 				float xCenter = main.WidthOffset + ((i*TileSize) + (TileSize/2.0f));
 				float zCenter = main.LengthOffset + ((j*TileSize) + (TileSize/2.0f));
-				Vector3 center = new Vector3(xCenter, 0, zCenter);				
-				center.y = Terrain.activeTerrain.SampleHeight(center);
-				
+				Vector3 center = new Vector3(xCenter, 0, zCenter);	
+
+				center.y = getHeight(center);
+
+
 				m_Grid[i,j] = new Tile(i, j, center);
 			}
 		}
@@ -175,6 +177,20 @@ public class Grid : MonoBehaviour, IGrid
 		if (levelLoader != null) levelLoader.FinishLoading ();
 
 	}
+
+
+	public float getHeight(Vector3 worldPoint)
+	{
+		if (Terrain.activeTerrain != null) {
+			return Terrain.activeTerrain.SampleHeight (worldPoint);
+		}
+
+		RaycastHit hit;
+		if (Physics.Raycast (worldPoint + Vector3.up*200, Vector3.down, out hit, 1000, 1 << 8)) {
+			return  hit.point.y;
+		}
+		return 0;
+	}
 	
 	public void Initialise()
 	{//main = this;
@@ -188,8 +204,8 @@ public class Grid : MonoBehaviour, IGrid
 				float xCenter = main.WidthOffset + ((i*TileSize) + (TileSize/2.0f));
 				float zCenter = main.LengthOffset + ((j*TileSize) + (TileSize/2.0f));
 				Vector3 center = new Vector3(xCenter, 0, zCenter);				
-				center.y = Terrain.activeTerrain.SampleHeight(center);
-				
+				center.y = getHeight(center);
+
 				m_Grid[i,j] = new Tile(i, j, center);
 			}
 		}

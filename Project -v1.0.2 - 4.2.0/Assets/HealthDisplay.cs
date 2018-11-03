@@ -28,15 +28,29 @@ public class HealthDisplay : MonoBehaviour {
 	void Start () {
 		cam = MainCamera.main.transform;// GameObject.FindObjectOfType<MainCamera> ().gameObject;
 		Update();
-
+		transform.localScale = new Vector3(-1,1,1);
 	}
-	
+
+
+	Vector3 lastCameraPosition;
+	Vector3 myLastPosition;
 	// Update is called once per frame
 	void Update () {
 
-			LookLocation = cam.position;
-			LookLocation.x = gameObject.transform.position.x;
-			gameObject.transform.LookAt (LookLocation);
+		if (cam.position != lastCameraPosition) {
+			//LookLocation = cam.position;
+			//LookLocation.x = gameObject.transform.position.x;
+			//gameObject.transform.LookAt (LookLocation);
+			gameObject.transform.rotation = cam.rotation;
+			lastCameraPosition = cam.position;
+
+		} else if (transform.position != myLastPosition) {
+			
+			myLastPosition = transform.position;
+			gameObject.transform.rotation = cam.rotation;
+	
+		}
+
 
 	}
 

@@ -636,6 +636,7 @@ e900fcc98e1287155b44e27de4513e74 Assembly-CSharp-firstpass.dll:.DynamicGridObsta
 cede466b44528b3f6397afcb274eccb4 Assembly-CSharp.dll:.ChimeraRangeUpgrade
 1a36ed963756235c61fb047b2789e493 Assembly-CSharp.dll:.TargetDeathVictory
 0105e63af03e0575afdf1dca0dd62268 Assembly-CSharp.dll:.MultiShooter
+9ce6ca41872f0e774488087956055980 Assembly-CSharp.dll:.SteamManager
 f53d193848146de551fc6d9bb4eb0cb2 Assembly-CSharp-firstpass.dll:Pathfinding.AnimationLink
 4ac8e53f5c12d76b5f155cbe90719f57 Assembly-CSharp.dll:.GameTips
 f7edfb0b13c829e23ed480abedd37dd2 Assembly-CSharp.dll:.TimeDelayTrigger
