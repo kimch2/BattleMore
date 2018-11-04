@@ -219,7 +219,7 @@ public class RaceManager : MonoBehaviour, ManagerWatcher {
 			foreach (UnitManager tempMan  in pair.Value) {
 				if(tempMan){
 					upgrade.ApplySkin (tempMan.gameObject);
-					if (!tempMan.myStats.isUnitType (UnitTypes.UnitTypeTag.Structure)) {
+					if (!tempMan.myStats.isUnitType (UnitTypes.UnitTypeTag.Structure) || tempMan.myStats.isUnitType (UnitTypes.UnitTypeTag.Add_On)) {
 						upgrade.applyUpgrade (tempMan.gameObject);
 					}
 					if (tempMan.UnitName == unitname) {

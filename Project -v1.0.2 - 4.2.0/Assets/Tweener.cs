@@ -24,9 +24,12 @@ public class Tweener : MonoBehaviour {
 	}
 	[Tooltip("Everything in this list will be created into a new KeyFrame Animation Pose when the button below is created.")]
 
+
 	public List<Transform> quickList;
 	[HideInInspector]
 	public List<AnimationPose> myPoses  = new List<AnimationPose>();
+	public List<OnFinishTrigger> OnFinishTriggers = new List<OnFinishTrigger>(); 
+
 	[HideInInspector]
 	public List<transition> myTransitions;
 	Dictionary<string,Coroutine> currentTweens = new Dictionary<string,Coroutine> ();
@@ -147,6 +150,7 @@ public class Tweener : MonoBehaviour {
 	{
 		pose.setStartPoses ();
 
+
 		//Time.unscaledDeltaTime.captureFramerate, .13f is the time it takes to tween most buttons
 		for (float i = 0; i < tweenTime; i += (Time.timeScale == 0 && tweenTime == .13f) ?  (1/Time.unscaledDeltaTime) : Time.deltaTime) {
 			pose.updateTween (i / tweenTime);
@@ -155,6 +159,11 @@ public class Tweener : MonoBehaviour {
 			yield return 0;
 		}
 		pose.updateTween (1);
+		foreach (OnFinishTrigger trig in OnFinishTriggers) {
+			if (trig.AnimationPoseName == pose.PoseName) {
+				trig.OnFinish.Invoke ();
+			}
+		}
 		//Debug.Log ("Ending tween " + pose.PoseName);
 		stopTween (pose.PoseName);
 	}
@@ -162,13 +171,18 @@ public class Tweener : MonoBehaviour {
 
 	IEnumerator TransitionTween(AnimationPose pose, float tweenTime)
 	{
-		
+
 		pose.setStartPoses ();
 		for (float i = 0; i < tweenTime; i += Time.deltaTime) {
 			pose.updateTween (i / tweenTime);
 			yield return null;
 		}
 		pose.updateTween (1);
+		foreach (OnFinishTrigger trig in OnFinishTriggers) {
+			if (trig.AnimationPoseName == pose.PoseName) {
+				trig.OnFinish.Invoke ();
+			}
+		}
 	}
 
 }
@@ -184,6 +198,9 @@ public class TweenerEditor : Editor {
 	bool useRotations;
 	bool ShowAnimations;
 	bool ShowTransitions;
+
+
+
 	public override void OnInspectorGUI()
 	{
 		Tweener targ = ((Tweener)target);
@@ -358,7 +375,6 @@ public class TweenerEditor : Editor {
 			foreach (ObjectPose obj in pose.objPoses) {
 				DisplayObjectPose (obj, pose.objPoses);
 			}
-
 			EditorGUI.indentLevel--;
 		}
 	}
@@ -386,7 +402,7 @@ public class TweenerEditor : Editor {
 				pose.scale = EditorGUILayout.Vector3Field ("Scale: ", pose.scale);
 			}
 				
-
+		
 			if (GUILayout.Button ("Delete Animation")) {
 				poseList.Remove (pose);
 			}
@@ -398,6 +414,12 @@ public class TweenerEditor : Editor {
 
 //==============================================================================================================================
 
+[System.Serializable]
+public class OnFinishTrigger
+{
+	public string AnimationPoseName;
+	public UnityEngine.Events.UnityEvent OnFinish;
+}
 
 [System.Serializable]
 public class AnimationPose
@@ -410,6 +432,7 @@ public class AnimationPose
 
 	List<ObjectPose> startPoses = new List<ObjectPose>();
 
+
 	public void setStartPoses()
 	{startPoses.Clear ();
 		foreach (ObjectPose pose in objPoses) {
@@ -421,6 +444,8 @@ public class AnimationPose
 
 	public void GoToPose()
 	{
+
+
 		switch(myScope){
 		case Tweener.TweenScope.Local:
 			for (int i = 0; i < objPoses.Count; i++) {

@@ -12,10 +12,10 @@ public class deexaArmor : Upgrade
     {
 
         UnitManager manager = obj.GetComponent<UnitManager>();
-
-		if (!manager.myStats.isUnitType(UnitTypes.UnitTypeTag.Structure) || manager.UnitName == "Augmentor")
+		Debug.Log (manager.UnitName);
+		if (!manager.myStats.isUnitType(UnitTypes.UnitTypeTag.Structure) || manager.myStats.isUnitType(UnitTypes.UnitTypeTag.Add_On) )
         {
-            obj.GetComponent<UnitStats>().armor += 1;
+			obj.GetComponent<UnitStats>().changeArmor(1);
         }
     }
 	public override void unApplyUpgrade (GameObject obj){

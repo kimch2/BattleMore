@@ -15,7 +15,7 @@ public class GameMenu : MonoBehaviour {
 	public Button hotkeysB;
 	public Button raceTipsB;
 	public Button returnToGameB;
-	public Button MissionLogB;
+
 	public Button EnemyArrayB;
 
 	public bool ispaused = false;
@@ -27,8 +27,8 @@ public class GameMenu : MonoBehaviour {
 	public Canvas soundMenu;
 	public Canvas gameplayMenu;
 	public Canvas graphicsMenu;
+	public Canvas BugReporter;
 
-	public Canvas missionLog;
 	public Canvas otherHotkeys;
 	public Canvas EnemyArray;
 
@@ -61,7 +61,7 @@ public class GameMenu : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if (Input.GetKeyUp (escapekey)) {
+		if (Input.GetKeyUp (escapekey) &&currentMenu != BugReporter) {
 			
 			openMenu ();
 			if (CursorManager.main) {
@@ -123,6 +123,11 @@ public class GameMenu : MonoBehaviour {
 	public void openHotkeys()
 	{
 		setMenu (hotkeyMenu);
+	}
+
+	public void openBugReporter()
+	{
+		setMenu (BugReporter);
 	}
 
 	public void openRaceTips()
@@ -205,9 +210,6 @@ public class GameMenu : MonoBehaviour {
 
 
 
-	public void opeMissionLog(){
-		setMenu (missionLog);
-	}
 
 	public void ExitGame()
 	{Application.Quit ();}

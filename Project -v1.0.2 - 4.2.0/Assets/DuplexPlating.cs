@@ -15,7 +15,10 @@ public class DuplexPlating  :SpecificUpgrade{
 		if (confirmUnit (obj)) {
 
 			UnitStats us = obj.GetComponent<UnitStats> ();
-			if (us.isUnitType (UnitTypes.UnitTypeTag.Structure)) {
+			Debug.Log (
+				us.health
+			);
+			if (us.isUnitType (UnitTypes.UnitTypeTag.Structure)||us.isUnitType (UnitTypes.UnitTypeTag.Add_On) ) {
 				us.armor += 4;
 				us.Maxhealth *= 1.2f;
 				us.health *= 1.2f;

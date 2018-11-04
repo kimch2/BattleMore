@@ -115,9 +115,11 @@ public class DifficultyManager : MonoBehaviour {
 		}
 	}
 
+	int diedCount = 0;
 	public void UpgradeDied ()
 	{
 		UpgradeCenterCount--;
+		diedCount++;
 	}
 
 	public void UpgradeCounter()
@@ -127,7 +129,16 @@ public class DifficultyManager : MonoBehaviour {
 
 	IEnumerator UpgradeTimer(float time)
 	{
+		int currentlyDead = diedCount;
+
 		yield return new WaitForSeconds (time * 60);
+
+		while (currentlyDead != diedCount) {
+			yield return new WaitForSeconds ((diedCount - currentlyDead) * 90);
+			currentlyDead = diedCount;
+		}
+
+
 		if (UpgradeCenterCount > upgradeCount) {
 			upgradeCount++;
 			foreach (UnitManager man in GameObject.FindObjectsOfType<UnitManager>()) {

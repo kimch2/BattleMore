@@ -129,4 +129,8 @@ public class MainMenuManager : MonoBehaviour {
 	}
 
 
+	public void GoToWebsite()
+	{
+		Application.OpenURL ("https://www.playbattlemore.com/");
+	}
 }

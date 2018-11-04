@@ -14,15 +14,24 @@ public class PopUpMaker : MonoBehaviour {
 	 GameObject PopUpThing;
 	 GameObject StunThing;
 
+	protected static Lean.LeanPool myBulletPool;
+
+	public void setBulletPool(Lean.LeanPool pool)
+	{
+		myBulletPool = pool;
+	}
+
+
 	public void CreatePopUp(string input, Color c)
 	{Vector3 location = this.transform.position;
 		location.y += 5;
 
 		if (!PopUpThing) {
 			PopUpThing = Resources.Load<GameObject> ("PopUp");
+			myBulletPool = Lean.LeanPool.getSpawnPool (PopUpThing);
 		}
 
-		GameObject obj = (GameObject)Instantiate (PopUpThing, location, Quaternion.identity);
+		GameObject obj = myBulletPool.FastSpawn(location, Quaternion.identity);
 		if (mySprite != null) {
 		//	obj.GetComponent<TextMesh>().te.GetComponentInChildren<Image> ().enabled = true;
 			obj.GetComponentInChildren<SpriteRenderer> ().sprite = mySprite;
@@ -40,9 +49,10 @@ public class PopUpMaker : MonoBehaviour {
 
 		if (!PopUpThing) {
 			PopUpThing = Resources.Load<GameObject> ("PopUp");
+			myBulletPool = Lean.LeanPool.getSpawnPool (PopUpThing);
 		}
 
-		GameObject obj = (GameObject)Instantiate (PopUpThing, location, Quaternion.identity);
+		GameObject obj = myBulletPool.FastSpawn(location, Quaternion.identity);
 		if (mySprite != null) {
 			obj.GetComponentInChildren<SpriteRenderer> ().enabled = true;
 			obj.GetComponentInChildren<SpriteRenderer> ().sprite = mySprite;
@@ -61,9 +71,10 @@ public class PopUpMaker : MonoBehaviour {
 
 		if (!PopUpThing) {
 			PopUpThing = Resources.Load<GameObject> ("PopUp");
+			myBulletPool = Lean.LeanPool.getSpawnPool (PopUpThing);
 		}
 
-		GameObject obj = (GameObject)Instantiate (PopUpThing, location, Quaternion.identity);
+		GameObject obj = myBulletPool.FastSpawn(location, Quaternion.identity);
 		if (mySprite != null) {
 			obj.GetComponentInChildren<SpriteRenderer> ().enabled = true;
 			obj.GetComponentInChildren<SpriteRenderer> ().sprite = mySprite;
@@ -78,9 +89,10 @@ public class PopUpMaker : MonoBehaviour {
 	{location.y += 5;
 		if (!PopUpThing) {
 			PopUpThing = Resources.Load<GameObject> ("PopUp");
+			myBulletPool = Lean.LeanPool.getSpawnPool (PopUpThing);
 		}
 
-		GameObject obj = (GameObject)Instantiate (PopUpThing, location, Quaternion.identity);
+		GameObject obj = myBulletPool.FastSpawn(location, Quaternion.identity);
 		if (mySprite != null) {
 			obj.GetComponentInChildren<SpriteRenderer> ().enabled = true;
 			obj.GetComponentInChildren<SpriteRenderer> ().sprite = mySprite;
@@ -100,9 +112,10 @@ public class PopUpMaker : MonoBehaviour {
 
 		if (!PopUpThingy) {
 			PopUpThingy = Resources.Load<GameObject> ("PopUp");
+			myBulletPool = Lean.LeanPool.getSpawnPool (PopUpThingy);
 		}
 
-		GameObject obj =Instantiate<GameObject> (PopUpThingy, location, Quaternion.identity);
+		GameObject obj = myBulletPool.FastSpawn(location, Quaternion.identity);
 		TextMesh childText = obj.GetComponent<TextMesh> ();
 
 		childText.color = c;
@@ -116,13 +129,14 @@ public class PopUpMaker : MonoBehaviour {
 		location.y += 5;
 		if (!PopUpThingy) {
 			PopUpThingy = Resources.Load<GameObject> ("PopUp");
+			myBulletPool = Lean.LeanPool.getSpawnPool (PopUpThingy);
 		}
 
-		GameObject obj = Instantiate<GameObject> (PopUpThingy, location, Quaternion.identity);
+		GameObject obj = myBulletPool.FastSpawn(location, Quaternion.identity);
 		TextMesh childText =obj.GetComponent<TextMesh> ();
 		childText.color = c;
 		childText.text = input;
-		obj.GetComponent<selfDestructTimer> ().timer = duration;
+		obj.GetComponent<PopUp> ().setDuration(duration);
 		obj.GetComponent<PopUp> ().speed = duration / 5;
 
 		return obj;

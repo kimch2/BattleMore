@@ -90,11 +90,8 @@ public class IWeapon : MonoBehaviour {
 		public UnitTypes.UnitTypeTag type;
 		public float bonus;
 	}
-	//public bonusDamage[] extraDamage;
+
 	public List<bonusDamage> extraDamage;
-
-	//public IList<method> weaponModifiers
-
 
 
 	public GameObject projectile;

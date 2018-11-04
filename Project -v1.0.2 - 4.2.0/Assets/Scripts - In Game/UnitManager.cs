@@ -64,11 +64,8 @@ public class UnitManager : Unit,IOrderable{
 	public UnitState.StateType startingState;
 	new void Awake()
 	{
-		
-		if(interactor == null)
-		{
+		if(interactor == null){
 			interactor = (Iinteract)gameObject.GetComponent(typeof(Iinteract));
-			//Debug.Log ("Found Interactor " + interactor);
 		}
 
 		if (visionSphere == null) {
@@ -79,13 +76,9 @@ public class UnitManager : Unit,IOrderable{
 				}
 			}
 		}
-
-
-
+			
 		if (cMover == null) {
-			cMover = gameObject.GetComponent<customMover>();
-			if(cMover == null)
-				cMover = gameObject.GetComponent<airmover>();
+			cMover = (IMover)gameObject.GetComponent(typeof(IMover));
 		}
 
 
@@ -101,35 +94,29 @@ public class UnitManager : Unit,IOrderable{
 			CharController = GetComponent<CharacterController> ();
 		}
 
-		if (myStats == null) {
+		if (!myStats) {
 			myStats = gameObject.GetComponent<UnitStats>();
 		}
 
 	
-		GameManager man = 	GameManager.getInstance ();//GameObject.FindObjectOfType<GameManager> ();
+		GameManager man = 	GameManager.getInstance ();
 		if (PlayerOwner == man.playerNumber) {
 				this.gameObject.tag = "Player";
 			} 
 
-			//man.initialize (); // Initializes data, if this is the first unit to wake up.
-			myStats.Initialize();
-
-
+		myStats.Initialize();
 		initializeVision (false);
 
+
 		if(startingState == UnitState.StateType.HoldGround) {
-
 			changeState (new HoldState (this));
-		}
-		else if (cMover != null) {
-			//Debug.Log (this.gameObject + " state is default");
+		}else if (cMover != null) {
 			changeState (new DefaultState ());
-		} else if (startingState == UnitState.StateType.Turret) {		       
-
+		}else if (startingState == UnitState.StateType.Turret) {		       
 			changeState (new turretState (this));
 		} 
 
-		chaseRange = visionRange+15;
+		chaseRange = visionRange + 15;
 	}
 
 	public void initializeVision(bool createIt)
@@ -140,24 +127,19 @@ public class UnitManager : Unit,IOrderable{
 		if (!fogger && createIt) {
 			fogger = gameObject.AddComponent<FogOfWarUnit> ();
 			if (cMover) {
-				cMover.myFogger = fogger;}
-		}
-
-		if (CharController && visionSphere != null) {
-			float distance = visionRange + CharController.radius;
-			visionSphere.radius = distance;
-
-
-			if(fogger){
-				fogger.radius = distance +3;
+				cMover.myFogger = fogger;
 			}
 		}
-		else {
-			visionSphere.radius = visionRange;
-			if (fogger) {
-				fogger.radius = visionRange +3;
-			}
+
+		float distance = visionRange + 3;
+		if (CharController) {
+			distance += CharController.radius;
 		}
+		visionSphere.radius = distance;
+		if (fogger) {
+			fogger.radius = distance;
+		}
+	
 	}
 
 	bool hasStarted = false;
@@ -166,19 +148,10 @@ public class UnitManager : Unit,IOrderable{
 		if (!hasStarted) {
 
 			if (startingCommand.Count > 0 || cMover) {
-
 				Invoke ("GiveStartCommand", .1f);
 			}
-		if (Time.timeSinceLevelLoad < 1 || !myStats.isUnitType (UnitTypes.UnitTypeTag.Structure) || UnitName == "Augmentor") {
-				
-				RaceManager racer = GameManager.getInstance ().playerList [PlayerOwner - 1];
-
-					racer.addUnit (this);
-			}
-
-
-			if (myStats.isUnitType (UnitTypes.UnitTypeTag.Structure) && UnitName != "Augmentor") {
-				//GameManager.getInstance ().playerList [PlayerOwner - 1].applyUpgrade (this);
+			if (Time.timeSinceLevelLoad < 1 || !myStats.isUnitType (UnitTypes.UnitTypeTag.Structure) || myStats.isUnitType (UnitTypes.UnitTypeTag.Add_On)) {
+				GameManager.getInstance ().playerList [PlayerOwner - 1].addUnit (this);
 			}
 	
 			hasStarted = true;
@@ -286,7 +259,6 @@ public class UnitManager : Unit,IOrderable{
 					changeState (new CastAbilityState (abilityList [n]),false,queue);
 
 				}
-
 			}
 			return order.nextUnitCast;
 		}
@@ -329,7 +301,6 @@ public class UnitManager : Unit,IOrderable{
 		if (abilityList [n] != null) {
 
 			abilityList [n].setAutoCast(offOn);
-
 		}
 	}
 
@@ -340,10 +311,9 @@ public class UnitManager : Unit,IOrderable{
 		if(interactor == null)
 		{
 			interactor = (Iinteract)gameObject.GetComponent(typeof(Iinteract));
-			//Debug.Log ("Found Interactor " + interactor);
 		}
 
-		Start (); // in the parent class
+		Start (); // reset some variables
 
 	}
 
@@ -373,10 +343,18 @@ public class UnitManager : Unit,IOrderable{
 		}
 	}
 
-
-	public void removeAbility(Ability abil)
-	{abilityList.Remove (abil);
-		abilityList.RemoveAll(item => item == null);}
+	/// <summary>
+	/// If you empy the nulls as the bonus Arg, it will shift all abilities into the left msot slots.
+	/// </summary>
+	/// <param name="abil">Abil.</param>
+	/// <param name="emptyNulls">If set to <c>true</c> empty nulls.</param>
+	public void removeAbility(Ability abil, bool emptyNulls = false)
+	{
+		abilityList.Remove (abil);
+		if (emptyNulls) {
+			abilityList.RemoveAll (item => item == null);
+		}
+	}
 
 
 	public void AddEnemySighted(EnemySighted comp)
@@ -397,8 +375,6 @@ public class UnitManager : Unit,IOrderable{
 	//Other Units have entered vision
 	void OnTriggerEnter(Collider other)
 	{
-		//need to set up calls to listener components
-		//this will need to be refactored for team games
 
 		if (!other.isTrigger) {
 
@@ -406,12 +382,7 @@ public class UnitManager : Unit,IOrderable{
 			if (other.gameObject.layer == 15) { // Its a projectile, the most common kind of trigger
 				return;
 			}
-			/* We Don't need to consider this, probably
-			if (other.gameObject.layer == 13) {
-				neutrals.Add (other.gameObject);
-				return;
-			}*/
-			//Debug.Log (this.gameObject + " hit " + other.gameObject);
+
 			UnitManager manage = other.gameObject.GetComponent<UnitManager>();
 
 		
@@ -449,19 +420,13 @@ public class UnitManager : Unit,IOrderable{
 		if (other.gameObject.layer == 15) { // Its a projectile, the most common kind of trigger
 			return;
 		}
-		/*
-		if (neutrals.Contains (other.gameObject)) {
-			neutrals.Remove (other.gameObject);
-		}
-*/
-		UnitManager manage = other.gameObject.GetComponent<UnitManager>();
 
+		UnitManager manage = other.gameObject.GetComponent<UnitManager>();
 
 			if(	enemies.Remove (manage)){
 				foreach (EnemySighted sighter in EnemyWatchers) {
 					if (sighter != null) {
 						sighter.enemyLeft (manage);
-					
 					}
 				}
 		} else if (allies.Remove (manage)) {
@@ -471,9 +436,6 @@ public class UnitManager : Unit,IOrderable{
 						sighter.allyLeft (manage);
 					}
 				}
-
-				//allies.Remove (manage); changed contained to remove above wich changes order, might break!!!
-				//Debug.Log ( this.gameObject + "  Removing " + other.gameObject);
 			}
 			else {
 				neutrals.Remove (other.gameObject);
@@ -482,10 +444,8 @@ public class UnitManager : Unit,IOrderable{
 
 
 	bool erase = false;
-	// Called from some of the states (ie, DefaultState, AttackMoveState)
 	public UnitManager findClosestEnemy()
 	{
-
 		UnitManager best = null;
 		float currDistance = 0;
 		float distance = float.MaxValue;
@@ -497,7 +457,6 @@ public class UnitManager : Unit,IOrderable{
 				currDistance = Vector3.Distance (enemies [i].transform.position, this.gameObject.transform.position);
 				if (currDistance < distance) {
 					best = enemies [i];
-					
 					distance = currDistance;
 				}
 				
@@ -511,7 +470,6 @@ public class UnitManager : Unit,IOrderable{
 		}
 
 		return best;
-
 	}
 
 
@@ -532,11 +490,12 @@ public class UnitManager : Unit,IOrderable{
 
 		for (int i = 0; i < enemies.Count; i ++) {
 
-			currentIter = enemies [i];
-			if (currentIter == null) {
+			if (enemies[i] == null) {
 				continue;
 			}
-				
+
+			currentIter = enemies [i];
+
 			if (!isValidTarget (currentIter)) {
 				continue;
 			}
@@ -555,7 +514,6 @@ public class UnitManager : Unit,IOrderable{
 					distance = currDistance;
 				}
 			}
-
 		}
 
 		return best;
@@ -663,11 +621,6 @@ public class UnitManager : Unit,IOrderable{
 
 			}  
 		}
-		// This was causing problems with refunding money from building cancels. maybe it was here for a reason?
-		// else if (myState is PlaceBuildingState) {
-		//	((PlaceBuildingState)myState).cancel ();
-		//}
-
 	
 		else if (nextState is AttackMoveState ) {
 			((AttackMoveState)nextState).setHome (this.gameObject.transform.position);
@@ -733,11 +686,6 @@ public class UnitManager : Unit,IOrderable{
 	{
 		if (myAnim ) {
 			myAnim.Play ("Attack");
-			//foreach (AnimatorControllerParameter parem in myAnim.parameters) {
-				//if (parem.name == "State") {
-					//myAnim.SetInteger ("State", 3);
-				//}
-			//}
 		}
 	}
 
@@ -763,7 +711,7 @@ public class UnitManager : Unit,IOrderable{
 
 
 
-	// return -1 if it is not in range, else pass back the index of the weapon that is in range
+
 	public IWeapon inRange(UnitManager obj)
 	{
 		float min= 100000000;
@@ -778,7 +726,6 @@ public class UnitManager : Unit,IOrderable{
 
 		}
 		return best;
-
 	}
 
 	IWeapon best = null;
@@ -789,11 +736,7 @@ public class UnitManager : Unit,IOrderable{
 		min= 100000000;
 		foreach (IWeapon weap in myWeapon) {
 			if( weap.isValidTarget(obj)){
-				return weap; // I think this was originally in here so that units would prefer swords to bows if the enemy was close enough, takign it out for optimizations
-				//if (weap.range < min) {
-				//	best = weap;
-					//min = weap.range;
-				//}
+				return weap; 
 			}
 
 		}
@@ -804,11 +747,11 @@ public class UnitManager : Unit,IOrderable{
 	{IWeapon best = null;
 		float min= 100000000;
 		foreach (IWeapon weap in myWeapon) {
-		//	Debug.Log ("Checking " + weap.Title);
+
 			if(weap.canAttack(obj)){
-				//Debug.Log (weap.Title + " can attack");
+
 				if (weap.range < min) {
-				//	Debug.Log (weap.Title + " best range");
+
 					best = weap;
 					min = weap.range;
 				}
@@ -829,14 +772,12 @@ public class UnitManager : Unit,IOrderable{
 	public void cleanEnemy()
 	{
 		enemies.RemoveAll(item => item == null);
-	
 	}
 
 
 	public void setStun(bool StunOrNot, Object source,bool  showIcon)
 	{
 
-		//Debug.Log ("getting stunned " + this.gameObject);
 		if (StunOrNot) {
 			stunSources.Add (source);
 			if (cMover) {
