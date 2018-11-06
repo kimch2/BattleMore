@@ -47,6 +47,8 @@ public class APMCounter : MonoBehaviour {
 	float apm;
 	int Acounter;
 
+
+
 	public void updateAverage()
 	{
 		apm = 0;
@@ -64,6 +66,9 @@ public class APMCounter : MonoBehaviour {
 		}
 	//	Debug.Log ("size " + actions.Count + "  apm  " + apm);
 		if (counter.gameObject.activeInHierarchy) {
+
+
+
 			if (Acounter > 0) {
 
 				counter.text = "Actions Per Minute\n" + (int)((Acounter / apm) * 60) + "\nGame Average\n" + (int)(totalActions / (Clock.main.getTotalSecond () / 60)) +
