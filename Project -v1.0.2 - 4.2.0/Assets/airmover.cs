@@ -20,7 +20,7 @@ public class airmover : IMover {
 
 	public float flyerHeight;
 
-
+	public GameObject FlyingDecal;
 
 	public void Start () {
 
@@ -28,6 +28,24 @@ public class airmover : IMover {
 		//Start a new path to the targetPosition, return the result to the OnPathComplete function
 		//seeker.StartPath (transform.position,targetPosition, OnPathComplete);
 		initialSpeed = getMaxSpeed();
+
+		if (FlyingDecal == null) {
+			FlyingDecal = (GameObject)Instantiate<GameObject> (Resources.Load<GameObject>("FlyingDecal"), this.gameObject.transform);
+
+			RaycastHit objecthit;
+			Vector3 down = this.gameObject.transform.TransformDirection (Vector3.down);
+
+			if (Physics.Raycast (this.gameObject.transform.position, down, out objecthit, 1000, 1 << 8)) {
+				FlyingDecal.transform.position = objecthit.point + Vector3.up;
+
+			}
+
+
+			Light l = GetComponentInChildren<Light> ();
+			if (l) {
+				Destroy (l);
+			}
+		}
 	}
 
 
@@ -41,6 +59,8 @@ public class airmover : IMover {
 
 
 	UnitManager collidingObject ; // This is used to help cache units we are tryingto navigate around
+
+
 
 
 	override
@@ -83,6 +103,9 @@ public class airmover : IMover {
 		
 
 		}
+
+		FlyingDecal.transform.position = objecthit.point + Vector3.up;
+		FlyingDecal.transform.up = objecthit.normal;
 
 		RaycastHit lookAhead = new RaycastHit();
 		Vector3 vec = this.gameObject.transform.forward;

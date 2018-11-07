@@ -21,7 +21,7 @@ public class TurretPlacer : MonoBehaviour {
 
 	private bool buttonsOn = false;
 
-	private GameObject cam;
+	private Transform cam;
 
 	private float lastTrueTimeG;
 	private float lastTrueTimeR;
@@ -34,7 +34,7 @@ public class TurretPlacer : MonoBehaviour {
 	private bool isON = false;
 	// Use this for initialization
 	void Start () {
-		cam = GameObject.FindObjectOfType<MainCamera> ().gameObject;
+		cam = MainCamera.main.transform;
 		myRect = this.gameObject.GetComponent<RectTransform> ();
 	}
 
@@ -91,6 +91,11 @@ public class TurretPlacer : MonoBehaviour {
 	Vector3 pos;
 	Vector3 dif ;
 	Vector3 location;
+
+	Vector3 lastCameraPosition;
+	Vector3 myLastPosition;
+
+
 	// Update is called once per frame
 	void Update () {
 		if (!unit) {
@@ -121,18 +126,22 @@ public class TurretPlacer : MonoBehaviour {
 			}
 
 		}
+		if (cam.position != lastCameraPosition || transform.position != myLastPosition) {
+			pos = myMount.transform.position + Vector3.up *5;
+			//myRect.position = pos;
 
-		pos = myMount.transform.position + Vector3.up *5;
-		myRect.position = pos;
+			dif = (cam.transform.position - this.gameObject.transform.position) * .5f;
 
-		dif = (cam.transform.position - this.gameObject.transform.position) * .5f;
+			myRect.position = dif + pos;
 
-		myRect.position = dif + pos;
+			location = cam.transform.position;
+			location.x = this.gameObject.transform.position.x;
+			gameObject.transform.LookAt (location);
 
-		location = cam.transform.position;
-		location.x = this.gameObject.transform.position.x;
-		gameObject.transform.LookAt (location);
+			lastCameraPosition = cam.position;
+			myLastPosition = transform.position;
 
+		}
 
 	}
 

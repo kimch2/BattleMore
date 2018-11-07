@@ -14,11 +14,13 @@ public class GraphicsMenu : MonoBehaviour {
 	int frameCount;
 	int badFrameCount;
 
+	static bool IgnoreMe = false;
+
 	void Start () {
 		qualityDrop = qualityDropObj.GetComponent<Dropdown> ();
 		qualityDrop.value = QualitySettings.GetQualityLevel ();
 
-		if (qualityDrop.value > 0) {
+		if (qualityDrop.value > 0 && !IgnoreMe && GraphicsButton) {
 			InvokeRepeating ("updateAverage", 2, 2);
 		}
 	
@@ -30,8 +32,8 @@ public class GraphicsMenu : MonoBehaviour {
 		frameCount++;
 		totalFrame += Time.smoothDeltaTime;
 
-		Debug.Log ((1 / Time.smoothDeltaTime ) + "  " + (1/(totalFrame/frameCount)));
 		if ((1 / Time.smoothDeltaTime < 15 || (1/ (totalFrame/frameCount)) < 35 ) && !GraphicsButton.activeSelf) {
+			Debug.Log ((1 / Time.smoothDeltaTime ) + "  " + (1/ (totalFrame/frameCount)));
 			badFrameCount++;
 			if(badFrameCount >4){
 				GraphicsButton.SetActive (true);
@@ -44,6 +46,7 @@ public class GraphicsMenu : MonoBehaviour {
 
 	public void Ignore()
 	{
+		IgnoreMe = true;
 		CancelInvoke ("updateAverage");
 	}
 

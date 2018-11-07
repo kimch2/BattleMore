@@ -4,8 +4,6 @@ using System.Collections;
 
 public class TurretHealthDisplay : HealthDisplay {
 
-	private GameObject camy;
-
 	public SpriteRenderer Icon;
 
 
@@ -31,16 +29,31 @@ public class TurretHealthDisplay : HealthDisplay {
 	void Start () {
 		
 		//updateHealth (currentHealth);
-		camy = GameObject.FindObjectOfType<MainCamera> ().gameObject;
-
+		cam = MainCamera.main.transform;
+		transform.localScale = new Vector3(-1,1,1);
 	}
-	
+
+
 	Vector3 location;
 	void Update () {
-		location = camy.transform.position;
+		/*
+		location = cam.transform.position;
 		location.x = this.gameObject.transform.position.x;
 		gameObject.transform.LookAt (location);
+*/
+		if (cam.position != lastCameraPosition) {
+			//LookLocation = cam.position;
+			//LookLocation.x = gameObject.transform.position.x;
+			//gameObject.transform.LookAt (LookLocation);
+			gameObject.transform.rotation = cam.rotation;
+			lastCameraPosition = cam.position;
 
+		} else if (transform.position != myLastPosition) {
+
+			myLastPosition = transform.position;
+			gameObject.transform.rotation = cam.rotation;
+
+		}
 
 		if (flashing) {
 			if (Time.time > nextflashTime) {

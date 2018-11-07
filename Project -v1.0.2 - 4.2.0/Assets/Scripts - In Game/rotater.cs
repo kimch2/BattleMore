@@ -24,8 +24,9 @@ public class rotater : animate {
 	
 	// Update is called once per frame
 	void Update () {  
-		if(active)
+		if (active) {
 			transform.Rotate (axis, speed * Time.deltaTime);
+		}
 
 	
 	}

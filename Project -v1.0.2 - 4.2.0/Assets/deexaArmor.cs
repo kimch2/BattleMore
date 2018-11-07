@@ -12,7 +12,7 @@ public class deexaArmor : Upgrade
     {
 
         UnitManager manager = obj.GetComponent<UnitManager>();
-		Debug.Log (manager.UnitName);
+
 		if (!manager.myStats.isUnitType(UnitTypes.UnitTypeTag.Structure) || manager.myStats.isUnitType(UnitTypes.UnitTypeTag.Add_On) )
         {
 			obj.GetComponent<UnitStats>().changeArmor(1);

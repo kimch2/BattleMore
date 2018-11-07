@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class HealthDisplay : MonoBehaviour {
 
-	private Transform cam;
+	protected  Transform cam;
 	//public List<Image> buffList = new List<Image>();
 
 	public SpriteRenderer BuildingUnit;
@@ -32,8 +32,8 @@ public class HealthDisplay : MonoBehaviour {
 	}
 
 
-	Vector3 lastCameraPosition;
-	Vector3 myLastPosition;
+	protected Vector3 lastCameraPosition;
+	protected  Vector3 myLastPosition;
 	// Update is called once per frame
 	void Update () {
 
