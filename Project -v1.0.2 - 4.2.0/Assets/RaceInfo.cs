@@ -6,35 +6,20 @@ using System.Collections.Generic;
 public class RaceInfo : MonoBehaviour {
 
 
-	public enum raceType{Daexa, Urden}
-	public enum unitType
+	public enum raceType{SteelCrest, Coalition, Polygons, Animals , None }
+
+    public enum unitType
 	{
 		ConstructionYard,Armory,AetherCore,Augmentor,Aviatrix,FluxArray,EngineeringBay,Academy,Manticore,SteelCraftor,Zephyr,Vulcan,Triton,Chimera,Minigun,ImperioCannon,RepairBay,MortarPod
 	}
+
 	public raceType race;
-	public string subtitle;
+	
 
 	public List<GameObject> unitList = new List<GameObject>();
 	public List<GameObject> buildingList = new List<GameObject>();
 	public List<GameObject> attachmentsList = new List<GameObject>();
 
-	public Material PowerGraph;
+    
 
-
-	[TextArea(3,10)]
-	public string summary;
-	[TextArea(3,10)]
-	public string playingAgainst;
-	[TextArea(3,10)]
-	public string playingAs;
-
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 }

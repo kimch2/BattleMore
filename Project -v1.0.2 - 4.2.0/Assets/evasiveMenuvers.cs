@@ -12,8 +12,10 @@ public class evasiveMenuvers : Ability,Modifier{
 	float lastDodgeTime;
 
 
-		void Awake()
-		{audioSrc = GetComponent<AudioSource> ();
+	new void Awake()
+	{
+		base.Awake();
+		audioSrc = GetComponent<AudioSource> ();
 			myType = type.passive;
 		}
 
@@ -21,7 +23,7 @@ public class evasiveMenuvers : Ability,Modifier{
 		// Use this for initialization
 		void Start () {
 		myStats = GetComponent<UnitManager> ().myStats;
-			myStats.addModifier (this);
+		myStats.addModifier (this, 0);
 		mover = GetComponent<UnitManager> ().cMover;
 
 

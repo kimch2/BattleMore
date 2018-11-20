@@ -119,8 +119,8 @@ public class UIManager : MonoBehaviour, IUIManager {
 	// Update is called once per frame
 	void Update () 
 	{
-		System.Diagnostics.Stopwatch time = new System.Diagnostics.Stopwatch();
-		time.Start ();
+		//System.Diagnostics.Stopwatch time = new System.Diagnostics.Stopwatch();
+		//time.Start ();
 
 
 
@@ -285,7 +285,7 @@ public class UIManager : MonoBehaviour, IUIManager {
 			break;
 		}
 
-		time.Stop();
+	//	time.Stop(); 
 
 	}
 

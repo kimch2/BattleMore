@@ -11,8 +11,11 @@ public class ArmorBackHeal : Ability,Modifier {
 	bool IsArmored;
 	float lastArmorTime;
 	public float percentageHealSecond = .15f;
-	void Awake()
-	{audioSrc = GetComponent<AudioSource> ();
+
+	new void Awake()
+	{
+		base.Awake();
+		audioSrc = GetComponent<AudioSource> ();
 		myType = type.passive;
 	}
 

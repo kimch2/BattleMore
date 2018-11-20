@@ -114,13 +114,29 @@ public class VictoryTrigger : MonoBehaviour {
 		ObjectiveManager.instance.updateObjective(ob);
 	}
 
+	public void UpdateObjective(Objective ob, Color c)
+	{
+		ObjectiveManager.instance.updateObjective(ob,c);
+	}
 
+
+	void OnAnimation(Canvas target)
+	{
+		GameObject effect = Instantiate<GameObject>(Resources.Load<GameObject>("VcitoryEffect"), MainCamera.main.transform);
+		effect.transform.localPosition = new Vector3(.3f,.3f,14.7f);
+		effect.transform.localRotation = Quaternion.identity;
+
+		target.enabled = true;
+		target.GetComponent<Tweener>().GoToPose("On");
+	}
 
 	public void Win()
 	{if (!hasFinished) {
 			SoundTrackPlayer.main.playVictoryTrack();
 			hasFinished = true;
-			VictoryScreen.enabled = true;
+			OnAnimation(VictoryScreen);
+
+		
 			if (LevelData.getDifficulty () == 1) {
 				VictoryScreen.transform.Find ("BackGround").GetComponent<UnityEngine.UI.Image> ().sprite = Resources.Load<Sprite> ("BronzeComplete");
 			}
@@ -159,7 +175,8 @@ public class VictoryTrigger : MonoBehaviour {
 	{if (!hasFinished) {
 			hasFinished = true;
 			Debug.Log ("LostA");
-			DefeatScreen.enabled = true;
+
+			OnAnimation(DefeatScreen);
 			GameObject.FindObjectOfType<MainCamera> ().DisableScrolling ();
 			StartCoroutine (LoseLevel ());
 			UISetter.main.startFade (1.5f, false);

@@ -20,8 +20,11 @@ public class DayexaShield : Ability,Modifier , Notify{
 
 	private float damageAbsorbed;
 
-	void Awake()
-	{audioSrc = GetComponent<AudioSource> ();
+	new void Awake()
+	{
+		base.Awake();
+
+		audioSrc = GetComponent<AudioSource> ();
 		myType = type.passive;
 	}
 

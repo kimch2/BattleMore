@@ -110,7 +110,7 @@ public class BeamWeapon : IWeapon{
 		line.SetPositions (new Vector3[]{(transform.rotation) * LaserStartPoint + this.gameObject.transform.position, (transform.rotation) * LaserStartPoint + this.gameObject.transform.position});	
 	}
 
-	public void OnDrawGizmos()
+	public new void OnDrawGizmos()
 	{
 
 		Gizmos.DrawSphere ((transform.rotation) * LaserStartPoint + this.gameObject.transform.position, .5f);

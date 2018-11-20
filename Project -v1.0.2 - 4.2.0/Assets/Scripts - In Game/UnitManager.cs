@@ -41,7 +41,7 @@ public class UnitManager : Unit,IOrderable{
 	//List of weapons modifiers that need to be applied to weapons as they are put on this guy
 	private List<Notify> potentialNotify = new List<Notify>();
 
-
+	public List<Ability> myAddons = new List<Ability>(); // Currently being used so we can see Repair bays in a weapon slot
 
 
 
@@ -159,7 +159,15 @@ public class UnitManager : Unit,IOrderable{
 	}
 
 
+	public void addAddon(Ability toAdd)
+	{
+		myAddons.Add(toAdd);
+	}
 
+	public void removeAddon(Ability toAdd)
+	{
+		myAddons.Remove(toAdd);
+	}
 
 	void GiveStartCommand()
 	{
@@ -320,20 +328,26 @@ public class UnitManager : Unit,IOrderable{
 
 	public new void GiveOrder (Order order)
 	{
+		if (!order.queued)
+		{
+			if (myState is ChannelState)
+			{
+				//order.queued = true;
+				foreach (UnitState s in queuedStates)
+				{
 
-		if (myState is  ChannelState) {
-			//order.queued = true;
-			foreach (UnitState s in queuedStates) {
-
-				if (s is PlaceBuildingState) {
-					//Debug.Log ("Cenceling");
-					((PlaceBuildingState)s).cancel ();
+					if (s is PlaceBuildingState)
+					{
+						//Debug.Log ("Cenceling");
+						((PlaceBuildingState)s).cancel();
+					}
 				}
+				if (!order.queued)
+				{
+					queuedStates.Clear();
+				}
+				//return;
 			}
-			if (!order.queued) {
-				queuedStates.Clear ();
-			}
-			//return;
 		}
 
 

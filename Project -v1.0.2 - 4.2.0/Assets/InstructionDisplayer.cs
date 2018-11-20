@@ -30,12 +30,11 @@ public class InstructionDisplayer : MonoBehaviour {
 		myCanvas.enabled = true;
 
 		Invoke ("TurnOff", duration);
-		MissionLogger.instance.AddLog (input);
+		//MissionLogger.instance.AddLog (input);
 		if (sound != null) {
 			myAudio.volume = volume;
 			myAudio.PlayOneShot (sound);
 		}
-
 		if (pic != null) {
 			myImage.enabled = true;
 			myImage.sprite = pic;

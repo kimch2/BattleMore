@@ -38,43 +38,54 @@
 
 	public void initialize()
 	{
-		if (myUnit.currentUnit) {
-			Title.text = myUnit.currentUnit.myWeapon [index].Title;
-			Range.text = "Range: " +myUnit.currentUnit.myWeapon [index].range;
-			AttackSpeed.text = "Attack Speed: " +   ((float)((int)(100 *myUnit.currentUnit.myWeapon [index].attackPeriod)))/100;
+		if (myUnit.currentUnit)
+		{
+			if (myUnit.currentUnit.myWeapon.Count > index)
+			{
+				IWeapon myWeap = myUnit.currentUnit.myWeapon[index];
+				Title.text = myWeap.Title;
+				Range.text = "Range: " + myWeap.range;
+				AttackSpeed.text = "Attack Speed: " + ((float)((int)(100 * myWeap.attackPeriod))) / 100;
 
-			//if (myUnit.currentUnit.myWeapon [index].numOfAttacks > 1) {
-				//AttackNum.text = "Attacks: " + myUnit.currentUnit.myWeapon [index].numOfAttacks;
-			//} else {
-				//AttackNum.text = "";
-			//}
-			Damage.text = "Damage: " +((float)((int)(100 *myUnit.currentUnit.myWeapon [index].baseDamage)))/100; // myUnit.currentUnit.myWeapon [index].baseDamage;
+				Damage.text = "Damage: " + ((float)((int)(100 * myWeap.baseDamage))) / 100; // myUnit.currentUnit.myWeapon [index].baseDamage;
 
-			//if (myUnit.currentUnit.myWeapon [index].extraDamage.Length > 0) {
-				//Damage.text += " ( +" +myUnit.currentUnit.myWeapon [index].extraDamage [0].bonus + " vs " + myUnit.currentUnit.myWeapon [index].extraDamage [0].type + ")";
-			//} 
-			foreach (IWeapon.bonusDamage bd in myUnit.currentUnit.myWeapon [index].extraDamage) {
-				Damage.text += " (+" +bd.bonus + " vs " + bd.type + ")";
-			}
-			if (myUnit.currentUnit.myWeapon [index].numOfAttacks > 1) {
-				Damage.text += "  Attacks X " + myUnit.currentUnit.myWeapon [index].numOfAttacks;
-			} 
+				foreach (IWeapon.bonusDamage bd in myWeap.extraDamage)
+				{
+					Damage.text += " (+" + bd.bonus + " vs " + bd.type + ")";
+				}
+				if (myWeap.numOfAttacks > 1)
+				{
+					Damage.text += "  Attacks X " + myWeap.numOfAttacks;
+				}
 
 
-			string n = "";
-			if (myUnit.currentUnit.myWeapon [index].cantAttackTypes.Count > 0) {
-				n+="Can't Attack: ";
+				string n = "";
+				if (myWeap.cantAttackTypes.Count > 0)
+				{
+					n += "Can't Attack: ";
+				}
+				foreach (UnitTypes.UnitTypeTag t in myWeap.cantAttackTypes)
+				{
+					n += t.ToString() + ",";
+				}
+				if (n.EndsWith(","))
+				{
+					n = n.Substring(0, n.Length - 1);
+				}
+				CantAttack.text = n;
 			}
-			foreach (UnitTypes.UnitTypeTag t in myUnit.currentUnit.myWeapon [index].cantAttackTypes) {
-				n += t.ToString () + ",";
+			else
+			{
+				Ability ab = myUnit.currentUnit.myAddons[index - myUnit.currentUnit.myWeapon.Count];
+				Title.text = ab.Name;
+				AttackSpeed.text = " Speed: 1";
+				Damage.text = " Heal Amount: 10";
+				Range.text = " Range: 45";
+				CantAttack.text = "";
 			}
-			if (n.EndsWith (",")) {
-				n = n.Substring (0, n.Length - 1);
-			}
-			CantAttack.text = n;
-				
 		}
 	}
+
 
 
 

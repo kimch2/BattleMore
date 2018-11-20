@@ -62,6 +62,7 @@ public class WorldRecharger : MonoBehaviour {
 
 		foreach (UnitStats stat in ToHeal) {
 			if (stat) {
+				//Debug.Log("Healing " + stat.Maxhealth);
 				stat.veternStat.UpHealing (stat.heal (stat.HealthRegenPerHalf, DamageTypes.DamageType.Regular)); 
 			}
 		}

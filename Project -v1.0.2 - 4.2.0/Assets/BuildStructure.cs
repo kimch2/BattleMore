@@ -22,7 +22,7 @@ public class BuildStructure:  UnitProduction {
 	public float animationRate =1;
 
 	public ParticleSystem myEffect;
-	void Awake()
+	new void Awake()
 	{base.Awake ();
 		audioSrc = GetComponent<AudioSource> ();
 		myType = type.building;
@@ -83,7 +83,7 @@ public class BuildStructure:  UnitProduction {
 		mySelect.updateCoolDown (0);
 		HD.stopBuilding ();
 		Morphing = false;
-		myManager.setStun (false, this, false);
+		//myManager.setStun (false, this, false);
 
 		myManager.changeState(new DefaultState());
 
@@ -120,7 +120,7 @@ public class BuildStructure:  UnitProduction {
 		Morphing = false;
 
 		racer.stopBuildingUnit (this);
-		myManager.setStun (false, this, false);
+	//	myManager.setStun (false, this, false);
 		myManager.changeState(new DefaultState());
 
 		if (inConstruction) {
@@ -139,16 +139,11 @@ public class BuildStructure:  UnitProduction {
 	{
 
 		continueOrder order = new continueOrder();
-		if (Morphing) {
 
-			//order.nextUnitCast = true;
-			//order.canCast = true;
-			//return order;
-		}
 
 		if (myManager.getState() is ChannelState) {
 			
-			order.canCast = false;
+		//	order.canCast = false;
 		}
 
 		if (!myCost.canActivate (this, order,showError)) {
@@ -191,7 +186,7 @@ public class BuildStructure:  UnitProduction {
 			racer.buildingUnit (this);
 
 			myManager.changeState (new ChannelState (),true,false);
-			myManager.setStun (true, this, false);
+			//myManager.setStun (true, this, false);
 			if (mySelect.IsSelected) {
 				SelectedManager.main.updateUI ();
 			}
@@ -224,7 +219,7 @@ public class BuildStructure:  UnitProduction {
 		mySelect.updateCoolDown (0);
 
 		GameManager.main.playerList[myManager.PlayerOwner-1].UnitCreated(unitToBuild.GetComponent<UnitStats> ().supply);
-		myManager.setStun (false, this, false);
+		//myManager.setStun (false, this, false);
 		myManager.changeState(new DefaultState());
 		racer.stopBuildingUnit (this);
 	
@@ -253,7 +248,7 @@ public class BuildStructure:  UnitProduction {
 		Morphing = true;
 
 		myManager.changeState (new ChannelState (), false, false);
-		myManager.setStun (true, this, false);
+		//myManager.setStun (true, this, false);
 		if (mySelect.IsSelected) {
 			SelectedManager.main.updateUI ();
 		}

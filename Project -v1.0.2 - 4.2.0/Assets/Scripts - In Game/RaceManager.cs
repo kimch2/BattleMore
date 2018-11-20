@@ -496,7 +496,8 @@ public class RaceManager : MonoBehaviour, ManagerWatcher {
 				StartCoroutine (DeathRescan (b));
 			}
 
-			if (!Unit.myStats.isUnitType (UnitTypes.UnitTypeTag.Turret) && !Unit.myStats.isUnitType (UnitTypes.UnitTypeTag.Summon)) {
+			if (trueDeath && !Unit.myStats.isUnitType (UnitTypes.UnitTypeTag.Turret) && !Unit.myStats.isUnitType (UnitTypes.UnitTypeTag.Summon)) {
+
 				unitsLost++;
 			}
 

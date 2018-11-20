@@ -48,30 +48,33 @@ public class GamePlayMenu : MonoBehaviour {
 
 		cam =  MainCamera.main;
 
-		if (!GameSettings.getToolTips()) {
 
-			toggleTools ();
-		}
+		showToolTip.isOn = GameSettings.getToolTips();
+		toggleTools ();
 
-		if (!GameSettings.getAbility()) {
-			toggleAbilities ();
-		}
+		showAbility.isOn = GameSettings.getAbility();
+		toggleAbilities ();
+		
 		healthBarList ();
 	
 	}
-	
+
+
+	public void changeMouseSpeed(Slider slide)
+	{
+		PlayerPrefs.SetFloat("MouseScroll", slide.value);
+		// NOT IMPLEMENTED
+	}
 
 	public void toggleTools()
 	{
-		toggled = !toggled;
-		GameSettings.setToolTips (toggled);
-		if (showToolTip.isOn != toggled) {
-			//showToolTip.isOn = toggled;
-		}
+
+		GameSettings.setToolTips (showToolTip.isOn);
+
 
 		foreach (ToolTip tool in Object.FindObjectsOfType<ToolTip> ()) {
 			if (!tool.Ability) {
-				tool.enabled = toggled;
+				tool.enabled = showToolTip.isOn;
 			}
 		}
 	}
@@ -88,14 +91,12 @@ public class GamePlayMenu : MonoBehaviour {
 
 	public void toggleAbilities()
 	{
-		toggled = !toggled;
-		GameSettings.setAbility (toggled);
-		if (showAbility.isOn != toggled) {
-			//showAbility.isOn = toggled;
-		}
-		foreach (ToolTip tool in Object.FindObjectsOfType<ToolTip> ()) {
+
+		GameSettings.setAbility (showAbility.isOn);
+
+		foreach (UltTip tool in Object.FindObjectsOfType<UltTip> ()) {
 			if (tool.Ability) {
-				tool.enabled = toggled;
+				tool.enabled = showAbility.isOn;
 			}
 		}
 	}

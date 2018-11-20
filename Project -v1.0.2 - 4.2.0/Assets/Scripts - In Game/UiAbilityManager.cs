@@ -691,27 +691,32 @@ public class UiAbilityManager : MonoBehaviour {
 			cardCreator.gameObject.GetComponent<Canvas> ().enabled = true;
 		}
 
-		for(int j = 0; j < 3; j ++){
+        for (int j = 0; j < 3; j++)
+        {
 
-			if (uiPage.rows [j] == null) {
+            if (uiPage.rows[j] == null)
+            {
 
-				continue;
-			}
-
-
-			if (j > 0 && uiPage.rows [j] == uiPage.rows[j-1]) {
-
-				continue;
-			}
+                continue;
+            }
 
 
-			n = uiPage.rows[j][0].AbilityStartingRow;
+            if (j > 0 && uiPage.rows[j] == uiPage.rows[j - 1])
+            {
+
+                continue;
+            }
 
 
-			//Sets the unit's stats and count
-			UnitManager man = uiPage.rows[j][0].gameObject.GetComponent<UnitManager> ();
-			Stats[n].GetComponent<StatsUI> ().loadUnit (man,uiPage.rows[j].Count, man.UnitName);
-			IconStartPoints [j].SetActive (true);
+            n = uiPage.rows[j][0].AbilityStartingRow;
+
+
+            //Sets the unit's stats and count
+            UnitManager man = uiPage.rows[j][0].gameObject.GetComponent<UnitManager>();
+            Stats[n].GetComponent<StatsUI>().loadUnit(man, uiPage.rows[j].Count, man.UnitName);
+            if (totalUnit > 1) { 
+                IconStartPoints[j].SetActive(true);
+               }
 			// fill the icon panel
 
 
@@ -763,16 +768,16 @@ public class UiAbilityManager : MonoBehaviour {
 				else{
 					if (j == 0 || uiPage.rows [j] != uiPage.rows [j - 1]) {
 						int picCount = Mathf.Min (uiPage.rows [j].Count, 18);
-						int separation = 59;
+						int separation = 62;
 
 						if (uiPage.rows [j].Count > 14) {
 							separation = Mathf.Max (15, 558 / picCount);
 						}
 
-						int currentX = 140;
+						int currentX = 145;
 						for (int k = 0; k < picCount; k++) {
 
-							Vector3 pos = IconStartPoints [j].transform.position;
+							Vector3 pos = IconStartPoints [j].transform.position + Vector3.down * (2 - j) * 3;
 							pos.x += currentX * this.transform.localScale.x;
 							GameObject unit = myIconPool.FastSpawn (Vector3.zero, Quaternion.identity);
 

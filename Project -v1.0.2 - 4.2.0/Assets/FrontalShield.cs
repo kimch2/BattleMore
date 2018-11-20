@@ -15,8 +15,10 @@ public class FrontalShield : Ability,Modifier {
 
 	Coroutine bleederCo;
 
-	void Awake()
-	{audioSrc = GetComponent<AudioSource> ();
+	new void Awake()
+	{
+		base.Awake();
+		audioSrc = GetComponent<AudioSource> ();
 		myType = type.passive;
 	}
 

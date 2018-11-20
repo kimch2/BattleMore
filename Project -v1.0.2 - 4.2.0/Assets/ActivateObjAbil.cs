@@ -19,8 +19,10 @@ public class ActivateObjAbil : Ability {
 
 	// Use this for initialization
 
-	void Awake()
-	{audioSrc = GetComponent<AudioSource> ();
+	new void Awake()
+	{
+		base.Awake();
+		audioSrc = GetComponent<AudioSource> ();
 		myType = type.activated;
 	}
 

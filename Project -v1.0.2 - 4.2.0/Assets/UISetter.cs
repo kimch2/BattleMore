@@ -17,6 +17,7 @@ public class UISetter : MonoBehaviour {
 	public CanvasGroup canGroup;
 	public static UISetter main;
 
+
 	public GameObject EnemyArsenalButton;
 	void Awake()
 	{main = this;

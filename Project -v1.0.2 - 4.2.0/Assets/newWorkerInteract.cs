@@ -92,7 +92,6 @@ public class newWorkerInteract :  Ability, Iinteract {
 
 	public void findNearestOre()
 	{
-
 		float distance = 300;
 		if (myManager.getState () is MiningState) {
 			return;}
@@ -210,6 +209,12 @@ public class newWorkerInteract :  Ability, Iinteract {
 
 	public  void computeInteractions (Order order)
 	{
+
+		if (myManager.getState() is ChannelState && !order.queued)
+		{
+			return;
+		}
+
 		//Debug.Log ("interacting" + order.OrderType);
 		switch (order.OrderType) {
 		//Stop Order----------------------------------------
@@ -238,7 +243,7 @@ public class newWorkerInteract :  Ability, Iinteract {
 			break;
 
 		case Const.ORDER_Interact:
-			
+
 			if(order.Target.gameObject.GetComponent<OreDispenser> () != null)
 			{
 				if (!order.Target.gameObject.GetComponent<OreDispenser> ().currentMinor) {

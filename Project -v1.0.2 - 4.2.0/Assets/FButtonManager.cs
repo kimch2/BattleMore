@@ -17,6 +17,9 @@ public class FButtonManager : MonoBehaviour {
 	public Text unbound;
 	public Text AllBuildings;
 
+	public Button IdleButton;
+	public Button TurretButton;
+
 	//SelectedManager selectManager;
 
 
@@ -25,8 +28,11 @@ public class FButtonManager : MonoBehaviour {
 		//selectManager = GameObject.Find ("Manager").GetComponent<SelectedManager>();
 		//setButtons ();
 		main = this;
-	
+
+		Invoke("changeWorkers",1);
+		Invoke("updateTankNumber", 1);
 	}
+
 	
 
 
@@ -65,16 +71,33 @@ public class FButtonManager : MonoBehaviour {
 			}
 		}
 		if (workerCount == 0) {
-			idleWorkers.color = Color.white;
+		
+			IdleButton.interactable = false;
+			idleWorkers.transform.parent.gameObject.SetActive(false);
 		} else {
-			idleWorkers.color = Color.red;
+			IdleButton.interactable = true;
+
+			idleWorkers.transform.parent.gameObject.SetActive(true);
 		}
 		idleWorkers.text = "" + workerCount;
 	}
 
 	public void updateTankNumber()
 	{
+
+
 		unbound.text = "" + SelectedManager.main.getUnarmedTankCount ();
+		if (unbound.text == "0")
+		{
+
+			TurretButton.interactable = false;
+			unbound.transform.parent.gameObject.SetActive(false);
+		}
+		else
+		{
+			unbound.transform.parent.gameObject.SetActive(true);
+			TurretButton.interactable = true;
+		}
 		//Debug.Log ("Updated " + SelectedManager.main.getUnarmedTankCount ());
 	}
 

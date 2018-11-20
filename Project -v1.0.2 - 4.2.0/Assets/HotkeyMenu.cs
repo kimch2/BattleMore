@@ -139,7 +139,7 @@ public class HotkeyMenu : MonoBehaviour {
 			selectMan = GameObject.FindObjectOfType<SelectedManager> ();
 			foreach (RaceInfo info in raceInfo.GetComponents<RaceInfo>()) {
 
-			if (info.race == RaceInfo.raceType.Daexa) {
+			if (info.race == RaceInfo.raceType.SteelCrest) {
 
 					objectList = new List<GameObject> ();
 

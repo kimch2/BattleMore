@@ -102,13 +102,31 @@ public class Email : MonoBehaviour {
 
 	}
 
+	mail currentEmail;
 
 	public void ReadEmail(mail m)
 	{
+		currentEmail = m;
 		ReadEmailObj.SetActive (true);
 		m.Message = m.Message.Replace ("{Player}", PlayerPrefs.GetString ("PlayerName") );
 		ReadEmailObj.GetComponentInChildren<Text> ().text = "To: " + m.To+ "\nFrom: "+ m.From + "\n\n"+m.Message;
 
+	}
+
+	public void DeleteEmail()
+	{
+
+		foreach (Transform t in inbox.transform)
+		{
+			if (t.gameObject.name.Contains("Email"))
+			{
+				if (t.gameObject.GetComponentsInChildren<Text>()[1].text.Contains(currentEmail.Header))
+				{
+					Destroy(t.gameObject);
+				}
+			}
+		}
+		LevelData.currentInfo.readScienceLog(currentEmail.Header);
 	}
 
 	public void AttemptLogin(InputField input)
@@ -168,7 +186,7 @@ public class Email : MonoBehaviour {
 				m.To = accounts [0].Username;
 			}
 			//Debug.Log ("Highest " + m.LevelUnLocked + "   " + LevelData.getHighestLevel());
-			if (m.LevelUnLocked <= LevelData.getHighestLevel ()) {
+			if (m.LevelUnLocked <= LevelData.getHighestLevel () && !LevelData.currentInfo.hasReadLog(m.Header)) {
 
 				if (m.From == currentAccount.Username) {
 					GameObject obj = Instantiate<GameObject> (EmailHeaderTemplate, sentBox.transform);

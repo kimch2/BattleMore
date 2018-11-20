@@ -11,7 +11,24 @@ public class turret : MonoBehaviour {
 	
 	//float lastTargetTime;
 
-	GameObject myTarget; 
+	GameObject myTarget;
+
+	public bool ProtectedByShields;
+
+	private void Start()
+	{
+		if (ProtectedByShields)
+		{
+			if (GetComponent<UnitStats>())
+			{
+				GetComponent<UnitStats>().addModifier(GetComponentInParent<DayexaShield>());
+			}
+			else
+			{
+				GetComponentInParent<UnitStats>().addModifier(GetComponentInParent<DayexaShield>());
+			}
+		}
+	}
 
 	public void Target(GameObject target)
 	{

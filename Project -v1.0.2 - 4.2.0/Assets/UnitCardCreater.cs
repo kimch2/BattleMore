@@ -198,22 +198,34 @@ public class UnitCardCreater : MonoBehaviour {
 			weaponTitle.enabled = true;
 		}
 
+		int n = 0;
 		// Change this if a unit ever has more than 5 weapons;
 		for (int i = 0; i < 5; i++) {
 	
 				weaponIcons [i].SetActive (manager.myWeapon.Count > i);
 			if (manager.myWeapon.Count > i) {
+				n++;
 				weaponIcons [i].transform.Find("DamageIcon").GetComponent<Image> ().sprite = manager.myWeapon [i].myIcon;
 				if (manager.myWeapon [i].getUpgradeLevel () > 0) {
-				//	Debug.Log ("Setting level to " + manager.myWeapon [i].getUpgradeLevel ());
+				
 					weaponIcons [i].transform.GetComponentInChildren<Text> ().text = "" + manager.myWeapon [i].getUpgradeLevel ();
 				} else {
 					weaponIcons [i].transform.GetComponentInChildren<Text> ().text = "";
 				}
 			}
 
+			
 		}
 
+		for (int i = n; i < 5; i++)
+		{
+			weaponIcons[i].SetActive(manager.myAddons.Count + n > i);
+			if (manager.myAddons.Count + n > i)
+			{
+				weaponIcons[i].transform.Find("DamageIcon").GetComponent<Image>().sprite = manager.myAddons[i - n].iconPic;
+				weaponIcons[i].transform.GetComponentInChildren<Text>().text = "";
+			}
+		}
 		foreach (Transform child in BuffList.transform) {
 			Destroy (child.gameObject);
 		}

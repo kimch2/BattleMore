@@ -1,10 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+using System;
+using System.ComponentModel;
+using System.IO;
 using System.Net;
 using System.Net.Mail;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
+using UnityEngine;
 
 public class BugReporter : MonoBehaviour {
 
@@ -14,40 +17,64 @@ public class BugReporter : MonoBehaviour {
 	public void submit()
 	{
 
-		StartCoroutine (sendEmail ());
+		if (lastSubmissionTime > Time.time - 60)
+		{
+			myField.text = "Please wait at least 60 seconds between submissions" ;
+			return;
+		}
 
+		if (myField.text == "" || myField.text == " You must type your bug report first!")
+		{
+			myField.text = " You must type your bug report first!";
+			return;
+		}
+
+		//	StartCoroutine (sendEmail ());
+		sendmail();
 	
 
 
 	}
 
-	IEnumerator sendEmail()
+
+	float lastSubmissionTime = -60;
+
+
+
+
+
+	public void sendmail()
 	{
-		yield return null;
+		lastSubmissionTime = Time.time;
+		SimpleEmailSender.emailSettings.STMPClient = "smtp.gmail.com";
+		SimpleEmailSender.emailSettings.SMTPPort = 587;
+		SimpleEmailSender.emailSettings.UserName = "battlemoredummy@gmail.com";
+		SimpleEmailSender.emailSettings.UserPass = "Hadrian1!";
 
-		if (myField.text == "" || myField.text == " You must type your bug report first!") {
-			myField.text = " You must type your bug report first!";
-	
-		} else {
-			MailMessage mail = new MailMessage ();
+		myField.text += "\n\n Sending...";
 
-			mail.From = new MailAddress ("battlemoreofficial@gmail.com");
-			mail.To.Add ("battlemoreofficial@gmail.com");
-			mail.Subject = "Bug Report";
-			mail.Body = myField.text;
-			//mail.Headers.Add("X-SMTPAPI" xsmtpapiJSON);
 
-			SmtpClient smtpServer = new SmtpClient ("smtp.gmail.com");
-			smtpServer.Port = 587;
-			smtpServer.Timeout = 5000;
-			smtpServer.Credentials = new System.Net.NetworkCredential ("battlemoreofficial@gmail.com", "Hyperion1!") as ICredentialsByHost;
-			smtpServer.EnableSsl = true;
-			ServicePointManager.ServerCertificateValidationCallback = 
-			delegate(object s, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors) {
-				return true;
-			};
-			smtpServer.Send (mail);
-			myField.text =  "You bug has been reported. I'll fix it as soon as possible!";
+
+		string subjectLine = "Bug Report: ";
+		if (UISetter.main)
+		{
+			subjectLine += " " + UISetter.main.LevelTitle.text;
+		}
+		SimpleEmailSender.Send("battlemoreofficial@gmail.com", subjectLine, myField.text, "", SendCompletedCallback);
+	}
+
+	private void SendCompletedCallback(object sender, AsyncCompletedEventArgs e)
+	{
+		if (e.Cancelled || e.Error != null)
+		{
+
+			myField.text = "Something broke, please report this on the Steam Forum or the game website.";
+		}
+		else
+		{
+			print("Email successfully sent.");
+
+			myField.text = "You bug has been reported. I'll fix it as soon as possible!";
 		}
 	}
 }

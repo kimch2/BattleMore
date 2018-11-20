@@ -32,23 +32,31 @@ public class HealthDisplay : MonoBehaviour {
 	}
 
 
+	protected Quaternion lastRotation;
 	protected Vector3 lastCameraPosition;
 	protected  Vector3 myLastPosition;
 	// Update is called once per frame
 	void Update () {
 
-		if (cam.position != lastCameraPosition) {
+		if (cam.position != lastCameraPosition)
+		{
 			//LookLocation = cam.position;
 			//LookLocation.x = gameObject.transform.position.x;
 			//gameObject.transform.LookAt (LookLocation);
 			gameObject.transform.rotation = cam.rotation;
 			lastCameraPosition = cam.position;
 
-		} else if (transform.position != myLastPosition) {
-			
+		}
+		else if (transform.position != myLastPosition)
+		{
 			myLastPosition = transform.position;
 			gameObject.transform.rotation = cam.rotation;
-	
+
+		}
+		else if (lastRotation != transform.rotation)
+		{
+			lastRotation = transform.rotation;
+			gameObject.transform.rotation = cam.rotation;
 		}
 
 

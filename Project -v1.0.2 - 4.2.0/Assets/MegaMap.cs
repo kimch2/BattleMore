@@ -24,7 +24,7 @@ public class MegaMap : MonoBehaviour{
 
 	void Update()
 	{
-		if (Input.GetKeyDown (KeyCode.M)) {
+		if (Input.GetKeyDown (KeyCode.M) && Time.timeScale != 0) {
 			ToggleMegamap ();
 		}
 	}

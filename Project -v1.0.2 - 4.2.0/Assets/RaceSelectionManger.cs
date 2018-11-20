@@ -53,7 +53,7 @@ public class RaceSelectionManger : MonoBehaviour {
 	private void loadRace(int index)
 
 	{Title.text = raceList [index].race.ToString ();
-		subtitle.text = raceList [index].subtitle;
+
 		foreach (Button but in buttonlist) {
 			Destroy (but.gameObject);
 		}
@@ -61,9 +61,6 @@ public class RaceSelectionManger : MonoBehaviour {
 		currentIndex = index;
 
 
-		summary.text = "General\n  " +raceList [index].summary;
-
-		graph.material = raceList [index].PowerGraph;
 
 		bool first = true;
 		float currentX = firstUnitButton.transform.position.x;
@@ -86,7 +83,7 @@ public class RaceSelectionManger : MonoBehaviour {
 	}
 
 	public void loadGeneral()
-	{summary.text = "General\n  " +raceList [currentIndex].summary;
+	{
 	}
 
 	public void selectDaexa()
@@ -103,8 +100,8 @@ public class RaceSelectionManger : MonoBehaviour {
 
 
 	public void loadTips()
-	{summary.text = "Playing as: \n" + raceList [currentIndex].playingAs + "\n\nPlaying Against:\n" + raceList [currentIndex].playingAgainst;
-	}
+	{
+    }
 
 	public void selectUrden()
 	{

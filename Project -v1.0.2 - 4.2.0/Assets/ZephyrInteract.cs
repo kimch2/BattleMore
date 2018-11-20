@@ -14,7 +14,8 @@ public class ZephyrInteract : StandardInteract{
 		if (manage != null) {
 
 			if (manage.PlayerOwner != this.gameObject.GetComponent<UnitManager>().PlayerOwner  ) {
-				if (this.gameObject.GetComponent<UnitManager> ().myWeapon.Count  == 0) {
+				if (myManager.myWeapon.Count  == 0) {
+					 
 					myManager.changeState (new FollowState (order.Target.gameObject, myManager));
 				} else {
 					//Debug.Log ("Ordering to interact " + manage.gameObject);

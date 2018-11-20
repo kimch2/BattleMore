@@ -155,6 +155,8 @@ public class UnitStats : MonoBehaviour {
 			WorldRecharger.main.addHeal(this);
 		} 
 		veternStat.playerOwner = myManager.PlayerOwner;
+		HealthRegenPerHalf = HealthRegenPerSec / 2;
+		EnergyRegenPerHalf = EnergyRegenPerSec / 2;
 	}
 
 	void firstHealth()
@@ -324,6 +326,12 @@ public class UnitStats : MonoBehaviour {
 	private bool dead = false;
 
 
+	public void kill(GameObject deathSource)
+	{
+		kill(deathSource, null);
+	
+		}
+
 
 	public void kill(GameObject deathSource, UnitManager srcManager = null)
 	{
@@ -449,7 +457,11 @@ public class UnitStats : MonoBehaviour {
 
 	}
 
-
+	/// <summary>
+	/// priority of 0 puts it at the front of the queue
+	/// </summary>
+	/// <param name="mod"></param>
+	/// <param name="priority"></param>
 	public void addModifier(Modifier mod, int priority = -1)
 	{
 		if (!damageModifiers.Contains (mod)) {
@@ -551,13 +563,16 @@ public class UnitStats : MonoBehaviour {
 		if (health == Maxhealth) {
 			return 0;
 		}
-
 		foreach (Modifier mod in HealModifiers) {
-			n = mod.modify (n, null,type);
+			if (mod != null)
+			{
+				n = mod.modify(n, null, type);
+			}
 		}
 		
 		float amount = Math.Min (n, Maxhealth - health);
 
+		
 		health += amount;
 
 		updateHealthBar();

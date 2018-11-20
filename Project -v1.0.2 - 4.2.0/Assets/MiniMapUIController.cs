@@ -429,18 +429,18 @@ public class MiniMapUIController : MonoBehaviour, IPointerDownHandler , IPointer
 		botLeftP = Vector2.zero;
 		botRightP = Vector2.zero;
 
+      
 
-
-		ray1 = Camera.main.ScreenPointToRay (new Vector3 (0, 150, 0));
+		ray1 = MainCamera.main.camera.ScreenPointToRay (new Vector3 (0, 150, 0));
 
 		//Top left
-		ray2 = Camera.main.ScreenPointToRay (new Vector3 (0, Screen.height - 1, 0));
+		ray2 = MainCamera.main.camera.ScreenPointToRay (new Vector3 (0, Screen.height - 1, 0));
 
 		//Top right
-		ray3 = Camera.main.ScreenPointToRay (new Vector3 (Screen.width, Screen.height - 1, 0));
+		ray3 = MainCamera.main.camera.ScreenPointToRay (new Vector3 (Screen.width, Screen.height - 1, 0));
 
 		//Bottom right
-		ray4 = Camera.main.ScreenPointToRay (new Vector3 (Screen.width, 150, 0));
+		ray4 = MainCamera.main.camera.ScreenPointToRay (new Vector3 (Screen.width, 150, 0));
 
 		//	Debug.Log ("B" + DateTime.Now.Millisecond );
 

@@ -92,6 +92,22 @@ public class ObjectiveManager : MonoBehaviour {
 		}
 	}
 
+	public void updateObjective(Objective obj, Color color)
+	{
+		try
+		{
+			Text t = bonusObjectives[obj].GetComponentInChildren<Text>();
+			t.text = "" + obj.description;
+			t.color = color;
+		}
+		catch (Exception)
+		{
+			Text t = mainObjectives[obj].GetComponentInChildren<Text>();
+			t.text = "" + obj.description;
+			t.color = color;
+		}
+	}
+
 	public bool hasObjective(Objective obj)
 	{
 		return (bonusObjectives.ContainsKey (obj) || mainObjectives.ContainsKey (obj));

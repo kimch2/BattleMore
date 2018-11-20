@@ -8,11 +8,18 @@ public class BillBoard : MonoBehaviour
 	public float RandomRotate = 0;
 	private float RndRotate;
 	public Transform this_t_;
-	
-	void Awake() {
+
+	void Start() {
 		this_t_ = this.transform;
 		//RndRotate = Random.value*RandomRotate;
-		LookAtCam = Camera.main;
+
+		if (MainCamera.main) { 
+
+		LookAtCam = MainCamera.main.camera; }
+		if (!LookAtCam)
+		{
+			LookAtCam = Camera.main;
+		}
 	}
 	Vector3 LookLocation;
 	void Update() {

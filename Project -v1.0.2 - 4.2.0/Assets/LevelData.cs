@@ -24,6 +24,8 @@ public class LevelData  {
 
 		public List<string> scienceLogs = new List<string> ();
 
+		
+
 		public bool hasCompletedLevel(int levelNumber)
 		{
 			foreach (levelInfo info in myLevels) {

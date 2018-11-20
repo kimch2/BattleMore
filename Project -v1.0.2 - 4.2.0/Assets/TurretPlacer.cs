@@ -128,7 +128,7 @@ public class TurretPlacer : MonoBehaviour {
 		}
 		if (cam.position != lastCameraPosition || transform.position != myLastPosition) {
 			pos = myMount.transform.position + Vector3.up *5;
-			//myRect.position = pos;
+			myRect.position = pos;
 
 			dif = (cam.transform.position - this.gameObject.transform.position) * .5f;
 

@@ -240,7 +240,7 @@ public class SelectedManager : MonoBehaviour, ISelectedManager
 		if (Input.GetKeyUp (KeyCode.Delete)) {
 			if (SelectedObjects.Count > 0 && SelectedObjects [0] != null) {
 				if (SelectedObjects [0].getUnitManager ().PlayerOwner == 1 || Input.GetKey (KeyCode.Backslash)) {
-					SelectedObjects [0].getUnitStats ().kill (null);
+					SelectedObjects [0].getUnitStats ().kill (null,null);
 				}
 			}
 		}
@@ -414,13 +414,15 @@ public class SelectedManager : MonoBehaviour, ISelectedManager
     public void AddObject(RTSObject obj)
     {
         if (!SelectedObjects.Contains(obj))
-        {       
-			//Debug.Log ("Adding " + obj);
-            SelectedObjects.Add(obj);
+        {
+            if (SelectedObjects.Count == 0 || obj.getUnitManager().PlayerOwner == SelectedObjects[0].getUnitManager().PlayerOwner)
+            {
+                SelectedObjects.Add(obj);
 
-            obj.SetSelected();
-            
-            sortUnit(obj);
+                obj.SetSelected();
+
+                sortUnit(obj);
+            }
         }
 
     }
@@ -1151,7 +1153,9 @@ public class SelectedManager : MonoBehaviour, ISelectedManager
 	public float getUnarmedTankCount()
 	{float i = 0;
 		foreach (KeyValuePair<string, List<UnitManager>> pair in raceMan.getUnitList()) {
+
 			foreach (UnitManager obj in pair.Value) {
+			
 				TurretMount tm = obj.GetComponentInChildren<TurretMount> ();
 				if (tm && !tm.turret) {
 					i++;

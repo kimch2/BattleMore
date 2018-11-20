@@ -33,8 +33,14 @@ public class TimedObjective : Objective {
 			yield return new WaitForSeconds (1);
 			remainingTime -= 1;
 			description = initialDescript + "  " + Clock.convertToString(remainingTime);
-			VictoryTrigger.instance.UpdateObjective (this);
-		
+			if (remainingTime < 60)
+			{
+				VictoryTrigger.instance.UpdateObjective(this , Color.red);
+			}
+			else
+			{
+				VictoryTrigger.instance.UpdateObjective(this);
+			}
 		
 		}
 		if (completed) {

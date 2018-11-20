@@ -80,7 +80,9 @@ public class GameMenu : MonoBehaviour {
 
 
 	public void setMenu(Canvas can)
-	{if (currentMenu != null) {
+	{
+		closeDropdowns();
+		if (currentMenu != null) {
 			currentMenu.enabled = false;
 		}
 		currentMenu = can;
@@ -107,6 +109,14 @@ public class GameMenu : MonoBehaviour {
 		pause ();
 	}
 		
+	}
+
+	void closeDropdowns()
+	{ foreach (Dropdown d in GameObject.FindObjectsOfType<Dropdown>())
+		{
+			d.Hide();
+		}
+
 	}
 
 	public void quitGame()

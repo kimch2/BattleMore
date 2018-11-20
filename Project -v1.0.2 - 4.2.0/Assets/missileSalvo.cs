@@ -333,8 +333,9 @@ public class missileSalvo :  Ability, Iinteract, Validator, Notify{
 	public bool attackWhileMoving;
 
 	// Use this for initialization
-	void Awake () {
-
+	new void Awake()
+	{
+		base.Awake();
 		myManager = GetComponent<UnitManager> ();
 		myManager.setInteractor (this);
 

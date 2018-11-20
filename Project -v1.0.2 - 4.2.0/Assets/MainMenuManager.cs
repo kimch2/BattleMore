@@ -86,6 +86,16 @@ public class MainMenuManager : MonoBehaviour {
 		}
 
 
+	public void replay()
+	{
+
+		if (VictoryTrigger.instance)
+		{
+			VictoryTrigger.instance.replay();
+		}
+
+	}
+
 	public void loadOption()
 	{
 		OptionsCan.enabled = !OptionsCan.enabled;
@@ -105,6 +115,11 @@ public class MainMenuManager : MonoBehaviour {
 
 	public void toCredits()
 	{loadScreen (Credits);}
+
+	public void EndGameCredits()
+	{
+		SceneManager.LoadScene(17);
+	}
 
 	public void toMain()
 	{loadScreen (MainMenu);

@@ -367,12 +367,12 @@ namespace AssetUsageFinder
             public static void FireOnSceneOpenAndForget(Action a)
             {
                 _delayedAction = a;
-                EditorApplication.hierarchyWindowChanged += Callback;
+                EditorApplication.hierarchyChanged += Callback;
             }
 
             private static void Callback()
             {
-                EditorApplication.hierarchyWindowChanged -= Callback;
+                EditorApplication.hierarchyChanged  -= Callback;
                 _delayedAction();
                 _delayedAction = null;
             }

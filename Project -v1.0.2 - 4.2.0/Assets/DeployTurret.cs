@@ -26,8 +26,10 @@ public class DeployTurret  : TargetAbility{
 	int maxChargeCount =2;
 	public MultiShotParticle FabricateEffect;
 
-	void Awake()
-	{audioSrc = GetComponent<AudioSource> ();
+	new void Awake()
+	{
+		base.Awake();
+		audioSrc = GetComponent<AudioSource> ();
 		myType = type.target;
 
 	}

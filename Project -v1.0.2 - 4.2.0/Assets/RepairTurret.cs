@@ -2,7 +2,7 @@
 using System.Collections;
 
 
-public class RepairTurret : Ability, Modifier{
+public class RepairTurret : Ability, Modifier, Addon{
 
 
 	private UnitManager mymanager;
@@ -281,4 +281,8 @@ public class RepairTurret : Ability, Modifier{
 
 
 
+}
+
+
+public interface Addon {
 }

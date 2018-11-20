@@ -48,6 +48,7 @@ public class FadeOut : MonoBehaviour {
 				myText.color = new Color (0, 0, 0, 0);
 
 				this.enabled = false;
+				myImage.enabled = false;
 			}
 		} else {
 			if (MainCamera.main) {

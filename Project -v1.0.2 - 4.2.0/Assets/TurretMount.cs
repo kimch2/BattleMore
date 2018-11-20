@@ -41,9 +41,14 @@ public class TurretMount : MonoBehaviour, Modifier {
 
 
 	public float modify(float damage, GameObject source, DamageTypes.DamageType theType)
-	{ 
-		if (turret) {
-			turret.SendMessage ("Dying", SendMessageOptions.DontRequireReceiver);
+	{
+		if (turret)
+		{
+			turret.SendMessage("Dying", SendMessageOptions.DontRequireReceiver);
+		}
+		else
+		{
+			FButtonManager.main.updateTankNumber();
 		}
 		return damage;
 	}
@@ -113,9 +118,20 @@ public class TurretMount : MonoBehaviour, Modifier {
 		obj.transform.rotation = this.gameObject.transform.rotation;
 
 		UnitManager manager = this.gameObject.GetComponentInParent<UnitManager> ();
-		if (obj.GetComponent<IWeapon> ()) {
-			manager.setWeapon (obj.GetComponent<IWeapon> ());
-		} 
+		if (obj.GetComponent<IWeapon>())
+		{
+			manager.setWeapon(obj.GetComponent<IWeapon>());
+		}
+		else if (obj.GetComponent<RepairTurret>())
+		{
+			manager.myAddons.Add(obj.GetComponent<RepairTurret>());
+		}
+
+		if (manager.gameObject.GetComponent<Selected>().IsSelected)
+		{
+			RaceManager.upDateUI();
+		}
+
 
 		transform.parent.SendMessage ("TurretPlaced", SendMessageOptions.DontRequireReceiver);
 		manager.PlayerOwner = GetComponentInParent<UnitManager> ().PlayerOwner;
@@ -137,6 +153,14 @@ public class TurretMount : MonoBehaviour, Modifier {
 		UnitManager manager = this.gameObject.GetComponentInParent<UnitManager> ();
 
 		manager.removeWeapon(toReturn.GetComponent<IWeapon>());
+		manager.removeAddon(toReturn.GetComponent<RepairTurret>());
+
+
+		if (manager.gameObject.GetComponent<Selected>().IsSelected)
+		{
+			RaceManager.upDateUI();
+		}
+
 
 		transform.parent.SendMessage ("TurretRemoved", SendMessageOptions.DontRequireReceiver);
 		FButtonManager.main.updateTankNumber ();

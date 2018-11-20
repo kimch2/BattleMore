@@ -22,8 +22,10 @@ public class buildTurret :UnitProduction{
 	public GameObject PlaceEffect;
 
 	public bool rapidArms;
-	void Awake()
-	{audioSrc = GetComponent<AudioSource> ();
+	new void Awake()
+	{
+		base.Awake();
+		audioSrc = GetComponent<AudioSource> ();
 		myType = type.activated;
 		buildMan = GetComponent<BuildManager> ();
 		manager = GetComponent<UnitManager> ();

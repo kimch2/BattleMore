@@ -65,7 +65,7 @@ public class CinematicCamera : SceneEventTrigger {
 				//Debug.Log ("PLaying  " +myScenes [currentScene].myShots [currentShot].DialogueText );
 				if (myScenes [currentScene].myShots [currentShot].dialogueLength > 0) {
 					ExpositionDisplayer.instance.displayText (myScenes [currentScene].myShots [currentShot].DialogueText, myScenes [currentScene].myShots [currentShot].dialogueLength
-						, myScenes [currentScene].myShots [currentShot].dialogueAudio, .8f, myScenes [currentScene].myShots [currentShot].dialogueImage, 5);
+						, myScenes [currentScene].myShots [currentShot].dialogueAudio, .8f, myScenes [currentScene].myShots [currentShot].dialogueImage, 7);
 				}
 				myScenes [currentScene].myShots [currentShot].toTrigger.Invoke ();
 			
@@ -96,7 +96,7 @@ public class CinematicCamera : SceneEventTrigger {
 		previousGameSpeed = Time.timeScale;
 		Time.timeScale = previousGameSpeed;
 		previousCamPos = MainCamera.main.gameObject.transform.position;
-
+		MainCamera.main.GetComponent<Camera> ().enabled = false;
 
 	GetComponent<Camera> ().enabled = true;
 		currentScene = index;
@@ -179,7 +179,7 @@ public class CinematicCamera : SceneEventTrigger {
 			MainCamera.main.gameObject.transform.position = previousCamPos ;
 			yield return null;
 		}
-
+		MainCamera.main.GetComponent<Camera> ().enabled = true;
 		GetComponent<Camera> ().enabled = false;
 		MainCamera.main.GetComponent<Camera> ().fieldOfView = startAngle;
 		if (GameMenu.main) {

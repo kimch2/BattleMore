@@ -219,7 +219,7 @@ public class DifficultyEditor : EditorWindow {
 		if (GUILayout.Button ("Replace Unit")) {
 			if (Selection.objects.Length > 0) {
 
-				GameObject prefab = (GameObject)PrefabUtility.GetPrefabParent (Selection.objects [0]);
+				GameObject prefab = (GameObject)PrefabUtility.GetCorrespondingObjectFromSource (Selection.objects [0]);
 
 				foreach (UnitManager manage in GameObject.FindObjectsOfType<UnitManager>()) {
 					if (manage.UnitName == replaceUnit) {

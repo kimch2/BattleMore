@@ -15,8 +15,10 @@ public class ActivatableShield : Ability,Modifier {
 
 	public List<ComboTag.AbilType> Combination;
 
-	void Awake()
-	{	audioSrc = GetComponent<AudioSource> ();
+	new void Awake()
+	{
+		base.Awake();
+		audioSrc = GetComponent<AudioSource> ();
 		myType = type.activated;
 	}
 

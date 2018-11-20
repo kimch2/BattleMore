@@ -1,4 +1,4 @@
-Shader "Hidden/Post FX/Uber"
+Shader "Hidden/Post FX/Uber Shader"
 {
     Properties
     {
