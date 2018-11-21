@@ -17,8 +17,11 @@ public class MainMenuManager : MonoBehaviour {
 	public AudioSource audioSource;
 	private Canvas currentScreen;
 
+	public static MainMenuManager main;
+
 	// Use this for initialization
 	void Start () {
+		main = this;
 		currentScreen = MainMenu;
 	
 	}
@@ -111,6 +114,17 @@ public class MainMenuManager : MonoBehaviour {
 		Cursor.lockState = CursorLockMode.Confined;
 		SceneManager.LoadScene (3);
 	
+	}
+
+	public void LoadSceneNumber(int i)
+	{
+		LevelData.getsaveInfo().ComingFromLevel = false;
+		if (LoadingScreen)
+		{
+			LoadingScreen.enabled = true;
+		}
+		Cursor.lockState = CursorLockMode.Confined;
+		SceneManager.LoadScene(i);
 	}
 
 	public void toCredits()

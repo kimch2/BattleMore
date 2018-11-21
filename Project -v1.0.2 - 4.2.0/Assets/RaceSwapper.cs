@@ -16,12 +16,7 @@ public class RaceSwapper : MonoBehaviour {
 	public GameObject EnemyRoot;
 	public GameObject NuetralRoot;
 
-	private void Start()
-    {
-
-
-    }
-
+	
 	public void swap(int playerNumber, RaceInfo.raceType race)
 	{
 		if (playerNumber == 1)
@@ -274,6 +269,10 @@ public class RaceSwapper : MonoBehaviour {
             PThreeUnits.Add(spot);
         }
     }
+
+
+
+	//public void
 
 }
 

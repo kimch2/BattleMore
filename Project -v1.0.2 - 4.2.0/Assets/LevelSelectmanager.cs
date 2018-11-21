@@ -7,36 +7,49 @@ public class LevelSelectmanager : MonoBehaviour {
 
 
 	public List<Button> levelButtons;
-	// Use this for initialization
-	void Start () {
 
-		for (int i = 0; i < levelButtons.Count; i++) {
-			if (i <= LevelData.getHighestLevel()) {
-				levelButtons [i].interactable = true;
-			} else {
-				levelButtons [i].interactable = false;
-			}
-		}
+	public List<FreePlayLevel> Levels;
 
-	
+	public GameObject StartButton;
+
+	public Text Title;
+	public Text Description;
+
+	private void Start()
+	{
+		currentLevel = Levels[0];
 	}
 
 	public void resetProgress()
-	{PlayerPrefs.DeleteAll ();
+	{
 
-		LevelData.reset ();
-		for (int i = 0; i < levelButtons.Count; i++) {
-			if (i <= LevelData.getHighestLevel()) {
-				levelButtons [i].interactable = true;
-			} else {
-				levelButtons [i].interactable = false;
-			}
-		}
-		
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+
+	FreePlayLevel currentLevel;
+
+	public void LoadLevel(int i)
+	{
+		Title.text = Levels[i].LevelName;
+		Description.text = Levels[i].Description;
+		StartButton.gameObject.SetActive(true);
 	}
+
+	public void PlayMission()
+	{
+		MainMenuManager.main.LoadLevel(currentLevel.SceneNumber);
+	}
+}
+
+
+
+
+[System.Serializable]
+public class FreePlayLevel
+{
+	public string LevelName;
+	public string Description;
+	public Sprite icon;
+	public int SceneNumber;
+	public List<RaceInfo.raceType > AllowedToPlayAs;
+	public List<RaceInfo.raceType> AllowedToPlayAgainst;
 }

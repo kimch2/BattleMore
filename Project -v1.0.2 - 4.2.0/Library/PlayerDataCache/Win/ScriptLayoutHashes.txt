@@ -408,6 +408,7 @@ f5c6c8dc1d2620313012c1f25775215c Assembly-CSharp-firstpass.dll:UnityStandardAsse
 c94a90e10609726f5237cf4c427868ff Assembly-CSharp.dll:.RapidArmsUpgrade
 c72b1a45d48b3e54cf9e0443042c3223 Assembly-CSharp.dll:.BloodMist
 9ad8a0b3eb04a48610640ae3bc5b980b Assembly-CSharp.dll:.StimPack
+438c2344ab3d9447e74f59f515ab7d04 Assembly-CSharp.dll:.BlankWeapon
 486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:.RandomRotate
 6ad1f6a83810a6eca9ac72ee4f47808b Assembly-UnityScript.dll:.PlatformInputController
 8511351ec3363f3a28bd1d5e4a68f8d9 Assembly-CSharp.dll:.HealthDisplay
@@ -763,7 +764,7 @@ d01ad4fbcece446f015a86fd1a8b190b Assembly-CSharp.dll:.CursorManager
 c5fbdb0f3050c0a01d25e6311052f2e5 Assembly-CSharp.dll:.UnitDisappear
 486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:.ShooterRotate
 34a795fce8a7c6c788b1e3a32fbe928d Assembly-CSharp.dll:.SupplyUpgrade
-33c66eec577f3654e35c2c110107e6e2 Assembly-CSharp.dll:.UnitManager
+308bbb2f90d291649ed692a281c2401e Assembly-CSharp.dll:.UnitManager
 41ceaa97513adf3100d3cb788a03d465 Assembly-CSharp.dll:.TurretMount
 7b6fd25f995bde53f8774d028af9ff9a Assembly-CSharp.dll:.TurretUIPanel
 c993908c95719790d301ba5fef708288 Assembly-CSharp-firstpass.dll:Pathfinding.DebugUtility
