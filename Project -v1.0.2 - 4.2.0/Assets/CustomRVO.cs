@@ -53,7 +53,7 @@ public class CustomRVO : IMover {
 	#endif
 
 	public void Awake () {
-		myFogger = GetComponent<FogOfWarUnit> ();
+	
 		initialSpeed = getMaxSpeed();
 		seeker = GetComponent<Seeker>();
 	}
@@ -62,9 +62,10 @@ public class CustomRVO : IMover {
 
 	// Use this for initialization
 	public void Start () {
-		#if RVOImp
+		myFogger = GetComponent<FogOfWarUnit>();
+#if RVOImp
 	
-		#endif
+#endif
 		//resetMoveLocation(-transform.position); // + transform.forward * 400);
 		controller = GetComponent<RVOController>();
 

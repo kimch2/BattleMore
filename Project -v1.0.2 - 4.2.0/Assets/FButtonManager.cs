@@ -38,6 +38,7 @@ public class FButtonManager : MonoBehaviour {
 
 	public void updateNumbers(Dictionary<string, List<UnitManager>> myUnits)
 	{
+		Debug.Log("Check this and maybe remove");
 		int tArmy = 0;
 		int totalBuilding = 0;
 

@@ -141,4 +141,10 @@ public class LevelOpenerEditor : EditorWindow
 		EditorSceneManager.OpenScene("Assets/Scenes/NewTestScene.unity");
 	}
 
+	[MenuItem("Open Level/BM Money Time")]
+	public static void T()
+	{
+		EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo();
+		EditorSceneManager.OpenScene("Assets/Scenes/BMMoneyTime.unity");
+	}
 }

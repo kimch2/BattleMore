@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class HotkeyMenu : MonoBehaviour {
 
 
-	public GameObject raceInfo;
+	public RaceInfo raceInfo;
 
 	public GameObject grid;
 
@@ -30,8 +30,19 @@ public class HotkeyMenu : MonoBehaviour {
 
 //	private FButtonManager fManager;
 
+		
+
+
 	// Use this for initialization
 	void Start () {
+
+		if (RaceSwapper.main)
+		{
+			raceInfo = RaceSwapper.main.getPlayerRaceInfo();
+		}
+		else {
+			raceInfo = Resources.Load<GameObject>("RaceInfoPacket").GetComponent<UnitEquivalance>().raceInfos[0];
+		}
 
 		selectMan = GameObject.FindObjectOfType<SelectedManager> ();
 		this.gameObject.GetComponent<Canvas> ().enabled = true;
@@ -132,32 +143,41 @@ public class HotkeyMenu : MonoBehaviour {
 		char[] separator = {';'};
 		//fManager = GameObject.Find ("F-Buttons").GetComponent<FButtonManager>();
 
-		string loaded = PlayerPrefs.GetString ("FHotkey", "Manticore,Zephyr,Vulcan,Triton,Chimera;Zephyr;Augmentor;SteelCrafter");//+ Mathf.Min(3, VictoryTrigger.instance.levelNumber), "");
-		string[] separated = loaded.Split (separator,System.StringSplitOptions.RemoveEmptyEntries);
+		string loaded = "";
+		if (RaceSwapper.main)
+		{
+			loaded = RaceSwapper.main.getPlayerRaceInfo().getFHotkeyString();
+			Debug.Log("Hotkey is " + loaded);
+		}
+		else {
+			loaded = PlayerPrefs.GetString("FHotkeySteelCrest", "Manticore,Zephyr,Vulcan,Triton,Chimera;Zephyr;Augmentor;SteelCrafter");//+ Mathf.Min(3, VictoryTrigger.instance.levelNumber), "");
+		}
+			string[] separated = loaded.Split (separator,System.StringSplitOptions.RemoveEmptyEntries);
 
 	
 			selectMan = GameObject.FindObjectOfType<SelectedManager> ();
-			foreach (RaceInfo info in raceInfo.GetComponents<RaceInfo>()) {
 
-			if (info.race == RaceInfo.raceType.SteelCrest) {
-
-					objectList = new List<GameObject> ();
+			objectList = new List<GameObject> ();
 
 
-					foreach (GameObject obj in info.unitList) {
-						objectList.Add (obj);
-					}
-
-					foreach (GameObject t in info.attachmentsList) {
-						objectList.Add (t);
-					}
-					foreach (GameObject build in info.buildingList) {
-						objectList.Add (build);
-					}
-
-
-				}
+		foreach (GameObject obj in raceInfo.unitList)
+		{
+			if (!(objectList.Find(item => item.GetComponent<UnitManager>().UnitName == obj.GetComponent<UnitManager>().UnitName)))
+			{
+				objectList.Add(obj);
 			}
+		}
+
+			foreach (GameObject t in raceInfo.attachmentsList) {
+				objectList.Add (t);
+				}
+			foreach (GameObject build in raceInfo.buildingList) {
+				objectList.Add (build);
+			}
+
+
+				
+			
 
 			GameObject toggle = transform.Find ("UseIt").gameObject;
 			GameObject name = transform.Find ("UnitName").gameObject;

@@ -668,6 +668,7 @@
     <Compile Include="Assets\UISoundManager.cs" />
     <Compile Include="Assets\UltCooldown.cs" />
     <Compile Include="Assets\UltimateApplier.cs" />
+    <Compile Include="Assets\UltObject.cs" />
     <Compile Include="Assets\UltTip.cs" />
     <Compile Include="Assets\UltUpgradeUI.cs" />
     <Compile Include="Assets\UndyingArmor.cs" />
@@ -918,6 +919,7 @@
     <None Include="Assets\Materials\Bit2Good\SFS\Shaders\SFS_Pr_N_D.shader" />
     <None Include="Assets\PostProcessing\Resources\Hidden\Post FX\GrainGen.shader" />
     <None Include="Assets\Materials\Bit2Good\SFS\Shaders\Mobile\SFS_M_DSI.shader" />
+    <None Include="Assets\New UIElements View 1.uxml" />
     <None Include="Assets\Colorify\Shaders\Realtime\Mobile\Colorify-Mobile-2colors-Unlit-Alpha.shader" />
     <None Include="Assets\PostProcessing\Resources\Hidden\Post FX\FXAA.shader" />
     <None Include="Assets\Materials\Bit2Good\SFS\Shaders\SFS_Pr_D_S_D.shader" />

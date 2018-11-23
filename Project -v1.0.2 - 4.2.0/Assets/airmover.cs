@@ -23,7 +23,7 @@ public class airmover : IMover {
 	public GameObject FlyingDecal;
 
 	public void Start () {
-
+		myFogger = GetComponent<FogOfWarUnit>();
 		controller = GetComponent<CharacterController>();
 		//Start a new path to the targetPosition, return the result to the OnPathComplete function
 		//seeker.StartPath (transform.position,targetPosition, OnPathComplete);

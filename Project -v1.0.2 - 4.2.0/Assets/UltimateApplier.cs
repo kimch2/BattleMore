@@ -25,7 +25,7 @@ public class UltimateApplier : MonoBehaviour {
 
 	void Start () {
 
-		myRace = GetComponent<GameManager> ().activePlayer;
+		myRace = GameManager.main.activePlayer;
 
 
 

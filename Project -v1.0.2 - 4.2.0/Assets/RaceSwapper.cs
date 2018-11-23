@@ -15,8 +15,64 @@ public class RaceSwapper : MonoBehaviour {
 	public GameObject PlayerRoot;
 	public GameObject EnemyRoot;
 	public GameObject NuetralRoot;
+	LevelChoice choice;
 
-	
+	[Tooltip("Set at runtime")]
+	public UltObject Ulty;
+
+	public static RaceSwapper main;
+
+	private void Awake()
+	{
+		main = this;
+		choice = LevelSelectmanager.BattleModeChoice;
+		LevelSelectmanager.BattleModeChoice = null;
+		if (RacePacket == null)
+		{
+			RacePacket = Resources.Load<GameObject>("RaceInfoPacket").GetComponent<UnitEquivalance>();
+		}
+
+		if (choice != null)
+		{
+			Debug.Log("As " + choice.PlayingAs + "  " + choice.PlayingAgainst);
+			Ulty = Instantiate<GameObject>( RacePacket.getRace(choice.PlayingAs).UltimatePrefab).GetComponent<UltObject>();
+			
+			swap(1, choice.PlayingAs);
+			swap(2, choice.PlayingAgainst);
+		}
+	}
+
+
+	void Start()
+	{
+		if(choice != null)
+		{
+			if (Ulty.myUltimates.Count > 0) {
+				GameManager.main.activePlayer.UltOne = Ulty.myUltimates[0];
+				}
+
+			if (Ulty.myUltimates.Count > 1)
+			{
+				GameManager.main.activePlayer.UltOne = Ulty.myUltimates[1];
+			}
+
+			if (Ulty.myUltimates.Count > 2)
+			{
+				GameManager.main.activePlayer.UltOne = Ulty.myUltimates[2];
+			}
+
+			if (Ulty.myUltimates.Count > 3)
+			{
+				GameManager.main.activePlayer.UltOne = Ulty.myUltimates[3];
+			}
+		}
+	}
+
+	public RaceInfo getPlayerRaceInfo()
+	{
+		return RacePacket.getRace(choice.PlayingAs);
+	}
+
 	public void swap(int playerNumber, RaceInfo.raceType race)
 	{
 		if (playerNumber == 1)
@@ -182,10 +238,12 @@ public class RaceSwapper : MonoBehaviour {
 		foreach (GameObject unit in obj)
 		{
 			UnitManager manage = unit.GetComponent<UnitManager>();
+			foreach (UnitManager man in unit.GetComponentsInChildren<UnitManager>(true))
+			{
+				man.PlayerOwner = num;
+			}
 			manage.PlayerOwner = num;
 		}
-
-		
 	}
 
 
@@ -251,6 +309,7 @@ public class RaceSwapper : MonoBehaviour {
     {
         if (playerNumber == 0)
         {
+			
             playerNumber = obj[0].GetComponent<UnitManager>().PlayerOwner;
         }
 

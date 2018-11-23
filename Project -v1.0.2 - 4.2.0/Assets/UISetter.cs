@@ -17,6 +17,9 @@ public class UISetter : MonoBehaviour {
 	public CanvasGroup canGroup;
 	public static UISetter main;
 
+	public List<Image> UltImages;
+	public List<Text> UltHelps;
+
 
 	public GameObject EnemyArsenalButton;
 	void Awake()
@@ -89,6 +92,18 @@ public class UISetter : MonoBehaviour {
 		{Invoke("turnOnArsenal", comp.MyLevels[LevelNum].ArsenalDisplayTime);}
 
 
+		RaceSwapper swapper = GameObject.FindObjectOfType<RaceSwapper>();
+		if (swapper)
+		{
+			for (int i = 0; i < swapper.Ulty.myUltimates.Count; i++)
+			{
+				UltImages[0].sprite = swapper.Ulty.myUltimates[i].iconPic;
+				UltHelps[0].text = swapper.Ulty.myUltimates[i].Descripton;
+			}
+			
+		
+
+		}
 
 	}
 

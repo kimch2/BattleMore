@@ -221,8 +221,16 @@ public class LevelMaker : EditorWindow
 
     Composition selectComp( Composition current)
     {
+		GUILayout.BeginHorizontal();
+		int i = 0;
         foreach (Composition obj in UnitHolder.myComps)
         {
+			i++;
+			if (i % 5 == 0)
+			{
+				GUILayout.EndHorizontal();
+				GUILayout.BeginHorizontal();
+			}
             if (current == obj)
             {
                 GUI.backgroundColor = Color.green;
@@ -257,7 +265,8 @@ public class LevelMaker : EditorWindow
             }
             
         }
-        return current;
+		GUILayout.EndHorizontal();
+		return current;
     }
 
 

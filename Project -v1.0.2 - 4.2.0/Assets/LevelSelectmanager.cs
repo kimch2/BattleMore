@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class LevelSelectmanager : MonoBehaviour {
 
 
+	public static LevelChoice BattleModeChoice;
 	public List<Button> levelButtons;
 
 	public List<FreePlayLevel> Levels;
@@ -26,9 +27,13 @@ public class LevelSelectmanager : MonoBehaviour {
 	}
 
 	FreePlayLevel currentLevel;
+	public RaceInfo.raceType MyRace = RaceInfo.raceType.SteelCrest;
+	public RaceInfo.raceType EnemyRace = RaceInfo.raceType.Coalition;
 
 	public void LoadLevel(int i)
 	{
+		currentLevel = Levels[i];
+		Debug.Log("Current Level is " + i + "  " + currentLevel.SceneNumber);
 		Title.text = Levels[i].LevelName;
 		Description.text = Levels[i].Description;
 		StartButton.gameObject.SetActive(true);
@@ -36,11 +41,47 @@ public class LevelSelectmanager : MonoBehaviour {
 
 	public void PlayMission()
 	{
-		MainMenuManager.main.LoadLevel(currentLevel.SceneNumber);
+
+		BattleModeChoice = new LevelChoice();
+		BattleModeChoice.PlayingAs = MyRace;
+		BattleModeChoice.PlayingAgainst = EnemyRace;
+		Debug.Log("Playing   " + currentLevel.SceneNumber);
+		MainMenuManager.main.LoadSceneNumber(currentLevel.SceneNumber);
 	}
+
+	public void SetRace(Dropdown d)
+	{
+		switch (d.value)
+		{
+			case 0:
+				MyRace = RaceInfo.raceType.SteelCrest;	
+			break;
+			case 1:
+				MyRace = RaceInfo.raceType.Coalition;
+				break;
+		}
+	}
+
+	public void SetEnemy(Dropdown d)
+	{
+		switch (d.value)
+		{
+			case 0:
+				EnemyRace = RaceInfo.raceType.SteelCrest;
+				break;
+			case 1:
+				EnemyRace = RaceInfo.raceType.Coalition;
+				break;
+		}
+	}
+
 }
 
-
+public class LevelChoice
+{
+	public RaceInfo.raceType PlayingAs;
+	public RaceInfo.raceType PlayingAgainst;
+}
 
 
 [System.Serializable]

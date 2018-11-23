@@ -859,8 +859,15 @@ public class SelectedManager : MonoBehaviour, ISelectedManager
 			}
 
 			voiceResponse (false);
-
-		assignMoveCOmmand (a,b, false, 1 + Vector3.Distance(a,b)/50);
+		if (Input.GetKey(KeyCode.LeftControl)) // Testing new feature to give Attack move via Right Click + Ctrl
+		{
+			attackMoveO(Vector3.zero);
+			//assignMoveCOmmand(a, b, false, 1 + Vector3.Distance(a, b) / 50);
+		}
+		else
+		{
+			assignMoveCOmmand(a, b, false, 1 + Vector3.Distance(a, b) / 50);
+		}
 
 		} 
 

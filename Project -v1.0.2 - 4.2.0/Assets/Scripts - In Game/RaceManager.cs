@@ -94,9 +94,9 @@ public class RaceManager : MonoBehaviour, ManagerWatcher {
 		} else {
 			myDecal = Resources.Load<Material> ("go1_1");
 		}
-		selectedManager = GameObject.FindObjectOfType<SelectedManager> ();
-		uiManager = FindObjectOfType <RaceUIManager>();
-		uiManage = (UIManager)FindObjectOfType (typeof(UIManager));
+		selectedManager = SelectedManager.main;// GameObject.FindObjectOfType<SelectedManager> ();
+		uiManager = RaceUIManager.instance;
+		uiManage = UIManager.main;
 
 		if (playerNumber == 1) {
 			InvokeRepeating ("UltUpdate", .2f, .2f);

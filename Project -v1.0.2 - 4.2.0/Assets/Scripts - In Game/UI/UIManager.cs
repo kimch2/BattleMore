@@ -890,7 +890,14 @@ public class UIManager : MonoBehaviour, IUIManager {
 							m_SelectedManager.GiveMoveSpread (rightClickOrThree, attackMovePoint);
 
 						} else {
-							m_SelectedManager.GiveOrder (Orders.CreateMoveOrder (attackMovePoint));
+								if (Input.GetKey(KeyCode.LeftControl))
+								{
+									m_SelectedManager.attackMoveO(Vector3.zero);
+								}
+								else
+								{
+									m_SelectedManager.GiveOrder(Orders.CreateMoveOrder(attackMovePoint));
+								}
 						}
 					}
 				} else if (currentObjLayer == 9 || currentObjLayer == 10 || currentObjLayer == 13) {
