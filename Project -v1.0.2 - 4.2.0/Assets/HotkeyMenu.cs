@@ -147,7 +147,6 @@ public class HotkeyMenu : MonoBehaviour {
 		if (RaceSwapper.main)
 		{
 			loaded = RaceSwapper.main.getPlayerRaceInfo().getFHotkeyString();
-			Debug.Log("Hotkey is " + loaded);
 		}
 		else {
 			loaded = PlayerPrefs.GetString("FHotkeySteelCrest", "Manticore,Zephyr,Vulcan,Triton,Chimera;Zephyr;Augmentor;SteelCrafter");//+ Mathf.Min(3, VictoryTrigger.instance.levelNumber), "");

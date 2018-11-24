@@ -31,7 +31,6 @@ public class RaceInfo : MonoBehaviour {
 		string n = "";
 		for (int i = 0; i < DefaultFOne.Count; i++)
 		{
-			Debug.Log("Checking " + DefaultFOne[i].UnitName);
 			n += DefaultFOne[i].UnitName;
 			if (i < DefaultFOne.Count - 1)
 			{
@@ -42,7 +41,6 @@ public class RaceInfo : MonoBehaviour {
 
 		for (int i = 0; i < DefaultFTwo.Count; i++)
 		{
-			Debug.Log("Checking " + DefaultFTwo[i].UnitName);
 			n += DefaultFTwo[i].UnitName;
 			if (i < DefaultFTwo.Count - 1)
 			{
@@ -54,7 +52,6 @@ public class RaceInfo : MonoBehaviour {
 
 		for (int i = 0; i < DefaultFThree.Count; i++)
 		{
-			Debug.Log("Checking " + DefaultFThree[i].UnitName);
 			n += DefaultFThree[i].UnitName;
 			if (i < DefaultFThree.Count - 1)
 			{
@@ -66,7 +63,6 @@ public class RaceInfo : MonoBehaviour {
 
 		for (int i = 0; i < DefaultFFour.Count; i++)
 		{
-			Debug.Log("Checking " + DefaultFFour[i].UnitName);
 			n += DefaultFFour[i].UnitName;
 			if (i < DefaultFFour.Count - 1)
 			{

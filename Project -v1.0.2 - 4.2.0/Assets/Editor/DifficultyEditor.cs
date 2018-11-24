@@ -101,64 +101,109 @@ public class DifficultyEditor : EditorWindow {
 		GUILayout.BeginHorizontal ();
 		GUILayout.Label ("Percent to remove: ");
 		percentEasy = EditorGUILayout.TextField(percentEasy);
-		if(GUILayout.Button("Generate Random Easy  "))
+		if (GUILayout.Button("Generate Random Easy  "))
 		{
-			List<GameObject> newDeleteOnEasy = new List<GameObject>();
-			foreach (UnitManager man in GameObject.FindObjectsOfType<UnitManager>()) {
-				if (man.PlayerOwner == 2 && !man.GetComponent<UnitStats>().otherTags.Contains(UnitTypes.UnitTypeTag.Structure)&& !man.GetComponent<UnitStats>().otherTags.Contains(UnitTypes.UnitTypeTag.Turret)) {
-					newDeleteOnEasy.Add (man.gameObject);
+			if (GameObject.FindObjectOfType<RaceSwapper>())
+			{
+				foreach (UnitSpot spot in GameObject.FindObjectOfType<RaceSwapper>().PTwoUnits)
+				{
+					int rand = UnityEngine.Random.Range(0, 100);
+					if (rand < double.Parse(percentEasy))
+					{
+						spot.MaxDifficulty = 1;
+					}
+					else
+					{
+						spot.MaxDifficulty = 3;
+					}
 				}
+
 			}
-			int originalCount = newDeleteOnEasy.Count;
-			foreach (GameObject obj in DM.deleteOnMedium) {
-				newDeleteOnEasy.Remove (obj);
-			}
-			double percent = Math.Abs((double.Parse (percentEasy)) / 100);
-			int numberToKeep = (int) (originalCount * percent);
-			Debug.Log (numberToKeep);
-			List<GameObject> replaceDeleteOnEasy = new List<GameObject>();
-			if (numberToKeep < newDeleteOnEasy.Count) {		
-				for (int i = 0; i < numberToKeep; i++) {
-					int rand = UnityEngine.Random.Range (0, newDeleteOnEasy.Count - 1);
-					replaceDeleteOnEasy.Add (newDeleteOnEasy [rand]);
-					newDeleteOnEasy.RemoveAt (rand);
+			else
+			{
+				List<GameObject> newDeleteOnEasy = new List<GameObject>();
+				foreach (UnitManager man in GameObject.FindObjectsOfType<UnitManager>())
+				{
+					if (man.PlayerOwner == 2 && !man.GetComponent<UnitStats>().otherTags.Contains(UnitTypes.UnitTypeTag.Structure) && !man.GetComponent<UnitStats>().otherTags.Contains(UnitTypes.UnitTypeTag.Turret))
+					{
+						newDeleteOnEasy.Add(man.gameObject);
+					}
 				}
-			} else
-				replaceDeleteOnEasy = newDeleteOnEasy;
-			DM.deleteOnEasy = replaceDeleteOnEasy;
+				int originalCount = newDeleteOnEasy.Count;
+				foreach (GameObject obj in DM.deleteOnMedium)
+				{
+					newDeleteOnEasy.Remove(obj);
+				}
+				double percent = Math.Abs((double.Parse(percentEasy)) / 100);
+				int numberToKeep = (int)(originalCount * percent);
+				Debug.Log(numberToKeep);
+				List<GameObject> replaceDeleteOnEasy = new List<GameObject>();
+				if (numberToKeep < newDeleteOnEasy.Count)
+				{
+					for (int i = 0; i < numberToKeep; i++)
+					{
+						int rand = UnityEngine.Random.Range(0, newDeleteOnEasy.Count - 1);
+						replaceDeleteOnEasy.Add(newDeleteOnEasy[rand]);
+						newDeleteOnEasy.RemoveAt(rand);
+					}
+				}
+				else
+					replaceDeleteOnEasy = newDeleteOnEasy;
+				DM.deleteOnEasy = replaceDeleteOnEasy;
+			}
 		}
 
 		GUILayout.EndHorizontal ();
 		GUILayout.BeginHorizontal ();
 		GUILayout.Label ("Percent to remove: ");
 		percentMedium = EditorGUILayout.TextField(percentMedium);
-		if(GUILayout.Button("Generate Random Medium"))
+		if (GUILayout.Button("Generate Random Medium"))
 		{
-			List<GameObject> newDeleteOnMedium = new List<GameObject>();
-			foreach (UnitManager man in GameObject.FindObjectsOfType<UnitManager>()) {
-				if (man.PlayerOwner == 2 && !man.GetComponent<UnitStats>().otherTags.Contains(UnitTypes.UnitTypeTag.Structure)&& !man.GetComponent<UnitStats>().otherTags.Contains(UnitTypes.UnitTypeTag.Turret)) {
-					newDeleteOnMedium.Add (man.gameObject);
+			if (GameObject.FindObjectOfType<RaceSwapper>())
+			{
+				foreach (UnitSpot spot in GameObject.FindObjectOfType<RaceSwapper>().PTwoUnits)
+				{
+					int rand = UnityEngine.Random.Range(0, 100);
+					if (rand < double.Parse(percentEasy))
+					{
+						spot.MaxDifficulty = 2;
+					}
 				}
-			}
-			int originalCount = newDeleteOnMedium.Count;
-			foreach (GameObject obj in DM.deleteOnEasy) {
-				newDeleteOnMedium.Remove (obj);
-			}
-			double percent = Math.Abs((double.Parse (percentMedium)) / 100);
-			int numberToKeep = (int) (originalCount * percent);
-			Debug.Log (numberToKeep);
-			List<GameObject> replaceDeleteOnMedium = new List<GameObject>();
-			if (numberToKeep < newDeleteOnMedium.Count) {		
-				for (int i = 0; i < numberToKeep; i++) {
-					int rand = UnityEngine.Random.Range (0, newDeleteOnMedium.Count - 1);
-					replaceDeleteOnMedium.Add (newDeleteOnMedium [rand]);
-					newDeleteOnMedium.RemoveAt (rand);
-				}
-			} else
-				replaceDeleteOnMedium = newDeleteOnMedium;
-			DM.deleteOnMedium = replaceDeleteOnMedium;
-		}
 
+			}
+			else
+			{
+				List<GameObject> newDeleteOnMedium = new List<GameObject>();
+				foreach (UnitManager man in GameObject.FindObjectsOfType<UnitManager>())
+				{
+					if (man.PlayerOwner == 2 && !man.GetComponent<UnitStats>().otherTags.Contains(UnitTypes.UnitTypeTag.Structure) && !man.GetComponent<UnitStats>().otherTags.Contains(UnitTypes.UnitTypeTag.Turret))
+					{
+						newDeleteOnMedium.Add(man.gameObject);
+					}
+				}
+				int originalCount = newDeleteOnMedium.Count;
+				foreach (GameObject obj in DM.deleteOnEasy)
+				{
+					newDeleteOnMedium.Remove(obj);
+				}
+				double percent = Math.Abs((double.Parse(percentMedium)) / 100);
+				int numberToKeep = (int)(originalCount * percent);
+				Debug.Log(numberToKeep);
+				List<GameObject> replaceDeleteOnMedium = new List<GameObject>();
+				if (numberToKeep < newDeleteOnMedium.Count)
+				{
+					for (int i = 0; i < numberToKeep; i++)
+					{
+						int rand = UnityEngine.Random.Range(0, newDeleteOnMedium.Count - 1);
+						replaceDeleteOnMedium.Add(newDeleteOnMedium[rand]);
+						newDeleteOnMedium.RemoveAt(rand);
+					}
+				}
+				else
+					replaceDeleteOnMedium = newDeleteOnMedium;
+				DM.deleteOnMedium = replaceDeleteOnMedium;
+			}
+		}
 		GUILayout.EndHorizontal ();
 		GUILayout.BeginHorizontal ();
 		if(GUILayout.Button("Select All Easy"))

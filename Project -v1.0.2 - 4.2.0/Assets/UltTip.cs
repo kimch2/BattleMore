@@ -67,7 +67,12 @@ public class UltTip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
 
 
 	// Use this for initialization
-	void Start () {
+	void Start()
+	{
+		Invoke("DelayedStart", .1f);
+	}
+		
+	void DelayedStart () {
 		if (toolbox == null) {
 			toolbox = GameObject.Find ("ToolTipBox").GetComponent<Canvas> ();
 		}
@@ -94,6 +99,7 @@ public class UltTip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
 			render = toolbox.gameObject.AddComponent<CanvasGroup> ();
 		}
 	}
+
 
 
 

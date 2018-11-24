@@ -79,7 +79,7 @@ public class LevelMaker : EditorWindow
                 {
                     DrawLine = false;
 
-                    swapper.CreateUnits(currentComp, currentType, playerNumber, firstPoint, lastPoint - firstPoint);
+                    swapper.CreateUnits(currentComp, currentType, playerNumber, firstPoint, lastPoint - firstPoint, maxDifficulty);
                 }
             }
 
@@ -166,8 +166,8 @@ public class LevelMaker : EditorWindow
     RaceInfo.raceType currentType = RaceInfo.raceType.SteelCrest;
     Composition currentComp;
 
-
-
+	int maxDifficulty = 2;
+	string[] difficulties = new string[3] { "Easy", "Normal", "Hard" };
 	void PlaceUnits()
 	{
 		GUILayout.BeginHorizontal();
@@ -176,6 +176,12 @@ public class LevelMaker : EditorWindow
 		{
 			capturable = GUILayout.Toggle(capturable, "Capturable ");
 		}
+
+		if (playerNumber == 2)
+		{
+			maxDifficulty = EditorGUILayout.Popup(maxDifficulty -1, difficulties) + 1;
+		}
+
 		GUILayout.EndHorizontal();
 
 		currentType = (RaceInfo.raceType)EditorGUILayout.EnumPopup("Current Race: ", currentType, GUILayout.Width(260));

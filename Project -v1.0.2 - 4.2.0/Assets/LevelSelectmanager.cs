@@ -8,6 +8,7 @@ public class LevelSelectmanager : MonoBehaviour {
 
 	public static LevelChoice BattleModeChoice;
 	public List<Button> levelButtons;
+	public Image Background;
 
 	public List<FreePlayLevel> Levels;
 
@@ -18,7 +19,9 @@ public class LevelSelectmanager : MonoBehaviour {
 
 	private void Start()
 	{
-		currentLevel = Levels[0];
+		MyRace = RaceInfo.raceType.SteelCrest;
+		EnemyRace = RaceInfo.raceType.Coalition;
+		LoadLevel(3);
 	}
 
 	public void resetProgress()
@@ -37,6 +40,7 @@ public class LevelSelectmanager : MonoBehaviour {
 		Title.text = Levels[i].LevelName;
 		Description.text = Levels[i].Description;
 		StartButton.gameObject.SetActive(true);
+		Background.sprite = currentLevel.myBackground;
 	}
 
 	public void PlayMission()
@@ -59,6 +63,16 @@ public class LevelSelectmanager : MonoBehaviour {
 			case 1:
 				MyRace = RaceInfo.raceType.Coalition;
 				break;
+			case 2:
+				if (UnityEngine.Random.Range(0, 2) == 0)
+				{
+					MyRace = RaceInfo.raceType.Coalition;
+				}
+				else
+				{
+					MyRace = RaceInfo.raceType.SteelCrest;
+				}
+				break;
 		}
 	}
 
@@ -72,7 +86,18 @@ public class LevelSelectmanager : MonoBehaviour {
 			case 1:
 				EnemyRace = RaceInfo.raceType.Coalition;
 				break;
+			case 2:
+				if (UnityEngine.Random.Range(0, 2) == 0)
+				{
+					EnemyRace = RaceInfo.raceType.Coalition;
+				}
+				else
+				{
+					EnemyRace = RaceInfo.raceType.SteelCrest;
+				}
+				break;
 		}
+		Debug.Log("Enemy " + EnemyRace);
 	}
 
 }
@@ -93,4 +118,5 @@ public class FreePlayLevel
 	public int SceneNumber;
 	public List<RaceInfo.raceType > AllowedToPlayAs;
 	public List<RaceInfo.raceType> AllowedToPlayAgainst;
+	public Sprite myBackground;
 }

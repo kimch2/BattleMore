@@ -97,14 +97,10 @@ public class UISetter : MonoBehaviour {
 		{
 			for (int i = 0; i < swapper.Ulty.myUltimates.Count; i++)
 			{
-				UltImages[0].sprite = swapper.Ulty.myUltimates[i].iconPic;
-				UltHelps[0].text = swapper.Ulty.myUltimates[i].Descripton;
+				UltImages[i].sprite = swapper.Ulty.myUltimates[i].iconPic;
+				UltHelps[i].text = swapper.Ulty.myUltimates[i].Descripton;
 			}
-			
-		
-
 		}
-
 	}
 
 

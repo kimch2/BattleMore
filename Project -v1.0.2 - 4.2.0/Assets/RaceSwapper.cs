@@ -38,6 +38,7 @@ public class RaceSwapper : MonoBehaviour {
 			Ulty = Instantiate<GameObject>( RacePacket.getRace(choice.PlayingAs).UltimatePrefab).GetComponent<UltObject>();
 			
 			swap(1, choice.PlayingAs);
+			Debug.Log("Swapping enemy to " + choice.PlayingAgainst);
 			swap(2, choice.PlayingAgainst);
 		}
 	}
@@ -49,21 +50,25 @@ public class RaceSwapper : MonoBehaviour {
 		{
 			if (Ulty.myUltimates.Count > 0) {
 				GameManager.main.activePlayer.UltOne = Ulty.myUltimates[0];
-				}
+				GameManager.main.activePlayer.UltOne.myCost.cooldownTimer = Ulty.StartingCooldowns[0];
+			}
 
 			if (Ulty.myUltimates.Count > 1)
 			{
-				GameManager.main.activePlayer.UltOne = Ulty.myUltimates[1];
+				GameManager.main.activePlayer.UltTwo = Ulty.myUltimates[1];
+				GameManager.main.activePlayer.UltTwo.myCost.cooldownTimer = Ulty.StartingCooldowns[0];
 			}
 
 			if (Ulty.myUltimates.Count > 2)
 			{
-				GameManager.main.activePlayer.UltOne = Ulty.myUltimates[2];
+				GameManager.main.activePlayer.UltThree = Ulty.myUltimates[2];
+				GameManager.main.activePlayer.UltThree.myCost.cooldownTimer = Ulty.StartingCooldowns[2];
 			}
 
 			if (Ulty.myUltimates.Count > 3)
 			{
-				GameManager.main.activePlayer.UltOne = Ulty.myUltimates[3];
+				GameManager.main.activePlayer.UltFour = Ulty.myUltimates[3];
+				GameManager.main.activePlayer.UltFour.myCost.cooldownTimer = Ulty.StartingCooldowns[3];
 			}
 		}
 	}
@@ -92,9 +97,14 @@ public class RaceSwapper : MonoBehaviour {
 
 	void SwapUnits(List<UnitSpot> spots, RaceInfo.raceType race)
 	{
+		int difficulty = 3;
+		if (Application.isPlaying)
+		{
+			difficulty = LevelData.getDifficulty();
+		}
+
 		foreach (UnitSpot spot in spots)
 		{
-
 			foreach (GameObject obj in spot.CurrentGuys) { 
 				DestroyImmediate(obj);
 			}
@@ -104,7 +114,14 @@ public class RaceSwapper : MonoBehaviour {
 				RacePacket = Resources.Load<GameObject>("RaceInfoPacket").GetComponent<UnitEquivalance>();
 			}
 
-		
+			if (Application.isPlaying && spots == PTwoUnits)
+			{
+				if (spot.MaxDifficulty < difficulty)
+				{
+					continue;
+				}
+			}
+
 			Composition comp = RacePacket.myComps.Find(item => item.ID == spot.CompositionID);
 			UnitPile pile = comp.RacePiles.Find(item => item.myRace == race);
 
@@ -116,10 +133,10 @@ public class RaceSwapper : MonoBehaviour {
 	}
 
 
-	public void CreateUnits(Composition currentComp, RaceInfo.raceType currentType, int playerNumber, Vector3 position, Vector3 direction)
+	public void CreateUnits(Composition currentComp, RaceInfo.raceType currentType, int playerNumber, Vector3 position, Vector3 direction, int difficulty)
 	{
 		List<GameObject> allUnits = SpawnUnit(currentComp, currentType, playerNumber, position, direction);
-		addUnit(currentComp, allUnits, position, direction, playerNumber);
+		addUnit(currentComp, allUnits, position, direction, difficulty , playerNumber);
 		
 	}
 
@@ -142,6 +159,7 @@ public class RaceSwapper : MonoBehaviour {
 
 #if UNITY_EDITOR
 			UnityEditor.Undo.RegisterCreatedObjectUndo(newUnit, "Create " + newUnit.name);
+			UnityEditor.Undo.RecordObject(this, "Create " + newUnit.name);
 #endif
 			newUnit.transform.LookAt(newUnit.transform.position + direction);
 			if (newUnit.GetComponent<airmover>())
@@ -305,7 +323,7 @@ public class RaceSwapper : MonoBehaviour {
 
 
 
-	public void addUnit(Composition comp, List<GameObject> obj, Vector3 position, Vector3 rotation, int playerNumber = 0)
+	public void addUnit(Composition comp, List<GameObject> obj, Vector3 position, Vector3 rotation,int difficulty, int playerNumber = 0)
     {
         if (playerNumber == 0)
         {
@@ -314,6 +332,7 @@ public class RaceSwapper : MonoBehaviour {
         }
 
         UnitSpot spot = new UnitSpot(comp.ID, position, rotation, obj, playerNumber);
+		spot.MaxDifficulty = difficulty;
 
         if (playerNumber == 1)
         {

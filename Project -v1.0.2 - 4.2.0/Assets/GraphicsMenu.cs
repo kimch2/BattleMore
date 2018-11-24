@@ -40,7 +40,7 @@ public class GraphicsMenu : MonoBehaviour {
 		totalFrame += Time.smoothDeltaTime;
 		badFrameCount -= .1f;
 		if ((1 / Time.smoothDeltaTime < 15 || (1 / (totalFrame / frameCount)) < 35) && !GraphicsButton.activeSelf) {
-			Debug.Log((1 / Time.smoothDeltaTime) + "  " + (1 / (totalFrame / frameCount)));
+		//	Debug.Log((1 / Time.smoothDeltaTime) + "  " + (1 / (totalFrame / frameCount)));
 			badFrameCount++;
 			if (badFrameCount > 4) {
 				GraphicsButton.SetActive(true);
