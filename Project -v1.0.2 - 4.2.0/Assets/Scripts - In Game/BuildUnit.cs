@@ -68,9 +68,8 @@ public class BuildUnit : UnitProduction {
 
 	public override void DeQueueUnit()
 	{myCost.refundCost ();
-		PopUpMaker.CreateGlobalPopUp ("+" + myCost.ResourceOne, Color.white, this.transform.localPosition + Vector3.up * 8);
-		//racer.UnitDied(unitToBuild.GetComponent<UnitStats>().supply, null);
-	
+		myCost.showCostPopUp(true);
+
 	}
 
 
@@ -135,10 +134,7 @@ public class BuildUnit : UnitProduction {
 			if (buildMan.buildUnit (this)) {
 				myCost.payCost();
 				myCost.resetCoolDown ();
-
-				PopUpMaker.CreateGlobalPopUp ("-" + myCost.ResourceOne, Color.white, this.transform.localPosition + Vector3.up * 8);
-
-			
+				myCost.showCostPopUp(false);
 			}
 		}
 

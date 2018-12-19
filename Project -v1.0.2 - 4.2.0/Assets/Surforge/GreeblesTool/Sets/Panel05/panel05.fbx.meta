@@ -1,0 +1,137 @@
+fileFormatVersion: 2
+guid: 69c76f1c851b8574b9ddbc71880db4f8
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: panel05
+    100004: panel05_1
+    100006: panel05_border
+    100008: panel05_border2
+    100010: panel05_border3
+    100012: panel05_border4
+    100014: panel05_border5
+    100016: panel05_border6
+    100018: panel05_border7
+    100020: panel05_corner
+    100022: panel05_innerCorner
+    100024: panel05_2
+    100026: panel05_3
+    100028: panel05_4
+    100030: panel05_5
+    400000: //RootNode
+    400002: panel05
+    400004: panel05_1
+    400006: panel05_border
+    400008: panel05_border2
+    400010: panel05_border3
+    400012: panel05_border4
+    400014: panel05_border5
+    400016: panel05_border6
+    400018: panel05_border7
+    400020: panel05_corner
+    400022: panel05_innerCorner
+    400024: panel05_2
+    400026: panel05_3
+    400028: panel05_4
+    400030: panel05_5
+    2300000: panel05
+    2300002: panel05_1
+    2300004: panel05_border
+    2300006: panel05_border2
+    2300008: panel05_border3
+    2300010: panel05_border4
+    2300012: panel05_border5
+    2300014: panel05_border6
+    2300016: panel05_border7
+    2300018: panel05_corner
+    2300020: panel05_innerCorner
+    2300022: panel05_2
+    2300024: panel05_3
+    2300026: panel05_4
+    2300028: panel05_5
+    3300000: panel05
+    3300002: panel05_1
+    3300004: panel05_border
+    3300006: panel05_border2
+    3300008: panel05_border3
+    3300010: panel05_border4
+    3300012: panel05_border5
+    3300014: panel05_border6
+    3300016: panel05_border7
+    3300018: panel05_corner
+    3300020: panel05_innerCorner
+    3300022: panel05_2
+    3300024: panel05_3
+    3300026: panel05_4
+    3300028: panel05_5
+    4300000: panel05
+    4300002: panel05_innerCorner
+    4300004: panel05_border
+    4300006: panel05_border2
+    4300008: panel05_border3
+    4300010: panel05_border4
+    4300012: panel05_border5
+    4300014: panel05_1
+    4300016: panel05_border7
+    4300018: panel05_corner
+    4300020: panel05_border6
+    4300022: panel05_2
+    4300024: panel05_3
+    4300026: panel05_4
+    4300028: panel05_5
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 1
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 

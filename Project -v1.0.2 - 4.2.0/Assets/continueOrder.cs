@@ -8,8 +8,7 @@ public class continueOrder  {
 	public bool nextUnitCast = true;
 
 	public List<reason> reasonList = new List<reason>();
+	public List<ResourceType> InsufficientResources = new List<ResourceType>();
 
-	public enum reason{resourceOne, resourceTwo, cooldown, requirement, energy, health, charge}
-
-
+	public enum reason{cooldown, requirement, energy, health, charge}
 }

@@ -32,6 +32,7 @@ public class UnitStats : MonoBehaviour {
 	public float armor;
 	public float spellResist;
 	public float cost;
+	public ResourceManager Cost;
 	private UnitManager myManager;
 
 	private List<Modifier> damageModifiers = new List<Modifier>();
@@ -249,7 +250,7 @@ public class UnitStats : MonoBehaviour {
 
 	public float TakeDamage(float amount, GameObject source, DamageTypes.DamageType type, UnitManager srcManager = null)
 	{
-
+		//Debug.Log("Taking " + amount + "  " + armor);
 		if (isUnitType(UnitTypes.UnitTypeTag.Invulnerable)) {
 			return 0;
 		}

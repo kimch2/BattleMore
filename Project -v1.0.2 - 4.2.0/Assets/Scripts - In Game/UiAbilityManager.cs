@@ -154,7 +154,7 @@ public class UiAbilityManager : MonoBehaviour {
 						myButtons [buttonIndex].mySlider.gameObject.SetActive (false);
 					}
 
-					myButtons [buttonIndex].MoneySign.enabled = firstManager.abilityList [i].myCost.ResourceOne > racer.ResourceOne;
+					myButtons[buttonIndex].MoneySign.enabled = !firstManager.abilityList[i].myCost.resourceCosts.ICanPay();
 				} else {
 					myButtons [buttonIndex].MoneySign.enabled = false;
 					myButtons [buttonIndex].mySlider.gameObject.SetActive (false);
@@ -354,7 +354,7 @@ public class UiAbilityManager : MonoBehaviour {
 						currButton.mySlider.gameObject.SetActive (false);
 					}
 
-					currButton.MoneySign.enabled = currAbil.myCost.ResourceOne > racer.ResourceOne;
+					currButton.MoneySign.enabled = !currAbil.myCost.resourceCosts.ICanPay();
 				} else {
 					currButton.MoneySign.enabled = false;
 					currButton.mySlider.gameObject.SetActive (false);
@@ -845,8 +845,9 @@ public class UiAbilityManager : MonoBehaviour {
 						currButton.mySlider.gameObject.SetActive (false);
 					}
 
-					currButton.MoneySign.enabled = currAbil.myCost.ResourceOne > racer.ResourceOne;
-				}else {
+					currButton.MoneySign.enabled = !currAbil.myCost.resourceCosts.ICanPay();
+				}
+				else {
 					currButton.MoneySign.enabled = false;
 					currButton.mySlider.gameObject.SetActive (false);
 				}

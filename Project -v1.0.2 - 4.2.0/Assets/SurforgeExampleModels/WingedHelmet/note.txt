@@ -1,0 +1,5 @@
+This model has simple base normal map baked for better edges smoothing.
+
+Drag and drop mesh, AO, and normal map into the corresponding fields of Surforge Render tab.
+
+wingedHelmet_bakedNormals.png should be imported as regular texture, not "Normal", for use with Surforge. 

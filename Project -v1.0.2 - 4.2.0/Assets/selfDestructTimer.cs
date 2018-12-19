@@ -11,6 +11,8 @@ public class selfDestructTimer : MonoBehaviour {
 	private Selected hd;
 	// Use this for initialization
 	void Start () {
+
+		
 		if (showTimer) {
 			StartCoroutine (checkForDeathWithUI ());
 
@@ -37,6 +39,13 @@ public class selfDestructTimer : MonoBehaviour {
 
 			Destroy (this.gameObject);}
 
+	}
+
+	public void modifyRemainingByPercent(float perc)
+	{
+		Debug.Log("before " + deathTime);
+		deathTime += (deathTime - Time.time) * perc;
+		Debug.Log("after " + deathTime);
 	}
 
 	IEnumerator checkForDeathWithUI()

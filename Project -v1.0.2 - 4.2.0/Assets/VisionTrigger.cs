@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class VisionTrigger : MonoBehaviour {
 
 	public int PlayerNumber;
-
+	public List<int> AdditionaPlayerNums;
 	public List<UnitManager> InVision;
 	public abstract void  UnitEnterTrigger(UnitManager manager);
 	public abstract void  UnitExitTrigger(UnitManager manager);
@@ -30,8 +30,9 @@ public abstract class VisionTrigger : MonoBehaviour {
 		if (other.isTrigger) {
 			return;
 		}
+
 		UnitManager otherManager = other.gameObject.GetComponent<UnitManager> ();
-		if (otherManager && otherManager.PlayerOwner.Equals (PlayerNumber)) {
+		if (otherManager && (otherManager.PlayerOwner.Equals (PlayerNumber) || AdditionaPlayerNums.Contains(otherManager.PlayerOwner))) {
 
 			InVision.Add (otherManager);
 			UnitEnterTrigger (otherManager);
@@ -44,7 +45,7 @@ public abstract class VisionTrigger : MonoBehaviour {
 			return;
 		}
 		UnitManager otherManager = other.gameObject.GetComponent<UnitManager> ();
-		if (otherManager) {
+		if (otherManager && InVision.Contains(otherManager)) {
 
 			InVision.Remove(otherManager);
 			UnitExitTrigger (otherManager);

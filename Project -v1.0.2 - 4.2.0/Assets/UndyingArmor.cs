@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class UndyingArmor : MonoBehaviour , IEffect,Modifier{
+public class UndyingArmor :  IEffect, Modifier{
 
 
 	private bool onTarget;
@@ -41,7 +41,7 @@ public class UndyingArmor : MonoBehaviour , IEffect,Modifier{
 
 	}
 
-	public void apply (GameObject source, GameObject target)
+	public override void apply (GameObject source, GameObject target)
 	{Debug.Log ("Applying to " + target);
 
 		target.AddComponent<UndyingArmor> ();
@@ -60,6 +60,13 @@ public class UndyingArmor : MonoBehaviour , IEffect,Modifier{
 
 		Debug.Log ("Returning " + damage);
 		return damage;
+	}
+
+	public override bool canCast() { return true; }
+
+	public override bool validTarget(GameObject target)
+	{
+		return true;
 	}
 
 

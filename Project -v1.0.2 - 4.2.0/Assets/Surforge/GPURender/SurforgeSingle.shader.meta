@@ -1,0 +1,25 @@
+fileFormatVersion: 2
+guid: a35ee6d2e5af9da49a52d43e7e2ab16c
+timeCreated: 1506063515
+licenseType: Store
+ShaderImporter:
+  defaultTextures:
+  - _LabelTexture: {instanceID: 0}
+  - _NormalMap: {instanceID: 0}
+  - _AoEdgesDirtDepth: {fileID: 2800000, guid: ae0fcc70d7a97604db1d13c5228a99dd, type: 3}
+  - _RGBAnoise: {instanceID: 0}
+  - _ObjectMasks: {instanceID: 0}
+  - _ObjectMasks2: {instanceID: 0}
+  - _Texture0: {instanceID: 0}
+  - _BumpMap0: {instanceID: 0}
+  - _OcclusionMap0: {instanceID: 0}
+  - _SpecularMap0: {instanceID: 0}
+  - _EmissionMap0: {instanceID: 0}
+  - _0Paint1MaskTex: {instanceID: 0}
+  - _0Paint2MaskTex: {instanceID: 0}
+  - _DirtTexture1: {instanceID: 0}
+  - _DirtTexture2: {instanceID: 0}
+  - _EmissionMask: {fileID: 2800000, guid: 6efaca9dc8a78474394710dd4f9a0adb, type: 3}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

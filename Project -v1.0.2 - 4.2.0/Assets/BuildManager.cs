@@ -18,14 +18,25 @@ public class BuildManager : MonoBehaviour {
 	UnitManager manager;
 	public AugmentAttachPoint augmenter;
 	// Use this for initialization
-	void Start () {
-		raceMan = GameManager.main.activePlayer ;
+	public void Start () {
+		
 		build = GameObject.FindObjectOfType<BuilderUI> ();
 		mySelect = GetComponent<Selected> ();
 		if (GetComponent<newWorkerInteract> ()) {
 			isWorker = true;}
 		manager = GetComponent<UnitManager> ();
-		StartCoroutine( checkBuildDecal ());
+		raceMan = GameManager.main.getActivePlayer();//.playerList[manager.PlayerOwner -1]; This doesn't work because of capturable untis
+		if (manager.PlayerOwner == 1)
+		{
+			StartCoroutine(checkBuildDecal());
+		}
+		else
+		{
+			if (buildDecal)
+			{
+				buildDecal.SetActive(false);
+			}
+		}
 	}
 	
 
@@ -47,7 +58,7 @@ public class BuildManager : MonoBehaviour {
 				if (buildOrder [0].unitToBuild) {
 					Sup = buildOrder [0].unitToBuild.GetComponent<UnitStats> ().supply;
 				}
-					
+				
 				if (Sup == 0 || raceMan.hasSupplyAvailable (Sup)) {
 
 					buildOrder [0].startBuilding ();
@@ -105,7 +116,7 @@ public class BuildManager : MonoBehaviour {
 			buildOrder [0].startBuilding ();
 			return;}
 		float Sup = buildOrder [0].unitToBuild.GetComponent<UnitStats> ().supply;
-
+		Debug.Log("No SUpply " + raceMan.hasSupplyAvailable(Sup));
 		if (Sup == 0 || raceMan.hasSupplyAvailable (Sup)) {
 			buildOrder [0].startBuilding ();
 			if (mySelect.IsSelected) {

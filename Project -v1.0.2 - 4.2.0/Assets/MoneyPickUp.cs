@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using System.Collections.Generic;
 public class MoneyPickUp : MonoBehaviour {
 
 	public float resOne;
 	public float resTwo;
-
+	public ResourceManager ToPickUp;
 
 	public AudioClip sound;
 
@@ -15,20 +15,13 @@ public class MoneyPickUp : MonoBehaviour {
 		if (man) {
 			if (man.PlayerOwner == 1) {
 				GameManager gm = GameObject.FindObjectOfType<GameManager> ();
-				gm.activePlayer.updateResources (resOne, resTwo, false);
+				gm.activePlayer.collectResources(ToPickUp.MyResources, false);
 
 				if (sound) {
 					ExpositionDisplayer.instance.displayText ("", 1, sound, .5f, null, 0);
 				}
+				ToPickUp.showPopups(transform.position, true);
 
-				if (resOne > 0) {
-
-					PopUpMaker.CreateGlobalPopUp ("+" + resOne + " Ore", Color.white, this.gameObject.transform.position);
-				
-				} else {
-					PopUpMaker.CreateGlobalPopUp ("+" + resTwo, Color.cyan, this.gameObject.transform.position);
-				
-				}
 				Destroy (this.gameObject);
 			
 			}

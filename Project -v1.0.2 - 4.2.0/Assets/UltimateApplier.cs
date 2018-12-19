@@ -27,8 +27,10 @@ public class UltimateApplier : MonoBehaviour {
 
 		myRace = GameManager.main.activePlayer;
 
-
-
+		if (myRace.myRace != RaceInfo.raceType.SteelCrest)
+		{
+			return;
+		}
 
 		hyperZero  = PlayerPrefs.GetInt ("HyperCharge0",0);
 		hyperOne = PlayerPrefs.GetInt ("HyperCharge1",0);

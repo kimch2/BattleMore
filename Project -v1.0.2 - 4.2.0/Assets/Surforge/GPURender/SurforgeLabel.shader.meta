@@ -1,0 +1,11 @@
+fileFormatVersion: 2
+guid: 2429927a07ef30544b5c58557a0ae6b6
+timeCreated: 1455553285
+licenseType: Store
+ShaderImporter:
+  defaultTextures:
+  - _MainTex: {instanceID: 0}
+  - _RGBAnoise: {fileID: 2800000, guid: 50c347eab86dc9d44bc0744817601acd, type: 3}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

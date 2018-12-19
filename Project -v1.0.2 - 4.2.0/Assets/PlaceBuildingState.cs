@@ -22,7 +22,9 @@ public class PlaceBuildingState :UnitState {
 		location = loc;
 		//Debug.Log ("Setting location to " + location + "  ghost " + ghost);
 		myAbility = abil;
-		PopUpMaker.CreateGlobalPopUp ("-" +myAbility.myCost.ResourceOne, Color.white,abil.transform.localPosition + Vector3.up * 4);
+
+		myAbility.myCost.showCostPopUp(false);
+
 		myAbility.myCost.payCost ();
 
 	}
@@ -34,6 +36,7 @@ public class PlaceBuildingState :UnitState {
 
 		if (!waiting) {
 			myAbility.myCost.refundCost ();
+			myAbility.myCost.showCostPopUp(true);
 		}
 	}
 
@@ -115,6 +118,7 @@ public class PlaceBuildingState :UnitState {
 		if (!waiting) {
 			if (myAbility.myCost) {
 				myAbility.myCost.refundCost ();
+				myAbility.myCost.showCostPopUp(true);
 			}
 		}
 	}

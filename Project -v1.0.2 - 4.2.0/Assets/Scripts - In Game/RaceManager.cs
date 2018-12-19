@@ -8,13 +8,9 @@ using Pathfinding;
 
 public class RaceManager : MonoBehaviour, ManagerWatcher {
 
-
-
-	public string OneName;
-	public float ResourceOne;
-	public string TwoName;
-	public float ResourceTwo;
 	public int playerNumber;
+
+	public ResourceManager resourceManager;
 
 	public float supplyMax;
 
@@ -24,18 +20,23 @@ public class RaceManager : MonoBehaviour, ManagerWatcher {
 	public Ability UltOne;
 	public Slider slideOne;
 	public Button ultBOne;
+	Text OneCharge;
 
 	public Ability UltTwo;
 	public Slider slideTwo;
 	public Button ultBTwo;
+	Text TwoCharge;
 
 	public Ability UltThree;
 	public Slider slideThree;
 	public Button ultBThree;
+	Text ThreeCharge;
 
 	public Ability UltFour;
 	public Slider slideFour;
 	public Button ultBFour;
+	Text FourCharge;
+
 	public bool playUltTwoWarningFirstTime = true;
 	public bool playUltFourWarningFirstTime = true;
 	public RaceInfo.raceType myRace;
@@ -71,6 +72,7 @@ public class RaceManager : MonoBehaviour, ManagerWatcher {
 	private List<LethalDamageinterface> lethalTrigger = new List<LethalDamageinterface>();
 	private List<LethalDamageinterface> deathTrigger = new List<LethalDamageinterface>();
 	public RaceUIManager uiManager;
+	public EconomyManager economyManager;
 
 	//Used for end level stats
 	public int unitsLost;
@@ -84,25 +86,47 @@ public class RaceManager : MonoBehaviour, ManagerWatcher {
 	//public TechTree myTech;
 
 	// Use this for initialization
-	void Awake () {
+	void Awake() {
 		if (playerNumber == 1) {
-			myDecal = Resources.Load<Material> ("go1_1");
+			myDecal = Resources.Load<Material>("go1_1");
 		} else if (playerNumber == 2) {
-			myDecal = Resources.Load<Material> ("EnemyDecal");
+			myDecal = Resources.Load<Material>("EnemyDecal");
 		} else if (playerNumber == 3) {
-			myDecal = Resources.Load<Material> ("NuetralMat");
+			myDecal = Resources.Load<Material>("NuetralMat");
 		} else {
-			myDecal = Resources.Load<Material> ("go1_1");
+			myDecal = Resources.Load<Material>("go1_1");
 		}
 		selectedManager = SelectedManager.main;// GameObject.FindObjectOfType<SelectedManager> ();
-		uiManager = RaceUIManager.instance;
-		uiManage = UIManager.main;
 
 		if (playerNumber == 1) {
-			InvokeRepeating ("UltUpdate", .2f, .2f);
+			InvokeRepeating("UltUpdate", .2f, .2f);
 		}
+		if (ultBOne)
+		{
+			Transform f = ultBOne.transform.Find("Count");
+			if (f)
+				{OneCharge = f.GetComponent<Text>();
+				OneCharge.gameObject.SetActive(false);
+			}
 
+			f = ultBTwo.transform.Find("Count");
+			if (f)
+				{TwoCharge = f.GetComponent<Text>();
+				TwoCharge.gameObject.SetActive(false);
+			}
 
+			f = ultBThree.transform.Find("Count");
+			if (f)
+				{ThreeCharge = f.GetComponent<Text>();
+				ThreeCharge.gameObject.SetActive(false);
+			}
+
+			f = ultBFour.transform.Find("Count");
+			if (f)
+				{FourCharge = f.GetComponent<Text>();
+				FourCharge.gameObject.SetActive(false);
+			}
+		}
 		if (upgradeBall) {
 			foreach (Upgrade grade in upgradeBall.GetComponents<Upgrade>()) {
 				if (!myUpgrades.Contains (grade)) {
@@ -113,7 +137,84 @@ public class RaceManager : MonoBehaviour, ManagerWatcher {
 	
 	}
 
-	IEnumerator Start()
+	void Start()
+	{
+		uiManager = RaceUIManager.instance;
+		uiManage = UIManager.main;
+
+		if (playerNumber == 1 && RaceSwapper.main == null )// && myRace != RaceInfo.raceType.SteelCrest)
+		{
+			UnitEquivalance RacePacket = Resources.Load<GameObject>("RaceInfoPacket").GetComponent<UnitEquivalance>();
+			UltObject Ulty = Instantiate<GameObject>(RacePacket.getRace(myRace).UltimatePrefab).GetComponent<UltObject>();
+			SetUltimates(Ulty);
+			changeRace(myRace);
+		}
+	}
+
+	public void changeRace(RaceInfo.raceType newType)
+	{
+		myRace = newType;
+		UISetter.main.SwapRaceHuds(newType);
+	}
+
+	public void AddResourceType(ResourceType resType, float amount)
+	{
+		RaceUIManager.instance.addResource(resType, amount);
+		EconomyManager.main.AddResourceType(resType);
+		resourceManager.MyResources.Add(new ResourceTank(resType, amount));
+	}
+
+	public void SetUltimates(UltObject Ulty)
+	{
+		Debug.Log("Settign Ult to " + Ulty.name);
+		if (Ulty.myUltimates.Count > 0)
+		{
+			UltOne = Ulty.myUltimates[0];
+			UltOne.myCost.cooldownTimer = Ulty.StartingCooldowns[0];
+			//UltOne.myCost.startCooldown();
+			UltOne.Start();
+			OneCharge.gameObject.SetActive(UltOne.chargeCount > -1);
+			RaceUIManager.instance.ultTexts[0].text = Ulty.myUltimates[0].Descripton;
+			ultBOne.image.sprite = Ulty.myUltimates[0].iconPic;
+		}
+
+		if (Ulty.myUltimates.Count > 1)
+		{
+			UltTwo = Ulty.myUltimates[1];
+			UltTwo.myCost.cooldownTimer = Ulty.StartingCooldowns[1];
+			//UltTwo.myCost.startCooldown();
+			UltTwo.Start();
+			TwoCharge.gameObject.SetActive(UltTwo.chargeCount > -1);
+			RaceUIManager.instance.ultTexts[1].text = Ulty.myUltimates[1].Descripton;
+			ultBTwo.image.sprite = Ulty.myUltimates[1].iconPic;
+		}
+
+		if (Ulty.myUltimates.Count > 2)
+		{
+			UltThree = Ulty.myUltimates[2];
+			UltThree.myCost.cooldownTimer = Ulty.StartingCooldowns[2];
+			//UltThree.myCost.startCooldown();
+			UltThree.Start();
+			ThreeCharge.gameObject.SetActive(UltThree.chargeCount > -1);
+			RaceUIManager.instance.ultTexts[2].text = Ulty.myUltimates[2].Descripton;
+			ultBThree.image.sprite = Ulty.myUltimates[2].iconPic;
+		}
+
+		if (Ulty.myUltimates.Count > 3)
+		{
+			UltFour = Ulty.myUltimates[3];
+			UltFour.myCost.cooldownTimer = Ulty.StartingCooldowns[3];
+			//UltFour.myCost.startCooldown();
+			UltFour.Start();
+			FourCharge.gameObject.SetActive(UltFour.chargeCount > -1);
+			RaceUIManager.instance.ultTexts[3].text = Ulty.myUltimates[3].Descripton;
+			ultBFour.image.sprite = Ulty.myUltimates[3].iconPic;
+		}
+	}
+
+
+
+	IEnumerator StartUp()
 	{yield return null;
 		if (UltTwo &&  !UltTwo.myCost.StartsRefreshed && UltTwo.active ) {
 			StartCoroutine (UltTwoNotif ());}
@@ -124,30 +225,44 @@ public class RaceManager : MonoBehaviour, ManagerWatcher {
 
 	public void UltUpdate()
 	{
-		if (slideOne && UltOne.active ) {
+		if (slideOne && UltOne.enabled ) {
 			slideOne.value = UltOne.myCost.cooldownProgress ();
+			//Debug.Log("Progress " + slideOne.value);
 			slideOne.gameObject.SetActive (slideOne.value < .99 && slideOne.value > .02f);
-			ultBOne.interactable = (slideOne.value  > .99);
-
+			ultBOne.interactable = (slideOne.value  > .99 || UltOne.chargeCount > 0);
+			if (UltFour.gameObject.activeSelf && OneCharge.text != UltOne.chargeCount.ToString())
+			{
+				OneCharge.text = UltOne.chargeCount.ToString();
+			}
 		}
 
-		if (slideTwo && UltTwo.active) {
+		if (slideTwo && UltTwo.enabled) {
 			slideTwo.value = UltTwo.myCost.cooldownProgress ();
 			slideTwo.gameObject.SetActive (slideTwo.value < .99 && slideTwo.value > .01f);
-			ultBTwo.interactable = (slideTwo.value > .99);
+			ultBTwo.interactable = (slideTwo.value > .99 || UltTwo.chargeCount > 0);
+			if (UltTwo.gameObject.activeSelf && TwoCharge.text != UltTwo.chargeCount.ToString())
+			{
+				TwoCharge.text = UltTwo.chargeCount.ToString();
+			}
 
-		
 		}
-		if (slideThree && UltThree.active) {
+		if (slideThree && UltThree.enabled) {
 			slideThree.value = UltThree.myCost.cooldownProgress ();
 			slideThree.gameObject.SetActive (slideThree.value < .99 && slideThree.value > .01f);
-			ultBThree.interactable = (slideThree.value > .99);
-		
+			ultBThree.interactable = (slideThree.value > .99 || UltThree.chargeCount > 0);
+			if (UltThree.gameObject.activeSelf && ThreeCharge.text != UltThree.chargeCount.ToString())
+			{
+				ThreeCharge.text = UltThree.chargeCount.ToString();
+			}
 		}
-		if (slideFour && UltFour.active) {
+		if (slideFour && UltFour.enabled) {
 			slideFour.value = UltFour.myCost.cooldownProgress ();
 			slideFour.gameObject.SetActive (slideFour.value < .99 && slideFour.value > .01f);
-			ultBFour.interactable = (slideFour.value > .99);
+			ultBFour.interactable = (slideFour.value > .99 || UltFour.chargeCount > 0);
+			if (UltFour.gameObject.activeSelf && FourCharge.text != UltFour.chargeCount.ToString())
+			{
+				FourCharge.text = UltFour.chargeCount.ToString();
+			}
 
 		}
 	
@@ -285,7 +400,12 @@ public class RaceManager : MonoBehaviour, ManagerWatcher {
 
 
 	public void addWatcher(ManagerWatcher input)
-	{myWatchers.Add (input);}
+	{
+		if (!myWatchers.Contains(input))
+		{
+			myWatchers.Add(input);
+		}
+	}
 	 
 
 	public void buildingUnit(UnitProduction abil)
@@ -514,36 +634,84 @@ public class RaceManager : MonoBehaviour, ManagerWatcher {
 		return finishDeath;
 	}
 
+	public void updateResources( ResourceManager res) { }
 
-
-	//Set income to false if you dont want it to count towards your income per minute.
-	public void updateResources(float resOne, float resTwo, bool income)
-	{bool hasNull = false;
-		ResourceOne += resOne;
-		ResourceTwo += resTwo;
-
-		foreach (ManagerWatcher watch in myWatchers) {
-			if(watch != null){
-			//	Debug.Log ("Checking " + watch);
-				watch.updateResources(ResourceOne, ResourceTwo, income);}
-			else{hasNull = true;}
-
+	public void collectResources(List<ResourceTank> toUpdate, bool income = true)
+	{
+		resourceManager.CollectResources(toUpdate);
+		foreach (ManagerWatcher watch in myWatchers)
+		{
+			if (watch != null)
+			{
+				watch.updateResources(resourceManager);
+			}
 		}
-		if(hasNull){
-			myWatchers.RemoveAll(item => item == null);}
-
-		if (income) {
-			if (resOne >= 0 && resTwo >= 0) {
-
-
-				totalResOne += resOne;
-				totalResTwo += resTwo;
-				uiManager.production.GetComponent<EconomyManager> ().updateMoney ((int)resOne, (int)resTwo);
+		if (income)
+		{
+			foreach (ResourceTank tank in toUpdate)
+			{
+				EconomyManager.main.updateResource(tank.resType, resourceManager.getResource(tank.resType), tank.currentAmount);
 			}
 		}
 	}
-	
-	
+
+	public void PayCost(List<ResourceTank> toUpdate)
+	{
+		resourceManager.PayCost(toUpdate);
+		foreach (ManagerWatcher watch in myWatchers)
+		{
+			if (watch != null)
+			{
+				watch.updateResources(resourceManager);
+			}
+		}
+	}
+
+	public void PayCost(ResourceTank toUpdate)
+	{
+		resourceManager.PayCost(toUpdate);
+		foreach (ManagerWatcher watch in myWatchers)
+		{
+			if (watch != null)
+			{
+				watch.updateResources(resourceManager);
+			}
+		}
+	}
+
+	public void collectOneResource(ResourceTank toUpdate, bool income = true)
+	{
+		resourceManager.collectResource(toUpdate.resType, toUpdate.currentAmount);
+		foreach (ManagerWatcher watch in myWatchers)
+		{
+			if (watch != null)
+			{
+				watch.updateResources(resourceManager);
+			}
+		}
+		if (income)
+		{
+			EconomyManager.main.updateResource(toUpdate.resType, resourceManager.getResource(toUpdate.resType), toUpdate.currentAmount);
+		}
+	}
+
+	public void collectOneResource(ResourceType theType, float amount, bool income = true)
+	{
+		resourceManager.collectResource(theType, amount);
+		foreach (ManagerWatcher watch in myWatchers)
+		{
+			if (watch != null)
+			{
+				watch.updateResources(resourceManager);
+			}
+		}
+		if (income)
+		{
+			EconomyManager.main.updateResource(theType, resourceManager.getResource(theType), amount);
+		}
+	}
+
+
 	public void updateSupply( float current, float max){
 		bool hasNull= false;
 		foreach (ManagerWatcher watch in myWatchers) {

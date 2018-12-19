@@ -44,7 +44,6 @@ public class LevelMaker : EditorWindow
     }
 
     Vector3 firstPoint;
-    bool DrawLine;
     void OnSceneGUI(SceneView scene_view)
     {
         HandleUtility.AddDefaultControl(GUIUtility.GetControlID(FocusType.Passive));
@@ -71,14 +70,12 @@ public class LevelMaker : EditorWindow
             {
                 if (Event.current.type == EventType.MouseDown)
                 {
-                    DrawLine = true;
                     firstPoint = lastPoint;
 
                 }
                 if (Event.current.type == EventType.MouseUp )
                 {
-                    DrawLine = false;
-
+ 
                     swapper.CreateUnits(currentComp, currentType, playerNumber, firstPoint, lastPoint - firstPoint, maxDifficulty);
                 }
             }

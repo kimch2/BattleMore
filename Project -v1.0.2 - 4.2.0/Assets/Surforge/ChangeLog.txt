@@ -1,0 +1,148 @@
+1.1.2
+
+Unity 2018.1.7 compatibility hotfix.
+
+
+1.1.1
+
+Unity 2018 compatibility.
+Foldable material categories.
+New materials.
+
+fixed: Scatter button caused error while greebles tool not active.
+fixed: Reload actual materials list on scene load.
+fixed: Honeycomb texture seams.
+
+changed: Several textures of .sbsar format replaced with raster images for better compatibility with Unity 2018.
+
+
+1.1.0
+
+Material Rotation.
+
+added: New "Missile Turret" model and demo scene.
+
+fixed: Minor issue with loading a scene, when "show actions" enabled during scene save.
+fixed: "Winged Helmet" demo scene repaired, improved, and returned to the place.
+
+
+1.0.7
+
+Surforge material system greatly improved.
+
+  Added Curstom Specular/Glossiness, AO, Emission maps slots for Surforge materials.
+  Drag-and-drop Surforge materials and material sets from project to texture preview.
+  Unity Standard (specular setup) materials import on drag-and-drop to Surforge texture preview.
+  Improved quality of existing materials, added normal maps for all Surforge textures.
+  24 new materials.
+  
+Preview material maps with right click menu on texture preview.
+Albedo, specular, glossiness calibration charts in maps preview.
+Much reduced the size of the saved scenes. Textures and material icons no more saved with the scene.
+
+fixed: Build project with Surforge caused errors.
+fixed: Texture preview doubleclick issue.
+fixed: Lagacy Image Effects package conflict.
+fixed: Select materials with Ctrl over texture preview when Surforge window not focused.
+fixed: After seamless mode used, reset texture preview camera could have wrong distance.
+fixed: After skybox rotation, reset texture preview could be wrong centered.
+fixed: Drag started outside of texture preview could sometimes rotate viewport.
+fixed: Material icons paint noise was not visible.
+fixed: Deleting objects in seamless mode could sometimes lead to error.
+
+
+1.0.6
+
+Unity 2017 compatibility.
+Source codes.
+
+
+1.0.5
+
+added: Normal Map slot for Surforge materials, which is blending with Surforge rendered normals.
+added: Reload button to update material list with changes in "Surforge/CustomPresets/Materials/".
+added: Show material names when hover with mouse in material list.
+
+fixed: Layout issue when Scene View not showing its contents in some cases.
+fixed: With more than one Scene View opened, Add Detail tool not worked correctly.
+fixed: Custom Material Sets import when load previously saved scenes, not only new.
+fixed: Material icons rendered improperly before skybox changed at least once.
+fixed: Selecting "none" in open model field caused error.
+fixed: Composer material issues when preview on arbitrary scene mesh, due to Material ID mask mipmaps.
+
+
+1.0.4
+
+Linear color space workflow support.
+
+  Select "Linear" in Edit - Project Settings - Player in Unity Editor. Exported maps, Texture Preview, and Composer Shader blending are linear in this mode.
+  Both linear and gamma modes supported.
+  Compatibility with gamma saved Surforge scenes. Press Render (Space) to update texture preview.
+
+Transparency.
+ 
+  Full and semi transparent, per Material ID.
+  Labels and Paint Masks support.
+  Albedo (alpha channel) transparency export. Select desired transparency mode in exported Standard material settings.
+
+Compatibility with Archimatix workflow. This is still early implementation, but handy.
+  
+  Ability to preview Surforge Composer shader on arbitrary scene meshes. Drag and drop "previewMat" from Surforge Render tab to your scene objects and Archimatix material fields.
+  Ability to drag scene MeshFilters to Surforge "open model" field. You chould preview Archimatix mesh stamps in Surforge Texture Preview this way.
+
+fixed: Texture Preview issue with project in Deferred mode.
+fixed: GUI elements size issues, when other assets changed Editor built-in styles.
+fixed: Asset database was not refreshed after screenshot capture.
+
+
+1.0.3
+
+Viewport performance, model loading speed and UV islands border shapes detection got huge improvements.
+
+added: 30 new Add Detail tool mesh assets.
+
+fixed: imported base normal map with antialiasing caused improper tiling.
+fixed: Poly Lasso profile "panelB" caused freeze.
+fixed: empty Screenshots folder removed by Asset Store Tools.
+
+
+1.0.2
+
+Unity 5.5.2 compatibility hotfix.
+
+added: new "Winged Helmet" example model for testing.
+added: winged Helmet texturing example scene.
+
+
+1.0.1
+
+added: compatibility with ProBuilder. This is still early implementation. To use it enable "meshes are assets" option in ProBuilder preferences. Drag and drop result mesh asset to Surforge mesh field and use Ctrl + Space hotkey to update your mesh.
+added: 12 Fantasy ornament Add Detail tool mesh assets.
+added: Poly Lasso profile scale slider.
+added: Poly Lasso profile scale hotkeys [,] for Poly Lasso tool, while it active, and for existing selected objects while tool inactive.
+added: auto focus on models of different scale in texture preview with doubleclick or mesh change.
+added: create material on export with map links.
+added: exported normal map mode switches to "normal map".
+added: add Detail tool: select last added item.
+added: last used transform tool activates on Surforge tools exit.
+added: switch on Unity Editor tools deactivate Surforge tools.
+added: example models for testing.
+added: single page SurforgeHotkeys.pdf
+
+fixed: certain layouts were needed revert to factory settings to run Surforge.
+fixed: model loading issue for similar models. 
+fixed: proper model asset changes detection.
+fixed: better UV islands recognition. Now handles overlapped islands, and islands shared an edge. Still need neat UV islands without folding for proper work. For tricky UV layouts please use "classic UV" mode instead.
+fixed: issue with saved scene or model load while UV Guides mode off.
+fixed: shrink/expand undo.
+fixed: global texture scale adjustment was wrong on exported maps.
+fixed: hotkeys holding down: better precision and performance.
+fixed: possible minor memory leak on continued material icons update.
+fixed: zoom was limited in texture preview.
+fixed: blender native format models with no UVs error.
+fixed: issues with ProGrids.
+
+changed: shrink/expand hotkeys from left/right arrows to shift + [, ] to not override Unity Editor standard hotkeys.
+changed: move object up/down hotkeys from up/down arrows to +, - to not override Unity Editor standard hotkeys.
+
+

@@ -9,8 +9,9 @@ public class sawDefense : MonoBehaviour {
 	public UnitManager myManager;
 
 	public GameObject mySaw;
-	bool inAttack;
+	bool inAttack = true;
 	float attackEndTime;
+	public float attackSpeed = 5;
 	int attackType;
 
 	public GameObject targetCircle; 
@@ -21,7 +22,14 @@ public class sawDefense : MonoBehaviour {
 	public AudioSource myAudio;
 
 	public AudioClip sliceSound;
+	public bool slice = true;
+	public bool Chop = true;
 
+	private void Start()
+	{
+		targetlocation = Vector3.right;
+		attackEndTime = Time.time + 1.5f; 
+	}
 
 	// Update is called once per frame
 	void Update () {
@@ -48,19 +56,22 @@ public class sawDefense : MonoBehaviour {
 				tempEnd.y = mySaw.transform.position.y;
 				targetlocation = (tempEnd- mySaw.transform.position).normalized;
 
-
-
 				inAttack = true;
-				if (attackType == 2) {
+				if (attackType == 2 && Chop) {
 					attackType = -2;
-				}else{
+					myController.Play("Chop");
+				}
+				else{
 					attackType = 2;
+					myController.Play("Slice");
 					}
-				attackEndTime = Time.time + 5;
-				myController.SetInteger ("State", attackType);
+				attackEndTime = Time.time + attackSpeed;
 
-				StartCoroutine (showInd ());
-				StartCoroutine (delayState());
+				if(showingInd != null) {
+					StopCoroutine(showingInd);
+				}
+
+				 showingInd = StartCoroutine (showInd ());
 
 			}
 		}
@@ -68,6 +79,7 @@ public class sawDefense : MonoBehaviour {
 
 
 	}
+	Coroutine showingInd;
 
 	IEnumerator showInd()
 	{	yield return new WaitForSeconds (.5f);
@@ -88,7 +100,7 @@ public class sawDefense : MonoBehaviour {
 
 
 		}
-		yield return new WaitForSeconds (3.5f);
+		yield return new WaitForSeconds (Mathf.Max(.1f, 3.5f));
 		targetCircle.gameObject.SetActive (false);
 
 		targetSlice.gameObject.SetActive (false);
@@ -96,11 +108,6 @@ public class sawDefense : MonoBehaviour {
 
 	}
 
-	IEnumerator delayState()
-	{
-		yield return new WaitForSeconds (2f);
-		myController.SetInteger ("State", 0);
-	}
 
 
 

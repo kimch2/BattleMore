@@ -32,7 +32,8 @@ public class StandardInteract : MonoBehaviour, Iinteract {
 	// When creating other interactor classes, make sure to pass all relevant information into whatever new state is being created (IMover, IWeapon, UnitManager)
 	public virtual void computeInteractions (Order order)
 	{
-	//	Debug.Log ("Queued " + order.queued);
+
+		Debug.Log ("Queued " + order.queued + "  " + order.Name);
 		switch (order.OrderType) {
 		case Const.Order_HoldGround:
 	
@@ -96,7 +97,7 @@ public class StandardInteract : MonoBehaviour, Iinteract {
 
 	// Right click on a obj/unit
 	public virtual void Interact(Order order)
-	{//Debug.Log ("First Intereact");
+	{Debug.Log ("First Intereact");
 		UnitManager manage = order.Target.GetComponent<UnitManager> ();
 		if (!manage) {
 			manage = order.Target.GetComponentInParent<UnitManager> ();

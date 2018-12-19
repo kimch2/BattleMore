@@ -9,6 +9,7 @@ public class AreaDamage : MonoBehaviour {
 
 
 	public DamageTypes.DamageType myType = DamageTypes.DamageType.Regular;
+	public IWeapon.bonusDamage BonusDamage;
 	public int Owner;
 	public GameObject cutEffect;
 
@@ -42,7 +43,8 @@ public	virtual void UpdateDamage () {
 					}
 				}
 		
-				s.TakeDamage (damage, this.gameObject.gameObject.gameObject, myType);
+				s.TakeDamage (damage + (s.isUnitType(BonusDamage.type)? BonusDamage.bonus : 0), this.gameObject.gameObject.gameObject, myType);
+		
 				if (showPop) {
 					iter++;
 					if (iter == 6) {

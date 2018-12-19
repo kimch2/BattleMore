@@ -34,12 +34,15 @@ public class RaceSwapper : MonoBehaviour {
 
 		if (choice != null)
 		{
-			Debug.Log("As " + choice.PlayingAs + "  " + choice.PlayingAgainst);
-			Ulty = Instantiate<GameObject>( RacePacket.getRace(choice.PlayingAs).UltimatePrefab).GetComponent<UltObject>();
-			
+			Ulty = Instantiate<GameObject>(RacePacket.getRace(choice.PlayingAs).UltimatePrefab).GetComponent<UltObject>();
+
 			swap(1, choice.PlayingAs);
 			Debug.Log("Swapping enemy to " + choice.PlayingAgainst);
 			swap(2, choice.PlayingAgainst);
+		}
+		else
+		{
+			Ulty = Instantiate<GameObject>( RacePacket.getRace(GameObject.FindObjectOfType<GameManager>().playerList[0].myRace).UltimatePrefab).GetComponent<UltObject>();
 		}
 	}
 
@@ -48,54 +51,65 @@ public class RaceSwapper : MonoBehaviour {
 	{
 		if(choice != null)
 		{
-			if (Ulty.myUltimates.Count > 0) {
-				GameManager.main.activePlayer.UltOne = Ulty.myUltimates[0];
-				GameManager.main.activePlayer.UltOne.myCost.cooldownTimer = Ulty.StartingCooldowns[0];
-			}
-
-			if (Ulty.myUltimates.Count > 1)
-			{
-				GameManager.main.activePlayer.UltTwo = Ulty.myUltimates[1];
-				GameManager.main.activePlayer.UltTwo.myCost.cooldownTimer = Ulty.StartingCooldowns[0];
-			}
-
-			if (Ulty.myUltimates.Count > 2)
-			{
-				GameManager.main.activePlayer.UltThree = Ulty.myUltimates[2];
-				GameManager.main.activePlayer.UltThree.myCost.cooldownTimer = Ulty.StartingCooldowns[2];
-			}
-
-			if (Ulty.myUltimates.Count > 3)
-			{
-				GameManager.main.activePlayer.UltFour = Ulty.myUltimates[3];
-				GameManager.main.activePlayer.UltFour.myCost.cooldownTimer = Ulty.StartingCooldowns[3];
-			}
+			GameManager.main.activePlayer.SetUltimates(Ulty);
 		}
 	}
 
 	public RaceInfo getPlayerRaceInfo()
 	{
-		return RacePacket.getRace(choice.PlayingAs);
+
+		if (RacePacket == null)
+		{
+			RacePacket = Resources.Load<GameObject>("RaceInfoPacket").GetComponent<UnitEquivalance>();
+		}
+		return RacePacket.getRace(choice == null ? RaceInfo.raceType.SteelCrest : choice.PlayingAs);
 	}
 
 	public void swap(int playerNumber, RaceInfo.raceType race)
 	{
 		if (playerNumber == 1)
 		{
+			GameManager.main.activePlayer.changeRace(race);
 			SwapUnits(POneUnits, race);
 		}
 		else if (playerNumber == 2)
 		{
+			GameManager.main.playerList[1].myRace = race;
 			SwapUnits(PTwoUnits, race);
 		}
 		else if (playerNumber == 3)
 		{
+			GameManager.main.playerList[2].myRace = race;
 			SwapUnits(PThreeUnits, race);
 		}
-
 	}
 
-	void SwapUnits(List<UnitSpot> spots, RaceInfo.raceType race)
+	public void DeleteGameObjects()
+	{
+		foreach (UnitSpot spot in POneUnits)
+		{
+			foreach (GameObject obj in spot.CurrentGuys)
+			{
+				DestroyImmediate(obj);
+			}
+		}
+		foreach (UnitSpot spot in PTwoUnits)
+		{
+			foreach (GameObject obj in spot.CurrentGuys)
+			{
+				DestroyImmediate(obj);
+			}
+		}
+		foreach (UnitSpot spot in PThreeUnits)
+		{
+			foreach (GameObject obj in spot.CurrentGuys)
+			{
+				DestroyImmediate(obj);
+			}
+		}
+	}
+
+	public void SwapUnits(List<UnitSpot> spots, RaceInfo.raceType race)
 	{
 		int difficulty = 3;
 		if (Application.isPlaying)
@@ -116,7 +130,7 @@ public class RaceSwapper : MonoBehaviour {
 
 			if (Application.isPlaying && spots == PTwoUnits)
 			{
-				if (spot.MaxDifficulty < difficulty)
+				if (spot.MaxDifficulty > difficulty )
 				{
 					continue;
 				}
@@ -127,11 +141,27 @@ public class RaceSwapper : MonoBehaviour {
 
 			List<GameObject> allUnits = SpawnUnit(comp, race, spot.PlayerOwner, spot.position, spot.Rotation);
 			spot.CurrentGuys = allUnits;
-
-
 		}
 	}
 
+	private void OnDrawGizmos()
+	{
+		Gizmos.color = Color.blue;
+		foreach (UnitSpot spot in POneUnits)
+		{
+			Gizmos.DrawSphere(spot.position, 1);
+		}
+		Gizmos.color = Color.red;
+		foreach (UnitSpot spot in PTwoUnits)
+		{
+			Gizmos.DrawSphere(spot.position, 1);
+		}
+		Gizmos.color = Color.yellow;
+		foreach (UnitSpot spot in PThreeUnits)
+		{
+			Gizmos.DrawSphere(spot.position, 1);
+		}
+	}
 
 	public void CreateUnits(Composition currentComp, RaceInfo.raceType currentType, int playerNumber, Vector3 position, Vector3 direction, int difficulty)
 	{

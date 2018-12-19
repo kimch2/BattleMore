@@ -6,30 +6,55 @@ public class OreDispenser : MonoBehaviour {
 
 	public float OreRemaining;
 
-	private bool inUse;
-
 
 	public GameObject currentMinor;
 	
-	private Queue<GameObject> workers =  new Queue<GameObject >();
 	// used for increased mining
 	public float returnRate = 1;
 	public float efficiency = 1;
 
+	public UnitManager MyStructure;
 
 
 	public bool requestWork(GameObject obj)
-	{if (!currentMinor) {
+	{
+		if (!currentMinor) {
 			currentMinor = obj;
 			return true;
 		}
 		return false;
 	}
 
+	public void assignBuilding(UnitManager manager)
+	{
+		MyStructure = manager;
+	}
+
+	public bool confirmCanMine(string structureName)
+	{
+		if (string.IsNullOrEmpty(structureName) && MyStructure == null)
+		{
+			return true;
+		}
+		else if (string.IsNullOrEmpty(structureName))
+		{
+			return false;
+		}
+		else if (MyStructure.UnitName == structureName)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
 
 
 	public float getOre( float amount)
-	{float giveBack = Mathf.Min (OreRemaining, amount * returnRate);
+	{
+		float giveBack = Mathf.Min (OreRemaining, amount * returnRate);
 		OreRemaining -= giveBack;
 		if (OreRemaining <= .5) {
 
@@ -43,11 +68,6 @@ public class OreDispenser : MonoBehaviour {
 		}
 		return Mathf.Min (OreRemaining, giveBack) * efficiency;
 
-	}
-
-	public void removeWorker(GameObject client)
-	{
-		workers.Enqueue(client);
 	}
 
 }

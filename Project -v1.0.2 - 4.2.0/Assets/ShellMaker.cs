@@ -53,7 +53,7 @@ public class ShellMaker : Ability{
 	{
 		bastion.changeCharge (1);
 
-
+		/*
 
 		if (turnedOn) {
 			if (racer.ResourceOne >= myCost.ResourceOne) {
@@ -67,7 +67,7 @@ public class ShellMaker : Ability{
 				makingShell = true;
 				return;
 			}
-		}
+		}*/
 		makingShell = false;
 
 	}

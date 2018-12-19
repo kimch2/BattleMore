@@ -1,0 +1,451 @@
+fileFormatVersion: 2
+guid: 004bad01bdeb39f45a3c1fd1cf3d0378
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: circle_09
+    100002: circle_10
+    100004: circle_11
+    100006: //RootNode
+    100008: floater_01
+    100010: floater_02
+    100012: floater_03
+    100014: floater_04
+    100016: greeble_24
+    100018: greeble_25
+    100020: greeble_25B
+    100022: greeble_26
+    100024: greeble_26_floater
+    100026: greeble_27
+    100028: greeble_27B
+    100030: greeble_28
+    100032: greeble_28B
+    100034: greeble_29
+    100036: greeble_29_floater
+    100038: greeble_30
+    100040: greeble_31
+    100042: greeble_32
+    100044: greeble_33
+    100046: greeble_34
+    100048: greeble_35
+    100050: greeble_36
+    100052: greeble_37
+    100054: greeble_38
+    100056: greeble_39
+    100058: greeble_40
+    100060: greeble_41
+    100062: greeble_42
+    100064: greeble_43
+    100066: greeble_44
+    100068: greeble_45
+    100070: rivet_05
+    100072: rivet_05_floater
+    400000: circle_09
+    400002: circle_10
+    400004: circle_11
+    400006: //RootNode
+    400008: floater_01
+    400010: floater_02
+    400012: floater_03
+    400014: floater_04
+    400016: greeble_24
+    400018: greeble_25
+    400020: greeble_25B
+    400022: greeble_26
+    400024: greeble_26_floater
+    400026: greeble_27
+    400028: greeble_27B
+    400030: greeble_28
+    400032: greeble_28B
+    400034: greeble_29
+    400036: greeble_29_floater
+    400038: greeble_30
+    400040: greeble_31
+    400042: greeble_32
+    400044: greeble_33
+    400046: greeble_34
+    400048: greeble_35
+    400050: greeble_36
+    400052: greeble_37
+    400054: greeble_38
+    400056: greeble_39
+    400058: greeble_40
+    400060: greeble_41
+    400062: greeble_42
+    400064: greeble_43
+    400066: greeble_44
+    400068: greeble_45
+    400070: rivet_05
+    400072: rivet_05_floater
+    2300000: circle_09
+    2300002: circle_10
+    2300004: circle_11
+    2300006: floater_01
+    2300008: floater_02
+    2300010: floater_03
+    2300012: floater_04
+    2300014: greeble_24
+    2300016: greeble_25
+    2300018: greeble_25B
+    2300020: greeble_26
+    2300022: greeble_26_floater
+    2300024: greeble_27
+    2300026: greeble_27B
+    2300028: greeble_28
+    2300030: greeble_28B
+    2300032: greeble_29
+    2300034: greeble_29_floater
+    2300036: greeble_30
+    2300038: greeble_31
+    2300040: greeble_32
+    2300042: greeble_33
+    2300044: greeble_34
+    2300046: greeble_35
+    2300048: greeble_36
+    2300050: greeble_37
+    2300052: greeble_38
+    2300054: greeble_39
+    2300056: greeble_40
+    2300058: greeble_41
+    2300060: greeble_42
+    2300062: greeble_43
+    2300064: greeble_44
+    2300066: greeble_45
+    2300068: rivet_05
+    2300070: rivet_05_floater
+    3300000: circle_09
+    3300002: circle_10
+    3300004: circle_11
+    3300006: floater_01
+    3300008: floater_02
+    3300010: floater_03
+    3300012: floater_04
+    3300014: greeble_24
+    3300016: greeble_25
+    3300018: greeble_25B
+    3300020: greeble_26
+    3300022: greeble_26_floater
+    3300024: greeble_27
+    3300026: greeble_27B
+    3300028: greeble_28
+    3300030: greeble_28B
+    3300032: greeble_29
+    3300034: greeble_29_floater
+    3300036: greeble_30
+    3300038: greeble_31
+    3300040: greeble_32
+    3300042: greeble_33
+    3300044: greeble_34
+    3300046: greeble_35
+    3300048: greeble_36
+    3300050: greeble_37
+    3300052: greeble_38
+    3300054: greeble_39
+    3300056: greeble_40
+    3300058: greeble_41
+    3300060: greeble_42
+    3300062: greeble_43
+    3300064: greeble_44
+    3300066: greeble_45
+    3300068: rivet_05
+    3300070: rivet_05_floater
+    4300000: greeble_45
+    4300002: circle_11
+    4300004: circle_10
+    4300006: floater_04
+    4300008: greeble_44
+    4300010: greeble_43
+    4300012: greeble_42
+    4300014: greeble_41
+    4300016: greeble_40
+    4300018: greeble_39
+    4300020: greeble_38
+    4300022: greeble_37
+    4300024: greeble_36
+    4300026: greeble_35
+    4300028: greeble_34
+    4300030: floater_03
+    4300032: greeble_33
+    4300034: greeble_32
+    4300036: greeble_31
+    4300038: greeble_26
+    4300040: greeble_26_floater
+    4300042: rivet_05
+    4300044: rivet_05_floater
+    4300046: greeble_24
+    4300048: greeble_30
+    4300050: floater_02
+    4300052: greeble_29
+    4300054: greeble_29_floater
+    4300056: greeble_28
+    4300058: greeble_28B
+    4300060: floater_01
+    4300062: greeble_27
+    4300064: greeble_27B
+    4300066: circle_09
+    4300068: greeble_25
+    4300070: greeble_25B
+    9500000: //RootNode
+    2186277476908879412: ImportLogs
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: phong1
+    second: {fileID: 2100000, guid: a9a9e1833a3bc8045b0dd6f682ad190a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: phong10
+    second: {fileID: 2100000, guid: 1f6a4f9a92eac52478185ca085410e6c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: phong11
+    second: {fileID: 2100000, guid: be3ce25bdc64a0b4380a498f0e5810d9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: phong12
+    second: {fileID: 2100000, guid: c67b0029de4508f41b14138bc7a37f46, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: phong13
+    second: {fileID: 2100000, guid: f7a2527784f373d43ac54b930f0f429a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: phong14
+    second: {fileID: 2100000, guid: dc8cec786af9d3c46a1f16a6a42b3517, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: phong15
+    second: {fileID: 2100000, guid: c65816f2d36b0eb4d97e1a2374039fb3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: phong17
+    second: {fileID: 2100000, guid: a5f6ac690b20c464d85e823dfd7746b1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: phong18
+    second: {fileID: 2100000, guid: 74215e1477172314c84ddb71222d2053, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: phong2
+    second: {fileID: 2100000, guid: dd761ac97d4c3314faf5dce1f69c4912, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: phong20
+    second: {fileID: 2100000, guid: a86c4846dc380394cb1e9c1d54a110a8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: phong21
+    second: {fileID: 2100000, guid: 098863f43b3a8eb47bfca95596bc0d78, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: phong22
+    second: {fileID: 2100000, guid: 80cec619ef8f6314f985e7720e85020d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: phong23
+    second: {fileID: 2100000, guid: b290e0046cf2b0745a31df470c50547e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: phong24
+    second: {fileID: 2100000, guid: 2a2c08159bdc3ee43987d469f1a9d890, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: phong25
+    second: {fileID: 2100000, guid: ff8f6ea1348842b4e97807d9e0d322d5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: phong26
+    second: {fileID: 2100000, guid: a0e521c2dc188294faeaa68202873afb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: phong27
+    second: {fileID: 2100000, guid: 20abd4beafc523f4ca5e19dbd15211b5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: phong28
+    second: {fileID: 2100000, guid: 1fd31dc2508516a4d8d34c3789a64af7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: phong29
+    second: {fileID: 2100000, guid: aebb517965ce1dd4ea408caf5d338057, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: phong3
+    second: {fileID: 2100000, guid: 3ee4134821c407849b5999027e75d200, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: phong30
+    second: {fileID: 2100000, guid: 9cac082ef0ea19c42a6e5974b5664832, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: phong31
+    second: {fileID: 2100000, guid: 6789fb84d4132084d9e2234f4f4678c7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: phong32
+    second: {fileID: 2100000, guid: 039e904cf2617e44c8a7a32a1b1dff63, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: phong33
+    second: {fileID: 2100000, guid: 02170aef0b412954dbdf503a8510f9fb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: phong34
+    second: {fileID: 2100000, guid: 993ece3c8ef24174b873ee28f62ed4e3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: phong35
+    second: {fileID: 2100000, guid: c636fd30a23ba6f40bdf4d06097493ce, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: phong36
+    second: {fileID: 2100000, guid: de56e2ca0207cc7448e072a0571b6540, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: phong37
+    second: {fileID: 2100000, guid: e8d373554a6cb6a46b8cff8cd37e5c71, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: phong38
+    second: {fileID: 2100000, guid: 73f2e4519368ae749a77b486baa817c1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: phong39
+    second: {fileID: 2100000, guid: f29747b325fb30f4eb2238ebac9c4e4e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: phong5
+    second: {fileID: 2100000, guid: cd64ac324d2f3344ca2d61e94ca77bd9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: phong6
+    second: {fileID: 2100000, guid: c520b5d839b60f440ae0d57633c43ce9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: phong7
+    second: {fileID: 2100000, guid: c482e4d83c0ccfc4e8304e87a22a61dc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: phong8
+    second: {fileID: 2100000, guid: 4c9777d7c736ce3429be08ac89031c6a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: phong9
+    second: {fileID: 2100000, guid: fef2975ca6792b243999e797c8929eec, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 4
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 0
+    importBlendShapes: 1
+    importCameras: 0
+    importLights: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 0.04
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 4
+    normalCalculationMode: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -2,24 +2,38 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SalvageTarget :SingleTarget, IEffect {
+public class SalvageTarget : IEffect {
 
-	void Start()
-	{
-		base.Start ();
-		myEffect = this;
-	}
+	// Designed to be used with Ore and Waste
+	public override void apply (GameObject source, GameObject target){
 
-	public void apply (GameObject source, GameObject target){
+		UnitManager manage = target.GetComponent<UnitManager>();
+		float amountA = manage.myStats.Cost.MyResources[0].currentAmount *.5f;
+		float amountB = amountA;
+		if (manage.myStats.Cost.MyResources.Count > 1)
+		{
+			amountB += manage.myStats.Cost.MyResources[1].currentAmount ;
 
-		float amount = target.GetComponent<UnitManager> ().myStats.cost;
-		PopUpMaker.CreateGlobalPopUp ("+ " + (int)(amount *.75f), Color.white,this.transform.position);
-		PopUpMaker.CreateGlobalPopUp ("+ " + (int)(amount *.75f), Color.white,target.transform.position);
+		}
+
+
+		PopUpMaker.CreateGlobalPopUp ("+ " + (int)(amountA ), Color.white,this.transform.position);
+		PopUpMaker.CreateGlobalPopUp ("+ " + (int)(amountA ), Color.white,target.transform.position);
+
+		PopUpMaker.CreateGlobalPopUp("+ " + (int)(amountB), Color.green, this.transform.position + Vector3.down *3);
+		PopUpMaker.CreateGlobalPopUp("+ " + (int)(amountB ), Color.green, target.transform.position + Vector3.down * 3);
 
 		target.GetComponent<UnitManager> ().myStats.kill (source);
-		GameManager.main.playerList [0].updateResources (amount,0,false);
-
+		GameManager.main.playerList[0].collectOneResource(new ResourceTank(ResourceType.Ore, (int)amountA), false );
+		GameManager.main.playerList[0].collectOneResource(new ResourceTank(ResourceType.Waste, (int)amountB), false);
 	}
+	 
+	public override bool canCast() { return true; }
+
+	public override bool validTarget(GameObject target) {
+		return true;
+	}
+
 
 
 }

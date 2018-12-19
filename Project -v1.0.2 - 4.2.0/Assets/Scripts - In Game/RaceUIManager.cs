@@ -10,8 +10,6 @@ public class RaceUIManager : MonoBehaviour , ManagerWatcher{
 
 	public RaceManager raceManager;
 
-	public Text resourceOne;
-	public Text resourceTwo;
 	public Text supply;
 	string OneName;
 	string TwoName;
@@ -28,9 +26,16 @@ public class RaceUIManager : MonoBehaviour , ManagerWatcher{
 	public List<GameObject> dropdowns = new List<GameObject>();
 	public List<Text> ultTexts;
 
+	public GameObject ResourcePrefab;
+	public Transform ResourceGrid;
+
+	private Dictionary<ResourceType, Text> ResourceMap = new Dictionary<ResourceType, Text>();
+
+
 	void Awake()
 	{
 		instance = this;
+		raceManager = GameObject.FindObjectOfType<GameManager>().playerList[0];
 	}
 
 	// Use this for initialization
@@ -44,25 +49,7 @@ public class RaceUIManager : MonoBehaviour , ManagerWatcher{
 
 		if (runTabs) {
 			raceManager.addWatcher (this);
-			OneName = raceManager.OneName;
-			TwoName = raceManager.TwoName;
 
-		
-			//resourceOne = this.gameObject.transform.Find ("Resources").Find ("ResourceOne").GetComponent<Text> ();
-			//resourceTwo = this.gameObject.transform.Find ("Resources").Find ("ResourceTwo").GetComponent<Text> ();
-			//supply = this.gameObject.transform.Find ("Resources").Find ("Supply").GetComponent<Text> ();
-
-			if (OneName != "") {
-				resourceOne.text = "" + ((int)raceManager.ResourceOne);
-			} else {
-				resourceOne.text = "";
-			}
-
-			if (TwoName != "") {
-						resourceTwo.text = "" + ((int)raceManager.ResourceTwo);
-			} else {
-				resourceTwo.text = "";
-			}
 			if (raceManager.supplyMax >= raceManager.supplyCap) {
 				supply.color = Color.white;
 			}
@@ -127,8 +114,6 @@ public class RaceUIManager : MonoBehaviour , ManagerWatcher{
 			production.value = 5;
 			chanageDropDown ();
 		}
-
-	
 	}
 
 
@@ -177,24 +162,27 @@ public class RaceUIManager : MonoBehaviour , ManagerWatcher{
 		else{
 			currentProdManager.SetActive (false);
 		}
-
-	
-
+		
 		}
 	}
 
 
-
+	public void addResource(ResourceType resType, float startingAmount)
+	{
+		GameManager.main.getActivePlayer().addWatcher(this);
+		GameObject obj = Instantiate<GameObject>(ResourcePrefab, ResourceGrid);
+		obj.transform.SetSiblingIndex(obj.transform.parent.childCount - 2);
+		obj.GetComponentInChildren<Image>().sprite = UnitEquivalance.getResourceInfo(resType).icon;
+		ResourceMap.Add(resType, obj.GetComponentsInChildren<Text>()[0]);
+		ResourceMap[resType].text = startingAmount + "";
+	}
 
 	
-	public void updateResources(float resOne, float resTwo, bool income){
+	public void updateResources(ResourceManager manager){
 
-		if (OneName != "") {
-							resourceOne.text = "" + ((int)resOne);
-		}
-		if (TwoName != "") {
-			
-							resourceTwo.text = "" + ((int)resTwo);
+		foreach (ResourceTank t in manager.MyResources)
+		{
+			ResourceMap[t.resType].text = t.currentAmount + "";
 		}
 	}
 	
@@ -269,7 +257,10 @@ public class RaceUIManager : MonoBehaviour , ManagerWatcher{
 	}
 	
 	public void fTwelve()
-	{SelectedManager.main.selectAllUnArmedTanks ();
+	{
+
+
+		SelectedManager.main.selectAllUnArmedTanks ();
 		UISoundManager.interfaceClick (true);
 	}
 

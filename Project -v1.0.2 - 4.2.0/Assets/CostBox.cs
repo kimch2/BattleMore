@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
@@ -9,18 +10,14 @@ public class CostBox : MonoBehaviour {
 
 	public Text MyName;
 	public Text time;
-	public Text resOne;
-	public Text resTwo;
-	public Text health;
 	public Text description;
-	public Text requirements;
 	public Image clocker;
-	public Image BloodDrop;
 	public Text Population;
-	public Image EnergyPic;
-	public Text EnergyText;
-	public Image OreIcon;
+	public GameObject CostPrefab;
+	protected Lean.LeanPool myPool;
+	public Transform CostGrid;
 
+	List<GameObject> inUseCosts = new List<GameObject>();
 	Color teal = new Color(.698f, .949f, 255);
 
 
@@ -31,22 +28,30 @@ public class CostBox : MonoBehaviour {
 	{
 		myCanvas = GetComponent<Canvas> ();
 		instance = this;
+
 	}
 
+	private void Start()
+	{
+		myPool = Lean.LeanPool.getSpawnPool(CostPrefab);
+	}
 
 	public void turnOff()
 	{
 		myCanvas.enabled = false;
 	}
 
+	bool canBuild = true;
 	public void setText(Ability input)
-	{if (input == null) {
+	{
+		canBuild = true;
+		if (input == null) {
 			return;}
 		continueOrder order = input.canActivate (false);
 		
 		MyName.text = input.Name;
 
-		bool canBuild = true;
+	
 		if (input.myCost) {
 			// CLOCK ===========================================
 
@@ -87,6 +92,7 @@ public class CostBox : MonoBehaviour {
 					Population.text = "";
 				}
 				if (sup > GameManager.getInstance ().activePlayer.supplyMax - GameManager.getInstance ().activePlayer.currentSupply) {
+					canBuild = false;
 					Population.color = Color.red;
 				} else {
 					Population.color = teal;
@@ -95,106 +101,53 @@ public class CostBox : MonoBehaviour {
 			} else {
 				Population.text = "";
 			}
+			foreach (GameObject tank in inUseCosts)
+			{
+				myPool.FastDespawn(tank);
+			}
+			inUseCosts.Clear();
 
-
-			if (input.myCost.ResourceOne > 0) {
-				resOne.text = "" + (int)input.myCost.ResourceOne;
-				OreIcon.enabled =true;
-				if (order.reasonList.Contains (continueOrder.reason.resourceOne)) {
-					resOne.color = Color.red;
-
-					canBuild = false;
-				} else {
-					resOne.color = teal;
-				}
-
-
-			} else {
-			//	Debug.Log ("Disabling");
-				OreIcon.enabled = false;
-				resOne.text = "";
+			foreach (ResourceTank tank in input.myCost.resourceCosts.MyResources)
+			{
+				CreateCostSettings(Mathf.Abs(tank.currentAmount).ToString(), UnitEquivalance.getResourceInfo(tank.resType).icon, order.InsufficientResources.Contains(tank.resType) ?  Color.red : teal);
 			}
 
+			if (input.myCost.energy > 0)
+			{
+				CreateCostSettings(input.myCost.energy.ToString(), UnitEquivalance.getResourceInfo(ResourceType.Energy).icon, order.reasonList.Contains(continueOrder.reason.energy) ? teal : Color.red);
+			}
 
+			if (input.myCost.health > 0)
+			{
+				CreateCostSettings(input.myCost.health.ToString(), UnitEquivalance.getResourceInfo(ResourceType.Life).icon, order.reasonList.Contains(continueOrder.reason.health) ? teal : Color.red);
+			}
 
+			if (input.RequiredUnit.Count > 0)
+			{
 
-			if (input.RequiredUnit.Count > 0) {
-				
-				if (order.reasonList.Contains (continueOrder.reason.requirement)) {
-					requirements.color = Color.red;
-	
-					canBuild = false;
+				if (order.reasonList.Contains(continueOrder.reason.requirement))
+				{
 
 					string s = "Req: ";
-					foreach (string n in input.RequiredUnit) {
-						if (!s.Equals ("Req: ")) {
+					foreach (string n in input.RequiredUnit)
+					{
+						if (!s.Equals("Req: "))
+						{
 							s += ", ";
 						}
 						s += n;
 					}
-					requirements.text = s;
-				} else {
-					requirements.text = "";
 
+					CreateCostSettings(s, UnitEquivalance.getResourceInfo(ResourceType.Structure).icon, order.reasonList.Contains(continueOrder.reason.health) ? teal : Color.red);
 				}
-
-
-
-			} else {
-				requirements.text = "";
 			}
 
-			if (input.myCost.energy > 0) {
-				EnergyPic.enabled = true;
-				EnergyText.text = "" + input.myCost.energy;
 
-			} else {
-				EnergyPic.enabled = false;
-				EnergyText.text = "" ;
-			}
-
-			if (input.myCost.ResourceTwo > 0) {
-
-				if (order.reasonList.Contains (continueOrder.reason.resourceTwo)) {
-					resTwo.color = Color.red;
-	
-					canBuild = false;
-				} else {
-					resTwo.color = teal;
-				}
-
-				resTwo.text = "Gas: " + (int)input.myCost.ResourceTwo;
-			} else {
-				resTwo.text = "";
-			}
-
-			if (input.myCost.health > 0) {
-				health.text = ""+ input.myCost.health;
-				BloodDrop.enabled = true;
-				if (order.reasonList.Contains (continueOrder.reason.health)) {
-					health.color = Color.red;
-
-					canBuild = false;
-				} else {
-					health.color = teal;
-				}
-
-			} else {
-				BloodDrop.enabled = false;
-				health.text = "";
-			}
 		} else {
 			Population.text = "";
-			EnergyText.text = "";
-			EnergyPic.enabled = false;
 			time.text = "";
-			resOne.text = "";
-			resTwo.text = "";
-			health.text = "";
-			requirements.text = "";
 			clocker.enabled = false;
-			BloodDrop.enabled = false;
-			OreIcon.enabled = false;
+		
 		}
 
 		if (canBuild) {
@@ -207,6 +160,19 @@ public class CostBox : MonoBehaviour {
 
 	}
 
+
+	GameObject  CreateCostSettings(string text, Sprite icon, Color c)
+	{
+		GameObject obj = myPool.FastSpawn(Vector3.zero, Quaternion.identity, CostGrid);
+		inUseCosts.Add(obj);
+		Text comp = obj.GetComponentInChildren<Text>();
+		comp.text = text;
+		obj.GetComponentInChildren<Image>().sprite = icon;
+		comp.color = c;
+		if (c == Color.red)
+		{ canBuild = false; }
+		return obj;
+	}
 
 
 

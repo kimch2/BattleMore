@@ -24,8 +24,6 @@ public class ErrorPrompt : MonoBehaviour {
 	{
 
 		if (lastErrorTime < Time.time - 2.5f) {
-		
-		
 
 			this.gameObject.GetComponent<Text> ().text = err;
 			this.gameObject.GetComponent<Text> ().enabled = true;
@@ -80,6 +78,7 @@ public class ErrorPrompt : MonoBehaviour {
 
 	public void notEnoughResource()
 	{UISoundManager.interfaceClick (false);
+		Debug.Log("Printing ");
 		showError( "Not Enough Ore",myVoicePack.getOreLine());
 	} 
 

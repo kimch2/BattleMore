@@ -25,7 +25,7 @@ public class ConstructionUpgrade  :SpecificUpgrade{
 					foreach (string toApply in unitsToApply) {
 						if (ab.Name.Contains (toApply)) {
 							((BuildStructure)ab).buildTime *= .75f;
-							ab.myCost.ResourceOne *= .75f;
+							ab.myCost.resourceCosts.reduceCostPercentage(.25f);
 							((BuildStructure)ab).animationRate = 1.333f;
 
 							break;

@@ -1,20 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class AbstractCost : MonoBehaviour {
 		
 		
 
 	Coroutine currenCooldown;
+	
 
-	public enum CostType
-	{	unit, building, ability, upkeep}
 
-	//public CostType MyType;
-		//These are global resources held by any player, even though their names might change (ore, gold ,wood etc)
-		public float ResourceOne;
-		public float ResourceTwo;
-		
+	[HideInInspector]
+	public ResourceManager resourceCosts;
 
 		public float health;
 		
@@ -42,7 +39,10 @@ public class AbstractCost : MonoBehaviour {
 			
 			if (!StartsRefreshed) {
 				cooldownTimer = cooldown;
-			currenCooldown =  StartCoroutine (onCooldown());
+			if (currenCooldown == null)
+			{
+				currenCooldown = StartCoroutine(onCooldown());
+			}
 			}
 			
 			stats = this.gameObject.GetComponent<UnitStats> ();
@@ -51,7 +51,7 @@ public class AbstractCost : MonoBehaviour {
 
 	IEnumerator onCooldown()
 	{	cooldownTimer = cooldown;
-	//	Debug.Log ("Resting cooldown " + cooldownTimer);
+		//Debug.Log ("Resting cooldown " + cooldownTimer);
 		while (true){
 			yield return null;
 		if (cooldownTimer > 0) {
@@ -66,56 +66,51 @@ public class AbstractCost : MonoBehaviour {
 	}
 
 	}
-		
-		
+
+	public void showCostPopUp(bool positive)
+	{
+		resourceCosts.showPopups(transform.position, positive);
+	}
+
+
 	public bool canActivate(Ability ab, continueOrder order, bool showError)
-		{
+	{
 		bool result = true;
 		if (!ab.active) {
-		//	Debug.Log ("Not active");
-			result =  false;}
-
-		if (myGame == null) {
-		//	Debug.Log ("Totally null");
+			result = false;
 		}
-		if (myGame.ResourceOne < this.ResourceOne || myGame.ResourceTwo < this.ResourceTwo) {
 
-		
+		ResourceType canPay = myGame.resourceManager.canPay(resourceCosts.MyResources);
+
+		if (canPay != ResourceType.CanPay) {
+
 			if (showError) {
-				ErrorPrompt.instance.notEnoughResource ();
-
+				ErrorPrompt.instance.notEnoughResource();
 			}
-
-			if (myGame.ResourceOne < this.ResourceOne) {
-				order.reasonList.Add (continueOrder.reason.resourceOne);
-			}
-
-			if (myGame.ResourceTwo < this.ResourceTwo) {
-				order.reasonList.Add (continueOrder.reason.resourceTwo);
-			}
+			order.InsufficientResources.Add(canPay);
 			order.nextUnitCast = false;
-		//	Debug.Log ("Not enough money");
-			//GameObject.FindGameObjectWithTag ("Error").GetComponent<ErrorPrompt> ().showError ("Not Enough Resources");
-			result =  false;
-			}
-			
 
-			if (stats.health < health ) {
+			result = false;
+		}
+
+	
+		if (stats.health < health ) {
 			order.reasonList.Add (continueOrder.reason.health);
 			result =  false;
-			}
-			
-			if (stats.currentEnergy < energy) {
-			order.reasonList.Add (continueOrder.reason.energy);
+		}
+
+		if (stats.currentEnergy < energy)
+		{
+			order.reasonList.Add(continueOrder.reason.energy);
 			result = false;
-			if (showError) {
-				ErrorPrompt.instance.notEnoughEnergy ();
+			if (showError)
+			{
+				ErrorPrompt.instance.notEnoughEnergy();
 			}
 		}
 
 	
 		if (cooldown > 0 && cooldownTimer > 0) {
-		//	Debug.Log ("Cooldown is wrong");
 			order.reasonList.Add (continueOrder.reason.cooldown);
 			result = false;
 			if (showError) {
@@ -123,9 +118,8 @@ public class AbstractCost : MonoBehaviour {
 			}
 		}
 			
-			return result;
-			
-		}
+			return result;	
+	}
 
 
 	public bool canActivate(Ability ab)
@@ -133,10 +127,7 @@ public class AbstractCost : MonoBehaviour {
 		if (!ab.active) {
 			return  false;}
 
-		if (myGame.ResourceOne < this.ResourceOne || myGame.ResourceTwo < this.ResourceTwo) {
-			//ErrorPrompt.instance.showError ("Not Enough Resources");
-		
-
+		if (myGame.resourceManager.canPay(resourceCosts.MyResources) != ResourceType.CanPay){
 			return false;
 		}
 
@@ -178,7 +169,7 @@ public class AbstractCost : MonoBehaviour {
 	public void refundCost()
 	{
 		//Debug.Log ("Refunding");
-		myGame.updateResources(ResourceOne, ResourceTwo, false);
+		myGame.collectResources(resourceCosts.MyResources, false);
 	//	Debug.Log ("Refunding " + this.gameObject);
 		cooldownTimer = 0;
 	}
@@ -194,7 +185,7 @@ public class AbstractCost : MonoBehaviour {
 
 	public void payCost ()
 	{
-		myGame.updateResources (-ResourceOne, -ResourceTwo, false);
+		myGame.PayCost(resourceCosts.MyResources);
 		if (stats) {
 
 			if (health > 0) {
@@ -205,12 +196,7 @@ public class AbstractCost : MonoBehaviour {
 				stats.changeEnergy (-energy);
 
 			}
-
-
 		}
-
 		startCooldown ();
-
-		
 	}
 }

@@ -5,14 +5,24 @@ using UnityEngine;
 public class UnitEquivalance : MonoBehaviour {
 
 
-	// Use this for initialization
-	void Start () {
-		
-	}
     public  List<Composition> myComps =  new List<Composition>();
     public List<RaceInfo> raceInfos;
 
+	public List<ResourceInfo> resourceInfos = new List<ResourceInfo>();
 
+
+
+	public static UnitEquivalance main;
+
+	public static ResourceInfo getResourceInfo(ResourceType resType)
+	{
+		if (main == null)
+		{
+			main = Resources.Load<GameObject>("RaceInfoPacket").GetComponent<UnitEquivalance>();
+		}
+
+		return main.resourceInfos.Find(item => item.resType == resType);
+	}
 
     public RaceInfo getRace(RaceInfo.raceType type)
     {
@@ -54,4 +64,13 @@ public class UnitPile
     public List<GameObject> units = new List<GameObject>(); 
 
 
+}
+
+[System.Serializable]
+public class ResourceInfo
+{
+
+	public ResourceType resType;
+	public Color ResourceColor = Color.gray;
+	public Sprite icon;
 }

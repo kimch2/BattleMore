@@ -5,6 +5,8 @@ using System.Collections.Generic;
 public class SingleTarget:  TargetAbility {
 
 	protected UnitManager manage;
+	int playerOwner;
+
 	public GameObject missile;
 	protected Selected mySelect;
 	public List<UnitTypes.UnitTypeTag> cantTarget = new List<UnitTypes.UnitTypeTag>();
@@ -13,16 +15,30 @@ public class SingleTarget:  TargetAbility {
 	public enum sideTarget{ally, enemy, all}
 	public sideTarget who;
 	public int maxChargeCount;
-	public IEffect myEffect;
+	public IEffect AttributeEffect;
 
 	Coroutine currentCharger;
 	// Use this for initialization
-	protected void Start () {
+	public void Start () {
+		base.Start();
 		myType = type.target;
 		mySelect = GetComponent<Selected> ();
 		manage = this.gameObject.GetComponent<UnitManager> ();
+		if (manage)
+		{
+			playerOwner = manage.PlayerOwner;
+		}
+		else
+		{
+			playerOwner = 1; // Assuming the only things without managers are Ults
+		}
+
 		if (chargeCount >-1) {
 			if(chargeCount < maxChargeCount){
+				if (currentCharger != null)
+				{
+					StopCoroutine(currentCharger);
+				}
 				currentCharger = StartCoroutine (increaseCharges ());
 			}
 		}
@@ -47,7 +63,7 @@ public class SingleTarget:  TargetAbility {
 
 		if (myCost && !myCost.canActivate (this)) {
 			order.canCast = false;
-			if (myCost.energy == 0 && myCost.ResourceOne == 0 && chargeCount > 0) {
+			if (myCost.energy == 0 && myCost.resourceCosts.MyResources.Count == 0 && chargeCount > 0) {
 				order.canCast = true;
 				order.nextUnitCast = false;
 			}
@@ -78,13 +94,13 @@ public class SingleTarget:  TargetAbility {
 		switch (who) {
 
 		case sideTarget.ally:
-			if (manage.PlayerOwner != m.PlayerOwner) {
+			if (playerOwner != m.PlayerOwner) {
 				return false;
 			}
 			break;
 
 		case sideTarget.enemy:
-			if (manage.PlayerOwner == m.PlayerOwner) {
+			if (playerOwner == m.PlayerOwner) {
 				return false;
 			}
 			break;
@@ -97,7 +113,7 @@ public class SingleTarget:  TargetAbility {
 
 		foreach (UnitTypes.UnitTypeTag t in cantTarget) {
 			
-			if (manage.myStats.isUnitType (t)) {
+			if (m.myStats.isUnitType (t)) {
 				return false;}
 		}
 
@@ -105,7 +121,7 @@ public class SingleTarget:  TargetAbility {
 			return true;
 		}
 		foreach (UnitTypes.UnitTypeTag t in mustTarget) {
-				if (manage.myStats.isUnitType (t)) {
+				if (m.myStats.isUnitType (t)) {
 					return true;}
 			}
 	
@@ -149,8 +165,8 @@ public class SingleTarget:  TargetAbility {
 				}
 
 			} else {
-				
-				myEffect.apply (this.gameObject, tar);
+
+				AttributeEffect.apply (this.gameObject, tar);
 			}
 		}
 
@@ -195,7 +211,7 @@ public class SingleTarget:  TargetAbility {
 
 			} else {
 
-				myEffect.apply (this.gameObject, target);
+				AttributeEffect.apply (this.gameObject, target);
 			}
 		}
 
@@ -209,12 +225,12 @@ public class SingleTarget:  TargetAbility {
 
 		if (chargeCount == 0) {
 			active = false;
-		
-
 		}
 
 		myCost.startCooldown ();
-		yield return new WaitForSeconds (myCost.cooldown-.2f);
+	//	Debug.Log("Waiting for " + myCost.cooldown);
+		yield return new WaitForSeconds (myCost.cooldown-.15f);
+		//Debug.Log("Done Waiting");
 		active = true;
 		changeCharge (1);
 
@@ -234,7 +250,7 @@ public class SingleTarget:  TargetAbility {
 		if (chargeCount > maxChargeCount) {
 			chargeCount = maxChargeCount;
 		}
-		if (mySelect.IsSelected) {
+		if (mySelect && mySelect.IsSelected) {
 			RaceManager.upDateUI ();
 			RaceManager.updateActivity ();
 

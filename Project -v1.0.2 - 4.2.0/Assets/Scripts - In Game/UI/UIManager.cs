@@ -836,9 +836,14 @@ public class UIManager : MonoBehaviour, IUIManager {
 	{currentTargetUnit = UnitName;
 		currentAbilityNUmber = n;
 		currentAbility = (TargetAbility)abil;
+
+
 		if (currentAbility.myTargetType == TargetAbility.targetType.unit) {
-			
+
+			AbilityTargeter.SetActive(false); // This might break with things like the vulcans targeted abilities
+
 		} else {
+
 			CursorManager.main.offMode ();
 			AbilityTargeter.SetActive (true);
 			AbilityTargeter.GetComponentInChildren<Light> ().cookie = currentAbility.targetArea;

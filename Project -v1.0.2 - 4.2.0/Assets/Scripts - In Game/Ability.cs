@@ -40,6 +40,11 @@ public abstract class Ability : MonoBehaviour {
 
 	private bool initialized;
 
+	public virtual void Start()
+	{
+		
+	}
+
 	private void initialize()
 		{
 		initialized = true;

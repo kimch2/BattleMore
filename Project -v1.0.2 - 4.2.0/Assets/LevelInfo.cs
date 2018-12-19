@@ -29,7 +29,7 @@ public class LevelInfo {
 	public Sprite loadingScreen;
 	public bool showFullTechTree;
 
-
+	public ResourceManager StartingResources;
 
 
 	[System.Serializable]

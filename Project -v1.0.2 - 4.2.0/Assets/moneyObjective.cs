@@ -3,42 +3,54 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class moneyObjective : Objective {
+public class moneyObjective : Objective, ManagerWatcher {
 
 	public Slider moneySlide;
 	public RaceManager myRace;
 	public Text myText;
 	public List<int> halfwayVoiceLines;
 
+	public ResourceType resourceType = ResourceType.Ore;
 	public float moneyVictory;
 
 	bool playedHalfWay;
 
-	// Use this for initialization
-	new void Start () {
-		base.Start ();
-		InvokeRepeating ("UpdateMoney", .75f, .7f);
-	}
 	
-	// Update is called once per frame
-	void UpdateMoney () {
-		if (myText) {
-			myText.text = ((int)myRace.ResourceOne) + "/" + moneyVictory;
+
+	public void updateResources(ResourceManager manager) {
+		float currentMoneyAmount = manager.getResource(resourceType);
+		if (myText)
+		{
+			myText.text = (int)currentMoneyAmount + "/" + moneyVictory;
 		}
-		if (moneySlide) {
-			moneySlide.value = myRace.ResourceOne / moneyVictory;
+		if (moneySlide)
+		{
+			moneySlide.value = currentMoneyAmount / moneyVictory;
 		}
 
-		if (!playedHalfWay && myRace.ResourceOne > moneyVictory / 2) {
+		if (!playedHalfWay && currentMoneyAmount > moneyVictory / 2)
+		{
 			playedHalfWay = true;
-			if (halfwayVoiceLines.Count > 0) {
-				dialogManager.instance.playLine (UnityEngine.Random.Range(0,halfwayVoiceLines.Count));
+			if (halfwayVoiceLines.Count > 0)
+			{
+				dialogManager.instance.playLine(UnityEngine.Random.Range(0, halfwayVoiceLines.Count));
 			}
 		}
 
-		if (myRace.ResourceOne >= moneyVictory) {
-			complete ();
+		if (currentMoneyAmount >= moneyVictory)
+		{
+			complete();
 		}
+	}
+
+
+	public void updateSupply(float current, float max)
+	{
 
 	}
+
+	public void updateUpgrades() {
+
+	}
+
 }

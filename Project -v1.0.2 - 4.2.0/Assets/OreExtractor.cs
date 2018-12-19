@@ -3,19 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class OreExtractor :Ability {
-	public float amountPerLoad;
 
+
+	[Tooltip("CurrentAmount for amount of each load")]
+	public ResourceManager toCollect;
 	// Use this for initialization
-	void Start () {
+	new void Start () {
+		base.Start();
 		myType = type.passive;
 		InvokeRepeating ("extractOre",3,3);
 	}
 
+
 	void extractOre()
 	{
 		if (this.enabled) {
-			PopUpMaker.CreateGlobalPopUp ("+" + amountPerLoad, Color.white, transform.position);
-			GameManager.main.playerList [0].updateResources (amountPerLoad, 0, true);
+			toCollect.showPopups(transform.position, true);
+			GameManager.main.playerList[0].collectResources(toCollect.MyResources);
 		}
 	}
 

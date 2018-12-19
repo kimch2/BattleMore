@@ -1,0 +1,74 @@
+fileFormatVersion: 2
+guid: 516e0eade81090d4aabdd37c3e0d158f
+timeCreated: 1506068191
+licenseType: Store
+ShaderImporter:
+  defaultTextures:
+  - _LabelTexture: {instanceID: 0}
+  - _NormalMap: {instanceID: 0}
+  - _AoEdgesDirtDepth: {fileID: 2800000, guid: ae0fcc70d7a97604db1d13c5228a99dd, type: 3}
+  - _RGBAnoise: {instanceID: 0}
+  - _ObjectMasks: {fileID: 2800000, guid: 6bad7f0a5f4224844b0dd91a4c93d0b5, type: 3}
+  - _ObjectMasks2: {fileID: 2800000, guid: f8642abd056f658479a78a05b0ab1177, type: 3}
+  - _Texture0: {instanceID: 0}
+  - _BumpMap0: {instanceID: 0}
+  - _OcclusionMap0: {instanceID: 0}
+  - _SpecularMap0: {instanceID: 0}
+  - _EmissionMap0: {instanceID: 0}
+  - _0Paint1MaskTex: {instanceID: 0}
+  - _0Paint2MaskTex: {instanceID: 0}
+  - _Texture1: {instanceID: 0}
+  - _BumpMap1: {instanceID: 0}
+  - _OcclusionMap1: {instanceID: 0}
+  - _SpecularMap1: {instanceID: 0}
+  - _EmissionMap1: {instanceID: 0}
+  - _1Paint1MaskTex: {instanceID: 0}
+  - _1Paint2MaskTex: {instanceID: 0}
+  - _Texture2: {instanceID: 0}
+  - _BumpMap2: {instanceID: 0}
+  - _OcclusionMap2: {instanceID: 0}
+  - _SpecularMap2: {instanceID: 0}
+  - _EmissionMap2: {instanceID: 0}
+  - _2Paint1MaskTex: {instanceID: 0}
+  - _2Paint2MaskTex: {instanceID: 0}
+  - _Texture3: {instanceID: 0}
+  - _BumpMap3: {instanceID: 0}
+  - _OcclusionMap3: {instanceID: 0}
+  - _SpecularMap3: {instanceID: 0}
+  - _EmissionMap3: {instanceID: 0}
+  - _3Paint1MaskTex: {instanceID: 0}
+  - _3Paint2MaskTex: {instanceID: 0}
+  - _Texture4: {instanceID: 0}
+  - _BumpMap4: {instanceID: 0}
+  - _OcclusionMap4: {instanceID: 0}
+  - _SpecularMap4: {instanceID: 0}
+  - _EmissionMap4: {instanceID: 0}
+  - _4Paint1MaskTex: {instanceID: 0}
+  - _4Paint2MaskTex: {instanceID: 0}
+  - _Texture5: {instanceID: 0}
+  - _BumpMap5: {instanceID: 0}
+  - _OcclusionMap5: {instanceID: 0}
+  - _SpecularMap5: {instanceID: 0}
+  - _EmissionMap5: {instanceID: 0}
+  - _5Paint1MaskTex: {instanceID: 0}
+  - _5Paint2MaskTex: {instanceID: 0}
+  - _Texture6: {instanceID: 0}
+  - _BumpMap6: {instanceID: 0}
+  - _OcclusionMap6: {instanceID: 0}
+  - _SpecularMap6: {instanceID: 0}
+  - _EmissionMap6: {instanceID: 0}
+  - _6Paint1MaskTex: {instanceID: 0}
+  - _6Paint2MaskTex: {instanceID: 0}
+  - _Texture7: {instanceID: 0}
+  - _BumpMap7: {instanceID: 0}
+  - _OcclusionMap7: {instanceID: 0}
+  - _SpecularMap7: {instanceID: 0}
+  - _EmissionMap7: {instanceID: 0}
+  - _7Paint1MaskTex: {instanceID: 0}
+  - _7Paint2MaskTex: {instanceID: 0}
+  - _DirtTexture1: {instanceID: 0}
+  - _DirtTexture2: {instanceID: 0}
+  - _EmissionMask: {fileID: 2800000, guid: 6efaca9dc8a78474394710dd4f9a0adb, type: 3}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

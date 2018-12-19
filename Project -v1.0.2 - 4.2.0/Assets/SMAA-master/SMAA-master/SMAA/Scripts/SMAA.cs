@@ -29,9 +29,6 @@ namespace Smaa
 	/// <summary>
 	/// Implementation of Subpixel Morphological Antialiasing for Unity.
 	/// </summary>
-#if UNITY_5_4_OR_NEWER
-    [ImageEffectAllowedInSceneView]
-#endif
 	[ExecuteInEditMode]
 	[RequireComponent(typeof(Camera))]
 	[AddComponentMenu("Image Effects/Subpixel Morphological Antialiasing")]

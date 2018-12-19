@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class AugmentAttachPoint : MonoBehaviour {
+public class AugmentAttachPoint : Ability {
 
 	public GameObject myAugment;
 	public Vector3 attachPoint;
@@ -29,6 +29,24 @@ public class AugmentAttachPoint : MonoBehaviour {
 		}
 	}
 
+
+	public override continueOrder canActivate(bool error)
+	{
+		continueOrder ord = new continueOrder();
+		ord.canCast = myAugment == null;
+		ord.nextUnitCast = true;
+		return ord;
+	}
+
+	public override void Activate()
+	{
+
+	}
+
+	public override void setAutoCast(bool offOn)
+	{
+
+	}
 
 
 

@@ -66,12 +66,17 @@ public abstract class IMover: MonoBehaviour {
 
 			//Debug.Log ("Final speed is " + initialSpeed);
 	} else {
-		// This will need to be changed if a source can apply different amounts of speed changes
-		foreach (SpeedMod a in ASMod) {
-				if (a.source == obj) {
-					return;
+			// This will need to be changed if a source can apply different amounts of speed changes
+			if (obj != null)
+			{
+				foreach (SpeedMod a in ASMod)
+				{
+					if (a.source == obj)
+					{
+						return;
+					}
+				}
 			}
-		}
 
 		SpeedMod temp = new SpeedMod ();
 		temp.flat = flat;

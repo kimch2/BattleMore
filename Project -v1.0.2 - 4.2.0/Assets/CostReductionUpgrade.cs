@@ -18,15 +18,16 @@ public class CostReductionUpgrade  : Upgrade {
 		foreach (Ability ab in man.abilityList) {
 			if (ab is ResearchUpgrade) {
 
-					ab.myCost.ResourceOne -= ab.myCost.ResourceOne * costReduction;
-					ab.myCost.ResourceTwo -= ab.myCost.ResourceTwo * costReduction;
+				ab.myCost.resourceCosts.reduceCostPercentage(costReduction);
+
 
 					((ResearchUpgrade)ab).buildTime -= ((ResearchUpgrade)ab).buildTime * timeReduction;
 					foreach (Upgrade up in ((ResearchUpgrade)ab).upgrades) {
 					up.buildTime -= costReduction*up.buildTime;
 						if (up.myCost) {
+						up.myCost.resourceCosts.reduceCostPercentage(costReduction);
 
-							up.myCost.ResourceOne -= up.myCost.ResourceOne * costReduction;
+					
 						} else {
 							Debug.Log (up.Name + " doesn't have a cost");
 						}

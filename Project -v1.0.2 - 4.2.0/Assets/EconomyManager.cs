@@ -7,95 +7,93 @@ public class EconomyManager : MonoBehaviour {
 
 	private RaceManager racer;
 
-	public Text ResourceOne;
-	public Text BarResOneAvg;
-	public Text ResourceTwo;
+	public Transform ResourceGrid;
 
+	public static EconomyManager main;
 
-	private Dictionary<float, int> resOneMap = new Dictionary<float, int>();
-	private Dictionary<float, int> resTwoMap = new Dictionary<float, int>();
+	private Dictionary<ResourceType, Text> ResourceMap = new Dictionary<ResourceType, Text>();
+	private Dictionary<ResourceType, Dictionary<float, int>> updateMap = new Dictionary<ResourceType, Dictionary<float, int>>();
+
+	private void Awake()
+	{
+		main = this;
+	}
 
 	// Use this for initialization
 	void Start () {
 		racer = GameManager.main.playerList [0];
-
-		if (racer.OneName.Length > 0) {
-			
-			ResourceOne.text = " ";
-			BarResOneAvg.text = " ";
-		}
-		if (racer.TwoName.Length > 0) {
-			ResourceTwo.text =  " ";
-		}
-
-		InvokeRepeating ("updateAverage", 1,4);
+		InvokeRepeating ("updateAverage", 1,4);  // ?? FIX THIS
 	}
-	
 
-	public void updateAverage()
+	public void AddResourceType(ResourceType typ)
 	{
 
-		if (racer.OneName.Length > 0) {
-			List<float> deleteThese = new List<float> ();
-
-			int totalResOne = 0;
-			foreach (KeyValuePair<float, int> entry in resOneMap) {
-				if (entry.Key + 10 > Time.time) {
-					totalResOne += entry.Value;
-				} else {
-					deleteThese.Add (entry.Key);
-				}
-			}
-
-			foreach (float f in deleteThese) {
-				resOneMap.Remove (f);
-			}
-			BarResOneAvg.text = "(+"+(totalResOne * 6)+")";
-			ResourceOne.text = racer.OneName + ": " + totalResOne * 6 + " per min";
-
-		}
-		if (racer.TwoName.Length > 0) {
-			List<float> deleteThese2 = new List<float> ();
-
-			int totalResTwo = 0;
-			foreach (KeyValuePair<float, int> entry in resTwoMap) {
-				if (entry.Key + 10 > Time.time) {
-					totalResTwo += entry.Value;
-				} else {
-					deleteThese2.Add (entry.Key);
-				}
-			}
-
-			foreach (float f in deleteThese2) {
-				resTwoMap.Remove (f);
-			}
-
-			ResourceTwo.text = racer.TwoName + ": " + totalResTwo * 6+ " per min";
-
-		}
-	}
-
-
-
-	public void updateMoney(int resOne, int resTwo)
-	{//Debug.Log ("adding money" + resOne);
+		GameObject obj = new GameObject("Income Rate");
+		Text text =  obj.AddComponent<Text>();
+		((RectTransform)obj.transform).sizeDelta = new Vector2(60,24);
+		text.fontSize = 13;
 		
-		if (resOneMap.ContainsKey (Time.time)) {
-			resOneMap [Time.time] += resOne;
-		} else {
-			resOneMap.Add (Time.time, resOne);
+
+		text.font = RaceUIManager.instance.supply.font;
+		foreach (Transform t in RaceUIManager.instance.ResourceGrid.transform)
+		{
+			if (t.GetComponentInChildren<Image>().sprite == UnitEquivalance.getResourceInfo(typ).icon)
+			{
+				obj.transform.SetParent(t);
+			}
 		}
 
+		obj.transform.localScale = Vector3.one;
+		obj.transform.localPosition = new Vector3(38, -21, 0);
+		//obj.transform.SetParent(RaceUIManager.instance.ResourceGrid.parent);
+		
+		ResourceMap.Add(typ, text);
+		updateMap.Add(typ, new Dictionary<float, int> ());
 
-		if (resTwoMap.ContainsKey (Time.time)) {
-			resTwoMap [Time.time] += resTwo;
-		} else {
-			resTwoMap.Add (Time.time, resTwo);
-		}
-
-
-		updateAverage ();
 	}
+
+	public void updateResource(ResourceType theType, float currentAmount, float changeAmount)
+	{
+		if (updateMap[theType].ContainsKey(Time.time))
+		{
+			updateMap[theType][Time.time] += (int)changeAmount;
+		}
+		else
+		{
+			updateMap[theType].Add(Time.time, (int)changeAmount);
+		}
+	}
+
+	void updateAverage()
+	{
+		List<float> deleteThese = new List<float>();
+
+		
+
+		foreach (KeyValuePair<ResourceType, Dictionary<float, int>> pair in updateMap)
+		{
+			int totalResOne = 0;
+			foreach (KeyValuePair<float, int> entry in pair.Value)
+			{
+				if (entry.Key + 15.1f > Time.time)
+				{
+					totalResOne += entry.Value;
+				}
+				else
+				{
+					deleteThese.Add(entry.Key);
+				}
+			}
+
+			foreach (float f in deleteThese)
+			{
+				pair.Value.Remove(f);
+			}
+			ResourceMap[pair.Key].text = "+" + (totalResOne * 4);
+
+		}
+	}
+
 
 
 }

@@ -103,10 +103,9 @@ public class BuildStructure:  UnitProduction {
 
 	public override void DeQueueUnit()
 	{
-
+		
 		myCost.refundCost ();
-		PopUpMaker.CreateGlobalPopUp ("+" + myCost.ResourceOne, Color.white, this.transform.localPosition + Vector3.up * 8);
-
+		myCost.showCostPopUp(true);
 	}
 
 

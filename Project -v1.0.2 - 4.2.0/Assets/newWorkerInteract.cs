@@ -9,29 +9,24 @@ public class newWorkerInteract :  Ability, Iinteract {
 
 	public float resourceOne;
 	public float resourceTwo;
-	public GameObject Hook;
-	private Vector3 hookPos;
-	private bool retractHook;
+
 	public OreDispenser myOre;
 	private GameObject oreBlock;
 	private OreDispenser lastOreDeposit;
+	public GameObject PurifierPrefab;
+	public ParticleSystem MiningEffect;
 
 	// Use this for initialization
-	void Start () {
+	new void Start () {
+		base.Start();
 		myManager = GetComponent<UnitManager> ();
 		myManager.setInteractor (this);
-		oreBlock = Hook.transform.Find ("Cube").gameObject;
 
 		if (autocast) {
 			StartCoroutine (delayer ());
 		}
-		if (Hook) {
-			hookPos = this.gameObject.transform.position - Hook.transform.position;
-
-		}
 
 		myType = type.activated;
-
 	}
 
 	bool firstMove = true;
@@ -122,8 +117,7 @@ public class newWorkerInteract :  Ability, Iinteract {
 		}
 		if (closest != null) {
 			myOre = closest;
-			myManager.changeState (new MiningState (closest, myManager, miningTime, resourceOne, resourceTwo, Hook, hookPos));
-		
+			goToOre(closest);
 		}
 	}
 
@@ -161,9 +155,8 @@ public class newWorkerInteract :  Ability, Iinteract {
 		}
 		if (closest != null) {
 			myOre = closest;
+			goToOre(closest);
 		
-			myManager.changeState (new MiningState (closest, myManager, miningTime, resourceOne, resourceTwo, Hook, hookPos));
-	
 		} else {
 			//myManager.changeState (new MoveState (targ.gameObject.transform.position, myManager));
 		
@@ -174,34 +167,6 @@ public class newWorkerInteract :  Ability, Iinteract {
 
 
 
-
-	// Update is called once per frame
-	void Update () {
-		if (retractHook) {
-
-			Hook.transform.Translate (Vector3.up * 20 * Time.deltaTime, Space.Self);
-
-
-			if (Hook.transform.position.y > this.gameObject.transform.position.y -hookPos.y ) {
-				Hook.transform.position = this.gameObject.transform.position - hookPos;
-
-				if (oreBlock.activeSelf) {
-					oreBlock.SetActive (false);
-
-					GetComponent<ResourceDropOff> ().dropOff (resourceOne, resourceTwo);
-
-					PopUpMaker.CreateGlobalPopUp ("+" + +resourceOne, Color.white, myManager.gameObject.transform.position);
-
-				}
-
-				retractHook = false;
-
-			}
-
-
-		}
-
-	}
 	public void initialize(){
 		Start ();
 	}
@@ -227,7 +192,7 @@ public class newWorkerInteract :  Ability, Iinteract {
 
 			}
 			myManager.changeState (new DefaultState ());
-			checkHook ();
+
 			break;
 
 			//Move Order ---------------------------------------------
@@ -239,7 +204,7 @@ public class newWorkerInteract :  Ability, Iinteract {
 				myOre.currentMinor = null;
 				myOre = null;
 			}
-			checkHook ();
+
 			break;
 
 		case Const.ORDER_Interact:
@@ -254,16 +219,16 @@ public class newWorkerInteract :  Ability, Iinteract {
 						myOre = null;
 					}
 					myOre = order.Target.gameObject.GetComponent<OreDispenser> ();
-					myManager.changeState (new MiningState (order.Target.gameObject.GetComponent<OreDispenser>(), myManager, miningTime, resourceOne, resourceTwo, Hook, hookPos),false,order.queued);
-					order.Target.gameObject.GetComponent<OreDispenser> ().currentMinor = this.gameObject;
+					goToOre(order.Target.gameObject.GetComponent<OreDispenser>());
+						
 				} else if (order.Target.gameObject.GetComponent<OreDispenser> ().currentMinor == this.gameObject) {
-				}
+
+					}
 				else{
 					Redistribute (order.Target);
 				}
 				break;}
 
-			checkHook ();
 
 			if (order.Target) {
 				if (order.Target.GetComponent<UnitManager> () == null) {
@@ -291,18 +256,17 @@ public class newWorkerInteract :  Ability, Iinteract {
 			else {
 				myManager.changeState (new MoveState (order.OrderLocation, myManager),false,order.queued);
 			}
-			checkHook ();
+
 			break;
 
 
 		case Const.ORDER_Follow:
 			
 			if (order.Target.gameObject.GetComponent<OreDispenser> () != null) {
-				myManager.changeState (new MiningState (order.Target.gameObject.GetComponent<OreDispenser>(), myManager, miningTime, resourceOne, resourceTwo, Hook, hookPos),false,order.queued);
+				goToOre(order.Target.gameObject.GetComponent<OreDispenser>());
 				break;
 			}
 
-			checkHook ();
 
 			if (order.Target) {
 				if (order.Target.GetComponent<UnitManager> () == null) {
@@ -320,24 +284,6 @@ public class newWorkerInteract :  Ability, Iinteract {
 			}
 
 			break;
-
-
-
-
-		}
-
-
-
-
-
-	}
-
-	public void checkHook()
-	{
-		if (Hook.transform.position.y <this.gameObject.transform.position.y - hookPos.y ) {
-			//oreBlock.SetActive (false);
-			retractHook = true;
-
 		}
 	}
 
@@ -358,20 +304,27 @@ public class newWorkerInteract :  Ability, Iinteract {
 		return order;
 	}
 
+	void goToOre(OreDispenser target )
+	{
+		myManager.GiveOrder(Orders.CreateMoveOrder(target.transform.position, false));
+
+		myManager.changeState(new MiningState(lastOreDeposit.gameObject.GetComponent<OreDispenser>(), myManager, miningTime, resourceOne, resourceTwo,MiningEffect),false,true);
+	}
+
 	override
 	public void Activate()
 	{
 		if (lastOreDeposit) {
 			
-				if (lastOreDeposit.currentMinor == null) {
-				myManager.changeState (new MiningState (lastOreDeposit.gameObject.GetComponent<OreDispenser>(), myManager, miningTime, resourceOne, resourceTwo, Hook, hookPos));
-				} else {
-					Redistribute (lastOreDeposit.gameObject);
-				}
+			if (lastOreDeposit.currentMinor == null) {
+				goToOre(lastOreDeposit.gameObject.GetComponent<OreDispenser>());
+			} else {
+				Redistribute (lastOreDeposit.gameObject);
+			}
 
 
 		} 
-		checkHook ();
+
 	}
 
 
