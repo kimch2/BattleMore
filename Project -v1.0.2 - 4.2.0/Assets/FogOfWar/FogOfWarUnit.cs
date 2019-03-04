@@ -14,7 +14,8 @@ public class FogOfWarUnit : MonoBehaviour
 	public bool hasMoved = true;
 	[Tooltip("Will clear fog even if a mover has not marked this thing as having moved")]
 	public bool autoUpdate;
-    void Start()
+
+	void Start()
     {
 		//Debug.Log ("Fog");
 		hasMoved = true;

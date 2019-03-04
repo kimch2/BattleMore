@@ -145,11 +145,8 @@ public class DifficultyManager : MonoBehaviour {
 				if (man.PlayerOwner == 2) {
 					if (man.myStats) {
 						man.myStats.armor += 1;
-						foreach (IWeapon weap in man.myWeapon) {
-							if (weap) {
-								weap.changeAttack (0, 1 * (int)(weap.baseDamage / 10), true, null);
-							}
-						}
+
+				
 					}
 
 				}
@@ -173,17 +170,6 @@ public class DifficultyManager : MonoBehaviour {
 						man.myStats.health *= EasyHealth;
 					}
 
-		}
-
-
-		if (man.myStats) {
-
-				man.myStats.armor += upgradeCount;
-				foreach (IWeapon weap in man.myWeapon) {
-					if (weap) {
-					weap.changeAttack (0, upgradeCount * Mathf.Max(1,(int)(weap.baseDamage / 10)), true, null);
-					}
-				}
 		}
 
 	}

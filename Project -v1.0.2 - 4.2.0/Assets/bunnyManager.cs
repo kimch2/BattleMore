@@ -21,8 +21,19 @@ public class bunnyManager : Objective {
 	Coroutine flashing;
 
 	public int highestAmountSoFar;
+	public static bunnyManager main;
+
+	List<bunnyPopulate> bunnyList = new List<bunnyPopulate>();
+	int lastBunnyCount;
 
 	public List<voiceLineRandomizer> lineTriggers;
+
+	private void Awake()
+	{
+		main = this;
+	}
+
+
 
 	[System.Serializable]
 	public class voiceLineRandomizer{
@@ -47,64 +58,81 @@ public class bunnyManager : Objective {
 		}
 	}
 
-
-	public void changeInBunnyCount(int change)
+	public void addBunny(bunnyPopulate dude)
 	{
-		int oldAmount = currAmount;  
+		bunnyList.Add(dude);
+	}
 
-		int iter = -1;
-		foreach (bunnyPopulate bp in GameObject.FindObjectsOfType<bunnyPopulate>()) {
-			if (bp.repopulateTime != 0) {
-			
-				iter++;}
-		}
+	public void BunnyDead(bunnyPopulate dude)
+	{
+		bunnyList.Remove(dude);
+	}
 
-		currAmount = iter;
+	private void Update()
+	{
+		if (bunnyList.Count != currAmount)
+		{
 
+			mySlide.value = (float)bunnyList.Count / (float)maxAmount;
 
-		if (oldAmount < currAmount) {
-			foreach (voiceLineRandomizer v in lineTriggers) {
-				if (currAmount == v.triggerNumber) {
-					v.playVoiceLine ();
-					break;
+			if (bunnyList.Count > maxAmount * .85)
+			{
+				flash = true;
+				if (flashing == null)
+				{
+					flashing = StartCoroutine(flashColor());
+				}
+				myPanel.color = red;
+			}
+			else if (bunnyList.Count > maxAmount * .70)
+			{
+				flash = true;
+				myPanel.color = red;
+			}
+			else if (bunnyList.Count > maxAmount * .5)
+			{
+				flash = false;
+				myPanel.color = yellow;
+			}
+			else if (bunnyList.Count > maxAmount * .3)
+			{
+				flash = false;
+				myPanel.color = Color.white;
+			}
+			else
+			{
+				flash = false;
+				myPanel.color = green;
+			}
+
+			if (bunnyList.Count > highestAmountSoFar)
+			{
+				highestAmountSoFar = bunnyList.Count;
+			}
+
+			if (highestAmountSoFar < currAmount)
+			{
+				foreach (voiceLineRandomizer v in lineTriggers)
+				{
+					if (currAmount == v.triggerNumber)
+					{
+						v.playVoiceLine();
+						break;
+					}
 				}
 			}
-		}
 
-		mySlide.value = (float)currAmount / (float)maxAmount;
+			bunnyCount.text = "White Bunnies Left \n" + bunnyList.Count + " / " + maxAmount;
 
-		if (currAmount > maxAmount * .85) {
-			flash = true;
-			if (flashing == null) {
-				flashing = StartCoroutine (flashColor ());
+			if (bunnyList.Count >= maxAmount)
+			{
+				VictoryTrigger.instance.Lose();
 			}
-			myPanel.color = red;
-		} 
-		else if (currAmount > maxAmount * .70) {
-			flash = true;
-			myPanel.color = red;
-		} else if (currAmount > maxAmount * .5) {
-			flash = false;
-			myPanel.color = yellow;
-		} else if (currAmount > maxAmount * .3) {
-			flash = false;
-			myPanel.color = Color.white;
-		} else {
-			flash = false;
-			myPanel.color = green;
-		}
-
-		if (currAmount > highestAmountSoFar) {
-			highestAmountSoFar = currAmount;
-		}
-
-		bunnyCount.text = "White Bunnies Left \n" + currAmount + " / " + maxAmount;
-
-		if (currAmount >= maxAmount) {
-			VictoryTrigger.instance.Lose();
-		}
-		else if (currAmount <= 0) {
-			VictoryTrigger.instance.Win();
+			else if (bunnyList.Count <= 0)
+			{
+				VictoryTrigger.instance.Win();
+			}
+			currAmount = bunnyList.Count;
 		}
 	}
 

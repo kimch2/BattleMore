@@ -8,7 +8,6 @@ public class BuildStructure:  UnitProduction {
 
 	//private BuildingInteractor myInteractor;
 
-	private UnitManager myManager;
 	private RaceManager racer;
 
 

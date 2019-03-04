@@ -133,6 +133,7 @@ public class CapturableUnit : MonoBehaviour, Modifier  {
 		manage.myStats.veternStat.playerOwner = 1;
 
 		manage.PlayerOwner = 1;
+		manage.myRacer = GameManager.main.playerList[0];
 
 		FogOfWarUnit foggy = manage.GetComponent<FogOfWarUnit> ();
 		if (foggy) {
@@ -149,6 +150,10 @@ public class CapturableUnit : MonoBehaviour, Modifier  {
 		}
 		foreach (buildTurret tm in GetComponents<buildTurret>()) {
 			tm.Start ();
+		}
+		foreach (AbstractCost tm in GetComponents<AbstractCost>())
+		{
+			tm.Start();
 		}
 		foreach (TurretScreenDisplayer tm in GetComponents<TurretScreenDisplayer>()) {
 			tm.Start ();

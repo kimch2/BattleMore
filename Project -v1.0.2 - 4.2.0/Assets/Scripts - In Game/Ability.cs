@@ -17,7 +17,7 @@ public abstract class Ability : MonoBehaviour {
 	//These are seperate because Unit inspector wont show dictionaries
 	public List<string> RequiredUnit = new List<string>();
 	private Dictionary<string, bool> requirementList = new Dictionary<string, bool> ();
-
+	protected UnitManager myManager;
 
 	//public GameObject UIButton;
 	protected string description;
@@ -36,7 +36,7 @@ public abstract class Ability : MonoBehaviour {
 	public abstract void setAutoCast(bool offOn);
 	public AudioClip soundEffect;
 	protected AudioSource audioSrc;
-	private Selected select;
+	protected Selected select;
 
 	private bool initialized;
 
@@ -45,10 +45,10 @@ public abstract class Ability : MonoBehaviour {
 		
 	}
 
-	private void initialize()
+	protected void initialize()
 		{
+		myManager = GetComponent<UnitManager>();
 		initialized = true;
-		select = GetComponent<Selected> ();
 		foreach (string s in RequiredUnit) {
 
 			requirementList.Add (s, false);
@@ -68,6 +68,8 @@ public abstract class Ability : MonoBehaviour {
 
 	protected void Awake()
 	{
+		select = GetComponent<Selected>();
+		myManager = GetComponent<UnitManager>();
 		audioSrc = GetComponent<AudioSource> ();
 		StartCoroutine( delayedInitialize());
 	}

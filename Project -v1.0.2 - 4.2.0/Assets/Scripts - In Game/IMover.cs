@@ -45,7 +45,7 @@ public abstract class IMover: MonoBehaviour {
 		initialSpeed = MaxSpeed;
 
 	}
-
+	/*
 	public void removeSpeedBuff(Object obj)
 	{
 		for (int i = 0; i < ASMod.Count; i++) {
@@ -57,37 +57,55 @@ public abstract class IMover: MonoBehaviour {
 
 	}
 
-
-	public void changeSpeed(float perc, float flat, bool perm, Object obj )
-	{if (perm) {
+	/// <summary>
+	///  to reduce speed by a percent, pass in .2f to make it attack 20% slower
+	/// </summary>
+	public void changeSpeed(float perc, float flat, bool perm, Object obj, bool stackable = false )
+	{	if (perm) {
 			//Debug.Log ("Initial speed " + initialSpeed + "   " + flat + "   " + perc);
 			initialSpeed += flat;
 			initialSpeed *= perc;
 
 			//Debug.Log ("Final speed is " + initialSpeed);
-	} else {
+		}
+		else
+		{
 			// This will need to be changed if a source can apply different amounts of speed changes
 			if (obj != null)
 			{
-				foreach (SpeedMod a in ASMod)
+				for (int i = 0; i < ASMod.Count; i++)
 				{
+					SpeedMod a = ASMod[i];
 					if (a.source == obj)
 					{
-						return;
+						if (!stackable)
+						{
+							return;
+						}
+						else
+						{
+							a.flat += flat;
+							a.perc +=  perc;
+
+							ASMod[i] = a;
+							adjustSpeed();
+							return;
+						}
+						
 					}
 				}
 			}
 
-		SpeedMod temp = new SpeedMod ();
-		temp.flat = flat;
-		temp.perc = perc;
-		temp.source = obj;
-		ASMod.Add (temp);
+			SpeedMod temp = new SpeedMod ();
+			temp.flat = flat;
+			temp.perc = perc;
+			temp.source = obj;
+			ASMod.Add (temp);
+		}
+
+		adjustSpeed ();
+
 	}
-
-	adjustSpeed ();
-
-}
 	
 
 
@@ -102,10 +120,12 @@ public abstract class IMover: MonoBehaviour {
 
 		float percent = 1;
 		foreach (SpeedMod a in ASMod) {
+
 			percent += a.perc;
 		}
-
+		percent = Mathf.Max(0, percent);
 		tempspeed *= percent;
+
 		if (tempspeed < .001f) {
 			tempspeed = .001f;}
 		else if(tempspeed >1000) {
@@ -122,5 +142,5 @@ public abstract class IMover: MonoBehaviour {
 		}
 	
 	}
-
+	*/
 }

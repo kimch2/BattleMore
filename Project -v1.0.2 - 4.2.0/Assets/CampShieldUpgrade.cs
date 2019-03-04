@@ -5,7 +5,8 @@ using System.Collections.Generic;
 
 public class CampShieldUpgrade :SpecificUpgrade{
 
-
+	[Tooltip("If this list is empty, it will be applied to all units.")]
+	public List<string> unitNames;
 
 	//[ToolTip("Only fill these in if this upgrade replaces another one")]
 
@@ -18,6 +19,9 @@ public class CampShieldUpgrade :SpecificUpgrade{
 			UnitStats us = obj.GetComponent<UnitStats> ();
 			us.MaxEnergy *= 1.5f;
 			us.currentEnergy *= 1.5f;
+
+			us.MaxEnergy =  (int)us.MaxEnergy;
+			us.currentEnergy = (int)us.currentEnergy;
 		}
 	}
 

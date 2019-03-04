@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class ChangeAmmo : Ability {
 
-
+	// Used by Chimera
 
 	//UnitManager myManager;
 	public GameObject myAmmo;
@@ -20,6 +20,11 @@ public class ChangeAmmo : Ability {
 
 	Lean.LeanPool myBulletPool;
 
+	//Used by Seer;
+	[Tooltip("If 0, will be permanant, used by Seer")]
+	public float Duration = 0;
+	public GameObject PreviousAmmo;
+
 	new void Awake()
 	{
 		base.Awake();
@@ -29,6 +34,7 @@ public class ChangeAmmo : Ability {
 	}
 
 	void Start () {
+		base.Start();
 		if (myAmmo) {
 			myBulletPool = Lean.LeanPool.getSpawnPool (myAmmo);
 		}
@@ -55,8 +61,18 @@ public class ChangeAmmo : Ability {
 	override
 	public continueOrder canActivate (bool showError)
 	{
+		if (!myCost)
+		{
+			return new continueOrder();
+		}
 
-		return  new continueOrder ();
+		continueOrder order = new continueOrder
+		{
+			canCast = myCost.canActivate(this)
+		};
+
+		return order;
+	
 	}
 
 	public void upgrade(string upgradeName)
@@ -71,6 +87,13 @@ public class ChangeAmmo : Ability {
 	override
 	public void Activate()
 	{
+
+
+		if (myCost)
+		{
+			myCost.payCost();
+		}
+
 		autocast = true;
 		myWeapon.projectile = myAmmo;
 		myWeapon.baseDamage = attackDamage + myWeapon.getUpgradeLevel()*5;
@@ -87,10 +110,18 @@ public class ChangeAmmo : Ability {
 		}
 
 		updateUICommandCard ();
-	
 
+		if (Duration > 0)
+		{
+			Invoke("switchBack", Duration);
+		}
 	}
 
 
+	void switchBack()
+	{
+		myWeapon.projectile = PreviousAmmo;
+		myWeapon.setBulletPool(Lean.LeanPool.getSpawnPool (PreviousAmmo));
+	}
 
 }

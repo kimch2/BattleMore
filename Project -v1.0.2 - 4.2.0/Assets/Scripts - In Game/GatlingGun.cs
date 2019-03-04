@@ -16,10 +16,8 @@ public class GatlingGun :  Ability,Notify, Modifier {
 	private float totalSpeed;
 	private bool Revved = false;
 
-	//private Selected healthD;
-
 	public Animator myAnim;
-
+	UnitManager parentManager;
 
 
 
@@ -34,9 +32,7 @@ public class GatlingGun :  Ability,Notify, Modifier {
 	
 		myWeapon.triggers.Add (this);
 		nextActionTime = Time.time + 3;
-
-		//myWeapon.myManager.myStats.addDeathTrigger (this);
-	
+		parentManager = transform.parent.GetComponentInParent<UnitManager>();
 	}
 
 
@@ -59,16 +55,12 @@ public class GatlingGun :  Ability,Notify, Modifier {
 					}
 					if (revCount > 0) {
 
-						myWeapon.removeAttackSpeedBuff (this);
-						myWeapon.changeAttackSpeed (.357f *revCount,0, false, this);
+						parentManager.myStats.statChanger.changeSpecAttSpeed(-.357f ,0, this, myWeapon, true);
 						revCount--;
 					
-					
 					} else if (revCount == 0) {
-						myWeapon.removeAttackSpeedBuff (this);
+						parentManager.myStats.statChanger.removeSpecAttSpeed(this, myWeapon);
 					}
-				
-
 				}
 			}
 		}
@@ -91,9 +83,7 @@ public class GatlingGun :  Ability,Notify, Modifier {
 		if (revCount < 7) {
 			revCount++;
 
-			myWeapon.removeAttackSpeedBuff (this);
-
-			myWeapon.changeAttackSpeed (.357f * revCount, 0, false, this);
+			parentManager.myStats.statChanger.changeSpecAttSpeed(.357f , 0, this, myWeapon, true);
 			lastFired = Time.time;
 			if (myAnim) {
 				myAnim.SetInteger ("State", 1);

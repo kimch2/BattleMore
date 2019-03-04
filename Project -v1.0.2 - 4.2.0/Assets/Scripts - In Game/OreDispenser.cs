@@ -57,7 +57,7 @@ public class OreDispenser : MonoBehaviour {
 		float giveBack = Mathf.Min (OreRemaining, amount * returnRate);
 		OreRemaining -= giveBack;
 		if (OreRemaining <= .5) {
-
+			Debug.Log("Error " + ErrorPrompt.instance);
 			ErrorPrompt.instance.OreDepleted(transform.position);
 			SelectedManager.main.DeselectObject (GetComponent<UnitManager> ());
 			AugmentAttachPoint AAP = GetComponent<AugmentAttachPoint> ();
@@ -66,7 +66,7 @@ public class OreDispenser : MonoBehaviour {
 			}
 			Destroy (this.gameObject);
 		}
-		return Mathf.Min (OreRemaining, giveBack) * efficiency;
+		return  giveBack * efficiency;
 
 	}
 

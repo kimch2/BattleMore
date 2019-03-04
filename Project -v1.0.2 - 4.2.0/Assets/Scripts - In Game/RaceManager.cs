@@ -81,7 +81,7 @@ public class RaceManager : MonoBehaviour, ManagerWatcher {
 
 	private Material myDecal;
 
-
+	public SkinColorManager colorManager;
 
 	//public TechTree myTech;
 
@@ -134,7 +134,6 @@ public class RaceManager : MonoBehaviour, ManagerWatcher {
 				}
 			}
 		}
-	
 	}
 
 	void Start()
@@ -149,12 +148,49 @@ public class RaceManager : MonoBehaviour, ManagerWatcher {
 			SetUltimates(Ulty);
 			changeRace(myRace);
 		}
+
+		if (colorManager == null)
+		{
+			colorManager = gameObject.AddComponent<SkinColorManager>();
+			colorManager.useColoredSkins = false;
+		}
+	}
+
+
+	public SkinColorManager getColorManager()
+	{
+		if (colorManager == null)
+		{
+			colorManager = gameObject.AddComponent<SkinColorManager>();
+			colorManager.useColoredSkins = false;
+		}
+		return colorManager;
+	}
+
+	public Color getColor()
+	{
+		if (playerNumber == 1)
+		{
+			return Color.green;
+		}
+		else if (playerNumber == 2)
+		{
+			return Color.red;
+		}
+		else
+		{
+			return Color.gray;
+		}
+		// To do, create a color variable and set it in each level.
 	}
 
 	public void changeRace(RaceInfo.raceType newType)
 	{
 		myRace = newType;
-		UISetter.main.SwapRaceHuds(newType);
+		if (UISetter.main)
+		{
+			UISetter.main.SwapRaceHuds(newType);
+		}
 	}
 
 	public void AddResourceType(ResourceType resType, float amount)
@@ -328,15 +364,14 @@ public class RaceManager : MonoBehaviour, ManagerWatcher {
 
 		myUpgrades.Add ((Upgrade)temp);
 
-
-
 		foreach (KeyValuePair<string, List<UnitManager>> pair in unitRoster) {
+
 			foreach (UnitManager tempMan  in pair.Value) {
 				if(tempMan){
 					upgrade.ApplySkin (tempMan.gameObject);
-					if (!tempMan.myStats.isUnitType (UnitTypes.UnitTypeTag.Structure) || tempMan.myStats.isUnitType (UnitTypes.UnitTypeTag.Add_On)) {
-						upgrade.applyUpgrade (tempMan.gameObject);
-					}
+					//if (!tempMan.myStats.isUnitType (UnitTypes.UnitTypeTag.Structure) || tempMan.myStats.isUnitType (UnitTypes.UnitTypeTag.Add_On)) {
+					upgrade.applyUpgrade (tempMan.gameObject);
+					//}
 					if (tempMan.UnitName == unitname) {
 				
 						tempMan.gameObject.SendMessage ("researched", upgrade);
@@ -434,8 +469,19 @@ public class RaceManager : MonoBehaviour, ManagerWatcher {
 		}
 		if (supply < 0) {
 
+			if (obj.myStats.isUnitType(UnitTypes.UnitTypeTag.Structure))
+			{
+				BuildingInteractor interactor = obj.gameObject.GetComponent<BuildingInteractor>();
+				if (interactor && interactor.ConstructDone())
+				{
+					supplyMax += supply;
+				}
+			}
+			else
+			{
+				supplyMax += supply;
+			}
 
-			supplyMax += supply;
 		} else {
 			currentSupply -= supply;
 		}
@@ -444,32 +490,10 @@ public class RaceManager : MonoBehaviour, ManagerWatcher {
 		updateSupply (currentSupply,  Mathf.Min(supplyCap, supplyMax));
 	}
 
-	/*
-	public void UnitDied(float supply, GameObject obj)
-	{
-		if (unitList.Contains (obj)) {
-			unitList.Remove (obj);
 
-		}
-
-	if (supply < 0) {
-
-		
-			supplyMax += supply;
-		} else {
-			currentSupply -= supply;
-		}
-
-	
-			updateSupply (currentSupply,  Mathf.Min(supplyCap, supplyMax));
-	
-
-	}
-*/
 	public void UnitCreated(float supply)
-	{//Debug.Log ("Created " + supply);
+	{
 		if (supply < 0) {
-
 	
 			supplyMax -= supply;
 		} else {
@@ -508,14 +532,17 @@ public class RaceManager : MonoBehaviour, ManagerWatcher {
 
 	public void addUnit(UnitManager obj )
 	{
-
-		if (!unitRoster.ContainsKey (obj.UnitName)) {
+		//if (playerNumber == 1)
+		//{Debug.Log("Adding " + obj);}
+		if (!unitRoster.ContainsKey(obj.UnitName))
+		{
 			unitRoster.Add(obj.UnitName, new List<UnitManager>());
 		}
-		List<UnitManager> tempRefList = unitRoster [obj.UnitName];
-		tempRefList.Add (obj);
-		tempRefList.RemoveAll (item => item == null);
-	
+		List<UnitManager> tempRefList = unitRoster[obj.UnitName];
+		tempRefList.Add(obj);
+		tempRefList.RemoveAll(item => item == null);
+		
+
 		if (playerNumber == 1) {
 			if (FButtonManager.main == null) {
 				FButtonManager.main = GameObject.FindObjectOfType<FButtonManager> ();
@@ -523,7 +550,7 @@ public class RaceManager : MonoBehaviour, ManagerWatcher {
 			FButtonManager.main.updateNumbers (unitRoster);
 
 
-			obj.initializeVision (true);
+			//obj.initializeVision (true);
 
 			if (uiManager != null) {
 				foreach (ArmyUIManager uiMan in uiManager.production.GetComponents<ArmyUIManager> ()) {
@@ -714,6 +741,7 @@ public class RaceManager : MonoBehaviour, ManagerWatcher {
 
 	public void updateSupply( float current, float max){
 		bool hasNull= false;
+
 		foreach (ManagerWatcher watch in myWatchers) {
 		//	Debug.Log ("Manager watcher "+watch);
 			if(watch != null){
@@ -750,14 +778,22 @@ public class RaceManager : MonoBehaviour, ManagerWatcher {
 		return unitRoster;
 	}
 
+	public List<UnitManager> getUnitType(string unitName)
+	{
+		List<UnitManager> toReturn;
+		if (!unitRoster.TryGetValue(unitName, out toReturn))
+		{
+			toReturn = new List<UnitManager>();
+		}
+		return toReturn;
+	}
+
 	public void cleanUnitRoster()
 	{
 		foreach (KeyValuePair<string, List<UnitManager>> pair in unitRoster) {
 
 			pair.Value.RemoveAll(item => item == null);
-
 		}
-
 	}
 
 	public void addDropOff(GameObject obj)

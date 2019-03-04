@@ -11,7 +11,7 @@ class ColliderFogRect
     public int xMax { get { return position.x + size.x; } set { size.x = value - position.x; } }
     public int yMax { get { return position.y + size.y; } set { size.y = value - position.y; } }
 
-    public ColliderFogRect(Collider c, FogOfWar fow)
+	public ColliderFogRect(Collider c, FogOfWar fow)
     {
         Bounds b = c.bounds;
         position = fow.WorldPositionToFogPosition(b.min);
@@ -126,18 +126,24 @@ class FogFill
 
     public void UnfogCircle(byte[] values)
 	{int sqrdistance;
-		Vector2i offset;
-        for (int y = yStart; y < yEnd; ++y)
+		Vector2i offset = new Vector2i();
+
+		int indexY;
+		int index;
+		for (int y = yStart; y < yEnd; ++y)
         {
-            for (int x = xStart; x < xEnd; ++x)
+			indexY = y * fogOfWar.mapResolution;
+			offset.y = y - position.y;
+
+			for (int x = xStart; x < xEnd; ++x)
             {
-                int index = y * fogOfWar.mapResolution + x;
+               index = indexY + x;
 
                 // do nothing if it is already completely unfogged
                 if (values[index] == 0)
                     continue;
 
-                offset = new Vector2i(x - position.x, y - position.y);
+				offset.x = x - position.x;
                 sqrdistance = offset.sqrMagnitude;
 
                 // fully unfogged
@@ -256,6 +262,8 @@ public class FogOfWar : MonoBehaviour
     static Shader _clearFogShader = null;
     public static Shader clearFogShader { get { if (_clearFogShader == null) _clearFogShader = Resources.Load<Shader>("ClearFogShader"); return _clearFogShader; } }
 
+	byte partialfog;
+
 	public void Initialize()
     {
         current = this;
@@ -269,11 +277,13 @@ public class FogOfWar : MonoBehaviour
         _material.SetFloat("_mapSize", mapSize);
         _material.SetVector("_mapOffset", mapOffset);
 
-        _values = new byte[mapResolution * mapResolution];
+		partialfog = (byte)(partialFogAmount * 255);
+		_values = new byte[mapResolution * mapResolution];
         SetAll(255);
     }
+	float mapmultiplier;
 
-    void Start()
+	void Start()
     {
         _transform = transform;
         _camera = GetComponent<Camera>();
@@ -283,8 +293,8 @@ public class FogOfWar : MonoBehaviour
 		InvokeRepeating( "UpdateTexture",.01f, .08f);
 		Invoke("delayedFogger",1.1f);
 		Invoke ("UpdateTexture", 1.2f);
-
-    }
+		mapmultiplier = (float)mapResolution / mapSize;
+	}
 
 	void delayedFogger()
 	{
@@ -299,7 +309,7 @@ public class FogOfWar : MonoBehaviour
 
     public Vector2i WorldPositionToFogPosition(Vector3 position)
     {
-        float mapmultiplier = (float)mapResolution / mapSize;
+   
         Vector2i mappos = new Vector2i((new Vector2(position.x, position.z) - mapOffset) * mapmultiplier);
         mappos += new Vector2i(mapResolution >> 1, mapResolution >> 1);
         return mappos;
@@ -355,24 +365,21 @@ public class FogOfWar : MonoBehaviour
 
 	public bool HasUnFogged;
 	public int FogIndex = 0;
-    public void Unfog(Vector3 position, float radius, int layermask = 0)
-    {
+	public void Unfog(Vector3 position, float radius, int layermask = 0)
+	{
 		HasUnFogged = true;
-        FogFill fogfill = new FogFill(this, position, radius);
+		FogFill fogfill = new FogFill(this, position, radius);
 
-        ColliderFogRectList colliderrects = GetExtendedColliders(fogfill, layermask);
-        if (colliderrects == null)
-        {
-
-            fogfill.UnfogCircle(_values);
-            return;
-        }
-
-        //if (colliderrects.Count != 1 || !colliderrects[0].ContainsCircle(fogfill.position, fogfill.radius))
-        //    fogfill.UnfogCircle(_values, colliderrects);
-	
-        fogfill.UnfogCircleLineOfSight(_values, colliderrects, layermask);
-    }
+		ColliderFogRectList colliderrects = GetExtendedColliders(fogfill, layermask);
+		if (colliderrects == null)
+		{
+			fogfill.UnfogCircle(_values);
+		}
+		else
+		{
+			fogfill.UnfogCircleLineOfSight(_values, colliderrects, layermask);
+		}
+	}
 
     public void Unfog(Rect rect)
 	{	HasUnFogged = true;
@@ -381,7 +388,7 @@ public class FogOfWar : MonoBehaviour
         for (int y = min.y; y < max.y; ++y)
         {
             for (int x = min.x; x < max.x; ++x)
-                _values[y * mapResolution + x] = 0;
+                _values[y * mapResolution + x] = partialfog; // changed this from 0 along with the commented out section below
         }
     }
 
@@ -395,7 +402,7 @@ public class FogOfWar : MonoBehaviour
 			texture.filterMode = filterMode;
 			//texture.wrapMode = TextureWrapMode.Clamp;
 			texture.Apply ();
-
+			/*
 			byte partialfog = (byte)(partialFogAmount * 255);
 			int index = 0;
 			for (int y = 0; y < mapResolution; ++y) {
@@ -406,7 +413,7 @@ public class FogOfWar : MonoBehaviour
 					}
 					index++;
 				}
-			}
+			}*/
 		}
     }
 

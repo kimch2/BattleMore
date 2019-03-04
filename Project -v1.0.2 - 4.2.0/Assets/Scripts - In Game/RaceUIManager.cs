@@ -182,7 +182,15 @@ public class RaceUIManager : MonoBehaviour , ManagerWatcher{
 
 		foreach (ResourceTank t in manager.MyResources)
 		{
-			ResourceMap[t.resType].text = t.currentAmount + "";
+			if (ResourceMap.ContainsKey(t.resType))
+			{
+				ResourceMap[t.resType].text = t.currentAmount + "";
+			}
+			else
+			{
+				addResource(t.resType, t.currentAmount);
+				EconomyManager.main.AddResourceType(t.resType);
+			}
 		}
 	}
 	

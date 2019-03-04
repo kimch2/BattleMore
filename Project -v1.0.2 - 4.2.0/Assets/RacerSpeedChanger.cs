@@ -15,11 +15,11 @@ public class RacerSpeedChanger : MonoBehaviour {
 
 
 	IEnumerator ChangeSpeed()
-	{manager.cMover.changeSpeed (0,UnityEngine.Random.Range(0,maxSpeedIncrease),false,this);
+	{manager.myStats.statChanger.changeMoveSpeed(0,UnityEngine.Random.Range(0,maxSpeedIncrease),this);
 		while (true) {
 			yield return new WaitForSeconds (UnityEngine.Random.Range (3, 8));
-			manager.cMover.removeSpeedBuff (this);
-			manager.cMover.changeSpeed (0,UnityEngine.Random.Range(0,maxSpeedIncrease),false,this);
+			manager.myStats.statChanger.removeMoveSpeed(this);
+			manager.myStats.statChanger.changeMoveSpeed(0, UnityEngine.Random.Range(0, maxSpeedIncrease), this);
 			//Debug.Log ("Speed is now " + manager.cMover.MaxSpeed);
 		}
 

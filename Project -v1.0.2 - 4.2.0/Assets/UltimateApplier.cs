@@ -84,7 +84,7 @@ public class UltimateApplier : MonoBehaviour {
 
 		else if (myRace.UltTwo == ab) {
 	
-			thingy.GetComponent<IWeapon> ().changeAttackSpeed (-.2f * NimbusOne,0,true,null);
+			thingy.GetComponent<UnitStats> ().statChanger.changeAttackSpeed (-.2f * NimbusOne,0, null);
 
 
 			if (NimbusTwo == 1) {

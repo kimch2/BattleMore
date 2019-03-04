@@ -869,167 +869,17 @@ public class SelectedManager : MonoBehaviour, ISelectedManager
 			assignMoveCOmmand(a, b, false, 1 + Vector3.Distance(a, b) / 50);
 		}
 
-		} 
+		}
 
 
 
 
 	// Used  for Circular Formation movement, Mostly Broken
-	public void assignMoveCOmmand(Vector3 targetPoint,Vector3 secondPoint, bool attack, float sepDistance)
+	public void assignMoveCOmmand(Vector3 targetPoint, Vector3 secondPoint, bool attack, float sepDistance)
 	{
-
-
-		//List<RTSObject> realMovers = new List<RTSObject> ();
-		Dictionary<int, List<RTSObject>> trueMovers = new Dictionary<int,List< RTSObject>> ();
-		List<RTSObject> others = new List<RTSObject> ();
-
-		int MoverCount = 0;
-		Vector3 middlePoint = Vector3.zero;
-		foreach (RTSObject obj in SelectedObjects) {
-			if (!obj.getUnitManager ().cMover) {//.cMover.getUnitStats ().isUnitType (UnitTypes.UnitTypeTag.Turret) || obj.getUnitStats ().isUnitType (UnitTypes.UnitTypeTag.Structure)) {
-				others.Add (obj);
-			} else {
-				MoverCount++;
-			//	realMovers.Add (obj);
-				if (trueMovers.ContainsKey (obj.getUnitManager ().formationOrder)) {
-					trueMovers [obj.getUnitManager ().formationOrder].Add (obj);
-				} else {
-					trueMovers.Add (obj.getUnitManager ().formationOrder, new List<RTSObject> (){ obj });
-				}
-				middlePoint += obj.transform.position;
-			}
-		}
-			
-
-		//give move command to all nonmovers, setting rally points and such
-		StartCoroutine (staticMove (others, targetPoint));
-
-		middlePoint /= MoverCount;
-
-
-
-
-		float angle;
-
-		if (sepDistance == 1) {
-			angle = (float)(Mathf.Atan2 (middlePoint.x - targetPoint.x, middlePoint.z - targetPoint.z) / Mathf.PI) * 180;
-		} else {
-			angle = (float)(Mathf.Atan2(secondPoint.x - targetPoint.x,secondPoint.z - targetPoint.z) / Mathf.PI) * 180 + 90;
-			targetPoint = Vector3.Lerp (targetPoint, secondPoint, .5f);
-		}
-			
-
-		float sepDistanceD = Vector3.Distance (targetPoint, secondPoint) / 15;
-		sepDistance = Mathf.Max (sepDistance, 1.2f);
-		List<Vector3> points = Formations.getFormation (MoverCount, Mathf.Min(3f, sepDistance));
-		for (int t = 0; t < points.Count; t++) {
-			points [t] = Quaternion.Euler (0, angle, 0) * points [t] +  targetPoint;
-		}
-
-
-		int minPointIndex = 0;
-		int maxPointIndex = 0;
-		foreach (KeyValuePair<int, List<RTSObject>> kvp in trueMovers.OrderBy(i => i.Key)) {
-
-			maxPointIndex = minPointIndex + kvp.Value.Count;
-			List<IOrderable> usedGuys = new List<IOrderable> ();
-			while (usedGuys.Count < kvp.Value.Count) {
-				float maxDistance = 0;
-				IOrderable closestUnit = null;
-				foreach (IOrderable obj in kvp.Value) {
-					float tempDist = Vector3.Distance (obj.getObject ().transform.position, targetPoint);
-					if (!usedGuys.Contains (obj) && tempDist > maxDistance) {
-						maxDistance = tempDist;
-						closestUnit = obj;
-					}
-				}
-				usedGuys.Add (closestUnit);
-
-				float runDistance = 1000000;
-				Vector3 closestSpot = points [0];
-
-				for (int i = minPointIndex; i < maxPointIndex; i++) {
-					
-					float tempDist = Vector3.Distance (closestUnit.getObject ().transform.position, points [i]);
-					if (tempDist < runDistance) {
-						closestSpot = points [i];
-						runDistance = tempDist;
-
-
-					}
-				}
-
-				StartCoroutine (giveCommand (attack, closestSpot, closestUnit));
-				maxPointIndex--;
-				points.Remove (closestSpot);
-
-
-			}
-				
-			minPointIndex = maxPointIndex;
-
-		}
+		Formations.assignMoveCOmmand(SelectedObjects, targetPoint, secondPoint, attack, sepDistance);
 	}
-		// Old formation code based off of who is closest to what
-		/*
-		List<IOrderable> usedGuys = new List<IOrderable> ();
-		while (usedGuys.Count < realMovers.Count) {
-			float maxDistance = 0;
-			IOrderable closestUnit = null;
-			foreach (IOrderable obj in realMovers) {
-				float tempDist = Vector3.Distance (obj.getObject ().transform.position, targetPoint);
-				if (!usedGuys.Contains (obj) && tempDist > maxDistance) {
-					maxDistance = tempDist;
-					closestUnit = obj;
-				}
-			}
-			usedGuys.Add (closestUnit);
-
-			float runDistance = 1000000;
-			Vector3 closestSpot = points[0];
-			for (int i = 0; i < points.Count; i++) {
-				float tempDist = Vector3.Distance (closestUnit.getObject ().transform.position, points [i]);
-				if (tempDist < runDistance) {
-						closestSpot = points [i];
-					runDistance = tempDist;
-
-			
-				}
-			}
-		
-			StartCoroutine (giveCommand (attack, closestSpot, closestUnit));
-
-			points.Remove (closestSpot);
 	
-
-		}
-		*/	
-
-	IEnumerator giveCommand(bool attack, Vector3 closestSpot, IOrderable unittoMove)
-	{yield return new WaitForSeconds (0.001f);
-		if (attack) {
-			Order o = Orders.CreateAttackMove (closestSpot, Input.GetKey(KeyCode.LeftShift));
-
-			unittoMove.GiveOrder (o);
-		} else {
-			Order o = Orders.CreateMoveOrder (closestSpot, Input.GetKey(KeyCode.LeftShift));
-			unittoMove.GiveOrder (o);
-
-		}
-	
-	}
-
-	//Used to multithread and increase response time
-	IEnumerator staticMove(List<RTSObject> others , Vector3 targetPoint)
-	{yield return new WaitForSeconds (0.005f);
-		foreach ( IOrderable io  in others) {
-			io.GiveOrder (Orders.CreateMoveOrder (targetPoint,Input.GetKey(KeyCode.LeftShift)));
-		}
-
-	}
-
-
-
 
 	public void AddUnitsToGroup(int groupNumber, bool clear)
 	{if (clear) {
@@ -1087,8 +937,6 @@ public class SelectedManager : MonoBehaviour, ISelectedManager
 
 		foreach (KeyValuePair<string, List<UnitManager>> pair in raceMan.getUnitList()) {
 			foreach (UnitManager obj in pair.Value) {
-        //foreach (GameObject obj in raceMan.getUnitList())
-       // {
 
 				if (!obj.myStats.isUnitType(UnitTypes.UnitTypeTag.Structure)
 					&& !obj.myStats.isUnitType(UnitTypes.UnitTypeTag.Worker)

@@ -47,8 +47,6 @@ public abstract class RTSObject : MonoBehaviour {
 	public int CompareTo(RTSObject obja)
 	{
 
-
-
 		if (AbilityPriority < obja.AbilityPriority) {
 			return -1;
 		} else {

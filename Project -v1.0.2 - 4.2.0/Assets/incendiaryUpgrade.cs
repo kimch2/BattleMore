@@ -11,7 +11,7 @@ public class incendiaryUpgrade:SpecificUpgrade{
 			SlowDebuff debuff = obj.AddComponent<SlowDebuff> ();
 			debuff.duration = 3;
 			debuff.speedDecrease = 0;
-			debuff.percent = -.3f;
+			debuff.speedPercent = -.3f;
 			debuff.AddToWeapon ();
 
 		}

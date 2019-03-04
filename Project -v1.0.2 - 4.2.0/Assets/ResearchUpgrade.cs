@@ -12,7 +12,6 @@ public class ResearchUpgrade: UnitProduction, Upgradable{
 	private HealthDisplay HD;
 	private BuildManager buildMan;
 		public List<Upgrade> upgrades;
-	private UnitManager myManager;
 
 	public bool researchingElsewhere;
 
@@ -22,8 +21,9 @@ public class ResearchUpgrade: UnitProduction, Upgradable{
 
 		//public float buildTime;
 		// Use this for initialization
-	void Awake () {
-		myManager = GetComponent<UnitManager> ();
+	new void Awake () {
+		base.Awake();
+		
 		myType = type.activated;
 		mySelect = GetComponent<Selected> ();
 		buildMan = GetComponent<BuildManager> ();
@@ -94,7 +94,7 @@ public class ResearchUpgrade: UnitProduction, Upgradable{
 	{
 		//Debug.Log ("Has addon");
 		hasAddon = true;
-		if (requiresAddon) {
+		if (requiresAddon && !researchingElsewhere) {
 			active = true;
 			if (mySelect.IsSelected) {
 				RaceManager.updateActivity ();
@@ -135,20 +135,25 @@ public class ResearchUpgrade: UnitProduction, Upgradable{
 		{
 
 			if (myCost.canActivate (this)) {
-
-
-
+			
 			researchingElsewhere = true;
 			object[] temp = new object[2];
 			temp [0] = false;
 			temp [1] = upgrades[currentUpgrade];
-	
-			foreach (ResearchUpgrade ru in GameObject.FindObjectsOfType<ResearchUpgrade>()) {
-				if (ru == this) {
-					continue;}
-				ru.commence (temp);
-			}
 
+			foreach (UnitManager manage in myManager.myRacer.getUnitList()[myManager.UnitName])
+			{
+				foreach(Ability ab in manage.abilityList)
+				{
+					if (ab is ResearchUpgrade)
+					{
+						if (ab != this)
+						{
+							((ResearchUpgrade)ab).commence(temp);
+						}
+					}
+				}
+			}
 
 			if (buildMan.buildUnit (this)) {
 
@@ -175,12 +180,12 @@ public class ResearchUpgrade: UnitProduction, Upgradable{
 	public void commence(object[] incoming)
 	{
 
-			if (Name == ((Upgrade)incoming[1]).Name) {
+		if (Name == ((Upgrade)incoming[1]).Name) {
 
-				researchingElsewhere = !(bool)incoming[0];
-				active = (bool)incoming[0];
+			researchingElsewhere = !(bool)incoming[0];
+			active = (bool)incoming[0];
 		
-			}
+		}
 	}
 
 
@@ -218,11 +223,6 @@ public class ResearchUpgrade: UnitProduction, Upgradable{
 
 					Destroy (up);
 				}
-
-				//foreach (Transform obj in this.transform) {
-
-					//obj.SendMessage ("DeactivateAnimation",SendMessageOptions.DontRequireReceiver);
-				//}
 
 				Destroy (this);
 			}
@@ -262,10 +262,6 @@ public class ResearchUpgrade: UnitProduction, Upgradable{
 		myCost.resetCoolDown ();
 		raceMan.commenceUpgrade (false, upgrades [currentUpgrade], myManager.UnitName);
 
-		//foreach (Transform obj in this.transform) {
-
-			//obj.SendMessage ("ActivateAnimation",SendMessageOptions.DontRequireReceiver);
-		//}
 		researching = true;
 	}
 

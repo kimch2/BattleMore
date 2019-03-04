@@ -166,10 +166,35 @@ public class MiniMapUIController : MonoBehaviour, IPointerDownHandler , IPointer
    
 		InvokeRepeating ("updateScreenRect", .1f, minimapUpdateRate);
 		InvokeRepeating ("setFog", .08f, minimapUpdateRate);
-		InvokeRepeating ("UpdateMiniMapA", .7f, minimapUpdateRate);
+		//InvokeRepeating ("UpdateMiniMapA", .7f, minimapUpdateRate);
 
 		transform.parent.gameObject.SetActive (wasOn);
 
+		
+
+		GameObject newCamera = new GameObject("Minimap Camera");
+		Camera cam = newCamera.AddComponent<Camera>();
+		cam.cullingMask = (1 << LayerMask.NameToLayer("MinimapIcon"));
+		cam.orthographic = true;
+		cam.orthographicSize = WorldWidth/2;
+		cam.transform.position = Vector3.Lerp(MainCamera.main.BottomLeftBorder, MainCamera.main.TopRightBorder, .5f) + Vector3.up * 60;
+		cam.transform.eulerAngles = new Vector3(90,0,0);
+		cam.clearFlags = CameraClearFlags.Color;
+		cam.backgroundColor = Color.clear;
+
+		cam.renderingPath = RenderingPath.Forward;
+		cam.allowDynamicResolution = false;
+		cam.allowHDR = false;
+		cam.allowMSAA = false;
+
+		GameObject rawGameobject = img.gameObject;
+
+		DestroyImmediate(img);
+		RawImage raw = rawGameobject.gameObject.AddComponent<RawImage>();
+		raw.texture = Resources.Load<RenderTexture>("MinimapTexture");
+		cam.targetTexture = (RenderTexture)raw.texture;
+		raw.raycastTarget = false;
+		
 	}
 
 
@@ -281,7 +306,7 @@ public class MiniMapUIController : MonoBehaviour, IPointerDownHandler , IPointer
 	{
 		//Debug.Log ("Points " + used.Count);
 		foreach (Point p in used) {
-			virtMap [p.x, p.y] = false;
+			//virtMap [p.x, p.y] = false;
 			tex.SetPixel (p.x, p.y, Color.clear);
 		}
 		used.Clear ();
@@ -336,32 +361,27 @@ public class MiniMapUIController : MonoBehaviour, IPointerDownHandler , IPointer
             
 			foreach (KeyValuePair<string, List<UnitManager>> pair in  gameMan.playerList[i].getFastUnitList()) {
 				foreach (UnitManager unit  in pair.Value) {
-					if (!unit) {
+					if (!unit || fog.IsInCompleteFog(unit.transform.position)) {
 						continue;
 					}
 
 					iCoord = (int)((unit.transform.position.x - Left) * WidthScale);
 					jCoord = (int)((unit.transform.position.z - bottom) * HeightScale);
 
-					if (fog.IsInCompleteFog(unit.transform.position)) {
-						//Debug.Log ("in the black");
-						continue;
-					}
-
 					if (unit.gameObject.layer == 10) {
 						//chitSize = 2;
 						for (int n = -2; n <= 2; n++) {
-
-							for (int j = -2; j <= 2; j++) {
 								ChitX = n + iCoord;
+							for (int j = -2; j <= 2; j++) {
+								
 								ChitY = j + jCoord;
 								try {
-									if (!virtMap [ChitX, ChitY]) {	
+									//if (!virtMap [ChitX, ChitY]) {	
 
 										usedUnitPoints.Add (PointArray [ChitX, ChitY]);
-										virtMap [ChitX, ChitY] = true;
+										//virtMap [ChitX, ChitY] = true;
 										tex.SetPixel (ChitX, ChitY, raceColor);
-									}
+									//}
 								} catch (Exception) {
 
 								}
@@ -370,39 +390,36 @@ public class MiniMapUIController : MonoBehaviour, IPointerDownHandler , IPointer
 
 					} else {
 						try {
-							if (!virtMap [iCoord, jCoord]) {	
+							//if (!virtMap [iCoord, jCoord]) {	
 								usedUnitPoints.Add (PointArray [iCoord, jCoord]);
-								virtMap [iCoord, jCoord] = true;
+								//virtMap [iCoord, jCoord] = true;
 								tex.SetPixel (iCoord, jCoord, raceColor);
-							}
+							//}
 							ChitX = 1 + iCoord;
 		
-							if (!virtMap [ChitX, jCoord]) {	
+							//if (!virtMap [ChitX, jCoord]) {	
 								usedUnitPoints.Add (PointArray [ChitX, jCoord]);
-								virtMap [ChitX, jCoord] = true;
+							//	virtMap [ChitX, jCoord] = true;
 								tex.SetPixel (ChitX, jCoord, raceColor);
-							}
+							//}
 
 							ChitY = 1 + jCoord;
-							if (!virtMap [iCoord, ChitY]) {	
+							//if (!virtMap [iCoord, ChitY]) {	
 								usedUnitPoints.Add (PointArray [iCoord, ChitY]);
-								virtMap [iCoord, ChitY] = true;
+							//	virtMap [iCoord, ChitY] = true;
 								tex.SetPixel (iCoord, ChitY, raceColor);
-							}
+						//	}
 
-							if (!virtMap [ChitX, ChitY]) {	
+							//if (!virtMap [ChitX, ChitY]) {	
 								usedUnitPoints.Add (PointArray [ChitX, ChitY]);
-								virtMap [ChitX, ChitY] = true;
+							//	virtMap [ChitX, ChitY] = true;
 								tex.SetPixel (ChitX, ChitY, raceColor);
-							}
+							//}
 						} catch (Exception) {
 
 						}
-					
 					}
-			
 				}
-			
 			}
 		}
 		//Debug.Log ("C " + Environment.TickCount);
@@ -451,26 +468,18 @@ public class MiniMapUIController : MonoBehaviour, IPointerDownHandler , IPointer
 		Physics.Raycast (ray1, out hit, Mathf.Infinity, 1 << 16);
 		Vector3 v1 = hit.point;
 
-	
-		//int iC = (int)(((v1.x - Left) / (WorldWidth)) * textureWidth);
-		//int jC = (int)(((v1.z - bottom) / (WorldHeight)) * textureHeight);
-	
 		botLeftP = new Vector2 ((int)(((v1.x - Left) / (WorldWidth)) * textureWidth), (int)(((v1.z - bottom) / (WorldHeight)) * textureHeight));
 
 
 		Physics.Raycast (ray2, out hit, Mathf.Infinity, 1 << 16);
 		//Vector3 
 		v1 = hit.point;
-		//iC = (int)(((v2.x - Left) / (WorldWidth)) * textureWidth);
-		//jC = (int)(((v2.z - bottom) / (WorldHeight)) * textureHeight);
 	
 		topLeftP = new Vector2 ((int)(((v1.x - Left) / (WorldWidth)) * textureWidth), (int)(((v1.z - bottom) / (WorldHeight)) * textureHeight));
 
 		Physics.Raycast (ray3, out hit, Mathf.Infinity, 1 << 16);
 		//Vector3
 		v1 = hit.point;
-		//iC = (int)(((v3.x - Left) / (WorldWidth)) * textureWidth);
-		//jC = (int)(((v3.z - bottom) / (WorldHeight)) * textureHeight);
 	
 		topRightP = new Vector2 ((int)(((v1.x - Left) / (WorldWidth)) * textureWidth), (int)(((v1.z - bottom) / (WorldHeight)) * textureHeight));
 
@@ -478,13 +487,8 @@ public class MiniMapUIController : MonoBehaviour, IPointerDownHandler , IPointer
 		Physics.Raycast (ray4, out hit, Mathf.Infinity, 1 << 16);
 		//Vector3
 		v1 = hit.point;
-		//Debug.Log ("Hit " + hit.collider.gameObject);
-		//iC = (int)(((v4.x - Left) / (WorldWidth)) * textureWidth);
-		//jC = (int)(((v4.z - bottom) / (WorldHeight)) * textureHeight);
 
 		botRightP = new Vector2 ((int)(((v1.x - Left) / (WorldWidth)) * textureWidth), (int)(((v1.z - bottom) / (WorldHeight)) * textureHeight));
-		//Debug.Log ("C" + DateTime.Now.Millisecond );
-		//	Debug.Log (topRightP + "   " + botRightP + "  " +hit.collider.gameObject);
 
 		drawLine (screenTrapzoidTex, virtTrapezoid, topLeftP, topRightP);
 		drawLine (screenTrapzoidTex, virtTrapezoid, botLeftP, botRightP);
@@ -519,24 +523,26 @@ public class MiniMapUIController : MonoBehaviour, IPointerDownHandler , IPointer
 		float Iterate = Mathf.Max (Mathf.Abs (p1.x - p2.x), Mathf.Abs (p1.y - p2.y));
 		float ctr = 0;
 		int counter = 0;
-		while (((int)t.x != (int)p2.x || (int)t.y != (int)p2.y) && counter <= Iterate) {
+		while (((int)t.x != (int)p2.x || (int)t.y != (int)p2.y) && counter <= Iterate)
+		{
 			counter++;
-			t = Vector2.Lerp (p1, p2, ctr);
-		
+			t = Vector2.Lerp(p1, p2, ctr);
+
 			ctr += 1 / Iterate;
 
-			if (t.x > 0 && t.y < tex.height && t.x < tex.width) {
-				try {
-					usedTriangleList.Add (PointArray [(int)t.x, (int)t.y]);
-					virtMap [(int)t.x, (int)t.y] = true;
-					tex.SetPixel ((int)t.x, (int)t.y, Color.magenta);
-				} catch (Exception) {
+			if (t.x > 0 && t.y < tex.height && t.x < tex.width)
+			{
+				try
+				{
+					usedTriangleList.Add(PointArray[(int)t.x, (int)t.y]);
+					//virtMap [(int)t.x, (int)t.y] = true;
+					tex.SetPixel((int)t.x, (int)t.y, Color.magenta);
+				}
+				catch (Exception)
+				{
 				}
 			}
-		
 		}
-
-	
 	}
 
 	public void drawPath(List<Vector3> points, float duration, float thickness=1)

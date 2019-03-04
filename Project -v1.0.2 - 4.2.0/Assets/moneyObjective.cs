@@ -15,7 +15,12 @@ public class moneyObjective : Objective, ManagerWatcher {
 
 	bool playedHalfWay;
 
-	
+	public new void Start()
+	{
+		base.Start();
+
+		GameManager.main.activePlayer.addWatcher(this);
+	}
 
 	public void updateResources(ResourceManager manager) {
 		float currentMoneyAmount = manager.getResource(resourceType);

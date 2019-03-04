@@ -14,6 +14,7 @@ public class Bombardment : TargetAbility{
 	Lean.LeanPool myBulletPool;
 	void Start()
 	{
+		base.Start();
 		if (Explosion) {
 			myBulletPool = Lean.LeanPool.getSpawnPool (Explosion);
 		}
@@ -89,8 +90,13 @@ public class Bombardment : TargetAbility{
 		hitzone.x += Mathf.Sin (Mathf.Deg2Rad * angle) * radius;
 		hitzone.z += Mathf.Cos (Mathf.Deg2Rad * angle) * radius;
 
-	
+		
+		RaycastHit objecthit;
 
+		if (Physics.Raycast(hitzone + Vector3.up, Vector3.down, out objecthit, 100, 1 << 8))
+		{
+			hitzone = objecthit.point;
+		}
 		Vector3 spawnLoc = hitzone;
 		spawnLoc.y += 192;
 

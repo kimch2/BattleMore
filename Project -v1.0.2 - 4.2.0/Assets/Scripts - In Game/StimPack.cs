@@ -63,7 +63,7 @@ public class StimPack : Ability {
 
 			if (!on) {
 
-				myManager.cMover.changeSpeed (0,speedBoost,false,this);
+				myManager.myStats.statChanger.changeMoveSpeed (0,speedBoost,this);
 
 			
 				BoostEffect.continueEffect ();
@@ -83,7 +83,7 @@ public class StimPack : Ability {
 
 	public void Deactivate()
 	{on = false;
-		myManager.cMover.removeSpeedBuff (this);
+		myManager.myStats.statChanger.removeMoveSpeed (this);
 		BoostEffect.stopEffect ();
 
 

@@ -6,9 +6,15 @@ public class TurretDeathTrigger : MonoBehaviour, Modifier{
 	private UnitManager mymanager;
 	//private IWeapon weapon;
 	// Use this for initialization
+
+	void Awake()
+	{
+		mymanager = GetComponent<UnitManager>();
+		UnitManager parentManager = transform.parent.GetComponentInParent<UnitManager>();
+		mymanager.PlayerOwner = parentManager.PlayerOwner;
+	}
+
 	void Start () {
-		//weapon = GetComponent<IWeapon> ();
-		mymanager = GetComponent<UnitManager> ();
 		mymanager.myStats.addDeathTrigger (this);
 	}
 	
@@ -28,14 +34,10 @@ public class TurretDeathTrigger : MonoBehaviour, Modifier{
 
 			RaceManager.removeUnitSelect(mymanager);
 		}
-
-
+		
 		FButtonManager.main.updateTankNumber ();
-
-
+		
 		mymanager.myStats.kill (null);
-	
-
 	}
 
 

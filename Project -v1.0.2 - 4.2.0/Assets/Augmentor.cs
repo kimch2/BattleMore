@@ -119,8 +119,22 @@ public class Augmentor : TargetAbility, Iinteract, Modifier {
 						((UnitProduction)bu).setBuildRate (SpeedPlus);
 						if (xxx > 1 && !unitMan.UnitName.Contains ("Yard") && !unitMan.UnitName.Contains ("Armory")) 
 						{
-							((UnitProduction)bu).active = true;
-							bu.SendMessage ("attachAddon", SendMessageOptions.DontRequireReceiver);
+							if (bu is ResearchUpgrade)
+							{
+								if (!((ResearchUpgrade)bu).researchingElsewhere)
+								{
+									
+									((UnitProduction)bu).active = true;
+									bu.SendMessage("attachAddon", SendMessageOptions.DontRequireReceiver);
+								}
+							}
+							else
+							{
+								((UnitProduction)bu).active = true;
+								bu.SendMessage("attachAddon", SendMessageOptions.DontRequireReceiver);
+							}
+
+							
 						}
 
 					}
@@ -228,7 +242,7 @@ public class Augmentor : TargetAbility, Iinteract, Modifier {
 
 						((UnitProduction)bu).setBuildRate (1);
 						if (xxx > 1 && !man.UnitName.Contains ("Yard") && !man.UnitName.Contains ("Armory")) {
-							bu.SendMessage ("removeAddon", SendMessageOptions.DontRequireReceiver);
+							bu.SendMessage ("removeAddon", this, SendMessageOptions.DontRequireReceiver);
 							((UnitProduction)bu).active = false;
 						}
 
@@ -238,9 +252,7 @@ public class Augmentor : TargetAbility, Iinteract, Modifier {
 			}
 
 		}
-
-
-
+		
 	
 		if (target && target.GetComponent<Selected> ().IsSelected) {
 			RaceManager.updateActivity ();
@@ -260,8 +272,6 @@ public class Augmentor : TargetAbility, Iinteract, Modifier {
 			manager.changeState (new MoveState (down, manager,true));
 		
 		}
-
-
 	}
 
 	public void Dying()

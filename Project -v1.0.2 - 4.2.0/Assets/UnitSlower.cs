@@ -43,8 +43,7 @@ public class UnitSlower : MonoBehaviour {
 		UnitManager manage = col.GetComponent<UnitManager> ();
 		if (manage) {
 			if (manage.PlayerOwner == playerOwner && manage.cMover && !excludedUnits.Contains(manage.UnitName) && inSight.Contains(manage)) {
-				manage.cMover.removeSpeedBuff (this);
-
+				manage.myStats.statChanger.removeMoveSpeed(this);
 			}
 		}
 	}
@@ -53,7 +52,7 @@ public class UnitSlower : MonoBehaviour {
 	{
 		foreach (UnitManager manage in inSight) {
 			if (manage && manage.cMover) {
-				manage.cMover.removeSpeedBuff (this);
+				manage.myStats.statChanger.removeMoveSpeed(this);
 			}
 		
 		}
@@ -69,9 +68,9 @@ public class UnitSlower : MonoBehaviour {
 		inSight.Add (manage);
 
 		if (slowUnits) {
-			manage.cMover.changeSpeed (slowAmount, 0, false, this);
+			manage.myStats.statChanger.changeMoveSpeed(slowAmount,0, this);
 		} else {
-			manage.cMover.changeSpeed (.5f, 0,false, this);
+			manage.myStats.statChanger.changeMoveSpeed(slowAmount, 0, this);
 		}
 
 

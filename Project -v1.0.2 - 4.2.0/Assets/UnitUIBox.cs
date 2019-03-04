@@ -1,16 +1,16 @@
 ﻿
-	using UnityEngine;
-	using System.Collections;
-	using UnityEngine.UI;
-	using UnityEngine.EventSystems;
+using UnityEngine;
+using System.Collections;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-	public class UnitUIBox : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
+public class UnitUIBox : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
 
 
 		public Canvas toolbox;
 
 		
-		//private bool inBox;
+	private bool inBox;
 	public int index;
 
 	public Text Title;
@@ -23,18 +23,31 @@
 
 
 		public void OnPointerEnter(PointerEventData eventd)
-			{//inBox = true;
+		{
+			inBox = true;
 			toolbox.enabled = true;
 
-		initialize ();
+			initialize ();
+			StartCoroutine(UpdateStats());
 			
-			}
+		}
 
 		public void OnPointerExit(PointerEventData eventd)
-		{//inBox = false;
+		{
+			inBox = false;
 			toolbox.enabled = false;
 		}
 
+
+	IEnumerator UpdateStats()
+	{
+		while (inBox)
+		{
+			yield return null;
+			AttackSpeed.text = "Attack Speed: " + Mathf.Round(100 * myUnit.currentUnit.myWeapon[index].attackPeriod) / 100f;
+			Damage.text = "Damage: " + Mathf.Round(100 * myUnit.currentUnit.myWeapon[index].baseDamage) / 100f;
+		}
+	}
 
 	public void initialize()
 	{
@@ -45,9 +58,8 @@
 				IWeapon myWeap = myUnit.currentUnit.myWeapon[index];
 				Title.text = myWeap.Title;
 				Range.text = "Range: " + myWeap.range;
-				AttackSpeed.text = "Attack Speed: " + ((float)((int)(100 * myWeap.attackPeriod))) / 100;
-
-				Damage.text = "Damage: " + ((float)((int)(100 * myWeap.baseDamage))) / 100; // myUnit.currentUnit.myWeapon [index].baseDamage;
+				AttackSpeed.text = "Attack Speed: " + Mathf.Round(100 * myWeap.attackPeriod) / 100f;
+				Damage.text = "Damage: " + Mathf.Round(100 * myWeap.baseDamage) / 100f;
 
 				foreach (IWeapon.bonusDamage bd in myWeap.extraDamage)
 				{
@@ -89,4 +101,4 @@
 
 
 
-	}
+}

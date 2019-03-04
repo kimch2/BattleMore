@@ -13,7 +13,7 @@ public class bobble : MonoBehaviour {
 	Vector3 upVector;
 	float rand;
 
-	void Start()
+	public void Start()
 	{
 		StartPosition = transform.localPosition;
 		rand = Random.value *50;

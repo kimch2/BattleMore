@@ -13,21 +13,19 @@ public class PlasmaDischarge : Ability {
 	private float timer;
 	//private Selected select;
 	public MultiShotParticle BoostEffect;
-	UnitManager myManager;
+
 
 	public GameObject explodeEffect;
 	private GameObject popUp;
 
 	// Use this for initialization
 
-	void Awake()
-	{audioSrc = GetComponent<AudioSource> ();
-		myType = type.activated;
-	}
+
 
 	void Start () {
-		//select = GetComponent<Selected> ();
-		myManager = GetComponent<UnitManager> ();
+	
+		audioSrc = GetComponent<AudioSource>();
+		myType = type.activated;
 	}
 
 	// Update is called once per frame
@@ -71,7 +69,7 @@ public class PlasmaDischarge : Ability {
 					myCost.payCost ();
 					on = true;
 					timer = Time.time + duration;
-				popUp = PopUpMaker.CreateGlobalPopUp ("0", Color.red, this.gameObject.transform.position,duration);
+				popUp = PopUpMaker.CreateGlobalPopUp ("0", Color.red, this.gameObject.transform.position + Vector3.up * 7,duration);
 				popUp.transform.SetParent (this.gameObject.transform);
 				mychargeUP = (GameObject)Instantiate (chargeUpEffect, transform.position, Quaternion.identity);
 				mychargeUP.transform.SetParent (this.gameObject.transform);

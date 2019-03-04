@@ -19,7 +19,7 @@ public class IWeapon : MonoBehaviour {
 	public string AnimationName = "Attack";
 
 	public float attackPeriod;
-	private float baseAttackPeriod;
+	public float baseAttackPeriod;
 	public int numOfAttacks = 1;
 	[Tooltip("Amount of time between each bullet when numOfAttacks is more than 1")]
 	public float RepeatDelay = .06f;
@@ -28,13 +28,13 @@ public class IWeapon : MonoBehaviour {
 	//private float myRadius;
 
 	public float baseDamage;
-	private float InitialBaseDamage ;
+	private float InitialBaseDamage;
 	bool initialSpeedSet;
 	bool initalDamageSet;
 
 
 	[Tooltip("Having arange that is longer than the vision range is not supported yet")]
-	public float range =5;
+	public float range = 5;
 
 	public GameObject turret;
 	turret turretClass;
@@ -61,7 +61,7 @@ public class IWeapon : MonoBehaviour {
 
 	protected bool offCooldown = true;
 
-	public List<Notify> triggers = new List<Notify> ();
+	public List<Notify> triggers = new List<Notify>();
 
 	public List<Validator> validators = new List<Validator>();
 
@@ -71,17 +71,18 @@ public class IWeapon : MonoBehaviour {
 	{
 		myBulletPool = pool;
 	}
-
+	/*
 	private struct attackSpeedMod{
 		public float perc;
 		public float flat;
 		public Object source;
-	}
+	}*/
 
-	private List<attackSpeedMod> ASMod = new List<attackSpeedMod>();
-	private List<attackSpeedMod> DamageMod = new List<attackSpeedMod>();
-
-	public List<UnitTypes.UnitTypeTag> cantAttackTypes = new List<UnitTypes.UnitTypeTag> ();
+	/*
+private List<attackSpeedMod> ASMod = new List<attackSpeedMod>();
+private List<attackSpeedMod> DamageMod = new List<attackSpeedMod>();
+*/
+	public List<UnitTypes.UnitTypeTag> cantAttackTypes = new List<UnitTypes.UnitTypeTag>();
 
 	[System.Serializable]
 	public struct bonusDamage {
@@ -93,10 +94,19 @@ public class IWeapon : MonoBehaviour {
 
 	public List<bonusDamage> extraDamage;
 
+	public float getInitialDamage()
+	{
+		return InitialBaseDamage;
+	}
 
 	public GameObject projectile;
 	//public Effect spawnEffect;
 
+	public void changeBasePeriod(float percent, float flat)
+	{
+		baseAttackPeriod += flat;
+		baseAttackPeriod *= (1 - percent);
+	}
 
 	void Awake()
 	{
@@ -140,7 +150,7 @@ public class IWeapon : MonoBehaviour {
 	IEnumerator ComeOffDamagePoint(float length)
 	{
 		yield return new WaitForSeconds (length);
-		PointSource.cMover.removeSpeedBuff (this);
+		PointSource.myStats.statChanger.removeMoveSpeed (this);
 	}
 
 
@@ -250,7 +260,6 @@ public class IWeapon : MonoBehaviour {
 	public virtual bool checkMinimumRange(UnitManager target)
 	{
 		return true;
-
 	}
 
 
@@ -267,7 +276,7 @@ public class IWeapon : MonoBehaviour {
 	
 
 		if (toStun && damagePoint > 0) {
-			toStun.cMover.changeSpeed (-1, 0, false, this);
+			toStun.myStats.statChanger.changeMoveSpeed(-1, 0, this);
 
 			StartCoroutine (ComeOffDamagePoint (damagePoint));
 
@@ -340,7 +349,6 @@ public class IWeapon : MonoBehaviour {
 					fireEffect.playEffect ();
 				}
 			}
-
 		}
 	}
 
@@ -410,9 +418,7 @@ public class IWeapon : MonoBehaviour {
 
 	public void removeNotifyTrigger(Notify not)
 	{
-		if (triggers.Contains (not)) {
-			triggers.Remove (not);
-		}
+		triggers.Remove (not);
 	}
 
 	public float fireTriggers(GameObject source, GameObject proj, UnitManager target, float damage)
@@ -460,160 +466,21 @@ public class IWeapon : MonoBehaviour {
 
 	}
 
-
-
-
-	public void removeAttackSpeedBuff(Object obj)
+	public float getBasePeriod()
 	{
-		for (int i = 0; i < ASMod.Count; i++) {
-			if (ASMod [i].source ==obj) {
-				ASMod.RemoveAt (i);
-				break;
-			}
-		}
-		adjustAttackSpeed ();
-
+		return baseAttackPeriod;
 	}
 
-
-	public void changeAttackSpeed(float perc, float flat, bool perm, Object obj )
-	{
-		
 	
-		if (!initialSpeedSet) {
-			baseAttackPeriod =attackPeriod;
-			initialSpeedSet = true;
-		}
-
-		if (perm) {
-			baseAttackPeriod += flat;
-			if (perc > 0) {
-				baseAttackPeriod *= perc;
-			}
-		} else {
-			attackSpeedMod temp = new attackSpeedMod ();
-			temp.flat = flat;
-			temp.perc = perc;
-			temp.source = obj;
-			ASMod.Add (temp);
-		}
-
-		adjustAttackSpeed ();
-	
-	}
-
-	private void adjustAttackSpeed()
-	{
-
-
-		float speed = baseAttackPeriod;
-		foreach (attackSpeedMod a in ASMod) {
-			speed += a.flat;
-		}
-
-		float percent = 1;
-		foreach (attackSpeedMod a in ASMod) {
-			percent += a.perc;
-		}
-		//Debug.Log ("Setting to " + percent);
-		speed /= percent;
-		if (speed < .05f) {
-			speed = .05f;}
-		
-		attackPeriod = speed;
-		//Debug.Log ("Attack PEriod " + attackPeriod + "  " + this.gameObject.name);
-	}
-
-
-	// CHANGE ATTACK DAMAGE
-
-	public void removeAttackBuff(Object obj)
-	{
-		for (int i = 0; i < DamageMod.Count; i++) {
-			if (DamageMod [i].source ==obj) {
-				DamageMod.RemoveAt (i);
-				break;
-
-			}
-		}
-		adjustAttack();
-
-	}
-
-
-	public void AdjustAttack(float perc, float flat, bool perm, Object obj )
-	{//Debug.Log ("initials is " + InitialBaseDamage);
-
-		for (int i = 0; i < DamageMod.Count; i++) {
-			if (DamageMod [i].source ==obj) {
-				DamageMod.RemoveAt (i);
-				break;
-
-			}
-		}
-
-		changeAttack (perc, flat, perm, obj);
-	}
-
-
-	public void changeAttack(float perc, float flat, bool perm, Object obj )
-	{//Debug.Log ("initials is " + InitialBaseDamage);
-		if (!initalDamageSet) {
-			InitialBaseDamage = baseDamage;
-			initalDamageSet = true;
-		}
-
-		if (perm) {
-			InitialBaseDamage += flat;
-			if (perc > 0) {
-				InitialBaseDamage *= 1 + perc;
-			}
-	} else {
-		attackSpeedMod temp = new attackSpeedMod ();
-		temp.flat = flat;
-		temp.perc = perc;
-		temp.source = obj;
-		DamageMod.Add (temp);
-	}
-
-	adjustAttack();
-		//Debug.Log ("after is " + InitialBaseDamage);
-}
-
-	private void adjustAttack()
-	{
-		float myDamage = InitialBaseDamage;
-		foreach (attackSpeedMod a in DamageMod) {
-			myDamage += a.flat;
-		}
-
-		float percent = 1;
-		foreach (attackSpeedMod a in DamageMod) {
-			percent += a.perc;
-		}
-	//	Debug.Log ("Before multiple " + InitialBaseDamage);
-		myDamage *= percent;
-		if (myDamage < .05f) {
-			myDamage = .05f;}
-
-		baseDamage = myDamage;
-	}
-
-
-
 
 	public void OnDrawGizmos()
 	{
-
-		foreach (AnimationPoint vec in firePoints) {
-				if (turret) {
+	foreach (AnimationPoint vec in firePoints) {
+			if (turret) {
 				Gizmos.DrawSphere ((turret.transform.rotation) * vec.position +turret.transform.position, .5f);
-				} else {
+			} else {
 				Gizmos.DrawSphere ((transform.rotation) *vec.position + this.gameObject.transform.position, .5f);
-				}
-
+			}
 		}
 	}
-
-
 }

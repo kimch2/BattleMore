@@ -53,7 +53,7 @@ public class CampaignUpgrade : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		grayScale = Resources.Load<Material>("GrayScaleUI");
+		grayScale = HotkeyMenu.main.grayScale;
 		StartCoroutine (delayInit());
 	}
 

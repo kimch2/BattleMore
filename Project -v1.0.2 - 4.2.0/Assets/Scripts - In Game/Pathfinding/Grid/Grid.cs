@@ -213,6 +213,14 @@ public class Grid : MonoBehaviour, IGrid
 
 
 	}
+
+	public bool isPathable(Vector3 point)
+	{
+
+		Tile t = GetClosestRedTile(point);
+		return !(Vector3.Distance(t.Center, point) < TileSize);
+
+	}
 	
 	public Tile GetClosestTile(Vector3 position)
 	{

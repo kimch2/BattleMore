@@ -15,7 +15,7 @@ public class UnitManager : Unit,IOrderable{
 
 	private float chaseRange;  // how far an enemy can come into vision before I chase after him.
 	public IMover cMover;      // Pathing Interface. Classes to use here : AirMover(Flying Units), cMover (ground, uses Global Astar) , RVOMover(ground, Uses Astar and unit collisions, still in testing)
-	public List<IWeapon> myWeapon;   // IWeapon is not actually an interface but a base class with required parameters for all weapons.
+	public List<IWeapon> myWeapon = new List<IWeapon>();   // IWeapon is not actually an interface but a base class with required parameters for all weapons.
 	public bool MultiWeaponAttack;
 	public UnitStats myStats; // Contains Unit health, regen, armor, supply, cost, etc
 
@@ -23,9 +23,12 @@ public class UnitManager : Unit,IOrderable{
 
 	public float visionRange;
 	SphereCollider visionSphere; // Trigger Collider that respresents vision radius. Size is set in the start function based on visionRange
-	// When Enemies enter the visionsphere, it puts them into one of these categories. They are removed when they move away or die.
+								 // When Enemies enter the visionsphere, it puts them into one of these categories. They are removed when they move away or die.
+	//[HideInInspector]
 	public List<UnitManager> enemies = new List<UnitManager>();
+	[HideInInspector]
 	public List<UnitManager> allies = new List<UnitManager>();
+	[HideInInspector]
 	public List<GameObject> neutrals = new List<GameObject> ();
 
 
@@ -42,8 +45,8 @@ public class UnitManager : Unit,IOrderable{
 	private List<Notify> potentialNotify = new List<Notify>();
 
 	public List<Ability> myAddons = new List<Ability>(); // Currently being used so we can see Repair bays in a weapon slot
-
-
+	[HideInInspector]
+	public RaceManager myRacer;
 
 	public CharacterController CharController;
 	public FogOfWarUnit fogger;
@@ -62,6 +65,9 @@ public class UnitManager : Unit,IOrderable{
 	[Tooltip("Use this if you do not put anything in Starting COmmand List")]
 
 	public UnitState.StateType startingState;
+
+
+
 	new void Awake()
 	{
 		if(interactor == null){
@@ -89,6 +95,7 @@ public class UnitManager : Unit,IOrderable{
 				}
 			}
 		}
+		
 
 		if (!CharController) {
 			CharController = GetComponent<CharacterController> ();
@@ -99,13 +106,14 @@ public class UnitManager : Unit,IOrderable{
 		}
 
 	
+
 		GameManager man = 	GameManager.getInstance ();
 		if (PlayerOwner == man.playerNumber) {
 				this.gameObject.tag = "Player";
 			} 
 
 		myStats.Initialize();
-		initializeVision (false);
+		//initializeVision ();
 
 
 		if(startingState == UnitState.StateType.HoldGround) {
@@ -119,18 +127,32 @@ public class UnitManager : Unit,IOrderable{
 		chaseRange = visionRange + 15;
 	}
 
-	public void initializeVision(bool createIt)
+	public void initializeVision()
 	{
 		if (!fogger) {
 			fogger = GetComponent<FogOfWarUnit> ();
 		}
-		if (!fogger && createIt) {
-			fogger = gameObject.AddComponent<FogOfWarUnit> ();
-			if (cMover) {
-				cMover.myFogger = fogger;
+
+		if (!fogger)
+		{
+			if ((PlayerOwner == 1 && !myStats.isUnitType(UnitTypes.UnitTypeTag.Turret)) || myStats.getSelector().ManualFogOfWar)
+			{
+				fogger = gameObject.AddComponent<FogOfWarUnit>();
+				if (cMover)
+				{
+					cMover.myFogger = fogger;
+				}
 			}
 		}
-
+		else
+		{
+			if (PlayerOwner != 1 && !myStats.getSelector().ManualFogOfWar)
+			{
+				
+				fogger.enabled = false;
+				fogger = null;
+			}
+		}
 		float distance = visionRange + 3;
 		if (CharController) {
 			distance += CharController.radius;
@@ -138,6 +160,7 @@ public class UnitManager : Unit,IOrderable{
 		visionSphere.radius = distance;
 		if (fogger) {
 			fogger.radius = distance;
+			fogger.enabled = true;
 		}
 	
 	}
@@ -153,8 +176,11 @@ public class UnitManager : Unit,IOrderable{
 			if (Time.timeSinceLevelLoad < 1 || !myStats.isUnitType (UnitTypes.UnitTypeTag.Structure) || myStats.isUnitType (UnitTypes.UnitTypeTag.Add_On)) {
 				GameManager.getInstance ().playerList [PlayerOwner - 1].addUnit (this);
 			}
-	
+
+			myStats.setAggressionPriority();
+			myRacer = GameManager.main.playerList[PlayerOwner - 1];
 			hasStarted = true;
+			initializeVision();
 		}
 	}
 
@@ -213,6 +239,8 @@ public class UnitManager : Unit,IOrderable{
 	// Update is called once per frame
 	new void Update () {
 
+		//System.Diagnostics.Stopwatch stopwatch = new System.Diagnostics.Stopwatch();
+		//stopwatch.Start();
 		if (myState != null) {
 			//Debug.Log ("This " + this.gameObject  + "  " + myState);
 			myState.Update ();
@@ -220,6 +248,8 @@ public class UnitManager : Unit,IOrderable{
 			enabled = false;
 		}
 
+		//stopwatch.Stop();
+		//Debug.Log(this.gameObject + "  " + stopwatch.ElapsedTicks);
 	}
 
 
@@ -493,9 +523,10 @@ public class UnitManager : Unit,IOrderable{
 
 	public UnitManager findBestEnemy(out float distance, UnitManager best) // Similar to above method but takes into account attack priority (enemy soldiers should be attacked before buildings)
 	{
+		float currentIterPriority;
 		if (best != null) {
 			distance = Vector3.Distance (best.transform.position, transform.position);
-			bestPriority = best.myStats.attackPriority;
+			bestPriority = best.myStats.getCombatPriority(myStats.DefensePriority);
 		} else {
 
 			distance = float.MaxValue;
@@ -513,13 +544,13 @@ public class UnitManager : Unit,IOrderable{
 			if (!isValidTarget (currentIter)) {
 				continue;
 			}
-	
-			if (currentIter.myStats.attackPriority > bestPriority) {
+			currentIterPriority = currentIter.myStats.getCombatPriority(myStats.DefensePriority);
+			if (currentIterPriority > bestPriority) {
 				best = currentIter;
-				bestPriority = currentIter.myStats.attackPriority;
+				bestPriority = currentIterPriority;
 				distance = Vector3.Distance (currentIter.transform.position, this.gameObject.transform.position);
 			}
-			else if (currentIter.myStats.attackPriority == bestPriority) {
+			else if (currentIterPriority == bestPriority) {
 			
 				currDistance = Vector3.Distance (currentIter.transform.position, this.gameObject.transform.position);
 
@@ -605,9 +636,7 @@ public class UnitManager : Unit,IOrderable{
 			myState =interactor.computeState (nextState);
 			myState.initialize ();
 
-
 			return;
-		
 		}
 		else if (QueueBack && (!(nextState is DefaultState) && (queuedStates.Count > 0 || !(myState is DefaultState)))){
 
@@ -622,7 +651,7 @@ public class UnitManager : Unit,IOrderable{
 				if (myState != null) {
 					myState.endState ();
 				}
-			
+				//Debug.Log("HereA");
 				myState = interactor.computeState(popFirstState());
 			
 				if (myState == null) {
@@ -645,11 +674,17 @@ public class UnitManager : Unit,IOrderable{
 	
 		foreach (UnitState s in queuedStates) {
 
-			if (s is PlaceBuildingState) {
+			if (s is PlaceBuildingState)
+			{
 				//Debug.Log ("Cenceling");
-				((PlaceBuildingState)s).cancel ();
+				((PlaceBuildingState)s).cancel();
+			}
+			else
+			{
+				s.endState(); // Risky line, here to make sure ore depos lose their dudes
 			}
 		}
+
 			queuedStates.Clear ();
 
 
@@ -660,7 +695,7 @@ public class UnitManager : Unit,IOrderable{
 		if (myState != null) {
 			myState.endState ();
 		}
-
+		//Debug.Log("HereB");
 		myState =interactor.computeState (nextState);
 
 		if (myState!= null) {
@@ -788,8 +823,11 @@ public class UnitManager : Unit,IOrderable{
 		enemies.RemoveAll(item => item == null);
 	}
 
-
-	public void setStun(bool StunOrNot, Object source,bool  showIcon)
+	public void cleanAlly()
+	{
+		allies.RemoveAll(item => item == null);
+	}
+		public void setStun(bool StunOrNot, Object source,bool  showIcon)
 	{
 
 		if (StunOrNot) {
@@ -885,7 +923,8 @@ public class UnitManager : Unit,IOrderable{
 
 
 	public void setWeapon(IWeapon weap)
-	{if (weap) {
+	{
+		if (weap) {
 			if (!myWeapon.Contains (weap)) {
 				myWeapon.Add (weap);
 				foreach (Notify not in potentialNotify) {
@@ -893,6 +932,7 @@ public class UnitManager : Unit,IOrderable{
 						weap.triggers.Add (not);
 					}
 				}
+				myStats.setAggressionPriority();
 			}
 		}
 	}
@@ -903,6 +943,7 @@ public class UnitManager : Unit,IOrderable{
 		
 		if (myWeapon.Contains (weap)) {
 			myWeapon.Remove(weap);
+			myStats.setAggressionPriority();
 		}
 		foreach (Notify not in potentialNotify) {
 

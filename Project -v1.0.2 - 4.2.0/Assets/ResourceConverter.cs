@@ -5,6 +5,8 @@ using UnityEngine;
 public class ResourceConverter : Ability
 {
 
+	public UnityEngine.Events.UnityEvent OnActivate;
+	public UnityEngine.Events.UnityEvent Deacactivate;
 	public ResourceTank from;
 	public ResourceTank To;
 
@@ -21,16 +23,22 @@ public class ResourceConverter : Ability
 
 	void Convert()
 	{
-		if (autocast)
+		if (active && autocast)
 		{
 			if (GameManager.main.playerList[0].resourceManager.getResource(from.resType) > minimumResFromAmount)
 			{
 				PopUpMaker.CreateGlobalPopUp("-" + from.currentAmount, UnitEquivalance.getResourceInfo(from.resType).ResourceColor, transform.position + Vector3.up * 3);
 				PopUpMaker.CreateGlobalPopUp("+" + To.currentAmount, UnitEquivalance.getResourceInfo(To.resType).ResourceColor, transform.position);
-				GameManager.main.playerList[0].PayCost(from);
+				GameManager.main.playerList[0].collectOneResource(from, true);
 				GameManager.main.playerList[0].collectOneResource(To, true);
 			}
 		}
+	}
+
+	public void TurnOff()
+	{
+		autocast = false;
+		updateAutocastCommandCard();
 	}
 
 	public override continueOrder canActivate(bool error)
@@ -40,10 +48,21 @@ public class ResourceConverter : Ability
 	}
 	public override void Activate() {
 		autocast = !autocast;
+		if (autocast)
+		{
+			OnActivate.Invoke();
+		}
+		else
+		{
+			Deacactivate.Invoke();
+		}
 		updateAutocastCommandCard();
 
 
 	}  // returns whether or not the next unit in the same group should also cast it
-	public override void setAutoCast(bool offOn) { }
+	public override void setAutoCast(bool offOn) {
+		autocast = !autocast;
+		updateAutocastCommandCard();
+	}
 
 }

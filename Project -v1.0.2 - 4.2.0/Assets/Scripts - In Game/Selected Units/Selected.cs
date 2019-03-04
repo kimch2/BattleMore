@@ -30,7 +30,7 @@ public class Selected : MonoBehaviour {
 	public GameObject RallyPoint;
 	public GameObject RallyUnit;
 
-
+	UnitManager manager;
 
 	private float tempSelectTime;
 	private bool tempSelectOn;
@@ -52,6 +52,9 @@ public class Selected : MonoBehaviour {
 
 	public GameObject decalCircle;
 	private UnitStats myStats;
+
+	[Tooltip("by default only Player 1 units have fogOfWarRevealed")]
+	public bool ManualFogOfWar; 
 	//private bool onCooldown = false;
 	// Use this for initialization
 	void Awake () 
@@ -59,6 +62,69 @@ public class Selected : MonoBehaviour {
 		Initialize ();
 	
 	}
+
+	public SpriteRenderer MinimapIcon;
+
+	private void Start()
+	{
+		manager = GetComponent<UnitManager>();
+		if (!MinimapIcon)
+		{
+			GameObject obj = new GameObject("MinimapIcon");
+			obj.transform.parent = this.transform;
+			obj.transform.localPosition = manager.CharController.center;
+			MinimapIcon = obj.AddComponent<SpriteRenderer>();
+			MinimapIcon.transform.LookAt(MinimapIcon.transform.position + Vector3.up);
+			MinimapIcon.color = GameManager.main.playerList[manager.PlayerOwner - 1].getColor();
+			MinimapIcon.gameObject.layer = 21;
+			if (manager.myStats.isUnitType(UnitTypes.UnitTypeTag.Structure))
+			{
+				MinimapIcon.transform.localScale *= 175;
+				MinimapIcon.sprite = UISetter.main.defaultMinimapSquare;
+			}
+			else if (manager.myStats.isUnitType(UnitTypes.UnitTypeTag.Turret))
+			{
+				MinimapIcon.sprite = UISetter.main.defaultMinimapcircle;
+			}
+			else
+			{
+				MinimapIcon.sprite = UISetter.main.defaultMinimapcircle;
+				MinimapIcon.transform.localScale *= 100;
+			}
+		}
+	}
+
+
+	public void attackBlink()
+	{
+		StartCoroutine(Blinker());
+	}
+
+	IEnumerator Blinker()
+	{
+		MinimapIcon.transform.localScale += Vector3.one * 40;
+		for (int i = 0; i < 3; i++)
+		{
+			MinimapIcon.color = Color.yellow;
+			yield return new WaitForSeconds(.2f);
+			MinimapIcon.color = Color.black;
+			yield return new WaitForSeconds(.2f);
+		}
+		MinimapIcon.transform.localScale -= Vector3.one * 40;
+		if (IsSelected)
+		{
+			MinimapIcon.color = Color.white;
+		}
+		else
+		{
+			MinimapIcon.color = manager.myRacer.getColor();
+		}
+	}
+
+
+
+
+
 
 
 
@@ -241,8 +307,6 @@ public class Selected : MonoBehaviour {
 		{
 			decalCircle.GetComponent<MeshRenderer> ().enabled = false;
 		}
-
-
 	}
 
 	public void tempSelect()
@@ -268,14 +332,9 @@ public class Selected : MonoBehaviour {
 				obj.SendMessage ("setSelect", SendMessageOptions.DontRequireReceiver);
 			}
 		}
-
-	
-
 	}
 
-
-
-
+	
 	IEnumerator CurrentlyTempSelect()
 	{
 
@@ -371,18 +430,13 @@ public class Selected : MonoBehaviour {
 
 		StartCoroutine (currentlySelected());
 		decalCircle.GetComponent<MeshRenderer> ().enabled = true;
-
+		MinimapIcon.color = Color.white;
 		if (RallyPoint) {
 			RallyPoint.SetActive (true);
 			if (myLine) {
 				myLine.enabled = true;
 			}
 		}
-			
-		//foreach (Transform obj in this.transform) {
-
-			//obj.SendMessage ("setSelect", SendMessageOptions.DontRequireReceiver);
-		//}
 	}
 
 	IEnumerator currentlySelected()
@@ -404,6 +458,7 @@ public class Selected : MonoBehaviour {
 		unitIcon = null;
 		IconSlider = null;
 		IconInfo = null;
+		MinimapIcon.color =manager.myRacer.getColor();
 		decalCircle.GetComponent<MeshRenderer> ().enabled = false;
 		if (RallyPoint) {
 			RallyPoint.SetActive (false);
@@ -414,7 +469,6 @@ public class Selected : MonoBehaviour {
 			
 
 		foreach (Transform obj in this.transform) {
-
 			obj.SendMessage ("setDeSelect", SendMessageOptions.DontRequireReceiver);
 		}
 

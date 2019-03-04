@@ -111,7 +111,7 @@ public class ResourceManager {
 	{
 		foreach (ResourceTank tank in MyResources)
 		{
-			if (GameManager.main.getActivePlayer().resourceManager.canPay(MyResources) != ResourceType.CanPay)
+			if (GameManager.main.getActivePlayer().resourceManager.canPay(MyResources).Count > 0)
 				{ return false; }
 
 		}
@@ -119,16 +119,19 @@ public class ResourceManager {
 		return true;
 	}
 
-	public ResourceType canPay(List<ResourceTank> myCosts)
+	public List<ResourceType>  canPay(List<ResourceTank> myCosts)
 	{
+		List<ResourceType> cantPay = new List<ResourceType>();
 		foreach (ResourceTank tank in myCosts)
 		{
 			if (MyResources.Find(item => item.resType == tank.resType).currentAmount < tank.currentAmount)
-			{ return tank.resType; }
+			{
+				cantPay.Add(tank.resType);
+}
 			
 		}
 
-		return ResourceType.CanPay;
+		return cantPay;
 	}
 
 	public bool canPay(ResourceType myType, float amount)

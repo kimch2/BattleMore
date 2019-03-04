@@ -15,10 +15,10 @@ public class stunZone : VisionTrigger {
 
 	IEnumerator timedRoot(UnitManager manager)
 	{
-		manager.cMover.changeSpeed (0, -1000, false, this);
+		manager.myStats.statChanger.changeMoveSpeed (0, -1000,  this);
 		yield return new WaitForSeconds (rootTime);
 		if (manager) {
-			manager.cMover.removeSpeedBuff (this);
+			manager.myStats.statChanger.removeMoveSpeed (this);
 		}
 	}
 
@@ -28,7 +28,7 @@ public class stunZone : VisionTrigger {
 	public override void UnitExitTrigger(UnitManager manager)
 	{
 		if (manager.cMover) {
-			manager.cMover.removeSpeedBuff (this);
+			manager.myStats.statChanger.removeMoveSpeed(this);
 		}
 	}
 
@@ -36,8 +36,8 @@ public class stunZone : VisionTrigger {
 	{
 		foreach (UnitManager manage in InVision) {
 			if (manage && manage.cMover) {
-				
-				manage.cMover.removeSpeedBuff ( this);
+
+				manage.myStats.statChanger.removeMoveSpeed( this);
 			}
 		}
 	}

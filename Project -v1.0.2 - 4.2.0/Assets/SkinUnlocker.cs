@@ -5,8 +5,12 @@ using UnityEngine;
 public class SkinUnlocker : MonoBehaviour {
 
 	public List<Skin> mySkins;
+	public List<MeshRenderer> ColoredSkins;
+	List<Material> DefaultMaterials = new List<Material>();
 
+	public SkinColorManager mySkinner;
 	bool setFalse;
+
 	void Awake()
 	{	if (!setFalse) {
 			setFalse = true;
@@ -19,6 +23,20 @@ public class SkinUnlocker : MonoBehaviour {
 		}
 	}
 
+	public void Start()
+	{
+		if (!mySkinner)
+		{
+			UnitManager manager = GetComponent<UnitManager>();
+			RaceManager racer = GameManager.main.playerList[manager.PlayerOwner - 1];
+			mySkinner = racer.getColorManager();
+		}
+		for (int i = 0; i < ColoredSkins.Count; i++)
+		{
+			DefaultMaterials.Add(ColoredSkins[i].material);
+			ColoredSkins[i].material = mySkinner.getSkin(DefaultMaterials[i]);
+		}
+	}
 
 	[System.Serializable]
 	public class Skin
@@ -43,9 +61,7 @@ public class SkinUnlocker : MonoBehaviour {
 					obj.SetActive (true);
 				}
 			}
-
 		}
-
 	}
 
 

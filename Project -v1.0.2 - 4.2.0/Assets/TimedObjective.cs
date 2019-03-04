@@ -25,12 +25,25 @@ public class TimedObjective : Objective {
 		StartCoroutine (countDown());
 	}
 
+	bool paused = false;
+
+	public void Pause(bool pause)
+	{
+
+		paused = pause;
+	}
 
 	IEnumerator countDown()
 	{
 		//Debug.Log ("Starting countddown");
 		while (remainingTime > 0 && !completed) {
 			yield return new WaitForSeconds (1);
+
+			if (paused)
+			{
+				continue;
+			}
+
 			remainingTime -= 1;
 			description = initialDescript + "  " + Clock.convertToString(remainingTime);
 			if (remainingTime < 60)

@@ -26,10 +26,9 @@ public class HookFury : MonoBehaviour,  Notify {
 	{
 		float toChange = -(.5f - (myStats.health / myStats.Maxhealth) / 2);
 		//Debug.Log ("Changing " + toChange);
-		foreach (IWeapon weap in myWeapon) {
-			weap.removeAttackSpeedBuff (this);
-			weap.changeAttackSpeed (toChange, 0, false, this);
-		}
+
+		myStats.statChanger.removeAttackSpeed(this);
+		myStats.statChanger.changeAttackSpeed(toChange, 0, this);
 		return damage;
 	}
 

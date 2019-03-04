@@ -17,6 +17,8 @@ public class SingleTarget:  TargetAbility {
 	public int maxChargeCount;
 	public IEffect AttributeEffect;
 
+	protected Lean.LeanPool myBulletPool;
+
 	Coroutine currentCharger;
 	// Use this for initialization
 	public void Start () {
@@ -40,6 +42,14 @@ public class SingleTarget:  TargetAbility {
 					StopCoroutine(currentCharger);
 				}
 				currentCharger = StartCoroutine (increaseCharges ());
+			}
+		}
+
+		if (missile)
+		{
+			if (!myBulletPool)
+			{
+				myBulletPool = Lean.LeanPool.getSpawnPool(missile);
 			}
 		}
 	}
@@ -151,14 +161,15 @@ public class SingleTarget:  TargetAbility {
 			if (missile) {
 				Vector3 pos = this.gameObject.transform.position;
 				pos.y += this.gameObject.GetComponent<CharacterController> ().radius;
-				proj = (GameObject)Instantiate (missile, pos, Quaternion.identity);
-
+				proj = myBulletPool.FastSpawn(transform.position, Quaternion.identity);
 				Projectile script = proj.GetComponent<Projectile> ();
 
 				if (script) {
+
 					script.target = target.GetComponent<UnitManager> ();
 					script.Source = this.gameObject;
 					script.Initialize (target.GetComponent<UnitManager>(),0,manage);
+					script.setup();
 				} else {
 					proj.SendMessage ("setSource", this.gameObject,SendMessageOptions.DontRequireReceiver);
 					proj.SendMessage ("setTarget", tar,SendMessageOptions.DontRequireReceiver);
@@ -195,7 +206,8 @@ public class SingleTarget:  TargetAbility {
 			if (missile) {
 				Vector3 pos = this.gameObject.transform.position;
 				pos.y += this.gameObject.GetComponent<CharacterController> ().radius;
-				proj = (GameObject)Instantiate (missile, pos, Quaternion.identity);
+				proj = myBulletPool.FastSpawn(transform.position, Quaternion.identity);
+
 
 				Projectile script = proj.GetComponent<Projectile> ();
 				if (script) {

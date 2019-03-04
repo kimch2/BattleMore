@@ -37,6 +37,7 @@ public  class Projectile : MonoBehaviour {
 
 	public float FriendlyFire;
 	protected Vector3 randomOffset;
+	protected Vector3 originPoint;
 
 	GameObject myEffect;
 	MultiShotParticle multiParticle;
@@ -71,7 +72,7 @@ public  class Projectile : MonoBehaviour {
 
 	public void OnSpawn()
 	{	currentDistance = 0;
-		
+		originPoint = transform.position;
 		if (AudSrc && mySound) {
 			AudSrc.pitch +=((float)Random.Range (-3, 3)) / 10;
 			SoundManager.PlayOneShotSound (AudSrc, mySound);
@@ -80,7 +81,12 @@ public  class Projectile : MonoBehaviour {
 			rend.Clear ();	
 		}
 	}
-			
+
+	public Vector3 getOrigin()
+	{
+		return originPoint;
+	}
+
 	public void Initialize(UnitManager targ, float dam, UnitManager src)
 	{
 		//Debug.Log ("Setting target " + targ);

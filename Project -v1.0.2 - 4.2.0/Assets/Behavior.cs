@@ -26,11 +26,6 @@ void Start () {
 		setBuffStuff (BuffType, BuffIsGood);
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
 
 	public void applyBuffUI()
 	{if (!initialized) {

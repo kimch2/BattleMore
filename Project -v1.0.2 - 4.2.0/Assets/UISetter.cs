@@ -27,6 +27,8 @@ public class UISetter : MonoBehaviour {
 	public Text SupplyText;
 	public Text BuildMoreSupplyText;
 
+	public Sprite defaultMinimapcircle;
+	public Sprite defaultMinimapSquare;
 	void Awake()
 	{ main = this;
 
@@ -74,31 +76,31 @@ public class UISetter : MonoBehaviour {
 			}
 
 			racer.collectResources(comp.MyLevels[LevelNum].StartingResources.MyResources, false);
-
+			bool allTech = PlayerPrefs.GetInt("AllTech") == 0;
 
 			int NumOfUlts = 4;
-			if (!comp.MyLevels[LevelNum].UIBarsNUlts.UltOneActivated && PlayerPrefs.GetInt("AllTech") == 0)
+			if (!comp.MyLevels[LevelNum].UIBarsNUlts.UltOneActivated && allTech)
 			{
 				racer.UltOne.enabled = false;
 				racer.ultBOne.gameObject.SetActive(false);
 				NumOfUlts--;
 			}
 
-			if (!comp.MyLevels[LevelNum].UIBarsNUlts.UltTwoActivated && PlayerPrefs.GetInt("AllTech") == 0)
+			if (!comp.MyLevels[LevelNum].UIBarsNUlts.UltTwoActivated && allTech)
 			{
 				racer.UltTwo.enabled = false;
 				racer.ultBTwo.gameObject.SetActive(false);
 				NumOfUlts--;
 			}
 
-			if (!comp.MyLevels[LevelNum].UIBarsNUlts.UltThreeActivated && PlayerPrefs.GetInt("AllTech") == 0)
+			if (!comp.MyLevels[LevelNum].UIBarsNUlts.UltThreeActivated && allTech)
 			{
 				racer.UltThree.enabled = false;
 				racer.ultBThree.gameObject.SetActive(false);
 				NumOfUlts--;
 			}
 
-			if (!comp.MyLevels[LevelNum].UIBarsNUlts.UltFourActivated && PlayerPrefs.GetInt("AllTech") == 0)
+			if (!comp.MyLevels[LevelNum].UIBarsNUlts.UltFourActivated && allTech)
 			{
 				racer.UltFour.enabled = false;
 				racer.ultBFour.gameObject.SetActive(false);
@@ -173,6 +175,10 @@ public class UISetter : MonoBehaviour {
 
 	public void SwapRaceHuds(RaceInfo.raceType newType)
 	{
+		if (!gameObject)
+		{
+			return;
+		}
 		UnitEquivalance RacePacket = Resources.Load<GameObject>("RaceInfoPacket").GetComponent<UnitEquivalance>();
 		RaceInfo myType = RacePacket.getRace(RaceInfo.raceType.SteelCrest);
 		RaceInfo newRace = RacePacket.getRace(newType);

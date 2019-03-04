@@ -20,11 +20,11 @@ public class AcidRain : VisionTrigger {
 			{
 				if (manage.myStats.armor > minimumArmor)
 				{
-					manage.myStats.changeArmor(-1);
+					manage.myStats.statChanger.changeArmor(0, -1, this, true);
 				}
 				if (manage.cMover)
 				{
-					manage.cMover.changeSpeed(.95f, 0, true, this);
+					manage.myStats.statChanger.changeMoveSpeed(-.05f, 0, this, true);
 				}
 			}
 		}

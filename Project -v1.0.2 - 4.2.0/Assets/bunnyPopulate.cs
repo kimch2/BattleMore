@@ -8,7 +8,7 @@ public class bunnyPopulate : MonoBehaviour, Notify {
 
 	public float repopulateTime;
 	public float randomSpawnRange;
-	private float nextRepopulate;
+	private float nextRepopulate; // this script is also used for lightning animations... for some reason.
 	private UnitStats myStats;
 
 	public LightningBoltScript myLightning;
@@ -19,12 +19,14 @@ public class bunnyPopulate : MonoBehaviour, Notify {
 	// Use this for initialization
 	void Start () {
 		if (repopulateTime > 0) {
-			repopulateTime += (43 - LevelData.getDifficulty () * 10);
+			repopulateTime += (78 - LevelData.getDifficulty () * 20);
 		}
 		mymanager = GetComponent<UnitManager> ();
-		bunnyMan =	GameObject.FindObjectOfType<bunnyManager> ();
-		if(bunnyMan && repopulateTime > 0){
-			bunnyMan.changeInBunnyCount (1);}
+		bunnyMan =	bunnyManager.main;
+
+		if (repopulateTime > 0){
+			bunnyMan.addBunny(this);
+		}
 
 		myStats = GetComponent<UnitStats> ();
 		foreach(IWeapon weap in mymanager.myWeapon)
@@ -97,7 +99,7 @@ public class bunnyPopulate : MonoBehaviour, Notify {
 
 	public void Dying (){
 		if(bunnyMan&& repopulateTime > 0){
-			bunnyMan.changeInBunnyCount (-1);
+			bunnyMan.BunnyDead(this);
 	}
 	}
 

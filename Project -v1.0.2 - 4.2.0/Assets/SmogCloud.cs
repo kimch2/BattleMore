@@ -25,7 +25,7 @@ public class SmogCloud : VisionTrigger
 		{
 			transform.position = objecthit.point + Vector3.up;
 		}
-		transform.Translate(transform.forward * 7 * Time.deltaTime);
+		transform.Translate(transform.forward * 5 * Time.deltaTime);
 		transform.Rotate(Vector3.up, angleChangeAmount * Time.deltaTime);
 		if (Time.time > timeChange)
 		{
@@ -41,13 +41,13 @@ public class SmogCloud : VisionTrigger
 			{
 				if (manage && MyOwner != manage.PlayerOwner)
 				{
-					manage.myStats.TakeDamage(2 +( transform.localScale.x * 2), this.gameObject, DamageTypes.DamageType.Regular);
+					manage.myStats.TakeDamage(4 +( transform.localScale.x * 2), this.gameObject, DamageTypes.DamageType.Regular);
 				}
 			}
 
 		}
-
-		transform.localScale -= new Vector3(.075f, .075f, .075f) * Time.deltaTime;
+		float m = Mathf.Max(.07f, transform.localScale.x/80);
+		transform.localScale -= new Vector3(m,m,m) * Time.deltaTime;
 		if (transform.localScale.x < 0)
 		{
 			Destroy(this.gameObject);
@@ -74,7 +74,7 @@ public class SmogCloud : VisionTrigger
 	{
 		for (float f = 0; f < 2f; f += Time.deltaTime)
 		{
-			transform.localScale += new Vector3(.3f, .3f, .3f) * Time.deltaTime;
+			transform.localScale += new Vector3(.25f, .25f, .25f) * Time.deltaTime;
 			yield return null;
 		}
 

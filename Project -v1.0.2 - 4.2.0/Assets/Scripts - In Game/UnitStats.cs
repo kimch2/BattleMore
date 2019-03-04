@@ -8,7 +8,7 @@ using System;
 
 public class UnitStats : MonoBehaviour {
 
-	[TextArea(2,10)]
+	[TextArea(2, 10)]
 	public string UnitDescription = "dude";
 	public bool isHero;
 	public float Maxhealth;
@@ -26,32 +26,36 @@ public class UnitStats : MonoBehaviour {
 	public Sprite Icon;
 
 	public float supply;    //positive gives supply, negative uses it
-	public float attackPriority =1 ;
 
+	public float attackPriority = 1;
+	//[HideInInspector]
+	public byte DefensePriority; // Am I an Air/Ground/ Both unit , this is a bitmask to be compared against the attackers agressionPriority
+	public byte agressionPriority; //Can I attack Air/Ground/Both units, who should I prioritize
 
 	public float armor;
 	public float spellResist;
 	public float cost;
 	public ResourceManager Cost;
-	private UnitManager myManager;
+	[HideInInspector]
+	public UnitManager myManager;
 
 	private List<Modifier> damageModifiers = new List<Modifier>();
 
 	//BE Careful this can pass in both negative and positive numbers!
 	private List<Modifier> EnergyModifiers = new List<Modifier>();
 	private List<Modifier> HealModifiers = new List<Modifier>();
-	public List<UnitTypes.UnitTypeTag> otherTags = new  List<UnitTypes.UnitTypeTag> ();
-	private List<UnitTypes.UnitTypeTag> TotalTags = new  List<UnitTypes.UnitTypeTag> ();
+	public List<UnitTypes.UnitTypeTag> otherTags = new List<UnitTypes.UnitTypeTag>();
+	private List<UnitTypes.UnitTypeTag> TotalTags = new List<UnitTypes.UnitTypeTag>();
 
 	int typeBitMask;
 
 	public UnitTypes.UnitArmorTag armorType;
 	public UnitTypes.SizeTag sizeType;
 	public UnitTypes.HeightType myHeight;
-	private List<Modifier> deathTriggers = new List<Modifier> ();
-	public List<KillModifier> killMods = new List<KillModifier> ();
+	private List<Modifier> deathTriggers = new List<Modifier>();
+	public List<KillModifier> killMods = new List<KillModifier>();
 
-	//Tags the units can have
+
 	private Selected mySelection;
 
 	[HideInInspector]
@@ -72,97 +76,98 @@ public class UnitStats : MonoBehaviour {
 	bool tagSet = false;
 
 	public List<Buff> goodBuffs = new List<Buff>();
-	public 	List<Buff> badBuffs = new List<Buff>();
+	public List<Buff> badBuffs = new List<Buff>();
 
-
-
+	public StatChanger statChanger; // This contains all thigns that can alter any numbers for this unit, like Range or attackSpeed
 
 
 	void Awake()
 	{
-		Initialize ();
+		statChanger = new StatChanger(this);
+		Initialize();
 	}
 
 	public void SetTags()
 	{
 		tagSet = true;
-		TotalTags.Clear ();
+		TotalTags.Clear();
 		foreach (UnitTypes.UnitTypeTag t in otherTags) {
 
-			TotalTags.Add ((UnitTypes.UnitTypeTag)Enum.Parse(typeof(UnitTypes.UnitTypeTag) ,t.ToString()));
+			TotalTags.Add((UnitTypes.UnitTypeTag)Enum.Parse(typeof(UnitTypes.UnitTypeTag), t.ToString()));
 		}
-		TotalTags.Add ((UnitTypes.UnitTypeTag)Enum.Parse(typeof(UnitTypes.UnitTypeTag) ,armorType.ToString()));
-		TotalTags.Add ((UnitTypes.UnitTypeTag)Enum.Parse(typeof(UnitTypes.UnitTypeTag) ,myHeight.ToString()));
-		TotalTags.Add ((UnitTypes.UnitTypeTag)Enum.Parse(typeof(UnitTypes.UnitTypeTag) ,sizeType.ToString()));
+		TotalTags.Add((UnitTypes.UnitTypeTag)Enum.Parse(typeof(UnitTypes.UnitTypeTag), armorType.ToString()));
+		TotalTags.Add((UnitTypes.UnitTypeTag)Enum.Parse(typeof(UnitTypes.UnitTypeTag), myHeight.ToString()));
+		TotalTags.Add((UnitTypes.UnitTypeTag)Enum.Parse(typeof(UnitTypes.UnitTypeTag), sizeType.ToString()));
 
 		int bitMask = 0;
 		foreach (UnitTypes.UnitTypeTag t in TotalTags) {
-			bitMask += (int)Mathf.Pow (2, ((int)t));
+			bitMask += (int)Mathf.Pow(2, ((int)t));
 		}
 		typeBitMask = bitMask;
+		setDefensePriority();
+
 		//Debug.Log (this.gameObject + ": "+bitMask);
 	}
 
 	public void Initialize()
 	{
 		if (!tagSet) {
-			SetTags ();
+			SetTags();
 		}
 		if (!myManager) {
-			myManager = this.gameObject.GetComponent<UnitManager> ();
+			myManager = this.gameObject.GetComponent<UnitManager>();
 			myManager.myStats = this;
 		}
 
 		if (isHero) {
-			bool HasAName = !isUnitType (UnitTypes.UnitTypeTag.Turret) && !isUnitType (UnitTypes.UnitTypeTag.Structure);
-			veternStat= new VeteranStats(HasAName, GetComponent<UnitManager>().UnitName,
-				!(isUnitType(UnitTypes.UnitTypeTag.Turret))&&!(isUnitType(UnitTypes.UnitTypeTag.Worker)) && !(isUnitType(UnitTypes.UnitTypeTag.Structure)),GetComponent<UnitManager>().UnitName 
+			bool HasAName = !isUnitType(UnitTypes.UnitTypeTag.Turret) && !isUnitType(UnitTypes.UnitTypeTag.Structure);
+			veternStat = new VeteranStats(HasAName, GetComponent<UnitManager>().UnitName,
+				!(isUnitType(UnitTypes.UnitTypeTag.Turret)) && !(isUnitType(UnitTypes.UnitTypeTag.Worker)) && !(isUnitType(UnitTypes.UnitTypeTag.Structure)), GetComponent<UnitManager>().UnitName
 				, myManager.PlayerOwner, myManager);
 		}
-		else{
-		veternStat= new VeteranStats(!isUnitType(UnitTypes.UnitTypeTag.Turret)&& !isUnitType(UnitTypes.UnitTypeTag.Structure), GetComponent<UnitManager>().UnitName,
-				!(isUnitType(UnitTypes.UnitTypeTag.Turret))&&!(isUnitType(UnitTypes.UnitTypeTag.Worker)) && !(isUnitType(UnitTypes.UnitTypeTag.Structure)), "", myManager.PlayerOwner,myManager);}
+		else {
+			veternStat = new VeteranStats(!isUnitType(UnitTypes.UnitTypeTag.Turret) && !isUnitType(UnitTypes.UnitTypeTag.Structure), GetComponent<UnitManager>().UnitName,
+					!(isUnitType(UnitTypes.UnitTypeTag.Turret)) && !(isUnitType(UnitTypes.UnitTypeTag.Worker)) && !(isUnitType(UnitTypes.UnitTypeTag.Structure)), "", myManager.PlayerOwner, myManager); }
 
 		if (!mySelection) {
 			mySelection = this.gameObject.GetComponent<Selected>();
 		}
 		veternStat.myUnit = myManager;
-	//	veternStat.playerOwner = myManager.PlayerOwner;
 	}
 
 
 
 	// Use this for initialization
-	void Start () {
+	void Start() {
 		if (!myManager) {
-			myManager = GetComponent<UnitManager> ();
+			myManager = GetComponent<UnitManager>();
 			myManager.myStats = this;
 		}
-	
-		if (Clock.main.getTotalSecond()< 1 && myManager.PlayerOwner == 1) {
-			
-			GameManager.main.playerList[myManager.PlayerOwner-1].UnitCreated (supply);		
+
+		if (Clock.main.getTotalSecond() < 1 && myManager.PlayerOwner == 1) {
+
+			GameManager.main.playerList[myManager.PlayerOwner - 1].UnitCreated(supply);
 		}
 
-		GameManager.main.playerList [myManager.PlayerOwner - 1].addVeteranStat (veternStat);
+		GameManager.main.playerList[myManager.PlayerOwner - 1].addVeteranStat(veternStat);
 		if (isHero) {
 			veternStat.UnitName = myManager.UnitName;
 		}
-			
+
 		if (EnergyRegenPerSec > 0 && !WorldRecharger.main.ToEnergize.Contains(this)) {
 			WorldRecharger.main.addEnergy(this);
-		} 
+		}
 		if (HealthRegenPerSec > 0 && !WorldRecharger.main.ToHeal.Contains(this)) {
 			WorldRecharger.main.addHeal(this);
-		} 
+		}
 		veternStat.playerOwner = myManager.PlayerOwner;
 		HealthRegenPerHalf = HealthRegenPerSec / 2;
 		EnergyRegenPerHalf = EnergyRegenPerSec / 2;
 	}
 
 	void firstHealth()
-	{if (!isUnitType (UnitTypes.UnitTypeTag.Invulnerable)) {
-			updateHealthBar ();
+	{ if (!isUnitType(UnitTypes.UnitTypeTag.Invulnerable)) {
+			updateHealthBar();
 		}
 	}
 
@@ -170,12 +175,12 @@ public class UnitStats : MonoBehaviour {
 	public void setEnergyRegen(float amount)
 	{
 		if (amount == 0 && EnergyRegenPerSec > 0) {
-			WorldRecharger.main.removeEnergy (this);
-		} 
-		else if (amount > 0 && EnergyRegenPerSec == 0) {
-			WorldRecharger.main.addEnergy (this);
+			WorldRecharger.main.removeEnergy(this);
 		}
-	
+		else if (amount > 0 && EnergyRegenPerSec == 0) {
+			WorldRecharger.main.addEnergy(this);
+		}
+
 		EnergyRegenPerSec = amount;
 		EnergyRegenPerHalf = amount / 2;
 	}
@@ -183,17 +188,20 @@ public class UnitStats : MonoBehaviour {
 	public void setHealRate(float amount)
 	{
 		if (amount == 0 && HealthRegenPerSec > 0) {
-			WorldRecharger.main.removeHeal (this);
-		} 
+			WorldRecharger.main.removeHeal(this);
+		}
 		else if (amount > 0 && HealthRegenPerSec == 0) {
-			WorldRecharger.main.addHeal (this);
+			WorldRecharger.main.addHeal(this);
 		}
 
 		HealthRegenPerSec = amount;
 		HealthRegenPerHalf = amount / 2;
 	}
-		
 
+	public Selected getSelector()
+	{
+		return mySelection;
+	}
 
 	int n = 0;
 	public bool isUnitType(UnitTypes.UnitTypeTag type){
@@ -244,13 +252,72 @@ public class UnitStats : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// This is called at the start and when a weapon is added, so that units will prioirtize units that can target them back in combat
+	/// </summary>
+	public void setAggressionPriority()
+	{
+		agressionPriority = 0;
+		bool canAttackAir = true ;
+		bool canAttackGRound = true;
 
+		if (myManager.myWeapon.Count > 0)
+		{
+			foreach (IWeapon weap in myManager.myWeapon)
+			{
+				if (weap.cantAttackTypes.Contains(UnitTypes.UnitTypeTag.Air))
+				{
+					canAttackAir = false;
+				}
+				if (weap.cantAttackTypes.Contains(UnitTypes.UnitTypeTag.Ground))
+				{
+					canAttackGRound = false;
+				}
+			}
+			if (canAttackAir)
+			{
+				agressionPriority += 1;
+			}
+			if (canAttackGRound)
+			{
+				agressionPriority += 2;
+			}
+		}
+	}
 
+	public void setDefensePriority()
+	{
+		
+		if (myHeight == UnitTypes.HeightType.Air)
+		{
+			DefensePriority = 1;
+		}
+		else if (myHeight == UnitTypes.HeightType.Ground)
+		{
+			DefensePriority = 2;
+		}
+		else if (myHeight == UnitTypes.HeightType.Both)
+		{
+			DefensePriority = 3;
+		}
+		else
+		{
+			DefensePriority = 0;
+		}
+	}
+
+	/// <summary>
+	/// pass in the defensePriority of the guy targeting this guy
+	/// </summary>
+	public float getCombatPriority(int defensePri)
+	{
+		return attackPriority + (((defensePri & agressionPriority) > 0) ? 1 :0); 
+	}
 
 
 	public float TakeDamage(float amount, GameObject source, DamageTypes.DamageType type, UnitManager srcManager = null)
 	{
-		//Debug.Log("Taking " + amount + "  " + armor);
+
 		if (isUnitType(UnitTypes.UnitTypeTag.Invulnerable)) {
 			return 0;
 		}
@@ -271,57 +338,80 @@ public class UnitStats : MonoBehaviour {
 			amount = Mathf.Max (amount - armor, 1);
 		}
 
-		if (myManager.PlayerOwner == 1 && source != this.gameObject) {
-			if (isUnitType(UnitTypes.UnitTypeTag.Structure)) {
-				ErrorPrompt.instance.underBaseAttack (this.transform.position);
-			} else {
-				ErrorPrompt.instance.underAttack (this.transform.position);
-			}
-		}
-			
+		AttackResponse(source, srcManager);
+
 		if (veternStat != null) {
 			veternStat.UpMitigated(armor);
 			veternStat.UpdamTaken (amount);
 		}
 
-			//	Debug.Log ("Actual " + amount);
 		health -= amount;
-
+		
 		if (health < 1) {
 			kill (source, srcManager);
 		} else {
 			updateHealthBar ();
-
-
-
-		if (srcManager) {
-			myManager.Attacked (srcManager);
 		}
-
-		}
-	
+		
 		return amount;
-
 	}
 
+	float nextResponseTime = 0;
 
+	void AttackResponse(GameObject source, UnitManager srcManager)
+	{
+		if (nextResponseTime < Time.time)
+		{
+			nextResponseTime = Time.time + 15;
+			if (myManager.PlayerOwner == 1 && source != this.gameObject)
+			{
+				mySelection.attackBlink();
+				if (isUnitType(UnitTypes.UnitTypeTag.Structure))
+				{
+					ErrorPrompt.instance.underBaseAttack(this.transform.position);
+				}
+				else
+				{
+					ErrorPrompt.instance.underAttack(this.transform.position);
+				}
+			}
+		
+			if (srcManager)
+			{
+				myManager.Attacked(srcManager);
+			}
+		}
+	}
+
+	/// <summary>
+	/// As a percent
+	/// </summary>
 	public void SetHealth (float percent)
 	{
 		health = Maxhealth * percent;
 		updateHealthBar ();
 	}
 
+	public void setHealthValue(float amount)
+	{
+		health = amount;
+		updateHealthBar();
+	}
+
+	public void setEnergy(float amount)
+	{
+		currentEnergy = amount;
+		updateEnergyBar();
+	}
+
 	private void updateHealthBar()
 	{
-			mySelection.updateHealthBar (health / Maxhealth);
-	
+		mySelection.updateHealthBar (health / Maxhealth);
 	}
 
 	private void updateEnergyBar()
 	{
-
 		mySelection.updateEnergyBar(currentEnergy / MaxEnergy);
-
 	}
 
 	private bool dead = false;
@@ -330,10 +420,8 @@ public class UnitStats : MonoBehaviour {
 	public void kill(GameObject deathSource)
 	{
 		kill(deathSource, null);
+	}
 	
-		}
-
-
 	public void kill(GameObject deathSource, UnitManager srcManager = null)
 	{
 		if (dead)
@@ -356,9 +444,7 @@ public class UnitStats : MonoBehaviour {
 					deathTriggers [i].modify (0, deathSource, DamageTypes.DamageType.Regular);
 				}
 			}
-
 			
-
 			if (deathCorpse != null) {
 
 				Vector3 spawnLoc = this.gameObject.transform.position;
@@ -368,9 +454,7 @@ public class UnitStats : MonoBehaviour {
 					Physics.Raycast (this.gameObject.transform.position + Vector3.up * 10, Vector3.down, out objecthit, 1000, 1 << 8);
 					spawnLoc = objecthit.point;
 				}
-				//Debug.Log ("Rotation is " + this.gameObject.transform.rotation);
-				//GameObject corpse = 
-
+				
 				GameObject.Instantiate (deathCorpse, spawnLoc, this.gameObject.transform.rotation);
 
 			}
@@ -380,17 +464,15 @@ public class UnitStats : MonoBehaviour {
 			if (HealthRegenPerSec > 0) {
 				WorldRecharger.main.removeHeal(this);
 			}
-
-			//Testing this to see if it stops health bar stutter bug on death
-	
+			
 			if (srcManager) {
 				srcManager.myStats.upKills ();
 			}
-
-			//fix this when we have multiplayer games, here for optimizations?
+			
 			if (myManager.PlayerOwner == 1) {
-					
+				//fix this when we have multiplayer games, here for optimizations?
 				GameManager.main.playerList [myManager.PlayerOwner - 1].UnitDied (supply, myManager);
+				SelectedManager.main.updateControlGroups(myManager);
 			}
 
 			if (mySelection.IsSelected) {
@@ -400,7 +482,7 @@ public class UnitStats : MonoBehaviour {
 				Instantiate (deathEffect, this.gameObject.transform.position, Quaternion.identity);
 			}
 	
-			SelectedManager.main.updateControlGroups (myManager);
+			
 			this.gameObject.SendMessage ("Dying", SendMessageOptions.DontRequireReceiver);
 			veternStat.Died = true;
 			veternStat.DeathTime = Time.timeSinceLevelLoad;
@@ -442,27 +524,23 @@ public class UnitStats : MonoBehaviour {
 	}
 
 	public void addLethalTrigger()//Method method)
-	{
-		//lethalDamage.Add (method);
-		
+	{ // not implemented yet
 	}
 
 	public void removeDeathTrigger (Modifier mod)
-	{deathTriggers.Remove (mod);
+	{
+		deathTriggers.Remove (mod);
 	}
 	public void addDeathTrigger( Modifier mod)//Method method)
-	{if (!deathTriggers.Contains (mod)) {
+	{
+		if (!deathTriggers.Contains (mod)) {
 			deathTriggers.Add (mod);
 		}
-		//deathTriggers.Add (method);
-
 	}
 
 	/// <summary>
 	/// priority of 0 puts it at the front of the queue
 	/// </summary>
-	/// <param name="mod"></param>
-	/// <param name="priority"></param>
 	public void addModifier(Modifier mod, int priority = -1)
 	{
 		if (!damageModifiers.Contains (mod)) {
@@ -483,7 +561,8 @@ public class UnitStats : MonoBehaviour {
 	}
 
 	public void removeModifier(Modifier mod)
-	{if (damageModifiers.Contains (mod)) {
+	{
+		if (damageModifiers.Contains (mod)) {
 			damageModifiers.Remove (mod);
 		}
 	}
@@ -497,7 +576,8 @@ public class UnitStats : MonoBehaviour {
 	}
 
 	public void removeEnergyModifier(Modifier mod)
-	{if (EnergyModifiers.Contains (mod)) {
+	{
+		if (EnergyModifiers.Contains (mod)) {
 			EnergyModifiers.Remove (mod);
 		}
 	}
@@ -513,15 +593,13 @@ public class UnitStats : MonoBehaviour {
 	}
 
 	public float changeEnergy(float n)
-	{//Debug.Log ("Recharging " + n);
+	{
 		if (MaxEnergy == 0 ||  (n > 0 && currentEnergy == MaxEnergy)) {
+			return 0;
+		}
 		
-			return 0;}
-
-
 		float amount = 0;
 
-	
 		foreach (Modifier mod in EnergyModifiers) {
 			n = mod.modify (n, this.gameObject, DamageTypes.DamageType.Regular);
 		}
@@ -590,12 +668,12 @@ public class UnitStats : MonoBehaviour {
 		}
 	}
 
-	public void changeArmor(float amount)
-	{armor += amount;}
 
 	public int getKills()
 	{
 		return veternStat.kills;
 	}
+
+
 
 }

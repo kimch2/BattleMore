@@ -4,13 +4,10 @@ using System.Collections.Generic;
 
 public class AbstractCost : MonoBehaviour {
 		
-		
-
 	Coroutine currenCooldown;
+	public bool showCooldown;
 	
-
-
-	[HideInInspector]
+	//[HideInInspector]
 	public ResourceManager resourceCosts;
 
 		public float health;
@@ -24,7 +21,7 @@ public class AbstractCost : MonoBehaviour {
 		
 		private UnitStats stats;
 
-		private RaceManager myGame;
+		UnitManager manager;
 
 		//private Selected selectMan;
 
@@ -34,19 +31,19 @@ public class AbstractCost : MonoBehaviour {
 		
 		
 		// Use this for initialization
-		void Start () {
+		public void Start () {
 		//selectMan = this.gameObject.GetComponent<Selected> ();
 			
 			if (!StartsRefreshed) {
 				cooldownTimer = cooldown;
-			if (currenCooldown == null)
-			{
-				currenCooldown = StartCoroutine(onCooldown());
-			}
+				if (currenCooldown == null)
+				{
+					currenCooldown = StartCoroutine(onCooldown());
+				}
 			}
 			
 			stats = this.gameObject.GetComponent<UnitStats> ();
-		myGame = GameManager.main.getActivePlayer ();			
+			manager = GetComponent<UnitManager>();			
 		}
 
 	IEnumerator onCooldown()
@@ -54,17 +51,23 @@ public class AbstractCost : MonoBehaviour {
 		//Debug.Log ("Resting cooldown " + cooldownTimer);
 		while (true){
 			yield return null;
-		if (cooldownTimer > 0) {
-			cooldownTimer -= Time.deltaTime;
-			//	Debug.Log ("Colling " + cooldownTimer + "   " +UsedFor + "  " + this.gameObject);
-			//selectMan.updateCoolDown (cooldownTimer / cooldown);
-		}
-		else
+			if (cooldownTimer > 0) {
+				cooldownTimer -= Time.deltaTime;
+				//	Debug.Log ("Colling " + cooldownTimer + "   " +UsedFor + "  " + this.gameObject);
+				if (showCooldown)
+				{
+					manager.myStats.getSelector().updateCoolDown(cooldownTimer / cooldown);
+				}
+			}
+			else
 			{cooldownTimer = 0;
-			break;
+				break;
+			}
 		}
-	}
-
+		if (showCooldown)
+		{
+			manager.myStats.getSelector().updateCoolDown(cooldownTimer / cooldown);
+		}
 	}
 
 	public void showCostPopUp(bool positive)
@@ -80,14 +83,14 @@ public class AbstractCost : MonoBehaviour {
 			result = false;
 		}
 
-		ResourceType canPay = myGame.resourceManager.canPay(resourceCosts.MyResources);
+		List<ResourceType> canPay = manager.myRacer.resourceManager.canPay(resourceCosts.MyResources);
 
-		if (canPay != ResourceType.CanPay) {
+		if (canPay.Count > 0) {
 
 			if (showError) {
 				ErrorPrompt.instance.notEnoughResource();
 			}
-			order.InsufficientResources.Add(canPay);
+			order.InsufficientResources = canPay;
 			order.nextUnitCast = false;
 
 			result = false;
@@ -118,7 +121,7 @@ public class AbstractCost : MonoBehaviour {
 			}
 		}
 			
-			return result;	
+		return result;	
 	}
 
 
@@ -127,7 +130,15 @@ public class AbstractCost : MonoBehaviour {
 		if (!ab.active) {
 			return  false;}
 
-		if (myGame.resourceManager.canPay(resourceCosts.MyResources) != ResourceType.CanPay){
+		if (manager)
+		{
+			if (manager.myRacer.resourceManager.canPay(resourceCosts.MyResources).Count > 0)
+			{
+				return false;
+			}
+		}
+		else if(GameManager.main.activePlayer.resourceManager.canPay(resourceCosts.MyResources).Count > 0) // Fix this once  I do enemy AI that use ults
+		{
 			return false;
 		}
 
@@ -156,7 +167,16 @@ public class AbstractCost : MonoBehaviour {
 	public void resetCoolDown()
 	{cooldownTimer = 0;
 	}
-		
+
+	void beginCooldown()
+	{
+		if (currenCooldown != null)
+		{
+			StopCoroutine(currenCooldown);
+		}
+		currenCooldown = StartCoroutine(onCooldown());
+	}
+
 	/// <summary>
 	/// Cooldowns the progress. 0 = cooldown just started, 1 = its done
 	/// </summary>
@@ -169,7 +189,7 @@ public class AbstractCost : MonoBehaviour {
 	public void refundCost()
 	{
 		//Debug.Log ("Refunding");
-		myGame.collectResources(resourceCosts.MyResources, false);
+		manager.myRacer.collectResources(resourceCosts.MyResources, false);
 	//	Debug.Log ("Refunding " + this.gameObject);
 		cooldownTimer = 0;
 	}
@@ -185,7 +205,15 @@ public class AbstractCost : MonoBehaviour {
 
 	public void payCost ()
 	{
-		myGame.PayCost(resourceCosts.MyResources);
+		if (manager)
+		{
+			Debug.Log("Paying");
+			manager.myRacer.PayCost(resourceCosts.MyResources);
+		}
+		else
+		{
+			GameManager.main.activePlayer.PayCost(resourceCosts.MyResources);// Fix this once  I do enemy AI that use ults
+		}
 		if (stats) {
 
 			if (health > 0) {

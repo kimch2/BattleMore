@@ -7,8 +7,6 @@ public class missileSalvo :  Ability, Iinteract, Validator, Notify{
 
 	private IWeapon myweapon;
 	public int  maxRockets = 2;
-	private UnitManager mymanager;
-	private Selected mySelect;
 
 	public List<GameObject> MissileModels = new List<GameObject> ();
 	Vector3 padSpot;
@@ -27,13 +25,13 @@ public class missileSalvo :  Ability, Iinteract, Validator, Notify{
 	// Use this for initialization
 	void Start () {
 		flierheight = GetComponent<airmover> ().flyerHeight;
-		mymanager = GetComponent<UnitManager> ();
+
 		myweapon = GetComponent<IWeapon> ();
 		myweapon.triggers.Add (this);
 		myweapon.validators.Add (this);
 		myType = type.activated;
-		mySelect = GetComponent<Selected> ();
 		StartCoroutine (delayedUpdate());
+
 
 	}
 
@@ -42,7 +40,7 @@ public class missileSalvo :  Ability, Iinteract, Validator, Notify{
 	IEnumerator delayedUpdate()
 	{
 		yield return new WaitForSeconds (.1f);
-		mySelect.updateCoolDown (chargeCount / maxRockets);
+		select.updateCoolDown (chargeCount / maxRockets);
 		fillHerUp = 1;
 	}
 
@@ -53,7 +51,7 @@ public class missileSalvo :  Ability, Iinteract, Validator, Notify{
 		StartCoroutine (fillUpBar(.5f));
 		
 		
-		if (mySelect.IsSelected) {
+		if (select.IsSelected) {
 			
 			RaceManager.upDateUI ();
 		}
@@ -73,12 +71,12 @@ public class missileSalvo :  Ability, Iinteract, Validator, Notify{
 		for (int i = 0; i < 12; i++) {
 			yield return new WaitForSeconds (.07f);
 			fillHerUp += amount/12;
-			mySelect.updateCoolDown (fillHerUp + .05f);
+			select.updateCoolDown (fillHerUp + .05f);
 		
 		}
 		if (fillHerUp > .9f) {
 			fillHerUp = 1;
-			mySelect.updateCoolDown (1);
+			select.updateCoolDown (1);
 		}
 	}
 
@@ -104,7 +102,7 @@ public class missileSalvo :  Ability, Iinteract, Validator, Notify{
 
 		StartCoroutine (fillUpBar(-.5f));
 	
-		if (mySelect.IsSelected ) {
+		if (select.IsSelected ) {
 			RaceManager.upDateUI ();
 		}
 		if (autocast && chargeCount <= 0) {
@@ -151,9 +149,12 @@ public class missileSalvo :  Ability, Iinteract, Validator, Notify{
 			padSpot = Vector3.zero;
 			float distance = 100000;
 
-			HarpyLandingPad[] landingPads = GameObject.FindObjectsOfType<HarpyLandingPad> ();
+			List<UnitManager> landingPads = myManager.myRacer.getUnitType("Aviatrix");
 			// NEED TO CHECK FOR PLAYER OWNER
-			foreach (HarpyLandingPad arm in landingPads) {
+			foreach (UnitManager man in landingPads)
+			{
+				HarpyLandingPad arm = man.GetComponent<HarpyLandingPad>();
+
 				if (!arm.hasAvailable() || !arm.GetComponent<BuildingInteractor>().ConstructDone()) {
 					continue;
 				}
@@ -167,7 +168,9 @@ public class missileSalvo :  Ability, Iinteract, Validator, Notify{
 			}
 
 			if (!home) { // we didn't find one the first time because they are all in use, go and wait in line
-				foreach (HarpyLandingPad arm in landingPads) {
+				foreach (UnitManager man in landingPads)
+				{
+					HarpyLandingPad arm = man.GetComponent<HarpyLandingPad>();
 					if (!arm.GetComponent<BuildingInteractor>().ConstructDone()) {
 						continue;
 					}
@@ -186,9 +189,9 @@ public class missileSalvo :  Ability, Iinteract, Validator, Notify{
 				if (home.hasAvailable ()) {
 
 					homeLocation = home.transform.position;
-					mymanager.GiveOrder (Orders.CreateMoveOrder (home.transform.position));
+					myManager.GiveOrder (Orders.CreateMoveOrder (home.transform.position));
 				} else {
-					mymanager.GiveOrder (Orders.CreateMoveOrder 
+					myManager.GiveOrder (Orders.CreateMoveOrder 
 						(new Vector3(home.transform.position.x + Random.Range(0,5),home.transform.position.y + Random.Range(0,5),
 							home.transform.position.z)));
 				}
@@ -224,7 +227,7 @@ public class missileSalvo :  Ability, Iinteract, Validator, Notify{
 
 		GetComponent<CharacterController> ().radius = 2.1f;
 
-		mymanager.StunForTime (this, landingTime);
+		myManager.StunForTime (this, landingTime);
 		StopCoroutine (ReFill);
 
 		yield return new WaitForSeconds (1.5f);
@@ -234,7 +237,7 @@ public class missileSalvo :  Ability, Iinteract, Validator, Notify{
 		yield return new WaitForSeconds (1.2f);
 
 		ReFill = null;
-		mymanager.setStun (false, this, false);
+		myManager.setStun (false, this, false);
 
 		inLanding = false;
 		if (home) {
@@ -255,7 +258,7 @@ public class missileSalvo :  Ability, Iinteract, Validator, Notify{
 		padSpot = Vector3.zero;
 		GetComponent<airmover> ().flyerHeight = flierheight;
 	
-		mymanager.GiveOrder (Orders.CreateMoveOrder (this.transform.position+ MoveLocation * 17) );
+		myManager.GiveOrder (Orders.CreateMoveOrder (this.transform.position+ MoveLocation * 17) );
 
 	}
 
@@ -263,15 +266,13 @@ public class missileSalvo :  Ability, Iinteract, Validator, Notify{
 
 
 	IEnumerator checkForLandingPad()
-	{
-		
+	{	
 		yield return new WaitForSeconds (.1f);
 
 		while (true) {
 
 			if (home && homeLocation != Vector3.zero && Vector3.Distance(transform.position,homeLocation) < 30  && !inLanding) {
 
-			
 				Vector3 temp = home.requestLanding (this.gameObject);
 
 				if (temp != Vector3.zero) {
@@ -291,16 +292,13 @@ public class missileSalvo :  Ability, Iinteract, Validator, Notify{
 
 	public virtual UnitState computeState(UnitState s)
 	{
-
 		if (inLanding || this == null) {
 			return null;}
 
 		airmover air = GetComponent<airmover> ();
 		if (air && air.flyerHeight == 4 && inLanding) {
-			return new MoveState (padSpot + transform.forward * .25f, mymanager);
+			return new MoveState (padSpot + transform.forward * .25f, myManager);
 		}
-	
-
 		return s;
 	}
 
@@ -313,9 +311,8 @@ public class missileSalvo :  Ability, Iinteract, Validator, Notify{
 		HarpyLandingPad pad = other.GetComponent<HarpyLandingPad>();
 		if (pad) {
 			nearbyPads.Add (pad);
-		
 		}
-		}
+	}
 
 	void OnTriggerExit(Collider other)
 	{
@@ -328,17 +325,14 @@ public class missileSalvo :  Ability, Iinteract, Validator, Notify{
 	}
 
 
-
-	protected UnitManager myManager;
+	
 	public bool attackWhileMoving;
 
 	// Use this for initialization
 	new void Awake()
 	{
 		base.Awake();
-		myManager = GetComponent<UnitManager> ();
 		myManager.setInteractor (this);
-
 	}
 
 
@@ -426,7 +420,7 @@ public class missileSalvo :  Ability, Iinteract, Validator, Notify{
 					//Debug.Log ("Ordering to interact " + manage.gameObject);
 					myManager.changeState (new InteractState (manage.gameObject, myManager), false, order.queued);
 				}
-			} else if (manage.UnitName == "Ballistics Lab") {
+			} else if (manage.UnitName == "Aviatrix") {
 				Activate ();
 			}
 			else{

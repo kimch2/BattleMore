@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class newWorkerInteract :  Ability, Iinteract {
 
-	private UnitManager myManager;
+
 	public float miningTime;
 
 	public float resourceOne;
@@ -15,11 +15,11 @@ public class newWorkerInteract :  Ability, Iinteract {
 	private OreDispenser lastOreDeposit;
 	public GameObject PurifierPrefab;
 	public ParticleSystem MiningEffect;
+	public ParticleSystem BuildingEffect;
 
 	// Use this for initialization
 	new void Start () {
 		base.Start();
-		myManager = GetComponent<UnitManager> ();
 		myManager.setInteractor (this);
 
 		if (autocast) {
@@ -32,8 +32,7 @@ public class newWorkerInteract :  Ability, Iinteract {
 	bool firstMove = true;
 
 	public UnitState computeState(UnitState s)
-	{
-		
+	{		
 		if (autocast && myManager) {
 	
 			if ((myManager.getState () is ChannelState && s is MoveState) || (myManager.getState () is PlaceBuildingState && s is DefaultState)) {
@@ -174,13 +173,13 @@ public class newWorkerInteract :  Ability, Iinteract {
 
 	public  void computeInteractions (Order order)
 	{
-
+		//Debug.Log("interacting" + order.OrderType + "   " + order.Target ) ;
 		if (myManager.getState() is ChannelState && !order.queued)
 		{
 			return;
 		}
 
-		//Debug.Log ("interacting" + order.OrderType);
+
 		switch (order.OrderType) {
 		//Stop Order----------------------------------------
 		case Const.ORDER_STOP:
@@ -219,7 +218,7 @@ public class newWorkerInteract :  Ability, Iinteract {
 						myOre = null;
 					}
 					myOre = order.Target.gameObject.GetComponent<OreDispenser> ();
-					goToOre(order.Target.gameObject.GetComponent<OreDispenser>());
+					goToOre(myOre);
 						
 				} else if (order.Target.gameObject.GetComponent<OreDispenser> ().currentMinor == this.gameObject) {
 

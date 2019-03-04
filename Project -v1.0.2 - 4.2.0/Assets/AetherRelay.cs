@@ -7,7 +7,7 @@ public class AetherRelay : Ability, AllySighted,EnemySighted{
 	List<DayexaShield> shieldList = new List<DayexaShield> ();
 	List<UnitStats> enemyStats = new List<UnitStats> ();
 	public float energyChargeRate;
-	UnitManager manager;
+
 
 
 	public MultiShotParticle myEffect;
@@ -18,9 +18,8 @@ public class AetherRelay : Ability, AllySighted,EnemySighted{
 	// Use this for initialization
 	void Start () {
 		myType = type.activated;
-		manager = GetComponent<UnitManager> ();
-		manager.AddAllySighted (this);
-		manager.AddEnemySighted (this);
+		myManager.AddAllySighted (this);
+		myManager.AddEnemySighted (this);
 
 		InvokeRepeating ("UpdateAether", 1, 1);
 
@@ -34,7 +33,7 @@ public class AetherRelay : Ability, AllySighted,EnemySighted{
 	void UpdateAether () {
 
 			if (turnedOn) {
-				if (manager.myStats.currentEnergy <= 35) {
+				if (myManager.myStats.currentEnergy <= 35) {
 					turnedOn = !turnedOn;
 					autocast = false;
 					myEffect.stopEffect ();
@@ -43,8 +42,8 @@ public class AetherRelay : Ability, AllySighted,EnemySighted{
 
 				}
 				else{
-					manager.getUnitStats ().TakeDamage (.1f, this.gameObject,DamageTypes.DamageType.Regular);
-					manager.myStats.changeEnergy (-34.9f);
+				myManager.getUnitStats ().TakeDamage (.1f, this.gameObject,DamageTypes.DamageType.Regular);
+				myManager.myStats.changeEnergy (-34.9f);
 					if (soundEffect) {
 						SoundManager.PlayOneShotSound(audioSrc, soundEffect);
 					}
@@ -54,7 +53,7 @@ public class AetherRelay : Ability, AllySighted,EnemySighted{
 						if (us) {
 							if (Vector3.Distance (us.transform.position, this.transform.position) < 40) {
 								float actual = us.TakeDamage (damageRate, this.gameObject, DamageTypes.DamageType.Regular);
-								manager.myStats.veternStat.UpdamageDone (actual);
+							myManager.myStats.veternStat.UpdamageDone (actual);
 							}
 						}
 					}
@@ -73,7 +72,7 @@ public class AetherRelay : Ability, AllySighted,EnemySighted{
 						}
 					}
 				}
-			manager.myStats.veternStat.UpEnergy(total);
+			myManager.myStats.veternStat.UpEnergy(total);
 			}
 
 	}
@@ -120,7 +119,7 @@ public class AetherRelay : Ability, AllySighted,EnemySighted{
 		continueOrder order = new continueOrder ();
 
 
-		if (manager.myStats.currentEnergy < 20) {
+		if (myManager.myStats.currentEnergy < 20) {
 			order.canCast = false;
 			return order;}
 		
@@ -133,8 +132,8 @@ public class AetherRelay : Ability, AllySighted,EnemySighted{
 		turnedOn = !turnedOn;
 		autocast = turnedOn;
 		if (turnedOn) {
-			manager.getUnitStats ().TakeDamage (.1f, this.gameObject, DamageTypes.DamageType.Regular);
-			manager.getUnitStats ().changeEnergy (.1f);
+			myManager.getUnitStats ().TakeDamage (.1f, this.gameObject, DamageTypes.DamageType.Regular);
+			myManager.getUnitStats ().changeEnergy (.1f);
 			myEffect.continueEffect ();
 			myCost.payCost ();
 

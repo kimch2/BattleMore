@@ -27,8 +27,6 @@ public class DamageUpgrade : Upgrade {
 	public void applyUpgrade (GameObject obj){
 
         UnitManager manager = obj.GetComponent<UnitManager>();
-		//if (obj.GetComponentInChildren<TurretMount> ()) {
-			//return;}
 
 		bool doubleTheDamage = false;
 		if (obj.GetComponent<DoubleUpgradeApp> () && obj.GetComponent<DoubleUpgradeApp> ().doubleIt) {
@@ -37,16 +35,13 @@ public class DamageUpgrade : Upgrade {
 	
 		foreach (unitAmount ua in unitsToUpgrade) {
 			if (manager.UnitName.Contains(ua.UnitName)) {
-			//Debug.Log ("Applying to "+ ua.UnitName + "  " + obj.name);
 				for (int i = 0; i < manager.myWeapon.Count; i++)
 					if (manager.myWeapon [i]) {
 
 					
-						manager.myWeapon [i].changeAttack(0, ua.amount[i],true,null);
+						manager.myStats.statChanger.changeWeaponDamage(0, doubleTheDamage ? ua.amount[i] * 2 : ua.amount[i], null);
 					
-						if (doubleTheDamage) {
-							manager.myWeapon [i].changeAttack(0, ua.amount[i],true,null);
-						}
+
 						manager.myWeapon [i].incrementUpgrade ();
 						manager.gameObject.SendMessage ("upgrade", Name,SendMessageOptions.DontRequireReceiver);
 						if (ua.mySpecial.Count > 0) {

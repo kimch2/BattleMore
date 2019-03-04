@@ -23,7 +23,7 @@ public class CinematicCamera : SceneEventTrigger {
 	void Start () {
 		main = this;
 
-	
+		GetComponent<Camera>().cullingMask &= ~(1 << LayerMask.NameToLayer("MinimapIcon"));
 	}
 
 	Vector3 lookPosition;

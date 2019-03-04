@@ -24,6 +24,7 @@ public class Pillage : MonoBehaviour , Notify {
 		}
 		if (PillageOnlyDeposits)
 		{
+			GetComponent<AudioSource>().volume *= .3f;
 			if (myManager.enemies.Count == 0)
 			{
 				Invoke(	"findNewSpot", .5f);
@@ -78,9 +79,8 @@ public class Pillage : MonoBehaviour , Notify {
 
 	void findNewSpot()
 	{
-		float distance = 150;
+		float distance = 200;
 
-		Debug.Log("Find new");
 		OreDispenser closest = null;
 
 		foreach (KeyValuePair<string, List<UnitManager>> pair in GameManager.main.playerList[2].getUnitList())

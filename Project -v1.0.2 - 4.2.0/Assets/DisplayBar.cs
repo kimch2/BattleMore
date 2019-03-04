@@ -33,18 +33,26 @@ public class DisplayBar : MonoBehaviour {
 	}
 
 
+	long a = 0;
+	long b = 0;
+	long c = 0;
+
+
 	/// <summary>
 	/// Returns whether it is on or not
 	/// </summary>
 	/// <returns><c>true</c>, if ratio was updated, <c>false</c> otherwise.</returns>
 	public bool updateRatio(float ratio, UnitIconInfo unitIcon, UnitIconInfo slider)
 	{
+		bool changeTo = (ratio < .99 && ratio > 0);
 
-		gameObject.SetActive (ratio < .99 && ratio > 0);
-	
+		if (changeTo != gameObject.activeSelf)
+		{
+			gameObject.SetActive(changeTo);
+		}
+
 		healthVector.x = ratio;
-		colorBar.transform.localScale = healthVector; 
-
+		colorBar.transform.localScale = healthVector;
 
 		if (slider) {
 			slider.updateSlider (ratio);
@@ -56,9 +64,10 @@ public class DisplayBar : MonoBehaviour {
 				if (unitIcon) {
 					unitIcon.changeColor (hold.HPBarColor);	
 				}
-								break;
+				break;
 			}
 		}
+
 		return this.gameObject.activeSelf;
 	}
 

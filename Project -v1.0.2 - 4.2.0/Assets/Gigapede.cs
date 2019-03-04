@@ -44,32 +44,24 @@ public class Gigapede : VisionTrigger, Modifier {
 	public override void  UnitEnterTrigger(UnitManager manager)
 	{
 		if(segmentLeft >1 && manager.gameObject != gameObject){
-			foreach (IWeapon weap in manager.myWeapon) {
-				weap.AdjustAttack (0, segmentLeft - 1, false, this);
-			}
+			manager.myStats.statChanger.changeWeaponDamage(0, segmentLeft - 1, this);
 		}
+		
 	}
 
 	public override void  UnitExitTrigger(UnitManager manager)
 	{
-		foreach (IWeapon weap in manager.myWeapon) {
-			weap.removeAttackBuff (this);
-		}
+		manager.myStats.statChanger.removeWeaponDamage(this);
 	}
 
 
 	public void updateDamageBuff(UnitManager manager )
 	{
-
-		foreach (IWeapon weap in manager.myWeapon) {
-			weap.removeAttackBuff (this);
-		}
+		manager.myStats.statChanger.removeWeaponDamage(this);
 
 
 		if(this &&manager && gameObject && segmentLeft >1 && manager.gameObject != gameObject){
-			foreach (IWeapon weap in manager.myWeapon) {
-				weap.AdjustAttack (0, segmentLeft - 1, false, this);
-			}
+			manager.myStats.statChanger.changeWeaponDamage(0, segmentLeft - 1, this);
 		}
 	}
 

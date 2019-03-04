@@ -84,7 +84,7 @@ public class ErrorPrompt : MonoBehaviour {
 
 
 	public void ResearchComplete(string s , Vector3 location)
-	{showError( s+ " Complete ", myVoicePack.getResearchLine(s));
+	{showError(  s.Substring(0, s.Length-3) + " Complete ", myVoicePack.getResearchLine(s));
 		addAlertLocation( location);
 	}
 

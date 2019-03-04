@@ -72,12 +72,14 @@ public class WaveManager : MonoBehaviour {
 
 
 	public void ReleaseWave(int waveDifficulty)
-	{GameObject spawner = EmergencySpawnLocation;
-		float delay = .1f;
+	{
+		GameObject spawner = EmergencySpawnLocation;
+		List<UnitManager> myUnits = new List<UnitManager>();
+		//float delay = .1f;
 		foreach (GameObject obj in CurrentWaves[0].waveType) {
-
-			StartCoroutine (MyCoroutine (delay, obj, spawner, myWaves [currentWaveIndex].RallyPointIndex == -1 ? firstRallyPoint : alternateRallyPoints[myWaves [currentWaveIndex].RallyPointIndex]));
-			delay += .2f;
+			myUnits.Add( createUnit(obj, spawner));
+		//	StartCoroutine (MyCoroutine (delay, obj, spawner, myWaves [currentWaveIndex].RallyPointIndex == -1 ? firstRallyPoint : alternateRallyPoints[myWaves [currentWaveIndex].RallyPointIndex]));
+			//delay += .2f;
 
 		}
 	}
@@ -102,7 +104,7 @@ public class WaveManager : MonoBehaviour {
 
 
 		} else {
-			//Debug.Log (container +" -- ");
+
 			waveOption = container.getWave (FirstPlayWaveType);
 			CurrentWaves = container.getWave (FirstPlayWaveType).waveRampUp;
 		}
@@ -165,7 +167,6 @@ public class WaveManager : MonoBehaviour {
 				if (giveWarnings) {
 					ErrorPrompt.instance.EnemyWave (waveOption.warningType);
 				}
-
 			}
 
 			if (CurrentWaves == null) {
@@ -182,24 +183,30 @@ public class WaveManager : MonoBehaviour {
 				}
 			}
 
+			List<UnitManager> AttackingUnits = new List<UnitManager>();
 
 			Debug.Log ("Spawning wave " + this.gameObject + "  " + currentWaveIndex);
 
+			Vector3 targetPoint = myWaves[currentWaveIndex].RallyPointIndex == -1 ? firstRallyPoint : alternateRallyPoints[myWaves[currentWaveIndex].RallyPointIndex];
 			myWaves [currentWaveIndex].WaveAdvancement = Mathf.Clamp (myWaves [currentWaveIndex].WaveAdvancement, 0, CurrentWaves.Count - 1);
-			foreach (GameObject obj in CurrentWaves[myWaves[currentWaveIndex].WaveAdvancement].waveType) {
 
-				StartCoroutine (MyCoroutine (delay, obj, spawner, myWaves [currentWaveIndex].RallyPointIndex == -1 ? firstRallyPoint : alternateRallyPoints[myWaves [currentWaveIndex].RallyPointIndex]));
-				delay += .12f;
+			List<UnitManager> myUnits = new List<UnitManager>();
+			foreach (GameObject obj in CurrentWaves[myWaves[currentWaveIndex].WaveAdvancement].waveType) {
+				myUnits.Add(createUnit(obj, spawner));
+				//StartCoroutine (MyCoroutine (delay, obj, spawner, myWaves [currentWaveIndex].RallyPointIndex == -1 ? firstRallyPoint : alternateRallyPoints[myWaves [currentWaveIndex].RallyPointIndex]));
+				//delay += .12f;
 
 			}
 
 
 
 			if (LevelData.getDifficulty () >= 2) {
-				SpawnExtra (CurrentWaves [myWaves [currentWaveIndex].WaveAdvancement], spawner , myWaves [currentWaveIndex].RallyPointIndex == -1 ? firstRallyPoint : alternateRallyPoints[myWaves [currentWaveIndex].RallyPointIndex]);
+				SpawnExtra (CurrentWaves [myWaves [currentWaveIndex].WaveAdvancement], spawner , myWaves [currentWaveIndex].RallyPointIndex == -1 ? firstRallyPoint : alternateRallyPoints[myWaves [currentWaveIndex].RallyPointIndex], myUnits);
 				foreach (GameObject obj in CurrentWaves[myWaves[currentWaveIndex].WaveAdvancement].mediumExtra) {
-					StartCoroutine (MyCoroutine (delay, obj, spawner, myWaves [currentWaveIndex].RallyPointIndex == -1 ? firstRallyPoint : alternateRallyPoints[myWaves [currentWaveIndex].RallyPointIndex]));
-					delay += .12f;
+					myUnits.Add(createUnit(obj, spawner));
+					
+					//StartCoroutine(MyCoroutine (delay, obj, spawner, myWaves [currentWaveIndex].RallyPointIndex == -1 ? firstRallyPoint : alternateRallyPoints[myWaves [currentWaveIndex].RallyPointIndex]));
+					//delay += .12f;
 
 				}
 			}
@@ -207,13 +214,17 @@ public class WaveManager : MonoBehaviour {
 
 				foreach (GameObject obj in CurrentWaves[myWaves[currentWaveIndex].WaveAdvancement].HardExtra) {
 
+					myUnits.Add(createUnit(obj, spawner));
 
-					StartCoroutine (MyCoroutine (delay, obj, spawner,  myWaves [currentWaveIndex].RallyPointIndex == -1 ? firstRallyPoint : alternateRallyPoints[myWaves [currentWaveIndex].RallyPointIndex]));
-					delay += .12f;
-
+					//StartCoroutine(MyCoroutine (delay, obj, spawner,  myWaves [currentWaveIndex].RallyPointIndex == -1 ? firstRallyPoint : alternateRallyPoints[myWaves [currentWaveIndex].RallyPointIndex]));
+					//delay += .12f;
 				}
 			}
 
+			GameObject AIGO = new GameObject("Combat AI");
+			CombatAI AI =  AIGO.AddComponent<CombatAI>();
+			AI.addUnits(myUnits);
+			AI.setAttackMovePoint(targetPoint);
 
 			setNextWave ();
 		
@@ -240,66 +251,56 @@ public class WaveManager : MonoBehaviour {
 
 
 	//autobalancing based on how many units the player has
-	void SpawnExtra(WaveSpawner.attackWave myWave, GameObject Spawner, Vector3 spawnSpot)
-	{float delay = .1f;
-		
-			
+	void SpawnExtra(WaveSpawner.attackWave myWave, GameObject Spawner, Vector3 spawnSpot, List<UnitManager> myList)
+	{			
 		if (raceMan.getArmyCount () * .50 >  myWave.waveType.Count + myWave.HardExtra.Count + myWave.mediumExtra.Count) {
 			foreach (GameObject obj in myWave.HardExtra) {
 
-				StartCoroutine(MyCoroutine(delay, obj,Spawner,spawnSpot));
-				delay += .12f;
+				myList.Add(createUnit(obj, Spawner));
 
 			}
 		}
 	}
 
 
-	IEnumerator MyCoroutine (float amount, GameObject obj, GameObject spawnObject, Vector3 spawnSpot)
+	UnitManager createUnit(GameObject obj, GameObject spawnObject)
 	{
-		yield return new WaitForSeconds(amount);
-
 
 		Vector3 hitzone = spawnObject.transform.position;
+
 		float radius = Random.Range(12, 25);
 		float angle = Random.Range(0, 360);
 
 		hitzone.x += Mathf.Sin(Mathf.Deg2Rad * angle) * radius;
-		hitzone.z +=  Mathf.Cos(Mathf.Deg2Rad * angle)* radius;
-		hitzone.y -=5;
+		hitzone.z += Mathf.Cos(Mathf.Deg2Rad * angle) * radius;
+		hitzone.y -= 5;
 
-		if (obj.GetComponent<airmover> ()) {
-			hitzone.y += obj.GetComponent<airmover> ().flyerHeight + 5;
+		if (obj.GetComponent<airmover>())
+		{
+			hitzone.y += obj.GetComponent<airmover>().flyerHeight + 5;
 		}
 
-		GameObject unit = (GameObject)Instantiate (obj, hitzone, Quaternion.identity);
-		if (unit.GetComponent<airmover>()) {
+		GameObject unit = (GameObject)Instantiate(obj, hitzone, Quaternion.identity);
+
+		FogOfWarUnit fogger = unit.GetComponent<FogOfWarUnit>();
+		if (fogger)
+		{ DestroyImmediate(fogger); }
+
+		if (unit.GetComponent<airmover>())
+		{
 			unit.transform.position = unit.transform.position + Vector3.up * 10;
 		}
 
-		unit.AddComponent<EnemySearchAI> ();
-		//Debug.Log ("Making new guys! " + nextActionTime);
-		yield return new WaitForSeconds(.1f);
+	
+		difficultyM.SetUnitStats(unit);
 
-
-		Vector3 attackzone = spawnSpot;
-
-
-		float radiusA = Random.Range(0, 50);
-		float angleA = Random.Range(0, 360);
-
-		attackzone.x += Mathf.Sin(Mathf.Deg2Rad * angleA) * radiusA;
-		attackzone.z +=  Mathf.Cos(Mathf.Deg2Rad * angleA)* radiusA;
-
-
-		difficultyM.SetUnitStats (unit);
-
-		UnitManager manage = unit.GetComponent<UnitManager> ();
-		manage.startingCommand.Clear ();
-
-		unit.GetComponent<UnitManager> ().GiveOrder (Orders.CreateAttackMove (attackzone));
-
+		UnitManager manage = unit.GetComponent<UnitManager>();
+		manage.PlayerOwner = 2;
+		manage.startingCommand.Clear();
+		return manage;
 	}
+
+	
 
 
 	public void SetRallyIndexes(int n)

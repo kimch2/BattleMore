@@ -27,7 +27,7 @@ public class GraphicsMenu : MonoBehaviour {
 		{
 			InvokeRepeating("updateAverage", 4, 2);
 		}
-		Windowed.isOn = PlayerPrefs.GetInt("Windowed", 0) == 0;
+		Windowed.isOn = PlayerPrefs.GetInt("Windowed", 1) == 0;
 		Screen.fullScreen = !Windowed.isOn;
 		resolution.value = PlayerPrefs.GetInt("Resolution", 10);
 		setResolution(resolution.value);
@@ -108,47 +108,47 @@ public class GraphicsMenu : MonoBehaviour {
 		switch (i)
 		{
 			case 0:
-			Screen.SetResolution(1024, 768, !Windowed);
+			Screen.SetResolution(1024, 768, !Windowed.isOn);
 			break;
 
 			case 1:
-				Screen.SetResolution(1280, 720, !Windowed);
+				Screen.SetResolution(1280, 720, !Windowed.isOn);
 				break;
 
 			case 2:
-				Screen.SetResolution(1280, 768, !Windowed);
+				Screen.SetResolution(1280, 768, !Windowed.isOn);
 				break;
 
 			case 3:
-				Screen.SetResolution(1280, 800, !Windowed);
+				Screen.SetResolution(1280, 800, !Windowed.isOn);
 				break;
 
 			case 4:
-				Screen.SetResolution(1280, 960, !Windowed);
+				Screen.SetResolution(1280, 960, !Windowed.isOn);
 				break;
 
 			case 5:
-				Screen.SetResolution(1280, 1024, !Windowed);
+				Screen.SetResolution(1280, 1024, !Windowed.isOn);
 				break;
 
 			case 6:
-				Screen.SetResolution(1440, 900, !Windowed);
+				Screen.SetResolution(1440, 900, !Windowed.isOn);
 				break;
 
 			case 7:
-				Screen.SetResolution(1600, 1000, !Windowed);
+				Screen.SetResolution(1600, 1000, !Windowed.isOn);
 				break;
 
 			case 8:
-				Screen.SetResolution(1600, 1024, !Windowed);
+				Screen.SetResolution(1600, 1024, !Windowed.isOn);
 				break;
 
 			case 9:
-				Screen.SetResolution(1680, 1050, !Windowed);
+				Screen.SetResolution(1680, 1050, !Windowed.isOn);
 				break;
 
 			case 10:
-				Screen.SetResolution(1920, 1080, !Windowed);
+				Screen.SetResolution(1920, 1080, !Windowed.isOn);
 				break;
 
 		}

@@ -18,6 +18,7 @@ public class AbstractCostEditor : Editor
 		if (GUILayout.Button("Add Resource Cost"))
 		{
 			info.resourceCosts.MyResources.Add(new ResourceTank(typ, 0));
+			EditorUtility.SetDirty(target);
 		}
 
 		GUILayout.EndHorizontal();
@@ -25,11 +26,20 @@ public class AbstractCostEditor : Editor
 		{
 			GUILayout.BeginHorizontal();
 			GUILayout.Label(tank.resType + "");
+			float f = tank.currentAmount;
 			tank.currentAmount = EditorGUILayout.FloatField(tank.currentAmount);
+			if (f != tank.currentAmount)
+			{
+				EditorUtility.SetDirty(target);
+			}
+
 			if (GUILayout.Button("Remove"))
 			{
 				info.resourceCosts.MyResources.Remove(tank);
+				EditorUtility.SetDirty(target);
 			}
+			
+
 			GUILayout.EndHorizontal();
 		}
 

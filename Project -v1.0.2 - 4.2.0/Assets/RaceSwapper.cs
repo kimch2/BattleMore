@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 using System;
 
 public class RaceSwapper : MonoBehaviour {
@@ -67,21 +68,46 @@ public class RaceSwapper : MonoBehaviour {
 
 	public void swap(int playerNumber, RaceInfo.raceType race)
 	{
+		GameManager gamer = FindObjectOfType<GameManager>(); // this gets called during edit time so .main doesn't exist 
+
 		if (playerNumber == 1)
 		{
-			GameManager.main.activePlayer.changeRace(race);
+			gamer.activePlayer.changeRace(race);
+			if (choice != null)
+			{
+				addColoror(gamer.playerList[0], choice.PlayerHueShift, choice.PlayerSaturation);
+			}
 			SwapUnits(POneUnits, race);
 		}
 		else if (playerNumber == 2)
 		{
-			GameManager.main.playerList[1].myRace = race;
+			gamer.playerList[1].myRace = race;
+			if (choice != null)
+			{
+				addColoror(gamer.playerList[1], choice.EnemyHueShift, choice.EnemySaturation);
+			}
 			SwapUnits(PTwoUnits, race);
 		}
 		else if (playerNumber == 3)
 		{
-			GameManager.main.playerList[2].myRace = race;
+			gamer.playerList[2].myRace = race;
+			if (choice != null)
+			{
+				addColoror(gamer.playerList[2], 0, 1);
+			}
 			SwapUnits(PThreeUnits, race);
 		}
+	}
+
+
+	void addColoror(RaceManager racer, float HueShift, float Saturation)
+	{
+		Debug.Log("Making Swapper " + racer.playerNumber);
+		SkinColorManager colorer = GameManager.main.gameObject.AddComponent<SkinColorManager>();
+		racer.colorManager = colorer;
+		colorer.resetHue(HueShift);
+		colorer.resetSaturation(Saturation);
+		colorer.useColoredSkins = true;
 	}
 
 	public void DeleteGameObjects()
@@ -182,14 +208,25 @@ public class RaceSwapper : MonoBehaviour {
 			count++;
 
 			Vector3 newPosition = position;
-			newPosition.x += Mathf.Sin(Mathf.Deg2Rad * 60  *count) * 12 * ((count + 5) / 6);
-			newPosition.z += Mathf.Cos(Mathf.Deg2Rad * 60  * count) * 12 * ((count + 5) / 6);
+			newPosition.x += Mathf.Sin(Mathf.Deg2Rad * 60 * count) * 12 * ((count + 5) / 6);
+			newPosition.z += Mathf.Cos(Mathf.Deg2Rad * 60 * count) * 12 * ((count + 5) / 6);
 
-			GameObject newUnit = (GameObject)Instantiate<GameObject>(obj, newPosition, Quaternion.identity, null);
+			GameObject newUnit = null;
+			if (Application.isPlaying) {
+				newUnit = (GameObject)Instantiate<GameObject>(obj, newPosition, Quaternion.identity, null);
+			//	Debug.Log("Is Playing");
+			}
 
 #if UNITY_EDITOR
-			UnityEditor.Undo.RegisterCreatedObjectUndo(newUnit, "Create " + newUnit.name);
-			UnityEditor.Undo.RecordObject(this, "Create " + newUnit.name);
+			if (!Application.isPlaying)
+			{
+			//	Debug.Log("Is Playing");
+				newUnit = (GameObject)UnityEditor.PrefabUtility.InstantiatePrefab(obj);
+				newUnit.transform.position = newPosition;
+				newUnit.transform.rotation = Quaternion.identity;
+				UnityEditor.Undo.RegisterCreatedObjectUndo(newUnit, "Create " + newUnit.name);
+				UnityEditor.Undo.RecordObject(this, "Create " + newUnit.name);
+			}
 #endif
 			newUnit.transform.LookAt(newUnit.transform.position + direction);
 			if (newUnit.GetComponent<airmover>())
@@ -285,9 +322,12 @@ public class RaceSwapper : MonoBehaviour {
 	{
 		foreach (GameObject unit in obj)
 		{
+			
 			UnitManager manage = unit.GetComponent<UnitManager>();
+			manage.initializeVision();
 			foreach (UnitManager man in unit.GetComponentsInChildren<UnitManager>(true))
 			{
+				man.initializeVision();
 				man.PlayerOwner = num;
 			}
 			manage.PlayerOwner = num;

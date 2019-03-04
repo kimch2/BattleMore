@@ -28,9 +28,16 @@ public class HotkeyMenu : MonoBehaviour {
 
 	private List<GameObject> toggles = new List<GameObject> ();
 
-//	private FButtonManager fManager;
+	//	private FButtonManager fManager;
+	public Material grayScale;
+	public static HotkeyMenu main;
 
-		
+	public GameObject RaceInfoPacket;
+	private void Awake()
+	{
+		main = this;
+		grayScale = Resources.Load<Material>("GrayScaleUI");
+	}
 
 
 	// Use this for initialization
@@ -40,8 +47,20 @@ public class HotkeyMenu : MonoBehaviour {
 		{
 			raceInfo = RaceSwapper.main.getPlayerRaceInfo();
 		}
-		else {
-			raceInfo = Resources.Load<GameObject>("RaceInfoPacket").GetComponent<UnitEquivalance>().raceInfos[0];
+		else
+		{
+			if (RaceInfoPacket == null)
+			{
+				RaceInfoPacket = Resources.Load<GameObject>("RaceInfoPacket");
+			}
+			if (GameManager.main)
+			{
+				raceInfo = RaceInfoPacket.GetComponent<UnitEquivalance>().getRace(GameManager.main.activePlayer.myRace);
+			}
+			else
+			{
+				raceInfo = RaceInfoPacket.GetComponent<UnitEquivalance>().getRace(RaceInfo.raceType.SteelCrest);
+			}
 		}
 
 		selectMan = GameObject.FindObjectOfType<SelectedManager> ();
@@ -149,7 +168,10 @@ public class HotkeyMenu : MonoBehaviour {
 			loaded = RaceSwapper.main.getPlayerRaceInfo().getFHotkeyString();
 		}
 		else {
-			loaded = PlayerPrefs.GetString("FHotkeySteelCrest", "Manticore,Zephyr,Vulcan,Triton,Chimera;Zephyr;Augmentor;SteelCrafter");//+ Mathf.Min(3, VictoryTrigger.instance.levelNumber), "");
+	
+			
+			 loaded = PlayerPrefs.GetString("FHotkey" + raceInfo.race.ToString(), raceInfo.FHotkeyString);//+ Mathf.Min(3, VictoryTrigger.instance.levelNumber), "");
+			
 		}
 			string[] separated = loaded.Split (separator,System.StringSplitOptions.RemoveEmptyEntries);
 

@@ -116,7 +116,7 @@ public class BuildManager : MonoBehaviour {
 			buildOrder [0].startBuilding ();
 			return;}
 		float Sup = buildOrder [0].unitToBuild.GetComponent<UnitStats> ().supply;
-		Debug.Log("No SUpply " + raceMan.hasSupplyAvailable(Sup));
+		//Debug.Log("No SUpply " + raceMan.hasSupplyAvailable(Sup));
 		if (Sup == 0 || raceMan.hasSupplyAvailable (Sup)) {
 			buildOrder [0].startBuilding ();
 			if (mySelect.IsSelected) {

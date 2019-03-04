@@ -33,7 +33,6 @@ public class StandardInteract : MonoBehaviour, Iinteract {
 	public virtual void computeInteractions (Order order)
 	{
 
-		Debug.Log ("Queued " + order.queued + "  " + order.Name);
 		switch (order.OrderType) {
 		case Const.Order_HoldGround:
 	
@@ -97,7 +96,8 @@ public class StandardInteract : MonoBehaviour, Iinteract {
 
 	// Right click on a obj/unit
 	public virtual void Interact(Order order)
-	{Debug.Log ("First Intereact");
+	{
+	
 		UnitManager manage = order.Target.GetComponent<UnitManager> ();
 		if (!manage) {
 			manage = order.Target.GetComponentInParent<UnitManager> ();

@@ -62,10 +62,9 @@ public class Masochism : Ability {
 				if (GetComponent<SlowDebuff> () == null) {
 					this.gameObject.AddComponent<SlowDebuff> ();
 				}
-				GetComponent<SlowDebuff> ().initialize (duration, -speedBoost, 0);
-
-				myWeap.changeAttackSpeed(.5f, 0, false, this);
-				myMover.changeSpeed(speedBoost, 0, false, this);
+				GetComponent<SlowDebuff> ().initialize (duration, -speedBoost, 0,0,0, true);
+				myManager.myStats.statChanger.changeAttackSpeed(.5f,0,this);
+				myManager.myStats.statChanger.changeMoveSpeed(speedBoost, 0, this);
 
 
 				myCost.payCost ();
@@ -80,9 +79,8 @@ public class Masochism : Ability {
 	public void Deactivate()
 	{on = false;
 		timer = 0;
-
-		myWeap.removeAttackSpeedBuff (this);
-		myMover.removeSpeedBuff (this);
+		myManager.myStats.statChanger.removeAttackSpeed(this);
+		myManager.myStats.statChanger.removeMoveSpeed(this);
 
 	}
 

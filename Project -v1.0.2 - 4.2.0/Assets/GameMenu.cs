@@ -50,7 +50,7 @@ public class GameMenu : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
+		Cursor.lockState = CursorLockMode.Confined;
 		uimanage = (UIManager)FindObjectOfType<UIManager>();
 		if (GameSettings.gameSpeed < 0) {
 			GameSettings.gameSpeed = 1;

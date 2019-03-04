@@ -12,11 +12,13 @@ public class RaceInfo : MonoBehaviour {
 	public GameObject UltimatePrefab;
     public enum unitType
 	{
-		ConstructionYard,Armory,AetherCore,Augmentor,Aviatrix,FluxArray,EngineeringBay,Academy,Manticore,SteelCraftor,Zephyr,Vulcan,Triton,Chimera,Minigun,ImperioCannon,RepairBay,MortarPod
+		ConstructionYard,Armory,AetherCore,Augmentor,Aviatrix,FluxArray,EngineeringBay,Academy,Manticore,SteelCraftor,Zephyr,Vulcan,Triton,Chimera,Minigun,ImperioCannon,RepairBay,MortarPod,
+		ScrapCycle, BlastDrone, Crackhammer, Chembuchet, Desolator, Dreadnaught, Chainflail, ScrapYard, ChopShop, Subterforge, WastePlant, Foundry, Thrasher, FlakCannon
 	}
 
 	public raceType race;
-	
+
+	public string FHotkeyString;
 
 	public List<GameObject> unitList = new List<GameObject>();
 	public List<GameObject> buildingList = new List<GameObject>();

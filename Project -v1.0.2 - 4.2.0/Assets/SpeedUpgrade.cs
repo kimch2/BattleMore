@@ -23,14 +23,11 @@ public class SpeedUpgrade  : Upgrade {
 		foreach (unitAmount ua in unitsToUpgrade) {
 			if (manager.UnitName.Contains(ua.UnitName)) {
 				
-				manager.cMover.changeSpeed(ua.percAmount,ua.flatamount,true,null);
 
-			
+				manager.myStats.statChanger.changeMoveSpeed(ua.percAmount, ua.flatamount, null);
 
 			}
 		}
-
-
 	}
 
 	public override void unApplyUpgrade (GameObject obj){

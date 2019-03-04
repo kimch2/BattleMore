@@ -13,6 +13,8 @@ public class AttackMoveState : UnitState {
 
 	private bool enemyDead = false;
 
+
+
 	private float nextActionTime = 0;
 	float chaseRange;
 
@@ -49,11 +51,12 @@ public class AttackMoveState : UnitState {
 		//Debug.Log ("Target is " + obj + " locat " + target);
 		}
 
+
+	public UnitManager getEnemy()
+	{ return enemy; }
+
 	public override void initialize()
-	{if (myManager) {
-		
-			//Debug.Log ("has manager");
-		}
+	{
 		if (myManager.cMover) {
 			//Debug.Log (myManager.cMover);
 			myManager.cMover.resetMoveLocation (target);
@@ -110,7 +113,7 @@ public class AttackMoveState : UnitState {
 		if (enemy != null) { // && myManager.myWeapon.Count > 0) {
 			enemyDead = false;
 			bool attacked = false;
-			bool stillTooClose = false;
+
 			foreach (IWeapon weap in myManager.myWeapon) {
 				if (weap.inRange (enemy)) {
 

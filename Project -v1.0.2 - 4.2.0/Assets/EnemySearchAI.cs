@@ -6,15 +6,19 @@ public class EnemySearchAI : MonoBehaviour {
 
 	UnitManager myManager;
 	RaceManager raceMan;
-
+	public CombatAI combatAI;
 
 	// Use this for initialization
-	void Start () {
-
-		myManager = GetComponent<UnitManager> ();
-		raceMan = GameManager.main.playerList [0];
-		InvokeRepeating ("FindTarget", 40, 5);
+	public void Start()
+	{
+		if (!combatAI)
+		{
+			myManager = GetComponent<UnitManager>();
+			raceMan = GameManager.main.playerList[0];
+			InvokeRepeating("FindTarget", 40, 5);
+		}
 	}
+
 	
 	// Update is called once per frame
 	void FindTarget () {

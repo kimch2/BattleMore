@@ -14,6 +14,12 @@ public class MissionMapManager : MonoBehaviour {
 
 	public List<int> firstLevelPulse;
 	public GameObject MainScreen;
+	public static MissionMapManager main;
+
+	private void Awake()
+	{
+		main = this;
+	}
 
 	[Tooltip("Should have three pic in here, bronze, silver, gold")]
 	public List<Sprite> DifficultyPics;

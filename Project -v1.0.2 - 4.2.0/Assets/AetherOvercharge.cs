@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class AetherOvercharge : Buff, Notify{
 
@@ -65,12 +66,15 @@ public class AetherOvercharge : Buff, Notify{
 		AetherEffect = (GameObject)Instantiate (effect, this.gameObject.transform.position, this.gameObject.transform.rotation);
 		AetherEffect.transform.SetParent (this.gameObject.transform);
 
-		foreach (IWeapon weap in unitman.myWeapon) {
 
-			weap.changeAttackSpeed (attackSpeed, 0, false, this);
+		unitman.myStats.statChanger.changeAttackSpeed(attackSpeed, 0, this);
+		unitman.myStats.statChanger.changeWeaponDamage(attackDamage, 0, this);
 
-			weap.triggers.Add (this);
-			weap.changeAttack (attackDamage, 0, false, this);
+		foreach (IWeapon weap in unitman.myWeapon)
+		{
+			weap.triggers.Add(this);
+
+
 		}
 
 		//Debug.Log ("Final speed is " + unitman.myWeapon[0].attackPeriod);
@@ -104,18 +108,18 @@ public class AetherOvercharge : Buff, Notify{
 		GetComponent<DayexaShield> ().startRecharge (1);
 		removeBuff();
 		Destroy (AetherEffect);
-		foreach (IWeapon weap in myman.myWeapon) {
-			if (weap) {
-				
 
-				weap.removeAttackSpeedBuff (this);
+		myman.myStats.statChanger.removeAttackSpeed( this);
+		myman.myStats.statChanger.removeWeaponDamage( this);
 
-				weap.triggers.Remove (this);
-				weap.removeAttackBuff (this);
-
+		foreach (IWeapon weap in myman.myWeapon)
+		{
+			if (weap)
+			{
+				weap.triggers.Remove(this);
 			}
-		}
 
+		}
 
 	}
 
@@ -134,7 +138,5 @@ public class AetherOvercharge : Buff, Notify{
 				}
 			}
 		}
-
-
 	}
 }

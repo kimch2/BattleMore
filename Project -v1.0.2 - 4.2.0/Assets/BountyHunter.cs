@@ -33,9 +33,9 @@ public class BountyHunter : MonoBehaviour, KillModifier {
 		myStats.Maxhealth += health;
 		myStats.heal (health);
 
-		myStats.changeArmor (armor);
-		myWeap.changeAttack (0,damage,true, this);
-		myWeap.changeAttackSpeed (0, attackPeriodDecrease,this, this);
+		myStats.statChanger.changeArmor (0,armor,this);
+		myStats.statChanger.changeAttackSpeed(0, attackPeriodDecrease,this);
+		myStats.statChanger.changeWeaponDamage(0, damage, this);
 
 		foreach (Ability ab in manage.abilityList) {
 			if (ab != null && ab.myCost != null) {

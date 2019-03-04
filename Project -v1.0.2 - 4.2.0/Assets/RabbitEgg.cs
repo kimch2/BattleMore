@@ -55,8 +55,10 @@ public class RabbitEgg : MonoBehaviour,Modifier  {
 		
 		hatching = true;
 		float totalTime = 0;
+		yield return null;
 
 		while (totalTime < hatchTime) {
+	
 			totalTime += .15f;
 			mySelect.updateCoolDown (totalTime / hatchTime);
 			yield return new WaitForSeconds (.15f);

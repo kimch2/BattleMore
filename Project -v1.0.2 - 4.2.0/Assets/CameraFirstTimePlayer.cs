@@ -13,11 +13,11 @@ public class CameraFirstTimePlayer : MonoBehaviour {
 	// Use this for initialization
 	void Awake () {
 
-		if (LevelData.getHighestLevel () == 1) {
+		if (LevelData.getHighestLevel () == 1 && PlayerPrefs.GetInt("IntroPlayed", 0) == 0) {
 			hadrianPic.SetActive (true);
 			myRobot.StartCoroutine (myRobot.scrollingText(OpeningLine,openingAudio));
 			Invoke ("turnOff", openingAudio.length + 2.5f);
-
+			PlayerPrefs.SetInt("IntroPlayed", 1);
 		} else {
 			GetComponent<Animator> ().enabled = false;
 			GetComponent<EventManager> ().EnterState ("MainArea");

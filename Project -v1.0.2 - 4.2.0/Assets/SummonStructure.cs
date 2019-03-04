@@ -8,7 +8,7 @@ public class SummonStructure :  UnitProduction{
 	protected Selected mySelect;
 
 	Coroutine currentCharger;
-	UnitManager myManager;
+
 	Vector3 targetLocation;
 	float supplyNeeded;
 	public Animator myAnim;
@@ -17,10 +17,10 @@ public class SummonStructure :  UnitProduction{
 	RaceManager racer;
 
 	// Use this for initialization
-	void Start () {
+	new void Start () {
 		myType = type.building;
 		mySelect = GetComponent<Selected> ();
-		myManager = GetComponent<UnitManager> ();
+	
 		supplyNeeded = unitToBuild.GetComponent<UnitStats> ().supply;
 		racer = GameManager.getInstance ().playerList [myManager.PlayerOwner - 1];
 	}

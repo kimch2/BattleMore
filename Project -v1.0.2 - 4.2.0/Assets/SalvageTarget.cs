@@ -8,6 +8,11 @@ public class SalvageTarget : IEffect {
 	public override void apply (GameObject source, GameObject target){
 
 		UnitManager manage = target.GetComponent<UnitManager>();
+		if (manage.myStats.Cost.MyResources.Count == 0)
+		{
+			return;
+		}
+
 		float amountA = manage.myStats.Cost.MyResources[0].currentAmount *.5f;
 		float amountB = amountA;
 		if (manage.myStats.Cost.MyResources.Count > 1)

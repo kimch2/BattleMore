@@ -8,7 +8,7 @@ public class MegaMap : MonoBehaviour{
 
 
 	public Image fogSprite;
-	public Image UnitSprite;
+	public RawImage UnitSprite;
 
 	public Image OtherFogSprite;
 	public Image OtherUnitSprite;
@@ -40,7 +40,7 @@ public class MegaMap : MonoBehaviour{
 	void UpdateSprite () {
 		if (active) {
 			fogSprite.sprite = OtherFogSprite.sprite;
-			UnitSprite.sprite = miniController.UnitSprite;// OtherUnitSprite;
+			//UnitSprite.sprite = miniController.UnitSprite;// OtherUnitSprite;
 		
 		}
 		

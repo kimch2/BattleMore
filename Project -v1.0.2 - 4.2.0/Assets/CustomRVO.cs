@@ -14,10 +14,11 @@ public class CustomRVO : IMover {
 
 	private float nextRepath = 0;
 
-	#if RVOImp
+#if RVOImp
 	private int agentID;
-	#endif
+#endif
 
+	UnitManager manager;
 	private bool pathSet;
 	private Vector3 target;
 	private bool canSearchAgain = true;
@@ -53,7 +54,8 @@ public class CustomRVO : IMover {
 	#endif
 
 	public void Awake () {
-	
+
+		manager = GetComponent<UnitManager>();
 		initialSpeed = getMaxSpeed();
 		seeker = GetComponent<Seeker>();
 	}
@@ -80,7 +82,8 @@ public class CustomRVO : IMover {
 		this.target = target;
 		RecalculatePath();
 		//Debug.Log ("Setting move path " + target);
-		GetComponent<UnitManager> ().animMove ();
+		
+		manager.animMove ();
 	}
 
 

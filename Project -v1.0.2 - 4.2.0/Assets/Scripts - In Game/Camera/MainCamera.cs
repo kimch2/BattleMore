@@ -48,6 +48,7 @@ public class MainCamera : MonoBehaviour, ICamera {
 	void Awake()
 	{
         camera = GetComponent<Camera>();
+		camera.cullingMask &= ~(1 << LayerMask.NameToLayer("MinimapIcon"));
 		main = this;
 
 		SetBoundries ( BottomLeftBorder.x,BottomLeftBorder.z, TopRightBorder.x,TopRightBorder.z);
@@ -81,7 +82,6 @@ public class MainCamera : MonoBehaviour, ICamera {
 	// Update is called once per frame
 	void Update () 
 	{
-		//Debug.Log ("Time scale " + Time.timeScale);
 		if (deltaTimes.Count < 5 && Time.deltaTime != 0.0f) {
 			deltaTimes.Enqueue (Time.deltaTime);
 			avgDeltaTime = Time.deltaTime;
@@ -90,9 +90,7 @@ public class MainCamera : MonoBehaviour, ICamera {
 			sumDeltaTimes -= deltaTimes.Dequeue ();//==========
 			deltaTimes.Enqueue (Time.deltaTime);
 			sumDeltaTimes += Time.deltaTime;
-			//sumDeltaTimes = 0;
-			//foreach (float f in deltaTimes) {
-			//}
+
 			float tempAvg = sumDeltaTimes / 5.0f;//average of last 5
 			if (tempAvg > avgDeltaTime * 1.1f) {
 				avgDeltaTime *= 1.1f;
@@ -103,12 +101,6 @@ public class MainCamera : MonoBehaviour, ICamera {
 		} else {
 			avgDeltaTime = Time.deltaTime;
 		}
-
-		//avgDeltaTime = sumDeltaTimes / 5.0f;
-		//Debug.Log ("maxDelta: " + maxDelta);
-		//Debug.Log ("average: " + avgDeltaTime);
-
-
 
 		if (ScreenSteal) {
 			cutsceneTime += Time.deltaTime;
@@ -170,8 +162,6 @@ public class MainCamera : MonoBehaviour, ICamera {
             }
 
         }
-      //  Debug.Log("END WHILE");
-
     }
 
 	public void goToStart()
@@ -188,12 +178,12 @@ public class MainCamera : MonoBehaviour, ICamera {
 
 
 	public void setCutScene(Vector3 vec, float cameraHeight)
-	{canWeScroll = false;
+	{
+		canWeScroll = false;
 		StealTarget = new Vector3 (vec.x, vec.y + cameraHeight, vec.z - cameraHeight);
 
 		ScreenSteal = true;
 		CutSceneStart = this.gameObject.transform.position;
-
 	}
 
 
@@ -211,9 +201,10 @@ public class MainCamera : MonoBehaviour, ICamera {
 			float totalSpeed = e.duration * ScrollAcceleration *2f + 150;
 			//Debug.Log ("Speed is " + totalSpeed);
 			float targetSpeed = totalSpeed < ScrollSpeed ? totalSpeed : ScrollSpeed;
-
+			
 			transform.Translate (e.x*avgDeltaTime*targetSpeed * 1.5f, 0, e.y*avgDeltaTime*targetSpeed, Space.World);
-
+			
+			
 			//Check if we have scrolled past edge
 			if (transform.position.x < m_Boundries.xMin)
 			{
@@ -227,13 +218,13 @@ public class MainCamera : MonoBehaviour, ICamera {
 
 			if (transform.position.z < m_Boundries.yMin -10)
 			{
-				//transform.position = new Vector3(transform.position.x, transform.position.y, m_Boundries.yMin);
+				transform.position = new Vector3(transform.position.x, transform.position.y, m_Boundries.yMin-10);
 			}
 			else if (transform.position.z > m_Boundries.yMax +60)
 			{
 				transform.position = new Vector3(transform.position.x, transform.position.y, m_Boundries.yMax+60);
 			}
-
+			//Debug.Log("MOving to " + transform.position);
 			CheckEdgeMovement ();
 		}
 	}
@@ -254,9 +245,7 @@ public class MainCamera : MonoBehaviour, ICamera {
 		float left, right, top, bottom;
 
 		RaycastHit h1;
-
-
-
+		
 		Physics.Raycast (r1, out h1, Mathf.Infinity, 1<< 16);		
 		top = h1.point.z;
 
@@ -273,13 +262,11 @@ public class MainCamera : MonoBehaviour, ICamera {
 		}
 		else if (right > m_Boundries.xMax)
 		{
-			//Debug.Log ("hit right side");
 			MainCamera.main.camera.transform.Translate (new Vector3(m_Boundries.xMax-right,0,0), Space.World);
 		}
 
 		if (bottom < m_Boundries.yMin -10)
 		{
-
 			MainCamera.main.camera.transform.Translate (new Vector3(0,0,(m_Boundries.yMin-10)-bottom), Space.World);
 		}
 		else if (top > m_Boundries.yMax +60)
@@ -349,10 +336,8 @@ public class MainCamera : MonoBehaviour, ICamera {
 
 	public void minimapMove(Vector2 input)
 	{
-
 		transform.position = new Vector3((input.x ) , this.gameObject.transform.position.y ,(input.y ));
 		CheckEdgeMovement ();
-
 	}
 
 	public void DisableScrolling()
@@ -372,8 +357,6 @@ public class MainCamera : MonoBehaviour, ICamera {
 		m_Boundries.xMax = maxX;
 		m_Boundries.yMin = minY;
 		m_Boundries.yMax = maxY;
-
-
 	}
 
 	public Rect getBoundries()
@@ -445,8 +428,3 @@ public class MainCamera : MonoBehaviour, ICamera {
 	}
 
 }
-
-
-
-
-

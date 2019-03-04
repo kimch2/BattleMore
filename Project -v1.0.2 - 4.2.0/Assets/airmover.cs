@@ -98,7 +98,8 @@ public class airmover : IMover {
 
 
 			if (Physics.Raycast (transform.position + transform.forward *6 + Vector3.up*30, down, out objecthitB, 1000, 1 << 8)) {
-				dir.y -= Time.deltaTime * (transform.position.y - ((objecthit.point.y + objecthitB.point.y)/2 + flyerHeight)) * (myspeed / 8) * Mathf.Min (3, tempDist);
+
+				dir.y -= Mathf.Clamp (Time.deltaTime * (transform.position.y - ((objecthit.point.y + objecthitB.point.y)/2 + flyerHeight)) * (myspeed / 8) * Mathf.Min (3, tempDist), -.2f,.2f);
 			}
 		
 

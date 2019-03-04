@@ -302,7 +302,7 @@ public class UIManager : MonoBehaviour, IUIManager {
 			RaycastHit hit;		
 
 		if (Physics.Raycast (ray, out hit, Mathf.Infinity, ~(5 << 12) & ~(1 << 20) )) {
-		//	Debug.Log ("hit something " + hit.collider.gameObject + "   "+this.gameObject.name);
+			//Debug.Log ("hit something " + hit.collider.gameObject + "   "+this.gameObject.name);
 			currentObject = hit.collider.gameObject;
 
 			if (!clickOverUI) {
@@ -975,7 +975,7 @@ public class UIManager : MonoBehaviour, IUIManager {
 
 				float sepDistance = Vector3.Distance (newPoint, rightClickEnd) / 15;
 				sepDistance = Math.Max (sepDistance, 1.2f);
-				List<Vector3> points = Formations.getFormation (trueMovers.Count, Mathf.Min (3f, sepDistance));
+				List<Vector3> points = Formations.getFormation (trueMovers.Count, Mathf.Min (5f, sepDistance));
 				for (int t = 0; t < points.Count; t++) {
 					points [t] = Quaternion.Euler (0, angle, 0) * points [t] + newPoint;
 				}

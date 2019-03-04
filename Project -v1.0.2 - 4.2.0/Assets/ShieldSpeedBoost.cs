@@ -118,7 +118,7 @@ public class ShieldSpeedBoost : Buff,Modifier,Notify {
 	void activateSPeedBoost()
 	{
 		//ShieldsDown = true;
-		mymanager.cMover.changeSpeed (speedBoost,0,false,this);
+		mymanager.myStats.statChanger.changeMoveSpeed(speedBoost,0,this);
 		BoostEffect.continueEffect ();
 
 		if (select.IsSelected) {
@@ -129,8 +129,8 @@ public class ShieldSpeedBoost : Buff,Modifier,Notify {
 
 	void DeactivateSpeedBoost()
 	{
-		mymanager.cMover.removeSpeedBuff (this);
-		//ShieldsDown = false;
+		mymanager.myStats.statChanger.removeMoveSpeed(this);
+			//ShieldsDown = false;
 		BoostEffect.stopEffect ();
 		if (select.IsSelected) {
 			RaceManager.upDateSingleCard ();

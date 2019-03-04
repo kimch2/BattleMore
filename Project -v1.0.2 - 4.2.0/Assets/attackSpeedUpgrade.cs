@@ -41,8 +41,7 @@ public class attackSpeedUpgrade  : Upgrade {
 
 
 				for (int i = 0; i < manager.myWeapon.Count; i++) {
-
-
+					
 
 					if (manager.myWeapon [i]) {
 
@@ -51,7 +50,7 @@ public class attackSpeedUpgrade  : Upgrade {
 						}
 						alreadyUpgraded.Add (manager.myWeapon [i]);
 
-						manager.myWeapon [i].changeAttackSpeed (ua.percentageAmount [AllUnits ? 0 : i], ua.flatAmount [AllUnits ? 0 : i], true, null);
+						manager.myWeapon [i].changeBasePeriod (ua.percentageAmount [AllUnits ? 0 : i], ua.flatAmount [AllUnits ? 0 : i]);
 						manager.gameObject.SendMessage ("upgrade", Name, SendMessageOptions.DontRequireReceiver);
 					}
 				

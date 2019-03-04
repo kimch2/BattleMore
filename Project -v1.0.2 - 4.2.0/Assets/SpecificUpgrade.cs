@@ -21,7 +21,7 @@ public abstract class SpecificUpgrade : Upgrade {
 	protected bool confirmUnit(GameObject obj)
 	{
 		UnitManager manage = obj.GetComponent<UnitManager> ();
-
+		//Debug.Log("Confirming " + manage.UnitName);
 		if (unitsToApply.Contains (manage.UnitName)) {
 			return true;
 		}

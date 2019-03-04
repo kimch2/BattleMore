@@ -1,2 +1,0 @@
-C:/Users/Matthew Johnson/Desktop/BattleTrifecta/Project -v1.0.2 - 4.2.0/Assets\PostProcessing-2
-C:\Users\Matthew Johnson\Desktop\BattleTrifecta\Project -v1.0.2 - 4.2.0\Packages\com.unity.postprocessing
