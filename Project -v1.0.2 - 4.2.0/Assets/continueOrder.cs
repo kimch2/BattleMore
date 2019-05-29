@@ -10,5 +10,5 @@ public class continueOrder  {
 	public List<reason> reasonList = new List<reason>();
 	public List<ResourceType> InsufficientResources = new List<ResourceType>();
 
-	public enum reason{cooldown, requirement, energy, health, charge}
+	public enum reason{cooldown, requirement, energy, health, charge, supply}
 }

@@ -14,7 +14,10 @@ public class TargetCircle : MonoBehaviour {
 			Initialize (range, unit);
 		}
 
-
+        foreach (GameObject obj in points)
+        {
+            obj.GetComponent<Light>().cullingMask = 1 << 8;
+        }
 	}
 
 	public void Initialize(float r, GameObject u)

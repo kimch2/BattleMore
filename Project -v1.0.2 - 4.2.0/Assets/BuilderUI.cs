@@ -19,10 +19,10 @@ public class BuilderUI : MonoBehaviour {
 	public Canvas HelpBox;
 
 	public Text moreSupply;
+
+
 	// Use this for initialization
 	void Start () {
-
-
 		InvokeRepeating ("UpdateStuff", .3f, .3f);
 	}
 	
@@ -66,9 +66,12 @@ public class BuilderUI : MonoBehaviour {
 	
 	}
 
-	public void NoSupply ()
+	public void NoSupply()
 	{
-		moreSupply.enabled = true;
+		if (myMan)
+		{
+			moreSupply.enabled = true;
+		}
 	}
 
 	public void hasSupply()
@@ -79,6 +82,7 @@ public class BuilderUI : MonoBehaviour {
 	public void loadUnit(RTSObject obj)
 	{
 		myMan = obj.GetComponent<BuildManager> ();
+		
 
 		bool hasBuild = false;
 		buildingStuff = false;
@@ -127,6 +131,17 @@ public class BuilderUI : MonoBehaviour {
 	{if (myMan && obj == myMan.gameObject) {
 			loadUnit (myMan.gameObject.GetComponent<UnitManager> ());
 		}
+	}
+
+	public void close()
+	{
+		myMan = null;
+		foreach (Button b in que)
+		{
+			b.gameObject.SetActive(false);
+		}
+		NoSupply();
+		perc.text = "";
 	}
 
 

@@ -23,7 +23,7 @@ public class missileSalvo :  Ability, Iinteract, Validator, Notify{
 
 	Coroutine ReFill;
 	// Use this for initialization
-	void Start () {
+	new void Start () {
 		flierheight = GetComponent<airmover> ().flyerHeight;
 
 		myweapon = GetComponent<IWeapon> ();
@@ -31,8 +31,6 @@ public class missileSalvo :  Ability, Iinteract, Validator, Notify{
 		myweapon.validators.Add (this);
 		myType = type.activated;
 		StartCoroutine (delayedUpdate());
-
-
 	}
 
 
@@ -336,7 +334,7 @@ public class missileSalvo :  Ability, Iinteract, Validator, Notify{
 	}
 
 
-	public void initialize(){
+	public new void initialize(){
 		Awake ();
 	}
 
@@ -472,4 +470,8 @@ public class missileSalvo :  Ability, Iinteract, Validator, Notify{
 		}
 	}
 
+    public void initializeInteractor()
+    {
+        
+    }
 }

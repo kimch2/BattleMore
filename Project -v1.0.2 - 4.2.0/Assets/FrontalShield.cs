@@ -24,7 +24,7 @@ public class FrontalShield : Ability,Modifier {
 
 
 	// Use this for initialization
-	void Start () {
+	new void Start () {
 		myStats = GetComponent<UnitStats> ();
 		myStats.addModifier (this);
 
@@ -34,8 +34,6 @@ public class FrontalShield : Ability,Modifier {
 			obj.gameObject.GetComponent<UnitManager> ().myStats.addModifier (this);
 
 		}
-
-
 	}
 
 

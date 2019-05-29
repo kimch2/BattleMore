@@ -63,9 +63,9 @@ public class DragBombDamager : VisionTrigger
 
 			if (Source)
 			{
-				Vector3 force = (Source.transform.position - transform.position);
+				Vector3 force = (Source.transform.position - transform.position) * Time.deltaTime * 120;
 				force.y = -1;
-				RBody.AddForce(force * 20);
+				RBody.AddForce(force);
 			}
 			else
 			{
@@ -143,7 +143,9 @@ public class DragBombDamager : VisionTrigger
 		}
 		if (Vector3.Distance(transform.position, Source.transform.position) > chainLength / 2)
 		{
-			RBody.AddForce((Source.transform.position - transform.position) * 16);
+			Vector3 force = (Source.transform.position - transform.position) * 400 * Time.deltaTime;
+			force.y *= .3f;
+			RBody.AddForce(force);
 		}
 		SetChain();
 	}
@@ -159,42 +161,6 @@ public class DragBombDamager : VisionTrigger
 
 		lineRender.SetPositions(LinePoints);
 	}
-	/*
-	void Update()
-	{
-		LinePoints[0] = transform.position;
-		if (Time.time < detachTime)
-		{
-			if (Source)
-			{
-				LinePoints[1] = Source.transform.position;
-				if (Vector3.Distance(transform.position, Source.transform.position) > chainLength)
-				{
-					transform.position = Source.transform.position - (Source.transform.position - transform.position).normalized * chainLength;
-				}
-				else if (Vector3.Distance(transform.position, Source.transform.position) > chainLength / 2 || Time.time < initialDragTime)
-				{
-					RBody.AddForce((Source.transform.position - transform.position) * 16);
-				}
-			}
-			else
-			{
-				LinePoints[1] = transform.position;
-			}
-		}
-		else
-		{
-			LinePoints[1] = transform.position;
-		}
-
-		if (Time.time > ExplodeTime)
-		{
-			Explode();
-		}
-
-		lineRender.SetPositions(LinePoints);
-	}
-	*/
 	
 
 	void Explode()
@@ -222,7 +188,7 @@ public class DragBombDamager : VisionTrigger
 
 	public override void UnitEnterTrigger(UnitManager manager)
 	{
-		if (manager.myStats.isUnitType(UnitTypes.UnitTypeTag.Structure))
+		if (manager.myStats.isUnitType(UnitTypes.UnitTypeTag.Structure) || !Source)
 		{
 			Explode();
 		}

@@ -27,7 +27,7 @@ public class ErrorPrompt : MonoBehaviour {
 
 			this.gameObject.GetComponent<Text> ().text = err;
 			this.gameObject.GetComponent<Text> ().enabled = true;
-			ExpositionDisplayer.instance.displayText ("", 2, errorSound, .4f, null, 3);
+			ExpositionDisplayer.instance.displayText ("", 10, errorSound, .4f, null, 3);
 			//myAudio.PlayOneShot (errorSound, .4f);
 			StopCoroutine (MyCoroutine ());
 			StartCoroutine (MyCoroutine ());

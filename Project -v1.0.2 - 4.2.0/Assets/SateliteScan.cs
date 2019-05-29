@@ -6,9 +6,10 @@ public class SateliteScan : TargetAbility{
 	public GameObject prefab;
 
 	UltimateApplier myApplier;
-	// Use this for initialization
-	void Start () {
-		myApplier = GetComponent<UltimateApplier> ();
+    // Use this for initialization
+    public override void Start() { 
+
+        myApplier = GetComponent<UltimateApplier> ();
 		myType = type.target;
 	}
 
@@ -54,8 +55,8 @@ public class SateliteScan : TargetAbility{
 		proj = (GameObject)Instantiate (prefab, location, Quaternion.identity);
 		if (proj.GetComponent<UnitManager> ()) {
 			proj.GetComponent<UnitManager> ().setInteractor ();
-			proj.GetComponent<UnitManager> ().interactor.initialize ();
-		}
+			proj.GetComponent<UnitManager> ().interactor.initializeInteractor();
+        }
 		if (myApplier) {
 			myApplier.applyUlt (proj, this);
 		}

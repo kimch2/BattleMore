@@ -7,7 +7,6 @@ public class SoulBond : TargetAbility, Modifier{
 	UnitStats myStats;
 	UnitStats brother;
 
-	UnitManager manager;
 	AugmentAttachPoint AugmentAttach;
 	public GameObject AuraThingy;
 	public GameObject FlyingAura;
@@ -18,20 +17,17 @@ public class SoulBond : TargetAbility, Modifier{
 	public LineRenderer myLine;
 
 
-	void Awake()
-	{audioSrc = GetComponent<AudioSource> ();
+	new void Awake()
+	{
+        base.Awake();
+        audioSrc = GetComponent<AudioSource> ();
 		myType = type.target;
 		AugmentAttach = GetComponent<AugmentAttachPoint> ();
 		myLine.SetPosition (0, transform.position+ Vector3.up *7);
 		myLine.SetPosition (1, transform.position+ Vector3.up *5);
-	}
+        myStats = GetComponent<UnitStats>();
+    }
 
-
-	// Use this for initialization
-	void Start () {
-		myStats = GetComponent<UnitStats> ();
-		manager = GetComponent<UnitManager> ();
-	}
 
 
 	public float modify(float amount, GameObject src, DamageTypes.DamageType theType)

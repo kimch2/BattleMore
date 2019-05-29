@@ -22,10 +22,12 @@ public class ActivatableShield : Ability,Modifier {
 		myType = type.activated;
 	}
 
+
 	bool turnedOn;
-	// Use this for initialization
-	void Start () {
-		myStats = GetComponent<UnitStats> ();
+    // Use this for initialization
+    public override void Start()
+    {
+        myStats = GetComponent<UnitStats> ();
 		myStats.addModifier (this);
 	}
 

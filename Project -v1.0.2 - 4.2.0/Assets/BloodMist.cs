@@ -12,7 +12,7 @@ public class BloodMist : TargetAbility {
 	public bool OnlyOnPathable;
 
 	// Use this for initialization
-	void Start () {
+	new void Start () {
 		myType = type.target;
 		mySelect = GetComponent<Selected> ();
 

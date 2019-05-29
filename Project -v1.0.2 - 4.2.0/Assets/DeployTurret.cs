@@ -5,15 +5,11 @@ using System.Collections.Generic;
 public class DeployTurret  : TargetAbility{
 
 
-	UnitManager manager;
-
 	public GameObject UnitToBuild;
 
 	protected float timer =0;
 	protected bool buildingUnit = false;
 
-
-	protected Selected mySelect;
 	protected HealthDisplay HD;
 	protected List<TurretMount> turretMounts = new List<TurretMount>();
 	public float ReplicationTime;
@@ -35,15 +31,19 @@ public class DeployTurret  : TargetAbility{
 	}
 
 
-	// Use this for initialization
-	void Start () {
-
-		manager = GetComponent<UnitManager> ();
-		mySelect = GetComponent<Selected> ();
+    // Use this for initialization
+    public override void Start()
+    { 
 
 		HD = GetComponentInChildren<HealthDisplay>();
 
 		InvokeRepeating ("AutoCasting", 1, .25f);
+
+		if (chargeCount < maxChargeCount && currentTurret)
+		{
+			currentReplciation = StartCoroutine(replicateTurrets());
+		}
+
 	}
 
 	// Update is called once per frame
@@ -95,15 +95,15 @@ public class DeployTurret  : TargetAbility{
 		}
 		IWeapon weap = currentTurret.GetComponent<IWeapon> ();
 		if(weap)
-		{manager.removeWeapon (weap);}
+		{myManager.removeWeapon (weap);}
 		UnitManager turrManage = currentTurret.GetComponent<UnitManager> ();
 
 
 		//turrManage.enabled = false;
 		if (chargeCount < maxChargeCount) {
 			currentReplciation = StartCoroutine (replicateTurrets ());
-
 		}
+
 		if (turrManage.UnitName.Contains("Mini")) {
 			iconPic = turretIcons [1];
 		}
@@ -208,7 +208,7 @@ public class DeployTurret  : TargetAbility{
 			return;
 		}
 
-		if (manage.PlayerOwner == manager.PlayerOwner) {
+		if (manage.PlayerOwner == myManager.PlayerOwner) {
 
 			turretMounts.RemoveAll (item => item == null);
 			foreach (TurretMount mount in other.gameObject.GetComponentsInChildren<TurretMount> ()) {
@@ -244,7 +244,7 @@ public class DeployTurret  : TargetAbility{
 			return;
 		}
 
-		if (manage.PlayerOwner == manager.PlayerOwner) {
+		if (manage.PlayerOwner == myManager.PlayerOwner) {
 
 			foreach (TurretMount mount in other.gameObject.GetComponentsInChildren<TurretMount> ()) {
 				if (mount) {
@@ -257,13 +257,7 @@ public class DeployTurret  : TargetAbility{
 
 		}
 	}
-
-
-
-
-
-
-
+	
 
 	override
 	public continueOrder canActivate (bool showError)
@@ -301,16 +295,21 @@ public class DeployTurret  : TargetAbility{
 		myCost.startCooldown ();
 		changeCharge (-1);
 
+		if (target)
+		{
+			foreach (TurretMount tm in target.GetComponentsInChildren<TurretMount>())
+			{
+				if (!tm.turret)
+				{
 
-		foreach (TurretMount tm in target.GetComponentsInChildren<TurretMount>()) {
-			if (!tm.turret) {
+					tm.placeTurret(createUnit());
+					if (PlaceEffect)
+					{
+						Instantiate(PlaceEffect, tm.transform.position, Quaternion.identity, tm.transform);
+					}
 
-				tm.placeTurret (createUnit ());
-				if (PlaceEffect) {
-					Instantiate (PlaceEffect, tm.transform.position, Quaternion.identity, tm.transform);
+					return true;
 				}
-
-				return true;
 			}
 		}
 
@@ -410,7 +409,7 @@ public class DeployTurret  : TargetAbility{
 		if (chargeCount > maxChargeCount) {
 			chargeCount = maxChargeCount;
 		}
-		if (mySelect.IsSelected) {
+		if (select.IsSelected) {
 			RaceManager.updateActivity ();
 			RaceManager.upDateUI ();
 		}

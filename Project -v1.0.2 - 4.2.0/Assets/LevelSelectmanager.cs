@@ -7,6 +7,7 @@ public class LevelSelectmanager : MonoBehaviour {
 
 
 	public static LevelChoice BattleModeChoice;
+	public static LevelChoice reservedChoice;// This is used by the replay button so that the same race will be loaded
 	public List<Button> levelButtons;
 	public Image Background;
 
@@ -22,8 +23,21 @@ public class LevelSelectmanager : MonoBehaviour {
 	public SkinColorManager enemySkinScript;
 	public List<SkinPreview> EnemySkinPreviews;
 
-	public Dropdown PlayAsDrop;
-	public Dropdown PlayAgainstDrop;
+	public Text factionDescription;
+
+	GameObject RaceInfoPacket;
+
+    public Slider PlayerColor;
+    public Slider EnemyColor;
+
+    public Image EnemyRandom;
+    public Image PlayerRandom;
+    public Image DescriptionIcon;
+	private void Awake()
+	{
+		RaceInfoPacket = Resources.Load<GameObject>("RaceInfoPacket");
+	}
+
 
 	private void Start()
 	{
@@ -43,6 +57,7 @@ public class LevelSelectmanager : MonoBehaviour {
 			prev.InitializePositions();
 			prev.parentObject.SetActive(prev.myRace == EnemyRace);
 		}
+	
 	}
 
 	public void resetProgress()
@@ -57,58 +72,49 @@ public class LevelSelectmanager : MonoBehaviour {
 	public void LoadLevel(int i)
 	{
 		currentLevel = Levels[i];
-		Debug.Log("Current Level is " + i + "  " + currentLevel.SceneNumber);
+		//Debug.Log("Current Level is " + i + "  " + currentLevel.SceneNumber);
 		Title.text = Levels[i].LevelName;
 		Description.text = Levels[i].Description;
 		StartButton.gameObject.SetActive(true);
 		Background.sprite = currentLevel.myBackground;
 
-		resetRaces();
+		//resetRaces();
 		
+	}
+
+
+	public void setDescription(string d)
+	{
+		UnitEquivalance RacePacket = RaceInfoPacket.GetComponent<UnitEquivalance>();
+
+		switch (d)
+		{
+			case "SteelCrest":
+				factionDescription.text = "The Republic of Steelcrest\n\n"+ RacePacket.getRace(RaceInfo.raceType.SteelCrest).RaceDescription;
+                DescriptionIcon.sprite = RacePacket.getRace(RaceInfo.raceType.SteelCrest).factionIcon;
+                break;
+			case "Coalition":
+				factionDescription.text = "The Coalition\n\n" + RacePacket.getRace(RaceInfo.raceType.Coalition).RaceDescription;
+                DescriptionIcon.sprite = RacePacket.getRace(RaceInfo.raceType.Coalition).factionIcon;
+                break;
+			case "Animals":
+				factionDescription.text = "Animals\n\n" + RacePacket.getRace(RaceInfo.raceType.Animals).RaceDescription;
+                DescriptionIcon.sprite = RacePacket.getRace(RaceInfo.raceType.Animals).factionIcon;
+                break;
+			case "Random":
+                factionDescription.text = "Random \n\n A powerful concoction of probability and sheer luck, this faction could be anything and nothing at the same time.";
+                DescriptionIcon.sprite = EnemyRandom.sprite;
+                break;
+		}
+
+
 	}
 
 	public void resetRaces()
 	{
-		Debug.Log("Clearing ");
-		PlayAsDrop.ClearOptions();
-		foreach (RaceInfo.raceType racer in currentLevel.AllowedToPlayAs)
-		{
-			PlayAsDrop.options.Add(new Dropdown.OptionData(racer.ToString()));
-		}
-		if (currentLevel.AllowedToPlayAs.Count > 1)
-		{
-			PlayAsDrop.options.Add(new Dropdown.OptionData("Random"));
-		}
-		if (!currentLevel.AllowedToPlayAs.Contains(MyRace))
-		{
-			PlayAsDrop.value = 0;
-		}
-		else
-		{
-			PlayAsDrop.value = currentLevel.AllowedToPlayAs.IndexOf(MyRace);
-		}
-		SetRace(PlayAsDrop);
-		PlayAsDrop.RefreshShownValue();
-
-		PlayAgainstDrop.ClearOptions();
-		foreach (RaceInfo.raceType racer in currentLevel.AllowedToPlayAgainst)
-		{
-			PlayAgainstDrop.options.Add(new Dropdown.OptionData(racer.ToString()));
-		}
-		if (currentLevel.AllowedToPlayAgainst.Count > 1)
-		{
-			PlayAgainstDrop.options.Add(new Dropdown.OptionData("Random"));
-		}
-		if (!currentLevel.AllowedToPlayAgainst.Contains(EnemyRace))
-		{
-			PlayAgainstDrop.value = 0;
-		}
-		else
-		{
-			PlayAgainstDrop.value = currentLevel.AllowedToPlayAgainst.IndexOf(EnemyRace);
-		}
-		PlayAgainstDrop.RefreshShownValue();
-		SetEnemy(PlayAgainstDrop);
+        // Later on make it so you can onl play as certain races in some levels
+		SetRace("SteelCrest");
+		SetEnemy("Coalition");
 	}
 
 	public void PlayMission()
@@ -149,9 +155,9 @@ public class LevelSelectmanager : MonoBehaviour {
 		preview.parentObject.transform.Rotate(new Vector3(0, total, 0));
 	}
 
-	public void SetRace(Dropdown d)
+	public void SetRace(string s)
 	{
-		switch (d.options[d.value].text)
+		switch (s)
 		{
 			case "SteelCrest":
 				MyRace = RaceInfo.raceType.SteelCrest;
@@ -166,17 +172,30 @@ public class LevelSelectmanager : MonoBehaviour {
 				MyRace = currentLevel.AllowedToPlayAs[UnityEngine.Random.Range(0, currentLevel.AllowedToPlayAs.Count)];
 				break;
 		}
+		setDescription(s);
+		if (MyRace == EnemyRace && (Mathf.Abs(BattleModeChoice.PlayerHueShift - BattleModeChoice.EnemyHueShift) < 40 || Mathf.Abs(BattleModeChoice.PlayerHueShift - BattleModeChoice.EnemyHueShift)  >  320))
+		{
+            EnemyColor.value = ((BattleModeChoice.PlayerHueShift + 90) % 360) / 360;
+		}
+       PlayerRandom.gameObject.SetActive(s == "Random");
+        
+        
 		foreach (SkinPreview prev in playerSkinPreviews)
 		{
-			prev.parentObject.SetActive(prev.myRace == MyRace);
+			prev.parentObject.SetActive(prev.myRace == MyRace && (s != "Random"));
 		}
 	}
 
 	public void setPlayerColor(Slider slide)
 	{
-		BattleModeChoice.PlayerHueShift = slide.value * 360;
+		setPlayerColor(slide.value);
+	}
+
+	public void setPlayerColor(float value)
+	{
+		BattleModeChoice.PlayerHueShift = value * 360;
 		playerSkinScript.resetHue(BattleModeChoice.PlayerHueShift);
-		foreach (SkinUnlocker skin in playerSkinPreviews.Find(item=>item.myRace == BattleModeChoice.PlayingAs).skins)
+		foreach (SkinUnlocker skin in playerSkinPreviews.Find(item => item.myRace == BattleModeChoice.PlayingAs).skins)
 		{
 			skin.Start();
 		}
@@ -184,8 +203,13 @@ public class LevelSelectmanager : MonoBehaviour {
 
 	public void setEnemyColor(Slider slide)
 	{
-		BattleModeChoice.EnemyHueShift = slide.value * 360;
-		enemySkinScript.resetHue (BattleModeChoice.EnemyHueShift);
+		setEnemyColor(slide.value);
+	}
+
+	public void setEnemyColor(float value)
+	{
+		BattleModeChoice.EnemyHueShift = value * 360;
+		enemySkinScript.resetHue(BattleModeChoice.EnemyHueShift);
 		foreach (SkinUnlocker skin in EnemySkinPreviews.Find(item => item.myRace == BattleModeChoice.PlayingAgainst).skins)
 		{
 			skin.Start();
@@ -202,6 +226,7 @@ public class LevelSelectmanager : MonoBehaviour {
 		}
 	}
 
+
 	public void setPlayerSaturation(Slider slide)
 	{
 		BattleModeChoice.PlayerSaturation = slide.value * 3;
@@ -212,9 +237,15 @@ public class LevelSelectmanager : MonoBehaviour {
 		}
 	}
 
-	public void SetEnemy(Dropdown d)
+	void clearBattleChoice()
 	{
-		switch (d.options[d.value].text)
+		LevelSelectmanager.BattleModeChoice = null;
+		LevelSelectmanager.reservedChoice = null;
+	}
+
+	public void SetEnemy(string d)
+	{
+		switch (d)
 		{
 			case "SteelCrest":
 				EnemyRace = RaceInfo.raceType.SteelCrest;
@@ -229,9 +260,19 @@ public class LevelSelectmanager : MonoBehaviour {
 				EnemyRace = currentLevel.AllowedToPlayAgainst[UnityEngine.Random.Range(0, currentLevel.AllowedToPlayAgainst.Count)];
 				break;
 		}
-		foreach (SkinPreview prev in EnemySkinPreviews)
+		setDescription(d);
+
+		if (MyRace == EnemyRace && (Mathf.Abs(BattleModeChoice.PlayerHueShift - BattleModeChoice.EnemyHueShift) < 40 || Mathf.Abs(BattleModeChoice.PlayerHueShift - BattleModeChoice.EnemyHueShift) > 320))
 		{
-			prev.parentObject.SetActive(prev.myRace == EnemyRace);
+            EnemyColor.value = ((BattleModeChoice.PlayerHueShift + 90) % 360) / 360;
+		}
+        EnemyRandom.gameObject.SetActive(d == "Random");
+
+
+        foreach (SkinPreview prev in EnemySkinPreviews)
+		{
+            prev.parentObject.SetActive(prev.myRace == EnemyRace && (d != "Random"));
+
 		}
 	}
 
@@ -241,6 +282,7 @@ public class LevelSelectmanager : MonoBehaviour {
 		public GameObject parentObject;
 		public RaceInfo.raceType myRace;
 		public List<SkinUnlocker> skins;
+        public Sprite factionIcon;
 
 		public void InitializePositions()
 		{

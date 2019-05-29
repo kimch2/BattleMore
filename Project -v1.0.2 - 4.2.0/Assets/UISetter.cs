@@ -19,6 +19,7 @@ public class UISetter : MonoBehaviour {
 
 	public List<Image> UltImages;
 	public List<Text> UltHelps;
+	public List<UltimatePointer> UltimateUIs;
 
 	public List<ImageGroup> ImageGroups;
 
@@ -30,14 +31,27 @@ public class UISetter : MonoBehaviour {
 	public Sprite defaultMinimapcircle;
 	public Sprite defaultMinimapSquare;
 	void Awake()
-	{ main = this;
-
+	{
+		main = this;
 	}
+
+    public static UISetter getInstance()
+    {
+        if (main == null)
+        {
+            main = GameObject.FindObjectOfType<UISetter>();
+        }
+        return main;
+    }
+
+
+
+	RaceSwapper swapper;
 	// Use this for initialization
 	void Start() {
 
 		int LevelNum = GameObject.FindObjectOfType<VictoryTrigger>().levelNumber;
-		RaceSwapper swapper = GameObject.FindObjectOfType<RaceSwapper>();
+		swapper = GameObject.FindObjectOfType<RaceSwapper>();
 		LevelCompilation comp = ((GameObject)Resources.Load("LevelEditor")).GetComponent<LevelCompilation>();
 
 
@@ -65,54 +79,23 @@ public class UISetter : MonoBehaviour {
 
 		if (swapper == null)
 		{
-			racer.resourceManager.MyResources.Clear();
 
-			UnitEquivalance RacePacket = Resources.Load<GameObject>("RaceInfoPacket").GetComponent<UnitEquivalance>();
-			RaceInfo myType = RacePacket.getRace(racer.myRace);// RaceInfo.raceType.SteelCrest);
+			bool allTech = PlayerPrefs.GetInt("AllTech", 0) == 1;
+			Debug.Log("All Tech " + allTech);
 
-			foreach (ResourceTank tank in myType.ResourceTypes.MyResources)
+			EnableUlt(0, allTech || comp.MyLevels[LevelNum].UIBarsNUlts.UltOneActivated);
+			EnableUlt(1, allTech || comp.MyLevels[LevelNum].UIBarsNUlts.UltTwoActivated);
+			EnableUlt(2, allTech || comp.MyLevels[LevelNum].UIBarsNUlts.UltThreeActivated);
+			EnableUlt(3, allTech || comp.MyLevels[LevelNum].UIBarsNUlts.UltFourActivated);
+		}
+		else
+		{
+			for (int i = 0; i < swapper.Ulty.myUltimates.Count; i++)
 			{
-				racer.AddResourceType(tank.resType, 0);
-			}
-
-			racer.collectResources(comp.MyLevels[LevelNum].StartingResources.MyResources, false);
-			bool allTech = PlayerPrefs.GetInt("AllTech") == 0;
-
-			int NumOfUlts = 4;
-			if (!comp.MyLevels[LevelNum].UIBarsNUlts.UltOneActivated && allTech)
-			{
-				racer.UltOne.enabled = false;
-				racer.ultBOne.gameObject.SetActive(false);
-				NumOfUlts--;
-			}
-
-			if (!comp.MyLevels[LevelNum].UIBarsNUlts.UltTwoActivated && allTech)
-			{
-				racer.UltTwo.enabled = false;
-				racer.ultBTwo.gameObject.SetActive(false);
-				NumOfUlts--;
-			}
-
-			if (!comp.MyLevels[LevelNum].UIBarsNUlts.UltThreeActivated && allTech)
-			{
-				racer.UltThree.enabled = false;
-				racer.ultBThree.gameObject.SetActive(false);
-				NumOfUlts--;
-			}
-
-			if (!comp.MyLevels[LevelNum].UIBarsNUlts.UltFourActivated && allTech)
-			{
-				racer.UltFour.enabled = false;
-				racer.ultBFour.gameObject.SetActive(false);
-				NumOfUlts--;
-			}
-
-			if (NumOfUlts == 0)
-			{
-				racer.ultBFour.gameObject.transform.parent.gameObject.SetActive(false);
+				initializeUlt(swapper.Ulty.myUltimates[i], i);
 			}
 		}
-		
+
 		foreach (Image im in minimapPics) {
 			im.sprite = comp.MyLevels[LevelNum].MinimapPic;
 		}
@@ -122,26 +105,54 @@ public class UISetter : MonoBehaviour {
 		startFade(1, true);
 
 		if (comp.MyLevels[LevelNum].ArsenalDisplayTime >= 0)
-		{ Invoke("turnOnArsenal", comp.MyLevels[LevelNum].ArsenalDisplayTime); }
+		{
+            Invoke("turnOnArsenal", comp.MyLevels[LevelNum].ArsenalDisplayTime);
+        }
 
 
 	
-		if (swapper)
-		{
-			for (int i = 0; i < swapper.Ulty.myUltimates.Count; i++)
-			{
-				UltImages[i].sprite = swapper.Ulty.myUltimates[i].iconPic;
-				UltHelps[i].text = swapper.Ulty.myUltimates[i].Descripton;
-			}
-		}
+		
 	}
 
+	public void initializeUlt(Ability abil, int index)
+	{
+		UltimateUIs[index].myAbility = abil;
+		UltimateUIs[index].ultBOne.image.sprite = abil.iconPic;
+		UltimateUIs[index].HelpText.text = abil.Descripton;
+		UltimateUIs[index].OneCharge.gameObject.SetActive(abil == null ? false : abil.chargeCount != -1);
+	}
 
+	public void EnableUlt(int i, bool onOff)
+	{
+		UltimateUIs[i].ultBOne.gameObject.SetActive(onOff);
+
+		foreach (UltimatePointer pointer in UltimateUIs)
+		{
+			if (pointer.ultBOne.gameObject.activeSelf)
+			{
+				pointer.ultBOne.gameObject.transform.parent.gameObject.SetActive(true);
+				return;
+			}
+		}
+		UltimateUIs[i].ultBOne.gameObject.transform.parent.gameObject.SetActive(false);
+	}
+
+	public void updateUlt(int ultNumber)
+	{
+		UltimateUIs[ultNumber].slideOne.value = UltimateUIs[ultNumber].myAbility.myCost.cooldownProgress();
+		UltimateUIs[ultNumber].slideOne.gameObject.SetActive((UltimateUIs[ultNumber].slideOne.value != 1));
+		UltimateUIs[ultNumber].ultBOne.interactable = (UltimateUIs[ultNumber].slideOne.value == 1);
+
+		if (UltimateUIs[ultNumber].myAbility.chargeCount != -1)
+		{
+			UltimateUIs[ultNumber].OneCharge.text = UltimateUIs[ultNumber].myAbility.chargeCount + "";
+		}
+	}
+	
 	void turnOnArsenal()
 	{
 		if (EnemyArsenalButton) {
 			EnemyArsenalButton.SetActive(true);
-			//EnemyArsenalButton.GetComponent<Tweener> ().playTransition ("Pulse");
 		}
 	}
 
@@ -175,7 +186,8 @@ public class UISetter : MonoBehaviour {
 
 	public void SwapRaceHuds(RaceInfo.raceType newType)
 	{
-		if (!gameObject)
+      //  InstructionHelperManager.getInstance().addBUtton("UI Setting A", 25, null);
+        if (!gameObject)
 		{
 			return;
 		}
@@ -183,17 +195,7 @@ public class UISetter : MonoBehaviour {
 		RaceInfo myType = RacePacket.getRace(RaceInfo.raceType.SteelCrest);
 		RaceInfo newRace = RacePacket.getRace(newType);
 
-		if (RaceSwapper.main)
-		{
-			RaceManager racer = GameObject.FindObjectOfType<GameManager>().playerList[0];
-			racer.resourceManager.MyResources.Clear();
-			Debug.Log("Race is " + newRace);
-			foreach (ResourceTank tank in newRace.ResourceTypes.MyResources)
-			{
-				racer.AddResourceType(tank.resType, 100);
-			}
-		}
-		SwapImage(myType.myUIImages.UltBackGround, newRace.myUIImages.UltBackGround);
+        SwapImage(myType.myUIImages.UltBackGround, newRace.myUIImages.UltBackGround);
 		SwapImage(myType.myUIImages.FButtonbackgrounds, newRace.myUIImages.FButtonbackgrounds);
 		SwapImage(myType.myUIImages.BottomLeftPanel, newRace.myUIImages.BottomLeftPanel);
 		SwapImage(myType.myUIImages.BottomCenterPanel, newRace.myUIImages.BottomCenterPanel);
@@ -212,7 +214,8 @@ public class UISetter : MonoBehaviour {
 		SwapImage(myType.myUIImages.Plus, newRace.myUIImages.Plus);
 		SwapImage(myType.myUIImages.Minus, newRace.myUIImages.Minus);
 		SwapImage(myType.myUIImages.BorderlessButton, newRace.myUIImages.BorderlessButton);
-		foreach (GuiControls guis in gameObject.GetComponentsInChildren<GuiControls>())
+       // InstructionHelperManager.getInstance().addBUtton("UI Setting C", 25, null);
+        foreach (GuiControls guis in gameObject.GetComponentsInChildren<GuiControls>())
 		{
 			guis.MaxSprite = newRace.myUIImages.Plus;
 			guis.minSprite = newRace.myUIImages.Minus;
@@ -220,7 +223,9 @@ public class UISetter : MonoBehaviour {
 
 		SupplyText.text = "Population:   Current / Max\nBuild "+ newRace.myUIImages.supplyUnit + "s to increase the Total,   Max 100";
 		BuildMoreSupplyText.text = "Not Enough Supply.\nBuild More " + newRace.myUIImages.supplyUnit + "s";
-	}
+     //   InstructionHelperManager.getInstance().addBUtton("UI Setting D", 25, null);
+    }
+
 
 	void SwapImage(Sprite sprite, Sprite newSprite)
 	{
@@ -269,4 +274,16 @@ public class ImageGroup
 	public Sprite currentSprite;
 	public List<Image> myImages;
 
+}
+
+
+[System.Serializable]
+public class UltimatePointer
+{
+	public Ability myAbility;
+	public Slider slideOne;
+	public Button ultBOne;
+	public Text OneCharge;
+	public Text HelpText;
+	public Text Cooldown;
 }

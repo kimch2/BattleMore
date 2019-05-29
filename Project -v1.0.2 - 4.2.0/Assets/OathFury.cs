@@ -11,7 +11,7 @@ public class OathFury : Ability, Modifier, Notify {
 	private LifeSteal myStealer;
 
 	// Use this for initialization
-	void Start () {
+	new void Start () {
 		myWeapon = GetComponent<IWeapon> ();
 
 		myStats = GetComponent<UnitStats> ();
@@ -19,11 +19,6 @@ public class OathFury : Ability, Modifier, Notify {
 		myWeapon.triggers.Add (this);
 		myStealer = GetComponent<LifeSteal> ();
 		initialLifeSteal = myStealer.percentage;
-	}
-
-	// Update is called once per frame
-	void Update () {
-
 	}
 
 	public override continueOrder canActivate(bool showError){

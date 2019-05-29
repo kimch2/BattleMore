@@ -13,7 +13,6 @@ public class DeathCubeAchievement : Achievement{
 
 	public override void CheckEnd (){
 
-		float lastDeathTime =0;
 		if (!IsAccomplished () && isCorrectLevel()) {
 
 			foreach (VeteranStats vets in GameManager.main.playerList[1].getUnitStats()) {

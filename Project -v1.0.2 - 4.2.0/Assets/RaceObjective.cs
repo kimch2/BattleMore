@@ -12,10 +12,10 @@ public class RaceObjective : Objective {
 	public LineRenderer lineRend;
 	float startTime;
 	string rawObjectText;
-	void Start()
+	new void Start()
 	{
 		if (!RootObj) {
-			Debug.Log ("I am on " + gameObject);
+
 			startTime = Time.time;
 			VictoryTrigger.instance.addObjective (this);
 			rawObjectText = description;

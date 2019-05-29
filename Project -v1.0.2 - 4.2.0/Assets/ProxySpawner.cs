@@ -78,7 +78,7 @@ public class ProxySpawner :VisionTrigger {
 			if (totalSpawned >= maxSpawnCount) {
 				Destroy (this);}
 
-			yield return new WaitForSeconds (2f);
+			yield return new WaitForSeconds (7f);
 			manager.enemies.RemoveAll (item => item == null);			
 		}
 		currentSpawner = null;

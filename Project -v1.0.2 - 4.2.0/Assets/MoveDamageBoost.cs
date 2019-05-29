@@ -20,7 +20,7 @@ public class MoveDamageBoost :  Ability,Notify {
 
 
 	// Use this for initialization
-	void Start () {
+	new void Start () {
 		if (myWeapon == null) {
 
 			myWeapon = this.gameObject.GetComponent<IWeapon> ();

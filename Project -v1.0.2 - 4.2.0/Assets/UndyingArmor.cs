@@ -4,7 +4,6 @@ using System.Collections;
 public class UndyingArmor :  IEffect, Modifier{
 
 
-	private bool onTarget;
 	public GameObject myEffect;
 	private GameObject effectOnChar;
 	private UnitStats mystat;
@@ -42,12 +41,9 @@ public class UndyingArmor :  IEffect, Modifier{
 	}
 
 	public override void apply (GameObject source, GameObject target)
-	{Debug.Log ("Applying to " + target);
-
+	{
 		target.AddComponent<UndyingArmor> ();
-
 		target.GetComponent<UndyingArmor> ().initialize (source,myEffect);
-
 
 	}
 

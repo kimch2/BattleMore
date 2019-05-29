@@ -18,10 +18,11 @@ public class StandardInteract : MonoBehaviour, Iinteract {
 		myManager.setInteractor (this);
 	
 	}
-		
 
-	public void initialize(){
-		Awake ();
+
+    public void initializeInteractor()
+    {
+        Awake ();
 	}
 	public virtual UnitState computeState(UnitState s)
 	{

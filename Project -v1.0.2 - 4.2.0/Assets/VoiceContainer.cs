@@ -12,3 +12,27 @@ public class VoiceContainer : MonoBehaviour {
 
 
 }
+
+[System.Serializable]
+public class AudioTub
+{
+	public List<AudioClip> myClips;
+
+	public void playRandomClip(AudioSource src)
+	{
+		src.PlayOneShot(myClips[Random.Range(0, myClips.Count)]);
+	}
+
+	public void playRandomClip(AudioSource src, float volume)
+	{
+		src.volume = volume;
+		src.PlayOneShot(myClips[Random.Range(0, myClips.Count)]);
+	}
+
+
+	public AudioClip getRandomClip()
+	{
+
+		return myClips[Random.Range(0, myClips.Count)];
+	}
+}

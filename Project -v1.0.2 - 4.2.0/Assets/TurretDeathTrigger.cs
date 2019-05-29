@@ -3,19 +3,27 @@ using System.Collections;
 
 public class TurretDeathTrigger : MonoBehaviour, Modifier{
 
-	private UnitManager mymanager;
+	public UnitManager mymanager;
+	public UnitManager parentManager;
 	//private IWeapon weapon;
 	// Use this for initialization
 
 	void Awake()
 	{
-		mymanager = GetComponent<UnitManager>();
-		UnitManager parentManager = transform.parent.GetComponentInParent<UnitManager>();
+		if (!mymanager)
+		{
+			mymanager = GetComponent<UnitManager>();
+		}
+		if (!parentManager)
+		{
+			parentManager = transform.parent.GetComponentInParent<UnitManager>();
+		}
 		mymanager.PlayerOwner = parentManager.PlayerOwner;
 	}
 
 	void Start () {
 		mymanager.myStats.addDeathTrigger (this);
+		mymanager.PlayerOwner = parentManager.PlayerOwner;
 	}
 	
 

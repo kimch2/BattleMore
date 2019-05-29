@@ -15,11 +15,12 @@ public class dialogManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		instance = this;
-		RootPrafab = ((GameObject)Resources.Load ("CharacterHolder")).GetComponent<dialogManager>();
+		RootPrafab = ResourceLoader.getMain().getResource("CharacterHolder").GetComponent<dialogManager>();
 	}
 
 	public void playLine (int index)
 	{
+        Debug.Log("Playing " + VoiceLines[index].summary);
 		ExpositionDisplayer.instance.displayText (VoiceLines[index].MainLine.myText, VoiceLines[index].MainLine.duration, VoiceLines[index].MainLine.myClip, .93f, 
 			getCharacter(VoiceLines[index].CharacterImage, VoiceLines[index]),VoiceLines[index].Priority);
 	}

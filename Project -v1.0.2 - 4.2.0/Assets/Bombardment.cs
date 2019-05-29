@@ -12,8 +12,8 @@ public class Bombardment : TargetAbility{
 
 
 	Lean.LeanPool myBulletPool;
-	void Start()
-	{
+    public override void Start()
+    {
 		base.Start();
 		if (Explosion) {
 			myBulletPool = Lean.LeanPool.getSpawnPool (Explosion);
@@ -51,19 +51,20 @@ public class Bombardment : TargetAbility{
 	override
 	public  bool Cast(GameObject target, Vector3 location)
 	{
-
 		myCost.payCost ();
-
-		//	myCost.payCost ();
 
 		for (int i = 0; i < shotCount; i++) {
 		
 			StartCoroutine( Fire ((i * .087f), location, i));
 		}
+		GameObject sight = new GameObject("SightObject");
+		sight.transform.position = location;
+		FogOfWarUnit fogger = sight.AddComponent<FogOfWarUnit>();
+		fogger.radius = 55;
+		fogger.hasMoved = true;
 
 		StartCoroutine( shakeCamera ());
 		return false;
-
 	}
 
 	IEnumerator shakeCamera()

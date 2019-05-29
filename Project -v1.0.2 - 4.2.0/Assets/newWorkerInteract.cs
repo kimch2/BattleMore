@@ -166,7 +166,8 @@ public class newWorkerInteract :  Ability, Iinteract {
 
 
 
-	public void initialize(){
+    public void initializeInteractor()
+    {
 		Start ();
 	}
 

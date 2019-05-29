@@ -22,7 +22,7 @@ public class PrecodDance : Ability, Modifier
 
 
 	// Use this for initialization
-	void Start()
+	new void Start()
 	{
 		base.Start();
 		myStats = GetComponent<UnitManager>().myStats;

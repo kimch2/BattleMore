@@ -77,9 +77,13 @@ public class GameMenu : MonoBehaviour {
 	}
 
 
+    public void MainMenu()
+    {
+        Time.timeScale = 1;
+        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+    }
 
-
-	public void setMenu(Canvas can)
+    public void setMenu(Canvas can)
 	{
 		closeDropdowns();
 		if (currentMenu != null) {
@@ -120,7 +124,10 @@ public class GameMenu : MonoBehaviour {
 	}
 
 	public void quitGame()
-	{SceneManager.LoadScene (1);}
+	{
+        LevelSelectmanager.BattleModeChoice = null;
+        SceneManager.LoadScene (1);
+    }
 
 	public void restartLevel()
 	{	Time.timeScale = 1;

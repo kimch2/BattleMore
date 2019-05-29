@@ -16,7 +16,6 @@ public class explosion : MonoBehaviour {
 	public bool UseYFOrDetection;
 	public List<Notify> triggers = new List<Notify> ();
 
-	private List<UnitManager> hitStuff= new List<UnitManager>();
 	float friendlyAmount;
 	float sizeSquared;
 	public IWeapon.bonusDamage[] extraDamage;
@@ -34,7 +33,7 @@ public class explosion : MonoBehaviour {
 		}
 		//transform.localScale = Vector3.one * maxSize;
 		yield return null;
-		sizeSquared = maxSize/3;
+		sizeSquared = maxSize;
 		FindTargets();
 		yield return null;
 
@@ -100,10 +99,11 @@ public class explosion : MonoBehaviour {
 	void FindTargets()
 	{
 		float TempDamageAmount;
+		/* Commenting this out so explosions can be used to trigger status effects
 		if (damageAmount == 0 && extraDamage.Length == 0)
 		{
 			return;
-		}
+		}*/
 
 		foreach (RaceManager manager in GameManager.main.playerList)
 		{
@@ -123,6 +123,11 @@ public class explosion : MonoBehaviour {
 				TempDamageAmount = damageAmount;
 			}
 
+			if (TempDamageAmount == 0 )
+			{
+				continue;
+			}
+
 			List<UnitManager> toDamage = new List<UnitManager>();
 
 			foreach (KeyValuePair<string, List<UnitManager>> unitList in manager.getUnitList())
@@ -133,6 +138,7 @@ public class explosion : MonoBehaviour {
 					{
 						continue;
 					}
+					
 					if (getDistance(unit) <= Mathf.Pow (sizeSquared + unit.CharController.radius, 2))
 					{
 						toDamage.Add(unit);

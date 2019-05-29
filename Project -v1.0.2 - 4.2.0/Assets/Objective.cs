@@ -26,9 +26,13 @@ public class Objective : SceneEventTrigger {
 	}
 
 	public virtual void BeginObjective()
-	{started = true;
-		VictoryTrigger.instance.addObjective (this);
-		OnStart.Invoke ();
+	{
+		if (!started)
+		{
+			started = true;
+			VictoryTrigger.instance.addObjective(this);
+			OnStart.Invoke();
+		}
 	}
 	
 

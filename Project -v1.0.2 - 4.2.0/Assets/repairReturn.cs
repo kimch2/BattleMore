@@ -11,20 +11,13 @@ public class repairReturn : Ability{
 	private UnitStats TargetHealth;
 	private GameObject target;
 	// Use this for initialization
-	void Start () {
-		//mymanager = GetComponent<UnitManager> ();
 
-
-	}
 
 	public override void setAutoCast(bool offOn){
 	}
 
 
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
 
 
 	public void removeTurret (){

@@ -29,9 +29,10 @@ public class DayexaShield : Ability,Modifier , Notify{
 	}
 
 
-	// Use this for initialization
-	void Start () {
-		myStats.addModifier (this);
+    // Use this for initialization
+    public override void Start()
+    {
+        myStats.addModifier (this);
 
 		//This makes it so all childed turrets get their incoming damage reduced by the tanks shields. 
 		foreach (IWeapon obj in GetComponent<UnitManager>().myWeapon) {

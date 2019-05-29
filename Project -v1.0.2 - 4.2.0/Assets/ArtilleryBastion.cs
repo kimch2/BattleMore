@@ -13,8 +13,9 @@ public class ArtilleryBastion  : TargetAbility {
 	public int maxChargeCount = 500;
 
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    public override void Start()
+    {
 		myType = type.target;
 		WaitForAmmo ();
 	}
@@ -64,8 +65,6 @@ public class ArtilleryBastion  : TargetAbility {
 	public void Cast(){
 		
 		autocast = true;
-
-		this.location = location;
 		TargetReticule.transform.position = location;
 		updateAutocastCommandCard ();
 

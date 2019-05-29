@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-using System;
 
 public class RaceSwapper : MonoBehaviour {
 
 
-    public List<UnitSpot> POneUnits;
-    public List<UnitSpot> PTwoUnits;
-    public List<UnitSpot> PThreeUnits;
+    public List<UnitSpot> POneUnits = new List<UnitSpot>();
+    public List<UnitSpot> PTwoUnits = new List<UnitSpot>();
+    public List<UnitSpot> PThreeUnits = new List<UnitSpot>();
 
 	public UnitEquivalance RacePacket;
 
@@ -18,7 +17,7 @@ public class RaceSwapper : MonoBehaviour {
 	public GameObject NuetralRoot;
 	LevelChoice choice;
 
-	[Tooltip("Set at runtime")]
+	//[Tooltip("Set at runtime")]
 	public UltObject Ulty;
 
 	public static RaceSwapper main;
@@ -26,62 +25,90 @@ public class RaceSwapper : MonoBehaviour {
 	private void Awake()
 	{
 		main = this;
-		choice = LevelSelectmanager.BattleModeChoice;
-		LevelSelectmanager.BattleModeChoice = null;
-		if (RacePacket == null)
+ 
+        choice = LevelSelectmanager.BattleModeChoice;
+		LevelSelectmanager.reservedChoice = choice;
+		//LevelSelectmanager.BattleModeChoice = null;
+
+        if (RacePacket == null)
 		{
-			RacePacket = Resources.Load<GameObject>("RaceInfoPacket").GetComponent<UnitEquivalance>();
+			RacePacket = ResourceLoader.getMain().getResource("RaceInfoPacket").GetComponent<UnitEquivalance>();
 		}
 
-		if (choice != null)
+        if (choice != null)
 		{
 			Ulty = Instantiate<GameObject>(RacePacket.getRace(choice.PlayingAs).UltimatePrefab).GetComponent<UltObject>();
 
-			swap(1, choice.PlayingAs);
-			Debug.Log("Swapping enemy to " + choice.PlayingAgainst);
-			swap(2, choice.PlayingAgainst);
-		}
+            swap(1, choice.PlayingAs);
+
+            swap(2, choice.PlayingAgainst);
+
+        }
 		else
 		{
-			Ulty = Instantiate<GameObject>( RacePacket.getRace(GameObject.FindObjectOfType<GameManager>().playerList[0].myRace).UltimatePrefab).GetComponent<UltObject>();
-		}
-	}
+			Ulty = Instantiate<GameObject>( RacePacket.getRace(GameManager.getInstance().playerList[0].myRace).UltimatePrefab).GetComponent<UltObject>();
+           // InstructionHelperManager.getInstance().addBUtton("Awakening G", 25, null);
+        }
+       // InstructionHelperManager.getInstance().addBUtton("Awakening H", 25, null);
+    }
 
 
 	void Start()
 	{
-		if(choice != null)
-		{
-			GameManager.main.activePlayer.SetUltimates(Ulty);
-		}
+        if (choice != null)
+        {
+
+            GameManager.getInstance().activePlayer.SetUltimates(Ulty);
+        }
 	}
 
-	public RaceInfo getPlayerRaceInfo()
+    public RaceInfo.raceType getEnemyRace()
+    {
+        if (choice == null)
+        {
+            return RaceInfo.raceType.Coalition;
+        }
+        return choice.PlayingAgainst;
+    }
+
+    private void OnDisable()
+    {
+      //  InstructionHelperManager.getInstance().addBUtton("Disabling", 25, null);
+        this.enabled = true;
+    }
+    private void OnDestroy()
+    {
+      //  InstructionHelperManager.getInstance().addBUtton("Destroyed", 25, null);
+    }
+
+    public RaceInfo getPlayerRaceInfo()
 	{
 
 		if (RacePacket == null)
 		{
-			RacePacket = Resources.Load<GameObject>("RaceInfoPacket").GetComponent<UnitEquivalance>();
+			RacePacket = ResourceLoader.getMain().getResource("RaceInfoPacket").GetComponent<UnitEquivalance>();
 		}
 		return RacePacket.getRace(choice == null ? RaceInfo.raceType.SteelCrest : choice.PlayingAs);
 	}
 
 	public void swap(int playerNumber, RaceInfo.raceType race)
 	{
-		GameManager gamer = FindObjectOfType<GameManager>(); // this gets called during edit time so .main doesn't exist 
-
-		if (playerNumber == 1)
+		GameManager gamer =  FindObjectOfType<GameManager>(); // this gets called during edit time so .main doesn't exist 
+      //  InstructionHelperManager.getInstance().addBUtton("In Here A", 25, null);
+        if (playerNumber == 1)
 		{
-			gamer.activePlayer.changeRace(race);
-			if (choice != null)
+			gamer.playerList[0].changeRace(race);
+         //   InstructionHelperManager.getInstance().addBUtton("In Here B", 25, null);
+            if (choice != null)
 			{
 				addColoror(gamer.playerList[0], choice.PlayerHueShift, choice.PlayerSaturation);
 			}
-			SwapUnits(POneUnits, race);
+          //  InstructionHelperManager.getInstance().addBUtton("In Here C", 25, null);
+            SwapUnits(POneUnits, race);
 		}
 		else if (playerNumber == 2)
 		{
-			gamer.playerList[1].myRace = race;
+			gamer.playerList[1].changeRace(race);
 			if (choice != null)
 			{
 				addColoror(gamer.playerList[1], choice.EnemyHueShift, choice.EnemySaturation);
@@ -102,7 +129,7 @@ public class RaceSwapper : MonoBehaviour {
 
 	void addColoror(RaceManager racer, float HueShift, float Saturation)
 	{
-		Debug.Log("Making Swapper " + racer.playerNumber);
+		//Debug.Log("Making Swapper " + racer.playerNumber);
 		SkinColorManager colorer = GameManager.main.gameObject.AddComponent<SkinColorManager>();
 		racer.colorManager = colorer;
 		colorer.resetHue(HueShift);
@@ -142,17 +169,19 @@ public class RaceSwapper : MonoBehaviour {
 		{
 			difficulty = LevelData.getDifficulty();
 		}
-
-		foreach (UnitSpot spot in spots)
+       // InstructionHelperManager.getInstance().addBUtton("In Here D", 25, null);
+        if (RacePacket == null)
+		{
+			RacePacket = ResourceLoader.getMain().getResource("RaceInfoPacket").GetComponent<UnitEquivalance>();
+		}
+       // InstructionHelperManager.getInstance().addBUtton("In Here E", 25, null);
+        foreach (UnitSpot spot in spots)
 		{
 			foreach (GameObject obj in spot.CurrentGuys) { 
-				DestroyImmediate(obj);
+				Destroy(obj);
 			}
 			spot.CurrentGuys.Clear();
-			if (RacePacket == null)
-			{
-				RacePacket = Resources.Load<GameObject>("RaceInfoPacket").GetComponent<UnitEquivalance>();
-			}
+			
 
 			if (Application.isPlaying && spots == PTwoUnits)
 			{
@@ -164,8 +193,8 @@ public class RaceSwapper : MonoBehaviour {
 
 			Composition comp = RacePacket.myComps.Find(item => item.ID == spot.CompositionID);
 			UnitPile pile = comp.RacePiles.Find(item => item.myRace == race);
-
-			List<GameObject> allUnits = SpawnUnit(comp, race, spot.PlayerOwner, spot.position, spot.Rotation);
+            //InstructionHelperManager.getInstance().addBUtton("In Here E", 25, null);
+            List<GameObject> allUnits = SpawnUnit(comp, race, spot.PlayerOwner, spot.position, spot.Rotation);
 			spot.CurrentGuys = allUnits;
 		}
 	}
@@ -203,7 +232,8 @@ public class RaceSwapper : MonoBehaviour {
 		direction.y = 0;
 		List<GameObject> allUnits = new List<GameObject>();
 		int count = -1;
-		foreach (GameObject obj in prefab)
+       // InstructionHelperManager.getInstance().addBUtton("Finally A", 25, null);
+        foreach (GameObject obj in prefab)
 		{
 			count++;
 
@@ -214,11 +244,11 @@ public class RaceSwapper : MonoBehaviour {
 			GameObject newUnit = null;
 			if (Application.isPlaying) {
 				newUnit = (GameObject)Instantiate<GameObject>(obj, newPosition, Quaternion.identity, null);
-			//	Debug.Log("Is Playing");
-			}
-
+              //  InstructionHelperManager.instance.addBUtton("Makig Unit  " + newUnit.name, 25, null);
+            }
+         //   InstructionHelperManager.getInstance().addBUtton("Finally B", 25, null);
 #if UNITY_EDITOR
-			if (!Application.isPlaying)
+            if (!Application.isPlaying)
 			{
 			//	Debug.Log("Is Playing");
 				newUnit = (GameObject)UnityEditor.PrefabUtility.InstantiatePrefab(obj);
@@ -232,10 +262,12 @@ public class RaceSwapper : MonoBehaviour {
 			if (newUnit.GetComponent<airmover>())
 			{
 				newUnit.transform.position += Vector3.up * newUnit.GetComponent<airmover>().flyerHeight;
-			}
-			allUnits.Add(newUnit);
+			} 
+           // InstructionHelperManager.getInstance().addBUtton("Finally C", 25, null);
+            allUnits.Add(newUnit);
+            //InstructionHelperManager.getInstance().addBUtton("Finally D", 25, null);
 
-		}
+        }
 
 		if (playerNumber == 1)
 		{
@@ -269,10 +301,6 @@ public class RaceSwapper : MonoBehaviour {
 		foreach (GameObject unit in obj)
 		{
 			unit.transform.SetParent(PlayerRoot.transform);
-			FogOfWarUnit fogger = unit.GetComponent<FogOfWarUnit>();
-			if (!fogger)
-			{ fogger = unit.AddComponent<FogOfWarUnit>(); }
-			fogger.enabled = true;
 		}
 	}
 
@@ -291,9 +319,6 @@ public class RaceSwapper : MonoBehaviour {
 		foreach (GameObject unit in obj)
 		{
 			unit.transform.SetParent(EnemyRoot.transform);
-			FogOfWarUnit fogger = unit.GetComponent<FogOfWarUnit>();
-			if (fogger)
-			{ DestroyImmediate(fogger); }
 		}
 	}
 
@@ -311,10 +336,6 @@ public class RaceSwapper : MonoBehaviour {
 		foreach (GameObject unit in obj)
 		{
 			unit.transform.SetParent(NuetralRoot.transform);
-			FogOfWarUnit fogger = unit.GetComponent<FogOfWarUnit>();
-			if (!fogger)
-			{ fogger = unit.AddComponent<FogOfWarUnit>(); }
-			fogger.enabled = false;
 		}
 	}
 
@@ -322,15 +343,15 @@ public class RaceSwapper : MonoBehaviour {
 	{
 		foreach (GameObject unit in obj)
 		{
-			
 			UnitManager manage = unit.GetComponent<UnitManager>();
+			manage.PlayerOwner = num;
 			manage.initializeVision();
+
 			foreach (UnitManager man in unit.GetComponentsInChildren<UnitManager>(true))
 			{
-				man.initializeVision();
 				man.PlayerOwner = num;
+				man.initializeVision();
 			}
-			manage.PlayerOwner = num;
 		}
 	}
 

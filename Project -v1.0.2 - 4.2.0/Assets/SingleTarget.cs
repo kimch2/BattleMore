@@ -20,10 +20,12 @@ public class SingleTarget:  TargetAbility {
 	protected Lean.LeanPool myBulletPool;
 
 	Coroutine currentCharger;
-	// Use this for initialization
-	public void Start () {
-		base.Start();
-		myType = type.target;
+
+    // Use this for initialization
+    public override void Start()
+    { 
+
+        myType = type.target;
 		mySelect = GetComponent<Selected> ();
 		manage = this.gameObject.GetComponent<UnitManager> ();
 		if (manage)

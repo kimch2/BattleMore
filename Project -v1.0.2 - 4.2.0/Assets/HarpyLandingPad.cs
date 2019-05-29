@@ -10,17 +10,13 @@ public class HarpyLandingPad : MonoBehaviour {
 	public GameObject leftPadInUse;
 	public GameObject rightPadInUse;
 
-	public Animator myAnim;
-
-
 	public Vector3 requestLanding( GameObject incoming)
 	{
 		if (!rightPadInUse || rightPadInUse == incoming) {
 	
 			rightPadInUse = incoming;
 	
-		
-		//	myAnim.Play ("BallisticsLabRight");
+
 			return (transform.rotation) * RightPadPoint + this.gameObject.transform.position;
 
 		}
@@ -59,8 +55,6 @@ public class HarpyLandingPad : MonoBehaviour {
 		if (rightPadInUse == outgoing) {
 			rightPadInUse =null;
 			yield return new WaitForSeconds (.2f);
-			//myAnim.Play ("BallisticRightIn");
-
 
 
 		}
@@ -68,7 +62,6 @@ public class HarpyLandingPad : MonoBehaviour {
 			leftPadInUse = null;
 
 			yield return new WaitForSeconds (.2f);
-			//myAnim.Play ("BallisticLeftIn");
 
 		}
 

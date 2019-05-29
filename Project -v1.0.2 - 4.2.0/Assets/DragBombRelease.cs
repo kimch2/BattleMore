@@ -44,6 +44,7 @@ public class DragBombRelease : Ability
 		return order;
 	}
 
+
 	override
 	public void Activate()
 	{
@@ -91,6 +92,7 @@ public class DragBombRelease : Ability
 
 	void DelaySecondClick()
 	{
+		firstClickHappened = false;
 		myCost.startCooldown();
 	}
 

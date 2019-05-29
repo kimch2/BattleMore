@@ -18,9 +18,10 @@ public class DeathCubeDeactivator : Ability,EnemySighted{
 	UnitManager enemyOne = null;
 	UnitManager enemyTwo = null;
 
-	// Use this for initialization
-	void Start () {
-		myType = type.passive;
+    // Use this for initialization
+    public override void Start()
+    {
+        myType = type.passive;
 		manager = GetComponent<UnitManager> ();
 		manager.AddEnemySighted (this);
 

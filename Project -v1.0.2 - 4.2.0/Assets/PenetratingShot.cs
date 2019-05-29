@@ -13,9 +13,7 @@ public class PenetratingShot : Projectile {
 
 	public new void Start () {
 		AudSrc= GetComponent<AudioSource> ();
-		//randomOffset = UnityEngine.Random.insideUnitSphere * target.GetComponent<CharacterController> ().radius * .9f;
 		control = GetComponent<CharacterController> ();
-		//transform.LookAt (target.transform.position+ randomOffset);
 
 		if (!myBulletPool) {
 			myBulletPool = Lean.LeanPool.getSpawnPool (this.gameObject);
@@ -94,7 +92,7 @@ public class PenetratingShot : Projectile {
 	
 	}
 		
-	public new void setTarget(UnitManager so)
+	public void setTarget(UnitManager so)
 	{
 
 		target = so;

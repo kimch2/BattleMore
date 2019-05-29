@@ -9,15 +9,13 @@ public class LaserNode : Ability {
 
 	private float nextActionTime;
 
-	private UnitManager myManager;
-	private Selected select;
 
 	private List<GameObject> toDestroy = new List<GameObject>();
-	// Use this for initialization
-	void Start () {
-		nextActionTime = Time.time + .6f;
-		myManager = GetComponent<UnitManager> ();
-		select = GetComponent<Selected> ();
+    // Use this for initialization
+    public override void Start() {
+
+        nextActionTime = Time.time + .6f;
+
 	}
 	
 	// Update is called once per frame

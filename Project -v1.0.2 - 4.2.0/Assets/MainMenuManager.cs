@@ -13,6 +13,8 @@ public class MainMenuManager : MonoBehaviour {
 	public Canvas loadCanvas;
 	public Canvas OptionsCan;
 	public Canvas LoadingScreen;
+	public Canvas SwapOutScreen;
+	public GameObject blackScreen;
 
 	public AudioSource audioSource;
 	private Canvas currentScreen;
@@ -23,7 +25,12 @@ public class MainMenuManager : MonoBehaviour {
 	void Start () {
 		main = this;
 		currentScreen = MainMenu;
-	
+		if (LevelSelectmanager.reservedChoice != null && SwapOutScreen)
+		{
+			SwapOutScreen.enabled = true;
+			MainMenu.enabled = false;
+			blackScreen.SetActive(false);
+		}
 	}
 
 	public void loadScreen(Canvas can)
@@ -94,6 +101,10 @@ public class MainMenuManager : MonoBehaviour {
 
 		if (VictoryTrigger.instance)
 		{
+			if (RaceSwapper.main)
+			{
+				LevelSelectmanager.BattleModeChoice = LevelSelectmanager.reservedChoice;
+			}
 			VictoryTrigger.instance.replay();
 		}
 
@@ -127,6 +138,8 @@ public class MainMenuManager : MonoBehaviour {
 		SceneManager.LoadScene(i);
 	}
 
+
+
 	public void toCredits()
 	{loadScreen (Credits);}
 
@@ -145,8 +158,6 @@ public class MainMenuManager : MonoBehaviour {
 	{PlayerPrefs.DeleteAll ();
 
 		LevelData.reset ();
-
-
 	}
 
 

@@ -6,8 +6,10 @@ public class DaexaSupplyDrop: TargetAbility{
 	private RaceManager racer;
 	public GameObject prefab;
 	UltimateApplier myApplier;
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    public override void Start()
+    {
+ 
 		racer = GameObject.FindObjectOfType<GameManager> ().activePlayer;
 		myApplier = GetComponent<UltimateApplier> ();
 	}
@@ -61,7 +63,7 @@ public class DaexaSupplyDrop: TargetAbility{
 
 		UnitManager tempMan = proj.GetComponent<UnitManager> ();
 		tempMan.setInteractor ();
-		tempMan.interactor.initialize ();
+		tempMan.interactor.initializeInteractor();
 		racer.applyUpgrade (tempMan);
 
 		if (proj.GetComponent<FogOfWarUnit> ()) {

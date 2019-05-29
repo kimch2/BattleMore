@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public class Augmentor : TargetAbility, Iinteract, Modifier {
 
 
-	UnitManager manager;
+
 	GameObject attached;
 	DetachAugment detacher;
 	IMover myMover;
@@ -13,17 +13,19 @@ public class Augmentor : TargetAbility, Iinteract, Modifier {
 	public float SpeedPlus = 1.35f;
 
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    public override void Start()
+    {
 		
 		myType = type.target;
-		manager.myWeapon.Clear ();
+		myManager.myWeapon.Clear ();
 		detacher = GetComponent<DetachAugment> ();
 		if (target) {
 			StartCoroutine (delayCast());
 			//manager.changeState (new CastAbilityState (this),false,false);
 		}
-	}
+       myManager.setInteractor(this);
+    }
 	
 
 	IEnumerator delayCast()
@@ -39,7 +41,7 @@ public class Augmentor : TargetAbility, Iinteract, Modifier {
 
 		Unattach ();
 		if (!target) {
-			manager.changeState (new DefaultState ());
+            myManager.changeState (new DefaultState ());
 			return;
 		}
 
@@ -59,10 +61,10 @@ public class Augmentor : TargetAbility, Iinteract, Modifier {
 		myRotate.enabled = true;
 
 
-		//ComboTag.CastTag(target, ComboTag.AbilType.Hot, new List<ComboTag.AbilType>(){ComboTag.AbilType.Hot, ComboTag.AbilType.Hot}); //REMOVE ME
-		manager.myStats.myHeight = UnitTypes.HeightType.Ground;
-		manager.myStats.otherTags.Add(UnitTypes.UnitTypeTag.Structure);
-		manager.myStats.SetTags ();
+        //ComboTag.CastTag(target, ComboTag.AbilType.Hot, new List<ComboTag.AbilType>(){ComboTag.AbilType.Hot, ComboTag.AbilType.Hot}); //REMOVE ME
+        myManager.myStats.myHeight = UnitTypes.HeightType.Ground;
+        myManager.myStats.otherTags.Add(UnitTypes.UnitTypeTag.Structure);
+        myManager.myStats.SetTags ();
 		detacher.allowDetach (true);
 		attached = target;
 		target.GetComponent<UnitManager> ().myStats.addDeathTrigger (this);
@@ -81,7 +83,6 @@ public class Augmentor : TargetAbility, Iinteract, Modifier {
 			myRotate.speed = -250;
 			stopBuilding ();
 		}
-	
 
 
 		this.gameObject.transform.position = target.transform.position+  target.transform.rotation * AAP.attachPoint;
@@ -92,15 +93,15 @@ public class Augmentor : TargetAbility, Iinteract, Modifier {
 		if (armer) {
 			armer.stopRecharging ();
 			foreach (IWeapon w in GetComponents<IWeapon>()) {
-				if (!manager.myWeapon.Contains (w)) {
+				if (!myManager.myWeapon.Contains (w)) {
 
-					manager.myWeapon.Add (w);
-					manager.getUnitStats ().attackPriority = 3;
+                    myManager.myWeapon.Add (w);
+                    myManager.getUnitStats ().attackPriority = 3;
 				}
 
 			}
 		} else {
-			manager.getUnitStats ().attackPriority = 3;
+            myManager.getUnitStats ().attackPriority = 3;
 		}
 		UnitManager unitMan = target.GetComponent<UnitManager> ();
 
@@ -144,7 +145,7 @@ public class Augmentor : TargetAbility, Iinteract, Modifier {
 
 		}
 
-		manager.changeState( new HoldState (manager));
+        myManager.changeState( new HoldState (myManager));
 		if (target.GetComponent<Selected> ().IsSelected) {
 			RaceManager.updateActivity ();
 		}
@@ -156,7 +157,7 @@ public class Augmentor : TargetAbility, Iinteract, Modifier {
 	public float modify(float d, GameObject src, DamageTypes.DamageType theType )
 	{
 		Unattach ();
-		manager.myStats.kill(null);
+        myManager.myStats.kill(null);
 		return d;
 	}
 
@@ -214,19 +215,19 @@ public class Augmentor : TargetAbility, Iinteract, Modifier {
 	public void Unattach()
 	{if (!attached) {
 			return;}
-		manager.getUnitStats ().attackPriority = 2;
+        myManager.getUnitStats ().attackPriority = 2;
 		myRotate.enabled = false;
 		Swirly.GoToPose ("Off");
-		manager.myStats.myHeight = UnitTypes.HeightType.Air;
+        myManager.myStats.myHeight = UnitTypes.HeightType.Air;
 		attached.GetComponent<UnitManager> ().myStats.removeDeathTrigger (this);
 		ShieldBattery armer = attached.GetComponent<ShieldBattery> ();
 		UnitManager man = attached.GetComponent<UnitManager> ();
-		manager.myStats.otherTags.Remove(UnitTypes.UnitTypeTag.Structure);
-		manager.myStats.SetTags ();
+        myManager.myStats.otherTags.Remove(UnitTypes.UnitTypeTag.Structure);
+        myManager.myStats.SetTags ();
 
 		if (armer) {
-			
-			manager.myWeapon.Clear ();
+
+            myManager.myWeapon.Clear ();
 		}
 
 		OreDispenser OD = attached.GetComponent<OreDispenser> ();
@@ -269,7 +270,7 @@ public class Augmentor : TargetAbility, Iinteract, Modifier {
 		if (Physics.Raycast (this.gameObject.transform.position, down, out objecthit, 1000, (~8))) {
 
 			down =objecthit.point;
-			manager.changeState (new MoveState (down, manager,true));
+            myManager.changeState (new MoveState (down, myManager, true));
 		
 		}
 	}
@@ -303,7 +304,7 @@ public class Augmentor : TargetAbility, Iinteract, Modifier {
 		Vector3 attachSpot = target.transform.position;
 
 		this.gameObject.transform.position =  target.transform.rotation * attachSpot;
-		manager.myStats.otherTags.Add(UnitTypes.UnitTypeTag.Structure);
+        myManager.myStats.otherTags.Add(UnitTypes.UnitTypeTag.Structure);
 		///myMover = manager.cMover;
 		/// 
 		//ComboTag.CastTag(target, ComboTag.AbilType.Cold, new List<ComboTag.AbilType>(){ComboTag.AbilType.Cold, ComboTag.AbilType.Cold}); //REMOVE ME
@@ -335,7 +336,7 @@ public class Augmentor : TargetAbility, Iinteract, Modifier {
 		if (m.PlayerOwner == 3) {
 			return true;}
 
-		if (m.PlayerOwner != manager.PlayerOwner) {
+		if (m.PlayerOwner != myManager.PlayerOwner) {
 			return false;}
 
 
@@ -363,18 +364,8 @@ public class Augmentor : TargetAbility, Iinteract, Modifier {
 
 
 
-
-	// Use this for initialization
-	void Awake () {
-		manager = GetComponent<UnitManager> ();
-		manager.setInteractor (this);
-
-	}
-
-
-
-	public void initialize(){
-		Awake ();
+	public void initializeInteractor(){
+		Start ();
 	}
 
 
@@ -438,7 +429,7 @@ public class Augmentor : TargetAbility, Iinteract, Modifier {
 		if (attached) {
 			if (s is DefaultState || s is AttackMoveState) {
 				//Debug.Log ("Setting to hold state");
-				return new HoldState (manager);
+				return new HoldState (myManager);
 			}
 		}
 		return s;
@@ -448,7 +439,7 @@ public class Augmentor : TargetAbility, Iinteract, Modifier {
 	public void  AttackMove(Order order)
 	{
 		if (!attached) {
-			manager.changeState (new MoveState (order.OrderLocation, manager,true),false,order.queued);
+            myManager.changeState (new MoveState (order.OrderLocation, myManager, true),false,order.queued);
 
 		}
 	}
@@ -459,14 +450,14 @@ public class Augmentor : TargetAbility, Iinteract, Modifier {
 
 		if (!attached) {
 			if (!attached && isValidTarget (order.Target, Vector3.zero)) {
-				manager.UseTargetAbility (order.Target, Vector3.zero, 0, false);
+                myManager.UseTargetAbility (order.Target, Vector3.zero, 0, false);
 
 				return;
 			}
 		} else {
 			if (isValidTarget (order.Target, Vector3.zero)) {
-	
-				manager.UseTargetAbility (order.Target, Vector3.zero, 0, false);
+
+                myManager.UseTargetAbility (order.Target, Vector3.zero, 0, false);
 			}
 		}
 
@@ -479,14 +470,14 @@ public class Augmentor : TargetAbility, Iinteract, Modifier {
 
 			if (!attached && manage.PlayerOwner != this.gameObject.GetComponent<UnitManager>().PlayerOwner ) {
 
-				manager.changeState (new FollowState (order.Target.gameObject, manager),false,order.queued);
+                myManager.changeState (new FollowState (order.Target.gameObject, myManager),false,order.queued);
 			} else if(!attached && isValidTarget(order.Target, Vector3.zero)){
-				manager.UseTargetAbility (order.Target, Vector3.zero, 0, false);
+                myManager.UseTargetAbility (order.Target, Vector3.zero, 0, false);
 
 				}
 			} else {
 
-			manager.changeState (new FollowState (order.Target.gameObject,  manager),false,order.queued);
+            myManager.changeState (new FollowState (order.Target.gameObject, myManager),false,order.queued);
 			}
 
 	}
@@ -494,8 +485,8 @@ public class Augmentor : TargetAbility, Iinteract, Modifier {
 	public void Move(Order order)
 	{
 		if (!attached) {
-			//Debug.Log ("Im moving");
-			manager.changeState (new MoveState (order.OrderLocation, manager),false,order.queued);
+            //Debug.Log ("Im moving");
+            myManager.changeState (new MoveState (order.OrderLocation, myManager),false,order.queued);
 
 		}
 
@@ -505,7 +496,8 @@ public class Augmentor : TargetAbility, Iinteract, Modifier {
 
 	//Stop, caps lock
 	public void Stop(Order order)
-	{manager.changeState (new DefaultState ());
+	{
+        myManager.changeState (new DefaultState ());
 		if (target) {
 			target = null;}
 	}
@@ -515,7 +507,7 @@ public class Augmentor : TargetAbility, Iinteract, Modifier {
 	{if (target) {
 			target = null;}
 		if(!attached)
-			manager.changeState (new AttackMoveState (null, order.OrderLocation, AttackMoveState.MoveType.patrol, manager, manager.gameObject.transform.position),false,order.queued);
+            myManager.changeState (new AttackMoveState (null, order.OrderLocation, AttackMoveState.MoveType.patrol, myManager, myManager.gameObject.transform.position),false,order.queued);
 	}
 
 	//Shift-Caps
@@ -539,10 +531,10 @@ public class Augmentor : TargetAbility, Iinteract, Modifier {
 
 		if (!attached) {
 			if (isValidTarget (order.Target, Vector3.zero)) {
-				manager.UseTargetAbility (order.Target, Vector3.zero, 0, order.queued);
+                myManager.UseTargetAbility (order.Target, Vector3.zero, 0, order.queued);
 
 			} else {
-				manager.changeState (new MoveState (order.OrderLocation, manager, true), false, order.queued);
+                myManager.changeState (new MoveState (order.OrderLocation, myManager, true), false, order.queued);
 	
 				if (target) {
 					target = null;
@@ -561,7 +553,7 @@ public class Augmentor : TargetAbility, Iinteract, Modifier {
 
 				if (isValidTarget (order.Target, Vector3.zero)) {
 
-					manager.UseTargetAbility (order.Target, Vector3.zero, 0, order.queued);
+                myManager.UseTargetAbility (order.Target, Vector3.zero, 0, order.queued);
 					//Debug.Log ("Ordered to follow");
 				}
 			}

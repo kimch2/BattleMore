@@ -15,9 +15,10 @@ public class AetherRelay : Ability, AllySighted,EnemySighted{
 
 	public float damageRate;
 	bool turnedOn;
-	// Use this for initialization
-	void Start () {
-		myType = type.activated;
+    // Use this for initialization
+    public override void Start()
+    { 
+        myType = type.activated;
 		myManager.AddAllySighted (this);
 		myManager.AddEnemySighted (this);
 

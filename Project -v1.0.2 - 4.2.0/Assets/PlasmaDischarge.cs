@@ -22,7 +22,7 @@ public class PlasmaDischarge : Ability {
 
 
 
-	void Start () {
+	new void Start () {
 	
 		audioSrc = GetComponent<AudioSource>();
 		myType = type.activated;

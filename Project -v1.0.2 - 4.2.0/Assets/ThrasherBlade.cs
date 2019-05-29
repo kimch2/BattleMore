@@ -83,11 +83,11 @@ public class ThrasherBlade : Projectile {
 
 
 
-	void OnControllerColliderHit(ControllerColliderHit other)
+	new void OnControllerColliderHit(ControllerColliderHit other)
 	{
 		
 	}
-	new void OnTriggerEnter(Collider other)
+	void OnTriggerEnter(Collider other)
 	{
 		if (other.gameObject == Source && !goingOut) {
 			Destroy (this.gameObject);

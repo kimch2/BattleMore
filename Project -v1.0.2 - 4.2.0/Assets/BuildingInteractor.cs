@@ -12,7 +12,7 @@ public class BuildingInteractor : MonoBehaviour, Iinteract {
 	public GameObject RallyPointObj;
 	public LineRenderer myLine;
 	private float underConstruction;
-	private bool doneConstruction;
+	private bool doneConstruction = true;
 
 	private GameObject sourceObj;
 	public Animator myAnim;
@@ -66,7 +66,8 @@ public class BuildingInteractor : MonoBehaviour, Iinteract {
 	}
 
 
-	public void initialize(){
+    public void initializeInteractor()
+    {
 		Start ();
 	}
 
@@ -92,7 +93,7 @@ public class BuildingInteractor : MonoBehaviour, Iinteract {
 
 	public void startSelfConstruction(GameObject obj, float constructionTime)
 	{
-		GameManager.main.playerList [myManager.PlayerOwner - 1].addUnit (myManager);
+		//GameManager.main.playerList [myManager.PlayerOwner - 1].addUnit (myManager);
 
 		sourceObj = obj;
 		doneConstruction = false;
@@ -125,6 +126,7 @@ public class BuildingInteractor : MonoBehaviour, Iinteract {
 		if (myManager.myStats.supply < 0) {
 			GameManager.main.playerList [myManager.PlayerOwner - 1].UnitCreated (myManager.myStats.supply);
 		}
+		//GameManager.main.playerList[myManager.PlayerOwner - 1].addUnit(myManager);
 		//myManager.setStun (false, this, false);
 		if (GetComponent<Selected> ().IsSelected) {
 			SelectedManager.main.updateUI ();
@@ -183,7 +185,8 @@ public class BuildingInteractor : MonoBehaviour, Iinteract {
 					myManager.abilityList [i].active = true;
 				}
 				if (template.abilityList [i].enabled && myManager.abilityList [i]) {
-					
+
+		
 					myManager.abilityList [i].enabled = true;
 				}
 			}

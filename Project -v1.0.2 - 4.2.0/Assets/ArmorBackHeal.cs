@@ -6,7 +6,6 @@ public class ArmorBackHeal : Ability,Modifier {
 
 	public float ArmorAmount;
 	public UnitStats myStats;
-	UnitManager manager;
 	public Animator myAnimator;
 	bool IsArmored;
 	float lastArmorTime;
@@ -20,11 +19,11 @@ public class ArmorBackHeal : Ability,Modifier {
 	}
 
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    public override void Start()
+    {
 		myStats = GetComponent<UnitStats> ();
 		myStats.addModifier (this);
-		manager = GetComponent<UnitManager> ();
 
 	}
 
@@ -39,7 +38,7 @@ public class ArmorBackHeal : Ability,Modifier {
 
 				IsArmored = true;
 				myStats.armor += ArmorAmount;
-				manager.setStun (true, this, false);
+				myManager.setStun (true, this, false);
 				myAnimator.Play ("ArmorUp");
 				//myAnimator.SetInteger ("State", 0);
 				lastArmorTime = Time.time;
@@ -61,7 +60,7 @@ public class ArmorBackHeal : Ability,Modifier {
 			totalTime -= .333f;
 		}
 
-		manager.setStun (false, this, false);
+		myManager.setStun (false, this, false);
 		myAnimator.CrossFade ("BeetleIdle", 1);//.SetInteger ("State", 1);
 		myStats.armor -= ArmorAmount;
 		IsArmored = false;

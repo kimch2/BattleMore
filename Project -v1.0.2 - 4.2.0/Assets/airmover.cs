@@ -35,7 +35,7 @@ public class airmover : IMover {
 			RaycastHit objecthit;
 			Vector3 down = this.gameObject.transform.TransformDirection (Vector3.down);
 
-			if (Physics.Raycast (this.gameObject.transform.position, down, out objecthit, 1000, 1 << 8)) {
+			if (Physics.Raycast (this.gameObject.transform.position, down, out objecthit, 1000, 1 << 8 | 1 << 16)) {
 				FlyingDecal.transform.position = objecthit.point + Vector3.up;
 
 			}
@@ -94,15 +94,13 @@ public class airmover : IMover {
 		RaycastHit objecthitB;
 		Vector3 down = this.gameObject.transform.TransformDirection (Vector3.down);
 	
-		if (Physics.Raycast (this.gameObject.transform.position, down, out objecthit, 1000, 1 << 8)) {
+		if (Physics.Raycast (this.gameObject.transform.position, down, out objecthit, 1000, 1 << 8 | 1 << 16 |  1 << 11)) {
 
 
-			if (Physics.Raycast (transform.position + transform.forward *6 + Vector3.up*30, down, out objecthitB, 1000, 1 << 8)) {
+			if (Physics.Raycast (transform.position + transform.forward *6 + Vector3.up*30, down, out objecthitB, 1000, 1 << 8 | 1 << 16 | 1 << 11)) {
 
-				dir.y -= Mathf.Clamp (Time.deltaTime * (transform.position.y - ((objecthit.point.y + objecthitB.point.y)/2 + flyerHeight)) * (myspeed / 8) * Mathf.Min (3, tempDist), -.2f,.2f);
+				dir.y -= Mathf.Clamp (Time.deltaTime * (transform.position.y - ((objecthit.point.y + objecthitB.point.y)/2 + flyerHeight *  (objecthitB.collider.gameObject.layer == 8 ? 1 : 1.3f))) * (myspeed / 8) * Mathf.Min (3, tempDist), -.2f,.2f);
 			}
-		
-
 		}
 
 		FlyingDecal.transform.position = objecthit.point + Vector3.up;
@@ -111,7 +109,7 @@ public class airmover : IMover {
 		RaycastHit lookAhead = new RaycastHit();
 		Vector3 vec = this.gameObject.transform.forward;
 
-		if (Physics.Raycast (this.gameObject.transform.position, vec, out lookAhead, 7, 1 << 9)) {
+		if (Physics.Raycast (this.gameObject.transform.position, vec, out lookAhead, 7, 1 << 9 | 1 << 8)) {
 
 			Vector3 heading = lookAhead.collider.gameObject.transform.position- transform.position;
 			float dirNum = AngleDir (transform.forward, heading, transform.up);
@@ -176,7 +174,7 @@ public class airmover : IMover {
 		location = MainCamera.main.getMapClampedLocation (location);
 		RaycastHit objecthit;
 	
-		if (Physics.Raycast (location + Vector3.up *30, Vector3.down, out objecthit, 1000, 1 << 8)) {
+		if (Physics.Raycast (location + Vector3.up *30, Vector3.down, out objecthit, 1000, 1 << 8 | 1 << 16 | 1 << 11)) {
 			//if (Physics.Raycast (this.gameObject.transform.position, down, out objecthit, 1000, (~8))) {
 		
 			targetPosition = objecthit.point + Vector3.up * flyerHeight;

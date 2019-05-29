@@ -21,7 +21,7 @@ public class evasiveMenuvers : Ability,Modifier{
 
 
 		// Use this for initialization
-		void Start () {
+		new void Start () {
 		myStats = GetComponent<UnitManager> ().myStats;
 		myStats.addModifier (this, 0);
 		mover = GetComponent<UnitManager> ().cMover;

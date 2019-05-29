@@ -14,9 +14,10 @@ public class RadiationTreatment :  Ability, Notify {
 
 
 	IWeapon myWeap;
-	// Use this for initialization
-	void Start () {
-		myStats = GetComponent<UnitStats> ();
+    // Use this for initialization
+    public override void Start()
+    {
+        myStats = GetComponent<UnitStats> ();
 		lastDamageAmount = 0;
 		myWeap = GetComponent<IWeapon> ();
 		if (myWeap) {

@@ -27,7 +27,7 @@ public class PopUpMaker : MonoBehaviour {
 		location.y += 5;
 
 		if (!PopUpThing) {
-			PopUpThing = Resources.Load<GameObject> ("PopUp");
+			PopUpThing = ResourceLoader.getMain().getResource("PopUp");
 			myBulletPool = Lean.LeanPool.getSpawnPool (PopUpThing);
 		}
 
@@ -48,7 +48,7 @@ public class PopUpMaker : MonoBehaviour {
 		location.y += 5;
 
 		if (!PopUpThing) {
-			PopUpThing = Resources.Load<GameObject> ("PopUp");
+			PopUpThing = ResourceLoader.getMain().getResource("PopUp");
 			myBulletPool = Lean.LeanPool.getSpawnPool (PopUpThing);
 		}
 
@@ -70,7 +70,7 @@ public class PopUpMaker : MonoBehaviour {
 		location.y +=5;
 
 		if (!PopUpThing) {
-			PopUpThing = Resources.Load<GameObject> ("PopUp");
+			PopUpThing = ResourceLoader.getMain().getResource("PopUp");
 			myBulletPool = Lean.LeanPool.getSpawnPool (PopUpThing);
 		}
 
@@ -88,7 +88,7 @@ public class PopUpMaker : MonoBehaviour {
 	public void CreatePopUp(Vector3 location)
 	{location.y += 5;
 		if (!PopUpThing) {
-			PopUpThing = Resources.Load<GameObject> ("PopUp");
+			PopUpThing = ResourceLoader.getMain().getResource("PopUp");
 			myBulletPool = Lean.LeanPool.getSpawnPool (PopUpThing);
 		}
 
@@ -111,7 +111,7 @@ public class PopUpMaker : MonoBehaviour {
 		location.y += 5;
 
 		if (!PopUpThingy) {
-			PopUpThingy = Resources.Load<GameObject> ("PopUp");
+			PopUpThingy = ResourceLoader.getMain().getResource("PopUp");
 			myBulletPool = Lean.LeanPool.getSpawnPool (PopUpThingy);
 		}
 
@@ -128,7 +128,7 @@ public class PopUpMaker : MonoBehaviour {
 	{Vector3 location = loc;
 		location.y += 5;
 		if (!PopUpThingy) {
-			PopUpThingy = Resources.Load<GameObject> ("PopUp");
+			PopUpThingy = ResourceLoader.getMain().getResource("PopUp");
 			myBulletPool = Lean.LeanPool.getSpawnPool (PopUpThingy);
 		}
 
@@ -146,7 +146,7 @@ public class PopUpMaker : MonoBehaviour {
 	public static GameObject CreateStunIcon(GameObject obj)
 	{
 		if (StunThingy == null) {
-			StunThingy = Resources.Load<GameObject> ("StunIcon");
+			StunThingy = ResourceLoader.getMain().getResource("StunIcon");
 		}
 
 		GameObject toReturn = Instantiate<GameObject> (StunThingy, obj.transform.position + Vector3.up* 9, Quaternion.identity, obj.transform);

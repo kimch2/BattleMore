@@ -20,9 +20,10 @@ public class RepairTurret : Ability, Modifier, Addon{
 	public bool DroneAway;
 	public bool commandRepair;
 
-	// Use this for initialization
-	void Start () {
-		mymanager = gameObject.transform.parent.GetComponentInParent<UnitManager> ();
+    // Use this for initialization
+    public override void Start()
+    {
+        mymanager = gameObject.transform.parent.GetComponentInParent<UnitManager> ();
 		//chargeCount = maxRepair;
 
 		mymanager.myStats.addDeathTrigger (this);

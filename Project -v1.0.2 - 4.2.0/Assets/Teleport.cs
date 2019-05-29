@@ -6,7 +6,7 @@ public class Teleport :  TargetAbility {
 	//private UnitManager manage;
 	public GameObject effect;
 	// Use this for initialization
-	void Start () {
+	new void Start () {
 		//manage = this.gameObject.GetComponent<UnitManager> ();
 		myType = type.target;
 	}

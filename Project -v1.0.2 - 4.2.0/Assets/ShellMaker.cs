@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class ShellMaker : Ability{
 
-	RaceManager racer;
+
 	ArtilleryBastion bastion;
 
 
 	bool turnedOn;
 	// Use this for initialization
-	void Start () {
-		racer = GameManager.main.getActivePlayer ();
+	new void Start () {
 		myType = type.activated;
 		bastion= GameObject.FindObjectOfType<ArtilleryBastion> ();
 	}

@@ -15,7 +15,7 @@ public class deexaArmor : Upgrade
 
 		if (!manager.myStats.isUnitType(UnitTypes.UnitTypeTag.Structure) || manager.myStats.isUnitType(UnitTypes.UnitTypeTag.Add_On) )
         {
-			obj.GetComponent<UnitStats>().statChanger.changeArmor(0,1, null);
+			obj.GetComponent<UnitStats>().statChanger.changeArmor(0,1, null,true);
         }
     }
 	public override void unApplyUpgrade (GameObject obj){

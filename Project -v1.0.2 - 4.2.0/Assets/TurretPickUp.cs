@@ -6,16 +6,11 @@ public class TurretPickUp : TargetAbility {
 	TurretMount myMount;
 	public bool onSwallow;
 	// Use this for initialization
-	void Start () {
+	new void Start () {
 		myMount = this.gameObject.GetComponentInChildren<TurretMount> ();
 
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
 
 	public override void setAutoCast(bool offOn){
 		autocast = offOn;

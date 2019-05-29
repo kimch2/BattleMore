@@ -5,7 +5,7 @@ using UnityEngine;
 public class CooldownUpgrade : Upgrade
 {
 
-
+	public float reductionTime = 10;
 
 
 	override
@@ -16,10 +16,10 @@ public class CooldownUpgrade : Upgrade
 
 		if (manager.UnitName == "Vulcan")
 		{
-			manager.GetComponent<BloodMist> ().myCost.cooldown -= 10;
-			manager.GetComponent<DeployTurret> ().ReplicationTime -= 10;;
-			manager.GetComponent<DeployTurret> ().myCost.cooldown -= 10;
-			manager.GetComponent<SingleTarget> ().myCost.cooldown -=10;
+			manager.GetComponent<BloodMist> ().myCost.cooldown -= reductionTime;
+			manager.GetComponent<DeployTurret> ().ReplicationTime -= reductionTime; 
+			manager.GetComponent<DeployTurret> ().myCost.cooldown -= reductionTime;
+			manager.GetComponent<SingleTarget> ().myCost.cooldown -= reductionTime;
 		}
 
 	}

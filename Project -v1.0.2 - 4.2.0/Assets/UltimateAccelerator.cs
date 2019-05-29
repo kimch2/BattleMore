@@ -22,7 +22,6 @@ public class UltimateAccelerator : Ability
 
 	new void Start()
 	{
-		base.Start();
 		myType = type.activated;
 		InvokeRepeating("Convert", CovnersionPeriod + UnityEngine.Random.value, CovnersionPeriod);
 

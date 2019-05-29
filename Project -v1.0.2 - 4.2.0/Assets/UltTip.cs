@@ -46,14 +46,20 @@ public class UltTip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
 
 	IEnumerator updateCooldown()
 	{
-		while (true) {
-			
-			if (myUltCost.cooldownProgress () >= 1) {
-				
-				cooldown.text = "Cooldown: " +Clock.convertToString(myUltCost.cooldown );}
-			else{
-			cooldown.text = "Cooldown: " +Clock.convertToString((myUltCost.cooldown *  (1 - myUltCost.cooldownProgress ())));
-			}
+
+        while (true)
+        {
+
+            if (myUltCost.cooldownTimer == 0)
+            {
+                cooldown.text = "" + Clock.convertToString(Mathf.Max(0, myUltCost.cooldown));
+            }
+            else
+            {
+                cooldown.text = "" + Clock.convertToString(Mathf.Max(0, (int) myUltCost.cooldownTimer));
+            }
+        
+            
 			yield return new WaitForSeconds(1);
 		}
 

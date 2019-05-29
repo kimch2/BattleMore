@@ -16,7 +16,7 @@ public class WaveContainer : MonoBehaviour {
 	}
 
 
-	public WaveOption getWave(EnemyWave en)
+	public  WaveOption getWave(EnemyWave en)
 	{
 		switch (en) {
 		case EnemyWave.ScrapCrack:

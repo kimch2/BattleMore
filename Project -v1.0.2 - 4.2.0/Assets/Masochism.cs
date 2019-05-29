@@ -11,13 +11,13 @@ public class Masochism : Ability {
 	private float timer;
 
 	private float attackSpeedChange;
-	private IWeapon myWeap;
-	private IMover myMover;
-	// Use this for initialization
-	void Start () {description = "Uses life to give a short burst of speed";
+	//private IWeapon myWeap;
+
+    // Use this for initialization
+    public override void Start () {
+        description = "Uses life to give a short burst of speed";
 		
-		myWeap = GetComponent<IWeapon> ();
-		myMover = GetComponent<UnitManager> ().cMover;
+		//myWeap = GetComponent<IWeapon> ();
 	}
 
 	// Update is called once per frame
@@ -69,7 +69,7 @@ public class Masochism : Ability {
 
 				myCost.payCost ();
 
-				myWeap.fireTriggers (this.gameObject, null, GetComponent<UnitManager>(), 0);
+				//myWeap.fireTriggers (this.gameObject, null, GetComponent<UnitManager>(), 0);
 			}
 
 		}

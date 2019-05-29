@@ -39,22 +39,29 @@ public class SummonStructure :  UnitProduction{
 		}
 */
 
-		if (racer.currentSupply + supplyNeeded > racer.supplyMax) {
+		if (supplyNeeded != 0 && racer.currentSupply + supplyNeeded > racer.supplyMax) {
 			order.canCast = false;
+            order.reasonList.Add(continueOrder.reason.supply);
 		}
-		if (!myCost.canActivate (this)) {
+		if (!myCost.canActivate (this, order, false)) {
 			order.canCast = false;
 
-			// FIX THIS LINE IN THE FUTURE IF IT BREAKS! its currently in here to allow guys with multiple charges to use them even though the cooldown timer is shown.
-			if (myCost.energy == 0 && myCost.resourceCosts.MyResources.Count == 0 && chargeCount > 0) {
-				order.canCast = true;
-			}
+            // FIX THIS LINE IN THE FUTURE IF IT BREAKS! its currently in here to allow guys with multiple charges to use them even though the cooldown timer is shown.
+            if (myCost.energy == 0 && myCost.resourceCosts.MyResources.Count == 0 && chargeCount > 0)
+            {
+                order.canCast = true;
+            }
+            else
+            {
+                order.reasonList.Add(continueOrder.reason.cooldown);
+            }
 		} else {
 			order.nextUnitCast = false;
 		}
 		if (order.canCast) {
 			order.nextUnitCast = false;
 		}
+
 		return order;
 	}
 
@@ -82,8 +89,8 @@ public class SummonStructure :  UnitProduction{
 		buildingManager.PlayerOwner = myManager.PlayerOwner;
 		builder.startConstruction (unitToBuild, 1);
 		buildingManager.setInteractor();
-		buildingManager.interactor.initialize ();
-		inConstruction.GetComponent<Selected> ().Initialize ();
+		buildingManager.interactor.initializeInteractor();
+        inConstruction.GetComponent<Selected> ().Initialize ();
 		buildingManager.myStats.SetHealth (.02f);
 		builder.startSelfConstruction (unitToBuild,buildTime);
 
@@ -126,8 +133,8 @@ public class SummonStructure :  UnitProduction{
 		buildingManager.PlayerOwner = myManager.PlayerOwner;
 		builder.startConstruction (unitToBuild, 1);
 		buildingManager.setInteractor();
-		buildingManager.interactor.initialize ();
-		inConstruction.GetComponent<Selected> ().Initialize ();
+		buildingManager.interactor.initializeInteractor();
+        inConstruction.GetComponent<Selected> ().Initialize ();
 		buildingManager.myStats.SetHealth (.02f);
 		builder.startSelfConstruction (unitToBuild,buildTime);
 

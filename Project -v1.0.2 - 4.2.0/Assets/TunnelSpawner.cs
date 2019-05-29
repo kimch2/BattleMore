@@ -22,7 +22,8 @@ public class TunnelSpawner : Objective,Modifier{
 
 	string rawObjectText;
 	// Use this for initialization
-	void Start () {
+	new void Start () {
+        base.Start();
 		rawObjectText = description;
 
 		usedPoints = new GameObject[spawnPoints.Count];

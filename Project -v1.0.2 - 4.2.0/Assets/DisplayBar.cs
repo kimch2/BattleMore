@@ -15,13 +15,13 @@ public class DisplayBar : MonoBehaviour {
 
 	SpriteRenderer myColorSprite;
 
-	void Awake()
+	protected void Awake()
 	{
 		myColorSprite = colorBar.GetComponentInChildren<SpriteRenderer> (true);
 
 	}
 
-	void Start()
+	protected void Start()
 	{
 		healthVector.y = colorBar.transform.parent.localScale.y;
 		sprite.size =  new Vector2 (BarWidth, sprite.size.y);
@@ -33,16 +33,12 @@ public class DisplayBar : MonoBehaviour {
 	}
 
 
-	long a = 0;
-	long b = 0;
-	long c = 0;
-
 
 	/// <summary>
 	/// Returns whether it is on or not
 	/// </summary>
 	/// <returns><c>true</c>, if ratio was updated, <c>false</c> otherwise.</returns>
-	public bool updateRatio(float ratio, UnitIconInfo unitIcon, UnitIconInfo slider)
+	public virtual bool updateRatio(float ratio, UnitIconInfo unitIcon, UnitIconInfo slider)
 	{
 		bool changeTo = (ratio < .99 && ratio > 0);
 

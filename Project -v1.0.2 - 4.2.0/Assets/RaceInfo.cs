@@ -17,6 +17,9 @@ public class RaceInfo : MonoBehaviour {
 	}
 
 	public raceType race;
+    public Sprite factionIcon;
+	[TextArea(3,10)]
+	public string RaceDescription;
 
 	public string FHotkeyString;
 
@@ -79,6 +82,7 @@ public class RaceInfo : MonoBehaviour {
 	}
 
 }
+
 
 [System.Serializable]
 public class UIImages

@@ -53,7 +53,8 @@ public class Tweener : MonoBehaviour {
 	public void goStraightToPose(string PoseName)
 	{
 		foreach (AnimationPose pos in myPoses) {
-			if (pos.PoseName == pos.PoseName) {
+			if (pos.PoseName == PoseName) {
+				currentPose = PoseName;
 				pos.GoToPose ();
 				break;
 			}
@@ -88,8 +89,12 @@ public class Tweener : MonoBehaviour {
 		}
 	}
 
+	public string currentPose;
+	
+
 	void ShiftToPose(AnimationPose pose, float tweenTime)
 	{
+		currentPose = pose.PoseName;
 		StopAllTweens ();
 		Coroutine myCorout = null;
 		if (this.gameObject.activeInHierarchy) {
@@ -361,12 +366,14 @@ public class TweenerEditor : Editor {
 				foreach (ObjectPose p in pose.objPoses) {
 					p.setCurrentVectors (pose.myScope);
 				}
+				((Tweener)target).currentPose = pose.PoseName;
 			}
 
 			if (GUILayout.Button ("Add New ObjectPose", GUILayout.Width(200))) {
 				pose.objPoses.Add (new ObjectPose(((Tweener) target).transform));
 			}
 			if (GUILayout.Button ("Go To Pose", GUILayout.Width(200))) {
+				((Tweener)target).currentPose = pose.PoseName;
 				pose.GoToPose ();
 			}
 			if (GUILayout.Button ("Delete Animation", GUILayout.Width(200))) {

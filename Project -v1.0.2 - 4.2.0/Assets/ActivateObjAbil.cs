@@ -26,10 +26,6 @@ public class ActivateObjAbil : Ability {
 		myType = type.activated;
 	}
 
-	void Start () {
-		//select = GetComponent<Selected> ();
-		//myManager = GetComponent<UnitManager> ();
-	}
 
 	// Update is called once per frame
 	void Update () {

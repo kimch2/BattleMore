@@ -105,11 +105,7 @@ public class SurforgeSSAO : MonoBehaviour {
 		isSupported = true;
 		supportDX11 = SystemInfo.graphicsShaderLevel >= 50 && SystemInfo.supportsComputeShaders;
 			
-		if (!SystemInfo.supportsImageEffects)
-		{
-			NotSupported ();
-			return false;
-		}
+	
 			
 		if (needDepth)
 			GetComponent<Camera>().depthTextureMode |= DepthTextureMode.Depth;

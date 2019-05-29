@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
+
 public class LevelCompilation : MonoBehaviour {
 
-	[SerializeField]
 		public List<LevelInfo> MyLevels = new List<LevelInfo>();
 
 

@@ -12,7 +12,7 @@ public class MultiShotParticle : MonoBehaviour {
 	public void Awake() 
 		{otherP = new List<ParticleSystem> ();
 		ps = GetComponent<ParticleSystem>();
-		emmitNUm = ps.maxParticles;
+		emmitNUm = ps.main.maxParticles;
 		myPlayer = GetComponent<AudioPlayer> ();
 
 		recurseAddChildren (transform);
@@ -53,12 +53,15 @@ public class MultiShotParticle : MonoBehaviour {
 		//ps.Clear ();
 		if (ps) {
 			ps.Emit (emmitNUm);
-			ps.startLifetime = ps.startLifetime;
+			//ps.startLifetime = ps.startLifetime; WHY IS THIS HERE?
 		}
 		if (otherP != null) {
 			foreach (ParticleSystem pps in otherP) {
 				pps.Emit (emmitNUm);
-				pps.startLifetime = ps.startLifetime;
+                ParticleSystem.MainModule main = pps.main;
+                ParticleSystem.MainModule psMain = ps.main;
+
+                main.startLifetimeMultiplier = psMain.startLifetimeMultiplier;
 			}
 		}
 	}

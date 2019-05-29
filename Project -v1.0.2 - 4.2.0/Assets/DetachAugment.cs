@@ -4,13 +4,13 @@ using System.Collections;
 public class DetachAugment : Ability {
 
 	Augmentor myAugmentor;
-//	UnitManager manager;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    public override void Start()
+    {
 		myType = type.activated;
 		myAugmentor = GetComponent<Augmentor> ();
-		//manager = GetComponent<UnitManager> ();
+
 	}
 	
 

@@ -9,7 +9,7 @@ public class BuildUnitObjective : Objective  {
 
 	private int total = 0;
 	public bool startCountingWhenTriggered = true;
-	void Start()
+	new void Start()
 	{
 		base.Start ();
 		GameManager.main.playerList [0].addBuildUnitObjective (this);

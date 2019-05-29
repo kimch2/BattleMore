@@ -3,9 +3,6 @@ using System.Collections;
 
 public class BuildStructure:  UnitProduction {
 
-
-	private Selected mySelect;
-
 	//private BuildingInteractor myInteractor;
 
 	private RaceManager racer;
@@ -26,15 +23,12 @@ public class BuildStructure:  UnitProduction {
 		audioSrc = GetComponent<AudioSource> ();
 		myType = type.building;
 		buildMan = GetComponent<BuildManager> ();
-		myManager = GetComponent<UnitManager> ();
-
-		mySelect = GetComponent<Selected> ();
 	}
 
 	bool hasPaid;
 
 	// Use this for initialization
-	void Start () {
+	new void Start () {
 
 	
 		racer = GameObject.FindObjectOfType<GameManager>().activePlayer;
@@ -52,7 +46,7 @@ public class BuildStructure:  UnitProduction {
 
 			float percent = builder.construct (Time.deltaTime / buildTime);
 			if (percent >= 1) {
-				mySelect.updateCoolDown (0);
+				select.updateCoolDown (0);
 				HD.stopBuilding ();
 				Morphing = false;
 				createUnit ();
@@ -67,7 +61,7 @@ public class BuildStructure:  UnitProduction {
 					}
 				}
 			} else {
-				mySelect.updateCoolDown (percent);
+                select.updateCoolDown (percent);
 
 			}
 
@@ -79,7 +73,7 @@ public class BuildStructure:  UnitProduction {
 	public void cancel()
 	{
 		myEffect.Stop ();
-		mySelect.updateCoolDown (0);
+        select.updateCoolDown (0);
 		HD.stopBuilding ();
 		Morphing = false;
 		//myManager.setStun (false, this, false);
@@ -87,7 +81,7 @@ public class BuildStructure:  UnitProduction {
 		myManager.changeState(new DefaultState());
 
 		//builder.cancelBuilding ();
-		if (mySelect.IsSelected) {
+		if (select.IsSelected) {
 			SelectedManager.main.updateUI ();
 		}
 	}
@@ -113,7 +107,7 @@ public class BuildStructure:  UnitProduction {
 		myEffect.Stop ();
 		racer.stopBuildingUnit (this);
 		HD.stopBuilding ();
-		mySelect.updateCoolDown (0);
+        select.updateCoolDown (0);
 
 		Morphing = false;
 
@@ -124,7 +118,7 @@ public class BuildStructure:  UnitProduction {
 		if (inConstruction) {
 			Destroy (inConstruction.gameObject);
 		}
-		if (mySelect.IsSelected) {
+		if (select.IsSelected) {
 			SelectedManager.main.updateUI ();
 		}
 	}
@@ -185,7 +179,7 @@ public class BuildStructure:  UnitProduction {
 
 			myManager.changeState (new ChannelState (),true,false);
 			//myManager.setStun (true, this, false);
-			if (mySelect.IsSelected) {
+			if (select.IsSelected) {
 				SelectedManager.main.updateUI ();
 			}
 			inConstruction = ((GameObject)Instantiate(unitToBuild, targetLocation, Quaternion.identity)).GetComponent<UnitManager>();
@@ -197,13 +191,10 @@ public class BuildStructure:  UnitProduction {
 			} 
 			builder.startConstruction (unitToBuild, animationRate);
 			inConstruction.setInteractor();
-			inConstruction.interactor.initialize ();
+			inConstruction.interactor.initializeInteractor();
 			inConstruction.GetComponent<Selected> ().Initialize ();
 			inConstruction.myStats.SetHealth (.02f);
-
-
 		} 
-
 	}
 
 
@@ -213,8 +204,8 @@ public class BuildStructure:  UnitProduction {
 	public void createUnit()
 	{HD.stopBuilding ();
 
-	
-		mySelect.updateCoolDown (0);
+
+        select.updateCoolDown (0);
 
 		GameManager.main.playerList[myManager.PlayerOwner-1].UnitCreated(unitToBuild.GetComponent<UnitStats> ().supply);
 		//myManager.setStun (false, this, false);
@@ -247,7 +238,7 @@ public class BuildStructure:  UnitProduction {
 
 		myManager.changeState (new ChannelState (), false, false);
 		//myManager.setStun (true, this, false);
-		if (mySelect.IsSelected) {
+		if (select.IsSelected) {
 			SelectedManager.main.updateUI ();
 		}
 		inConstruction = obj.GetComponent<UnitManager>();

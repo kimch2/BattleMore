@@ -75,6 +75,8 @@ public class CapturableUnit : MonoBehaviour, Modifier  {
 		List<UnitManager> newEnemies = new List<UnitManager> ();
 		List<GameObject> removeFromNuetral = new List<GameObject> ();
 
+        
+
 		foreach (UnitManager unit in manage.enemies) {
 			if (unit.PlayerOwner == 2) {
 				newEnemies.Add (unit);
@@ -135,11 +137,10 @@ public class CapturableUnit : MonoBehaviour, Modifier  {
 		manage.PlayerOwner = 1;
 		manage.myRacer = GameManager.main.playerList[0];
 
+        manage.AddUnFoggerManual();
+
 		FogOfWarUnit foggy = manage.GetComponent<FogOfWarUnit> ();
-		if (foggy) {
-			foggy.radius = myManagers [0].visionRange + 3;
-			foggy.enabled = true;
-		}
+       
 		manage.myStats.upgradesApplied = false;
 		GameManager.main.activePlayer.UnitCreated (manage.myStats.supply);
 		GameManager.main.activePlayer.addUnit (manage);

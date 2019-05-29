@@ -11,7 +11,7 @@ public class TextHolder : MonoBehaviour {
 	public class TextType
 	{
 		public string Description;
-		[TextArea(2,10)]
+		//[TextArea(2,10)]
 		public List<string> myTexts = new List<string>();
 	}
 

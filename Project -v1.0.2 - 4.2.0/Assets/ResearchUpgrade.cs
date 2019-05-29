@@ -17,7 +17,6 @@ public class ResearchUpgrade: UnitProduction, Upgradable{
 
 	public bool requiresAddon;
 	bool hasAddon;
-	RaceManager raceMan;
 
 		//public float buildTime;
 		// Use this for initialization
@@ -31,9 +30,6 @@ public class ResearchUpgrade: UnitProduction, Upgradable{
 
 	}
 
-		void Start () {
-		raceMan = GameManager.getInstance().activePlayer;
-		}
 
 		// Update is called once per frame
 		void Update () {
@@ -47,11 +43,11 @@ public class ResearchUpgrade: UnitProduction, Upgradable{
 					{mySelect.updateCoolDown (0);
 					ErrorPrompt.instance.ResearchComplete(upgrades [currentUpgrade].Name , this.transform.position);
 
-					raceMan.stopBuildingUnit (this);
+					myManager.myRacer.stopBuildingUnit (this);
 					HD.stopBuilding ();
 					buildMan.unitFinished (this);
 					researching = false;
-					raceMan.addUpgrade (upgrades[currentUpgrade], myManager.UnitName);
+				myManager.myRacer.addUpgrade (upgrades[currentUpgrade], myManager.UnitName);
 					if (requiresAddon && hasAddon || !requiresAddon) {
 						active = true;
 					}
@@ -258,9 +254,9 @@ public class ResearchUpgrade: UnitProduction, Upgradable{
 	public override void startBuilding(){ 
 		timer = buildTime;
 		HD.loadIMage(iconPic);
-		raceMan.buildingUnit (this);
+		myManager.myRacer.buildingUnit (this);
 		myCost.resetCoolDown ();
-		raceMan.commenceUpgrade (false, upgrades [currentUpgrade], myManager.UnitName);
+		myManager.myRacer.commenceUpgrade (false, upgrades [currentUpgrade], myManager.UnitName);
 
 		researching = true;
 	}
@@ -269,7 +265,7 @@ public class ResearchUpgrade: UnitProduction, Upgradable{
 		//Debug.Log (Name + " is canceling");
 		HD.stopBuilding ();
 		mySelect.updateCoolDown (0);
-		raceMan.stopBuildingUnit (this);
+		myManager.myRacer.stopBuildingUnit (this);
 		timer = 0;
 		researching = false;
 		//myCost.refundCost ();
@@ -277,7 +273,7 @@ public class ResearchUpgrade: UnitProduction, Upgradable{
 			active = true;
 		}
 
-		raceMan.commenceUpgrade ((requiresAddon && hasAddon || !requiresAddon), upgrades [currentUpgrade], myManager.UnitName);
+		myManager.myRacer.commenceUpgrade ((requiresAddon && hasAddon || !requiresAddon), upgrades [currentUpgrade], myManager.UnitName);
 		if (mySelect.IsSelected) {
 			RaceManager.updateActivity ();
 		}

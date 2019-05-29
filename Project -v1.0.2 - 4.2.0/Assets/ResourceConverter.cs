@@ -27,7 +27,7 @@ public class ResourceConverter : Ability
 		{
 			if (GameManager.main.playerList[0].resourceManager.getResource(from.resType) > minimumResFromAmount)
 			{
-				PopUpMaker.CreateGlobalPopUp("-" + from.currentAmount, UnitEquivalance.getResourceInfo(from.resType).ResourceColor, transform.position + Vector3.up * 3);
+				PopUpMaker.CreateGlobalPopUp("" + from.currentAmount, UnitEquivalance.getResourceInfo(from.resType).ResourceColor, transform.position + Vector3.up * 3);
 				PopUpMaker.CreateGlobalPopUp("+" + To.currentAmount, UnitEquivalance.getResourceInfo(To.resType).ResourceColor, transform.position);
 				GameManager.main.playerList[0].collectOneResource(from, true);
 				GameManager.main.playerList[0].collectOneResource(To, true);

@@ -36,7 +36,7 @@ public class buildTurret :UnitProduction{
 
 
 	// Use this for initialization
-	public void Start () {
+	public new void Start () {
 
 
 	//	myCost.cooldown = buildTime;
@@ -79,7 +79,7 @@ public class buildTurret :UnitProduction{
 				buildingUnit = false;
 				buildMan.unitFinished (this);
 				racer.stopBuildingUnit (this);
-
+               
 				chargeCount++;
 				if (mySelect.IsSelected) {
 					RaceManager.upDateUI ();

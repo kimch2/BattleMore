@@ -252,9 +252,12 @@ public class UnitCardCreater : MonoBehaviour {
 		}
 
 
-
-		builder.loadUnit (obj);
-
+		if (manager.PlayerOwner == 1)
+		{
+			builder.loadUnit(obj);
+		}
+		else
+		{ builder.close(); }
 	}
 
 	public void turnOff()

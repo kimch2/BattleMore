@@ -3,18 +3,13 @@ using System.Collections;
 
 public class EmpMissile :  TargetAbility {
 
-	private UnitManager manage;
 	public GameObject missile;
-	// Use this for initialization
-	void Start () {
-		manage = this.gameObject.GetComponent<UnitManager> ();
+    // Use this for initialization
+    new void Start () {
+
 		myType = type.target;
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
 	override
 	public continueOrder canActivate(bool showError){
@@ -46,7 +41,7 @@ public class EmpMissile :  TargetAbility {
 			UnitManager m = target.GetComponent<UnitManager> ();
 			if (m == null) {
 				return false;}
-			if (manage.PlayerOwner != m.PlayerOwner) {
+			if (myManager.PlayerOwner != m.PlayerOwner) {
 				return true;
 			}
 		}

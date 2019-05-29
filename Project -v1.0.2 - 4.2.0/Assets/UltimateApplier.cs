@@ -35,6 +35,13 @@ public class UltimateApplier : MonoBehaviour {
 		hyperZero  = PlayerPrefs.GetInt ("HyperCharge0",0);
 		hyperOne = PlayerPrefs.GetInt ("HyperCharge1",0);
 
+        if (RaceSwapper.main != null)
+        {
+            hyperOne = 3;
+            hyperZero = 3;
+        }
+
+
 		switch (hyperOne) {
 		case 0:
 
@@ -55,17 +62,31 @@ public class UltimateApplier : MonoBehaviour {
 		NimbusThree= PlayerPrefs.GetInt ("Nimbus2",0);
 		NimbusFour= PlayerPrefs.GetInt ("Nimbus3",0);
 
-		DomeOne = PlayerPrefs.GetInt ("BarrierDome0",0);
+        DomeOne = PlayerPrefs.GetInt ("BarrierDome0",0);
 		DomeTwo= PlayerPrefs.GetInt ("BarrierDome1",0);
 
-		myRace.UltThree.myCost.cooldown = 180 - 20 * DomeTwo;
-		myRace.UltThree.myCost.cooldownTimer = myRace.UltThree.myCost.cooldown;
+        FireOne = PlayerPrefs.GetInt("Firestorm0");
+        FireTwo = PlayerPrefs.GetInt("Firestorm1", 0);
+ 
 
-		FireOne = PlayerPrefs.GetInt ("Firestorm0");
-		FireTwo = PlayerPrefs.GetInt ("Firestorm1",0);
+        if (RaceSwapper.main != null)
+        {
+            NimbusOne = 1;
+            NimbusTwo = 1;
+            NimbusThree = 1;
+            NimbusFour = 1;
 
+            DomeOne = 1;
+            DomeTwo = 1;
 
-		Bombardment bm = (Bombardment)myRace.UltFour;
+            FireOne = 0;
+            FireTwo = 0;
+        }
+
+        myRace.UltThree.myCost.cooldown -= 20 * DomeTwo;
+        myRace.UltThree.myCost.cooldownTimer = myRace.UltThree.myCost.cooldown;
+
+        Bombardment bm = (Bombardment)myRace.UltFour;
 		bm.myDamage = 60 + FireOne * 15;
 	
 		bm.FriendlyFire = 1 - FireTwo * .5f;

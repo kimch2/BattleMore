@@ -10,22 +10,24 @@ public class BuildManager : MonoBehaviour {
 
 	private Selected mySelect;
 	private BuilderUI build;
-	private RaceManager raceMan;
+
 	private bool isWorker;
 	public bool waitingOnSupply;
 	[Tooltip("This will appear if the building could be building something but isn't")]
 	public GameObject buildDecal;
 	UnitManager manager;
+
+	public int maxBuildQue = 5;
 	public AugmentAttachPoint augmenter;
+	public bool showSupplyError = true;
 	// Use this for initialization
 	public void Start () {
 		
-		build = GameObject.FindObjectOfType<BuilderUI> ();
+		build =  GameObject.FindObjectOfType<BuilderUI> ();
 		mySelect = GetComponent<Selected> ();
 		if (GetComponent<newWorkerInteract> ()) {
 			isWorker = true;}
 		manager = GetComponent<UnitManager> ();
-		raceMan = GameManager.main.getActivePlayer();//.playerList[manager.PlayerOwner -1]; This doesn't work because of capturable untis
 		if (manager.PlayerOwner == 1)
 		{
 			StartCoroutine(checkBuildDecal());
@@ -38,6 +40,7 @@ public class BuildManager : MonoBehaviour {
 			}
 		}
 	}
+
 	
 
 	public void cancel()
@@ -59,7 +62,7 @@ public class BuildManager : MonoBehaviour {
 					Sup = buildOrder [0].unitToBuild.GetComponent<UnitStats> ().supply;
 				}
 				
-				if (Sup == 0 || raceMan.hasSupplyAvailable (Sup)) {
+				if (Sup == 0 || manager.myRacer.hasSupplyAvailable (Sup)) {
 
 					buildOrder [0].startBuilding ();
 					build.hasSupply ();
@@ -117,7 +120,7 @@ public class BuildManager : MonoBehaviour {
 			return;}
 		float Sup = buildOrder [0].unitToBuild.GetComponent<UnitStats> ().supply;
 		//Debug.Log("No SUpply " + raceMan.hasSupplyAvailable(Sup));
-		if (Sup == 0 || raceMan.hasSupplyAvailable (Sup)) {
+		if (Sup == 0 || manager.myRacer.hasSupplyAvailable (Sup)) {
 			buildOrder [0].startBuilding ();
 			if (mySelect.IsSelected) {
 				waitingOnSupply = false;
@@ -170,7 +173,7 @@ public class BuildManager : MonoBehaviour {
 	}
 
 	public bool buildUnit(UnitProduction prod)
-	{if (buildOrder.Count >= 5) {
+	{if (buildOrder.Count >= maxBuildQue) {
 			return false;
 		
 		}
@@ -215,16 +218,25 @@ public class BuildManager : MonoBehaviour {
 
 	IEnumerator waitOnSupply(float supply)
 	{
-		if (raceMan.supplyMax == raceMan.supplyCap) {
-			ErrorPrompt.instance.atMaxSupply ();
-		} else {
-			ErrorPrompt.instance.notEnoughSupply ();
+		if (manager.myRacer.supplyMax == manager.myRacer.supplyCap)
+		{
+			if (manager.PlayerOwner == 1 && showSupplyError)
+			{
+				ErrorPrompt.instance.atMaxSupply();
+			}
+		}
+		else
+		{
+			if (manager.PlayerOwner == 1 && showSupplyError)
+			{
+				ErrorPrompt.instance.notEnoughSupply();
+			}
 		}
 		while (buildOrder.Count > 0) {
 			yield return new WaitForSeconds (.3f);
 			
 			if (buildOrder.Count > 0) {
-				if (supply == 0 ||raceMan.hasSupplyAvailable (supply)) {
+				if (supply == 0 || manager.myRacer.hasSupplyAvailable (supply)) {
 					buildOrder [0].startBuilding ();
 					build.hasSupply ();
 					waitingOnSupply = false;

@@ -6,15 +6,12 @@ public class PrefabDrop : TargetAbility{
 	private RaceManager racer;
 	public GameObject prefab;
 	// Use this for initialization
-	void Start () {
+	new void Start () {
 		racer = GameObject.FindObjectOfType<GameManager> ().activePlayer;
 	
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+
 	override
 	public continueOrder canActivate(bool showError){
 
@@ -54,9 +51,6 @@ public class PrefabDrop : TargetAbility{
 
 		myCost.payCost ();
 
-
-	//	myCost.payCost ();
-
 		GameObject proj = null;
 
 		Vector3 loc1 = location;
@@ -67,8 +61,8 @@ public class PrefabDrop : TargetAbility{
 		UnitManager tempMan = proj.GetComponent<UnitManager> ();
 
 		tempMan.setInteractor();
-		tempMan.interactor.initialize ();
-		racer.applyUpgrade (tempMan);
+		tempMan.interactor.initializeInteractor();
+        racer.applyUpgrade (tempMan);
 		proj.AddComponent<SpaceDrop> ();
 		proj.GetComponent<SpaceDrop> ().speed = 3;
 		loc1.y -= 150;
@@ -80,8 +74,8 @@ public class PrefabDrop : TargetAbility{
 		proj = (GameObject)Instantiate (prefab, loc2, Quaternion.identity);
 		tempMan = proj.GetComponent<UnitManager> ();
 		tempMan.setInteractor();
-		tempMan.interactor.initialize ();
-		racer.applyUpgrade (tempMan);
+		tempMan.interactor.initializeInteractor();
+        racer.applyUpgrade (tempMan);
 		proj.AddComponent<SpaceDrop> ();
 		proj.GetComponent<SpaceDrop> ().speed = 3;
 		loc2.y -= 150;
@@ -93,8 +87,8 @@ public class PrefabDrop : TargetAbility{
 		proj = (GameObject)Instantiate (prefab, loc3, Quaternion.identity);
 		tempMan = proj.GetComponent<UnitManager> ();
 		tempMan.setInteractor();
-		tempMan.interactor.initialize ();
-		racer.applyUpgrade (tempMan);
+		tempMan.interactor.initializeInteractor();
+        racer.applyUpgrade (tempMan);
 		proj.AddComponent<SpaceDrop> ();
 		proj.GetComponent<SpaceDrop> ().speed = 3;
 		loc3.y -= 150;
@@ -106,8 +100,8 @@ public class PrefabDrop : TargetAbility{
 		proj = (GameObject)Instantiate (prefab, loc4, Quaternion.identity);
 		tempMan = proj.GetComponent<UnitManager> ();
 		tempMan.setInteractor();
-		tempMan.interactor.initialize ();
-		racer.applyUpgrade (tempMan);
+		tempMan.interactor.initializeInteractor();
+        racer.applyUpgrade (tempMan);
 		proj.AddComponent<SpaceDrop> ();
 		proj.GetComponent<SpaceDrop> ().speed = 3;
 		loc4.y -= 150;

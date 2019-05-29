@@ -448,16 +448,16 @@ public class MiniMapUIController : MonoBehaviour, IPointerDownHandler , IPointer
 
       
 
-		ray1 = MainCamera.main.camera.ScreenPointToRay (new Vector3 (0, 150, 0));
+		ray1 = MainCamera.main.GetComponent<Camera>().ScreenPointToRay (new Vector3 (0, 150, 0));
 
 		//Top left
-		ray2 = MainCamera.main.camera.ScreenPointToRay (new Vector3 (0, Screen.height - 1, 0));
+		ray2 = MainCamera.main.GetComponent<Camera>().ScreenPointToRay (new Vector3 (0, Screen.height - 1, 0));
 
 		//Top right
-		ray3 = MainCamera.main.camera.ScreenPointToRay (new Vector3 (Screen.width, Screen.height - 1, 0));
+		ray3 = MainCamera.main.GetComponent<Camera>().ScreenPointToRay (new Vector3 (Screen.width, Screen.height - 1, 0));
 
 		//Bottom right
-		ray4 = MainCamera.main.camera.ScreenPointToRay (new Vector3 (Screen.width, 150, 0));
+		ray4 = MainCamera.main.GetComponent<Camera>().ScreenPointToRay (new Vector3 (Screen.width, 150, 0));
 
 		//	Debug.Log ("B" + DateTime.Now.Millisecond );
 
@@ -465,26 +465,26 @@ public class MiniMapUIController : MonoBehaviour, IPointerDownHandler , IPointer
 	
 		//Find world co-ordinates
 
-		Physics.Raycast (ray1, out hit, Mathf.Infinity, 1 << 16);
+		Physics.Raycast (ray1, out hit, Mathf.Infinity, 1 << 11);
 		Vector3 v1 = hit.point;
 
 		botLeftP = new Vector2 ((int)(((v1.x - Left) / (WorldWidth)) * textureWidth), (int)(((v1.z - bottom) / (WorldHeight)) * textureHeight));
 
 
-		Physics.Raycast (ray2, out hit, Mathf.Infinity, 1 << 16);
+		Physics.Raycast (ray2, out hit, Mathf.Infinity, 1 << 11);
 		//Vector3 
 		v1 = hit.point;
 	
 		topLeftP = new Vector2 ((int)(((v1.x - Left) / (WorldWidth)) * textureWidth), (int)(((v1.z - bottom) / (WorldHeight)) * textureHeight));
 
-		Physics.Raycast (ray3, out hit, Mathf.Infinity, 1 << 16);
+		Physics.Raycast (ray3, out hit, Mathf.Infinity, 1 << 11);
 		//Vector3
 		v1 = hit.point;
 	
 		topRightP = new Vector2 ((int)(((v1.x - Left) / (WorldWidth)) * textureWidth), (int)(((v1.z - bottom) / (WorldHeight)) * textureHeight));
 
 
-		Physics.Raycast (ray4, out hit, Mathf.Infinity, 1 << 16);
+		Physics.Raycast (ray4, out hit, Mathf.Infinity, 1 << 11);
 		//Vector3
 		v1 = hit.point;
 

@@ -3,14 +3,8 @@ using System.Collections;
 
 public class Morph :  UnitProduction {
 
-
-
-
-	private Selected mySelect;
-
 	private BuildingInteractor myInteractor;
 
-	private UnitManager myManager;
 	private RaceManager racer;
 
 	//public float buildTime;
@@ -20,11 +14,11 @@ public class Morph :  UnitProduction {
 	private BuildManager buildMan;
 
 	// Use this for initialization
-	void Start () {
+	new void Start () {
 		buildMan = GetComponent<BuildManager> ();
-		myManager = this.gameObject.GetComponent<UnitManager> ();
+	
 		myInteractor = GetComponent <BuildingInteractor> ();
-		mySelect = GetComponent<Selected> ();
+		
 		myCost.cooldown = buildTime;
 		racer = GameObject.FindGameObjectWithTag ("GameRaceManager").GetComponent<RaceManager> ();
 		HD = GetComponentInChildren<HealthDisplay>();
@@ -36,9 +30,9 @@ public class Morph :  UnitProduction {
 
 
 			timer -= Time.deltaTime;
-			mySelect.updateCoolDown (1 - timer/buildTime);
+			select.updateCoolDown (1 - timer/buildTime);
 			if(timer <=0)
-			{mySelect.updateCoolDown (0);
+			{select.updateCoolDown (0);
 				HD.stopBuilding ();
 				Morphing = false;
 				createUnit();
@@ -58,7 +52,7 @@ public class Morph :  UnitProduction {
 
 	public override void cancelBuilding ()
 	{	HD.stopBuilding ();
-		mySelect.updateCoolDown (0);
+		select.updateCoolDown (0);
 		timer = 0;
 		Morphing = false;
 		myCost.refundCost ();
@@ -67,7 +61,7 @@ public class Morph :  UnitProduction {
 		myManager.setStun (false, this, false);
 		myManager.changeState(new DefaultState());
 
-		if (mySelect.IsSelected) {
+		if (select.IsSelected) {
 			SelectedManager.main.updateUI ();
 		}
 	}
@@ -114,7 +108,7 @@ public class Morph :  UnitProduction {
 				racer.buildingUnit (this);
 				myManager.changeState (new ChannelState ());
 			myManager.setStun (true, this, false);
-			if (mySelect.IsSelected) {
+			if (select.IsSelected) {
 				SelectedManager.main.updateUI ();
 			}
 		} 
@@ -135,9 +129,9 @@ public class Morph :  UnitProduction {
 
 		UnitManager tempManage = unit.GetComponent<UnitManager> ();
 		tempManage.setInteractor();
-		tempManage.interactor.initialize ();
+		tempManage.interactor.initializeInteractor();
 
-		if (myInteractor != null) {
+        if (myInteractor != null) {
 			if (myInteractor.rallyUnit != null) {
 
 				tempManage.GiveOrder (Orders.CreateInteractCommand(myInteractor.rallyUnit));

@@ -21,7 +21,7 @@ public class SmogCloud : VisionTrigger
 
 		RaycastHit objecthit;
 	
-		if (Physics.Raycast(this.gameObject.transform.position, Vector3.down, out objecthit, 100, 1 << 8))
+		if (Physics.Raycast(this.gameObject.transform.position, Vector3.down, out objecthit, 100, 1 << 8 | (1 << 16)))
 		{
 			transform.position = objecthit.point + Vector3.up;
 		}

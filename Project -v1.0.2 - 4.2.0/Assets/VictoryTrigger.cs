@@ -133,7 +133,8 @@ public class VictoryTrigger : MonoBehaviour {
 	public void Win()
 	{if (!hasFinished) {
 			SoundTrackPlayer.main.playVictoryTrack();
-			hasFinished = true;
+            LevelSelectmanager.BattleModeChoice = null;
+            hasFinished = true;
 			OnAnimation(VictoryScreen);
 
 		
@@ -151,20 +152,26 @@ public class VictoryTrigger : MonoBehaviour {
 
 			}
 
-			LevelCompilation myComp = ((GameObject)(Resources.Load<GameObject> ("LevelEditor"))).GetComponent<LevelCompilation>();
-			//LevelCompilation.loadGameStatic ().ls [levelNumber].increaseCompCount ();
-			myComp.MyLevels [levelNumber].increaseCompCount ();
-			int numTimesWon = PlayerPrefs.GetInt ("L" + levelNumber + "Win");
-
-			PlayerPrefs.SetInt ("L" + levelNumber+"Win", numTimesWon + 1);
-
-			int diff = LevelData.getDifficulty ()-1;
-			if (diff > PlayerPrefs.GetInt ("L" + levelNumber + "Dif", -1)) {
 		
-				PlayerPrefs.SetInt ("L" + levelNumber + "Dif", diff);
+			LevelCompilation myComp = ((GameObject)(Resources.Load<GameObject>("LevelEditor"))).GetComponent<LevelCompilation>();
+			//LevelCompilation.loadGameStatic ().ls [levelNumber].increaseCompCount ();
+			if (!RaceSwapper.main)
+			{
+				myComp.MyLevels[levelNumber].increaseCompCount();
+
+				int numTimesWon = PlayerPrefs.GetInt("L" + levelNumber + "Win");
+
+				PlayerPrefs.SetInt("L" + levelNumber + "Win", numTimesWon + 1);
+
+				int diff = LevelData.getDifficulty() - 1;
+				if (diff > PlayerPrefs.GetInt("L" + levelNumber + "Dif", -1))
+				{
+					PlayerPrefs.SetInt("L" + levelNumber + "Dif", diff);
+				}
+
+				GetComponent<AchievementChecker>().EndLevel();
 			}
-			GameObject.FindObjectOfType<MainCamera> ().DisableScrolling ();
-			GetComponent<AchievementChecker> ().EndLevel ();
+			GameObject.FindObjectOfType<MainCamera>().DisableScrolling();
 			UISetter.main.startFade (1.5f, false);
 			StartCoroutine (WinLevel ());
 		}
@@ -174,7 +181,8 @@ public class VictoryTrigger : MonoBehaviour {
 	public void Lose()
 	{if (!hasFinished) {
 			hasFinished = true;
-			Debug.Log ("LostA");
+            LevelSelectmanager.BattleModeChoice = null;
+            Debug.Log ("LostA");
 
 			OnAnimation(DefeatScreen);
 			GameObject.FindObjectOfType<MainCamera> ().DisableScrolling ();
@@ -187,50 +195,63 @@ public class VictoryTrigger : MonoBehaviour {
 	{
 		LevelData.getsaveInfo().ComingFromLevel = true;
 		//ExpositionDisplayer.instance.displayText (6, victoryLine, 1);
-		float totalTime = 0;
+		float totalTime = 2;
 
 		for (int i = 0; i < 6; i++) { // Stop all currently playing messages
 			ExpositionDisplayer.instance.InteruptMessage ();
 		}
 		foreach (int i in winLine) {
 			dialogManager.instance.playLine (i);
-			totalTime += dialogManager.instance.VoiceLines[i].MainLine.duration;
+			totalTime += dialogManager.instance.VoiceLines[i].MainLine.duration -1;
 			}
 		ExpositionDisplayer.instance.acceptMessages = false;
-		CinematicCamera.main.exitScene ();
+        if (CinematicCamera.main)
+        {
+            CinematicCamera.main.exitScene();
+        }
 		yield return new WaitForSeconds (totalTime);
 
-		int bonusTech =LevelData.getDifficulty ();
-		if (bonusTech == 1) {
-			bonusTech = 0;
-		} else if (bonusTech == 2) {
-			bonusTech = 1;}
-		else if (bonusTech == 3) {
-			bonusTech = 3;}
+
+			int bonusTech = LevelData.getDifficulty();
+			if (bonusTech == 1)
+			{
+				bonusTech = 0;
+			}
+			else if (bonusTech == 2)
+			{
+				bonusTech = 1;
+			}
+			else if (bonusTech == 3)
+			{
+				bonusTech = 3;
+			}
 
 
-		int numTimesWon = PlayerPrefs.GetInt ("L" + levelNumber + "Win") -1 ;
+			int numTimesWon = PlayerPrefs.GetInt("L" + levelNumber + "Win") - 1;
 
-		int totalReward = TechCredits + techRewards + bonusTech;
-		Debug.Log ("Times won " + numTimesWon);
-		totalReward -= numTimesWon * 3; // Reduces the reward each time you replay a level
-		if (totalReward < 0) {
-			totalReward = bonusTech;}
-		
-		//Set my victory screen
-		//LevelData.loadVetStats (GameManager.main.playerList [0].getUnitStats());
-		Debug.Log("COmpleting with "+ TechCredits +"  " +techRewards + "  " + bonusTech);
-		LevelData.levelInfo Ldata = createLevelInfo(levelNumber , GameManager.main.playerList [1].UnitsLost(),GameManager.main.playerList [0].UnitsLost(), GameManager.main.playerList [0].totalResO() +  GameManager.main.playerList [0].totalResT(),
-			Clock.main.getTime(), totalReward, completeBonusObj + "/" + totalBonusObj);
-		foreach (VictoryScreen vs in GameObject.FindObjectsOfType<VictoryScreen> ()) {
-			vs.SetResults (Ldata, true);
+			int totalReward = TechCredits + techRewards + bonusTech;
+			Debug.Log("Times won " + numTimesWon);
+			totalReward -= numTimesWon * 3; // Reduces the reward each time you replay a level
+			if (totalReward < 0)
+			{
+				totalReward = bonusTech;
+			}
+
+			//Set my victory screen
+
+			Debug.Log("COmpleting with " + TechCredits + "  " + techRewards + "  " + bonusTech);
+			LevelData.levelInfo Ldata = createLevelInfo(levelNumber, GameManager.main.playerList[1].UnitsLost(), GameManager.main.playerList[0].UnitsLost(), 0, // Used to have Total Resources Harvested Here
+                Clock.main.getTime(), totalReward, completeBonusObj + "/" + totalBonusObj);
+			foreach (VictoryScreen vs in GameObject.FindObjectsOfType<VictoryScreen>())
+			{
+				vs.SetResults(Ldata, true);
+			}
+
+		if (!RaceSwapper.main)
+		{
+			LevelData.addLevelInfo(levelNumber, GameManager.main.playerList[1].UnitsLost(), GameManager.main.playerList[0].UnitsLost(), 0, // Used to have Total Resources Harvested Here
+				Clock.main.getTime(), totalReward, completeBonusObj + "/" + totalBonusObj);
 		}
-
-		LevelData.addLevelInfo (levelNumber , GameManager.main.playerList [1].UnitsLost(),GameManager.main.playerList [0].UnitsLost(), GameManager.main.playerList [0].totalResO() +  GameManager.main.playerList [0].totalResT(),
-			Clock.main.getTime(), totalReward, completeBonusObj + "/" + totalBonusObj);
-		
-
-
 	}
 
 	IEnumerator LoseLevel ()
@@ -244,16 +265,15 @@ public class VictoryTrigger : MonoBehaviour {
 		//ExpositionDisplayer.instance.displayText (6, DefeatLine, 1);
 		yield return new WaitForSeconds (2.5f);
 
-		LevelData.levelInfo Ldata = createLevelInfo(levelNumber , GameManager.main.playerList [1].UnitsLost(),GameManager.main.playerList [0].UnitsLost(), GameManager.main.playerList [0].totalResO() +  GameManager.main.playerList [0].totalResT(),
-			Clock.main.getTime(), TechCredits + techRewards, completeBonusObj + "/" + totalBonusObj);
-		foreach (VictoryScreen vs in GameObject.FindObjectsOfType<VictoryScreen> ()) {
-			vs.SetResults (Ldata, false);
-		}
+	
 
-	//	DefeatScreen.enabled = false;
-	//	GameObject.FindObjectOfType<MainCamera> ().EnableScrolling ();
-	//	DefeatScreen.enabled = false;
-		//SceneManager.LoadScene (3);
+		LevelData.levelInfo Ldata = createLevelInfo(levelNumber, GameManager.main.playerList[1].UnitsLost(), GameManager.main.playerList[0].UnitsLost(), 0, // Used to have Total Resources Harvested Here
+                Clock.main.getTime(), TechCredits + techRewards, completeBonusObj + "/" + totalBonusObj);
+		foreach (VictoryScreen vs in GameObject.FindObjectsOfType<VictoryScreen>())
+		{
+			vs.SetResults(Ldata, false);
+		}
+		
 	}
 
 	public void loadLevel(int levelNumber)

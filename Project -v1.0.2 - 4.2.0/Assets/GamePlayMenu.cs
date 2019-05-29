@@ -8,7 +8,7 @@ public class GamePlayMenu : MonoBehaviour {
 	public static GamePlayMenu instance;
 
 	public Dropdown healthList;
-	private bool toggled= true;
+
 	private MainCamera cam;
 	public Slider scrollSpeed;
 	public Text speedPercent;

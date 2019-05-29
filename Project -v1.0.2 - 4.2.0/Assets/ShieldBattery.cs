@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ShieldBattery  :Ability, AllySighted{
 
-	public UnitManager manager;
+
 	UnitStats myStats;
 
 	public float shieldRate;
@@ -18,12 +18,12 @@ public class ShieldBattery  :Ability, AllySighted{
 
 
 	// Use this for initialization
-	void Start () {
+	new void Start () {
 		myType = type.passive;
-		manager = GetComponent<UnitManager> ();
+		
 		mySHields = GetComponent<DayexaShield> ();
 		myStats = GetComponent<UnitStats> ();
-		manager.AddAllySighted (this);
+		myManager.AddAllySighted (this);
 		myLine.SetPosition (0, transform.position+ Vector3.up *7);
 		myLine.SetPosition (1, transform.position+ Vector3.up *5);
 		InvokeRepeating ("UpdateCharges", 1, 1);

@@ -25,7 +25,17 @@ public class EconomyManager : MonoBehaviour {
 		InvokeRepeating ("updateAverage", 1,4);  // ?? FIX THIS
 	}
 
-	public void AddResourceType(ResourceType typ)
+    public static EconomyManager getInstance()
+    {
+        if (main == null)
+        {
+            main = GameObject.FindObjectOfType<EconomyManager>();
+
+        }
+        return main;
+    }
+
+    public void AddResourceType(ResourceType typ)
 	{
 
 		GameObject obj = new GameObject("Income Rate");
@@ -35,7 +45,7 @@ public class EconomyManager : MonoBehaviour {
 		
 
 		text.font = RaceUIManager.instance.supply.font;
-		foreach (Transform t in RaceUIManager.instance.ResourceGrid.transform)
+		foreach (Transform t in RaceUIManager.getInstance().ResourceGrid.transform)
 		{
 			if (t.GetComponentInChildren<Image>().sprite == UnitEquivalance.getResourceInfo(typ).icon)
 			{

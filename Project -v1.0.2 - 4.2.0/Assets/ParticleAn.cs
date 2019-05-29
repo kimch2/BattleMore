@@ -14,7 +14,9 @@ public class ParticleAn : animate {
 		emmisionRate = ps.main.maxParticles;
 		ParticleSystem.MainModule myModule = ps.main;
 		myModule.maxParticles = 0;
-		ps.maxParticles = 0;
+        ParticleSystem.MainModule m= ps.main;
+        m.maxParticles = 0;
+
 	}
 
 	// Update is called once per frame
@@ -24,13 +26,17 @@ public class ParticleAn : animate {
 
 			if (!change) {
 
-			
-				ps.maxParticles = 0;
-			} else {
-				
-				ps.maxParticles = emmisionRate;
+                ParticleSystem.MainModule ma = ps.main;
+                ma.maxParticles = 0;
+            } else {
+                ParticleSystem.MainModule mb = ps.main;
+                mb.maxParticles = emmisionRate;
+ 
 			}
-			ps.startLifetime = ps.main.startLifetime.constant;
+            ParticleSystem.MainModule m = ps.main;
+            m.maxParticles = 0;
+            m.startLifetime = ps.main.startLifetime.constant;
+           // ps.startLifetime = ps.main.startLifetime.constant;
 
 		}
 	

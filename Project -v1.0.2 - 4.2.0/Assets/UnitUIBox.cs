@@ -46,6 +46,15 @@ public class UnitUIBox : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 			yield return null;
 			AttackSpeed.text = "Attack Speed: " + Mathf.Round(100 * myUnit.currentUnit.myWeapon[index].attackPeriod) / 100f;
 			Damage.text = "Damage: " + Mathf.Round(100 * myUnit.currentUnit.myWeapon[index].baseDamage) / 100f;
+
+			foreach (IWeapon.bonusDamage bd in myUnit.currentUnit.myWeapon[index].extraDamage)
+			{
+				Damage.text += " (+" + bd.bonus + " vs " + bd.type + ")";
+			}
+			if (myUnit.currentUnit.myWeapon[index].numOfAttacks > 1)
+			{
+				Damage.text += "  Attacks X " + myUnit.currentUnit.myWeapon[index].numOfAttacks;
+			}
 		}
 	}
 

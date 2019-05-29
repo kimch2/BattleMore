@@ -33,7 +33,7 @@ public class ChangeAmmo : Ability {
 		myType = type.activated;
 	}
 
-	void Start () {
+	new void Start () {
 		base.Start();
 		if (myAmmo) {
 			myBulletPool = Lean.LeanPool.getSpawnPool (myAmmo);

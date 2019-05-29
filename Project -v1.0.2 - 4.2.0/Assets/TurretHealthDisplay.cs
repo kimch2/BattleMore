@@ -18,7 +18,7 @@ public class TurretHealthDisplay : HealthDisplay {
 	private bool pointerIn;
 
 	// Use this for initialization
-	void Awake()
+	new void Awake()
 	{
 		base.Awake ();
 		if (!Icon) {

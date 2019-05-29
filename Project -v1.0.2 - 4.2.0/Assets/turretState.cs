@@ -53,9 +53,51 @@ public class turretState : UnitState {
 	}
 
 
+    float NextAttackResponse;
+
 	override
 	public void attackResponse(UnitManager src, float amount)
-	{}
+	{
+   
+
+            if (src)
+            {
+                //UnitManager manage = src.GetComponent<UnitManager> ();
+
+                if (src.PlayerOwner != myManager.PlayerOwner)
+                {
+                // Inform other alleis to also attack
+                     if (amount > 0)
+                     {
+                        if (Time.time < NextAttackResponse)
+                            {
+                             return;
+                             }
+                        else
+                            {
+                            NextAttackResponse = Time.time + 20;
+                             }
+                        foreach (UnitManager ally in myManager.allies)
+                        {
+                            if (ally)
+                            {
+                                if (myManager.gameObject != ally)
+                                {
+                                    UnitState hisState = ally.getState();
+                                    if (hisState is DefaultState)
+                                    {
+                                        //Debug.Log ("Callign to" + ally.gameObject);
+                                        hisState.attackResponse(src, 0);
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+
+                }
+            }
+    }
 
 
 	bool erase = false;

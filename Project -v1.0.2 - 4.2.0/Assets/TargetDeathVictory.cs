@@ -6,6 +6,7 @@ public class TargetDeathVictory : Objective {
 
 	public List<GameObject> targets = new List<GameObject> ();
 	public List<VoiceTrigger> VoiceTriggers;
+    public bool RevealFogOfWar = true;
 
 	[System.Serializable]
 	public struct VoiceTrigger{
@@ -43,14 +44,31 @@ public class TargetDeathVictory : Objective {
 	{
 		BeginObjective ();
 
-	//	VictoryTrigger.instance.addObjective (this);
-
-		foreach (GameObject go in targets) {
-			if (go) {
-				foreach (FogOfWarUnit fog in go.GetComponents<FogOfWarUnit>()) {
-					fog.enabled = true;
-				}
-			}
+        //	VictoryTrigger.instance.addObjective (this);
+        if (RevealFogOfWar) { 
+        foreach (GameObject go in targets)
+        {
+            if (go)
+            {
+                FogOfWarUnit[] Foggers = go.GetComponents<FogOfWarUnit>();
+                if (Foggers.Length == 0)
+                {
+                    FogOfWarUnit newFogger = go.AddComponent<FogOfWarUnit>();
+                    UnitManager manager = go.GetComponent<UnitManager>();
+                    if (manager)
+                    {
+                        manager.AddUnFoggerManual();
+                    }
+                }
+                else
+                {
+                    foreach (FogOfWarUnit fog in Foggers)
+                    {
+                        fog.enabled = true;
+                    }
+                }
+            }
+        }
 		}
 	}
 

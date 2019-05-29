@@ -12,9 +12,13 @@ public class UnitAppear  : SceneEventTrigger {
 	public List<UnitToChange> toKill;
 
 
+    public void Trigger()
+    {
+        trigger(0, 0, Vector3.zero, null, false);
 
+    }
 
-	public override void trigger (int index, float input, Vector3 location, GameObject target, bool doIt){
+    public override void trigger (int index, float input, Vector3 location, GameObject target, bool doIt){
 
 		foreach (toChange obj in toAppear) {
 			StartCoroutine (delayedAppear (obj));
