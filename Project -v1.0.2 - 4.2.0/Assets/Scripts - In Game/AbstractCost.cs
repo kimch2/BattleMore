@@ -10,41 +10,37 @@ public class AbstractCost : MonoBehaviour {
 	//[HideInInspector]
 	public ResourceManager resourceCosts;
 
-		public float health;
+	public float health;
 		
-		public float energy;
+	public float energy;
 
-		public float cooldown;
-		public float cooldownTimer;
-		public bool StartsRefreshed = true;
+	public float cooldown;
+	public float cooldownTimer;
+	public bool StartsRefreshed = true;
 		
 		
-		private UnitStats stats;
+	private UnitStats stats;
 
-		UnitManager manager;
+	UnitManager manager;
 
-		//private Selected selectMan;
-
-
-
-		public string UsedFor;
+	public string UsedFor;
 		
 		
 		// Use this for initialization
-		public void Start () {
+	public void Start () {
 		//selectMan = this.gameObject.GetComponent<Selected> ();
 			
-			if (!StartsRefreshed) {
-				cooldownTimer = cooldown;
-				if (currenCooldown == null)
-				{
-					currenCooldown = StartCoroutine(onCooldown());
-				}
+		if (!StartsRefreshed) {
+			cooldownTimer = cooldown;
+			if (currenCooldown == null)
+			{
+				currenCooldown = StartCoroutine(onCooldown());
 			}
-			
-			stats = this.gameObject.GetComponent<UnitStats> ();
-			manager = GetComponent<UnitManager>();			
 		}
+			
+		stats = this.gameObject.GetComponent<UnitStats> ();
+		manager = GetComponent<UnitManager>();			
+	}
 
 	IEnumerator onCooldown()
 	{	cooldownTimer = cooldown;
@@ -68,6 +64,46 @@ public class AbstractCost : MonoBehaviour {
 		{
 			manager.myStats.getSelector().updateCoolDown(cooldownTimer / cooldown);
 		}
+	}
+
+	public void StartCustomCooldown(float customTime)
+	{
+		if (currenCooldown != null)
+		{
+			StopCoroutine(currenCooldown);
+		}
+		currenCooldown = StartCoroutine(customCooldown(customTime));
+	}
+
+	IEnumerator customCooldown(float timer)
+	{
+		float previousTime = cooldown;
+		cooldown = timer;
+		cooldownTimer = timer;
+		//Debug.Log ("Resting cooldown " + cooldownTimer);
+		while (true)
+		{
+			yield return null;
+			if (cooldownTimer > 0)
+			{
+				cooldownTimer -= Time.deltaTime;
+				//Debug.Log ("Colling " + cooldownTimer + "  " + timer+  "   " +UsedFor + "  " + this.gameObject);
+				if (showCooldown)
+				{
+					manager.myStats.getSelector().updateCoolDown(cooldownTimer / timer);
+				}
+			}
+			else
+			{
+				cooldownTimer = 0;
+				break;
+			}
+		}
+		if (showCooldown)
+		{
+			manager.myStats.getSelector().updateCoolDown(cooldownTimer / cooldown);
+		}
+		cooldown = previousTime;
 	}
 
 	public void showCostPopUp(bool positive)
@@ -207,7 +243,6 @@ public class AbstractCost : MonoBehaviour {
 	{
 		if (manager)
 		{
-			Debug.Log("Paying");
 			manager.myRacer.PayCost(resourceCosts.MyResources);
 		}
 		else

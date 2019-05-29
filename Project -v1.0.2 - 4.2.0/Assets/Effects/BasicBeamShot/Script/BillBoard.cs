@@ -15,7 +15,7 @@ public class BillBoard : MonoBehaviour
 
 		if (MainCamera.main) { 
 
-		LookAtCam = MainCamera.main.camera; }
+		LookAtCam = MainCamera.main.GetComponent<Camera>(); }
 		if (!LookAtCam)
 		{
 			LookAtCam = Camera.main;

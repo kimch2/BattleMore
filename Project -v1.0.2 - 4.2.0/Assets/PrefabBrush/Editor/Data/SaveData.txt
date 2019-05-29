@@ -4,18 +4,18 @@ Brush Size: 5
 Fill Mode: True
 Fill Rate: 0.5
 
-Game Object: Assets/Prefabs/Other/OrePickUp.prefab
+Game Object: Assets/Stylized Flora Pack Lite/Mesh/plants_10.fbx
 Layer: Default
 Toggle: True
 Slider: 1
-Lock Orientation Toggle: False
-Random Rotation Toggle: False
+Lock Orientation Toggle: True
+Random Rotation Toggle: True
 Random Rotation X: False
-Random Rotation Y: False
+Random Rotation Y: True
 Random Rotation Z: False
-Random Scale Toggle: False
-Random Scale Min: 0.1
-Random Scale Max: 1
+Random Scale Toggle: True
+Random Scale Min: 5
+Random Scale Max: 7
 Fixed Rotation Toggle: False
 Fixed Rotation X: 0
 Fixed Rotation Y: 0

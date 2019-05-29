@@ -274,18 +274,14 @@ namespace AssetUsageFinder
 
             foreach (var go in allObjects)
             {
-                var prefabType = PrefabUtility.GetPrefabType(go);
+                var prefabType = PrefabUtility.GetPrefabAssetType(go);
                 switch (prefabType)
                 {
-                    case PrefabType.ModelPrefab:
-                    case PrefabType.Prefab:
-                        continue;
-                    case PrefabType.None:
-                    case PrefabType.ModelPrefabInstance:
-                    case PrefabType.MissingPrefabInstance:
-                    case PrefabType.DisconnectedPrefabInstance:
-                    case PrefabType.DisconnectedModelPrefabInstance:
-                    case PrefabType.PrefabInstance:
+                    case PrefabAssetType.Model:
+
+                    case PrefabAssetType.NotAPrefab:
+                    case PrefabAssetType.MissingAsset:
+                    case PrefabAssetType.Regular:
                         if (PrefabUtility.GetCorrespondingObjectFromSource(go) == to)
                             referencedBy.Add(go);
                         break;

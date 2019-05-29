@@ -22,7 +22,7 @@ public class GatlingGun :  Ability,Notify, Modifier {
 
 
 	// Use this for initialization
-	void Start () {
+	new void Start () {
 		if (myWeapon == null) {
 
 			myWeapon = this.gameObject.GetComponent<IWeapon> ();

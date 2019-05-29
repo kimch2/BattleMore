@@ -127,9 +127,10 @@ public class StatChanger
 
 	public void changeSpecWeapDamage(float perc, float flat, UnityEngine.Object obj, IWeapon specificWeap, bool stackable = false)
 	{
+
 		NumberAlter number = GetNumberAlter("Damage" + specificWeap.GetHashCode());
 		number.AddBuff(perc, flat, obj, stackable);
-		specificWeap.attackPeriod = NumberAlter.adjustTotalSpeedInverse(new List<NumberAlter>() { number, GetNumberAlter("AttackSpeed") }, specificWeap.getInitialDamage(), .05f, 10000);
+		specificWeap.baseDamage = NumberAlter.AdjustTotalSpeed(new List<NumberAlter>() { number, GetNumberAlter("AttackSpeed") }, specificWeap.getInitialDamage(), .05f, 10000);
 	}
 
 	public void removeSpecWeapDamage(UnityEngine.Object obj, IWeapon specificWeap)
@@ -541,7 +542,7 @@ public class NumberAlter
 			default:
 				min = .01f;
 				max = 4096;
-				Debug.Log("Adding " + numberName + "   but it isn't spelled right or it hasn't been catalogged");
+				//Debug.Log("Adding " + numberName + "   but it isn't spelled right or it hasn't been catalogged");
 				break;
 
 		}

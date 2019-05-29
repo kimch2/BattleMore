@@ -29,8 +29,6 @@ public class IWeapon : MonoBehaviour {
 
 	public float baseDamage;
 	private float InitialBaseDamage;
-	bool initialSpeedSet;
-	bool initalDamageSet;
 
 
 	[Tooltip("Having arange that is longer than the vision range is not supported yet")]
@@ -115,8 +113,6 @@ private List<attackSpeedMod> DamageMod = new List<attackSpeedMod>();
 		}
 		baseAttackPeriod = attackPeriod;
 		InitialBaseDamage = baseDamage;
-		initalDamageSet = true;
-		initialSpeedSet = true;
 
 		if (firePoints.Count == 0) {
 			firePoints.Add(new AnimationPoint());

@@ -32,6 +32,16 @@ public class RaceUIManager : MonoBehaviour , ManagerWatcher{
 	private Dictionary<ResourceType, Text> ResourceMap = new Dictionary<ResourceType, Text>();
 
 
+    public static RaceUIManager getInstance()
+    {
+        if (instance == null)
+        {
+            instance = GameObject.FindObjectOfType<RaceUIManager>();
+            
+        }
+        return instance;
+    }
+
 	void Awake()
 	{
 		instance = this;
@@ -169,12 +179,13 @@ public class RaceUIManager : MonoBehaviour , ManagerWatcher{
 
 	public void addResource(ResourceType resType, float startingAmount)
 	{
-		GameManager.main.getActivePlayer().addWatcher(this);
+	
+		GameManager.getInstance().getActivePlayer().addWatcher(this);
 		GameObject obj = Instantiate<GameObject>(ResourcePrefab, ResourceGrid);
 		obj.transform.SetSiblingIndex(obj.transform.parent.childCount - 2);
 		obj.GetComponentInChildren<Image>().sprite = UnitEquivalance.getResourceInfo(resType).icon;
 		ResourceMap.Add(resType, obj.GetComponentsInChildren<Text>()[0]);
-		ResourceMap[resType].text = startingAmount + "";
+		ResourceMap[resType].text = (int)startingAmount + "";
 	}
 
 	
@@ -184,7 +195,7 @@ public class RaceUIManager : MonoBehaviour , ManagerWatcher{
 		{
 			if (ResourceMap.ContainsKey(t.resType))
 			{
-				ResourceMap[t.resType].text = t.currentAmount + "";
+				ResourceMap[t.resType].text = (int)t.currentAmount + "";
 			}
 			else
 			{
@@ -195,7 +206,7 @@ public class RaceUIManager : MonoBehaviour , ManagerWatcher{
 	}
 	
 	
-	public void updateSupply( float current, float max){
+	public void updateSupply( float current, float max){ 
 		if (raceManager.supplyMax >= raceManager.supplyCap) {
 			supply.color = Color.white;
 		}

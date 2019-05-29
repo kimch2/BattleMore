@@ -367,6 +367,7 @@ public class FogOfWar : MonoBehaviour
 	public int FogIndex = 0;
 	public void Unfog(Vector3 position, float radius, int layermask = 0)
 	{
+        //Debug.Log("UNFogging");
 		HasUnFogged = true;
 		FogFill fogfill = new FogFill(this, position, radius);
 

@@ -155,7 +155,7 @@ public class SurforgeInterfaceRig : Editor {
 
 	void DrawVoxelAddHandle(Vector3 handlePos) {
 		Handles.color = new Color(0, 1, 0, 1);
-		bool addVoxelButton = Handles.Button(handlePos, Quaternion.identity, 0.2f, 0.2f, Handles.SphereCap);
+		bool addVoxelButton = Handles.Button(handlePos, Quaternion.identity, 0.2f, 0.2f, Handles.SphereHandleCap);
 		if (addVoxelButton) {
 			AddVoxel(handlePos);
 		}
@@ -238,7 +238,7 @@ public class SurforgeInterfaceRig : Editor {
 			                                        cluster.voxels[index].transform.localEulerAngles.y,
 			                                        cluster.voxels[index].transform.localEulerAngles.z);
 			arrowRotation = arrowRotation * Quaternion.LookRotation(Vector3.right); 
-			nextButton = Handles.Button(cluster.voxels[index].transform.position, arrowRotation, buttonSize, buttonSize, Handles.ConeCap);
+			nextButton = Handles.Button(cluster.voxels[index].transform.position, arrowRotation, buttonSize, buttonSize, Handles.ConeHandleCap);
 		}
 		
 		else {
@@ -246,10 +246,10 @@ public class SurforgeInterfaceRig : Editor {
 				Handles.color = Color.red + Color.yellow;
 				Quaternion originArrowRotation = Quaternion.identity;
 				originArrowRotation = originArrowRotation * Quaternion.LookRotation(Vector3.right); 
-				nextButton = Handles.Button(cluster.voxels[index].transform.position, originArrowRotation, buttonSize, buttonSize, Handles.ConeCap);
+				nextButton = Handles.Button(cluster.voxels[index].transform.position, originArrowRotation, buttonSize, buttonSize, Handles.ConeHandleCap);
 			}
 			else {
-				nextButton = Handles.Button(cluster.voxels[index].transform.position, Quaternion.identity, buttonSize, buttonSize, Handles.CubeCap);
+				nextButton = Handles.Button(cluster.voxels[index].transform.position, Quaternion.identity, buttonSize, buttonSize, Handles.CubeHandleCap);
 			}
 		}
 

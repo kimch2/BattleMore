@@ -438,7 +438,7 @@ public class GE_ELF_Demo : MonoBehaviour
 		// Remove old particle
 		if (m_CurrentParticle != null)
 		{
-			DestroyObject(m_CurrentParticle);
+			Destroy(m_CurrentParticle);
 		}
 
 		// Create new particle

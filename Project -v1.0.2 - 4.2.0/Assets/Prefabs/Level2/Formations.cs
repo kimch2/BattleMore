@@ -154,7 +154,7 @@ public class Formations{
 	}
 
 
-		public static void assignMoveCOmmand(List<RTSObject> SelectedObjects, Vector3 targetPoint, Vector3 secondPoint, bool attack, float sepDistance)
+	public static void assignMoveCOmmand(List<RTSObject> SelectedObjects, Vector3 targetPoint, Vector3 secondPoint, bool attack, float sepDistance)
 	{
 		Dictionary<int, List<RTSObject>> trueMovers = new Dictionary<int, List<RTSObject>>();
 		List<RTSObject> others = new List<RTSObject>();

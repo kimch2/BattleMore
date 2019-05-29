@@ -48,8 +48,10 @@ public class UIManager : MonoBehaviour, IUIManager {
 	private Vector3 rightClickOrThree = Vector3.zero;
 
 	public bool fastCast;
+    public LayerMask GroundsCast = (1 << 8) | ( 1 << 16) | (1 << 11);
+    public LayerMask EverythinCast = ~((1 << 4) | (1 << 5)  | (1 << 12) | (1 << 14) | (1 << 15) | (1 << 17) | (1 << 19) | (1 << 20) | (1 << 21));
 
-	private float lastClickDouble;
+    private float lastClickDouble;
 	public bool IsShiftDown
 	{
 		get;
@@ -138,7 +140,7 @@ public class UIManager : MonoBehaviour, IUIManager {
 
 				RaycastHit hitb;
 
-				if (Physics.Raycast (rayb, out hitb, Mathf.Infinity, ~((1 << 16) | (1 << 20)))) {
+				if (Physics.Raycast (rayb, out hitb, Mathf.Infinity, EverythinCast)) {
 					rightClickOrThree = hitb.point + Vector3.up * 2;
 				}
 
@@ -160,7 +162,7 @@ public class UIManager : MonoBehaviour, IUIManager {
 			
 				RaycastHit hitb;
 				Vector3 b = Vector3.zero;
-				if (Physics.Raycast (rayb, out hitb, Mathf.Infinity, 1 << 8)){
+				if (Physics.Raycast (rayb, out hitb, Mathf.Infinity, GroundsCast)){
 					rightClickEnd = hitb.point + Vector3.up*2;
 				}
 			
@@ -192,9 +194,9 @@ public class UIManager : MonoBehaviour, IUIManager {
 			RaycastHit hit;
 
 			if (currentAbility.myTargetType == TargetAbility.targetType.ground) {
-				hitSomething = Physics.Raycast (rayb, out hit, Mathf.Infinity, 1 << 8);
+				hitSomething = Physics.Raycast (rayb, out hit, Mathf.Infinity, GroundsCast);
 			} else {
-				hitSomething = Physics.Raycast (rayb, out hit, Mathf.Infinity, ~((1 << 16) | (1 << 20)));
+				hitSomething = Physics.Raycast (rayb, out hit, Mathf.Infinity, EverythinCast);
 			}
 
 			if (hitSomething) {
@@ -238,9 +240,9 @@ public class UIManager : MonoBehaviour, IUIManager {
 
 		
 			if (currentAbility.myTargetType == TargetAbility.targetType.ground) {
-				hitSomething = Physics.Raycast (rayb, out hit, Mathf.Infinity, 1 << 8);
+				hitSomething = Physics.Raycast (rayb, out hit, Mathf.Infinity, GroundsCast);
 			} else {
-				hitSomething = Physics.Raycast (rayb, out hit, Mathf.Infinity, ~((1 << 16) | (1 << 20)));
+				hitSomething = Physics.Raycast (rayb, out hit, Mathf.Infinity, EverythinCast);
 			}
 
 			if (hitSomething)
@@ -298,10 +300,10 @@ public class UIManager : MonoBehaviour, IUIManager {
 		
 
 			//We're over the main screen, let's raycast
-			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-			RaycastHit hit;		
+		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+		RaycastHit hit;		
 
-		if (Physics.Raycast (ray, out hit, Mathf.Infinity, ~(5 << 12) & ~(1 << 20) )) {
+		if (Physics.Raycast (ray, out hit, Mathf.Infinity, EverythinCast )){ // ~(5 << 12) & ~(1 << 20) )) {
 			//Debug.Log ("hit something " + hit.collider.gameObject + "   "+this.gameObject.name);
 			currentObject = hit.collider.gameObject;
 
@@ -398,7 +400,7 @@ public class UIManager : MonoBehaviour, IUIManager {
 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 		RaycastHit hit;
 		if (!clickOverUI) {
-			if (Physics.Raycast (ray, out hit, Mathf.Infinity, 1 << 8)) {
+			if (Physics.Raycast (ray, out hit, Mathf.Infinity, GroundsCast)) {
 
 				m_ObjectBeingPlaced.transform.position = hit.point;
 				//buildingPlacer.transform.position = spot;
@@ -682,9 +684,9 @@ public class UIManager : MonoBehaviour, IUIManager {
 
 				bool hitSomething;
 				if (currentAbility.myTargetType == TargetAbility.targetType.ground) {
-					hitSomething = Physics.Raycast (ray, out hit, Mathf.Infinity, 1 << 8);
+					hitSomething = Physics.Raycast (ray, out hit, Mathf.Infinity, GroundsCast);
 				} else {
-					hitSomething = Physics.Raycast (ray, out hit, Mathf.Infinity,~((1 << 16) | (1 << 20)));
+					hitSomething = Physics.Raycast (ray, out hit, Mathf.Infinity,EverythinCast);
 				}
 
 				if (hitSomething) {
@@ -723,9 +725,9 @@ public class UIManager : MonoBehaviour, IUIManager {
 		
 				bool hitSomethingB;
 				if (currentAbility.myTargetType == TargetAbility.targetType.ground) {
-					hitSomethingB = Physics.Raycast (ray, out hit, Mathf.Infinity,1 << 8);
+					hitSomethingB = Physics.Raycast (ray, out hit, Mathf.Infinity, GroundsCast);
 				} else {
-					hitSomethingB = Physics.Raycast (ray, out hit, Mathf.Infinity,~((1 << 16) | (1 << 20)));
+					hitSomethingB = Physics.Raycast (ray, out hit, Mathf.Infinity, EverythinCast);
 				}
 
 				if (hitSomethingB) {
@@ -761,7 +763,7 @@ public class UIManager : MonoBehaviour, IUIManager {
 					if (!clickOverUI) {
 						ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 
-						if (Physics.Raycast (ray, out hit, Mathf.Infinity, 1 << 8)) {
+						if (Physics.Raycast (ray, out hit, Mathf.Infinity, GroundsCast)) {
 							targetPoint = hit.point;
 
 						}
@@ -880,13 +882,13 @@ public class UIManager : MonoBehaviour, IUIManager {
 				int currentObjLayer = currentObject.layer;
 
 
-				if (currentObjLayer == 8) {
+				if (currentObjLayer == 8 || currentObjLayer == 16 || currentObjLayer == 11) {
 					//Terrain -> Move Command
 
 					Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 					RaycastHit hit;		
 				
-					if (Physics.Raycast (ray, out hit, Mathf.Infinity, ~((1 << 16) | (1 << 20)))) {
+					if (Physics.Raycast (ray, out hit, Mathf.Infinity, EverythinCast)) { // Took out 1 << 16
 						Vector3 attackMovePoint = hit.point;
 			
 

@@ -72,10 +72,10 @@ public class PrefabBrushEditor : EditorWindow
     void OnFocus()
     {
         // Remove if already present and register the function
-        SceneView.onSceneGUIDelegate -= this.OnSceneGUI;
+        SceneView.duringSceneGui -= this.OnSceneGUI;
 
         // This allows us to register an update function for the scene view port
-        SceneView.onSceneGUIDelegate += this.OnSceneGUI;
+        SceneView.duringSceneGui += this.OnSceneGUI;
 
         // Storing our editors hash ID for control ID purposes
         _editorHash = GetHashCode();
@@ -85,7 +85,7 @@ public class PrefabBrushEditor : EditorWindow
     void OnDestroy()
     {
         // Unregister our scene update function
-        SceneView.onSceneGUIDelegate -= this.OnSceneGUI;
+        SceneView.duringSceneGui -= this.OnSceneGUI;
 
         Directory.CreateDirectory(_brushSaveFilePath);
 

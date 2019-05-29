@@ -17,10 +17,10 @@ public class GeroBeamHit : MonoBehaviour {
 		if(b){
 
 			ParticleSystem.EmissionModule tempA = PatA.emission;
-			tempA.rate = new ParticleSystem.MinMaxCurve ( PatA_rate);
+			tempA.rateOverTime = new ParticleSystem.MinMaxCurve ( PatA_rate);
 
 			ParticleSystem.EmissionModule tempB = PatB.emission;
-			tempB.rate = new ParticleSystem.MinMaxCurve ( PatB_rate);
+			tempB.rateOverTime = new ParticleSystem.MinMaxCurve ( PatB_rate);
 
 			//PatA.emissionRate = PatA_rate;
 			//PatB.emissionRate = PatB_rate;
@@ -28,10 +28,10 @@ public class GeroBeamHit : MonoBehaviour {
 		}else{
 
 			ParticleSystem.EmissionModule temp = PatA.emission;
-			temp.rate = new ParticleSystem.MinMaxCurve (0);
+			temp.rateOverTime = new ParticleSystem.MinMaxCurve (0);
 
 			ParticleSystem.EmissionModule tempB = PatB.emission;
-			tempB.rate = new ParticleSystem.MinMaxCurve (0);
+			tempB.rateOverTime = new ParticleSystem.MinMaxCurve (0);
 			//PatA.set.emission = new ParticleSystem.EmissionModule ();
 			//PatA.emission//.emissionRate = 0;
 			//PatB.emission.rate = new ParticleSystem.MinMaxCurve (0);//.emissionRate = 0;
@@ -46,27 +46,28 @@ public class GeroBeamHit : MonoBehaviour {
 		ParticleB = transform.Find("GeroParticleB").gameObject;
 		HitFlash = transform.Find("BeamFlash").gameObject;
 		PatA = ParticleA.gameObject.GetComponent<ParticleSystem>();
-		PatA_rate = PatA.emission.rate.constant;
+		PatA_rate = PatA.emission.rateOverTime.constant;
 
 		ParticleSystem.EmissionModule temp = PatA.emission;
-		temp.rate = new ParticleSystem.MinMaxCurve (0);
+		temp.rateOverTime = new ParticleSystem.MinMaxCurve (0);
 
 	
 
 
 		PatB = ParticleB.gameObject.GetComponent<ParticleSystem>();
-		PatB_rate = PatB.emission.rate.constant;
+		PatB_rate = PatB.emission.rateOverTime.constant;
 	
 		ParticleSystem.EmissionModule tempB = PatB.emission;
-		tempB.rate = new ParticleSystem.MinMaxCurve (0);
+		tempB.rateOverTime = new ParticleSystem.MinMaxCurve (0);
 
 		HitFlash.GetComponent<Renderer>().enabled = false;
     }
 	
 	// Update is called once per frame
 	void Update () {
-        PatA.startColor = col;
-        PatB.startColor = col;
+        ParticleSystem.MainModule main = PatA.main;
+        main.startColor = col;
+        main.startColor = col;
         HitFlash.GetComponent<Renderer>().material.SetColor("_Color", col*1.5f);
     }
 }

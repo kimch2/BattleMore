@@ -17,7 +17,7 @@ public class AstarEnumFlagDrawer : PropertyDrawer {
 
 		EditorGUI.BeginProperty(position, label, property);
 		EditorGUI.BeginChangeCheck();
-		Enum enumNew = EditorGUI.EnumMaskField(position, propName, targetEnum);
+		Enum enumNew = EditorGUI.EnumFlagsField(position, propName, targetEnum);
 		bool changed = EditorGUI.EndChangeCheck();
 		if (!property.hasMultipleDifferentValues || changed) {
 			property.intValue = (int)Convert.ChangeType(enumNew, targetEnum.GetType());

@@ -5,6 +5,7 @@ using UnityEngine;
 public class WayPoint : MonoBehaviour {
 
 	public List<WayPoint> myFriends;
+	public bool IsPathable = true;
 
 	// Use this for initialization
 	void Awake () {

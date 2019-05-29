@@ -144,12 +144,11 @@ public class UnitStats : MonoBehaviour {
 			myManager.myStats = this;
 		}
 
-		if (Clock.main.getTotalSecond() < 1 && myManager.PlayerOwner == 1) {
-
-			GameManager.main.playerList[myManager.PlayerOwner - 1].UnitCreated(supply);
+		if (Clock.main.getTotalSecond() < 1  && supply != 0) {
+			myManager.getRaceManager().UnitCreated(supply);
 		}
 
-		GameManager.main.playerList[myManager.PlayerOwner - 1].addVeteranStat(veternStat);
+		myManager.getRaceManager().addVeteranStat(veternStat);
 		if (isHero) {
 			veternStat.UnitName = myManager.UnitName;
 		}
@@ -200,6 +199,11 @@ public class UnitStats : MonoBehaviour {
 
 	public Selected getSelector()
 	{
+		if (!mySelection)
+		{
+			mySelection = gameObject.GetComponent<Selected>();
+		}
+
 		return mySelection;
 	}
 
@@ -430,7 +434,7 @@ public class UnitStats : MonoBehaviour {
 		if (!isUnitType(UnitTypes.UnitTypeTag.Invulnerable)) {
 
 			if (this) {
-				if (!GameManager.main.playerList [myManager.PlayerOwner - 1].UnitDying (myManager, deathSource, true)) {
+				if (!myManager.myRacer.UnitDying (myManager, deathSource, true)) {
 					return;
 				}
 			}
@@ -469,9 +473,10 @@ public class UnitStats : MonoBehaviour {
 				srcManager.myStats.upKills ();
 			}
 			
-			if (myManager.PlayerOwner == 1) {
 				//fix this when we have multiplayer games, here for optimizations?
-				GameManager.main.playerList [myManager.PlayerOwner - 1].UnitDied (supply, myManager);
+			myManager.myRacer.UnitDied (supply, myManager);
+			if (myManager.PlayerOwner == 1)
+			{
 				SelectedManager.main.updateControlGroups(myManager);
 			}
 

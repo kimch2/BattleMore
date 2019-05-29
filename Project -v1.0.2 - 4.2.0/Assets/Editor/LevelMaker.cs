@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using System;
+using UnityEditor.SceneManagement;
+using UnityEngine.SceneManagement;
 
 public class LevelMaker : EditorWindow
 {
@@ -23,16 +25,16 @@ public class LevelMaker : EditorWindow
     void OnFocus()
     {
         // Remove if already present and register the function
-        SceneView.onSceneGUIDelegate -= this.OnSceneGUI;
+        SceneView.duringSceneGui -= this.OnSceneGUI;
 
         // This allows us to register an update function for the scene view port
-        SceneView.onSceneGUIDelegate += this.OnSceneGUI;
+        SceneView.duringSceneGui += this.OnSceneGUI;
        
     }
 
     void OnDestroy()
     {
-       SceneView.onSceneGUIDelegate -= this.OnSceneGUI;
+       SceneView.duringSceneGui -= this.OnSceneGUI;
     }
 
     Vector3 lastPoint;
@@ -53,7 +55,7 @@ public class LevelMaker : EditorWindow
          RaycastHit hit;
 
     
-          if (Physics.Raycast(ray, out hit, 10000, 1 << 8))
+          if (Physics.Raycast(ray, out hit, 10000, 1 << 8 | 1 << 11 | 1 << 16))
          {
                 lastPoint = hit.point;
               
@@ -77,6 +79,8 @@ public class LevelMaker : EditorWindow
                 {
  
                     swapper.CreateUnits(currentComp, currentType, playerNumber, firstPoint, lastPoint - firstPoint, maxDifficulty);
+                    EditorUtility.SetDirty(swapper);
+                    EditorSceneManager.MarkSceneDirty(SceneManager.GetActiveScene());
                 }
             }
 
@@ -85,7 +89,9 @@ public class LevelMaker : EditorWindow
 				if (Event.current.type == EventType.MouseDown)
 				{
 					swapper.DeleteSpot(lastPoint);
-				}
+                    EditorUtility.SetDirty(swapper);
+                    EditorSceneManager.MarkSceneDirty(SceneManager.GetActiveScene());
+                }
 				
 			}
 		}
@@ -107,11 +113,15 @@ public class LevelMaker : EditorWindow
                 swapper =  o.AddComponent<RaceSwapper>();
 
             }
+            EditorUtility.SetDirty(swapper);
+            EditorSceneManager.MarkSceneDirty(SceneManager.GetActiveScene());
         }
 
         if (UnitHolder == null)
         {
             UnitHolder = Resources.Load<GameObject>("RaceInfoPacket").GetComponent<UnitEquivalance>();
+            EditorUtility.SetDirty(swapper);
+            EditorSceneManager.MarkSceneDirty(SceneManager.GetActiveScene());
         }
 
 
@@ -214,7 +224,9 @@ public class LevelMaker : EditorWindow
 				if (GUILayout.Button(info.race.ToString()))
 				{
 					swapper.swap(playerNumber, info.race);
-					SwapUnits = false;
+                    EditorUtility.SetDirty(swapper);
+                    EditorSceneManager.MarkSceneDirty(SceneManager.GetActiveScene());
+                    SwapUnits = false;
 				}
 			}
 		}

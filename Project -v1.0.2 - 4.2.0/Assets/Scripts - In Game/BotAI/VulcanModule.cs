@@ -36,7 +36,7 @@ public class VulcanAI : UniqUnitAI
 		{ // Deploy Turret
 			if (manager.abilityList[2].canActivate(false).canCast)
 			{
-				Vector3 targetZone = UniqUnitAI.getRandomTargetZone(manager.transform.forward * 30, 15);
+				Vector3 targetZone = UniqUnitAI.getRandomTargetZone(manager.transform.position +  manager.transform.forward * 30, 15);
 				((TargetAbility)manager.abilityList[2]).Cast(null, targetZone);
 				return 1;
 			}
@@ -44,6 +44,10 @@ public class VulcanAI : UniqUnitAI
 			{ // Kinetic Barrier
 				foreach (UnitManager man in manager.allies)
 				{
+					if (!man)
+					{
+						continue;
+					}
 					if (!man.myStats.isUnitType(UnitTypes.UnitTypeTag.Structure))
 					{
 						if (!(man.myStats.currentEnergy < man.myStats.MaxEnergy -50))

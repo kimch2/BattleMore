@@ -56,24 +56,19 @@ public class UiAbilityManager : MonoBehaviour {
 	public void pressButton(int n)
 	{
 		var pointer = new PointerEventData (EventSystem.current);
-		ExecuteEvents.Execute (myButtons[n].myButton.gameObject, pointer, ExecuteEvents.pointerEnterHandler);
+		//ExecuteEvents.Execute (myButtons[n].myButton.gameObject, pointer, ExecuteEvents.pointerEnterHandler);
 		ExecuteEvents.Execute (myButtons[n].myButton.gameObject, pointer, ExecuteEvents.pointerDownHandler);
-		StartCoroutine (delayedClick(n));
-
 	}
 
-	IEnumerator delayedClick(int n)
-	{
-		//UISoundManager.interfaceClick (true);
+    public void UnPressButton(int n)
+    {
+        var pointer = new PointerEventData(EventSystem.current);
+       // CostBox.instance.turnOff();
+        ExecuteEvents.Execute(myButtons[n].myButton.gameObject, pointer, ExecuteEvents.pointerClickHandler);
+        ExecuteEvents.Execute(myButtons[n].myButton.gameObject, pointer, ExecuteEvents.pointerUpHandler);
+        ExecuteEvents.Execute(myButtons[n].myButton.gameObject, pointer, ExecuteEvents.pointerExitHandler);
+    }
 
-		var pointer = new PointerEventData (EventSystem.current);
-		CostBox.instance.turnOff ();
-		yield return new WaitForSeconds (.06f);
-		ExecuteEvents.Execute (myButtons[n].myButton.gameObject, pointer, ExecuteEvents.pointerClickHandler);
-		ExecuteEvents.Execute (myButtons[n].myButton.gameObject, pointer, ExecuteEvents.pointerExitHandler);
-
-
-	}
 
 
 	// Use this for initialization
@@ -92,35 +87,82 @@ public class UiAbilityManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-
-		if (Input.GetKeyUp (KeyCode.Q)) {
+        if (Input.GetKeyDown(KeyCode.Q)) {
 			pressButton (0);
-		} else if (Input.GetKeyUp (KeyCode.W)) {
+		} else if (Input.GetKeyDown (KeyCode.W)) {
 			pressButton (1);
-		} else if (Input.GetKeyUp (KeyCode.E)) {
+		} else if (Input.GetKeyDown(KeyCode.E)) {
 			pressButton (2);
-		} else if (Input.GetKeyUp (KeyCode.R)) {
+		} else if (Input.GetKeyDown(KeyCode.R)) {
 			pressButton (3);
-		} else if (Input.GetKeyUp (KeyCode.A)) {
+		} else if (Input.GetKeyDown(KeyCode.A)) {
 			pressButton (4);
-		} else if (Input.GetKeyUp (KeyCode.S)) {
+		} else if (Input.GetKeyDown(KeyCode.S)) {
 			pressButton (5);
-		} else if (Input.GetKeyUp (KeyCode.D)) {
+		} else if (Input.GetKeyDown(KeyCode.D)) {
 			pressButton (6);
-		} else if (Input.GetKeyUp (KeyCode.F)) {
+		} else if (Input.GetKeyDown(KeyCode.F)) {
 			pressButton (7);
-		} else if (Input.GetKeyUp (KeyCode.Z)) {
+		} else if (Input.GetKeyDown(KeyCode.Z)) {
 			pressButton (8);
-		} else if (Input.GetKeyUp (KeyCode.X)) {
+		} else if (Input.GetKeyDown(KeyCode.X)) {
 			pressButton (9);
-		} else if (Input.GetKeyUp (KeyCode.C)) {
+		} else if (Input.GetKeyDown(KeyCode.C)) {
 			pressButton (10);
-		} else if (Input.GetKeyUp (KeyCode.V)) {
+		} else if (Input.GetKeyDown(KeyCode.V)) {
 			pressButton (11);
-		} 
-			
+		}
 
-		if (Time.time < nextActionTime) {
+        if (Input.GetKeyUp(KeyCode.Q))
+        {
+            UnPressButton(0);
+        }
+        else if (Input.GetKeyUp(KeyCode.W))
+        {
+            UnPressButton(1);
+        }
+        else if (Input.GetKeyUp(KeyCode.E))
+        {
+            UnPressButton(2);
+        }
+        else if (Input.GetKeyUp(KeyCode.R))
+        {
+            UnPressButton(3);
+        }
+        else if (Input.GetKeyUp(KeyCode.A))
+        {
+            UnPressButton(4);
+        }
+        else if (Input.GetKeyUp(KeyCode.S))
+        {
+            UnPressButton(5);
+        }
+        else if (Input.GetKeyUp(KeyCode.D))
+        {
+            UnPressButton(6);
+        }
+        else if (Input.GetKeyUp(KeyCode.F))
+        {
+            UnPressButton(7);
+        }
+        else if (Input.GetKeyUp(KeyCode.Z))
+        {
+            UnPressButton(8);
+        }
+        else if (Input.GetKeyUp(KeyCode.X))
+        {
+            UnPressButton(9);
+        }
+        else if (Input.GetKeyUp(KeyCode.C))
+        {
+            UnPressButton(10);
+        }
+        else if (Input.GetKeyUp(KeyCode.V))
+        {
+            UnPressButton(11);
+        }
+
+        if (Time.time < nextActionTime) {
 			return;
 		} 
 		nextActionTime += .03f;
@@ -515,109 +557,12 @@ public class UiAbilityManager : MonoBehaviour {
 			
 			}
 		} else {
+            Debug.Log("Bad click");
 			UISoundManager.interfaceClick (false);
 		}
 		//EventSystem.current.SetSelectedGameObject (null);
 		
 	}
-
-
-
-
-
-
-	/*
-	public void UpdateSingleButton(int buttonNumber, int i, string UnitName)
-	{
-
-		int j = buttonNumber / 4;
-		UnitManager firstManager = currentPage.rows [j] [0].getUnitManager();
-		if (firstManager.UnitName != UnitName) {
-			return;
-		}
-			
-
-		int buttonIndex = i + firstManager.AbilityStartingRow * 4;
-		ButtonRef currButton = myButtons [buttonIndex]; 
-
-		currButton.myButton.gameObject.SetActive (firstManager.abilityList [i] != null);
-
-		if (firstManager.abilityList [i] == null) {
-				return;
-			}
-		Ability currAbil = firstManager.abilityList [i];
-
-		if (currAbil.myCost) {
-				if (currAbil.myCost.cooldown != 0) {
-
-				setButtonCooldown (currButton.mySlider, i, j);
-					} else {
-						currButton.mySlider.gameObject.SetActive (false);
-					}
-
-					currButton.MoneySign.enabled = currAbil.myCost.ResourceOne > racer.ResourceOne;
-				} else {
-					currButton.MoneySign.enabled = false;
-					currButton.mySlider.gameObject.SetActive (false);
-				}
-
-				if (firstManager.abilityList [i].chargeCount > -1) {
-
-					int totalCharge = 0;
-					foreach (RTSObject obj in currentPage.rows [j]) {
-						totalCharge += obj.abilityList [i].chargeCount;
-					}
-
-					currButton.ChargeCount.text = "" + totalCharge;
-				} else {
-					currButton.ChargeCount.text = "";
-				}
-
-				currButton.myButton.image.sprite = currAbil.iconPic;
-
-				currButton.abilityBox.myAbility = currAbil;
-
-				ColorBlock cb = currButton.myButton.colors;
-
-				bool active = false;
-				foreach (RTSObject obj in currentPage.rows [j]) {
-					UnitManager Uman = obj.getUnitManager ();
-
-					if (!Uman.Silenced () && !Uman.Stunned ()) {
-						active = (Uman.abilityList [i].active);
-					}
-					if (active) {
-						break;
-					}
-				}
-
-
-				if (active) {
-					cb.disabledColor = Color.white;
-					currButton.myButton.interactable = true;
-
-				} else {
-					cb.disabledColor = disabledColor;
-					currButton.myButton.interactable = false;
-
-				}
-
-				if (currAbil.getMyType () == Ability.type.passive) {
-					currButton.myHotkey.enabled = false;
-					cb.disabledColor = Color.white;
-					currButton.myButton.interactable = false;
-				} else {
-					currButton.myHotkey.enabled = true;
-				}
-
-				currButton.myButton.colors = cb;
-				currButton.autocastFrame.enabled = currAbil.canAutoCast;
-				currButton.AutocastAnim.enabled = currAbil.autocast;
-			
-	}
-*/
-
-
 
 
 	public void loadUI(Page uiPage)

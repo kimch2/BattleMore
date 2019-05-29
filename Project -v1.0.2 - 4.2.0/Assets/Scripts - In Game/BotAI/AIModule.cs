@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class AIModule {
 
-	protected List<UnitManager> AllUnits;// under my module's pervayance
+	protected List<UnitManager> AllUnits = new List<UnitManager>();// under my module's pervayance
 	protected Dictionary<string, List<UnitManager>> UnitRoster;
 
 

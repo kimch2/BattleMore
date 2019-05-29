@@ -25,11 +25,16 @@ public class CombatAI : MonoBehaviour , ITask
 	private void Awake()
 	{
 		mySeeker = gameObject.AddComponent<Seeker>();
-		myModules.Add(new KiteAIModule(this));
+		//myModules.Add(new KiteAIModule(this));
 		myModules.Add(new SpellCasterModule(this));
 		
 		InvokeRepeating("update",10, .5f);
 		
+	}
+
+	public void addModule(AIModule mod)
+	{
+		myModules.Add(mod);
 	}
 
 	private void update()
@@ -102,15 +107,21 @@ public class CombatAI : MonoBehaviour , ITask
 		}
 	}
 
-	public void addUnits(List<UnitManager> units)
+	public void addUnits(List<UnitManager> units, bool EnemySearch)
 	{
 		myUnits = units;
 		foreach (UnitManager man in units)
 		{
-
+			if (!man)
+			{
+				continue;
+			}
 			UniqUnitAI.applyModule(man, UniqueUnitAIs);
-			EnemySearchAI searcher = man.gameObject.AddComponent<EnemySearchAI>();
-			searcher.combatAI = this;
+			if (EnemySearch)
+			{
+				EnemySearchAI searcher = man.gameObject.AddComponent<EnemySearchAI>();
+				searcher.combatAI = this;
+			}
 			if (man.cMover && !(man.cMover is airmover))
 			{
 				hasGroundUnits = true;
@@ -125,6 +136,7 @@ public class CombatAI : MonoBehaviour , ITask
 
 	public void setAttackMovePoint(Vector3 point)
 	{
+		myUnits.RemoveAll(item => item == null);
 		AttackMovePoint = point;
 		if (hasGroundUnits)
 		{
@@ -142,12 +154,12 @@ public class CombatAI : MonoBehaviour , ITask
 
 	// Rally before reaching enemy base, then attack as one.
 
-	Vector3 HalfPoint;
+	public Vector3 HalfPoint;
 
 	public void OnPathComplete(Path p)
 	{
 		Vector3[] RallyPoints = getRallyPoint(p, 240);
-
+        HalfPoint = RallyPoints[0];
 		Formations.assignMoveCOmmand(myUnits, RallyPoints[0], RallyPoints[1], true, 0);
 
 		float time = Vector3.Distance(HalfPoint, myUnits[0].transform.position) / 30;
@@ -158,18 +170,35 @@ public class CombatAI : MonoBehaviour , ITask
 	{ // or maybe check if they are in the default
 		CheckIfAlive();
 
+        bool FinishAttack = false;
+        bool AllInRange = true;
 		foreach (UnitManager man in myUnits)
 		{
 			if (man)
 			{
 
-				if (Vector3.Distance(man.transform.position, HalfPoint) > 75 && man.enemies.Count == 0)
-				{
-					Invoke("FinishAttackMove", 5);
-					return;
-				}
+                if (man.enemies.Count > 0)
+                {
+                    FinishAttack = true;
+                    break;
+                }
+                if(Vector3.Distance(man.transform.position, HalfPoint) > 70 || !(man.getState() is DefaultState))
+                {
+                    AllInRange = false;
+                }
 			}
 		}
+        if (FinishAttack || AllInRange)
+        {
+            // Give the final attack command
+        }
+        else
+        {
+            Invoke("FinishAttackMove", 5);
+            return;
+        }
+
+        Debug.Log("Finsihing ");
 		Formations.assignMoveCOmmand(myUnits, AttackMovePoint, AttackMovePoint, true, 0);
 		hasReachedEnd = true;
 		foreach (UnitManager man in myUnits)
@@ -177,8 +206,11 @@ public class CombatAI : MonoBehaviour , ITask
 			if (man)
 			{
 				EnemySearchAI ai = man.gameObject.GetComponent<EnemySearchAI>();
-				ai.combatAI = null;
-				ai.Start();
+				if (ai)
+				{
+					ai.combatAI = null;
+					ai.Start();
+				}
 			}
 		}
 	}
@@ -198,8 +230,12 @@ public class CombatAI : MonoBehaviour , ITask
 				break;
 			}
 		}
+		if (lastInt < 0)
+		{
+			lastInt = 0;
+		}
 
-		Vector3 Offset = Quaternion.Euler(0, 90, 0) * (p.vectorPath[lastInt] - p.vectorPath[lastInt + 1]).normalized * 16;
+		Vector3 Offset = Quaternion.Euler(0, 90, 0) * (p.vectorPath[lastInt] - p.vectorPath[lastInt +1 ]).normalized * 16;
 
 		Vector3 totalAverage = Vector3.zero;
 		int totalCount = 1;

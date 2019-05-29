@@ -35,7 +35,7 @@ public class SplitterShot : Projectile {
 	}
 
 
-	public new void setTarget(UnitManager so)
+	public void setTarget(UnitManager so)
 	{
 
 	
@@ -43,7 +43,7 @@ public class SplitterShot : Projectile {
 		this.target = so;
 	}
 	
-	public new void setDamage(float so)
+	public void setDamage(float so)
 	{
 		
 		damage = so;
@@ -133,7 +133,7 @@ public class SplitterShot : Projectile {
 	}
 
 
-	new void OnTriggerEnter(Collider other)
+	void OnTriggerEnter(Collider other)
 	{
 		if (Source) {
 

@@ -51,33 +51,25 @@ public class WayPointInteracter : StandardInteract {
 	
 		oneAfter =next.nextPoint (previous);
 	
-
-		//WayPoint temp = next;
-		//next = next.nextPoint (previous);
-		//previous = temp;
-		//oneAfter = next.nextPoint (next);
-
 		Vector3 nextPoint = next.transform.position;
 		nextPoint.x += UnityEngine.Random.Range (-randomRadius,randomRadius);
 		nextPoint.z += UnityEngine.Random.Range (-randomRadius,randomRadius);
-		myManager.GiveOrder (Orders.CreateMoveOrder (nextPoint));
-		
+		myManager.GiveOrder (Orders.CreateMoveOrder (nextPoint));		
 	}
 
-	void OnControllerColliderHit(ControllerColliderHit hit)
-	{
-		WayPointInteracter inter = hit.gameObject.GetComponent<WayPointInteracter> ();
+    private void OnTriggerEnter(Collider other)
+    {
+       
+		WayPointInteracter inter = other.gameObject.GetComponent<WayPointInteracter> ();
 		if (inter) {
+            Debug.Log("COlliding with " + other.gameObject);
+            // A hack to make it so only one death cube redirects itself when they collide
 
-			// A hack to make it so only one death cube redirects itself when they collide
-
-			if (inter.next == next && inter.transform.position.x < transform.position.x || inter.next != next) {
+            if (inter.next == next && inter.transform.position.x < transform.position.x || inter.next != next || inter.next == previous) {
 				
-
-
 				WayPoint temp = previous;
 				previous = next;
-				next = previous;
+				next = temp;
 
 				oneAfter = next.nextPoint (previous);
 

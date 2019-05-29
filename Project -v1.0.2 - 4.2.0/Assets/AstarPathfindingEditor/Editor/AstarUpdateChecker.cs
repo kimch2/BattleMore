@@ -9,7 +9,7 @@ namespace Pathfinding {
 	public static class AstarUpdateChecker {
 		/** Used for downloading new version information */
 		static WWW updateCheckDownload;
-
+        
 		static System.DateTime _lastUpdateCheck;
 		static bool _lastUpdateCheckRead;
 

@@ -269,9 +269,10 @@ public class DifficultyEditor : EditorWindow {
 				foreach (UnitManager manage in GameObject.FindObjectsOfType<UnitManager>()) {
 					if (manage.UnitName == replaceUnit) {
 
-						GameObject obj =  (GameObject)Instantiate (Selection.objects [0], manage.transform.position, manage.transform.rotation, manage.transform.parent);
-						obj =  PrefabUtility.ConnectGameObjectToPrefab(obj,  prefab);
-						obj.transform.position = manage.transform.position;
+                        GameObject obj = (GameObject)PrefabUtility.InstantiatePrefab(Selection.objects[0], manage.transform.parent);
+                        obj.transform.position = manage.transform.position;
+                        obj.transform.rotation = manage.transform.rotation;
+
 						DestroyImmediate (manage.gameObject);
 				
 					}

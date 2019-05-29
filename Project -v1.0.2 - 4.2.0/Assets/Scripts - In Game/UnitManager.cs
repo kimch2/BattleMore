@@ -45,7 +45,7 @@ public class UnitManager : Unit,IOrderable{
 	private List<Notify> potentialNotify = new List<Notify>();
 
 	public List<Ability> myAddons = new List<Ability>(); // Currently being used so we can see Repair bays in a weapon slot
-	[HideInInspector]
+	//[HideInInspector]
 	public RaceManager myRacer;
 
 	public CharacterController CharController;
@@ -124,13 +124,20 @@ public class UnitManager : Unit,IOrderable{
 			changeState (new turretState (this));
 		} 
 
-		chaseRange = visionRange + 15;
+		chaseRange = visionRange + 40;
 	}
 
 	public void initializeVision()
 	{
-		if (!fogger) {
-			fogger = GetComponent<FogOfWarUnit> ();
+		if (!fogger)
+		{
+			fogger = gameObject.GetComponent<FogOfWarUnit>();
+
+		}
+
+		if (!myStats)
+		{
+			myStats = GetComponent<UnitStats>();
 		}
 
 		if (!fogger)
@@ -148,15 +155,32 @@ public class UnitManager : Unit,IOrderable{
 		{
 			if (PlayerOwner != 1 && !myStats.getSelector().ManualFogOfWar)
 			{
-				
-				fogger.enabled = false;
-				fogger = null;
+                //Debug.Log("On " + this.gameObject);
+                if (Application.isPlaying)
+                {
+                    Destroy(fogger);
+                }
+				//fogger.enabled = false;
+				//fogger = null;
 			}
 		}
 		float distance = visionRange + 3;
 		if (CharController) {
 			distance += CharController.radius;
 		}
+
+		if (!visionSphere)
+		{
+			foreach (SphereCollider sc in GetComponents<SphereCollider>())
+			{
+				if (sc.isTrigger)
+				{
+					visionSphere = sc;
+					break;
+				}
+			}
+		}
+
 		visionSphere.radius = distance;
 		if (fogger) {
 			fogger.radius = distance;
@@ -182,6 +206,15 @@ public class UnitManager : Unit,IOrderable{
 			hasStarted = true;
 			initializeVision();
 		}
+	}
+
+	public RaceManager getRaceManager()
+	{
+		if (myRacer == null)
+		{
+			myRacer = GameManager.main.playerList[PlayerOwner - 1];
+		}
+		return myRacer;
 	}
 
 
@@ -237,7 +270,7 @@ public class UnitManager : Unit,IOrderable{
 
 	
 	// Update is called once per frame
-	new void Update () {
+	void Update () {
 
 		//System.Diagnostics.Stopwatch stopwatch = new System.Diagnostics.Stopwatch();
 		//stopwatch.Start();
@@ -569,7 +602,25 @@ public class UnitManager : Unit,IOrderable{
 		//Start ();
 	}
 
+    public void AddUnFoggerManual()
+    {
+        if (!fogger)
+        {
+            fogger = gameObject.GetComponent<FogOfWarUnit>();
+            if (!fogger)
+            {
+                fogger = gameObject.AddComponent<FogOfWarUnit>();
+            }
+        }
+        fogger.radius = visionRange;
 
+        if (cMover)
+        {
+            cMover.myFogger = fogger;
+        }
+        fogger.enabled = true;
+      
+    }
 
 	private UnitState popLastState()
 	{
@@ -777,19 +828,16 @@ public class UnitManager : Unit,IOrderable{
 		return best;
 	}
 
-	IWeapon best = null;
-	float min= 100000000;
 	public IWeapon isValidTarget(UnitManager obj)
 	{
-		best = null;
-		min= 100000000;
+
 		foreach (IWeapon weap in myWeapon) {
 			if( weap.isValidTarget(obj)){
 				return weap; 
 			}
 
 		}
-		return best;
+		return null;
 	}
 
 	public IWeapon canAttack(UnitManager obj)

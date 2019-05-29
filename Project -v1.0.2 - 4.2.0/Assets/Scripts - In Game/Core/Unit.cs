@@ -39,23 +39,6 @@ public class Unit : RTSObject, IOrderable {
 
 	public GameObject getObject(){return this.gameObject;}
 
-
-	/*
-	protected void Update()
-	{
-		if (GetComponent<Renderer>().isVisible && guiManager.Dragging)
-		{
-			if (guiManager.IsWithin (transform.position))
-			{
-				selectedManager.AddObject(this);
-			}
-			else
-			{
-				selectedManager.DeselectObject (this);				
-			}
-		}
-	}
-		*/
 	public override void SetSelected ()
 	{
 		if (!GetComponent<Selected>().IsSelected)

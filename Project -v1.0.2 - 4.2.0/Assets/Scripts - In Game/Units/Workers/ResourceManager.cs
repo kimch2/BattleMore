@@ -58,7 +58,10 @@ public class ResourceManager {
 		MyResources.Find(item => item.resType == myType.resType).payCost(myType.currentAmount);
 	}
 
-
+	public bool hasResourceType(ResourceType t)
+	{
+		return MyResources.Find(item => item.resType == t) != null;
+	}
 
 	public void RefundResources(List<ResourceTank> myTypes)
 	{
@@ -127,7 +130,7 @@ public class ResourceManager {
 			if (MyResources.Find(item => item.resType == tank.resType).currentAmount < tank.currentAmount)
 			{
 				cantPay.Add(tank.resType);
-}
+            }
 			
 		}
 

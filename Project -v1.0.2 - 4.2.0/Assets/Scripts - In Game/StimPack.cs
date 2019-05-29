@@ -10,18 +10,21 @@ public class StimPack : Ability {
 
 
 	private float timer;
-	private Selected select;
+
 	public MultiShotParticle BoostEffect;
-	UnitManager myManager;
 
 	// Use this for initialization
 
-	void Awake()
-	{audioSrc = GetComponent<AudioSource> ();
+	new void Awake()
+	{
+        base.Awake();
+        audioSrc = GetComponent<AudioSource> ();
 		myType = type.activated;
 	}
 
-	void Start () {description = "Uses life to give a short burst of speed";
+	new void Start () {
+
+        description = "Uses life to give a short burst of speed";
 		select = GetComponent<Selected> ();
 		myManager = GetComponent<UnitManager> ();
 	}

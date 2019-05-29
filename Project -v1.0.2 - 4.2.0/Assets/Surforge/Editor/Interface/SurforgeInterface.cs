@@ -383,8 +383,8 @@ public class SurforgeInterface : EditorWindow
 
 			isSurforgeDelegateRunning = true;
 
-			SceneView.onSceneGUIDelegate -= SurforgeOnScene;
-			SceneView.onSceneGUIDelegate += SurforgeOnScene;
+			SceneView.duringSceneGui -= SurforgeOnScene;
+			SceneView.duringSceneGui += SurforgeOnScene;
 
 			Undo.undoRedoPerformed -= RepaintWindowOnUndoRedo;
 			Undo.undoRedoPerformed += RepaintWindowOnUndoRedo;
@@ -6304,7 +6304,7 @@ public class SurforgeInterface : EditorWindow
 		
 		Vector3 centerHandleOld = new Vector3(centerHandle.x, centerHandle.y, centerHandle.z);
 		
-		centerHandle = Handles.FreeMoveHandle(centerHandle + new Vector3(0.25f, 0, 0.25f), Quaternion.identity, HandleUtility.GetHandleSize(handleMaxX) * handleSizeMult, snapLimit, Handles.DotCap);
+		centerHandle = Handles.FreeMoveHandle(centerHandle + new Vector3(0.25f, 0, 0.25f), Quaternion.identity, HandleUtility.GetHandleSize(handleMaxX) * handleSizeMult, snapLimit, Handles.DotHandleCap);
 		centerHandle = centerHandle - new Vector3(0.25f, 0, 0.25f);
 
 		if (sceneCameraDirection == 1) {
@@ -6335,11 +6335,11 @@ public class SurforgeInterface : EditorWindow
 		if (sceneCameraDirection != 2) {
 			if (hideVolumeBorders) {
 				Vector3 handleMaxXFlat = new Vector3(Surforge.surforgeSettings.limits.maxX, Surforge.surforgeSettings.limits.minY, Surforge.surforgeSettings.limits.minZ + (Surforge.surforgeSettings.limits.maxZ - Surforge.surforgeSettings.limits.minZ) * 0.5f);
-				handleMaxX = Handles.FreeMoveHandle(handleMaxXFlat + new Vector3(0.25f, 0, 0.25f), Quaternion.identity, HandleUtility.GetHandleSize(handleMaxX) * handleSizeMult, snapLimit, Handles.DotCap);
+				handleMaxX = Handles.FreeMoveHandle(handleMaxXFlat + new Vector3(0.25f, 0, 0.25f), Quaternion.identity, HandleUtility.GetHandleSize(handleMaxX) * handleSizeMult, snapLimit, Handles.DotHandleCap);
 				handleMaxX = handleMaxX - new Vector3(0.25f, 0, 0.25f);
 			}
 			else {
-				handleMaxX = Handles.FreeMoveHandle(handleMaxX + new Vector3(0.25f, 0, 0.25f), Quaternion.identity, HandleUtility.GetHandleSize(handleMaxX) * handleSizeMult, snapLimit, Handles.DotCap);
+				handleMaxX = Handles.FreeMoveHandle(handleMaxX + new Vector3(0.25f, 0, 0.25f), Quaternion.identity, HandleUtility.GetHandleSize(handleMaxX) * handleSizeMult, snapLimit, Handles.DotHandleCap);
 				handleMaxX = handleMaxX - new Vector3(0.25f, 0, 0.25f);
 			}
 		}
@@ -6351,11 +6351,11 @@ public class SurforgeInterface : EditorWindow
 		if (sceneCameraDirection != 2) {
 			if (hideVolumeBorders) {
 				Vector3 handleMinXFlat = new Vector3(Surforge.surforgeSettings.limits.minX, Surforge.surforgeSettings.limits.minY, Surforge.surforgeSettings.limits.minZ + (Surforge.surforgeSettings.limits.maxZ - Surforge.surforgeSettings.limits.minZ) * 0.5f);
-				handleMinX = Handles.FreeMoveHandle(handleMinXFlat + new Vector3(0.25f, 0, 0.25f), Quaternion.identity, HandleUtility.GetHandleSize(handleMinX) * handleSizeMult, snapLimit, Handles.DotCap);
+				handleMinX = Handles.FreeMoveHandle(handleMinXFlat + new Vector3(0.25f, 0, 0.25f), Quaternion.identity, HandleUtility.GetHandleSize(handleMinX) * handleSizeMult, snapLimit, Handles.DotHandleCap);
 				handleMinX = handleMinX - new Vector3(0.25f, 0, 0.25f);
 			}
 			else {
-				handleMinX = Handles.FreeMoveHandle(handleMinX + new Vector3(0.25f, 0, 0.25f), Quaternion.identity, HandleUtility.GetHandleSize(handleMinX) * handleSizeMult, snapLimit, Handles.DotCap);
+				handleMinX = Handles.FreeMoveHandle(handleMinX + new Vector3(0.25f, 0, 0.25f), Quaternion.identity, HandleUtility.GetHandleSize(handleMinX) * handleSizeMult, snapLimit, Handles.DotHandleCap);
 				handleMinX = handleMinX - new Vector3(0.25f, 0, 0.25f);
 			}
 		}
@@ -6365,7 +6365,7 @@ public class SurforgeInterface : EditorWindow
 		
 		handleMaxY = new Vector3(Surforge.surforgeSettings.limits.minX + (Surforge.surforgeSettings.limits.maxX - Surforge.surforgeSettings.limits.minX) * 0.5f, Surforge.surforgeSettings.limits.maxY, Surforge.surforgeSettings.limits.minZ + (Surforge.surforgeSettings.limits.maxZ - Surforge.surforgeSettings.limits.minZ) * 0.5f);
 		if (sceneCameraDirection != 1) {
-			handleMaxY = Handles.FreeMoveHandle(handleMaxY + new Vector3(0.25f, 0, 0.25f), Quaternion.identity, HandleUtility.GetHandleSize(handleMaxY) * handleSizeMult, snapLimit, Handles.DotCap);
+			handleMaxY = Handles.FreeMoveHandle(handleMaxY + new Vector3(0.25f, 0, 0.25f), Quaternion.identity, HandleUtility.GetHandleSize(handleMaxY) * handleSizeMult, snapLimit, Handles.DotHandleCap);
 			handleMaxY = handleMaxY - new Vector3(0.25f, 0, 0.25f);
 		}
 		handleMaxY = new Vector3(Surforge.surforgeSettings.limits.minX + (Surforge.surforgeSettings.limits.maxX - Surforge.surforgeSettings.limits.minX) * 0.5f, RoundTo025And075(handleMaxY.y), Surforge.surforgeSettings.limits.minZ + (Surforge.surforgeSettings.limits.maxZ - Surforge.surforgeSettings.limits.minZ) * 0.5f);
@@ -6374,7 +6374,7 @@ public class SurforgeInterface : EditorWindow
 		
 		handleMinY = new Vector3(Surforge.surforgeSettings.limits.minX + (Surforge.surforgeSettings.limits.maxX - Surforge.surforgeSettings.limits.minX) * 0.5f, Surforge.surforgeSettings.limits.minY, Surforge.surforgeSettings.limits.minZ + (Surforge.surforgeSettings.limits.maxZ - Surforge.surforgeSettings.limits.minZ) * 0.5f);
 		if (sceneCameraDirection != 1) {
-			handleMinY = Handles.FreeMoveHandle(handleMinY + new Vector3(0.25f, 0, 0.25f), Quaternion.identity, HandleUtility.GetHandleSize(handleMinY) * handleSizeMult, snapLimit, Handles.DotCap);
+			handleMinY = Handles.FreeMoveHandle(handleMinY + new Vector3(0.25f, 0, 0.25f), Quaternion.identity, HandleUtility.GetHandleSize(handleMinY) * handleSizeMult, snapLimit, Handles.DotHandleCap);
 			handleMinY = handleMinY - new Vector3(0.25f, 0, 0.25f);
 		}
 		handleMinY = new Vector3(Surforge.surforgeSettings.limits.minX + (Surforge.surforgeSettings.limits.maxX - Surforge.surforgeSettings.limits.minX) * 0.5f, RoundTo025And075(handleMinY.y), Surforge.surforgeSettings.limits.minZ + (Surforge.surforgeSettings.limits.maxZ - Surforge.surforgeSettings.limits.minZ) * 0.5f);
@@ -6385,11 +6385,11 @@ public class SurforgeInterface : EditorWindow
 		if (sceneCameraDirection != 0) {
 			if (hideVolumeBorders) {
 				Vector3 handleMaxZFlat = new Vector3(Surforge.surforgeSettings.limits.minX + (Surforge.surforgeSettings.limits.maxX - Surforge.surforgeSettings.limits.minX) * 0.5f, Surforge.surforgeSettings.limits.minY, Surforge.surforgeSettings.limits.maxZ);
-				handleMaxZ = Handles.FreeMoveHandle(handleMaxZFlat + new Vector3(0.25f, 0, 0.25f), Quaternion.identity, HandleUtility.GetHandleSize(handleMaxZ) * handleSizeMult, snapLimit, Handles.DotCap);
+                handleMaxZ = Handles.FreeMoveHandle(handleMaxZFlat + new Vector3(0.25f, 0, 0.25f), Quaternion.identity, HandleUtility.GetHandleSize(handleMaxZ) * handleSizeMult, snapLimit, Handles.DotHandleCap);
 				handleMaxZ = handleMaxZ - new Vector3(0.25f, 0, 0.25f);
 			}
 			else {
-				handleMaxZ = Handles.FreeMoveHandle(handleMaxZ + new Vector3(0.25f, 0, 0.25f), Quaternion.identity, HandleUtility.GetHandleSize(handleMaxZ) * handleSizeMult, snapLimit, Handles.DotCap);
+				handleMaxZ = Handles.FreeMoveHandle(handleMaxZ + new Vector3(0.25f, 0, 0.25f), Quaternion.identity, HandleUtility.GetHandleSize(handleMaxZ) * handleSizeMult, snapLimit, Handles.DotHandleCap);
 				handleMaxZ = handleMaxZ - new Vector3(0.25f, 0, 0.25f);
 			}
 		}
@@ -6401,11 +6401,11 @@ public class SurforgeInterface : EditorWindow
 		if (sceneCameraDirection != 0) { 
 			if (hideVolumeBorders) {
 				Vector3 handleMinZFlat = new Vector3(Surforge.surforgeSettings.limits.minX + (Surforge.surforgeSettings.limits.maxX - Surforge.surforgeSettings.limits.minX) * 0.5f, Surforge.surforgeSettings.limits.minY, Surforge.surforgeSettings.limits.minZ);
-				handleMinZ = Handles.FreeMoveHandle(handleMinZFlat + new Vector3(0.25f, 0, 0.25f), Quaternion.identity, HandleUtility.GetHandleSize(handleMinZ) * handleSizeMult, snapLimit, Handles.DotCap);
+				handleMinZ = Handles.FreeMoveHandle(handleMinZFlat + new Vector3(0.25f, 0, 0.25f), Quaternion.identity, HandleUtility.GetHandleSize(handleMinZ) * handleSizeMult, snapLimit, Handles.DotHandleCap);
 				handleMinZ = handleMinZ - new Vector3(0.25f, 0, 0.25f);
 			}
 			else {
-				handleMinZ = Handles.FreeMoveHandle(handleMinZ + new Vector3(0.25f, 0, 0.25f), Quaternion.identity, HandleUtility.GetHandleSize(handleMinZ) * handleSizeMult, snapLimit, Handles.DotCap);
+				handleMinZ = Handles.FreeMoveHandle(handleMinZ + new Vector3(0.25f, 0, 0.25f), Quaternion.identity, HandleUtility.GetHandleSize(handleMinZ) * handleSizeMult, snapLimit, Handles.DotHandleCap);
 				handleMinZ = handleMinZ - new Vector3(0.25f, 0, 0.25f);
 			}
 		}
@@ -6437,26 +6437,26 @@ public class SurforgeInterface : EditorWindow
 		if (Surforge.surforgeSettings.showTextureEdges) {
 			
 			textureBordersHandleMaxX = new Vector3(Surforge.surforgeSettings.textureBorders.maxX, Surforge.surforgeSettings.textureBorders.minY + (Surforge.surforgeSettings.textureBorders.maxY - Surforge.surforgeSettings.textureBorders.minY) * 0.5f, Surforge.surforgeSettings.textureBorders.minZ + (Surforge.surforgeSettings.textureBorders.maxZ - Surforge.surforgeSettings.textureBorders.minZ) * 0.5f);
-			if (!limitsActive) textureBordersHandleMaxX = Handles.FreeMoveHandle(textureBordersHandleMaxX, Quaternion.identity, HandleUtility.GetHandleSize(textureBordersHandleMaxX) * handleSizeMult, snapLimit, Handles.DotCap);
+			if (!limitsActive) textureBordersHandleMaxX = Handles.FreeMoveHandle(textureBordersHandleMaxX, Quaternion.identity, HandleUtility.GetHandleSize(textureBordersHandleMaxX) * handleSizeMult, snapLimit, Handles.DotHandleCap);
 			textureBordersHandleMaxX = new Vector3(RoundTo025And075(textureBordersHandleMaxX.x), Surforge.surforgeSettings.textureBorders.minY + (Surforge.surforgeSettings.textureBorders.maxY - Surforge.surforgeSettings.textureBorders.minY) * 0.5f, Surforge.surforgeSettings.textureBorders.minZ + (Surforge.surforgeSettings.textureBorders.maxZ - Surforge.surforgeSettings.textureBorders.minZ) * 0.5f);
 			if (textureBordersHandleMaxX.x < Surforge.surforgeSettings.textureBorders.minX) textureBordersHandleMaxX = new Vector3(Surforge.surforgeSettings.textureBorders.minX, textureBordersHandleMaxX.y, textureBordersHandleMaxX.z);
 			Surforge.surforgeSettings.textureBorders.maxX = textureBordersHandleMaxX.x;
 			
 			textureBordersHandleMinX = new Vector3(Surforge.surforgeSettings.textureBorders.minX, Surforge.surforgeSettings.textureBorders.minY + (Surforge.surforgeSettings.textureBorders.maxY - Surforge.surforgeSettings.textureBorders.minY) * 0.5f, Surforge.surforgeSettings.textureBorders.minZ + (Surforge.surforgeSettings.textureBorders.maxZ - Surforge.surforgeSettings.textureBorders.minZ) * 0.5f);
-			if (!limitsActive) textureBordersHandleMinX = Handles.FreeMoveHandle(textureBordersHandleMinX, Quaternion.identity, HandleUtility.GetHandleSize(textureBordersHandleMinX) * handleSizeMult, snapLimit, Handles.DotCap);
+			if (!limitsActive) textureBordersHandleMinX = Handles.FreeMoveHandle(textureBordersHandleMinX, Quaternion.identity, HandleUtility.GetHandleSize(textureBordersHandleMinX) * handleSizeMult, snapLimit, Handles.DotHandleCap);
 			textureBordersHandleMinX = new Vector3(RoundTo025And075(textureBordersHandleMinX.x), Surforge.surforgeSettings.textureBorders.minY + (Surforge.surforgeSettings.textureBorders.maxY - Surforge.surforgeSettings.textureBorders.minY) * 0.5f, Surforge.surforgeSettings.textureBorders.minZ + (Surforge.surforgeSettings.textureBorders.maxZ - Surforge.surforgeSettings.textureBorders.minZ) * 0.5f);
 			if (textureBordersHandleMinX.x > Surforge.surforgeSettings.textureBorders.maxX) textureBordersHandleMinX = new Vector3(Surforge.surforgeSettings.textureBorders.maxX, textureBordersHandleMinX.y, textureBordersHandleMinX.z);
 			Surforge.surforgeSettings.textureBorders.minX = textureBordersHandleMinX.x;
 			
 			
 			textureBordersHandleMaxZ = new Vector3(Surforge.surforgeSettings.textureBorders.minX + (Surforge.surforgeSettings.textureBorders.maxX - Surforge.surforgeSettings.textureBorders.minX) * 0.5f, Surforge.surforgeSettings.textureBorders.minY + (Surforge.surforgeSettings.textureBorders.maxY - Surforge.surforgeSettings.textureBorders.minY) * 0.5f, Surforge.surforgeSettings.textureBorders.maxZ);
-			if (!limitsActive) textureBordersHandleMaxZ = Handles.FreeMoveHandle(textureBordersHandleMaxZ, Quaternion.identity, HandleUtility.GetHandleSize(textureBordersHandleMaxZ) * handleSizeMult, snapLimit, Handles.DotCap);
+			if (!limitsActive) textureBordersHandleMaxZ = Handles.FreeMoveHandle(textureBordersHandleMaxZ, Quaternion.identity, HandleUtility.GetHandleSize(textureBordersHandleMaxZ) * handleSizeMult, snapLimit, Handles.DotHandleCap);
 			textureBordersHandleMaxZ = new Vector3(Surforge.surforgeSettings.textureBorders.minX + (Surforge.surforgeSettings.textureBorders.maxX - Surforge.surforgeSettings.textureBorders.minX) * 0.5f, Surforge.surforgeSettings.textureBorders.minY + (Surforge.surforgeSettings.textureBorders.maxY - Surforge.surforgeSettings.textureBorders.minY) * 0.5f, RoundTo025And075(textureBordersHandleMaxZ.z));
 			if (textureBordersHandleMaxZ.z < Surforge.surforgeSettings.textureBorders.minZ) textureBordersHandleMaxZ = new Vector3(textureBordersHandleMaxZ.x, textureBordersHandleMaxZ.y, Surforge.surforgeSettings.textureBorders.minZ);
 			Surforge.surforgeSettings.textureBorders.maxZ = textureBordersHandleMaxZ.z;
 			
 			textureBordersHandleMinZ = new Vector3(Surforge.surforgeSettings.textureBorders.minX + (Surforge.surforgeSettings.textureBorders.maxX - Surforge.surforgeSettings.textureBorders.minX) * 0.5f, Surforge.surforgeSettings.textureBorders.minY + (Surforge.surforgeSettings.textureBorders.maxY - Surforge.surforgeSettings.textureBorders.minY) * 0.5f, Surforge.surforgeSettings.textureBorders.minZ);
-			if (!limitsActive) textureBordersHandleMinZ = Handles.FreeMoveHandle(textureBordersHandleMinZ, Quaternion.identity, HandleUtility.GetHandleSize(textureBordersHandleMinZ) * handleSizeMult, snapLimit, Handles.DotCap);
+			if (!limitsActive) textureBordersHandleMinZ = Handles.FreeMoveHandle(textureBordersHandleMinZ, Quaternion.identity, HandleUtility.GetHandleSize(textureBordersHandleMinZ) * handleSizeMult, snapLimit, Handles.DotHandleCap);
 			textureBordersHandleMinZ = new Vector3(Surforge.surforgeSettings.textureBorders.minX + (Surforge.surforgeSettings.textureBorders.maxX - Surforge.surforgeSettings.textureBorders.minX) * 0.5f, Surforge.surforgeSettings.textureBorders.minY + (Surforge.surforgeSettings.textureBorders.maxY - Surforge.surforgeSettings.textureBorders.minY) * 0.5f, RoundTo025And075(textureBordersHandleMinZ.z));
 			if (textureBordersHandleMinZ.z > Surforge.surforgeSettings.textureBorders.maxZ) textureBordersHandleMinZ = new Vector3(textureBordersHandleMinZ.x, textureBordersHandleMinZ.y, Surforge.surforgeSettings.textureBorders.maxZ);
 			Surforge.surforgeSettings.textureBorders.minZ = textureBordersHandleMinZ.z;
@@ -6593,7 +6593,7 @@ public class SurforgeInterface : EditorWindow
 	
 	public void OnDestroy() {
 		Surforge.ToggleEditorGrid(true);
-		SceneView.onSceneGUIDelegate -= SurforgeOnScene;
+		SceneView.duringSceneGui -= SurforgeOnScene;
 		
 		if (materialEditor != null) {
 			DestroyImmediate (materialEditor);
@@ -9506,12 +9506,12 @@ public class SurforgeInterface : EditorWindow
 		}
 		
 		Handles.color = polygonLassoCurrentPointColor;
-		Handles.CubeCap(0, snappedPoint, Quaternion.identity, HandleUtility.GetHandleSize(snappedPoint) * 0.06f);
+		Handles.CubeHandleCap(0, snappedPoint, Quaternion.identity, HandleUtility.GetHandleSize(snappedPoint) * 0.06f, EventType.KeyDown);
 
 		//snap circle
 		if (snapState == 1) {
 			Handles.color = snapMarkerObjectColor;
-			Handles.CircleCap(0, snappedPoint, Quaternion.Euler(90.0f, 0, 0), HandleUtility.GetHandleSize(snappedPoint) * 0.1f);
+			Handles.CircleHandleCap(0, snappedPoint, Quaternion.Euler(90.0f, 0, 0), HandleUtility.GetHandleSize(snappedPoint) * 0.1f, EventType.KeyDown);
 		}
 		if (snapState == 2) {
 			Handles.color = snapMarkerObjectColor;
@@ -9519,7 +9519,7 @@ public class SurforgeInterface : EditorWindow
 		}
 		if (snapState == 3) {
 			Handles.color = snapMarkerSelfColor;
-			Handles.CircleCap(0, snappedPoint, Quaternion.Euler(90.0f, 0, 0), HandleUtility.GetHandleSize(snappedPoint) * 0.1f);
+			Handles.CircleHandleCap(0, snappedPoint, Quaternion.Euler(90.0f, 0, 0), HandleUtility.GetHandleSize(snappedPoint) * 0.1f, EventType.KeyDown);
 		}
 		if (snapState == 4) {
 			Handles.color = snapMarkerSelfColor;
@@ -9527,7 +9527,7 @@ public class SurforgeInterface : EditorWindow
 		}
 		if (snapState == 5) {
 			Handles.color = snapMarkerHelpersColor;
-			Handles.CircleCap(0, snappedPoint, Quaternion.Euler(90.0f, 0, 0), HandleUtility.GetHandleSize(snappedPoint) * 0.1f);
+			Handles.CircleHandleCap(0, snappedPoint, Quaternion.Euler(90.0f, 0, 0), HandleUtility.GetHandleSize(snappedPoint) * 0.1f, EventType.KeyDown);
 		}
 		if (snapState == 6) {
 			Handles.color = snapMarkerHelpersColor;
@@ -9541,7 +9541,7 @@ public class SurforgeInterface : EditorWindow
 			for (int i=0; i < polygonLassoPoints.Count; i++) {
 				Handles.color = polygonLassoPointColor;
 				
-				Handles.CubeCap(0, polygonLassoPoints[i], Quaternion.identity, HandleUtility.GetHandleSize(polygonLassoPoints[i]) * 0.06f);
+				Handles.CubeHandleCap(0, polygonLassoPoints[i], Quaternion.identity, HandleUtility.GetHandleSize(polygonLassoPoints[i]) * 0.06f, EventType.KeyDown);
 			}
 			
 			Handles.color = polygonLassoLineColor;
@@ -9559,7 +9559,7 @@ public class SurforgeInterface : EditorWindow
 
 			//draw polyLassoToolScale
 			Handles.color = polygonLassoProfileSizeColor;
-			Handles.CircleCap(0, snappedPoint, Quaternion.Euler(90.0f, 0, 0), HandleUtility.GetHandleSize(snappedPoint) * polyLassoScale * 0.1f);
+			Handles.CircleHandleCap(0, snappedPoint, Quaternion.Euler(90.0f, 0, 0), HandleUtility.GetHandleSize(snappedPoint) * polyLassoScale * 0.1f, EventType.KeyDown);
 		}
 	}
 
@@ -9581,7 +9581,7 @@ public class SurforgeInterface : EditorWindow
 					Handles.DrawPolyLine(new Vector3[] {points[0], points[0] + (Surforge.surforgeSettings.warpShapeCenterLinePoint - points[0]) * -1.0f});
 
 					Handles.color = warpShapeColor;
-					Handles.CubeCap(0, points[0], Quaternion.identity, HandleUtility.GetHandleSize(points[0]) * 0.06f);
+					Handles.CubeHandleCap(0, points[0], Quaternion.identity, HandleUtility.GetHandleSize(points[0]) * 0.06f, EventType.KeyDown);
 				}
 			}
 		}
@@ -9599,7 +9599,7 @@ public class SurforgeInterface : EditorWindow
 			for (int i=0; i < polygonLassoChildPoints.Count; i++) {
 				Handles.color = polygonLassoPointColor;
 				
-				Handles.CubeCap(0, polygonLassoChildPoints[i], Quaternion.identity, HandleUtility.GetHandleSize(polygonLassoChildPoints[i]) * 0.06f);
+				Handles.CubeHandleCap(0, polygonLassoChildPoints[i], Quaternion.identity, HandleUtility.GetHandleSize(polygonLassoChildPoints[i]) * 0.06f, EventType.KeyDown);
 			}
 			
 			Handles.color = polygonLassoLineColor * 0.5f;
@@ -9612,7 +9612,7 @@ public class SurforgeInterface : EditorWindow
 					Handles.DrawWireDisc(circleCenter, Vector3.up, polyLassoArcCircleRadius);
 
 					Handles.color = polyLassoArcCircleCenterColor;
-					Handles.CubeCap(0, circleCenter, Quaternion.identity, HandleUtility.GetHandleSize(circleCenter) * 0.06f);
+					Handles.CubeHandleCap(0, circleCenter, Quaternion.identity, HandleUtility.GetHandleSize(circleCenter) * 0.06f,EventType.KeyDown);
 				}
 
 			}
@@ -9728,9 +9728,9 @@ public class SurforgeInterface : EditorWindow
 		Handles.DrawPolyLine(line);
 		Handles.color = polygonLassoMirrorPointColor;
 		for (int i=0; i < line.Length; i++) {
-			Handles.CubeCap(0, line[i], Quaternion.identity, HandleUtility.GetHandleSize(line[i]) * 0.06f);
+			Handles.CubeHandleCap(0, line[i], Quaternion.identity, HandleUtility.GetHandleSize(line[i]) * 0.06f, EventType.KeyDown);
 		}
-		Handles.CubeCap(0, activePoint, Quaternion.identity, HandleUtility.GetHandleSize(activePoint) * 0.06f);
+		Handles.CubeHandleCap(0, activePoint, Quaternion.identity, HandleUtility.GetHandleSize(activePoint) * 0.06f, EventType.KeyDown);
 	}
 
 	static List<Vector3> GetPolyLassoPointsSymmLine(List<Vector3> symLine, List<Vector3> sourcePoints) {  

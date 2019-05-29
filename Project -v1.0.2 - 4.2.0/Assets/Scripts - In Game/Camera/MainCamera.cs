@@ -9,7 +9,7 @@ public class MainCamera : MonoBehaviour, ICamera {
 	//Singleton
 	public static MainCamera main;
 
-    public Camera camera;
+    public Camera myCamera;
 	//Camera Variables
     Coroutine currentFlick;
 	public float HeightAboveGround = 30.0f;
@@ -47,8 +47,8 @@ public class MainCamera : MonoBehaviour, ICamera {
 	public Vector3 BottomLeftBorder;
 	void Awake()
 	{
-        camera = GetComponent<Camera>();
-		camera.cullingMask &= ~(1 << LayerMask.NameToLayer("MinimapIcon"));
+        myCamera = GetComponent<Camera>();
+        myCamera.cullingMask &= ~(1 << LayerMask.NameToLayer("MinimapIcon"));
 		main = this;
 
 		SetBoundries ( BottomLeftBorder.x,BottomLeftBorder.z, TopRightBorder.x,TopRightBorder.z);
@@ -71,12 +71,9 @@ public class MainCamera : MonoBehaviour, ICamera {
 		{goToStart ();
 			transform.position = new Vector3(StartPoint.transform.position.x, m_MinFieldOfView + 130, StartPoint.transform.position.z-AngleOffset);
 		}
-		AngleOffset = 45 -((transform.position.y - m_MinFieldOfView) / m_MaxFieldOfView) * 45;
+		AngleOffset = 50 -((transform.position.y - m_MinFieldOfView) / m_MaxFieldOfView) * 45;
 		//Set up camera rotation
 		transform.rotation = Quaternion.Euler (90-AngleOffset, 0, 0);
-
-
-	
 	}
 
 	// Update is called once per frame
@@ -216,9 +213,9 @@ public class MainCamera : MonoBehaviour, ICamera {
 			}
 
 
-			if (transform.position.z < m_Boundries.yMin -10)
+			if (transform.position.z < m_Boundries.yMin -35)
 			{
-				transform.position = new Vector3(transform.position.x, transform.position.y, m_Boundries.yMin-10);
+				transform.position = new Vector3(transform.position.x, transform.position.y, m_Boundries.yMin-35);
 			}
 			else if (transform.position.z > m_Boundries.yMax +60)
 			{
@@ -237,41 +234,42 @@ public class MainCamera : MonoBehaviour, ICamera {
 
 	private void CheckEdgeMovement()
 	{
-		Ray r1 =MainCamera.main.camera.ScreenPointToRay (new Vector3(Screen.width/2,Screen.height-1,0)); // TOP
+		Ray r1 = myCamera.ScreenPointToRay (new Vector3(Screen.width/2,Screen.height-1,0)); // TOP
 
-		Ray r3 = MainCamera.main.camera.ScreenPointToRay (new Vector3(0,50,0)); //Bottom Left
-		Ray r4 = MainCamera.main.camera.ScreenPointToRay (new Vector3(Screen.width-1,50,0)); //Bottom Right
+		Ray r3 = myCamera.ScreenPointToRay (new Vector3(0,50,0)); //Bottom Left
+		Ray r4 = myCamera.ScreenPointToRay (new Vector3(Screen.width-1,50,0)); //Bottom Right
 
 		float left, right, top, bottom;
 
 		RaycastHit h1;
 		
-		Physics.Raycast (r1, out h1, Mathf.Infinity, 1<< 16);		
+		Physics.Raycast (r1, out h1, Mathf.Infinity, 1<< 11);		
 		top = h1.point.z;
 
-		Physics.Raycast (r4, out h1, Mathf.Infinity, 1<< 16);
+		Physics.Raycast (r4, out h1, Mathf.Infinity, 1<< 11);
 		right = h1.point.x;
 
-		Physics.Raycast (r3, out h1, Mathf.Infinity, 1<< 16);
+		Physics.Raycast (r3, out h1, Mathf.Infinity, 1<< 11);
 		bottom = h1.point.z;
 		left = h1.point.x;
 
 		if (left < m_Boundries.xMin)
 		{
-			MainCamera.main.camera.transform.Translate (new Vector3(m_Boundries.xMin-left,0,0), Space.World);
+            myCamera.transform.Translate (new Vector3(m_Boundries.xMin-left,0,0), Space.World);
 		}
 		else if (right > m_Boundries.xMax)
 		{
-			MainCamera.main.camera.transform.Translate (new Vector3(m_Boundries.xMax-right,0,0), Space.World);
+            myCamera.transform.Translate (new Vector3(m_Boundries.xMax-right,0,0), Space.World);
 		}
 
-		if (bottom < m_Boundries.yMin -10)
+        if (bottom < m_Boundries.yMin -35)
 		{
-			MainCamera.main.camera.transform.Translate (new Vector3(0,0,(m_Boundries.yMin-10)-bottom), Space.World);
+
+            myCamera.transform.Translate (new Vector3(0,0,(m_Boundries.yMin-35)-bottom), Space.World);
 		}
 		else if (top > m_Boundries.yMax +60)
 		{
-			MainCamera.main.camera.transform.Translate (new Vector3(0,0,m_Boundries.yMax + 60-top), Space.World);
+            myCamera.transform.Translate (new Vector3(0,0,m_Boundries.yMax + 60-top), Space.World);
 		}
 	}
 
@@ -285,16 +283,16 @@ public class MainCamera : MonoBehaviour, ICamera {
 			return;}
 
 
-		Ray rayb = MainCamera.main.camera.ScreenPointToRay (new Vector2(.5f*Screen.width, .5f*Screen.height));
+		Ray rayb = myCamera.ScreenPointToRay (new Vector2(.5f*Screen.width, .5f*Screen.height));
 		RaycastHit hitb;
-		Physics.Raycast (rayb, out hitb, Mathf.Infinity, 1 << 16);
+		Physics.Raycast (rayb, out hitb, Mathf.Infinity, 1 << 11);
 
 		Ray rayc;
 		RaycastHit hitc = new RaycastHit();
 		if (Input.GetKey (KeyCode.LeftShift) && e.ScrollValue > 0) {
 	
-			rayc = MainCamera.main.camera.ScreenPointToRay (Input.mousePosition);
-			Physics.Raycast (rayc, out hitc, Mathf.Infinity, 1 << 16);
+			rayc = myCamera.ScreenPointToRay (Input.mousePosition);
+			Physics.Raycast (rayc, out hitc, Mathf.Infinity, 1 << 11);
 
 		}
 
@@ -328,7 +326,7 @@ public class MainCamera : MonoBehaviour, ICamera {
 			CheckEdgeMovement ();
 		}
 
-		AngleOffset = 45 -((transform.position.y - m_MinFieldOfView) / m_MaxFieldOfView) * 45;
+		AngleOffset = 50 -((transform.position.y - m_MinFieldOfView) / m_MaxFieldOfView) * 45;
 	}
 
 

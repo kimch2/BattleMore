@@ -38,9 +38,8 @@ public abstract class Ability : MonoBehaviour {
 	protected AudioSource audioSrc;
 	protected Selected select;
 
-	private bool initialized;
 
-	public virtual void Start()
+	public virtual void Start() // We have this here so other source can call Start and any of this guy's inheriters will have it called instead
 	{
 		
 	}
@@ -48,7 +47,6 @@ public abstract class Ability : MonoBehaviour {
 	protected void initialize()
 		{
 		myManager = GetComponent<UnitManager>();
-		initialized = true;
 		foreach (string s in RequiredUnit) {
 
 			requirementList.Add (s, false);

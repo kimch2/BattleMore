@@ -179,7 +179,7 @@ public  class Projectile : MonoBehaviour {
 			return;
 		}
 
-		if(!trackTarget && (other.gameObject!= Source && !other.gameObject.transform.IsChildOf(Source.transform) &&  (Source && !Source.transform.IsChildOf(other.transform))))
+		if(!trackTarget && Source&& (other.gameObject!= Source && !other.gameObject.transform.IsChildOf(Source.transform) &&  (!Source.transform.IsChildOf(other.transform))))
 		{
 			Terminate(null);}
 	}

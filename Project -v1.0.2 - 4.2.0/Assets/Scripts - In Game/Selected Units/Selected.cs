@@ -79,7 +79,7 @@ public class Selected : MonoBehaviour {
 			MinimapIcon.gameObject.layer = 21;
 			if (manager.myStats.isUnitType(UnitTypes.UnitTypeTag.Structure))
 			{
-				MinimapIcon.transform.localScale *= 175;
+				MinimapIcon.transform.localScale *= 185;
 				MinimapIcon.sprite = UISetter.main.defaultMinimapSquare;
 			}
 			else if (manager.myStats.isUnitType(UnitTypes.UnitTypeTag.Turret))
@@ -89,11 +89,16 @@ public class Selected : MonoBehaviour {
 			else
 			{
 				MinimapIcon.sprite = UISetter.main.defaultMinimapcircle;
-				MinimapIcon.transform.localScale *= 100;
+				MinimapIcon.transform.localScale *= 115;
 			}
 		}
 	}
 
+	public void toggleFogOfWar(bool turnOn)
+	{
+		ManualFogOfWar = turnOn;
+		manager.initializeVision();
+	}
 
 	public void attackBlink()
 	{
@@ -458,7 +463,7 @@ public class Selected : MonoBehaviour {
 		unitIcon = null;
 		IconSlider = null;
 		IconInfo = null;
-		MinimapIcon.color =manager.myRacer.getColor();
+		MinimapIcon.color = manager.myRacer.getColor();
 		decalCircle.GetComponent<MeshRenderer> ().enabled = false;
 		if (RallyPoint) {
 			RallyPoint.SetActive (false);

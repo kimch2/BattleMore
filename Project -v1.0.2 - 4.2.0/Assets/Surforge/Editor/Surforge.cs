@@ -8212,8 +8212,9 @@ public class Surforge : MonoBehaviour {
 		Material material = new Material( (Shader)AssetDatabase.LoadAssetAtPath("Assets/Surforge/GPURender/Surforge0.shader", typeof(Shader)));
 		material.color = color;
 		lr.sharedMaterial = material;
-		lr.SetWidth(0.2f, 0.2f);
-		lr.SetVertexCount(points.Count);
+        lr.startWidth = .2f;
+        lr.endWidth = .2f;
+		lr.positionCount = (points.Count);
 		for (int j =0; j < points.Count; j++) {
 			lr.SetPosition(j, new Vector3(points[j].x, 1.0f, points[j].z));
 		}

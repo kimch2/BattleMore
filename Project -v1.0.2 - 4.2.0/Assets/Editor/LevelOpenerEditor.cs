@@ -141,10 +141,17 @@ public class LevelOpenerEditor : EditorWindow
 		EditorSceneManager.OpenScene("Assets/Scenes/NewTestScene.unity");
 	}
 
-	[MenuItem("Open Level/BM Money Time")]
+	[MenuItem("Open Level/SwapOut Pay Day")]
 	public static void T()
 	{
 		EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo();
 		EditorSceneManager.OpenScene("Assets/Scenes/BMMoneyTime.unity");
+	}
+
+	[MenuItem("Open Level/SwapOut Locks")]
+	public static void U()
+	{
+		EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo();
+		EditorSceneManager.OpenScene("Assets/Scenes/SwapOutLocks.unity");
 	}
 }

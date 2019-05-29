@@ -54,9 +54,6 @@ public class WorldRecharger : MonoBehaviour {
 	}
 
 
-	float healAmount = 0;
-	float energyAmount = 0;
-
 	void Charge()
 	{
 

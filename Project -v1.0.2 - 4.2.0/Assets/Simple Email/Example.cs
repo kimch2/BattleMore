@@ -5,8 +5,6 @@ using System;
 
 public class Example : MonoBehaviour {
 
-    bool triggerResultEmail= false;
-    bool resultEmailSucess;
 
     public Text resultText;
 
@@ -60,15 +58,11 @@ public class Example : MonoBehaviour {
         {
             print("Email not sent: " + e.Error.ToString());
 
-            resultEmailSucess = false;
-            triggerResultEmail = true;
         }
         else
         {
             print("Email successfully sent.");
 
-            resultEmailSucess = true;
-            triggerResultEmail = true;
         }
     }
 }

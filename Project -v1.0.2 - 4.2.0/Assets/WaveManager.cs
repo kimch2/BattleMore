@@ -28,7 +28,7 @@ public class WaveManager : MonoBehaviour {
 	DifficultyManager difficultyM;
 	RaceManager raceMan;
 	float mystartTime;
-
+	public bool SearchForEnemies = true;
 	WaveContainer container = null;
 	WaveContainer.WaveOption waveOption;
 
@@ -85,6 +85,9 @@ public class WaveManager : MonoBehaviour {
 	}
 
 	void Start () {
+
+
+
 		mystartTime = Time.timeSinceLevelLoad;
 		//GeneralIndex = PlayerPrefs.GetInt ("VoicePack", 0);
 		currentWaveIndex = 0;
@@ -92,22 +95,29 @@ public class WaveManager : MonoBehaviour {
 		container = ((GameObject)(Resources.Load ("WaveContainer"))).GetComponent<WaveContainer> ();
 	
 
-		if ( PlayerPrefs.GetInt ("L" + VictoryTrigger.instance.levelNumber+"Win",0) > 0) {
+		if ( PlayerPrefs.GetInt ("L" + VictoryTrigger.instance.levelNumber+"Win",0) > 0 && RaceSwapper.main == null) {
 
 			if (ReplayWaves.Count > 0) {
 				//container = ((GameObject)(Resources.Load ("WaveContainer"))).GetComponent<WaveContainer> ();
 				waveOption = container.getWave (ReplayWaves [UnityEngine.Random.Range (0, ReplayWaves.Count)]);
 				CurrentWaves = waveOption.waveRampUp;
-
-
 			}
 
 
 		} else {
 
 			waveOption = container.getWave (FirstPlayWaveType);
-			CurrentWaves = container.getWave (FirstPlayWaveType).waveRampUp;
-		}
+            if (RaceSwapper.main != null)
+            {
+                waveOption = container.getWave(getSwappedRace());
+            }
+            CurrentWaves = container.getWave (FirstPlayWaveType).waveRampUp;
+
+            if (RaceSwapper.main != null)
+            {
+                CurrentWaves = container.getWave(getSwappedRace()).waveRampUp;
+            }
+        }
 
 
 		raceMan = GameObject.FindObjectOfType<GameManager> ().activePlayer;
@@ -121,13 +131,29 @@ public class WaveManager : MonoBehaviour {
 		CancelInvoke ();
 	}
 
+
+    WaveContainer.EnemyWave getSwappedRace()
+    {
+        if (RaceSwapper.main.getEnemyRace() == RaceInfo.raceType.SteelCrest)
+        {
+            return WaveContainer.EnemyWave.EnemySteelCrest;
+        }
+        if (RaceSwapper.main.getEnemyRace() == RaceInfo.raceType.Coalition)
+        {
+            if (Random.Range(0, 2) == 0)
+            {
+                return WaveContainer.EnemyWave.ScrapCrack;
+            }
+            return WaveContainer.EnemyWave.ScrapSkif;
+        }
+        return FirstPlayWaveType;
+    }
+
 	// Update is called once per frame
 	void Update () {
 		
 		if (Time.timeSinceLevelLoad - mystartTime > nextActionTime) {
 
-			float delay = .1f;
-		
 			if (spawnLocations.Count < SpawnerCount) {
 				spawnLocations.RemoveAll (item => item == null);
 				SpawnerCount = spawnLocations.Count;
@@ -222,8 +248,10 @@ public class WaveManager : MonoBehaviour {
 			}
 
 			GameObject AIGO = new GameObject("Combat AI");
-			CombatAI AI =  AIGO.AddComponent<CombatAI>();
-			AI.addUnits(myUnits);
+            AIGO.transform.position = myUnits[0].transform.position;
+            CombatAI AI =  AIGO.AddComponent<CombatAI>();
+           
+			AI.addUnits(myUnits, SearchForEnemies);
 			AI.setAttackMovePoint(targetPoint);
 
 			setNextWave ();
@@ -297,6 +325,11 @@ public class WaveManager : MonoBehaviour {
 		UnitManager manage = unit.GetComponent<UnitManager>();
 		manage.PlayerOwner = 2;
 		manage.startingCommand.Clear();
+		foreach (UnitManager man in unit.GetComponentsInChildren<UnitManager>())
+		{
+			man.PlayerOwner = 2;
+		}
+
 		return manage;
 	}
 

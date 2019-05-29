@@ -13,13 +13,15 @@ public class DragSelect : MonoBehaviour {
 	
 	private IGUIManager m_GuiManager;
 	private UIManager uiManager;
-	//private ISelectedManager m_SelectedManager;
-
+    //private ISelectedManager m_SelectedManager;
+    public Texture DragTexture;
+    RectTransform Square;
 
 	// Use this for initialization
-	void Start () 
-	{
-		m_DragStyle.normal.background = TextureGenerator.MakeTexture (0.8f, 0.8f, 0.8f, 0.3f);
+	void Start ()
+    {
+        m_DragStyle.normal.background = TextureGenerator.MakeTexture (0.8f, 0.8f, 0.8f, 0.3f);
+
 		m_DragStyle.border.bottom = 1;
 		m_DragStyle.border.top = 1;
 		m_DragStyle.border.left = 1;
@@ -36,29 +38,25 @@ public class DragSelect : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-
-
 		if (m_CheckDeselect) {
 			if (uiManager.allowDrag()) {
 				if (Mathf.Abs (Input.mousePosition.x - m_DragLocationStart.x) > 2 && Mathf.Abs (Input.mousePosition.y - m_DragLocationStart.y) > 2) {
 					m_CheckDeselect = false;
 					m_Dragging = true;
 					m_GuiManager.Dragging = true;
-					
-		
 				}
 			}
-
 		}
 	}
 	
 	void OnGUI()
 	{
-		if (m_Dragging)
-		{
-			m_DragLocationEnd = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-			DragBox (m_DragLocationStart, m_DragLocationEnd, m_DragStyle);
-		}
+        if (m_Dragging)
+        {
+            m_DragLocationEnd = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+            DragBox(m_DragLocationStart, m_DragLocationEnd, m_DragStyle);
+
+        }
 	}
 	
 	public void LeftButtonPressed(object sender, MouseEventArgs e)
@@ -89,12 +87,14 @@ public class DragSelect : MonoBehaviour {
 		float maxY = Mathf.Min (Screen.height-topLeft.y, Screen.height-bottomRight.y);
 				
 		Rect rect = new Rect(minX, minY, maxX-minX, maxY-minY);
-		
 
+        GUI.contentColor = Color.red;
+        GUI.color = Color.blue;
 		m_GuiManager.DragArea = new Rect(maxX, maxY, minX-maxX, minY-maxY);
-		
-		GUI.Box (rect, "", style);
+
+        GUI.Box(rect, "");//, style);
+        
 	}
-	
+
 
 }

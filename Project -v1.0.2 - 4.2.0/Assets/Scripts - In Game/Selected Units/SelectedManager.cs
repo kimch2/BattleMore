@@ -361,7 +361,7 @@ public class SelectedManager : MonoBehaviour, ISelectedManager
 					uiManage.UserPlacingBuilding (((UnitProduction)UIPages [currentPage].getAbility (n)).unitToBuild, n);
 					
 				} else {
-					
+
 					UISoundManager.interfaceClick (false);
 				}
 
@@ -820,7 +820,7 @@ public class SelectedManager : MonoBehaviour, ISelectedManager
 					Instantiate (fogIndicator);
 				
 				} else {
-					Instantiate (movementInd, location, Quaternion.Euler (90, 0, 0));
+                    Instantiate (movementInd, location, Quaternion.Euler (90, 0, 0));
 				}
 			}
 		
@@ -855,7 +855,7 @@ public class SelectedManager : MonoBehaviour, ISelectedManager
 				Instantiate (fogIndicator);
 
 			} else {
-			Instantiate (movementInd, Vector3.Lerp(a,b,.5f), Quaternion.Euler (90, 0, 0));
+            Instantiate (movementInd, Vector3.Lerp(a,b,.5f), Quaternion.Euler (90, 0, 0));
 			}
 
 			voiceResponse (false);

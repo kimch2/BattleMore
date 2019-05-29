@@ -5,7 +5,7 @@ public class MoveState : UnitState{
 
 	// Use this for initialization
 
-	Vector3 location;
+	public Vector3 location;
 	public bool assumedMove = false;
 	// Update is called once per frame
 

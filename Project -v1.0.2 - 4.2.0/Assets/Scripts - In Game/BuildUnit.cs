@@ -4,10 +4,7 @@ using System.Collections.Generic;
 
 public class BuildUnit : UnitProduction {
 
-	private RaceManager racer;
 
-
-	private Selected mySelect;
 
 	private BuildingInteractor myInteractor;
 
@@ -17,14 +14,15 @@ public class BuildUnit : UnitProduction {
 	private HealthDisplay HD;
 	private BuildManager buildMan;
 
+	public Vector3 SpawnOffset = new Vector3(4, 4, -7);
 
 	private int QueueNum;
 
 	[Tooltip("object that shows up while the unit is building, can be null")]
 	public GameObject constObject;
-	// Use this for initialization
+    // Use this for initialization
 
-	void Awake()
+    new void Awake()
 	{base.Awake ();
 
 		myType = type.activated;
@@ -33,12 +31,9 @@ public class BuildUnit : UnitProduction {
 
 
 
-	void Start () {
+    new void Start () {
 		buildMan = GetComponent<BuildManager> ();
-		racer = GameManager.main.activePlayer;
 		myInteractor = GetComponent <BuildingInteractor> ();
-		mySelect = GetComponent<Selected> ();
-
 		HD = GetComponentInChildren<HealthDisplay>();
 	}
 	
@@ -48,9 +43,10 @@ public class BuildUnit : UnitProduction {
 
 			timer -= Time.deltaTime * buildRate;
 
-			mySelect.updateCoolDown (1- timer/buildTime);
+			select.updateCoolDown (1- timer/buildTime);
 			if(timer <=0)
-			{mySelect.updateCoolDown (0);
+			{
+				select.updateCoolDown (0);
 				
 				buildingUnit = false;
 				createUnit();
@@ -80,7 +76,7 @@ public class BuildUnit : UnitProduction {
 
 	public override void cancelBuilding ()
 	{HD.stopBuilding ();
-		mySelect.updateCoolDown (0);
+		select.updateCoolDown (0);
 		timer = 0;
 		buildingUnit = false;
 		foreach (Transform obj in this.transform) {
@@ -91,10 +87,10 @@ public class BuildUnit : UnitProduction {
 
 		if (!buildMan.waitingOnSupply) {
 	
-			racer.UnitDied (unitToBuild.GetComponent<UnitStats> ().supply, null);
+			myManager.myRacer.UnitDied (unitToBuild.GetComponent<UnitStats> ().supply, null);
 		}
 
-		racer.stopBuildingUnit (this);
+		myManager.myRacer.stopBuildingUnit (this);
 		if (constObject) {
 			constObject.SetActive (false);
 		}
@@ -155,10 +151,10 @@ public class BuildUnit : UnitProduction {
 
 		HD.loadIMage(unitToBuild.GetComponent<UnitStats> ().Icon);
 		timer = buildTime;
-		GameManager.main.activePlayer.UnitCreated (unitToBuild.GetComponent<UnitStats> ().supply);
+		myManager.myRacer.UnitCreated (unitToBuild.GetComponent<UnitStats> ().supply);
 
 		buildingUnit = true;
-		racer.buildingUnit (this);
+		myManager.myRacer.buildingUnit (this);
 
 
 
@@ -173,18 +169,19 @@ public class BuildUnit : UnitProduction {
 			constObject.SetActive (false);
 		}
 		HD.stopBuilding ();
-		Vector3 location = new Vector3(this.gameObject.transform.position.x + 4,this.gameObject.transform.position.y+4,this.gameObject.transform.position.z -7);
+		Vector3 location = this.gameObject.transform.position + SpawnOffset;
 
 		GameObject unit = (GameObject)Instantiate(unitToBuild, location, Quaternion.identity);
 		unit.transform.LookAt (location + Vector3.right + Vector3.back);
 		UnitManager unitMan = unit.GetComponent<UnitManager> ();
-		unitMan.PlayerOwner = myManage.PlayerOwner; 
+		unitMan.PlayerOwner = myManage.PlayerOwner;
+
 		unitMan.setInteractor();
-		unitMan.interactor.initialize ();
-		if (myInteractor != null) {
+		unitMan.interactor.initializeInteractor();
+        if (myInteractor != null) {
 
 			//Sends units outside of the Construction yard, so it looks like they were built inside.
-			unitMan.GiveOrder (Orders.CreateMoveOrder(new Vector3(this.gameObject.transform.position.x +10,this.gameObject.transform.position.y+4,this.gameObject.transform.position.z -16)));
+			unitMan.GiveOrder(Orders.CreateAttackMove(transform.position + SpawnOffset * 1.5f));
 			//Debug.Log ("ordering to move " + new Vector3(this.gameObject.transform.position.x +10,this.gameObject.transform.position.y+4,this.gameObject.transform.position.z -16));
 			//Queue a command if they have a rally point or unit
 			if (myInteractor.rallyUnit != null) {
@@ -192,7 +189,7 @@ public class BuildUnit : UnitProduction {
 				unitMan.GiveOrder (Orders.CreateFollowCommand(myInteractor.rallyUnit,true));
 			} 
 			else if (myInteractor.rallyPoint != Vector3.zero) {
-				unitMan.GiveOrder (Orders.CreateMoveOrder (myInteractor.rallyPoint,true));
+				unitMan.GiveOrder (Orders.CreateAttackMove (myInteractor.rallyPoint,true));
 
 			//	Debug.Log ("Giving Rally Command");
 			}
@@ -203,7 +200,7 @@ public class BuildUnit : UnitProduction {
 
 			obj.SendMessage ("DeactivateAnimation",SendMessageOptions.DontRequireReceiver);
 		}
-		racer.stopBuildingUnit (this);
+		myManager.myRacer.stopBuildingUnit (this);
 		//racer.applyUpgrade (unit);
 		buildingUnit = false;
 		buildMan.unitFinished (this);
@@ -213,5 +210,8 @@ public class BuildUnit : UnitProduction {
 
 
 
-
+	private void OnDrawGizmos()
+	{
+		Gizmos.DrawSphere(transform.position + SpawnOffset, .3f);
+	}
 }

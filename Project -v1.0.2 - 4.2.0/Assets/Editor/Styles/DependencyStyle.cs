@@ -23,7 +23,7 @@ namespace AssetUsageFinder.Styles
             }
         }
 
-        [SerializeField, HideInInspector] private bool _pro;
+       // [SerializeField, HideInInspector] private bool _pro;
         [FormerlySerializedAs("Row")]public DependencyWindow.Style DependencyWindow = new DependencyWindow.Style();
         public FeedbackPopup.Style Popup= new FeedbackPopup.Style();
 
@@ -31,8 +31,8 @@ namespace AssetUsageFinder.Styles
         {
             get
             {
-                if (_cache) return _cache;
-                return _cache = ByType<DependencyStyle>().FirstOrDefault(s => s._pro == EditorGUIUtility.isProSkin);
+                if (_cache) return _cache;                                 // Was _pro instead of "true"
+                return _cache = ByType<DependencyStyle>().FirstOrDefault(s => true == EditorGUIUtility.isProSkin);
             }
         }
 
