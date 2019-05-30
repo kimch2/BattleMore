@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/L17BaseTutorial.unity
+- path: Assets/PostProcessing 1/PostProcessing Profiles/V1/Scenes/Scene1.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
