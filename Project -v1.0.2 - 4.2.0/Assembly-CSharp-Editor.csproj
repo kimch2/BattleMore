@@ -62,6 +62,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\ArtResources\Effects\LightningBolt\Editor\LightningBoltEditor.cs" />
     <Compile Include="Assets\AstarPathfindingEditor\Editor\AnimationLinkEditor.cs" />
     <Compile Include="Assets\AstarPathfindingEditor\Editor\AstarPathEditor.cs" />
     <Compile Include="Assets\AstarPathfindingEditor\Editor\AstarUpdateChecker.cs" />
@@ -119,7 +120,6 @@
     <Compile Include="Assets\Editor\UISetterEditor.cs" />
     <Compile Include="Assets\Editor\VictoryScriptEditor.cs" />
     <Compile Include="Assets\Editor\VoiceManEditor.cs" />
-    <Compile Include="Assets\Effects\LightningBolt\Editor\LightningBoltEditor.cs" />
     <Compile Include="Assets\Environment\Planets\HeyBlairGames\PlanetTextureGenerator\Editor\PlanetAsset.cs" />
     <Compile Include="Assets\Environment\Planets\HeyBlairGames\PlanetTextureGenerator\Editor\PlanetComponentEditor.cs" />
     <Compile Include="Assets\Environment\Planets\HeyBlairGames\PlanetTextureGenerator\Editor\PlanetNoiseGenerator.cs" />
