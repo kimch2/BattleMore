@@ -124,7 +124,7 @@ public class AbstractCost : MonoBehaviour {
 		if (canPay.Count > 0) {
 
 			if (showError) {
-				ErrorPrompt.instance.notEnoughResource();
+				ErrorPrompt.instance.notEnoughResource(canPay[0]);
 			}
 			order.InsufficientResources = canPay;
 			order.nextUnitCast = false;

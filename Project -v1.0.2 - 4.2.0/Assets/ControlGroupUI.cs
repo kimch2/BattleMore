@@ -42,8 +42,18 @@ public class ControlGroupUI : MonoBehaviour {
 
 	}
 
+    float LastPressedTime;
+    int LastControlPressed;
+
 	public void pressButton(int n)
 	{
+        if (Time.time < LastPressedTime + .6f && n == LastControlPressed)
+        {
+            selectM.CenterOnSelected();
+        }
+        LastControlPressed = n;
+        LastPressedTime = Time.time;
+
 		var pointer = new PointerEventData (EventSystem.current);
 		ExecuteEvents.Execute (controlList [n].gameObject, pointer, ExecuteEvents.pointerEnterHandler);
 		ExecuteEvents.Execute (controlList [n].gameObject, pointer, ExecuteEvents.pointerDownHandler);

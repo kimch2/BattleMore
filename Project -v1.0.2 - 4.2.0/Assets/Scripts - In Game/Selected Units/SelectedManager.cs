@@ -198,41 +198,38 @@ public class SelectedManager : MonoBehaviour, ISelectedManager
 				removeFromControlGroups ();
 				AddUnitsToGroup (9, true);
 			}
-		
-		
 		}
         else {
             // Select a control group
             if (Input.GetKeyDown(KeyCode.Alpha1))
             { 
-				//SelectGroup(0);
 				ControlGroupUI.instance.pressButton (0);}
             else if (Input.GetKeyDown(KeyCode.Alpha2))
-            { //SelectGroup(1); 
+            { 
 				ControlGroupUI.instance.pressButton (1);}
             else if (Input.GetKeyDown(KeyCode.Alpha3))
-            {// SelectGroup(2); 
+            {
 				ControlGroupUI.instance.pressButton (2);}
             else if (Input.GetKeyDown(KeyCode.Alpha4))
-            {//SelectGroup(3);
+            {
 				ControlGroupUI.instance.pressButton (3);}
             else if (Input.GetKeyDown(KeyCode.Alpha5))
-            {//SelectGroup(4);
+            {
 				ControlGroupUI.instance.pressButton (4);}
             else if (Input.GetKeyDown(KeyCode.Alpha6))
-            { //SelectGroup(5);
+            { 
 				ControlGroupUI.instance.pressButton (5);}
             else if (Input.GetKeyDown(KeyCode.Alpha7))
-            {// SelectGroup(6);
+            {
 				ControlGroupUI.instance.pressButton (6);}
             else if (Input.GetKeyDown(KeyCode.Alpha8))
-            {//SelectGroup(7);
+            {
 				ControlGroupUI.instance.pressButton (7);}
             else if (Input.GetKeyDown(KeyCode.Alpha9))
-            {//SelectGroup(8); 
+            {
 				ControlGroupUI.instance.pressButton (8);}
             else if (Input.GetKeyDown(KeyCode.Alpha0))
-            {//SelectGroup(9); 
+            {
 				ControlGroupUI.instance.pressButton (9);}
 
         }
@@ -246,31 +243,7 @@ public class SelectedManager : MonoBehaviour, ISelectedManager
 		}
 
 		else if (Input.GetKeyUp (KeyCode.Space)) {
-			if (SelectedObjects.Count == 1) {
-				Vector3 location = SelectedObjects [0].gameObject.transform.position;
-				location.z -= 70;
-
-				MainCamera.main.Move (location);
-			}
-			else if (SelectedObjects.Count > 1) {
-				int startingPoint = currentCenterOn;
-				do {
-					currentCenterOn++;
-					if (currentCenterOn >= SelectedObjects.Count) {
-						currentCenterOn = 0;
-					}
-					if(startingPoint == currentCenterOn)
-						{return;}
-				} while(SelectedObjects [currentCenterOn] == null);
-				
-
-				if (SelectedObjects [currentCenterOn]) {
-					Vector3 location = SelectedObjects [currentCenterOn].gameObject.transform.position;
-					location.z -= 70;
-
-					MainCamera.main.Move (location);
-				}
-			}
+            CenterOnSelected();
 		}
 
 		if (Input.GetKeyUp(KeyCode.Tab) && UIPages.Count > 0)
@@ -289,6 +262,40 @@ public class SelectedManager : MonoBehaviour, ISelectedManager
 			
     }
 
+
+    public void CenterOnSelected()
+    {
+        if (SelectedObjects.Count == 1)
+        {
+            Vector3 location = SelectedObjects[0].gameObject.transform.position;
+            location.z -= 105;
+
+            MainCamera.main.Move(location);
+        }
+        else if (SelectedObjects.Count > 1)
+        {
+            int startingPoint = currentCenterOn;
+            do
+            {
+                currentCenterOn++;
+                if (currentCenterOn >= SelectedObjects.Count)
+                {
+                    currentCenterOn = 0;
+                }
+                if (startingPoint == currentCenterOn)
+                { return; }
+            } while (SelectedObjects[currentCenterOn] == null);
+
+
+            if (SelectedObjects[currentCenterOn])
+            {
+                Vector3 location = SelectedObjects[currentCenterOn].gameObject.transform.position;
+                location.z -= 105;
+
+                MainCamera.main.Move(location);
+            }
+        }
+    }
 
 	public void setPage(int n)
 	{

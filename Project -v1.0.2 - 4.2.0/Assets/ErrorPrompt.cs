@@ -76,10 +76,10 @@ public class ErrorPrompt : MonoBehaviour {
 	}//
 	
 
-	public void notEnoughResource()
+	public void notEnoughResource(ResourceType resType)
 	{UISoundManager.interfaceClick (false);
 		Debug.Log("Printing ");
-		showError( "Not Enough Ore",myVoicePack.getOreLine());
+		showError( "Not Enough " + resType.ToString(),myVoicePack.getOreLine());
 	} 
 
 

@@ -205,14 +205,6 @@
     <Compile Include="Assets\Scripts - In Game\Editor\GridEditor.cs" />
     <Compile Include="Assets\SMAA-master\SMAA-master\SMAA\Scripts\Editor\MinDrawer.cs" />
     <Compile Include="Assets\SMAA-master\SMAA-master\SMAA\Scripts\Editor\SMAAEditor.cs" />
-    <Compile Include="Assets\Surforge\Editor\EditorObjExporter.cs" />
-    <Compile Include="Assets\Surforge\Editor\Interface\SurforgeAbout.cs" />
-    <Compile Include="Assets\Surforge\Editor\Interface\SurforgeInterface.cs" />
-    <Compile Include="Assets\Surforge\Editor\Interface\SurforgeInterfaceCluster.cs" />
-    <Compile Include="Assets\Surforge\Editor\Interface\SurforgeInterfaceRig.cs" />
-    <Compile Include="Assets\Surforge\Editor\Surforge.cs" />
-    <Compile Include="Assets\Surforge\Editor\SurforgeAssetPostprocessor.cs" />
-    <Compile Include="Assets\Surforge\Editor\SurforgeRigClusters.cs" />
     <Compile Include="Assets\UIAddons\Editor\EditorTools.cs" />
     <None Include="Assets\Editor\readme.txt" />
     <None Include="Assets\AstarPathfindingEditor\Editor\EditorAssets\Materials\Navmesh.shader" />

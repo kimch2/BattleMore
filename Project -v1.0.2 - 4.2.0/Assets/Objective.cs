@@ -20,9 +20,8 @@ public class Objective : SceneEventTrigger {
 	// Use this for initialization
 	public void Start () {
 		if (ActiveOnStart) {
-			VictoryTrigger.instance.addObjective (this);
-		}
-	
+            BeginObjective();
+		}	
 	}
 
 	public virtual void BeginObjective()
@@ -45,6 +44,11 @@ public class Objective : SceneEventTrigger {
 		if (!completed) {
 			completed = true;
 
+            if (!started)
+            {
+                BeginObjective();
+            }
+
 			foreach (SceneEventTrigger trig in myEvents) {
 				if (trig) {
 					trig.trigger (0, 0, Vector3.zero, null, false);
@@ -63,7 +67,6 @@ public class Objective : SceneEventTrigger {
 
 	public void unComplete()
 	{completed = false;
-		Debug.Log ("uncompleted");
 		VictoryTrigger.instance.unComplete (this);
 	}
 
