@@ -1,0 +1,18 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="none" x="0px" y="0px" width="1000px" height="1000px" viewBox="0 0 1000 1000">
+<defs>
+<g id="attack_impact_3_Layer0_0_FILL">
+<path fill="#FFFFFF" stroke="none" d="
+M 30.3 -5.8
+Q 33.15 -6.15 36.2 -6.15 45.6 -6.15 42.85 -5.4 67.6 -6.3 82.35 8.7 97.1 23.75 98.85 45.25 100.55 66.8 82.75 84.8 64.9 102.8 37.55 98.25 42.05 97.15 36.2 97.15 30.2 97.15 24.75 95.95 35 100.6 47.15 100.6 69.65 100.6 85.65 84.65 101.55 68.7 101.55 46.1 101.55 23.6 85.65 7.6 69.65 -8.35 47.15 -8.35 38.15 -8.35 30.3 -5.8 Z"/>
+</g>
+</defs>
+
+<g transform="matrix( -0.679534912109375, 0, 0, 0.679534912109375, 606.45,232.05) ">
+<g transform="matrix( 1, 0, 0, 1, 106.3,351) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#attack_impact_3_Layer0_0_FILL"/>
+</g>
+</g>
+</g>
+</svg>

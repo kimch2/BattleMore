@@ -8,7 +8,7 @@ public class MainCamera : MonoBehaviour, ICamera {
 
 	//Singleton
 	public static MainCamera main;
-
+    public float maxAngle = 45;
     public Camera myCamera;
 	//Camera Variables
     Coroutine currentFlick;
@@ -60,24 +60,26 @@ public class MainCamera : MonoBehaviour, ICamera {
 
 	}
 
-	// Use this for initialization
-	void Start () 
+    // Use this for initialization
+    public virtual void Start () 
 	{	if (StartPoint == null) {
 			StartPoint = GameObject.FindObjectOfType<sPoint> ().gameObject;
 
 		}
 		//Set up camera position
 		if (StartPoint != null)
-		{goToStart ();
-			transform.position = new Vector3(StartPoint.transform.position.x, m_MinFieldOfView + 130, StartPoint.transform.position.z-AngleOffset);
+		{
+            goToStart ();
+			transform.position = new Vector3(StartPoint.transform.position.x, m_MinFieldOfView + 130, StartPoint.transform.position.z- Mathf.Max(maxAngle, AngleOffset));
 		}
-		AngleOffset = 50 -((transform.position.y - m_MinFieldOfView) / m_MaxFieldOfView) * 45;
+		AngleOffset = Mathf.Max(maxAngle, 50 -((transform.position.y - m_MinFieldOfView) / m_MaxFieldOfView) * 45);
 		//Set up camera rotation
 		transform.rotation = Quaternion.Euler (90-AngleOffset, 0, 0);
-	}
+        Zoom(null, new ScrollWheelEventArgs(-1));
+    }
 
-	// Update is called once per frame
-	void Update () 
+    // Update is called once per frame
+    public virtual void Update () 
 	{
 		if (deltaTimes.Count < 5 && Time.deltaTime != 0.0f) {
 			deltaTimes.Enqueue (Time.deltaTime);
@@ -165,7 +167,8 @@ public class MainCamera : MonoBehaviour, ICamera {
 	{
 		if (StartPoint != null) {
 			transform.position = new Vector3 (StartPoint.transform.position.x, transform.position.y, StartPoint.transform.position.z - AngleOffset);
-			//Debug.Log ("Start Should be " + new Vector3 (StartPoint.transform.position.x, transform.position.y, StartPoint.transform.position.z - AngleOffset));
+            Zoom(null, new ScrollWheelEventArgs(-1));
+            //Debug.Log ("Start Should be " + new Vector3 (StartPoint.transform.position.x, transform.position.y, StartPoint.transform.position.z - AngleOffset));
 		}
 	}
 	public void generalMove(Vector3 input){
@@ -184,7 +187,7 @@ public class MainCamera : MonoBehaviour, ICamera {
 	}
 
 
-	public void Pan(object sender, ScreenEdgeEventArgs e)
+    public virtual void Pan(object sender, ScreenEdgeEventArgs e)
 	{
 		if (canWeScroll && !middleMouseDown)
 		{
@@ -232,7 +235,7 @@ public class MainCamera : MonoBehaviour, ICamera {
 		//CheckEdgeMovement ();
 	}
 
-	private void CheckEdgeMovement()
+    public virtual void CheckEdgeMovement()
 	{
 		Ray r1 = myCamera.ScreenPointToRay (new Vector3(Screen.width/2,Screen.height-1,0)); // TOP
 
@@ -273,7 +276,7 @@ public class MainCamera : MonoBehaviour, ICamera {
 		}
 	}
 
-	public void Zoom(object sender, ScrollWheelEventArgs e)
+    public virtual void Zoom(object sender, ScrollWheelEventArgs e)
 	{
 
 		if (Time.timeScale == 0)
@@ -326,13 +329,17 @@ public class MainCamera : MonoBehaviour, ICamera {
 			CheckEdgeMovement ();
 		}
 
-		AngleOffset = 50 -((transform.position.y - m_MinFieldOfView) / m_MaxFieldOfView) * 45;
+		AngleOffset = Mathf.Max(maxAngle, 50 -((transform.position.y - m_MinFieldOfView) / m_MaxFieldOfView) * 45);
 	}
 
 
+    public void CenterCamera(Vector2 input)
+    {  
+        transform.position = new Vector3(input.x, transform.position.y,input.y - AngleOffset);
+        CheckEdgeMovement();
+    }
 
-
-	public void minimapMove(Vector2 input)
+    public void minimapMove(Vector2 input)
 	{
 		transform.position = new Vector3((input.x ) , this.gameObject.transform.position.y ,(input.y ));
 		CheckEdgeMovement ();

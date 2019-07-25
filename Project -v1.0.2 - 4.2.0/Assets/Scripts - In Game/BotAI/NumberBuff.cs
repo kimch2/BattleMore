@@ -10,7 +10,8 @@ public class NumberBuff
 public class StatChanger
 {
 	UnitStats myStats;
-	
+    public enum BuffType {Armor,HP,HPRegen,Energy, EnergyRegen,MoveSpeed,Damage,AttackSpeed, Range, Cooldown }
+
 	Dictionary<string, NumberAlter> cachedAlters = new Dictionary<string, NumberAlter>();
 
 
@@ -39,19 +40,19 @@ public class StatChanger
 	public void changeAttackSpeed(float perc, float flat, UnityEngine.Object obj, bool stackable = false)
 	{
 		NumberAlter number = GetNumberAlter("AttackSpeed");
-		number.AddBuff(perc, flat, obj, stackable);
-		foreach (IWeapon weap in myStats.myManager.myWeapon)
-		{
-			if (cachedAlters.ContainsKey("AttackSpeed" + weap.GetHashCode()))
-			{
-				weap.attackPeriod = NumberAlter.adjustTotalSpeedInverse(new List<NumberAlter>() { number, GetNumberAlter("AttackSpeed" + weap.GetHashCode()) }, weap.baseAttackPeriod, .05f, 100);
-			}
-			else
-			{
-				weap.attackPeriod = number.adjustSpeedInverse(weap.getBasePeriod());
-			}
-		}
-	}
+        number.AddBuff(perc, flat, obj, stackable);   
+        foreach (IWeapon weap in myStats.myManager.myWeapon)
+        {
+            if (cachedAlters.ContainsKey("AttackSpeed" + weap.GetHashCode()))
+            {
+                weap.attackPeriod = NumberAlter.adjustTotalSpeedInverse(new List<NumberAlter>() { number, GetNumberAlter("AttackSpeed" + weap.GetHashCode()) }, weap.baseAttackPeriod, .05f, 100);
+            }
+            else
+            {
+                weap.attackPeriod = number.adjustSpeedInverse(weap.getBasePeriod());
+            }
+        }
+    }
 
 	public void removeAttackSpeed(UnityEngine.Object obj)
 	{
@@ -69,6 +70,7 @@ public class StatChanger
 			}
 		}
 	}
+
 
 
 
@@ -181,6 +183,7 @@ public class StatChanger
 			{
 				rvo.maxSpeed = myStats.myManager.cMover.MaxSpeed;
 			}
+            myStats.StatsChanged = true;
 		}
 	}
 
@@ -197,7 +200,8 @@ public class StatChanger
 			{
 				rvo.maxSpeed = myStats.myManager.cMover.MaxSpeed;
 			}
-		}
+            myStats.StatsChanged = true;
+        }
 	}
 	//===================================================================================================
 
@@ -209,50 +213,87 @@ public class StatChanger
 		NumberAlter number = GetNumberAlter("HealthMax");
 		number.AddBuff(perc, flat, obj, stackable);
 		myStats.Maxhealth = number.ApplyBuffs(number.baseAmount);
-	}
+        myStats.StatsChanged = true;
+    }
 
 	public void removeHealthMax(UnityEngine.Object obj)
 	{
 		NumberAlter number = GetNumberAlter("HealthMax");
 		number.RemoveBuff(obj);
 		myStats.Maxhealth = number.ApplyBuffs(number.baseAmount);
-	}
+        myStats.StatsChanged = true;
+    }
 	//===================================================================================================
 
-	/// <summary>
-	///  .2f as a perent means a 20% increase, This will apply to all weapons
-	/// </summary>
 	public void changeEnergyMax(float perc, float flat, UnityEngine.Object obj, bool stackable = false)
 	{
 		NumberAlter number = GetNumberAlter("EnergyMax");
 		number.AddBuff(perc, flat, obj, stackable);
 		myStats.MaxEnergy = number.ApplyBuffs(number.baseAmount);
-	}
+        myStats.StatsChanged = true;
+    }
 
 	public void removeEnergyMax(UnityEngine.Object obj)
 	{
 		NumberAlter number = GetNumberAlter("EnergyMax");
 		number.RemoveBuff(obj);
 		myStats.MaxEnergy = number.ApplyBuffs(number.baseAmount);
-	}
-	//===================================================================================================
+        myStats.StatsChanged = true;
+    }
 
-	/// <summary>
-	///  .2f as a perent means a 20% increase, This will apply to all weapons
-	/// </summary>
-	public void changeArmor(float perc, float flat, UnityEngine.Object obj, bool stackable = false)
+    //===================================================================================================
+
+
+    public void changeEnergyRegen(float perc, float flat, UnityEngine.Object obj, bool stackable = false)
+    {
+        NumberAlter number = GetNumberAlter("EnergyRegen");
+        number.AddBuff(perc, flat, obj, stackable);
+        myStats.setEnergyRegen(number.ApplyBuffs(number.baseAmount));
+    }
+
+    public void removeEnergyRegen(UnityEngine.Object obj)
+    {
+        NumberAlter number = GetNumberAlter("EnergyMax");
+        number.RemoveBuff(obj);
+        myStats.setEnergyRegen(number.ApplyBuffs(number.baseAmount));
+    }
+
+    //===================================================================================================
+
+
+    public void changeHealthRegen(float perc, float flat, UnityEngine.Object obj, bool stackable = false)
+    {
+        NumberAlter number = GetNumberAlter("HealthRegen");
+        number.AddBuff(perc, flat, obj, stackable);
+        myStats.setHealRate(number.ApplyBuffs(number.baseAmount));
+    }
+
+    public void removeHealthRegen(UnityEngine.Object obj)
+    {
+        NumberAlter number = GetNumberAlter("HealthRegen");
+        number.RemoveBuff(obj);
+        myStats.setHealRate(number.ApplyBuffs(number.baseAmount));
+    }
+    //===================================================================================================
+
+    /// <summary>
+    ///  .2f as a perent means a 20% increase, This will apply to all weapons
+    /// </summary>
+    public void changeArmor(float perc, float flat, UnityEngine.Object obj, bool stackable = false)
 	{
 		NumberAlter number = GetNumberAlter("Armor");
 		number.AddBuff(perc, flat, obj, stackable);
 		myStats.armor = number.ApplyBuffs(number.baseAmount);
-	}
+        myStats.StatsChanged = true;
+    }
 
 	public void removeArmor(UnityEngine.Object obj)
 	{
 		NumberAlter number = GetNumberAlter("Armor");
 		number.RemoveBuff(obj);
 		myStats.armor = number.ApplyBuffs(number.baseAmount);
-	}
+        myStats.StatsChanged = true;
+    }
 
 	//===================================================================================================
 	/// <summary>
@@ -517,7 +558,19 @@ public class NumberAlter
 				baseAmount = stats.MaxEnergy;
 				break;
 
-			case "Armor":
+            case "EnergyRegen":
+                min = 0;
+                max = 2048;
+                baseAmount = stats.EnergyRegenPerSec;
+                break;
+
+            case "HealthRegen":
+                min = 0;
+                max = 2048;
+                baseAmount = stats.HealthRegenPerSec;
+                break;
+
+            case "Armor":
 				min = -2048;
 				max = 2048;
 				baseAmount = stats.armor;

@@ -67,26 +67,48 @@ public class UnitCardCreater : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (currentUnit) {
-			if (myDispense) {
-				if (remainingOre != myDispense.OreRemaining) {
-					OreText.text = "Remaining Ore: " + myDispense.OreRemaining;
-					remainingOre = myDispense.OreRemaining;
-				}
+            if (myDispense)
+            {
+                if (remainingOre != myDispense.OreRemaining)
+                {
+                    OreText.text = "Remaining Ore: " + myDispense.OreRemaining;
+                    remainingOre = myDispense.OreRemaining;
+                }
 
-			} else {
-				if (currentHealth != (int)currentUnit.myStats.health || maxHealth != (int)currentUnit.myStats.Maxhealth) {
-				
-					health.text =  (int)currentUnit.myStats.health + "/" + (int)currentUnit.myStats.Maxhealth;
-					currentHealth = (int)currentUnit.myStats.health; 
-					maxHealth = (int)currentUnit.myStats.Maxhealth;
-				}
+            }
+            else if (currentUnit.myStats.StatsChanged)
+            {
+                currentUnit.myStats.StatsChanged = false;
+                health.text = (int)currentUnit.myStats.health + "/" + (int)currentUnit.myStats.Maxhealth;
+                energyText.text = (int)currentUnit.myStats.currentEnergy + "/" + currentUnit.myStats.MaxEnergy;
+                armor.text = "" + currentUnit.myStats.armor;
 
-				if (currentUnit.myStats.MaxEnergy > 0 && currentEnergy != ((int)currentUnit.myStats.currentEnergy)) {
-					currentEnergy = (int)currentUnit.myStats.currentEnergy;
-					energyText.text = (int)currentUnit.myStats.currentEnergy + "/" + currentUnit.myStats.MaxEnergy;	
+                if (currentUnit.cMover != null)
+                {
+                    if (currentUnit.cMover.getMaxSpeed() > 0)
+                    {
+                        speedIcon.enabled = true;
+                        speed.text = "" + (int)currentUnit.cMover.getMaxSpeed();
+                    }
+                }
+            }
+            else
+            {
+                if (currentHealth != (int)currentUnit.myStats.health || maxHealth != (int)currentUnit.myStats.Maxhealth)
+                {
 
-				}
-			}
+                    health.text = (int)currentUnit.myStats.health + "/" + (int)currentUnit.myStats.Maxhealth;
+                    currentHealth = (int)currentUnit.myStats.health;
+                    maxHealth = (int)currentUnit.myStats.Maxhealth;
+                }
+
+                if (currentUnit.myStats.MaxEnergy > 0 && currentEnergy != ((int)currentUnit.myStats.currentEnergy))
+                {
+                    currentEnergy = (int)currentUnit.myStats.currentEnergy;
+                    energyText.text = (int)currentUnit.myStats.currentEnergy + "/" + currentUnit.myStats.MaxEnergy;
+
+                }
+            }
 
 		} else {
 			if (hasUnit) {

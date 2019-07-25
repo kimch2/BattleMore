@@ -5,7 +5,6 @@ using UnityEngine;
 public class SummonStructure :  UnitProduction{
 
 
-	protected Selected mySelect;
 
 	Coroutine currentCharger;
 
@@ -19,8 +18,7 @@ public class SummonStructure :  UnitProduction{
 	// Use this for initialization
 	new void Start () {
 		myType = type.building;
-		mySelect = GetComponent<Selected> ();
-	
+
 		supplyNeeded = unitToBuild.GetComponent<UnitStats> ().supply;
 		racer = GameManager.getInstance ().playerList [myManager.PlayerOwner - 1];
 	}
@@ -108,21 +106,24 @@ public class SummonStructure :  UnitProduction{
 	}
 
 	public void setBuildSpot(Vector3 buildSpot, GameObject ghostPlacer)
-	{targetLocation = buildSpot;
+	{
+        Debug.Log("Activating");
+        targetLocation = buildSpot;
 		Destroy (ghostPlacer);
 	}
 		
 	public  bool Cast(GameObject target, Vector3 location)
 	{
-
-		Cast ();
+        Debug.Log("Activating");
+        Cast ();
 
 		return false;
 
 	}
 
 	public void Cast(){
-		myCost.payCost ();
+        Debug.Log("Activating");
+        myCost.payCost ();
 		GameObject inConstruction = null;
 
 		Vector3 pos = targetLocation;
@@ -160,5 +161,7 @@ public class SummonStructure :  UnitProduction{
 		return 0;
 	}
 
-
+    public override void InitializeGhostPlacer(GameObject ghost)
+    {
+    }
 }

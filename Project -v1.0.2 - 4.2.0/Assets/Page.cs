@@ -88,7 +88,10 @@ public class Page  {
 		// these two parts in the if/else statement are identical except for the kind of state they are looking for.
 		bool canCast =false;
 		rows [n / 4].RemoveAll (item => item == null);
-		if (rows [n / 4] [0].abilityList [X] is BuildStructure || rows [n / 4] [0].abilityList [X] is SummonStructure) {
+
+        Ability abil = rows[n / 4][0].abilityList[X];
+
+        if (abil is BuildStructure || abil is SummonStructure || abil is ValhallaBuilder) {
 			foreach (RTSObject unit in rows[n/4]) {
 				if (unit)
 				{
@@ -178,6 +181,7 @@ public class Page  {
 		{if (((UnitManager)bestGuy).getState () is ChannelState) {
 				queue = true;
 			}
+
 			bestGuy.UseTargetAbility (obj, loc, X, queue);
 		}
 
@@ -238,12 +242,24 @@ public class Page  {
 
 		foreach (RTSObject rts in rows[n/4]) {
 			try{
-				if(((TargetAbility)rts.abilityList [X]).isValidTarget ( target,location) && rts.abilityList [X].canActivate(false).canCast)
-			{
-				return true;
-			}
+                if (rts.abilityList[X].canActivate(false).canCast) {
+                    if (rts.abilityList[X] is TargetAbility)
+                    {
+                        if (((TargetAbility)rts.abilityList[X]).isValidTarget(target, location))
+                        {
+                            return true;
+                        }
+                    }
+                    else if (rts.abilityList[X] is ValhallaBuilder)
+                    {
+                        if (((ValhallaBuilder)rts.abilityList[X]).isValidTarget(target, location))
+                        {
+                            return true;
+                        }
+                    }
+                }
 			}catch (System.Exception e){
-				Debug.Log (e.StackTrace);
+				Debug.Log (e + "   "+e.StackTrace);
 				Debug.Log ("I am calling " + rts.name + " but it broke! X: " + X + " :(");
 			}
 		

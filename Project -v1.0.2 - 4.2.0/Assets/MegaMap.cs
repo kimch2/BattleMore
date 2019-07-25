@@ -14,15 +14,34 @@ public class MegaMap : MonoBehaviour{
 	public Image OtherUnitSprite;
 	public GameObject childParent;
 	public MiniMapUIController miniController;
-
+    public GameObject background;
 	bool active;
 
 	void Start()
 	{
 		InvokeRepeating ("UpdateSprite", .1f, .1f);
-	}
+        StartCoroutine(DelayedStart());
+    }
 
-	void Update()
+    IEnumerator DelayedStart()
+    {
+        yield return null;
+        Vector2 newSize = ((RectTransform)UnitSprite.transform).sizeDelta;
+        if (miniController.getAspectRatio() > 1)
+        {
+            newSize.y /= miniController.getAspectRatio();
+        }
+        else
+        {
+            newSize.x *= miniController.getAspectRatio();
+        }
+
+        ((RectTransform)fogSprite.transform).sizeDelta = newSize;
+        ((RectTransform)UnitSprite.transform).sizeDelta = newSize;
+        ((RectTransform)background.transform).sizeDelta = newSize;
+    }
+
+    void Update()
 	{
 		if (Input.GetKeyDown (KeyCode.M) && Time.timeScale != 0) {
 			ToggleMegamap ();

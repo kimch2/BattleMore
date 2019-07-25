@@ -14,7 +14,6 @@ public class SingleTarget:  TargetAbility {
 	public bool canTargetSelf;
 	public enum sideTarget{ally, enemy, all}
 	public sideTarget who;
-	public int maxChargeCount;
 	public IEffect AttributeEffect;
 
 	protected Lean.LeanPool myBulletPool;
@@ -37,15 +36,7 @@ public class SingleTarget:  TargetAbility {
 			playerOwner = 1; // Assuming the only things without managers are Ults
 		}
 
-		if (chargeCount >-1) {
-			if(chargeCount < maxChargeCount){
-				if (currentCharger != null)
-				{
-					StopCoroutine(currentCharger);
-				}
-				currentCharger = StartCoroutine (increaseCharges ());
-			}
-		}
+        InitializeCharges();
 
 		if (missile)
 		{
@@ -56,16 +47,6 @@ public class SingleTarget:  TargetAbility {
 		}
 	}
 
-
-	public void UpMaxCharge()
-	{
-		maxChargeCount = 3;
-
-		if (currentCharger == null) {
-			currentCharger = StartCoroutine (increaseCharges ());
-
-		}
-	}
 
 
 	override
@@ -149,12 +130,7 @@ public class SingleTarget:  TargetAbility {
 		if (target) {
 
 
-			if (chargeCount >-1) {
-				changeCharge (-1);
-				if (currentCharger == null) {
-					currentCharger = StartCoroutine (increaseCharges ());
-				}
-			}
+            changeCharge(-1);
 			if (myCost) {
 				myCost.payCost ();
 			}
@@ -194,12 +170,7 @@ public class SingleTarget:  TargetAbility {
 
 	//	Debug.Log ("Casting in other");
 		if (target) {
-			if (chargeCount >-1) {
-				changeCharge (-1);
-				if (currentCharger == null) {
-					currentCharger = StartCoroutine (increaseCharges ());
-				}
-			}
+            changeCharge(-1);
 			if (myCost) {
 				myCost.payCost ();
 			}
@@ -234,41 +205,6 @@ public class SingleTarget:  TargetAbility {
 
 
 
-	IEnumerator increaseCharges()
-	{
-
-		if (chargeCount == 0) {
-			active = false;
-		}
-
-		myCost.startCooldown ();
-	//	Debug.Log("Waiting for " + myCost.cooldown);
-		yield return new WaitForSeconds (myCost.cooldown-.15f);
-		//Debug.Log("Done Waiting");
-		active = true;
-		changeCharge (1);
-
-		if (chargeCount < maxChargeCount) {
-			currentCharger = StartCoroutine (increaseCharges ());
-		} else {
-			currentCharger = null;
-		}
-	}
-	public void changeCharge(int n)
-	{
-		chargeCount += n;
-		if (chargeCount == 0) {
-			active = false;
-
-		}
-		if (chargeCount > maxChargeCount) {
-			chargeCount = maxChargeCount;
-		}
-		if (mySelect && mySelect.IsSelected) {
-			RaceManager.upDateUI ();
-			RaceManager.updateActivity ();
-
-		}
-	}
+	
 
 }

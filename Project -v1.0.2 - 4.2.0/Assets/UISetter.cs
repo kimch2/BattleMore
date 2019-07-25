@@ -55,22 +55,22 @@ public class UISetter : MonoBehaviour {
 		LevelCompilation comp = ((GameObject)Resources.Load("LevelEditor")).GetComponent<LevelCompilation>();
 
 
-			if (!comp.MyLevels[LevelNum].UIBarsNUlts.CommandsOpen)
+			if (!comp.MyLevels[LevelNum].UIBarsNUlts.CommandsOpen && CommandMinimize)
 			{
 				CommandMinimize.onClick.Invoke();
 			}
 
-			if (!comp.MyLevels[LevelNum].UIBarsNUlts.LeftBarOpen)
+			if (!comp.MyLevels[LevelNum].UIBarsNUlts.LeftBarOpen && LeftMinimize)
 			{
 				LeftMinimize.onClick.Invoke();
 			}
 
-			if (!comp.MyLevels[LevelNum].UIBarsNUlts.RightBarOpen)
+			if (!comp.MyLevels[LevelNum].UIBarsNUlts.RightBarOpen && RightMinimize)
 			{
 				RightMinimize.onClick.Invoke();
 			}
 
-			if (!comp.MyLevels[LevelNum].UIBarsNUlts.resourcesOpen)
+			if (!comp.MyLevels[LevelNum].UIBarsNUlts.resourcesOpen && ResourceBar)
 			{
 				ResourceBar.SetActive(false);
 			}
@@ -108,10 +108,6 @@ public class UISetter : MonoBehaviour {
 		{
             Invoke("turnOnArsenal", comp.MyLevels[LevelNum].ArsenalDisplayTime);
         }
-
-
-	
-		
 	}
 
 	public void initializeUlt(Ability abil, int index)
@@ -141,7 +137,7 @@ public class UISetter : MonoBehaviour {
 	{
 		UltimateUIs[ultNumber].slideOne.value = UltimateUIs[ultNumber].myAbility.myCost.cooldownProgress();
 		UltimateUIs[ultNumber].slideOne.gameObject.SetActive((UltimateUIs[ultNumber].slideOne.value != 1));
-		UltimateUIs[ultNumber].ultBOne.interactable = (UltimateUIs[ultNumber].slideOne.value == 1);
+		UltimateUIs[ultNumber].ultBOne.interactable = (UltimateUIs[ultNumber].slideOne.value == 1 || UltimateUIs[ultNumber].myAbility.chargeCount >0);
 
 		if (UltimateUIs[ultNumber].myAbility.chargeCount != -1)
 		{

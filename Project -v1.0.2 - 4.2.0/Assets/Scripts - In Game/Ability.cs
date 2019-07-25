@@ -26,9 +26,10 @@ public abstract class Ability : MonoBehaviour {
 	public bool autocast;
 	[Tooltip("Check this if this ability should show in UI but be grayed out")]
 	public bool active = false;
+    public int maxChargeCount = 0;
 
-	//if -1, then it is infinite
-	public int chargeCount = -1;
+    //if -1, then it is infinite
+    public int chargeCount = -1;
 
 
 	public abstract continueOrder canActivate(bool error);
@@ -37,9 +38,9 @@ public abstract class Ability : MonoBehaviour {
 	public AudioClip soundEffect;
 	protected AudioSource audioSrc;
 	protected Selected select;
+    Coroutine currentCharger;
 
-
-	public virtual void Start() // We have this here so other source can call Start and any of this guy's inheriters will have it called instead
+    public virtual void Start() // We have this here so other source can call Start and any of this guy's inheriters will have it called instead
 	{
 		
 	}
@@ -58,9 +59,6 @@ public abstract class Ability : MonoBehaviour {
 		//	Debug.Log (this.gameObject.name + "  was created " + (requirementList.Count == 0) + "   " + (!requirementList.ContainsValue (false)));
 			active = false;
 		} 
-
-
-
 	}
 
 
@@ -132,7 +130,7 @@ public abstract class Ability : MonoBehaviour {
 		if (!select) {
 			select = GetComponent<Selected> ();
 		}
-		if (select.IsSelected) {
+		if (select && select.IsSelected) {
 			RaceManager.upDateAutocast ();
 		}
 
@@ -144,7 +142,7 @@ public abstract class Ability : MonoBehaviour {
 		if (!select) {
 			select = GetComponent<Selected> ();
 		}
-		if (select.IsSelected) {
+		if (select && select.IsSelected) {
 				RaceManager.updateActivity();
 		}
 
@@ -154,12 +152,78 @@ public abstract class Ability : MonoBehaviour {
 		if (!select) {
 			select = GetComponent<Selected> ();
 		}
-			if (select.IsSelected) {
+			if (select && select.IsSelected) {
 				RaceManager.upDateUI();
 			}
 
-		}
+    }
+
+    public void InitializeCharges()
+    {
+        if (chargeCount > -1)
+        {
+            if (chargeCount < maxChargeCount)
+            {
+                currentCharger = StartCoroutine(increaseCharges());
+            }
+        }
+    }
 
 
+    IEnumerator increaseCharges()
+    {
+        if (chargeCount == 0)
+        {
+            active = false;
+        }
+        myCost.startCooldown();
+        yield return new WaitForSeconds(myCost.cooldown - .2f);
 
+        active = true;
+        changeCharge(1);
+
+        if (chargeCount < maxChargeCount)
+        {
+            currentCharger = StartCoroutine(increaseCharges());
+        }
+        else
+        {
+            currentCharger = null;
+        }
+    }
+
+
+    public void changeCharge(int n)
+    {
+        if (chargeCount > -1)
+        {
+            chargeCount += n;
+            if (chargeCount == 0)
+            {
+                active = false;
+            }
+            if (chargeCount > maxChargeCount)
+            {
+                chargeCount = maxChargeCount;
+            }
+            if (chargeCount < maxChargeCount && currentCharger == null)
+            {
+                currentCharger = StartCoroutine(increaseCharges());
+            }
+            updateUICommandCard();
+
+            updateActiveCommandCard();
+        }
+    }
+
+
+    public void UpMaxCharge()
+    {
+        maxChargeCount = 3;
+
+        if (currentCharger == null)
+        {
+            currentCharger = StartCoroutine(increaseCharges());
+        }
+    }
 }

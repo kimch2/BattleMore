@@ -8,7 +8,6 @@ public class DeployTurret  : TargetAbility{
 	public GameObject UnitToBuild;
 
 	protected float timer =0;
-	protected bool buildingUnit = false;
 
 	protected HealthDisplay HD;
 	protected List<TurretMount> turretMounts = new List<TurretMount>();
@@ -19,7 +18,6 @@ public class DeployTurret  : TargetAbility{
 	public GameObject currentTurret;
 
 	public List<Sprite> turretIcons;
-	int maxChargeCount =2;
 	public MultiShotParticle FabricateEffect;
 
 	new void Awake()
@@ -287,7 +285,7 @@ public class DeployTurret  : TargetAbility{
 	override
 	public  bool Cast(GameObject target, Vector3 location)
 	{
-
+        Debug.Log("Firing");
 		if (chargeCount == maxChargeCount) {
 			currentReplciation = StartCoroutine (replicateTurrets ());
 		} 
@@ -346,6 +344,7 @@ public class DeployTurret  : TargetAbility{
 	override
 	public void Cast(){
 
+        Debug.Log("Casting");
 		if (chargeCount == maxChargeCount) {
 			currentReplciation =  StartCoroutine (replicateTurrets());
 		}

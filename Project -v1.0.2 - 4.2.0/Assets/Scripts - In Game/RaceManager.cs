@@ -156,8 +156,15 @@ public class RaceManager : MonoBehaviour, ManagerWatcher {
 
         if (playerNumber == 1)
         {
-            UltObject Ulty = Instantiate<GameObject>(RacePacket.getRace(myRace).UltimatePrefab).GetComponent<UltObject>();
-
+            UltObject Ulty = null;
+            if (TerraTileController.main)
+            {
+                Ulty = Instantiate<GameObject>(Resources.Load<GameObject>("TerraCrafterUlt")).GetComponent<UltObject>();
+            }
+            else
+            {
+                Ulty = Instantiate<GameObject>(RacePacket.getRace(myRace).UltimatePrefab).GetComponent<UltObject>();
+            }
             if (Application.isPlaying)
             {
                 SetUltimates(Ulty);
@@ -527,7 +534,7 @@ public class RaceManager : MonoBehaviour, ManagerWatcher {
 
     public void addUnit(UnitManager obj)
     {
-        //if (playerNumber == 1)
+       
         if (!unitRoster.ContainsKey(obj.UnitName))
         {
             unitRoster.Add(obj.UnitName, new List<UnitManager>());
@@ -541,10 +548,10 @@ public class RaceManager : MonoBehaviour, ManagerWatcher {
             if (FButtonManager.main == null) {
                 FButtonManager.main = GameObject.FindObjectOfType<FButtonManager>();
             }
-            FButtonManager.main.updateNumbers(unitRoster);
-
-
-            //obj.initializeVision (true);
+            if (FButtonManager.main != null)
+            {
+                FButtonManager.main.updateNumbers(unitRoster);
+            }
 
             if (uiManager != null) {
                 foreach (ArmyUIManager uiMan in uiManager.production.GetComponents<ArmyUIManager>()) {
@@ -999,7 +1006,7 @@ public class RaceManager : MonoBehaviour, ManagerWatcher {
 
     public void useAbilityOne()
     { if (UltOne != null) {
-
+            Debug.Log("ult one");
             if (UltOne.active && UltOne.canActivate(true).canCast) {
 
                 uiManage.SwitchMode(Mode.globalAbility);

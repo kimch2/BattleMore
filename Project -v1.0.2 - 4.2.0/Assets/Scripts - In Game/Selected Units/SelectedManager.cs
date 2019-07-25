@@ -365,7 +365,7 @@ public class SelectedManager : MonoBehaviour, ISelectedManager
 				//Debug.Log ("In here 2 ");
 				if (UIPages [currentPage].canCast (n)) {
 					UISoundManager.interfaceClick (true);
-					uiManage.UserPlacingBuilding (((UnitProduction)UIPages [currentPage].getAbility (n)).unitToBuild, n);
+					uiManage.UserPlacingBuilding (((UnitProduction)UIPages [currentPage].getAbility (n)).unitToBuild, ((UnitProduction)UIPages[currentPage].getAbility(n)), n);
 					
 				} else {
 

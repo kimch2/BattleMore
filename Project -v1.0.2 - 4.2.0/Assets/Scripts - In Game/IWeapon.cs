@@ -19,6 +19,7 @@ public class IWeapon : MonoBehaviour {
 	public string AnimationName = "Attack";
 
 	public float attackPeriod;
+    [HideInInspector]
 	public float baseAttackPeriod;
 	public int numOfAttacks = 1;
 	[Tooltip("Amount of time between each bullet when numOfAttacks is more than 1")]

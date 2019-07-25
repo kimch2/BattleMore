@@ -95,12 +95,12 @@ public class UIManager : MonoBehaviour, IUIManager {
 		lineRender = GetComponent<LineRenderer> ();
 		fog = GameObject.FindObjectOfType<FogOfWar> ();
 		//Resolve interface variables
-		m_SelectedManager = SelectedManager.main;// GameObject.FindObjectOfType<SelectedManager>();
-		m_Camera =  MainCamera.main;//  GameObject.FindObjectOfType<MainCamera> (); //ManagerResolver.Resolve<ICamera>();	
-		m_GuiManager =GameObject.FindObjectOfType<GUIManager>();// ManagerResolver.Resolve<IGUIManager>();
+		m_SelectedManager = SelectedManager.main;
+		m_Camera =  MainCamera.main;
+		m_GuiManager =GameObject.FindObjectOfType<GUIManager>();
 	
 		//Attach Event Handlers
-		EventsManager eventsManager =GameObject.FindObjectOfType<EventsManager>();// ManagerResolver.Resolve<IEventsManager>();
+		EventsManager eventsManager =GameObject.FindObjectOfType<EventsManager>();
 
 		eventsManager.MouseClick += ButtonClickedHandler;
 
@@ -121,11 +121,6 @@ public class UIManager : MonoBehaviour, IUIManager {
 	// Update is called once per frame
 	void Update () 
 	{
-		//System.Diagnostics.Stopwatch time = new System.Diagnostics.Stopwatch();
-		//time.Start ();
-
-
-
 		clickOverUI = isPointerOverUIObject ();
 	
 		rayb = Camera.main.ScreenPointToRay (Input.mousePosition);
@@ -135,8 +130,6 @@ public class UIManager : MonoBehaviour, IUIManager {
 			if (!clickOverUI) 
 			{
 				rightClickOrigin = Input.mousePosition;
-				//lineRender.enabled = true;
-
 
 				RaycastHit hitb;
 
@@ -401,18 +394,27 @@ public class UIManager : MonoBehaviour, IUIManager {
 		RaycastHit hit;
 		if (!clickOverUI) {
 			if (Physics.Raycast (ray, out hit, Mathf.Infinity, GroundsCast)) {
-
+                currentObject = hit.collider.gameObject;
 				m_ObjectBeingPlaced.transform.position = hit.point;
-				//buildingPlacer.transform.position = spot;
+                tempBuildingPlacer.GetComponent<BuildingPlacer>().canBuild(hit.collider.gameObject);
 
+               // m_SelectedManager.checkValidTarget(hit.point, hit.collider.gameObject, currentAbilityNUmber);
 
 			}
 		
 		}
 	}
-	
-	//----------------------Mouse Button Handler------------------------------------
-	private void ButtonClickedHandler(object sender, MouseEventArgs e)
+
+    public RaycastHit getGroundCast(Vector3 location)
+    {
+        Ray ray = new Ray(location + Vector3.up *50, Vector3.down);
+        RaycastHit hit;
+        Physics.Raycast(ray, out hit, Mathf.Infinity, GroundsCast);
+        return hit;
+    }
+
+        //----------------------Mouse Button Handler------------------------------------
+        private void ButtonClickedHandler(object sender, MouseEventArgs e)
 	{//Debug.Log ("Here "  + this.gameObject);
 			e.Command ();
 	}
@@ -425,11 +427,6 @@ public class UIManager : MonoBehaviour, IUIManager {
 		if(hoverOver != HoverOver.Menu)
 		switch (m_Mode)
 		{
-
-
-		case Mode.Menu:
-	
-			break;
 		case Mode.Normal:
 			//We've left clicked, what have we left clicked on?
 			//int currentObjLayer = currentObject.layer;
@@ -442,54 +439,8 @@ public class UIManager : MonoBehaviour, IUIManager {
 
 	PointerEventData eventDatacurrenPosition;
 	public bool isPointerOverUIObject()
-	{/*
-		List<long> intList = new List<long> ();
-		System.Diagnostics.Stopwatch watch = new System.Diagnostics.Stopwatch ();
-		watch.Start ();
-
-	
-		eventDatacurrenPosition = new PointerEventData (EventSystem.current);
-
-		eventDatacurrenPosition.position = new Vector2 (Input.mousePosition.x, Input.mousePosition.y);
-		//Debug.Log ("Current " + EventSystem.current.currentSelectedGameObject);
-		List<RaycastResult> results = new List<RaycastResult> ();
-		EventSystem.current.RaycastAll (eventDatacurrenPosition, results);
-	
-		intList.Add ( watch.ElapsedTicks);
-
-	
-		bool test = inputSystem.overUILayer ();
-		intList.Add ( watch.ElapsedTicks);
-
-		watch.Stop ();
-		bool firstRung = !(results.Count == 0);
-		if (results.Count != 0) {
-			firstRung = results [0].distance == 0;}
-
-
-	
-
-
-
-		Debug.Log("Starting" + firstRung + "    " + test);
-		int n = 0;
-		foreach (int i in intList) {
-
-			Debug.Log (n + "  " + i);
-			n++;
-		}
-
-		if (results.Count == 0) {
-			return false;
-		} 
-
-
-		//Debug.Log ("returning " + (results[0].distance == 0));
-		return results[0].distance == 0;
-
-*/
+	{
 		return  inputSystem.overUILayer ();
-
 	}
 
 	public bool isPointerOverFloatingButton()
@@ -509,10 +460,7 @@ public class UIManager : MonoBehaviour, IUIManager {
 
 		return (count != 0);
 	}
-
-
-
-
+    
 
 	public void LeftButton_DoubleClickDown(MouseEventArgs e)
 	{
@@ -746,18 +694,40 @@ public class UIManager : MonoBehaviour, IUIManager {
 						currentObject = null;
 					}
 				}
-				if (currentAbility.isValidTarget (currentObject, targetPoint)) {
-					((TargetAbility)currentAbility).Cast (currentObject, targetPoint);
-					raceManager.castedGlobal (currentAbility);
-
-					SwitchMode (Mode.Normal);
-				}
+                    if (currentAbility.isValidTarget(currentObject, targetPoint))
+                    {
+                        ((TargetAbility)currentAbility).Cast(currentObject, targetPoint);
+                        raceManager.castedGlobal(currentAbility);
+                        if (currentAbility.chargeCount > 0)
+                        {
+                            switch (currentAbilityNUmber)
+                            {
+                                case 0:
+                                    raceManager.useAbilityOne();
+                                    break;
+                                case 1:
+                                    raceManager.useAbilityTwo();
+                                    break;
+                                case 2:
+                                    raceManager.useAbilityThree();
+                                    break;
+                                case 3:
+                                    raceManager.useAbilityFour();
+                                    break;
+                            }
+                        }
+                        else
+                        {
+                            SwitchMode(Mode.Normal);
+                        }
+                    }
 			}
 				break;
 			
 		case Mode.PlaceBuilding:
+                Debug.Log("over here");
 			if (!clickOverUI) {
-			if (tempBuildingPlacer.GetComponent<BuildingPlacer> ().canBuild ()) {
+			if (tempBuildingPlacer.GetComponent<BuildingPlacer> ().canBuild (currentObject) ) {
 			
 
 					if (!clickOverUI) {
@@ -776,7 +746,7 @@ public class UIManager : MonoBehaviour, IUIManager {
 							m_ObjectBeingPlaced = null;
 						} else {
 							m_ObjectBeingPlaced = null;
-							SwitchToModePlacingBuilding (thingToBeBuilt);
+							SwitchToModePlacingBuilding (thingToBeBuilt, null);
 						}
 					}
 				}
@@ -835,7 +805,8 @@ public class UIManager : MonoBehaviour, IUIManager {
 	string currentTargetUnit;
 
 	public void setAbility(Ability abil, int n, string UnitName)
-	{currentTargetUnit = UnitName;
+	{
+        currentTargetUnit = UnitName;
 		currentAbilityNUmber = n;
 		currentAbility = (TargetAbility)abil;
 
@@ -1050,10 +1021,10 @@ public class UIManager : MonoBehaviour, IUIManager {
 	}
 	
 
-	public void UserPlacingBuilding(GameObject item, int i)
+	public void UserPlacingBuilding(GameObject item, UnitProduction abil, int i)
 	{
 		currentAbilityNUmber = i;
-		SwitchToModePlacingBuilding(item);
+		SwitchToModePlacingBuilding(item, abil);
 	}
 	
 	public void SwitchMode(Mode mode)
@@ -1118,9 +1089,9 @@ public class UIManager : MonoBehaviour, IUIManager {
 
 
 
-	public void SwitchToModePlacingBuilding(GameObject item)
+	public void SwitchToModePlacingBuilding(GameObject item, UnitProduction abil)
 	{
-
+        Debug.Log("Switching to here");
 		thingToBeBuilt = item;
 		if (m_Mode == Mode.PlaceBuilding) {
 			if (m_ObjectBeingPlaced) {
@@ -1136,13 +1107,22 @@ public class UIManager : MonoBehaviour, IUIManager {
 
 		tempBuildingPlacer .SetActive (true);
 		BuildingPlacer p = tempBuildingPlacer .GetComponent<BuildingPlacer> ();
-
-		p.reset (m_ObjectBeingPlaced, goodPlacement,  badPlacement);
-
-
-		tempBuildingPlacer .transform.SetParent (m_ObjectBeingPlaced.transform);
+       
+		p.reset (m_ObjectBeingPlaced, goodPlacement,  badPlacement, currentAbilityNUmber);
+        if (abil)
+        {
+            Debug.Log("ROOTING");
+            abil.InitializeGhostPlacer(tempBuildingPlacer);
+        }
+        tempBuildingPlacer .transform.SetParent (m_ObjectBeingPlaced.transform);
 		p.GetComponent<SphereCollider> ().enabled = true;
-		StartCoroutine (delayBuildDeath (m_ObjectBeingPlaced));
+
+        foreach (MonoBehaviour behave in p.building.GetComponents<MonoBehaviour>())
+        {
+            Destroy(behave);
+        }
+
+       // StartCoroutine (delayBuildDeath (m_ObjectBeingPlaced));
 	
 	}
 	IEnumerator delayBuildDeath(GameObject m_objectBeingPlaced)

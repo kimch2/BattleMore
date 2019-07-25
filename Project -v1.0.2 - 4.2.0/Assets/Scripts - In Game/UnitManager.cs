@@ -4,199 +4,202 @@ using System.Collections.Generic;
 
 
 //this class extends RTSObject through the Unit class
-public class UnitManager : Unit,IOrderable{
+public class UnitManager : Unit, IOrderable {
 
-	//AbilityList<Ability> is in the Unit Class
-	public string UnitName;
+    //AbilityList<Ability> is in the Unit Class
+    public string UnitName;
 
-	public int PlayerOwner; // 1 = active player, 2 = enemies, 3 = nuetral
-	public int formationOrder;
-	public Animator myAnim;
+    public int PlayerOwner; // 1 = active player, 2 = enemies, 3 = nuetral
+    public int formationOrder;
+    public Animator myAnim;
 
-	private float chaseRange;  // how far an enemy can come into vision before I chase after him.
-	public IMover cMover;      // Pathing Interface. Classes to use here : AirMover(Flying Units), cMover (ground, uses Global Astar) , RVOMover(ground, Uses Astar and unit collisions, still in testing)
-	public List<IWeapon> myWeapon = new List<IWeapon>();   // IWeapon is not actually an interface but a base class with required parameters for all weapons.
-	public bool MultiWeaponAttack;
-	public UnitStats myStats; // Contains Unit health, regen, armor, supply, cost, etc
+    private float chaseRange;  // how far an enemy can come into vision before I chase after him.
+    public IMover cMover;      // Pathing Interface. Classes to use here : AirMover(Flying Units), cMover (ground, uses Global Astar) , RVOMover(ground, Uses Astar and unit collisions, still in testing)
+    public List<IWeapon> myWeapon = new List<IWeapon>();   // IWeapon is not actually an interface but a base class with required parameters for all weapons.
+    public bool MultiWeaponAttack;
+    public UnitStats myStats; // Contains Unit health, regen, armor, supply, cost, etc
 
-	public Iinteract interactor; // Passes commands to this to determine how to interact (Right click on a friendly could be a follow command or a cast spell command, based on the Unit/)
+    public Iinteract interactor; // Passes commands to this to determine how to interact (Right click on a friendly could be a follow command or a cast spell command, based on the Unit/)
 
-	public float visionRange;
-	SphereCollider visionSphere; // Trigger Collider that respresents vision radius. Size is set in the start function based on visionRange
-								 // When Enemies enter the visionsphere, it puts them into one of these categories. They are removed when they move away or die.
-	//[HideInInspector]
-	public List<UnitManager> enemies = new List<UnitManager>();
-	[HideInInspector]
-	public List<UnitManager> allies = new List<UnitManager>();
-	[HideInInspector]
-	public List<GameObject> neutrals = new List<GameObject> ();
-
-
-	private LinkedList<UnitState> queuedStates = new LinkedList<UnitState> (); // Used to queue commands to be executed in succession.
-
-	private UnitState myState;     // used for StateMachine
-
-	private List<Object> stunSources = new List<Object> ();     // Used to keep track of stun lengths and duration, to ensure the strongest one is always applied.
-	private List<Object> silenceSources = new List<Object> ();
-
-	public voiceResponse myVoices;
-
-	//List of weapons modifiers that need to be applied to weapons as they are put on this guy
-	private List<Notify> potentialNotify = new List<Notify>();
-
-	public List<Ability> myAddons = new List<Ability>(); // Currently being used so we can see Repair bays in a weapon slot
-	//[HideInInspector]
-	public RaceManager myRacer;
-
-	public CharacterController CharController;
-	public FogOfWarUnit fogger;
-	[System.Serializable]
-	public struct voiceResponse
-	{ 
-		public List<AudioClip> moving;
-		public List<AudioClip> attacking;
-
-	}
-
-	private bool isStunned;
-	private bool isSilenced;
-
-	public List<StartCommand> startingCommand;
-	[Tooltip("Use this if you do not put anything in Starting COmmand List")]
-
-	public UnitState.StateType startingState;
+    public float visionRange;
+    SphereCollider visionSphere; // Trigger Collider that respresents vision radius. Size is set in the start function based on visionRange
+                                 // When Enemies enter the visionsphere, it puts them into one of these categories. They are removed when they move away or die.
+                                 //[HideInInspector]
+    public List<UnitManager> enemies = new List<UnitManager>();
+    [HideInInspector]
+    public List<UnitManager> allies = new List<UnitManager>();
+    [HideInInspector]
+    public List<GameObject> neutrals = new List<GameObject>();
 
 
+    private LinkedList<UnitState> queuedStates = new LinkedList<UnitState>(); // Used to queue commands to be executed in succession.
 
-	new void Awake()
-	{
-		if(interactor == null){
-			interactor = (Iinteract)gameObject.GetComponent(typeof(Iinteract));
-		}
+    private UnitState myState;     // used for StateMachine
 
-		if (visionSphere == null) {
-			foreach (SphereCollider sphere in gameObject.GetComponents<SphereCollider>()) {
-				if (sphere.isTrigger) {
-					visionSphere = this.gameObject.GetComponent<SphereCollider>();
-					break;
-				}
-			}
-		}
-			
-		if (cMover == null) {
-			cMover = (IMover)gameObject.GetComponent(typeof(IMover));
-		}
+    private List<Object> stunSources = new List<Object>();     // Used to keep track of stun lengths and duration, to ensure the strongest one is always applied.
+    private List<Object> silenceSources = new List<Object>();
 
+    public voiceResponse myVoices;
 
-		if (myWeapon.Count == 0) {
-			foreach (IWeapon w in GetComponents<IWeapon>()) {
-				if (!myWeapon.Contains (w)) {
-					myWeapon.Add (w);
-				}
-			}
-		}
-		
+    //List of weapons modifiers that need to be applied to weapons as they are put on this guy
+    private List<Notify> potentialNotify = new List<Notify>();
 
-		if (!CharController) {
-			CharController = GetComponent<CharacterController> ();
-		}
+    public List<Ability> myAddons = new List<Ability>(); // Currently being used so we can see Repair bays in a weapon slot
+                                                         //[HideInInspector]
+    public RaceManager myRacer;
 
-		if (!myStats) {
-			myStats = gameObject.GetComponent<UnitStats>();
-		}
+    public CharacterController CharController;
+    public FogOfWarUnit fogger;
+    [System.Serializable]
+    public struct voiceResponse
+    {
+        public List<AudioClip> moving;
+        public List<AudioClip> attacking;
 
-	
+    }
 
-		GameManager man = 	GameManager.getInstance ();
-		if (PlayerOwner == man.playerNumber) {
-				this.gameObject.tag = "Player";
-			} 
+    private bool isStunned;
+    private bool isSilenced;
 
-		myStats.Initialize();
-		//initializeVision ();
+    public List<StartCommand> startingCommand;
+    [Tooltip("Use this if you do not put anything in Starting COmmand List")]
+
+    public UnitState.StateType startingState;
 
 
-		if(startingState == UnitState.StateType.HoldGround) {
-			changeState (new HoldState (this));
-		}else if (cMover != null) {
-			changeState (new DefaultState ());
-		}else if (startingState == UnitState.StateType.Turret) {		       
-			changeState (new turretState (this));
-		} 
 
-		chaseRange = visionRange + 40;
-	}
+    new void Awake()
+    {
+        if (interactor == null) {
+            interactor = (Iinteract)gameObject.GetComponent(typeof(Iinteract));
+        }
 
-	public void initializeVision()
-	{
-		if (!fogger)
-		{
-			fogger = gameObject.GetComponent<FogOfWarUnit>();
+        if (visionSphere == null) {
+            foreach (SphereCollider sphere in gameObject.GetComponents<SphereCollider>()) {
+                if (sphere.isTrigger) {
+                    visionSphere = this.gameObject.GetComponent<SphereCollider>();
+                    break;
+                }
+            }
+        }
 
-		}
+        if (cMover == null) {
+            cMover = (IMover)gameObject.GetComponent(typeof(IMover));
+        }
 
-		if (!myStats)
-		{
-			myStats = GetComponent<UnitStats>();
-		}
 
-		if (!fogger)
-		{
-			if ((PlayerOwner == 1 && !myStats.isUnitType(UnitTypes.UnitTypeTag.Turret)) || myStats.getSelector().ManualFogOfWar)
-			{
-				fogger = gameObject.AddComponent<FogOfWarUnit>();
-				if (cMover)
-				{
-					cMover.myFogger = fogger;
-				}
-			}
-		}
-		else
-		{
-			if (PlayerOwner != 1 && !myStats.getSelector().ManualFogOfWar)
-			{
+        if (myWeapon.Count == 0) {
+            foreach (IWeapon w in GetComponents<IWeapon>()) {
+                if (!myWeapon.Contains(w)) {
+                    myWeapon.Add(w);
+                }
+            }
+        }
+
+
+        if (!CharController) {
+            CharController = GetComponent<CharacterController>();
+        }
+
+        if (!myStats) {
+            myStats = gameObject.GetComponent<UnitStats>();
+        }
+
+
+
+        GameManager man = GameManager.getInstance();
+        if (PlayerOwner == man.playerNumber) {
+            this.gameObject.tag = "Player";
+        }
+
+        myStats.Initialize();
+        //initializeVision ();
+
+
+        if (startingState == UnitState.StateType.HoldGround) {
+            changeState(new HoldState(this));
+        } else if (cMover != null) {
+            changeState(new DefaultState());
+        } else if (startingState == UnitState.StateType.Turret) {
+            changeState(new turretState(this));
+        }
+
+        chaseRange = visionRange + 40;
+    }
+
+    public void initializeVision()
+    {
+        if (!fogger)
+        {
+            fogger = gameObject.GetComponent<FogOfWarUnit>();
+
+        }
+
+        if (!myStats)
+        {
+            myStats = GetComponent<UnitStats>();
+        }
+
+        if (!fogger)
+        {
+            if ((PlayerOwner == 1 && !myStats.isUnitType(UnitTypes.UnitTypeTag.Turret)) || myStats.getSelector().ManualFogOfWar)
+            {
+                fogger = gameObject.AddComponent<FogOfWarUnit>();
+                if (cMover)
+                {
+                    cMover.myFogger = fogger;
+                }
+            }
+        }
+        else
+        {
+            if (PlayerOwner != 1 && !myStats.getSelector().ManualFogOfWar)
+            {
                 //Debug.Log("On " + this.gameObject);
                 if (Application.isPlaying)
                 {
                     Destroy(fogger);
                 }
-				//fogger.enabled = false;
-				//fogger = null;
-			}
-		}
-		float distance = visionRange + 3;
-		if (CharController) {
-			distance += CharController.radius;
-		}
+                //fogger.enabled = false;
+                //fogger = null;
+            }
+        }
+        float distance = visionRange + 3;
+        if (CharController) {
+            distance += CharController.radius;
+        }
 
-		if (!visionSphere)
-		{
-			foreach (SphereCollider sc in GetComponents<SphereCollider>())
-			{
-				if (sc.isTrigger)
-				{
-					visionSphere = sc;
-					break;
-				}
-			}
-		}
+        if (!visionSphere)
+        {
+            foreach (SphereCollider sc in GetComponents<SphereCollider>())
+            {
+                if (sc.isTrigger)
+                {
+                    visionSphere = sc;
+                    break;
+                }
+            }
+        }
 
-		visionSphere.radius = distance;
-		if (fogger) {
-			fogger.radius = distance;
-			fogger.enabled = true;
-		}
-	
-	}
+        visionSphere.radius = distance;
+        if (fogger) {
+            fogger.radius = distance;
+            fogger.enabled = true;
+        }
+
+    }
+
 
 	bool hasStarted = false;
-	protected void Start()
+	public void Start()
 	{
+
 		if (!hasStarted) {
 
 			if (startingCommand.Count > 0 || cMover) {
 				Invoke ("GiveStartCommand", .1f);
 			}
+            //Debug.Log("IN here " + (Time.timeSinceLevelLoad < 1) +"    "+!myStats.isUnitType(UnitTypes.UnitTypeTag.Structure) + "    " + myStats.isUnitType(UnitTypes.UnitTypeTag.Add_On));
 			if (Time.timeSinceLevelLoad < 1 || !myStats.isUnitType (UnitTypes.UnitTypeTag.Structure) || myStats.isUnitType (UnitTypes.UnitTypeTag.Add_On)) {
 				GameManager.getInstance ().playerList [PlayerOwner - 1].addUnit (this);
 			}
@@ -356,8 +359,13 @@ public class UnitManager : Unit,IOrderable{
 						((SummonStructure)abilityList [n]).setBuildSpot (loc, obj);
 						((SummonStructure)abilityList [n]).Activate ();
 					}
+                    else if (abilityList[n] is ValhallaBuilder)
+                    {
+                        ((ValhallaBuilder)abilityList[n]).setBuildSpot(loc, obj);
+                        ((ValhallaBuilder)abilityList[n]).Activate();
+                    }
 
-				}
+                }
 
 			}
 		} 
@@ -667,11 +675,10 @@ public class UnitManager : Unit,IOrderable{
 	}
 	// make sure that Queue front and queueback are never both true
 	public void changeState(UnitState nextState, bool Queuefront, bool QueueBack)
-	{//Debug.Log ("Next state is " + nextState + "    " + queuedStates.Count);
-
-		if (nextState != null) {
+	{
+		if (nextState != null && !isStunned) {
 			enabled = true;
-		} // THIS MAY BREAK THINGS
+		} // THIS MAY BREAK THINGS - IT Did, stun no longer works
 
 		if (myState is  ChannelState && !(nextState is DefaultState)) {
 			queuedStates.AddLast (nextState);

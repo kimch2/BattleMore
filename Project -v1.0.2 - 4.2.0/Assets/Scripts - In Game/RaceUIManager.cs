@@ -71,8 +71,11 @@ public class RaceUIManager : MonoBehaviour , ManagerWatcher{
 				supply.color = Color.yellow;
 			}
 			supply.text = raceManager.currentSupply + "/" +  Mathf.Min(raceManager.supplyMax, raceManager.supplyCap);
-			currentProdManager = dropdowns [1];
-			chanageDropDown ();
+            if (dropdowns.Count > 0)
+            {
+                currentProdManager = dropdowns[1];
+                chanageDropDown();
+            }
 		}
 
 

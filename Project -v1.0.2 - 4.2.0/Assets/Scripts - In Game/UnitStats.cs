@@ -39,6 +39,8 @@ public class UnitStats : MonoBehaviour {
 	[HideInInspector]
 	public UnitManager myManager;
 
+    [HideInInspector]
+    public bool StatsChanged;
 	private List<Modifier> damageModifiers = new List<Modifier>();
 
 	//BE Careful this can pass in both negative and positive numbers!
@@ -393,18 +395,21 @@ public class UnitStats : MonoBehaviour {
 	public void SetHealth (float percent)
 	{
 		health = Maxhealth * percent;
-		updateHealthBar ();
+        StatsChanged = true;
+        updateHealthBar ();
 	}
 
 	public void setHealthValue(float amount)
 	{
 		health = amount;
-		updateHealthBar();
+        StatsChanged = true;
+        updateHealthBar();
 	}
 
 	public void setEnergy(float amount)
 	{
 		currentEnergy = amount;
+        StatsChanged = true;
 		updateEnergyBar();
 	}
 

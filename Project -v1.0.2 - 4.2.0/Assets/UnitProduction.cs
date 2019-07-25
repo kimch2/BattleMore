@@ -8,7 +8,7 @@ public abstract class UnitProduction: Ability {
 	public float buildRate = 1;
 	public abstract float getProgress ();
 
-
+    public abstract void InitializeGhostPlacer(GameObject ghost);
 	public abstract void startBuilding();
 
 	public abstract void cancelBuilding();

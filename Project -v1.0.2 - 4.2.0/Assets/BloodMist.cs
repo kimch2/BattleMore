@@ -6,32 +6,15 @@ public class BloodMist : TargetAbility {
 
 	protected Selected mySelect;
 	public GameObject BloodMistObj;
-	Coroutine currentCharger;
-
-	public int maxChargeCount = 2;
 	public bool OnlyOnPathable;
 
 	// Use this for initialization
 	new void Start () {
 		myType = type.target;
 		mySelect = GetComponent<Selected> ();
-
-		if (chargeCount >-1) {
-			if(chargeCount < maxChargeCount){
-				currentCharger = StartCoroutine (increaseCharges ());
-			}
-		}
+        InitializeCharges();
 	}
 
-	public void UpMaxCharge()
-	{
-		maxChargeCount = 3;
-	
-			if (currentCharger == null) {
-				currentCharger = StartCoroutine (increaseCharges ());
-
-		}
-	}
 
 
 	override
@@ -82,23 +65,15 @@ public class BloodMist : TargetAbility {
 	override
 	public  bool Cast(GameObject target, Vector3 location)
 	{
-		
-		if (chargeCount >-1) {
-			changeCharge (-1);
-			if (currentCharger == null) {
-				currentCharger = StartCoroutine (increaseCharges ());
-			}
-		}
+
+        changeCharge(-1);
 
 		myCost.payCost ();
-
-
 
 		Vector3 pos = location;
 		pos.y += 5;
 		GameObject proj = (GameObject)Instantiate (BloodMistObj, pos, Quaternion.identity);
-
-
+        
 		proj.SendMessage ("setSource", this.gameObject);
 
 
@@ -108,15 +83,7 @@ public class BloodMist : TargetAbility {
 	override
 	public void Cast(){
 
-		if (chargeCount >-1) {
-			changeCharge (-1);
-			if (currentCharger == null) {
-				//Debug.Log ("it's my birthday");
-				currentCharger = StartCoroutine (increaseCharges ());
-			}
-		}
-
-	
+        changeCharge(-1);
 		GameObject proj = null;
 
 		Vector3 pos = location;
@@ -125,49 +92,8 @@ public class BloodMist : TargetAbility {
 
 
 		proj.SendMessage ("setSource", this.gameObject,SendMessageOptions.DontRequireReceiver);
-
-
-
-
 	}
 
 
-	IEnumerator increaseCharges()
-	{
-		
-		if (chargeCount == 0) {
-			active = false;
-		}
-		myCost.startCooldown ();
-		yield return new WaitForSeconds (myCost.cooldown-.2f);
-
-
-		active = true;
-		changeCharge (1);
-
-		if (chargeCount < maxChargeCount) {
-	
-			currentCharger = StartCoroutine (increaseCharges ());
-		} else {
-			
-			currentCharger = null;
-		}
-	}
-
-
-	public void changeCharge(int n)
-	{
-		chargeCount += n;
-		if (chargeCount == 0) {
-			active = false;
-
-		}
-		if (chargeCount > maxChargeCount) {
-			chargeCount = maxChargeCount;
-		}
-		updateUICommandCard ();
-
-		updateActiveCommandCard ();
-	}
 
 }

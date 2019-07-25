@@ -11,6 +11,7 @@ public class GridMaker : MonoBehaviour {
 	GameObject child;
 	public bool OnUnit;
 	public bool NotNuetral;
+
 	void Start()
 	{	child = transform.GetComponentInChildren<MeshRenderer>().gameObject;
 		UnitManager manager = GetComponent<UnitManager> ();

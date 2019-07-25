@@ -21,6 +21,9 @@ public class missileSalvo :  Ability, Iinteract, Validator, Notify{
 	Vector3 homeLocation;
 	float landingTime = 4.5f;
 
+    public HoldFire holdFireAbility;
+   public  bool TurnedOnWeapon = false;
+
 	Coroutine ReFill;
 	// Use this for initialization
 	new void Start () {
@@ -103,16 +106,30 @@ public class missileSalvo :  Ability, Iinteract, Validator, Notify{
 		if (select.IsSelected ) {
 			RaceManager.upDateUI ();
 		}
-		if (autocast && chargeCount <= 0) {
-			if (ReFill == null) {
-				
-				ReFill =	StartCoroutine (checkForLandingPad ());
-			}
-			Activate ();
-		}
+        if (chargeCount <= 0)
+        {
+            if (TurnedOnWeapon)
+            {
+                TurnedOnWeapon = false;
+                if (!holdFireAbility.WeaponDisabled)
+                {
+                    holdFireAbility.Activate();
+                }
+            }
+            if (autocast)
+            {
+                if (ReFill == null)
+                {
+
+                    ReFill = StartCoroutine(checkForLandingPad());
+                }
+                Activate();
+            }
+        }
 		if(MissileModels.Count > chargeCount && chargeCount >= 0){
 			MissileModels [chargeCount].SetActive (false);
 		}
+
 		return damage;
 	}
 
@@ -342,8 +359,14 @@ public class missileSalvo :  Ability, Iinteract, Validator, Notify{
 	// When creating other interactor classes, make sure to pass all relevant information into whatever new state is being created (IMover, IWeapon, UnitManager)
 	public virtual void computeInteractions (Order order)
 	{
-		//Debug.Log ("Queued " + order.queued);
-		switch (order.OrderType) {
+        
+        if (TurnedOnWeapon && !holdFireAbility.WeaponDisabled)
+        {
+            holdFireAbility.Activate();
+        }
+        TurnedOnWeapon = false;
+        //Debug.Log ("Queued " + order.queued);
+        switch (order.OrderType) {
 		case Const.Order_HoldGround:
 
 			HoldGround (order);
@@ -415,7 +438,12 @@ public class missileSalvo :  Ability, Iinteract, Validator, Notify{
 				if (this.gameObject.GetComponent<UnitManager> ().myWeapon.Count == 0) {
 					myManager.changeState (new FollowState (order.Target.gameObject, myManager), false, order.queued);
 				} else {
-					//Debug.Log ("Ordering to interact " + manage.gameObject);
+                    //Debug.Log ("Ordering to interact " + manage.gameObject);
+                    if (holdFireAbility.WeaponDisabled && holdFireAbility.toDisable.isValidTarget(manage))
+                    {
+                        TurnedOnWeapon = true;
+                        holdFireAbility.Activate();
+                    }
 					myManager.changeState (new InteractState (manage.gameObject, myManager), false, order.queued);
 				}
 			} else if (manage.UnitName == "Aviatrix") {

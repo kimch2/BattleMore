@@ -14,7 +14,7 @@ public abstract class TargetAbility : Ability {
 	public enum targetType{ground, unit}
 	public targetType myTargetType;
 
-	public bool inRange(Vector3 location)
+    public bool inRange(Vector3 location)
 	{
 
 		float pyth = Mathf.Pow (this.gameObject.transform.position.x - location.x, 2) + Mathf.Pow (this.gameObject.transform.position.z - location.z, 2);
@@ -38,6 +38,12 @@ public abstract class TargetAbility : Ability {
 		//Debug.Log ("distance is " + dist);
 		return AstarPath.active.graphs [0].GetNearest (location).node.Walkable;// (dist < 5);
 	}
+
+    public void setTarget(Vector3 position, GameObject Target)
+    {
+        target = Target;
+        location = position;
+    }
 
 
 }

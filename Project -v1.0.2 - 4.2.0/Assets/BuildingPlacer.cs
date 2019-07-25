@@ -9,12 +9,11 @@ public class BuildingPlacer : MonoBehaviour {
 	public GameObject building;
 	public Material good;
 	public Material bad;
-
+    int AbilityNumber;
 	private SphereCollider coll;
 	// Use this for initialization
 	void Awake () {
 		coll = GetComponent<SphereCollider> ();
-
 	}
 	
 	// Update is called once per frame
@@ -29,6 +28,11 @@ public class BuildingPlacer : MonoBehaviour {
 					setRenderers (bad);
 					return;
 				}
+                if (!SelectedManager.main.checkValidTarget(transform.position, UIManager.main.getGroundCast(transform.position).collider.gameObject, AbilityNumber))
+                {
+                    setRenderers(bad);
+                    return;
+                }
 
 				Tile t = Grid.main.GetClosestRedTile (this.gameObject.transform.position);
 				if (FogOfWar.current.IsInCompleteFog (this.gameObject.transform.position)) {
@@ -49,23 +53,32 @@ public class BuildingPlacer : MonoBehaviour {
 		}
 	}
 
-	public bool canBuild()
+	public bool canBuild(GameObject target = null)
 	{  		objects.RemoveAll (item => item == null);
 
+
 		if (objects.Count != 0) {
-			return false;
+            return false;
 		}
+
+      if( target && ! SelectedManager.main.checkValidTarget(transform.position,target, AbilityNumber))
+        {
+            Debug.Log("In Here");
+            setRenderers(bad);
+            return false; 
+        }
+
 			Tile t = Grid.main.GetClosestRedTile (this.gameObject.transform.position);
 			if (FogOfWar.current.IsInCompleteFog (this.gameObject.transform.position)) {
 				setRenderers (bad);
-			//Debug.Log ("In fogg" );
+
 			return false;
 			} else {
 				if (!t.Buildable) {
 					float dist = Mathf.Pow (t.Center.x - transform.position.x, 2) + Mathf.Pow (t.Center.z - transform.position.z, 2);
 					if (Mathf.Sqrt (dist) < coll.radius) {
 						setRenderers (bad);
-					//Debug.Log ("not buildable" );
+					Debug.Log ("not buildable" );
 					return false;
 					} else {
 						setRenderers (good);
@@ -76,11 +89,10 @@ public class BuildingPlacer : MonoBehaviour {
 
 		}
 
-
 		return true;
 	}
 
-	public void reset(GameObject b, Material g, Material ba)
+	public void reset(GameObject b, Material g, Material ba, int abilityNum)
 	{
 
 		FogOfWarUnit fow = b.GetComponent<FogOfWarUnit> ();
@@ -94,6 +106,7 @@ public class BuildingPlacer : MonoBehaviour {
 		good = g;
 		bad = ba;
 		setRenderers (good);
+        AbilityNumber = abilityNum;
 		Animator anim = b.GetComponentInChildren<Animator> ();
 		if (anim) {
 			anim.SetInteger ("State", 1);
@@ -144,16 +157,19 @@ public class BuildingPlacer : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider other)
-	{
-		UnitManager manage = other.gameObject.GetComponent<UnitManager> ();
-	
+	{	
+        if (other.transform.root == building.transform)
+        {
+            return;
+        }
+
+        UnitManager manage = other.gameObject.GetComponent<UnitManager>();
+      
 		if (manage || other.gameObject.layer == 17) {
-			//if (manage.PlayerOwner != 1 || manage.myStats.isUnitType (UnitTypes.UnitTypeTag.Structure)) {
-				objects.Add (other.gameObject);
+            objects.Add (other.gameObject);
 
 				setRenderers (bad);
 
-			//}
 		} else {
 			objects.Add (other.gameObject);
 
@@ -164,6 +180,7 @@ public class BuildingPlacer : MonoBehaviour {
 
 	public void setRenderers(Material m)
 	{
+
 		if (building) {
 			foreach (MeshRenderer mr in building.GetComponentsInChildren<MeshRenderer>()) {
 				

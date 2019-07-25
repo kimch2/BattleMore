@@ -55,6 +55,7 @@ public class SkinColorManager : MonoBehaviour
 			newMat.SetFloat("_HueShift", HueShift);
 			newMat.SetFloat("_Sat", Saturation);
 			newMat.SetFloat("_Val", Value);
+
 			newMat.renderQueue = 2000;
 			colorMapper.Add(toChange, newMat);
 		}

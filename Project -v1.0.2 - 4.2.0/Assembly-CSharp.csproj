@@ -179,10 +179,14 @@
     <Compile Include="Assets\canvasFader.cs" />
     <Compile Include="Assets\CapturableUnit.cs" />
     <Compile Include="Assets\CapturePoint.cs" />
+    <Compile Include="Assets\CaptureTerraTile.cs" />
     <Compile Include="Assets\CarbotAI.cs" />
+    <Compile Include="Assets\CarbotCamera.cs" />
     <Compile Include="Assets\CarbotObjectiveManager.cs" />
     <Compile Include="Assets\CarbotOverlord.cs" />
     <Compile Include="Assets\CarbotPointApplier.cs" />
+    <Compile Include="Assets\CarbotStuff\ModularAura.cs" />
+    <Compile Include="Assets\CarbotStuff\SpriteBillboard.cs" />
     <Compile Include="Assets\CastAbilityState.cs" />
     <Compile Include="Assets\ChainWhip.cs" />
     <Compile Include="Assets\ChangeAmmo.cs" />
@@ -295,6 +299,7 @@
     <Compile Include="Assets\HealthDisplay.cs" />
     <Compile Include="Assets\HealthUpgrade.cs" />
     <Compile Include="Assets\HeroDisplayBar.cs" />
+    <Compile Include="Assets\HoldFire.cs" />
     <Compile Include="Assets\HookFury.cs" />
     <Compile Include="Assets\HotkeyMenu.cs" />
     <Compile Include="Assets\HotkeyPicSetter.cs" />
@@ -663,6 +668,9 @@
     <Compile Include="Assets\Teleport.cs" />
     <Compile Include="Assets\TempInvulnerable.cs" />
     <Compile Include="Assets\Terminal.cs" />
+    <Compile Include="Assets\TerraCraftTile.cs" />
+    <Compile Include="Assets\TerraTileChecker.cs" />
+    <Compile Include="Assets\TerraTileController.cs" />
     <Compile Include="Assets\testScript.cs" />
     <Compile Include="Assets\TextChanger.cs" />
     <Compile Include="Assets\TextHolder.cs" />
@@ -720,6 +728,7 @@
     <Compile Include="Assets\Upgradable.cs" />
     <Compile Include="Assets\Upgrade.cs" />
     <Compile Include="Assets\UpgradeCenterTag.cs" />
+    <Compile Include="Assets\ValhallaBuilder.cs" />
     <Compile Include="Assets\VeteranStats.cs" />
     <Compile Include="Assets\VeteranVicDisplayer.cs" />
     <Compile Include="Assets\VictoryScreen.cs" />
@@ -793,6 +802,7 @@
     <None Include="Assets\PostProcessing 1\PostProcessing\Editor Resources\Monitors\HistogramRender.shader" />
     <None Include="Assets\Materials\Bit2Good\SFS\Shaders\SFS_St_Nt.shader" />
     <None Include="Assets\Colorify\Shaders\Realtime\2 colors\Colorify-2colors-Alpha-BumpSpec.shader" />
+    <None Include="Assets\CarbotStuff\Casketta Hero\Casketta Info.txt" />
     <None Include="Assets\PostProcessing 1\PostProcessing-2\PostProcessing\Shaders\API\PSSL.hlsl" />
     <None Include="Assets\PostProcessing 1\PostProcessing-2\PostProcessing\Shaders\Builtins\AutoExposure.shader" />
     <None Include="Assets\Resources\ColorPicker.shader" />
@@ -1048,6 +1058,12 @@
     <Reference Include="com.unity.multiplayer-hlapi.Editor">
       <HintPath>C:/Users/Matthew Johnson/Desktop/BattleTrifecta/Project -v1.0.2 - 4.2.0/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.VectorGraphics">
+      <HintPath>C:/Users/Matthew Johnson/Desktop/BattleTrifecta/Project -v1.0.2 - 4.2.0/Library/ScriptAssemblies/Unity.VectorGraphics.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.InternalAPIEditorBridge.003">
+      <HintPath>C:/Users/Matthew Johnson/Desktop/BattleTrifecta/Project -v1.0.2 - 4.2.0/Library/ScriptAssemblies/Unity.InternalAPIEditorBridge.003.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/Matthew Johnson/Desktop/BattleTrifecta/Project -v1.0.2 - 4.2.0/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
@@ -1062,6 +1078,9 @@
     </Reference>
     <Reference Include="UnityEngine.XR.LegacyInputHelpers">
       <HintPath>C:/Users/Matthew Johnson/Desktop/BattleTrifecta/Project -v1.0.2 - 4.2.0/Library/ScriptAssemblies/UnityEngine.XR.LegacyInputHelpers.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.VectorGraphics.Editor">
+      <HintPath>C:/Users/Matthew Johnson/Desktop/BattleTrifecta/Project -v1.0.2 - 4.2.0/Library/ScriptAssemblies/Unity.VectorGraphics.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Sprite.Editor">
       <HintPath>C:/Users/Matthew Johnson/Desktop/BattleTrifecta/Project -v1.0.2 - 4.2.0/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>

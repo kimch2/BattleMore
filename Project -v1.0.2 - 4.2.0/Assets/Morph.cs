@@ -156,5 +156,6 @@ public class Morph :  UnitProduction {
 	}
 
 
-
+    public override void InitializeGhostPlacer(GameObject ghost)
+    { }
 }

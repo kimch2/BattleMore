@@ -51,8 +51,7 @@ public class BuildUnit : UnitProduction {
 				buildingUnit = false;
 				createUnit();
 			}
-		}
-	
+		}	
 	}
 
 	public bool isBuilding()
@@ -79,11 +78,6 @@ public class BuildUnit : UnitProduction {
 		select.updateCoolDown (0);
 		timer = 0;
 		buildingUnit = false;
-		foreach (Transform obj in this.transform) {
-
-			obj.SendMessage ("DeactivateAnimation",SendMessageOptions.DontRequireReceiver);
-		}
-		//myCost.refundCost ();deq
 
 		if (!buildMan.waitingOnSupply) {
 	
@@ -103,8 +97,6 @@ public class BuildUnit : UnitProduction {
 	{
 		
 		continueOrder order = new continueOrder();
-
-
 		order.nextUnitCast = false;
 
 
@@ -141,10 +133,6 @@ public class BuildUnit : UnitProduction {
 	public  void startBuilding()
 	{
 
-		foreach (Transform obj in this.transform) {
-
-			obj.SendMessage ("ActivateAnimation", SendMessageOptions.DontRequireReceiver);
-		}
 		if (constObject) {
 			constObject.SetActive (true);
 		}
@@ -155,9 +143,6 @@ public class BuildUnit : UnitProduction {
 
 		buildingUnit = true;
 		myManager.myRacer.buildingUnit (this);
-
-
-
 	}
 
 
@@ -196,10 +181,7 @@ public class BuildUnit : UnitProduction {
 			timer = buildTime;
 		}
 
-		foreach (Transform obj in this.transform) {
-
-			obj.SendMessage ("DeactivateAnimation",SendMessageOptions.DontRequireReceiver);
-		}
+		
 		myManager.myRacer.stopBuildingUnit (this);
 		//racer.applyUpgrade (unit);
 		buildingUnit = false;
@@ -214,4 +196,7 @@ public class BuildUnit : UnitProduction {
 	{
 		Gizmos.DrawSphere(transform.position + SpawnOffset, .3f);
 	}
+
+    public override void InitializeGhostPlacer(GameObject ghost)
+    { }
 }

@@ -409,6 +409,12 @@
     <Reference Include="com.unity.multiplayer-hlapi.Editor">
       <HintPath>C:/Users/Matthew Johnson/Desktop/BattleTrifecta/Project -v1.0.2 - 4.2.0/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.VectorGraphics">
+      <HintPath>C:/Users/Matthew Johnson/Desktop/BattleTrifecta/Project -v1.0.2 - 4.2.0/Library/ScriptAssemblies/Unity.VectorGraphics.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.InternalAPIEditorBridge.003">
+      <HintPath>C:/Users/Matthew Johnson/Desktop/BattleTrifecta/Project -v1.0.2 - 4.2.0/Library/ScriptAssemblies/Unity.InternalAPIEditorBridge.003.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/Matthew Johnson/Desktop/BattleTrifecta/Project -v1.0.2 - 4.2.0/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
@@ -423,6 +429,9 @@
     </Reference>
     <Reference Include="UnityEngine.XR.LegacyInputHelpers">
       <HintPath>C:/Users/Matthew Johnson/Desktop/BattleTrifecta/Project -v1.0.2 - 4.2.0/Library/ScriptAssemblies/UnityEngine.XR.LegacyInputHelpers.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.VectorGraphics.Editor">
+      <HintPath>C:/Users/Matthew Johnson/Desktop/BattleTrifecta/Project -v1.0.2 - 4.2.0/Library/ScriptAssemblies/Unity.VectorGraphics.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Sprite.Editor">
       <HintPath>C:/Users/Matthew Johnson/Desktop/BattleTrifecta/Project -v1.0.2 - 4.2.0/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>

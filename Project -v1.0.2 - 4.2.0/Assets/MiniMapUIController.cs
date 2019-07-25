@@ -16,15 +16,13 @@ public class MiniMapUIController : MonoBehaviour, IPointerDownHandler , IPointer
 
 	public GameObject warningSymbol;
 	public Sprite defaultWarning;
-	private bool[,] virtUnitTexture;
 	private Texture2D UnitTexture;
 
 	public RaceManager raceMan;
-	private GameManager gameMan;
 	public float minimapUpdateRate;
 	public Image fogger;
-	public int unitPixelSize = 3;
 
+    public LayerMask MiniMapRender = (1 << 21);
 	float Left = 726f;
   
 	private bool dragging;
@@ -117,38 +115,26 @@ public class MiniMapUIController : MonoBehaviour, IPointerDownHandler , IPointer
 		_panelStyle = new GUIStyle ();
 		_panelStyle.normal.background = panelTex;
 
-
-		myRect = GetComponent<RectTransform> ();
-		minimapWidth = myRect.rect.width;
-		minimapHeight = myRect.rect.height;
-		//Debug.Log ("Mini map " + minimapWidth + " " +minimapHeight + "  " + myRect.sizeDelta + "  " + myRect.rect);
-
-
 		WorldHeight = top - bottom;
 		WorldWidth = Right - Left;
 		fog = GameObject.FindObjectOfType<FogOfWar> ();
         
-		gameMan = GameObject.FindObjectOfType<GameManager> ();
-        
+
 		textureWidth *= scalingfactor;
 		textureHeight *= scalingfactor;
-		virtUnitTexture = new bool[textureWidth, textureHeight];
 		virtTrapezoid = new bool[textureWidth, textureHeight];
 		screenTrapzoidTex = InitialTexture (screenTrapzoidTex);
 
 
 		UnitTexture = InitialTexture (UnitTexture);
 
-
-		usedUnitPoints = new List<Point> ();
 		usedTriangleList = new List<Point> ();
 		UnitSprite = Sprite.Create (UnitTexture as Texture2D, new Rect (0f, 0f, textureWidth, textureHeight), Vector2.zero);
 		img.sprite = UnitSprite;
 
 
 
-		_texture = fog.getTexture (); //new Texture2D (fog.texture.width, fog.texture.height);
-		//_texture.wrapMode = TextureWrapMode.Clamp;
+		_texture = fog.getTexture ();
 		setFog ();
 		fogger.sprite = Sprite.Create (_texture as Texture2D, new Rect (0f, 0f, fog.texture.width, fog.texture.height), Vector2.zero);
 
@@ -170,19 +156,39 @@ public class MiniMapUIController : MonoBehaviour, IPointerDownHandler , IPointer
 
 		transform.parent.gameObject.SetActive (wasOn);
 
-		
+        myRect = GetComponent<RectTransform>();
+        minimapWidth = myRect.rect.width;
+        minimapHeight = myRect.rect.height;
 
-		GameObject newCamera = new GameObject("Minimap Camera");
+        GameObject newCamera = new GameObject("Minimap Camera");
 		Camera cam = newCamera.AddComponent<Camera>();
-		cam.cullingMask = (1 << LayerMask.NameToLayer("MinimapIcon"));
+		cam.cullingMask = MiniMapRender;
 		cam.orthographic = true;
-		cam.orthographicSize = WorldWidth/2;
-		cam.transform.position = Vector3.Lerp(MainCamera.main.BottomLeftBorder, MainCamera.main.TopRightBorder, .5f) + Vector3.up * 60;
-		cam.transform.eulerAngles = new Vector3(90,0,0);
+		cam.orthographicSize = WorldHeight/2;
+		cam.transform.position = Vector3.Lerp(MainCamera.main.BottomLeftBorder, MainCamera.main.TopRightBorder, .5f) + Vector3.up * 120;
+        cam.aspect = WorldWidth / WorldHeight;
+        cam.transform.eulerAngles = new Vector3(90,0,0);
 		cam.clearFlags = CameraClearFlags.Color;
 		cam.backgroundColor = Color.clear;
 
-		cam.renderingPath = RenderingPath.Forward;
+        Vector2 newSize = ((RectTransform)img.transform).sizeDelta;
+        if (WorldWidth > WorldHeight)
+        {
+            minimapHeight = 237 / cam.aspect;
+            newSize.y = minimapHeight;
+        }
+        else
+        {
+            minimapWidth = 237 / cam.aspect;
+            newSize.x = minimapWidth;
+        }
+
+        ((RectTransform)img.transform).sizeDelta = newSize;
+        ((RectTransform)fogger.transform).sizeDelta = newSize;
+        ((RectTransform)transform).sizeDelta = newSize;
+        ((RectTransform)ScreenTrapz.transform).sizeDelta = newSize;
+
+        cam.renderingPath = RenderingPath.Forward;
 		cam.allowDynamicResolution = false;
 		cam.allowHDR = false;
 		cam.allowMSAA = false;
@@ -197,6 +203,10 @@ public class MiniMapUIController : MonoBehaviour, IPointerDownHandler , IPointer
 		
 	}
 
+    public float getAspectRatio()
+    {
+        return minimapWidth / minimapHeight;
+    }
 
 	public void showWarning (Vector3 location)
 	{
@@ -232,9 +242,7 @@ public class MiniMapUIController : MonoBehaviour, IPointerDownHandler , IPointer
 		//RectTransform newParent = (RectTransform)this.transform.parent.FindChild ("ScreenTrap");
 		int iCoord = (int)(((location.x - Left) / (WorldWidth)) * UIWidth);
 		int jCoord = (int)(((location.z - bottom) / (WorldHeight)) * UIHeight);
-
-
-
+        
 		GameObject obj = (GameObject)Instantiate (warningSymbol, new Vector2 (iCoord, jCoord), Quaternion.identity, newParent);
 		if (pulsing) {
 			//UIPulse pulser = 
@@ -262,12 +270,6 @@ public class MiniMapUIController : MonoBehaviour, IPointerDownHandler , IPointer
 			int jCoord = (int)(((location.z - bottom) / (WorldHeight)) * UIHeight);
 			sprite.transform.localPosition = new Vector2 (iCoord - UIWidth / 2, jCoord - UIHeight / 2);
 		}
-	}
-
-
-	void UpdateMiniMapA ()
-	{
-		updateTexture (UnitTexture, virtUnitTexture);
 	}
 
 
@@ -304,9 +306,7 @@ public class MiniMapUIController : MonoBehaviour, IPointerDownHandler , IPointer
  
 	private void clearTexture (Texture2D tex, bool[,] virtMap, bool apply, List<Point> used)
 	{
-		//Debug.Log ("Points " + used.Count);
 		foreach (Point p in used) {
-			//virtMap [p.x, p.y] = false;
 			tex.SetPixel (p.x, p.y, Color.clear);
 		}
 		used.Clear ();
@@ -317,17 +317,14 @@ public class MiniMapUIController : MonoBehaviour, IPointerDownHandler , IPointer
 
 	class Point
 	{
-
 		public Point (int X, int Y)
 		{
 			x = X;
 			y = Y;
 		}
-
 		public int x, y;
 	}
 
-	List<Point> usedUnitPoints;
 	List<Point> usedTriangleList;
 	float WidthScale;
 	float HeightScale;
@@ -341,93 +338,11 @@ public class MiniMapUIController : MonoBehaviour, IPointerDownHandler , IPointer
 
 	public Vector2 worldToMinimap(Vector3 location)
 	{
-
 		//int iCoord = (int)(((location.x - Left) / (WorldWidth)) * UIWidth);
 		//int jCoord = (int)(((location.z - bottom) / (WorldHeight)) * UIHeight);
 		return new Vector2((((location.x - Left) / (WorldWidth)) * UIWidth),(((location.z - bottom) / (WorldHeight)) * UIHeight));
 	}
-
-
-
-	//This method gets called alot so it is optimized like xrazy
-	private void updateTexture (Texture2D tex, bool[,] virtMap)
-	{
-
-		clearTexture (tex, virtMap, false, usedUnitPoints);
-
-		for (int i = 0; i < 3; i++) {
-			//foreach (RaceManager race in gameMan.playerList) { // Loops 3 times
-			Color raceColor = getColorForRaceManager (gameMan.playerList [i]);
-            
-			foreach (KeyValuePair<string, List<UnitManager>> pair in  gameMan.playerList[i].getFastUnitList()) {
-				foreach (UnitManager unit  in pair.Value) {
-					if (!unit || fog.IsInCompleteFog(unit.transform.position)) {
-						continue;
-					}
-
-					iCoord = (int)((unit.transform.position.x - Left) * WidthScale);
-					jCoord = (int)((unit.transform.position.z - bottom) * HeightScale);
-
-					if (unit.gameObject.layer == 10) {
-						//chitSize = 2;
-						for (int n = -2; n <= 2; n++) {
-								ChitX = n + iCoord;
-							for (int j = -2; j <= 2; j++) {
-								
-								ChitY = j + jCoord;
-								try {
-									//if (!virtMap [ChitX, ChitY]) {	
-
-										usedUnitPoints.Add (PointArray [ChitX, ChitY]);
-										//virtMap [ChitX, ChitY] = true;
-										tex.SetPixel (ChitX, ChitY, raceColor);
-									//}
-								} catch (Exception) {
-
-								}
-							}
-						}
-
-					} else {
-						try {
-							//if (!virtMap [iCoord, jCoord]) {	
-								usedUnitPoints.Add (PointArray [iCoord, jCoord]);
-								//virtMap [iCoord, jCoord] = true;
-								tex.SetPixel (iCoord, jCoord, raceColor);
-							//}
-							ChitX = 1 + iCoord;
-		
-							//if (!virtMap [ChitX, jCoord]) {	
-								usedUnitPoints.Add (PointArray [ChitX, jCoord]);
-							//	virtMap [ChitX, jCoord] = true;
-								tex.SetPixel (ChitX, jCoord, raceColor);
-							//}
-
-							ChitY = 1 + jCoord;
-							//if (!virtMap [iCoord, ChitY]) {	
-								usedUnitPoints.Add (PointArray [iCoord, ChitY]);
-							//	virtMap [iCoord, ChitY] = true;
-								tex.SetPixel (iCoord, ChitY, raceColor);
-						//	}
-
-							//if (!virtMap [ChitX, ChitY]) {	
-								usedUnitPoints.Add (PointArray [ChitX, ChitY]);
-							//	virtMap [ChitX, ChitY] = true;
-								tex.SetPixel (ChitX, ChitY, raceColor);
-							//}
-						} catch (Exception) {
-
-						}
-					}
-				}
-			}
-		}
-		//Debug.Log ("C " + Environment.TickCount);
-		//Debug.Log ("Drawing " + counter);
-		tex.Apply ();
-
-	}
-
+    
 	Vector2 topLeftP;
 	Vector2 topRightP;
 	Vector2 botLeftP;
@@ -437,16 +352,12 @@ public class MiniMapUIController : MonoBehaviour, IPointerDownHandler , IPointer
 	private void updateScreenRect ()
 	{
 		clearTexture (screenTrapzoidTex, virtTrapezoid, false, usedTriangleList);
-
-
-		//Debug.Log ("A" + DateTime.Now.Millisecond );
+        
 		// DRAWING CAMERA TRAPEZOID
 		topLeftP = Vector2.zero;
 		topRightP = Vector2.zero;
 		botLeftP = Vector2.zero;
 		botRightP = Vector2.zero;
-
-      
 
 		ray1 = MainCamera.main.GetComponent<Camera>().ScreenPointToRay (new Vector3 (0, 150, 0));
 
@@ -458,8 +369,6 @@ public class MiniMapUIController : MonoBehaviour, IPointerDownHandler , IPointer
 
 		//Bottom right
 		ray4 = MainCamera.main.GetComponent<Camera>().ScreenPointToRay (new Vector3 (Screen.width, 150, 0));
-
-		//	Debug.Log ("B" + DateTime.Now.Millisecond );
 
 		// LOTS OF COMMENTED OUT STUFF FOR OPTIMIZATIONS!
 	
@@ -496,23 +405,6 @@ public class MiniMapUIController : MonoBehaviour, IPointerDownHandler , IPointer
 		drawLine (screenTrapzoidTex, virtTrapezoid, botRightP, topRightP);
 
 		screenTrapzoidTex.Apply ();
-		//Debug.Log ("D" + DateTime.Now.Millisecond );
-	}
-
-
-
-	private Color getColorForRaceManager (RaceManager raceMan)
-	{
-		//#1 - Green
-		//#2 - Red
-		//#3 - Grey
-		if (raceMan.playerNumber == 1) {
-			return Color.green;
-		} else if (raceMan.playerNumber == 2) {
-			return Color.red;
-		} else {
-			return Color.gray;
-		}
 	}
 
 
@@ -552,7 +444,6 @@ public class MiniMapUIController : MonoBehaviour, IPointerDownHandler , IPointer
 
 	IEnumerator drawPathY(List<Vector3> points, float duration, float thickness)
 	{
-		//Debug.Log ("Drawing path " + points.Count);
 		List<GameObject> myArrows = new List<GameObject> ();
 		List<Vector2> newList = new List<Vector2> ();
 
@@ -575,9 +466,7 @@ public class MiniMapUIController : MonoBehaviour, IPointerDownHandler , IPointer
 				((RectTransform)obj.transform).sizeDelta = new Vector2 (20 *thickness,20);
 				obj.GetComponent<Image> ().sprite = lineArrow;
 				((RectTransform) obj.transform).anchoredPosition = Vector2.Lerp(newList[indexA], newList[indexB], (i +6)/ distance);
-				//UIPulse pulse = obj.AddComponent<UIPulse> ();
-				//pulse.rate = 1;
-				//pulse.amplitude = 1.3f;
+
 				obj.transform.up = new Vector3 (  newList [indexB].x - newList [indexA].x , newList [indexB].y - newList [indexA].y   , 0);//  .Rotate (new Vector3());
 				myArrows.Add (obj);
 				yield return new WaitForSeconds (.12f);
@@ -597,8 +486,6 @@ public class MiniMapUIController : MonoBehaviour, IPointerDownHandler , IPointer
 
 
 	Color32[] pixelsArray;
-	//Color32 transParent = new Color32 (0, 0, 0, 0);
-	//Color32 blackColor = new Color32 (0, 0, 0, 255);
 
 	int lastFrame;
 	public void setFog ()
@@ -608,40 +495,15 @@ public class MiniMapUIController : MonoBehaviour, IPointerDownHandler , IPointer
 			return;
 		}
 		lastFrame = Time.frameCount;
-		//Debug.Log ("Setting fog " + Time.frameCount);
-		//if (_texture == null) {
-		//	_texture = new Texture2D (fog.texture.width, fog.texture.height);
-		//	_texture.wrapMode = TextureWrapMode.Clamp;
-		//}
-	
+
 		if (!fog.HasUnFogged) {
 			return;
 		}
 		System.Diagnostics.Stopwatch watch = new System.Diagnostics.Stopwatch ();
 		watch.Start ();
-		//Debug.Log ("Size is " + fog.texture.width);
-
-		//byte[] original = fog.getTexture ().GetRawTextureData ();
-		_texture = fog.getTexture ();
-		_texture.Apply ();/*
-
-		Debug.Log ("Get Texture is " + watch.ElapsedMilliseconds);
-		if (pixelsArray == null) {
-			pixelsArray = new Color32[original.Length];
-		}
-		Debug.Log ("Get Texture is X " + watch.ElapsedMilliseconds);
-		for (int i = 0; i < pixelsArray.Length; i++) {
-			
-			pixelsArray [i] = original [i] < 255 ? transParent : blackColor;
 		
-		}
-		Debug.Log ("Get Texture is B " + watch.ElapsedMilliseconds);
-		_texture.SetPixels32 (pixelsArray);
-		Debug.Log ("Get Texture is C" + watch.ElapsedMilliseconds);
+		_texture = fog.getTexture ();
 		_texture.Apply ();
-		Debug.Log ("Get Texture is D" + watch.ElapsedMilliseconds);
-		watch.Stop ();
-	*/
 
 	}
 
@@ -655,16 +517,14 @@ public class MiniMapUIController : MonoBehaviour, IPointerDownHandler , IPointer
 		Vector2 toMove = new Vector2 ((x) * WorldWidth + Left, 
 			                 y * WorldHeight - 65 + bottom - Mathf.Tan (Mathf.Deg2Rad * MainCamera.main.AngleOffset) * (MainCamera.main.transform.position.y - MainCamera.main.m_MinFieldOfView));
 
-		MainCamera.main.minimapMove (toMove);
+		MainCamera.main.CenterCamera(toMove);
 	}
 
 	public void OnPointerUp (PointerEventData eventData)
 	{
 		if (eventData.button == PointerEventData.InputButton.Left) {
-			dragging = false;
-		
-		}
-			
+			dragging = false;		
+		}			
 	}
 
 	public void OnPointerDown (PointerEventData eventData)
@@ -676,11 +536,8 @@ public class MiniMapUIController : MonoBehaviour, IPointerDownHandler , IPointer
 			dragging = true;
 			StartCoroutine (DragMini ());
 
-		
-		
 		} else if (eventData.button == PointerEventData.InputButton.Right) {
 		
-
 			Vector3 clickPos = transform.InverseTransformPoint (eventData.pressPosition);
 			float x = .5f + (clickPos.x) / minimapWidth;
 			float y = .5f + (clickPos.y) / minimapHeight;
@@ -688,14 +545,17 @@ public class MiniMapUIController : MonoBehaviour, IPointerDownHandler , IPointer
 
 			RaycastHit hit;		
 
-			if (Physics.Raycast (RayPoint, Vector3.down, out hit, 400, (1 << 8))) {
-	
-				//Debug.Log ("moving to " + hit.point);
-				SelectedManager.main.GiveOrder (Orders.CreateMoveOrder (hit.point));
+			if (Physics.Raycast (RayPoint, Vector3.down, out hit, 400,UIManager.main.EverythinCast)) {
+                if (UIManager.main.CurrentMode == Mode.Normal)
+                {
+                    SelectedManager.main.GiveOrder(Orders.CreateMoveOrder(hit.point));
+                }
+                else
+                {
+                    MainCamera.main.CenterCamera(hit.point);
+                }
 			}
 		}
-
-
 	}
 
 
@@ -705,7 +565,6 @@ public class MiniMapUIController : MonoBehaviour, IPointerDownHandler , IPointer
 			mapMover ();
 			yield return null;
 		}
-
 	}
 
 	public void attackMoveMinimap ()
@@ -723,14 +582,11 @@ public class MiniMapUIController : MonoBehaviour, IPointerDownHandler , IPointer
 
 		RaycastHit hit;		
 
-		if (Physics.Raycast (RayPoint, Vector3.down, out hit, 400, (1 << 8))) {
+		if (Physics.Raycast (RayPoint, Vector3.down, out hit, 400,UIManager.main.EverythinCast)) {
 
 			//Debug.Log ("moving to " + hit.point);
 			SelectedManager.main.attackMoveO (hit.point);
 		}
 	}
-
-
-
-
+   
 }

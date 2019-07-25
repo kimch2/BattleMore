@@ -246,6 +246,7 @@ public class BuildStructure:  UnitProduction {
 	
 	}
 
-
+    public override void InitializeGhostPlacer(GameObject ghost)
+    { }
 
 }

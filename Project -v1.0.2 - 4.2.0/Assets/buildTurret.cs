@@ -309,4 +309,7 @@ public class buildTurret :UnitProduction{
 	
 	return tur;
 	}
+
+    public override void InitializeGhostPlacer(GameObject ghost)
+    { }
 }

@@ -322,8 +322,10 @@ public class Selected : MonoBehaviour {
 
 			StartCoroutine (CurrentlyTempSelect ());
 			tempSelectOn = true;
-
-			decalCircle.GetComponent<MeshRenderer> ().enabled = true;
+            if (decalCircle)
+            {
+                decalCircle.GetComponent<MeshRenderer>().enabled = true;
+            }
 			if (RallyPoint) {
 				RallyPoint.SetActive (true);
 			}
@@ -354,11 +356,14 @@ public class Selected : MonoBehaviour {
 		}
 
 		if (!IsSelected) {
-	
-			if (!interactSelect) {
 
-				decalCircle.GetComponent<MeshRenderer> ().enabled = false;
-			}
+            if (!interactSelect)
+            {
+                if (decalCircle)
+                {
+                    decalCircle.GetComponent<MeshRenderer>().enabled = false;
+                }
+            }
 			if (RallyPoint) {
 				RallyPoint.SetActive (false);
 			}

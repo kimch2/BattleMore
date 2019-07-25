@@ -261,27 +261,28 @@ public class ResearchUpgrade: UnitProduction, Upgradable{
 		researching = true;
 	}
 
-	public override void cancelBuilding(){
-		//Debug.Log (Name + " is canceling");
-		HD.stopBuilding ();
-		mySelect.updateCoolDown (0);
-		myManager.myRacer.stopBuildingUnit (this);
-		timer = 0;
-		researching = false;
-		//myCost.refundCost ();
-		if (requiresAddon && hasAddon || !requiresAddon) {
-			active = true;
-		}
+    public override void cancelBuilding()
+    {
+        //Debug.Log (Name + " is canceling");
+        HD.stopBuilding();
+        mySelect.updateCoolDown(0);
+        myManager.myRacer.stopBuildingUnit(this);
+        timer = 0;
+        researching = false;
+        //myCost.refundCost ();
+        if (requiresAddon && hasAddon || !requiresAddon)
+        {
+            active = true;
+        }
 
-		myManager.myRacer.commenceUpgrade ((requiresAddon && hasAddon || !requiresAddon), upgrades [currentUpgrade], myManager.UnitName);
-		if (mySelect.IsSelected) {
-			RaceManager.updateActivity ();
-		}
-		//foreach (Transform obj in this.transform) {
+        myManager.myRacer.commenceUpgrade((requiresAddon && hasAddon || !requiresAddon), upgrades[currentUpgrade], myManager.UnitName);
+        if (mySelect.IsSelected)
+        {
+            RaceManager.updateActivity();
 
-			//obj.SendMessage ("DeactivateAnimation",SendMessageOptions.DontRequireReceiver);
-		//}
-	}
-
+        }
+    }
+    public override void InitializeGhostPlacer(GameObject ghost)
+    { }
 
 }

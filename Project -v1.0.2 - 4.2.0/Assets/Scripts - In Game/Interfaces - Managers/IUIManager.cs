@@ -31,7 +31,7 @@ public interface IUIManager
 
 	void MiddleButton_SingleClick(MouseEventArgs e);
 
-	void UserPlacingBuilding(GameObject item, int n);
+	void UserPlacingBuilding(GameObject item, UnitProduction prod, int n);
 	
 	void SwitchMode(Mode mode);
 	bool allowDrag();
