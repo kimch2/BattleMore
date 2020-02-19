@@ -60,22 +60,28 @@ public class Selected : MonoBehaviour {
 	void Awake () 
 	{		
 		Initialize ();
-	
-	}
+        manager = GetComponent<UnitManager>();
+        if (!MinimapIcon)
+        {
+            GameObject obj = new GameObject("MinimapIcon");
+            obj.transform.parent = this.transform;
+           
+            MinimapIcon = obj.AddComponent<SpriteRenderer>();
+            MinimapIcon.transform.LookAt(MinimapIcon.transform.position + Vector3.up);
+
+        }
+    }
 
 	public SpriteRenderer MinimapIcon;
 
 	private void Start()
 	{
-		manager = GetComponent<UnitManager>();
-		if (!MinimapIcon)
+		
+		if (MinimapIcon)
 		{
-			GameObject obj = new GameObject("MinimapIcon");
-			obj.transform.parent = this.transform;
-			obj.transform.localPosition = manager.CharController.center;
-			MinimapIcon = obj.AddComponent<SpriteRenderer>();
-			MinimapIcon.transform.LookAt(MinimapIcon.transform.position + Vector3.up);
-			MinimapIcon.color = GameManager.main.playerList[manager.PlayerOwner - 1].getColor();
+            // This is split up because we have to wait for the GameManager to Selef Initalize before we can reference the singleton of it
+            MinimapIcon.transform.localPosition = manager.CharController.center;
+            MinimapIcon.color = GameManager.main.playerList[manager.PlayerOwner - 1].getColor();
 			MinimapIcon.gameObject.layer = 21;
 			if (manager.myStats.isUnitType(UnitTypes.UnitTypeTag.Structure))
 			{

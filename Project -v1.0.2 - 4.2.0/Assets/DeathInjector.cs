@@ -20,10 +20,23 @@ public class DeathInjector :MonoBehaviour,  Notify {
 
 		if (!onTarget) {
 
-			foreach (IWeapon weap in GetComponents<IWeapon> ()) {
-				weap.addNotifyTrigger (this);
-			}
+            if (GetComponents<IWeapon>().Length > 1)
+            {
+                foreach (IWeapon weap in GetComponents<IWeapon>())
+                {
+                    weap.addNotifyTrigger(this);
+                }
+            }
+            else
+            {
+                foreach (IWeapon weap in GetComponentsInParent<IWeapon>())
+                {
+                    weap.addNotifyTrigger(this);
+                }
+            }
+			
 		} else {
+            if(myEffect)
 			myEffect =	Instantiate<GameObject> (effect, this.transform.position, Quaternion.identity, transform);
 		}
 	}

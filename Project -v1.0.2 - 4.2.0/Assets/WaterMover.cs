@@ -51,7 +51,7 @@ public class WaterMover : IMover
 	}
 
 	override
-	public bool move()
+	public bool Move()
 	{
 		if (!workingframe)
 		{

@@ -439,14 +439,16 @@ public class UiAbilityManager : MonoBehaviour {
 
 				} else {
 					cb.disabledColor = disabledColor;
-					currButton.myButton.interactable = false;
+
+                    currButton.myButton.interactable = false;
 
 				}
 
 				if (currAbil.getMyType () == Ability.type.passive) {
 					currButton.myHotkey.enabled = false;
 					cb.disabledColor = Color.white;
-					currButton.myButton.interactable = false;
+
+                    currButton.myButton.interactable = false;
 				} else {
 					currButton.myHotkey.enabled = true;
 				}
@@ -523,14 +525,15 @@ public class UiAbilityManager : MonoBehaviour {
 
 				} else {
 					cb.disabledColor = disabledColor;
-					currButton.myButton.interactable = false;
+                 //   Debug.Log("Here");
+                    currButton.myButton.interactable = false;
 
 				}
 
 				if (currAbil.getMyType () == Ability.type.passive) {
 					currButton.myHotkey.enabled = false;
 					cb.disabledColor = Color.white;
-					currButton.myButton.interactable = false;
+                    currButton.myButton.interactable = false;
 				} else {
 					currButton.myHotkey.enabled = true;
 				}
@@ -833,6 +836,7 @@ public class UiAbilityManager : MonoBehaviour {
 						
 				} else {
 					cb.disabledColor =disabledColor;
+
 					currButton.myButton.interactable = false;
 
 				}
@@ -840,7 +844,7 @@ public class UiAbilityManager : MonoBehaviour {
 				if (currAbil.getMyType()== Ability.type.passive) {
 					currButton.myHotkey.enabled = false;
 					cb.disabledColor = Color.white;
-					currButton.myButton.interactable = false;
+                    currButton.myButton.interactable = false;
 				} else {
 					currButton.myHotkey.enabled = true;
 				}
@@ -855,13 +859,7 @@ public class UiAbilityManager : MonoBehaviour {
 				n++;
 
 		}
-
 	}
-
-	
-
-
-
 }
 
 [System.Serializable]

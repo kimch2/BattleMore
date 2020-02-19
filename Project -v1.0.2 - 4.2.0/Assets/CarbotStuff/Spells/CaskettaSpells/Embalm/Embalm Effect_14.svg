@@ -1,0 +1,24 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="none" x="0px" y="0px" width="150px" height="300px" viewBox="0 0 150 300">
+<defs>
+<g id="Duplicate_Items_Folder_Hero_Undead_Gravestone_copy_13_Layer0_0_FILL">
+<path fill="#DC30FC" stroke="none" d="
+M 122 -317.95
+Q 124 -317.4 126 -316.7 152.95 -307.55 131.2 -293.5
+L 124.4 -293.05 122.85 -281.7
+Q 126.6 -281.75 128.9 -283.65 169.2 -316.9 119.4 -322.75
+L 122 -317.95 Z"/>
+
+<path fill="#EF66FF" stroke="none" d="
+M 115.35 -302.85
+Q 115.1 -302.4 115 -301.9 112.55 -289.45 122.85 -281.7
+L 124.4 -293.05 131.2 -293.5 134.85 -305.75 115.35 -302.85 Z"/>
+</g>
+</defs>
+
+<g transform="matrix( 0.4565277099609375, 0, 0, 0.4565277099609375, 14.5,168.65) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#Duplicate_Items_Folder_Hero_Undead_Gravestone_copy_13_Layer0_0_FILL"/>
+</g>
+</g>
+</svg>

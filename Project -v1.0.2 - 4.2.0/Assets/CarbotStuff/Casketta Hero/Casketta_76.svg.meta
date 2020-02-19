@@ -11,15 +11,15 @@ ScriptedImporter:
   svgType: 0
   texturedSpriteMeshType: 0
   svgPixelsPerUnit: 100
-  gradientResolution: 128
+  gradientResolution: 16
   alignment: 9
   customPivot: {x: 0.5, y: 0.5}
   generatePhysicsShape: 0
   viewportOptions: 1
   preserveViewport: 0
   advancedMode: 0
-  predefinedResolutionIndex: 1
-  targetResolution: 1080
+  predefinedResolutionIndex: 3
+  targetResolution: 480
   resolutionMultiplier: 1
   stepDistance: 10
   samplingStepDistance: 100

@@ -7,15 +7,7 @@ public class BloodMistCloud : MonoBehaviour {
 	private GameObject source;
 	private int playerNumber;
 	private List<BloodMistAura> myAuras = new List<BloodMistAura>();
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+
 
 	public void setSource(GameObject obj)
 	{

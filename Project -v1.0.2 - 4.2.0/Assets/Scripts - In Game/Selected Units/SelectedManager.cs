@@ -43,7 +43,7 @@ public class SelectedManager : MonoBehaviour, ISelectedManager
 	private AudioSource AudioSrc;
 
 	public float unitResponseFrequancy; // between .35 (14 second min and 2 (2.5 second minimum))
- 
+   public bool HeroSelectOnly; // For use in DaMinionz
     void Start()
 	{
 		GameMenu.main.addDisableScript (this);
@@ -311,12 +311,15 @@ public class SelectedManager : MonoBehaviour, ISelectedManager
 		{
 		
 		UIPages [currentPage].fireAtTarget (obj, loc, abilNum , Input.GetKey(KeyCode.LeftShift));
-		targetManager.turnOff ();
+       // UIPages[currentPage].TurnOffIndicator(abilNum);
+        targetManager.turnOff ();
 
 	}
 
-	public void stoptarget (){
-		targetManager.turnOff ();
+	public void stoptarget (int n){
+        UIPages[currentPage].TurnOffIndicator(n);
+
+        targetManager.turnOff ();
 	}
 
 	public void toggleRangeIndicator(bool onOff)
@@ -424,14 +427,24 @@ public class SelectedManager : MonoBehaviour, ISelectedManager
         {
             if (SelectedObjects.Count == 0 || obj.getUnitManager().PlayerOwner == SelectedObjects[0].getUnitManager().PlayerOwner)
             {
-                SelectedObjects.Add(obj);
+                if (!HeroSelectOnly || obj.getUnitStats().isUnitType(UnitTypes.UnitTypeTag.Hero))
+                {
+                    SelectedObjects.Add(obj);
 
-                obj.SetSelected();
+                    obj.SetSelected();
 
-                sortUnit(obj);
+                    sortUnit(obj);
+                }
             }
         }
+    }
 
+    public void AddObjects(List<UnitManager> toAddList)
+    {
+        foreach (UnitManager rts in toAddList)
+        {
+            AddObject(rts);
+        }
     }
 
 	//removes the unit from the selection if is already in or adds it if not in.
@@ -577,8 +590,8 @@ public class SelectedManager : MonoBehaviour, ISelectedManager
         currentPage = j;
         UIPages.Clear();
         UIPages.Add(new Page());
-	
-	
+
+       // Debug.Log("Making new page");
 
 		for (int i = tempAbilityGroups.Count - 1; i > -1; i--) {
 			tempAbilityGroups[i].RemoveAll (item => item == null);

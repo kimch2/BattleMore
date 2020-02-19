@@ -1,0 +1,20 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="none" x="0px" y="0px" width="1000px" height="1000px" viewBox="0 0 1000 1000">
+<defs>
+<g id="Ground_Break_debri_shrapnal_blow_up_piecesG_0_Layer0_0_FILL">
+<path fill="#B89A80" fill-opacity="0.7176470588235294" stroke="none" d="
+M 1106.3 -243.45
+Q 850.4 -501.1 488.5 -501.1 126.65 -501.1 -129.25 -243.45 -385.15 14.2 -385.15 378.35 -385.15 466.55 -370.15 548.5 -340.7 587.45 -295.85 634.3 -206.15 728.05 -129.25 767.8 126.65 900.15 488.5 900.15 850.4 900.15 1106.3 767.8 1290.85 672.4 1342.35 548.5 1347.35 520.65 1352.3 485.5 1362.25 415.1 1362.25 378.35 1362.25 14.2 1106.3 -243.45 Z"/>
+</g>
+</defs>
+
+<g transform="matrix( 0.9910125732421875, 0, 0, 0.9910125732421875, 311.25,307.95) ">
+<g transform="matrix( 1.3134765625, 0, 0, 1.3134765625, 3.85,-203.25) ">
+<g transform="matrix( 0.13201904296875, 0, 0, 0.13201904296875, 79,184.45) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#Ground_Break_debri_shrapnal_blow_up_piecesG_0_Layer0_0_FILL"/>
+</g>
+</g>
+</g>
+</g>
+</svg>

@@ -361,7 +361,7 @@ public class AIMover : IMover {
 	}
 
 	override
-	public bool move()
+	public bool Move()
 	{
 			if (!canMove) { return false; }
 

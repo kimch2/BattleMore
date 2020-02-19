@@ -226,3 +226,11 @@ C:\Users\Matthew Johnson\Desktop\BattleTrifecta\Project -v1.0.2 - 4.2.0\Temp\bin
 C:\Users\Matthew Johnson\Desktop\BattleTrifecta\Project -v1.0.2 - 4.2.0\Temp\bin\Debug\Unity.Analytics.DataPrivacy.pdb
 C:\Users\Matthew Johnson\Desktop\BattleTrifecta\Project -v1.0.2 - 4.2.0\Temp\bin\Debug\UnityEditor.XR.LegacyInputHelpers.pdb
 C:\Users\Matthew Johnson\Desktop\BattleTrifecta\Project -v1.0.2 - 4.2.0\Temp\bin\Debug\com.unity.multiplayer-hlapi.Runtime.pdb
+C:\Users\Matthew Johnson\Desktop\BattleTrifecta\Project -v1.0.2 - 4.2.0\Temp\bin\Debug\Unity.InternalAPIEditorBridge.003.dll
+C:\Users\Matthew Johnson\Desktop\BattleTrifecta\Project -v1.0.2 - 4.2.0\Temp\bin\Debug\Unity.InternalAPIEngineBridge.003.dll
+C:\Users\Matthew Johnson\Desktop\BattleTrifecta\Project -v1.0.2 - 4.2.0\Temp\bin\Debug\Unity.VectorGraphics.dll
+C:\Users\Matthew Johnson\Desktop\BattleTrifecta\Project -v1.0.2 - 4.2.0\Temp\bin\Debug\Unity.VectorGraphics.Editor.dll
+C:\Users\Matthew Johnson\Desktop\BattleTrifecta\Project -v1.0.2 - 4.2.0\Temp\bin\Debug\Unity.VectorGraphics.pdb
+C:\Users\Matthew Johnson\Desktop\BattleTrifecta\Project -v1.0.2 - 4.2.0\Temp\bin\Debug\Unity.InternalAPIEditorBridge.003.pdb
+C:\Users\Matthew Johnson\Desktop\BattleTrifecta\Project -v1.0.2 - 4.2.0\Temp\bin\Debug\Unity.VectorGraphics.Editor.pdb
+C:\Users\Matthew Johnson\Desktop\BattleTrifecta\Project -v1.0.2 - 4.2.0\Temp\bin\Debug\Unity.InternalAPIEngineBridge.003.pdb

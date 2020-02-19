@@ -43,7 +43,7 @@ public class HealthDisplay : MonoBehaviour {
 			//LookLocation = cam.position;
 			//LookLocation.x = gameObject.transform.position.x;
 			//gameObject.transform.LookAt (LookLocation);
-			gameObject.transform.rotation = cam.rotation;
+			gameObject.transform.rotation = cam.rotation; // commented out orthographic camera code
 			lastCameraPosition = cam.position;
 
 		}

@@ -47,10 +47,10 @@ public class PhysicsSimulator : MonoBehaviour {
 				force *= .25f;
 			}
 		}
-		
 
+       // Debug.Log(startLocation +"  " + sourceLocation + "   " + (startLocation - sourceLocation).normalized);
 
-		Vector3 theoreticalTarget =  target.transform.position +  force.x * (target.transform.position - sourceLocation).normalized;
+		Vector3 theoreticalTarget = startLocation +  force.x * (startLocation - sourceLocation).normalized;
 
 		Vector3 ActualTarget = theoreticalTarget;
 		if (!target.myStats.isUnitType(UnitTypes.UnitTypeTag.Air))
@@ -60,7 +60,7 @@ public class PhysicsSimulator : MonoBehaviour {
 		
 		RaycastHit objecthit;
 
-		if (Physics.Raycast(target.transform.position + Vector3.up * 40, Vector3.down, out objecthit, 1000, 1 << 8))
+		if (Physics.Raycast(ActualTarget + Vector3.up * 40, Vector3.down, out objecthit, 1000, 1 << 8))
 		{
 			ActualTarget.y = objecthit.point.y;
 		}
@@ -92,7 +92,7 @@ public class PhysicsSimulator : MonoBehaviour {
 
 		}
 		travelTime /= 150;
-
+        //Debug.Log("Actual " + ActualTarget);
 		
 		Coroutine toAdd = StartCoroutine (fly(target, ActualTarget,travelTime, force.y,false, onFinish));
 		currentlyMoving.Add(target, toAdd);

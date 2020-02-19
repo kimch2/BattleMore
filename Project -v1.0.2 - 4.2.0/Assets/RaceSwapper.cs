@@ -19,7 +19,7 @@ public class RaceSwapper : MonoBehaviour {
 
 	//[Tooltip("Set at runtime")]
 	public UltObject Ulty;
-
+    public bool ignoreUlts;
 	public static RaceSwapper main;
 
 	private void Awake()
@@ -37,17 +37,22 @@ public class RaceSwapper : MonoBehaviour {
 
         if (choice != null)
 		{
-			Ulty = Instantiate<GameObject>(RacePacket.getRace(choice.PlayingAs).UltimatePrefab).GetComponent<UltObject>();
-
+            if (!ignoreUlts)
+            {
+                Ulty = Instantiate<GameObject>(RacePacket.getRace(choice.PlayingAs).UltimatePrefab).GetComponent<UltObject>();
+            }
             swap(1, choice.PlayingAs);
 
             swap(2, choice.PlayingAgainst);
 
         }
 		else
-		{
-			Ulty = Instantiate<GameObject>( RacePacket.getRace(GameManager.getInstance().playerList[0].myRace).UltimatePrefab).GetComponent<UltObject>();
-           // InstructionHelperManager.getInstance().addBUtton("Awakening G", 25, null);
+        {
+            if (!ignoreUlts)
+            {
+                Ulty = Instantiate<GameObject>(RacePacket.getRace(GameManager.getInstance().playerList[0].myRace).UltimatePrefab).GetComponent<UltObject>();
+            }
+            // InstructionHelperManager.getInstance().addBUtton("Awakening G", 25, null);
         }
        // InstructionHelperManager.getInstance().addBUtton("Awakening H", 25, null);
     }
@@ -55,7 +60,7 @@ public class RaceSwapper : MonoBehaviour {
 
 	void Start()
 	{
-        if (choice != null)
+        if (choice != null && Ulty)
         {
 
             GameManager.getInstance().activePlayer.SetUltimates(Ulty);

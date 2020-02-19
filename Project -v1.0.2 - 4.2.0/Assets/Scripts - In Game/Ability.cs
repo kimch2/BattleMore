@@ -28,7 +28,7 @@ public abstract class Ability : MonoBehaviour {
 	public bool active = false;
     public int maxChargeCount = 0;
 
-    //if -1, then it is infinite
+   [Tooltip("-1 means it doesn't use charges")]
     public int chargeCount = -1;
 
 
@@ -48,6 +48,11 @@ public abstract class Ability : MonoBehaviour {
 	protected void initialize()
 		{
 		myManager = GetComponent<UnitManager>();
+        if (!myManager)
+        {
+            myManager = GetComponentInParent<UnitManager>();
+        }
+
 		foreach (string s in RequiredUnit) {
 
 			requirementList.Add (s, false);
@@ -64,8 +69,13 @@ public abstract class Ability : MonoBehaviour {
 
 	protected void Awake()
 	{
-		select = GetComponent<Selected>();
+	
 		myManager = GetComponent<UnitManager>();
+        if (!myManager)
+        {
+            myManager = GetComponentInParent<UnitManager>();
+        }
+        InitializeSelect();
 		audioSrc = GetComponent<AudioSource> ();
 		StartCoroutine( delayedInitialize());
 	}
@@ -100,9 +110,7 @@ public abstract class Ability : MonoBehaviour {
 			if (GetComponent<Selected> ().IsSelected) {
 				RaceManager.updateActivity ();
 			}
-		} 
-			
-
+		} 	
 	}
 
 
@@ -127,9 +135,7 @@ public abstract class Ability : MonoBehaviour {
 
 	protected void updateAutocastCommandCard()
 	{
-		if (!select) {
-			select = GetComponent<Selected> ();
-		}
+        InitializeSelect();
 		if (select && select.IsSelected) {
 			RaceManager.upDateAutocast ();
 		}
@@ -139,23 +145,36 @@ public abstract class Ability : MonoBehaviour {
 
 	protected void updateActiveCommandCard()
 	{
-		if (!select) {
-			select = GetComponent<Selected> ();
-		}
-		if (select && select.IsSelected) {
+        InitializeSelect();
+        if (select && select.IsSelected) {
 				RaceManager.updateActivity();
 		}
 
 	}
-		protected void updateUICommandCard()
-		{
-		if (!select) {
-			select = GetComponent<Selected> ();
-		}
-			if (select && select.IsSelected) {
+
+    protected void updateUICommandCard()
+	{
+        InitializeSelect();
+        if (select && select.IsSelected) {
 				RaceManager.upDateUI();
 			}
 
+    }
+
+    void InitializeSelect()
+    {
+        if (!select)
+        {
+            if (!myManager)
+            {
+                myManager = GetComponent<UnitManager>();
+                if (!myManager)
+                {
+                    myManager = GetComponentInParent<UnitManager>();
+                }
+            }
+            select = myManager.getUnitStats().getSelector();
+        }
     }
 
     public void InitializeCharges()
@@ -197,6 +216,7 @@ public abstract class Ability : MonoBehaviour {
     {
         if (chargeCount > -1)
         {
+
             chargeCount += n;
             if (chargeCount == 0)
             {

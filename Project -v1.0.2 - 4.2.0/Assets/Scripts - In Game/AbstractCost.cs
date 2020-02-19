@@ -39,7 +39,15 @@ public class AbstractCost : MonoBehaviour {
 		}
 			
 		stats = this.gameObject.GetComponent<UnitStats> ();
-		manager = GetComponent<UnitManager>();			
+        if (!stats)
+        {
+            stats = GetComponentInParent<UnitStats>();
+        }
+		manager = GetComponent<UnitManager>();
+        if (!manager)
+        {
+            manager = GetComponentInParent<UnitManager>();
+        }
 	}
 
 	IEnumerator onCooldown()
@@ -57,6 +65,7 @@ public class AbstractCost : MonoBehaviour {
 			}
 			else
 			{cooldownTimer = 0;
+             //   Debug.Log("Breaking");
 				break;
 			}
 		}
@@ -87,7 +96,7 @@ public class AbstractCost : MonoBehaviour {
 			if (cooldownTimer > 0)
 			{
 				cooldownTimer -= Time.deltaTime;
-				//Debug.Log ("Colling " + cooldownTimer + "  " + timer+  "   " +UsedFor + "  " + this.gameObject);
+			//	Debug.Log ("CollingBB " + cooldownTimer + "  " + timer+  "   " +UsedFor + "  " + this.gameObject);
 				if (showCooldown)
 				{
 					manager.myStats.getSelector().updateCoolDown(cooldownTimer / timer);
@@ -148,14 +157,18 @@ public class AbstractCost : MonoBehaviour {
 			}
 		}
 
-	
-		if (cooldown > 0 && cooldownTimer > 0) {
-			order.reasonList.Add (continueOrder.reason.cooldown);
-			result = false;
-			if (showError) {
-				ErrorPrompt.instance.onCooldown ();
-			}
-		}
+
+        if (cooldown > 0 && cooldownTimer > 0)
+        {
+
+                order.reasonList.Add(continueOrder.reason.cooldown);
+                result = false;
+                if (showError)
+                {
+                    ErrorPrompt.instance.onCooldown();
+                }
+            
+        }
 			
 		return result;	
 	}
@@ -190,11 +203,18 @@ public class AbstractCost : MonoBehaviour {
 			}
 		}
 
-		if (cooldownTimer > 0) {
-			
-			return false;}
-	
-		return true;
+		if (cooldownTimer > 0 && ab.chargeCount <= 0)
+        {			
+			return false;
+        }
+
+        if(ab.chargeCount == 0 && ab.maxChargeCount > 0)
+        {
+            Debug.Log("Returning false");
+            return false;
+        }
+
+        return true;
 
 	}
 
@@ -202,6 +222,7 @@ public class AbstractCost : MonoBehaviour {
 
 	public void resetCoolDown()
 	{cooldownTimer = 0;
+        Debug.Log("Resetting cooldown");
 	}
 
 	void beginCooldown()
@@ -250,7 +271,6 @@ public class AbstractCost : MonoBehaviour {
 			GameManager.main.activePlayer.PayCost(resourceCosts.MyResources);// Fix this once  I do enemy AI that use ults
 		}
 		if (stats) {
-
 			if (health > 0) {
 
 				stats.TakeDamage (health, this.gameObject, DamageTypes.DamageType.True);

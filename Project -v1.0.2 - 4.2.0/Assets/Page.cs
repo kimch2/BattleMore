@@ -245,6 +245,7 @@ public class Page  {
                 if (rts.abilityList[X].canActivate(false).canCast) {
                     if (rts.abilityList[X] is TargetAbility)
                     {
+                        ((TargetAbility)rts.abilityList[X]).ShowSkillShotIndicator(location);
                         if (((TargetAbility)rts.abilityList[X]).isValidTarget(target, location))
                         {
                             return true;
@@ -267,6 +268,36 @@ public class Page  {
 		return false;
 	}
 
+    public void TurnOffIndicator(int n)
+    {
+        int X = n - rows[n / 4][0].AbilityStartingRow * 4;
+
+        if (rows[n / 4].Count == 0)
+        {
+            throw new UnityException();
+        }
+
+
+        foreach (RTSObject rts in rows[n / 4])
+        {
+            try
+            {
+                if (rts.abilityList[X] is TargetAbility)
+                    {
+
+                    TargetAbility ab = ((TargetAbility)rts.abilityList[X]);
+                        ab.DisableSkillShotIndicator();
+                        
+                    }                
+            }
+            catch (System.Exception e)
+            {
+                Debug.Log(e + "   " + e.StackTrace);
+                Debug.Log("I am calling " + rts.name + " but it broke! X: " + X + " :(");
+            }
+
+        }
+    }
 
 	public void useAbility(int n, bool queue)
 	{

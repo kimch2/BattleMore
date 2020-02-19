@@ -26,7 +26,8 @@ public class UltimateApplier : MonoBehaviour {
 	void Start () {
 
 		myRace = GameManager.main.activePlayer;
-
+        if (myRace.IgnoreUlts)
+        { return; }
 		if (myRace.myRace != RaceInfo.raceType.SteelCrest)
 		{
 			return;

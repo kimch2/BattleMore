@@ -73,9 +73,12 @@ public class MainCamera : MonoBehaviour, ICamera {
 			transform.position = new Vector3(StartPoint.transform.position.x, m_MinFieldOfView + 130, StartPoint.transform.position.z- Mathf.Max(maxAngle, AngleOffset));
 		}
 		AngleOffset = Mathf.Max(maxAngle, 50 -((transform.position.y - m_MinFieldOfView) / m_MaxFieldOfView) * 45);
+        //HeightAboveGround = transform.position.y;
 		//Set up camera rotation
 		transform.rotation = Quaternion.Euler (90-AngleOffset, 0, 0);
         Zoom(null, new ScrollWheelEventArgs(-1));
+        HeightAboveGround = transform.position.y;
+        Debug.Log("HEight is " + HeightAboveGround);
     }
 
     // Update is called once per frame
@@ -166,13 +169,13 @@ public class MainCamera : MonoBehaviour, ICamera {
 	public void goToStart()
 	{
 		if (StartPoint != null) {
-			transform.position = new Vector3 (StartPoint.transform.position.x, transform.position.y, StartPoint.transform.position.z - AngleOffset);
+			transform.position = new Vector3 (StartPoint.transform.position.x, HeightAboveGround, StartPoint.transform.position.z - AngleOffset);
             Zoom(null, new ScrollWheelEventArgs(-1));
             //Debug.Log ("Start Should be " + new Vector3 (StartPoint.transform.position.x, transform.position.y, StartPoint.transform.position.z - AngleOffset));
 		}
 	}
 	public void generalMove(Vector3 input){
-		transform.position = new Vector3 (input.x, this.gameObject.transform.position.y, input.z - AngleOffset/45 * transform.position.y);
+		transform.position = new Vector3 (input.x, HeightAboveGround, input.z - AngleOffset/45 * transform.position.y);
 		CheckEdgeMovement ();
 	}
 
@@ -208,21 +211,21 @@ public class MainCamera : MonoBehaviour, ICamera {
 			//Check if we have scrolled past edge
 			if (transform.position.x < m_Boundries.xMin)
 			{
-				transform.position = new Vector3(m_Boundries.xMin, transform.position.y, transform.position.z);
+				transform.position = new Vector3(m_Boundries.xMin, HeightAboveGround, transform.position.z);
 			}
 			else if (transform.position.x > m_Boundries.xMax)
 			{
-				transform.position = new Vector3(m_Boundries.xMax, transform.position.y, transform.position.z);
+				transform.position = new Vector3(m_Boundries.xMax, HeightAboveGround, transform.position.z);
 			}
 
 
 			if (transform.position.z < m_Boundries.yMin -35)
 			{
-				transform.position = new Vector3(transform.position.x, transform.position.y, m_Boundries.yMin-35);
+				transform.position = new Vector3(transform.position.x, HeightAboveGround, m_Boundries.yMin-35);
 			}
 			else if (transform.position.z > m_Boundries.yMax +60)
 			{
-				transform.position = new Vector3(transform.position.x, transform.position.y, m_Boundries.yMax+60);
+				transform.position = new Vector3(transform.position.x, HeightAboveGround, m_Boundries.yMax+60);
 			}
 			//Debug.Log("MOving to " + transform.position);
 			CheckEdgeMovement ();
@@ -231,7 +234,7 @@ public class MainCamera : MonoBehaviour, ICamera {
 
 	public void Move(Vector3 worldPos)
 	{
-		transform.position = new Vector3(worldPos.x, transform.position.y, worldPos.z);
+		transform.position = new Vector3(worldPos.x, HeightAboveGround, worldPos.z);
 		//CheckEdgeMovement ();
 	}
 
@@ -282,7 +285,7 @@ public class MainCamera : MonoBehaviour, ICamera {
 		if (Time.timeScale == 0)
 		{ return; }
 
-		if ((transform.position.y >= m_MaxFieldOfView && e.ScrollValue < 0) ||( transform.position.y <= m_MinFieldOfView &&e.ScrollValue > 0)) {
+		if ((HeightAboveGround >= m_MaxFieldOfView && e.ScrollValue < 0) ||(HeightAboveGround <= m_MinFieldOfView &&e.ScrollValue > 0)) {
 			return;}
 
 
@@ -329,19 +332,20 @@ public class MainCamera : MonoBehaviour, ICamera {
 			CheckEdgeMovement ();
 		}
 
+        HeightAboveGround = transform.position.y;
 		AngleOffset = Mathf.Max(maxAngle, 50 -((transform.position.y - m_MinFieldOfView) / m_MaxFieldOfView) * 45);
 	}
 
 
     public void CenterCamera(Vector2 input)
     {  
-        transform.position = new Vector3(input.x, transform.position.y,input.y - AngleOffset);
+        transform.position = new Vector3(input.x, HeightAboveGround,input.y - AngleOffset);
         CheckEdgeMovement();
     }
 
     public void minimapMove(Vector2 input)
 	{
-		transform.position = new Vector3((input.x ) , this.gameObject.transform.position.y ,(input.y ));
+		transform.position = new Vector3((input.x ) , HeightAboveGround ,(input.y ));
 		CheckEdgeMovement ();
 	}
 
@@ -388,8 +392,6 @@ public class MainCamera : MonoBehaviour, ICamera {
 
 		while (elapsed < duration) {
 
-	
-
 			float MiniShake = 0;
 	
 			Vector3 toMove = new Vector3(Random.value  - .5f, Random.value  - .5f,Random.value - .5f) * intensity;
@@ -413,7 +415,46 @@ public class MainCamera : MonoBehaviour, ICamera {
 		}
 	}
 
-	public Vector3 getMapClampedLocation(Vector3 targetLocation)
+
+    bool CurrentlySmashing;
+    Vector3 BeforeSmashPosition;
+    public void SmashCamera(GameObject target, float duration = .47f)
+    {
+        if (!CurrentlySmashing)
+            StartCoroutine(SwoopCamera(target, duration));
+    }
+
+    IEnumerator SwoopCamera(GameObject target, float duration)
+    {
+        BeforeSmashPosition = transform.position;
+        CurrentlySmashing = true;
+        Vector3 TargetSpot = target.transform.position;
+
+        for (float i = 0; i < .15f; i += Time.deltaTime)
+        {
+            transform.Translate((TargetSpot - transform.position) * Time.deltaTime * 5, Space.World);
+            yield return null;
+        }
+        ShakeCamera(duration, 100, .03f);
+        yield return new WaitForSeconds(duration + .01f);
+
+        Vector3 startPoint = transform.position;
+        for (float i = 0; i < .15f; i += Time.deltaTime)
+        {
+
+            transform.position = Vector3.Lerp(startPoint, BeforeSmashPosition, i / .15f);
+            yield return null;
+        }
+
+
+        CurrentlySmashing = false;
+    }
+
+
+
+
+
+    public Vector3 getMapClampedLocation(Vector3 targetLocation)
 	{
 
 		targetLocation.x = Mathf.Max (BottomLeftBorder.x + 10, targetLocation.x);
@@ -425,7 +466,7 @@ public class MainCamera : MonoBehaviour, ICamera {
 	}
 
 
-	void OnDrawGizmos()
+	protected virtual void OnDrawGizmos()
 	{	
 		Gizmos.DrawCube (TopRightBorder, Vector3.one*10);
 		Gizmos.DrawCube (BottomLeftBorder, Vector3.one*10);

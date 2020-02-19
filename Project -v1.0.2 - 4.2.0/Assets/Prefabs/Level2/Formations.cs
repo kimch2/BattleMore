@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 public class Formations{
 
@@ -259,6 +260,65 @@ public class Formations{
 
 		}
 	}
+
+
+    public static void SetObjectPositions(List<GameObject> SelectedObjects, Vector3 targetPoint, Vector3 secondPoint, GameObject template)
+    { // For now this is only being called from the UIManager for formation light indicators
+        Vector3 superUp = Vector3.up * 40;
+
+        List<RTSObject> trueMovers = new List<RTSObject>();
+
+        Vector3 middlePoint = Vector3.zero;
+        foreach (RTSObject obj in SelectedManager.main.ActiveObjectList())
+        {
+            if (obj.getUnitManager().cMover)
+            {
+                trueMovers.Add(obj);
+                middlePoint += obj.transform.position;
+            }
+        }
+
+        middlePoint /= trueMovers.Count;
+
+        float angle = (float)(Mathf.Atan2(secondPoint.x - targetPoint.x, secondPoint.z - targetPoint.z) / Mathf.PI) * 180;
+
+        if (angle < 0)
+        {
+            angle += 360;
+        }
+        angle += 90;
+        Vector3 newPoint = Vector3.Lerp(targetPoint, secondPoint, .5f);
+
+        float sepDistance = Vector3.Distance(newPoint, secondPoint) / 15;
+        sepDistance = Math.Max(sepDistance, 1.2f);
+        List<Vector3> points = Formations.getFormation(trueMovers.Count, Mathf.Min(5f, sepDistance));
+        for (int t = 0; t < points.Count; t++)
+        {
+            points[t] = Quaternion.Euler(0, angle, 0) * points[t] + newPoint;
+        }
+
+
+
+        int x = SelectedObjects.Count;
+        for (int n = x; n < trueMovers.Count; n++)
+        {
+            SelectedObjects.Add(GameObject.Instantiate<GameObject>(template));
+        }
+
+        for (int i = 0; i < SelectedObjects.Count; i++)
+        {
+            if (i < trueMovers.Count)
+            {
+                SelectedObjects[i].SetActive(true);
+                SelectedObjects[i].transform.position = points[i] + superUp;
+                SelectedObjects[i].transform.localEulerAngles = new Vector3(0, angle, 0);
+            }
+            else
+            {
+                SelectedObjects[i].SetActive(false);
+            }
+        }
+    }
 
 	static IEnumerator staticMove(List<RTSObject> others, Vector3 targetPoint)
 	{

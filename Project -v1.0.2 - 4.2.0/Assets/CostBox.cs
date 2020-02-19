@@ -114,12 +114,12 @@ public class CostBox : MonoBehaviour {
 
 			if (input.myCost.energy > 0)
 			{
-				CreateCostSettings(input.myCost.energy.ToString(), UnitEquivalance.getResourceInfo(ResourceType.Energy).icon, order.reasonList.Contains(continueOrder.reason.energy) ? teal : Color.red);
+				CreateCostSettings(input.myCost.energy.ToString(), UnitEquivalance.getResourceInfo(ResourceType.Energy).icon, order.reasonList.Contains(continueOrder.reason.energy) ? Color.red : teal);
 			}
 
 			if (input.myCost.health > 0)
 			{
-				CreateCostSettings(input.myCost.health.ToString(), UnitEquivalance.getResourceInfo(ResourceType.Life).icon, order.reasonList.Contains(continueOrder.reason.health) ? teal : Color.red);
+				CreateCostSettings(input.myCost.health.ToString(), UnitEquivalance.getResourceInfo(ResourceType.Life).icon, order.reasonList.Contains(continueOrder.reason.health) ? Color.red : teal);
 			}
 
 			if (input.RequiredUnit.Count > 0)

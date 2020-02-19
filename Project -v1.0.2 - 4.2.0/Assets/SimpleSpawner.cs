@@ -31,11 +31,19 @@ public class SimpleSpawner : MonoBehaviour {
 	void SpawnEnemy()
 	{
 
-
+        if (!gameObject.activeSelf)
+        {
+            return;
+        }
 		
 		GameObject unit = (GameObject)Instantiate (enemyTypes [Random.Range (0, enemyTypes.Count)], this.transform.position, Quaternion.identity);
-		difficultyM.SetUnitStats (unit);
-		unit.GetComponent<UnitManager> ().GiveOrder (Orders.CreateAttackMove (attackPoint));
+        UnitManager unitMan = unit.GetComponent<UnitManager>();
+       unitMan.PlayerOwner = 2;
+        unitMan.setInteractor();
+        unitMan.interactor.initializeInteractor();
+
+        difficultyM.SetUnitStats (unit);
+		unitMan.GiveOrder (Orders.CreateAttackMove (attackPoint));
 		if (increasingSpawnRate && spawnRate > .8f) {
 			spawnRate -= 1;
 			if (spawnRate < .8f) {

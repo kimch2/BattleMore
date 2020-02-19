@@ -10,6 +10,7 @@ public class BloodMist : TargetAbility {
 
 	// Use this for initialization
 	new void Start () {
+        base.Start();
 		myType = type.target;
 		mySelect = GetComponent<Selected> ();
         InitializeCharges();
@@ -23,17 +24,17 @@ public class BloodMist : TargetAbility {
 		continueOrder order = new continueOrder ();
 		if (chargeCount == 0 && chargeCount != -1) {
 			order.canCast = false;
-		}
+
+        }
 
 		if (!myCost.canActivate (this)) {
 			order.canCast = false;
-
 			// FIX THIS LINE IN THE FUTURE IF IT BREAKS! its currently in here to allow guys with multiple charges to use them even though the cooldown timer is shown.
 			if (myCost.energy == 0 && myCost.resourceCosts.MyResources.Count == 0 && chargeCount > 0) {
 				order.canCast = true;
 			}
 		} else {
-			order.nextUnitCast = false;
+            order.nextUnitCast = false;
 		}
 		if (order.canCast) {
 			order.nextUnitCast = false;
@@ -67,7 +68,7 @@ public class BloodMist : TargetAbility {
 	{
 
         changeCharge(-1);
-
+        Debug.Log("Changed charges");
 		myCost.payCost ();
 
 		Vector3 pos = location;
@@ -82,7 +83,7 @@ public class BloodMist : TargetAbility {
 	}
 	override
 	public void Cast(){
-
+        myCost.payCost();
         changeCharge(-1);
 		GameObject proj = null;
 

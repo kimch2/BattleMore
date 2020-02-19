@@ -1,0 +1,7 @@
+1 idle
+13 move
+25 attack
+36 spell cast
+56 death
+121 projectile
+126 impact

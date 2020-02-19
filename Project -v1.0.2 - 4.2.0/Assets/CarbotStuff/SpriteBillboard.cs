@@ -28,11 +28,14 @@ public class SpriteBillboard : MonoBehaviour
     }
     Vector3 LookLocation;
 
-    void Update()
+    void LateUpdate()
     {
-        LookLocation = transform.position * 2 - (LookAtCam.transform.position - LookAtCam.transform.up * LookAtCam.orthographicSize);
-        LookLocation.x = gameObject.transform.position.x;
-        gameObject.transform.LookAt(LookLocation);
+       // Plane p = new Plane(LookAtCam.transform.forward, LookAtCam.transform.position);
+       // LookLocation = p.ClosestPointOnPlane(transform.position);// transform.position * 2 - (LookAtCam.transform.position - LookAtCam.transform.up * LookAtCam.orthographicSize);
+                                                                 // LookLocation.x = gameObject.transform.position.x;
+        Quaternion Rot = Quaternion.LookRotation(LookAtCam.transform.forward, LookAtCam.transform.up);
+        gameObject.transform.rotation = Rot;// .LookAt(LookLocation);
+        if(transform.parent)
         mySprite.flipX = transform.parent.rotation.eulerAngles.y > 180;//|| transform.parent.rotation.eulerAngles.y < 270;
     }
 }

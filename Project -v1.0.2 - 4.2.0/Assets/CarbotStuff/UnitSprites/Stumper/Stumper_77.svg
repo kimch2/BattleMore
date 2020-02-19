@@ -1,0 +1,82 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="none" x="0px" y="0px" width="1000px" height="1000px" viewBox="0 0 1000 1000">
+<defs>
+<radialGradient id="Gradient_1" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="84.76395257566745" fx="0" fy="0" gradientTransform="matrix( 0.49785314060630587, -0.8672613506829635, 0.9203499557239203, 0.35923289411047427, 59.45,60.6) " spreadMethod="pad">
+<stop  offset="25.49019607843137%" stop-color="#66FF00" stop-opacity="0"/>
+
+<stop  offset="100%" stop-color="#66FF00"/>
+</radialGradient>
+
+<radialGradient id="Gradient_2" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="88.35783514352308" fx="0" fy="0" gradientTransform="matrix( 0.4976921393396488, -0.8673537539202351, 0.9205465465273152, 0.35933429048399884, -0.5,43) " spreadMethod="pad">
+<stop  offset="25.49019607843137%" stop-color="#66FF00" stop-opacity="0"/>
+
+<stop  offset="100%" stop-color="#66FF00"/>
+</radialGradient>
+
+<linearGradient id="Gradient_3" gradientUnits="userSpaceOnUse" x1="-8.9375" y1="120.9" x2="19.4375" y2="123.5" spreadMethod="pad">
+<stop  offset="25.49019607843137%" stop-color="#FFFFFF" stop-opacity="0"/>
+
+<stop  offset="100%" stop-color="#FFFFFF"/>
+</linearGradient>
+
+<radialGradient id="Gradient_4" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="25.34320051808769" fx="0" fy="0" gradientTransform="matrix( 0.9800459094451482, -0.19877126396899583, 0.19877126396899583, 0.9800459094451482, 27.5,72.2) " spreadMethod="pad">
+<stop  offset="25.49019607843137%" stop-color="#FFFFFF" stop-opacity="0"/>
+
+<stop  offset="100%" stop-color="#FFFFFF"/>
+</radialGradient>
+
+<radialGradient id="Gradient_5" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="30.15" fx="0" fy="0" gradientTransform="matrix( 1.0000000000000002, 0, 0, 1.0000000000000002, 43.6,29.35) " spreadMethod="pad">
+<stop  offset="25.49019607843137%" stop-color="#FFFFFF" stop-opacity="0"/>
+
+<stop  offset="100%" stop-color="#FFFFFF"/>
+</radialGradient>
+
+<linearGradient id="Gradient_6" gradientUnits="userSpaceOnUse" x1="63.5125" y1="-12.4625" x2="48.9875" y2="-11.137500000000001" spreadMethod="pad">
+<stop  offset="25.49019607843137%" stop-color="#FFFFFF" stop-opacity="0"/>
+
+<stop  offset="100%" stop-color="#FFFFFF"/>
+</linearGradient>
+
+<g id="stumper_leaf_spinner_2_Layer1_0_FILL">
+<path fill="url(#Gradient_1)" stroke="none" d="
+M 82.6 71.8
+Q 92 54.55 84.5 36.65 76.65 18.35 55.8 10.05 55.7 10.05 55.6 9.95 34.5 1.75 12.25 8.5 -9.25 15 -19.45 31.95 -17.6 43 31.75 51.95 85.8 62.85 82.6 71.8 Z"/>
+
+<path fill="url(#Gradient_2)" stroke="none" d="
+M 81.95 72.85
+Q 82.35 72.3 82.6 71.8 85.8 62.85 31.75 51.95 -17.6 43 -19.45 31.95 -19.75 32.45 -20.15 32.95 -30.3 50.7 -22.5 69.15 -14.85 87.5 6.3 95.75 6.4 95.75 6.5 95.85 27.6 104 49.65 97.35 71.8 90.55 81.95 72.85 Z"/>
+</g>
+
+<g id="stumper_leaf_spinner_2_Layer0_0_FILL">
+<path fill="url(#Gradient_3)" stroke="none" d="
+M 29.3 119.5
+Q 20.4 123.85 4.05 123.8 -16.7 123.75 -26.6 120 -15.85 125.75 -2.1 126.5 15.5 127.4 29.3 119.5 Z"/>
+
+<path fill="url(#Gradient_4)" stroke="none" d="
+M 16.5 79.35
+Q 28.2 83.85 38.5 83.15 48.95 82.5 51.9 76.8 54.7 71 48.35 63.65 43.55 58 35.2 53.85 37 55.3 40.6 59.15 45.75 64.8 42.5 71.75 39.3 78.7 32.7 79.9 26.25 81.25 16.5 79.35 Z"/>
+
+<path fill="url(#Gradient_5)" stroke="none" d="
+M 44.6 23
+Q 50.35 23 52.7 23.4 45 20.65 36.35 20.75 25.25 20.8 19.15 25.25 12.75 29.7 15.1 36.1 17.45 42.35 26.85 46.85
+L 27 46.9
+Q 21.45 42.25 21.1 37.8 20.65 33.4 28.2 28.05 35.8 22.8 44.6 23 Z"/>
+
+<path fill="url(#Gradient_6)" stroke="none" d="
+M 29.2 -7.4
+Q 38.85 -11.8 59.45 -13.3 75.7 -14.4 84.95 -10.55 70.65 -17.55 53.1 -15.45 39.45 -13.85 29.2 -7.4 Z"/>
+</g>
+</defs>
+
+<g transform="matrix( 1, 0, 0, 1, 134.2,227.4) ">
+<g transform="matrix( 1.58929443359375, 0, 0, 1.58929443359375, 341.3,101.9) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#stumper_leaf_spinner_2_Layer1_0_FILL"/>
+</g>
+
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#stumper_leaf_spinner_2_Layer0_0_FILL"/>
+</g>
+</g>
+</g>
+</svg>

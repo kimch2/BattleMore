@@ -71,7 +71,7 @@ public class customMover : IMover {
 
 
 	override
-	public bool move()
+	public bool Move()
 	{// for some reason the updates are being called out of order so this is here,
 
 

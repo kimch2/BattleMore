@@ -1,0 +1,82 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="none" x="0px" y="0px" width="1000px" height="1000px" viewBox="0 0 1000 1000">
+<defs>
+<radialGradient id="Gradient_1" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="147.1527618242349" fx="0" fy="0" gradientTransform="matrix( -0.9161397878554629, -0.40085893916457394, 0.39117512499530893, -0.719065674937088, 41.95,23.5) " spreadMethod="pad">
+<stop  offset="25.49019607843137%" stop-color="#66FF00" stop-opacity="0"/>
+
+<stop  offset="100%" stop-color="#66FF00"/>
+</radialGradient>
+
+<radialGradient id="Gradient_2" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="159.61154406871705" fx="0" fy="0" gradientTransform="matrix( -0.9231788393486243, -0.38437069422489384, 0.378105483235083, -0.7260596385817014, 16.7,84.9) " spreadMethod="pad">
+<stop  offset="25.49019607843137%" stop-color="#66FF00" stop-opacity="0"/>
+
+<stop  offset="100%" stop-color="#66FF00"/>
+</radialGradient>
+
+<radialGradient id="Gradient_3" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="77" fx="0" fy="0" gradientTransform="matrix( 1, 0, 0, 1, -2.85,24) " spreadMethod="pad">
+<stop  offset="25.49019607843137%" stop-color="#FFFFFF" stop-opacity="0"/>
+
+<stop  offset="100%" stop-color="#FFFFFF"/>
+</radialGradient>
+
+<radialGradient id="Gradient_4" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="39.9274420042156" fx="0" fy="0" gradientTransform="matrix( 0.3982223553996085, -0.917288916132746, 1.096989884685714, 0.2848917794132419, 7.7,29.8) " spreadMethod="pad">
+<stop  offset="54.90196078431372%" stop-color="#FFFFFF" stop-opacity="0"/>
+
+<stop  offset="100%" stop-color="#FFFFFF" stop-opacity="0.5215686274509804"/>
+</radialGradient>
+
+<radialGradient id="Gradient_5" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="35.5300598965158" fx="0" fy="0" gradientTransform="matrix( -0.23325319529823535, -0.9724160359039555, 0.9059230435791192, -0.10730350613267237, 54.55,64.25) " spreadMethod="pad">
+<stop  offset="54.90196078431372%" stop-color="#FFFFFF" stop-opacity="0"/>
+
+<stop  offset="100%" stop-color="#FFFFFF" stop-opacity="0.5215686274509804"/>
+</radialGradient>
+
+<radialGradient id="Gradient_6" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="84" fx="0" fy="0" gradientTransform="matrix( 1, 0, 0, 1, 61,85.3) " spreadMethod="pad">
+<stop  offset="25.49019607843137%" stop-color="#FFFFFF" stop-opacity="0"/>
+
+<stop  offset="100%" stop-color="#FFFFFF"/>
+</radialGradient>
+
+<g id="stumper_leaf_spinner_0_Layer1_0_FILL">
+<path fill="url(#Gradient_1)" stroke="none" d="
+M 1.15 104.25
+Q 16.45 102.5 29.55 52 45.4 -3.4 57.85 0 33.95 -9.85 9.1 -2.4 -16.5 5.3 -28.25 26.65 -28.4 26.75 -28.45 26.9 -40.15 48.45 -31.05 71.35 -22.25 93.5 1.15 104.25 Z"/>
+
+<path fill="url(#Gradient_2)" stroke="none" d="
+M 90 78.8
+Q 90.05 78.65 90.2 78.6 101.75 57.05 92.9 34.3 83.7 11.4 59.2 0.65 58.5 0.25 57.85 0 45.4 -3.4 29.55 52 16.45 102.5 1.15 104.25 1.8 104.6 2.5 104.9 26.95 115.65 52.7 107.95 78.3 100.3 90 78.8 Z"/>
+</g>
+
+<g id="stumper_leaf_spinner_0_Layer0_0_FILL">
+<path fill="url(#Gradient_3)" stroke="none" d="
+M -24.4 45.85
+Q -25.85 20.4 -19.35 8.8 -15.15 1 -12.75 -0.95 -21.9939453125 1.95078125 -30.45 15.15 -38.9189453125 28.39765625 -42.45 47.7 -45.9185546875 67.00234375 -29.5 83.9 -13.044140625 100.84921875 -0.05 100.4 0.036328125 100.3568359375 0.1 100.4 -10.2580078125 95.084765625 -16.55 83.1 -22.85 71.15 -24.4 45.85 Z"/>
+
+<path fill="url(#Gradient_4)" stroke="none" d="
+M 2.6 67.05
+Q 12.8 66.5 24.35 56.8
+L 24.5 56.65
+Q 14.8 61.65 8.2 60.35 1.55 59.25 -2.25 48.05 -4.4375 37.0052734375 -1.85 23.45 -5.8556640625 29.0125 -8.55 35.4 -14.3 48.9 -11.05 57.95 -8 67.45 2.6 67.05 Z"/>
+
+<path fill="url(#Gradient_5)" stroke="none" d="
+M 58.95 31.6
+Q 51.25 27 42 34.75 34.9 40.65 30.15 51.55 31.8 49.2 36.65 44.8 43.7 38.4 52.95 43.85 62.35 49.05 64.4 58.25 66.7 67.1 64.75 80.25 69.85 64.85 68.25 50.7 66.65 36.25 58.95 31.6 Z"/>
+
+<path fill="url(#Gradient_6)" stroke="none" d="
+M 103.25 43.65
+Q 99.49375 23.603125 82.7 12.4 65.951953125 1.248828125 56.2 1.75 59 2.75 65.85 8.65 75.85 17.35 83.15 41.7 90.3 66 88.5 79.4 86.7 92.85 78.6 101.5 78.75 101.35 79 101.3 91.2478515625 97.3009765625 99.15 80.5 107.0560546875 63.6966796875 103.25 43.65 Z"/>
+</g>
+</defs>
+
+<g transform="matrix( 1, 0, 0, 1, 134.2,227.4) ">
+<g transform="matrix( 1.58929443359375, 0, 0, 1.58929443359375, 341.3,101.9) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#stumper_leaf_spinner_0_Layer1_0_FILL"/>
+</g>
+
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#stumper_leaf_spinner_0_Layer0_0_FILL"/>
+</g>
+</g>
+</g>
+</svg>

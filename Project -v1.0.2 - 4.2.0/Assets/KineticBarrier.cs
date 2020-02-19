@@ -22,9 +22,9 @@ public class KineticBarrier : MonoBehaviour, Modifier{
 		myStats.addModifier (this, 0);
 		mySelected = GetComponentInParent<Selected> ();
 		mySelected.outsideAttchement = true;
-		mySelected.updateCoolDown (1);
+        myStats.SetShield(HP, this);
 
-		Invoke ("TurnOff",duration);
+        Invoke ("TurnOff",duration);
 
 	}
 
@@ -40,8 +40,7 @@ public class KineticBarrier : MonoBehaviour, Modifier{
 		float AmountReduced = Mathf.Min (amount, HP);
 		HP -= AmountReduced;
 		myStats.changeEnergy (AmountReduced);
-		mySelected.updateCoolDown (HP/initialHP);
-	
+        myStats.SetShield(HP, this);
 		if (HP <= 0) {
 			Invoke ("TurnOff",.1f);
 		}
@@ -52,8 +51,8 @@ public class KineticBarrier : MonoBehaviour, Modifier{
 	void TurnOff(){
 
 		myStats.removeModifier (this);
-
-		mySelected.outsideAttchement = false;
+        myStats.SetShield(0, this);
+        mySelected.outsideAttchement = false;
 		if (EndExplosion) {
 			GameObject explode = Instantiate<GameObject> (EndExplosion, transform.position,Quaternion.identity);
 

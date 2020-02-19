@@ -28,9 +28,10 @@ public class UnitStats : MonoBehaviour {
 	public float supply;    //positive gives supply, negative uses it
 
 	public float attackPriority = 1;
-	//[HideInInspector]
+	[HideInInspector]
 	public byte DefensePriority; // Am I an Air/Ground/ Both unit , this is a bitmask to be compared against the attackers agressionPriority
-	public byte agressionPriority; //Can I attack Air/Ground/Both units, who should I prioritize
+    [HideInInspector]
+    public byte agressionPriority; //Can I attack Air/Ground/Both units, who should I prioritize
 
 	public float armor;
 	public float spellResist;
@@ -57,6 +58,7 @@ public class UnitStats : MonoBehaviour {
 	private List<Modifier> deathTriggers = new List<Modifier>();
 	public List<KillModifier> killMods = new List<KillModifier>();
 
+    Dictionary<System.Object, float> ShieldSources = new Dictionary<System.Object, float>();
 
 	private Selected mySelection;
 
@@ -198,6 +200,38 @@ public class UnitStats : MonoBehaviour {
 		HealthRegenPerSec = amount;
 		HealthRegenPerHalf = amount / 2;
 	}
+
+    /// <summary>
+    /// CUrrently only works if you have the HeroDisplay Health Bar on the Unit
+    /// </summary>
+    /// <param name="amount"></param>
+    /// <param name="source"></param>
+    public void SetShield(float amount, System.Object source)
+    {
+        if (amount <= 0)
+        {
+            ShieldSources.Remove(source);
+        }
+
+        else if (ShieldSources.ContainsKey(source))
+        {
+            ShieldSources[source] = amount;
+        }
+        else
+        {
+            ShieldSources.Add(source,amount);
+        }
+
+
+        float total = 0;
+        foreach (KeyValuePair<object, float> pair in ShieldSources)
+        {
+                total += pair.Value;
+        }
+        Debug.Log("Setting shields " + total);
+        getSelector().healthBar.SetShieldAmount(total);
+        
+    }
 
 	public Selected getSelector()
 	{
@@ -649,10 +683,12 @@ public class UnitStats : MonoBehaviour {
 	/// <param name="type">Type.</param>
 	public float heal(float n, DamageTypes.DamageType type = DamageTypes.DamageType.Regular)
 	{
+      
 		if (health == Maxhealth) {
 			return 0;
 		}
-		foreach (Modifier mod in HealModifiers) {
+        //Debug.Log("HEaling " + health + "  " + Maxhealth);
+        foreach (Modifier mod in HealModifiers) {
 			if (mod != null)
 			{
 				n = mod.modify(n, null, type);

@@ -86,12 +86,14 @@
     <Compile Include="Assets\animate.cs" />
     <Compile Include="Assets\APMAchieve.cs" />
     <Compile Include="Assets\APMCounter.cs" />
+    <Compile Include="Assets\Applausometer.cs" />
     <Compile Include="Assets\ApplyBuffUpgrade.cs" />
     <Compile Include="Assets\AQUAS-Lite\Demo\SplineController\MathUtils.cs" />
     <Compile Include="Assets\AQUAS-Lite\Demo\SplineController\SplineController.cs" />
     <Compile Include="Assets\AQUAS-Lite\Demo\SplineController\SplineInterpolator.cs" />
     <Compile Include="Assets\AQUAS-Lite\Scripts\AQUAS_Camera.cs" />
     <Compile Include="Assets\AQUAS-Lite\Scripts\AQUAS_Reflection.cs" />
+    <Compile Include="Assets\AreaAuraApplier.cs" />
     <Compile Include="Assets\AreaDamage.cs" />
     <Compile Include="Assets\AreaDamageRecorder.cs" />
     <Compile Include="Assets\ArmorBackHeal.cs" />
@@ -137,6 +139,7 @@
     <Compile Include="Assets\AugmentAttachPoint.cs" />
     <Compile Include="Assets\Augmentor.cs" />
     <Compile Include="Assets\AugmentUpgrade.cs" />
+    <Compile Include="Assets\AuraApplierAbility.cs" />
     <Compile Include="Assets\BackLashAura.cs" />
     <Compile Include="Assets\BackLashZone.cs" />
     <Compile Include="Assets\BallisticMissile.cs" />
@@ -152,6 +155,7 @@
     <Compile Include="Assets\BloodMistCloud.cs" />
     <Compile Include="Assets\blowUp.cs" />
     <Compile Include="Assets\Bombardment.cs" />
+    <Compile Include="Assets\BoneQuillAbil.cs" />
     <Compile Include="Assets\BonusObjectiverTimer.cs" />
     <Compile Include="Assets\BountyHunter.cs" />
     <Compile Include="Assets\BridgeActivator.cs" />
@@ -221,6 +225,7 @@
     <Compile Include="Assets\DamagedLook.cs" />
     <Compile Include="Assets\DamageNonStacker.cs" />
     <Compile Include="Assets\DamageUpgrade.cs" />
+    <Compile Include="Assets\DaminionsInitializer.cs" />
     <Compile Include="Assets\DataChecker.cs" />
     <Compile Include="Assets\DateDisabler.cs" />
     <Compile Include="Assets\DayexaShield.cs" />
@@ -239,6 +244,10 @@
     <Compile Include="Assets\DifficultyManager.cs" />
     <Compile Include="Assets\DirectUpgradeApplier.cs" />
     <Compile Include="Assets\DisplayBar.cs" />
+    <Compile Include="Assets\DMAssigner.cs" />
+    <Compile Include="Assets\DMCollectionManager.cs" />
+    <Compile Include="Assets\DMSpawnUnit.cs" />
+    <Compile Include="Assets\DMUnitCard.cs" />
     <Compile Include="Assets\DoubleUpgrade.cs" />
     <Compile Include="Assets\DoubleUpgradeApp.cs" />
     <Compile Include="Assets\DragBombDamager.cs" />
@@ -250,6 +259,7 @@
     <Compile Include="Assets\EconomyManager.cs" />
     <Compile Include="Assets\EggAchievement.cs" />
     <Compile Include="Assets\Email.cs" />
+    <Compile Include="Assets\EmbalmAura.cs" />
     <Compile Include="Assets\EMPblast.cs" />
     <Compile Include="Assets\EmpMissile.cs" />
     <Compile Include="Assets\EnableAbility.cs" />
@@ -299,6 +309,7 @@
     <Compile Include="Assets\HealthDisplay.cs" />
     <Compile Include="Assets\HealthUpgrade.cs" />
     <Compile Include="Assets\HeroDisplayBar.cs" />
+    <Compile Include="Assets\HeroManager.cs" />
     <Compile Include="Assets\HoldFire.cs" />
     <Compile Include="Assets\HookFury.cs" />
     <Compile Include="Assets\HotkeyMenu.cs" />
@@ -395,6 +406,7 @@
     <Compile Include="Assets\PayloadFirendlyEndZone.cs" />
     <Compile Include="Assets\PenetratingShot.cs" />
     <Compile Include="Assets\PhysicsSimulator.cs" />
+    <Compile Include="Assets\Pilgrims\ComboAbility.cs" />
     <Compile Include="Assets\Pillage.cs" />
     <Compile Include="Assets\PlaceBuildingState.cs" />
     <Compile Include="Assets\PlasmaDischarge.cs" />
@@ -524,7 +536,6 @@
     <Compile Include="Assets\Scripts - In Game\Events\Custom EventArgs\KeyBoardEventActions\Key_Shift.cs" />
     <Compile Include="Assets\Scripts - In Game\Events\Custom EventArgs\KeyBoardEventArgs.cs" />
     <Compile Include="Assets\Scripts - In Game\Events\Custom EventArgs\MouseEventActions\LeftButton_Handler.cs" />
-    <Compile Include="Assets\Scripts - In Game\Events\Custom EventArgs\MouseEventActions\MiddleButton_Handler.cs" />
     <Compile Include="Assets\Scripts - In Game\Events\Custom EventArgs\MouseEventActions\RightButton_Handler.cs" />
     <Compile Include="Assets\Scripts - In Game\Events\Custom EventArgs\MouseEventArgs.cs" />
     <Compile Include="Assets\Scripts - In Game\Events\Custom EventArgs\ScreenEdgeEventArgs.cs" />
@@ -619,17 +630,20 @@
     <Compile Include="Assets\SeerHallucination.cs" />
     <Compile Include="Assets\SelectionNotifier.cs" />
     <Compile Include="Assets\selfDestructTimer.cs" />
+    <Compile Include="Assets\ShadowCaster.cs" />
     <Compile Include="Assets\ShellMaker.cs" />
     <Compile Include="Assets\ShieldBattery.cs" />
     <Compile Include="Assets\ShieldExplosion.cs" />
     <Compile Include="Assets\ShieldSpeedBoost.cs" />
     <Compile Include="Assets\ShieldSpeedUpgrade.cs" />
     <Compile Include="Assets\ShieldUpgrade.cs" />
+    <Compile Include="Assets\SimpleAnimator.cs" />
     <Compile Include="Assets\simpleROV.cs" />
     <Compile Include="Assets\SimpleSpawner.cs" />
     <Compile Include="Assets\SimpleStats.cs" />
     <Compile Include="Assets\SingleTarget.cs" />
     <Compile Include="Assets\SingleTargetCombo.cs" />
+    <Compile Include="Assets\SkillShotProjectile.cs" />
     <Compile Include="Assets\SkinUnlocker.cs" />
     <Compile Include="Assets\SMAA-master\SMAA-master\SMAA\Scripts\DebugPass.cs" />
     <Compile Include="Assets\SMAA-master\SMAA-master\SMAA\Scripts\EdgeDetectionMethod.cs" />
@@ -763,6 +777,7 @@
     <None Include="Assets\Colorify\Shaders\Realtime\Mobile\Colorify-Mobile-1color-Diffuse.shader" />
     <None Include="Assets\Colorify\Shaders\Mask\1 color\Colorify-Mask-1color-Bumped.shader" />
     <None Include="Assets\Materials\Bit2Good\SFS\Shaders\SFS_Pr_D_S_ST.shader" />
+    <None Include="Assets\CarbotStuff\UnitSprites\Knight\notes.txt" />
     <None Include="Assets\ArtResources\ANimations\Materials\OutlineShader.shader" />
     <None Include="Assets\Colorify\Shaders\Realtime\1 color\Colorify-1color-Unlit-Alpha.shader" />
     <None Include="Assets\Materials\Bit2Good\SFS\Shaders\SFS_St_N_ST.shader" />
@@ -803,6 +818,7 @@
     <None Include="Assets\Materials\Bit2Good\SFS\Shaders\SFS_St_Nt.shader" />
     <None Include="Assets\Colorify\Shaders\Realtime\2 colors\Colorify-2colors-Alpha-BumpSpec.shader" />
     <None Include="Assets\CarbotStuff\Casketta Hero\Casketta Info.txt" />
+    <None Include="Assets\CarbotStuff\HeroSprites\Fire Hero\Fire Hero Info.txt" />
     <None Include="Assets\PostProcessing 1\PostProcessing-2\PostProcessing\Shaders\API\PSSL.hlsl" />
     <None Include="Assets\PostProcessing 1\PostProcessing-2\PostProcessing\Shaders\Builtins\AutoExposure.shader" />
     <None Include="Assets\Resources\ColorPicker.shader" />
@@ -813,6 +829,7 @@
     <None Include="Assets\PostProcessing 1\PostProcessing-2\PostProcessing\Shaders\Builtins\GaussianDownsample.compute" />
     <None Include="Assets\UIAddons\Shaders\UIAddonsGrayScaleFont.shader" />
     <None Include="Assets\Colorify\Shaders\Realtime\2 colors\Colorify-2colors-Cutout-Bumped.shader" />
+    <None Include="Assets\CarbotStuff\UnitSprites\Gargantuan\garg notes.txt" />
     <None Include="Assets\ArtResources\Effects\LightningBolt\Readme.txt" />
     <None Include="Assets\Materials\Bit2Good\SFS\Shaders\SFS_St_D_T.shader" />
     <None Include="Assets\PostProcessing 1\PostProcessing\Resources\Hidden\Post FX\ScreenSpaceReflection.shader" />
@@ -857,6 +874,7 @@
     <None Include="Assets\Colorify\Shaders\Realtime\Mobile\Colorify-Mobile-1color-Unlit-Alpha.shader" />
     <None Include="Assets\Materials\Bit2Good\SFS\Shaders\SFS_St_N_S.shader" />
     <None Include="Assets\PostProcessing 1\PostProcessing-2\PostProcessing\Shaders\API\Vulkan.hlsl" />
+    <None Include="Assets\CarbotStuff\UnitSprites\Archer\info.txt" />
     <None Include="Assets\PostProcessing 1\PostProcessing\Resources\Hidden\Post FX\Blit.shader" />
     <None Include="Assets\Materials\Bit2Good\SFS\Shaders\SFS_Pr_N_S_DS.shader" />
     <None Include="Assets\Colorify\Shaders\Realtime\Mobile\Colorify-Mobile-2colors-Bumped.shader" />
@@ -883,6 +901,7 @@
     <None Include="Assets\Colorify\Shaders\Realtime\Mobile\Colorify-Mobile-1color-Unlit-Normal.shader" />
     <None Include="Assets\Colorify\Shaders\Realtime\1 color\Colorify-1color-Sprites-Diffuse.shader" />
     <None Include="Assets\Colorify\Shaders\Mask\2 colors\Colorify-Mask-2colors-BumpSpec.shader" />
+    <None Include="Assets\CarbotStuff\UnitSprites\Skelly\Skelly notes.txt" />
     <None Include="Assets\Scripts\Simple Email\Readme.txt" />
     <None Include="Assets\Colorify\Shaders\Mask\1 color\Colorify-Mask-1color-Unlit-Normal.shader" />
     <None Include="Assets\Colorify\Shaders\Realtime\Mobile\Colorify-Mobile-2colors-Diffuse.shader" />
@@ -950,6 +969,7 @@
     <None Include="Assets\Materials\Bit2Good\SFS\Shaders\Mobile\SFS_M_DI.shader" />
     <None Include="Assets\PostProcessing 1\PostProcessing\Resources\Hidden\Post FX\EyeHistogram.compute" />
     <None Include="Assets\New UIElements View.uxml" />
+    <None Include="Assets\CarbotStuff\HeroSprites\Almog Hero\Almog Info.txt" />
     <None Include="Assets\Colorify\Shaders\Mask\1 color\Colorify-Mask-1color-Unlit-Alpha.shader" />
     <None Include="Assets\Materials\Bit2Good\SFS\Shaders\SFS_Pr_D_D.shader" />
     <None Include="Assets\PostProcessing 1\PostProcessing\Resources\Hidden\Post FX\TAA.cginc" />
@@ -971,6 +991,7 @@
     <None Include="Assets\Colorify\Shaders\Standard\ColorifyStandardCoreBackfaces.cginc" />
     <None Include="Assets\Colorify\Shaders\Realtime\2 colors\Colorify-2colors-Cutout-BumpSpec.shader" />
     <None Include="Assets\Materials\Bit2Good\SFS\Shaders\SFS_Pr_N_S.shader" />
+    <None Include="Assets\CarbotStuff\Spells\AlamogSpells\Anchor\tint filter and transparency filter.txt" />
     <None Include="Assets\Colorify\Shaders\Colorify-debug.shader" />
     <None Include="Assets\PostProcessing 1\PostProcessing\Resources\Hidden\Post FX\DiskKernels.cginc" />
     <None Include="Assets\PostProcessing 1\PostProcessing\Resources\Hidden\Post FX\DepthOfField.cginc" />
@@ -978,10 +999,12 @@
     <None Include="Assets\PostProcessing 1\PostProcessing-2\PostProcessing\Shaders\API\D3D9.hlsl" />
     <None Include="Assets\PostProcessing 1\PostProcessing-2\PostProcessing\Shaders\Builtins\Lut2DBaker.shader" />
     <None Include="Assets\PostProcessing 1\PostProcessing\Resources\Hidden\Post FX\ScreenSpaceRaytrace.cginc" />
+    <None Include="Assets\CarbotStuff\UnitSprites\Catapult\cata notes.txt" />
     <None Include="Assets\Materials\Bit2Good\SFS\Shaders\SFS_St_N_S_DS.shader" />
     <None Include="Assets\Colorify\Shaders\Mask\2 colors\Colorify-Mask-2colors-Unlit-Normal.shader" />
     <None Include="Assets\PostProcessing 1\PostProcessing-2\PostProcessing\Shaders\Builtins\AutoExposure.compute" />
     <None Include="Assets\Materials\Bit2Good\SFS\Shaders\Mobile\SFS_M_NSI.shader" />
+    <None Include="Assets\CarbotStuff\UnitSprites\Ruffian\ruffian notes.txt" />
     <None Include="Assets\PostProcessing 1\PostProcessing-2\PostProcessing\Shaders\Debug\Overlays.shader" />
     <None Include="Assets\Materials\Bit2Good\SFS\Shaders\SFS_St_N_T.shader" />
     <None Include="Assets\SMAA-master\SMAA-master\LICENSE.txt" />
@@ -1005,6 +1028,7 @@
     <None Include="Assets\Materials\Bit2Good\SFS\Shaders\SFS_St_D_S_T.shader" />
     <None Include="Assets\Materials\Bit2Good\SFS\Shaders\SFS_Pr_Nt_S.shader" />
     <None Include="Assets\PostProcessing 1\PostProcessing-2\PostProcessing\Shaders\Builtins\Copy.shader" />
+    <None Include="Assets\CarbotStuff\UnitSprites\Stumper\Stumper Notes.txt" />
     <None Include="Assets\Colorify\Shaders\Mask\1 color\Colorify-Mask-1color-Alpha-BumpSpec.shader" />
     <None Include="Assets\Colorify\Shaders\Realtime\2 colors\Colorify-2colors-ToonLit.shader" />
     <None Include="Assets\Materials\Bit2Good\SFS\Shaders\Terrain\SFS_Te_D.shader" />
@@ -1093,6 +1117,9 @@
     </Reference>
     <Reference Include="UnityEngine.SpatialTracking">
       <HintPath>C:/Users/Matthew Johnson/Desktop/BattleTrifecta/Project -v1.0.2 - 4.2.0/Library/ScriptAssemblies/UnityEngine.SpatialTracking.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.InternalAPIEngineBridge.003">
+      <HintPath>C:/Users/Matthew Johnson/Desktop/BattleTrifecta/Project -v1.0.2 - 4.2.0/Library/ScriptAssemblies/Unity.InternalAPIEngineBridge.003.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
       <HintPath>C:/Users/Matthew Johnson/Desktop/BattleTrifecta/Project -v1.0.2 - 4.2.0/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>

@@ -15,7 +15,14 @@ public class HeroDisplayBar : DisplayBar
 	public float shakeRatio = .25f;
 	bool started = false;
 
-	new void Start()
+    public float HPperLine = 50;
+    public LineRenderer HPIncrements;
+    public GameObject ShieldBar;
+    Vector3 ShieldVector = new Vector3(1, 1, 1);
+    UnitStats myStats;
+    float currentShieldAmount = 0;
+
+    new void Start()
 	{
 		if (!started)
 		{
@@ -26,9 +33,18 @@ public class HeroDisplayBar : DisplayBar
 			splashSprite.transform.parent.localPosition = new Vector3(BarWidth / 2, 0, 0);
 			splashSprite.transform.localPosition = new Vector2(0 - BarWidth / 2, 0);
 			started = true;
+            myStats = GetComponentInParent<UnitStats>();
+            SetHealthIncrements(myStats.Maxhealth);
 		}
 	}
 
+
+    void SetHealthIncrements(float HealthAmount)
+    {
+        float LineCount = HealthAmount / HPperLine;
+        HPIncrements.SetPositions(new Vector3[2] { new Vector3(-1 * LineCount / 2, 0, 0), new Vector3(LineCount / 2, 0, 0) });
+        HPIncrements.transform.localScale = new Vector3(BarWidth / LineCount, 1, 1);
+    }
 
 	public override bool updateRatio(float ratio, UnitIconInfo unitIcon, UnitIconInfo slider)
 	{
@@ -36,20 +52,31 @@ public class HeroDisplayBar : DisplayBar
 
 		bool toReturn = base.updateRatio(ratio, unitIcon, slider);
 		updateSplashRatio(ratio);
+
+
+        if (currentShieldAmount > 0)
+        {
+            toReturn = true;
+            SetShieldAmount(currentShieldAmount);
+        }
 		return toReturn;
 	}
 
 	Coroutine shakingUp;
+    Coroutine loweringBar;
+    float ReductionPoint;
 
 	public void updateSplashRatio(float ratio)
 	{
-		endTime = Time.time + changeDuration;
-		float changeAmount = TargetVector.x - ratio;
+		//endTime = Time.time + changeDuration;
 		TargetVector.x = ratio;
 
 		if ( gameObject.activeInHierarchy)
 		{
-			StartCoroutine(changeHealth(changeAmount));
+            if (loweringBar == null)
+            {
+                loweringBar = StartCoroutine(changeHealth());
+            }
 			if (shakingUp == null && SplashBar.transform.localScale.x - TargetVector.x > shakeRatio)
 			{
 				shakingUp = StartCoroutine(shakeUp(SplashBar.transform.localScale.x - TargetVector.x));
@@ -57,14 +84,22 @@ public class HeroDisplayBar : DisplayBar
 		}
 	}
 
-	IEnumerator changeHealth(float changeAmount)
+	IEnumerator changeHealth()
 	{
-		for (float i = 0; i < changeDuration; i += Time.deltaTime)
-		{ 
-			SplashVector.x -= changeAmount * Time.deltaTime / changeDuration;
-			SplashBar.transform.localScale = SplashVector;
-			yield return null;
-		}
+        yield return new WaitForSeconds(.5f);
+        if (SplashVector.x < TargetVector.x)
+        {
+            SplashVector.x = TargetVector.x;
+        }
+        
+        while (SplashVector.x > TargetVector.x)
+        {
+            SplashVector.x -= changeDuration * Time.deltaTime ;
+            SplashBar.transform.localScale = SplashVector;
+            yield return null;
+        }
+
+        loweringBar = null;
 	}
 
 	IEnumerator shakeUp(float changeAmount)
@@ -102,4 +137,36 @@ public class HeroDisplayBar : DisplayBar
 		transform.localScale = Vector3.one;
 		shakingUp = null;
 	}
+
+    public override void SetShieldAmount(float amount) // Need a way to keep track of health that is subtracted while you still have a shield
+    {
+        currentShieldAmount = amount;
+        if (amount > 0)
+        {
+            gameObject.SetActive(true);
+            ShieldBar.SetActive(true);
+        }
+        else
+        {
+            ShieldBar.SetActive(false);
+        }
+
+
+        float totalMaxHP = Mathf.Max ( myStats.Maxhealth, amount + myStats.health);
+        float totalCurrentHP = amount + myStats.health;
+        if (totalCurrentHP < myStats.Maxhealth)
+        {
+            ShieldVector.x = totalCurrentHP / myStats.Maxhealth;
+            ShieldBar.transform.localScale = ShieldVector;
+        }
+        else
+        {
+          
+            ShieldVector.x = 1;
+            ShieldBar.transform.localScale = ShieldVector;          
+        }
+
+        base.updateRatio(myStats.health / totalMaxHP, null, null);
+        SetHealthIncrements(totalMaxHP);
+    }
 }

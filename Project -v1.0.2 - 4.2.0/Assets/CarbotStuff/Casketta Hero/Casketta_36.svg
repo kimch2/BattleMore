@@ -1,5 +1,5 @@
 
-<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="none" x="0px" y="0px" width="1000px" height="1000px" viewBox="0 0 1000 1000">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="none" x="0px" y="0px" width="500px" height="500px" viewBox="0 0 500 500">
 <defs>
 <linearGradient id="Gradient_1" gradientUnits="userSpaceOnUse" x1="54.1125" y1="55.2875" x2="30.8875" y2="160.1125" spreadMethod="pad">
 <stop  offset="0%" stop-color="#CCCCCC"/>
@@ -1740,7 +1740,7 @@ Q 28.1126953125 -29.558984375 24.95 -31.05 5.651171875 -29.9037109375 -5.05 -22.
 </g>
 </defs>
 
-<g transform="matrix( -0.679534912109375, 0, 0, 0.679534912109375, 606.45,232.05) ">
+<g transform="matrix( -0.679534912109375, 0, 0, 0.679534912109375, 338.35,132.05) ">
 <g transform="matrix( 1, 0, 0, 1, 0,0) ">
 <g transform="matrix( 0.787109375, 0.6166839599609375, -0.6166839599609375, 0.787109375, 40.2,252.45) ">
 <g transform="matrix( 1, 0, 0, 1, 0,0) ">

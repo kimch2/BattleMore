@@ -10,6 +10,7 @@ public class UnitManager : Unit, IOrderable {
     public string UnitName;
 
     public int PlayerOwner; // 1 = active player, 2 = enemies, 3 = nuetral
+    [Tooltip("Units with a lower number will be in the front of the formation")]
     public int formationOrder;
     public Animator myAnim;
 
@@ -201,14 +202,27 @@ public class UnitManager : Unit, IOrderable {
 			}
             //Debug.Log("IN here " + (Time.timeSinceLevelLoad < 1) +"    "+!myStats.isUnitType(UnitTypes.UnitTypeTag.Structure) + "    " + myStats.isUnitType(UnitTypes.UnitTypeTag.Add_On));
 			if (Time.timeSinceLevelLoad < 1 || !myStats.isUnitType (UnitTypes.UnitTypeTag.Structure) || myStats.isUnitType (UnitTypes.UnitTypeTag.Add_On)) {
-				GameManager.getInstance ().playerList [PlayerOwner - 1].addUnit (this);
+
+                GameManager.getInstance ().playerList [PlayerOwner - 1].addUnit (this);
 			}
 
 			myStats.setAggressionPriority();
 			myRacer = GameManager.main.playerList[PlayerOwner - 1];
 			hasStarted = true;
 			initializeVision();
-		}
+            if (myAnim)
+            {
+                foreach (AnimatorControllerParameter parem in myAnim.parameters)
+                {
+                    if (parem.name == "State")
+                    {
+                        hasAnimState = true;
+                        break;
+                    }
+                }
+            }
+
+        }
 	}
 
 	public RaceManager getRaceManager()
@@ -778,15 +792,26 @@ public class UnitManager : Unit, IOrderable {
 		queuedStates.Clear ();
 	}
 
-
+    bool hasAnimState;
 	public void animMove()
-	{if (myAnim ) {
-			foreach (AnimatorControllerParameter parem in myAnim.parameters) {
-				if (parem.name == "State") {
-					myAnim.SetInteger ("State", 2);
-				}
-			}
-		}
+	{
+        // Debug.Log("Animove");
+        if (myAnim)
+        {
+            if (myAnim.GetCurrentAnimatorStateInfo(0).IsName("Cast"))
+            {
+                return;
+            }
+
+            if (hasAnimState)
+            {
+                myAnim.SetInteger("State", 2);
+            }
+            else 
+            {
+                myAnim.Play("Move");
+            }
+        }
 	}
 
 	public void animAttack()
@@ -797,17 +822,26 @@ public class UnitManager : Unit, IOrderable {
 	}
 
 	public void animStop()
-	{if (myAnim) {
-				foreach (AnimatorControllerParameter parem in myAnim.parameters) {
-					if (parem.name == "State") {
-						myAnim.SetInteger ("State", 1);
-					}
-				}
-		}
+	{
+        if (hasAnimState)
+        {
+            myAnim.SetInteger("State", 1);
+        }
 	}
+
+    public void LookAtTarget(Vector3 target)
+    {
+
+        target.y = this.transform.position.y;
+        this.gameObject.transform.LookAt(target);
+    }
 
 	public override UnitStats getUnitStats ()
 	{
+        if (!myStats)
+        {
+            myStats = GetComponent<UnitStats>();
+        }
 		return myStats;
 	}
 
@@ -816,7 +850,13 @@ public class UnitManager : Unit, IOrderable {
 		return this;
 	}
 
-
+    public GameObject CreateInstance(Vector3 location, int playerNumber)
+    {
+       
+        GameObject newInstance = Instantiate<GameObject>(this.gameObject, location,Quaternion.identity);
+        newInstance.GetComponent<UnitManager>().PlayerOwner = playerNumber;
+        return newInstance;
+    }
 
 
 	public IWeapon inRange(UnitManager obj)

@@ -64,7 +64,7 @@ public class airmover : IMover {
 
 
 	override
-	public bool move()
+	public bool Move()
 	{
 
 		if (!workingframe) {

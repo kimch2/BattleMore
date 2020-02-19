@@ -1,0 +1,6 @@
+1 idle
+9 walk
+16 attack
+24 death
+25 hit
+26 pieces

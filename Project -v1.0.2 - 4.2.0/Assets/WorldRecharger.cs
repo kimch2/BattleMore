@@ -6,8 +6,10 @@ public class WorldRecharger : MonoBehaviour {
 
 
 	public List<UnitStats> ToHeal;
-	public List<UnitStats> ToEnergize;
-	public List<RoamAI> ToRoam;
+	public List<UnitStats> ToEnergize; // Updates twice a second
+    public List<UnitStats> ToSuperEnergize; // Updates 10 times a second
+
+    public List<RoamAI> ToRoam;
 
 	public static WorldRecharger main;
 
@@ -20,6 +22,7 @@ public class WorldRecharger : MonoBehaviour {
 	void Start () {
 		InvokeRepeating ("Charge",.5f,.5f);
 		InvokeRepeating ("Roam",1,3);
+        InvokeRepeating("SuperCharge", .1f, .1f);
 	}
 
 
@@ -33,14 +36,24 @@ public class WorldRecharger : MonoBehaviour {
 		ToHeal.Remove(target);
 	}
 
-	public void addEnergy(UnitStats target)
-	{
-		ToEnergize.Add (target);
-	}
+    public void addEnergy(UnitStats target)
+    {
+        if (target.EnergyRegenPerSec >= 5)
+        {
+            ToSuperEnergize.Add(target);
+        }
+        else
+        {
+            ToEnergize.Add(target);
+        }
+    }
 
 	public void removeEnergy(UnitStats target)
 	{
-		ToEnergize.Remove (target);
+        if (!ToEnergize.Remove(target))
+        {
+            ToSuperEnergize.Remove(target);
+        }
 	}
 
 	public void addRoam(RoamAI target)
@@ -53,6 +66,16 @@ public class WorldRecharger : MonoBehaviour {
 		ToRoam.Remove (target);
 	}
 
+    void SuperCharge()
+    {
+        foreach (UnitStats stat in ToSuperEnergize)
+        {
+            if (stat)
+            {
+                stat.veternStat.UpEnergy(stat.changeEnergy(stat.EnergyRegenPerSec / 10));
+            }
+        }
+    }
 
 	void Charge()
 	{

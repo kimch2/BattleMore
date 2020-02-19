@@ -85,15 +85,19 @@ public class UltTip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
 
 		switch(UltNumber){
 		case 1:
+                if(GameManager.main.playerList[0].UltOne)
 			myUltCost = GameManager.main.playerList [0].UltOne.myCost;
 			break;
 		case 2:
+                if(GameManager.main.playerList[0].UltTwo)
 			myUltCost = GameManager.main.playerList [0].UltTwo.myCost;
 			break;
 		case 3:
+                if (GameManager.main.playerList[0].UltThree)
 			myUltCost = GameManager.main.playerList [0].UltThree.myCost;
 			break;
 		case 4:
+                if(GameManager.main.playerList[0].UltFour)
 			myUltCost = GameManager.main.playerList [0].UltFour.myCost;
 			break;
 

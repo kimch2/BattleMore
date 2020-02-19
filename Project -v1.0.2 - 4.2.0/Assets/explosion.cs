@@ -15,7 +15,8 @@ public class explosion : MonoBehaviour {
 	VeteranStats vetStats;
 	public bool UseYFOrDetection;
 	public List<Notify> triggers = new List<Notify> ();
-
+    [Tooltip("The time between the spawn of this object (and the above effect) and when the damage is applied")]
+    public float DamageDelay = .01f;
 	float friendlyAmount;
 	float sizeSquared;
 	public IWeapon.bonusDamage[] extraDamage;
@@ -31,8 +32,8 @@ public class explosion : MonoBehaviour {
 			obj.SendMessage ("setOwner", sourceInt, SendMessageOptions.DontRequireReceiver);
 
 		}
-		//transform.localScale = Vector3.one * maxSize;
-		yield return null;
+        //transform.localScale = Vector3.one * maxSize;
+        yield return new WaitForSeconds(DamageDelay);
 		sizeSquared = maxSize;
 		FindTargets();
 		yield return null;

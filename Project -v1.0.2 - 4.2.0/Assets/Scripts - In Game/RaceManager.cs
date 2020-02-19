@@ -17,6 +17,7 @@ public class RaceManager : MonoBehaviour, ManagerWatcher {
     public float currentSupply;
     public float supplyCap;
 
+    public bool IgnoreUlts;
     public Ability UltOne;
     public Ability UltTwo;
     public Ability UltThree;
@@ -156,18 +157,21 @@ public class RaceManager : MonoBehaviour, ManagerWatcher {
 
         if (playerNumber == 1)
         {
-            UltObject Ulty = null;
-            if (TerraTileController.main)
+            if (!IgnoreUlts )
             {
-                Ulty = Instantiate<GameObject>(Resources.Load<GameObject>("TerraCrafterUlt")).GetComponent<UltObject>();
-            }
-            else
-            {
-                Ulty = Instantiate<GameObject>(RacePacket.getRace(myRace).UltimatePrefab).GetComponent<UltObject>();
-            }
-            if (Application.isPlaying)
-            {
-                SetUltimates(Ulty);
+                UltObject Ulty = null;
+                if (TerraTileController.main)
+                {
+                    Ulty = Instantiate<GameObject>(Resources.Load<GameObject>("TerraCrafterUlt")).GetComponent<UltObject>();
+                }
+                else
+                {
+                    Ulty = Instantiate<GameObject>(RacePacket.getRace(myRace).UltimatePrefab).GetComponent<UltObject>();
+                }
+                if (Application.isPlaying)
+                {
+                    SetUltimates(Ulty);
+                }
             }
 
             LevelCompilation comp = ResourceLoader.getMain().getResource("LevelEditor").GetComponent<LevelCompilation>();
@@ -291,18 +295,18 @@ public class RaceManager : MonoBehaviour, ManagerWatcher {
 
     public void UltUpdate()
     {
-        if (UltOne.enabled) {
+        if (UltOne && UltOne.enabled) {
             UISetter.main.updateUlt(0);
         }
-        if (UltTwo.enabled)
+        if (UltTwo && UltTwo.enabled)
         {
             UISetter.main.updateUlt(1);
         }
-        if (UltThree.enabled)
+        if (UltThree && UltThree.enabled)
         {
             UISetter.main.updateUlt(2);
         }
-        if (UltFour.enabled)
+        if (UltFour && UltFour.enabled)
         {
             UISetter.main.updateUlt(3);
         }
@@ -656,7 +660,7 @@ public class RaceManager : MonoBehaviour, ManagerWatcher {
             }
         }
 
-        if (playerNumber == 1) {
+        if (playerNumber == 1 && FButtonManager.main) {
             FButtonManager.main.updateNumbers(unitRoster);
         }
         return finishDeath;

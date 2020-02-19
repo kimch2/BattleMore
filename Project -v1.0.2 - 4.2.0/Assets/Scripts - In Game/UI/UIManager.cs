@@ -14,7 +14,6 @@ public class UIManager : MonoBehaviour, IUIManager {
 	public Material goodPlacement;
 	public Material badPlacement;
 	public GameObject thingToBeBuilt;
-	//Width of GUI menu
 
 	//Action Variables
 	private HoverOver hoverOver = HoverOver.Terrain;
@@ -24,30 +23,40 @@ public class UIManager : MonoBehaviour, IUIManager {
 	private Mode m_Mode = Mode.Normal;
 	
 	//Interface variables the UI needs to deal with
-	private SelectedManager m_SelectedManager;
 	private ICamera m_Camera;
 	private IGUIManager m_GuiManager;
 
-	//Building Placement variables
+    CustomInputSystem inputSystem;
 
-	public GameObject m_ObjectBeingPlaced;
+    //Building Placement variables
+
+    public GameObject m_ObjectBeingPlaced;
 	private bool m_Placed = false;
-	private FogOfWar fog;
-	private RaceManager raceManager;
+
+	public FogOfWar fog {
+        get;set;
+    }
+    private RaceManager raceManager;
 	private Vector3 originalPosition;
 	public GameObject AbilityTargeter;
-	private TargetAbility currentAbility;
+	public TargetAbility currentAbility;
 	public int currentAbilityNUmber;
-	private bool clickOverUI = false;
+	public bool clickOverUI
+    {
+        get;set;
+    }
 
-	//Used for right click Formations
-	private Vector2 rightClickOrigin;
+
+    //Used for right click Formations
+    private Vector2 rightClickOrigin;
 	private Vector3 rightClickEnd;
 	private bool rightClickDrag;
 	private LineRenderer lineRender;
 	private Vector3 rightClickOrThree = Vector3.zero;
 
 	public bool fastCast;
+    [Tooltip("Use a spriteRender for the Ability Target Reticule, like for Vector Graphics")]
+    public bool UseSpriteTarget;
     public LayerMask GroundsCast = (1 << 8) | ( 1 << 16) | (1 << 11);
     public LayerMask EverythinCast = ~((1 << 4) | (1 << 5)  | (1 << 12) | (1 << 14) | (1 << 15) | (1 << 17) | (1 << 19) | (1 << 20) | (1 << 21));
 
@@ -72,8 +81,6 @@ public class UIManager : MonoBehaviour, IUIManager {
 		}
 	}
 
-	CustomInputSystem inputSystem;
-
 	void Awake()
 	{
 		if (!GetComponent<WorldRecharger> ()) {
@@ -86,7 +93,6 @@ public class UIManager : MonoBehaviour, IUIManager {
 
 		inputSystem = GameObject.FindObjectOfType<CustomInputSystem> ();
 		main = this;
-		//Debug.Log ("Setting UI manager " + this.gameObject.name);
 	}
 
 	// Use this for initialization
@@ -94,8 +100,9 @@ public class UIManager : MonoBehaviour, IUIManager {
 	{	GameMenu.main.addDisableScript (this);
 		lineRender = GetComponent<LineRenderer> ();
 		fog = GameObject.FindObjectOfType<FogOfWar> ();
-		//Resolve interface variables
-		m_SelectedManager = SelectedManager.main;
+        if (!fog.enabled)
+        { fog = null; }
+        //Resolve interface variables
 		m_Camera =  MainCamera.main;
 		m_GuiManager =GameObject.FindObjectOfType<GUIManager>();
 	
@@ -127,140 +134,43 @@ public class UIManager : MonoBehaviour, IUIManager {
 
 		if (Input.GetMouseButtonDown (1)) {
 
-			if (!clickOverUI) 
-			{
-				rightClickOrigin = Input.mousePosition;
-
-				RaycastHit hitb;
-
-				if (Physics.Raycast (rayb, out hitb, Mathf.Infinity, EverythinCast)) {
-					rightClickOrThree = hitb.point + Vector3.up * 2;
-				}
-
-
-				rightClickDrag = true;
-
-				if (formationCoroutine != null) {
-					StopCoroutine (formationCoroutine);
-				}
-
-				formationCoroutine = StartCoroutine (formationDisplay());
-			}
-
-		} 
-
-		if (rightClickDrag) {
-			if (Vector2.Distance (Input.mousePosition, rightClickOrigin) > 50) {
-				lineRender.enabled = true;
-			
-				RaycastHit hitb;
-				Vector3 b = Vector3.zero;
-				if (Physics.Raycast (rayb, out hitb, Mathf.Infinity, GroundsCast)){
-					rightClickEnd = hitb.point + Vector3.up*2;
-				}
-			
-				lineRender.SetPositions (new Vector3[2] { rightClickOrThree, rightClickEnd });
-			} else {
-				lineRender.enabled = false;}
-
+            InitializeFormations();
 		}
-
-
-		bool hitSomething;
-	
-		switch (m_Mode)
+        CursorManager.main.normalMode();
+        ModeNormalBehaviour();
+        switch (m_Mode)
 		{
 
-		case Mode.Normal:
+		case Mode.Normal:			
 			
-			CursorManager.main.normalMode ();
-
-			ModeNormalBehaviour ();
 			break;
 			
 		case Mode.Menu:
-			
 			break;
+
 		case Mode.targetAbility:
-			ModeNormalBehaviour ();
-		
-			RaycastHit hit;
 
-			if (currentAbility.myTargetType == TargetAbility.targetType.ground) {
-				hitSomething = Physics.Raycast (rayb, out hit, Mathf.Infinity, GroundsCast);
-			} else {
-				hitSomething = Physics.Raycast (rayb, out hit, Mathf.Infinity, EverythinCast);
-			}
+			RaycastHit hit = TargetAbRaycast();
 
-			if (hitSomething) {
-				Vector3 targetPoint = hit.point;
-				currentObject = hit.collider.gameObject;
-
-				if (currentObject.transform.parent && currentObject.transform.parent.GetComponent<UnitManager> ()) {
-					currentObject = currentObject.transform.parent.gameObject;
-				}
-			
+			if (hit.collider) {			
 				try{
-					
-				if (m_SelectedManager.checkValidTarget(targetPoint, currentObject, currentAbilityNUmber)) {
-						if(currentAbility.myTargetType == TargetAbility.targetType.ground)
-							{AbilityTargeter.GetComponentInChildren<Light> ().color = Color.green;}
-						else{CursorManager.main.targetMode();}
-							
-					} else {
-						if(currentAbility.myTargetType == TargetAbility.targetType.ground){
-							AbilityTargeter.GetComponentInChildren<Light> ().color = Color.red;}
-						else{
-							CursorManager.main.invalidMode();}
+                     UpdateTargetReticule(SelectedManager.main.checkValidTarget(hit.point, currentObject, currentAbilityNUmber), hit.point);
 				}
-
-				targetPoint.y += 60;
-				AbilityTargeter.transform.position =  targetPoint;
-					
-				}
-				catch(NullReferenceException) {
-					
+				catch(NullReferenceException) {					
 					SwitchMode (Mode.Normal);
-
-				}
-			
+				}		
 			}
 
 			break;
 
 		case Mode.globalAbility:
-			ModeNormalBehaviour ();
 
-		
-			if (currentAbility.myTargetType == TargetAbility.targetType.ground) {
-				hitSomething = Physics.Raycast (rayb, out hit, Mathf.Infinity, GroundsCast);
-			} else {
-				hitSomething = Physics.Raycast (rayb, out hit, Mathf.Infinity, EverythinCast);
-			}
+            hit = TargetAbRaycast();
 
-			if (hitSomething)
+			if (hit.collider)
 			{
-				Vector3 targetPoint = hit.point;
-				currentObject = hit.collider.gameObject;
-				currentObject = hit.collider.gameObject;
-
-				if (currentObject.transform.parent && currentObject.transform.parent.GetComponent<UnitManager> ()) {
-					currentObject = currentObject.transform.parent.gameObject;
-				}
-
-				if (currentAbility.isValidTarget (currentObject, targetPoint)) {
-					AbilityTargeter.GetComponentInChildren<Light> ().color = Color.green;
-					CursorManager.main.targetMode();
-				} else {
-					AbilityTargeter.GetComponentInChildren<Light> ().color = Color.red;
-					CursorManager.main.invalidMode();
-				}
-
-				targetPoint.y += 60;
-				AbilityTargeter.transform.position =  targetPoint;
-
+                UpdateTargetReticule(currentAbility.isValidTarget(currentObject, hit.point),hit.point);
 			}
-
 			break;
 
 			
@@ -272,85 +182,153 @@ public class UIManager : MonoBehaviour, IUIManager {
 				Destroy (tempBuildingPlacer);
 				SwitchToModeNormal ();
 			} else {
-				ModeNormalBehaviour ();
-				CursorManager.main.normalMode ();
+
 				ModePlaceBuildingBehaviour ();
 				break;
 			}
 			break;
 		}
-
-	//	time.Stop(); 
-
 	}
 
-	InteractionState interactionState;
+    RaycastHit FindTarget()
+    {
+        RaycastHit hit = TargetAbRaycast();
+
+        if (hit.collider)
+        {
+            AbilityTargeter.transform.position = hit.point;
+
+            if (currentObject.layer == 9 || currentObject.layer == 10 || currentObject.layer == 13)
+            {
+
+            }
+            else
+            {
+                currentObject = null;
+            }
+        }
+        return hit;
+    }
+
+
+    RaycastHit TargetAbRaycast()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(rayb, out hit, Mathf.Infinity, currentAbility.myTargetType == TargetAbility.targetType.ground ? GroundsCast : EverythinCast))
+        {
+            currentObject = hit.collider.gameObject;
+            if (currentObject.transform.parent && currentObject.transform.parent.GetComponent<UnitManager>())
+            {
+                currentObject = currentObject.transform.parent.gameObject; // This is to get the unitmanager of the parent of a turret
+            }
+        }
+
+        return hit;
+    }
+
+    RaycastHit Raycast(LayerMask layer)
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, layer))
+        {
+            currentObject = hit.collider.gameObject;
+        }
+        return hit;
+    }
+
+    void UpdateTargetReticule(bool isValid, Vector3 location)
+    {
+        if (isValid)
+        {
+            AbilityTargeter.GetComponentInChildren<Light>().color = Color.green;
+            CursorManager.main.targetMode();
+        }
+        else
+        {
+            AbilityTargeter.GetComponentInChildren<Light>().color = Color.red;
+            CursorManager.main.invalidMode();
+        }
+        location.y += 60;
+        AbilityTargeter.transform.position = location;
+    }
+
+    void InitializeFormations() 
+    {
+        if (!clickOverUI)
+        {
+            rightClickOrigin = Input.mousePosition;
+            rightClickDrag = true;
+            RaycastHit hitb;
+
+            if (Physics.Raycast(rayb, out hitb, Mathf.Infinity, EverythinCast))
+            {
+                rightClickOrThree = hitb.point + Vector3.up * 2;
+            }
+
+            if (formationCoroutine != null)
+            {
+                StopCoroutine(formationCoroutine);
+            }
+
+            formationCoroutine = StartCoroutine(formationDisplay());
+        }
+    }
+
+    InteractionState interactionState;
 	private void ModeNormalBehaviour()
 	{
-		//Handle all non event, and non gui UI elements here
-		hoverOver = HoverOver.Terrain;
+        RaycastHit hit = Raycast(EverythinCast);
 
-		
+        if (hit.collider)
+        { 
 
-			//We're over the main screen, let's raycast
-		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-		RaycastHit hit;		
+            if (clickOverUI)
+            {
+                hoverOver = HoverOver.Menu;
+            }
+            else
+            {
+                hoverOver = HoverOver.Terrain;
 
-		if (Physics.Raycast (ray, out hit, Mathf.Infinity, EverythinCast )){ // ~(5 << 12) & ~(1 << 20) )) {
-			//Debug.Log ("hit something " + hit.collider.gameObject + "   "+this.gameObject.name);
-			currentObject = hit.collider.gameObject;
+                if (!fog || !fog.IsInCompleteFog(hit.point))
+                {
+                    switch (hit.collider.gameObject.layer)
+                    {
+                        case 9:
+                            hoverOver = HoverOver.Unit;
+                            break;
 
-			if (!clickOverUI) {
-				
-			
-				switch (hit.collider.gameObject.layer) {
+                        case 10:
+                            hoverOver = HoverOver.Building;
+                            break;
 
-				case 8:
-					hoverOver = HoverOver.Terrain;
-					break;
-					
-				case 9:
-					if (!fog.IsInCompleteFog (hit.point)) {
-						hoverOver = HoverOver.Unit;
-					}
-					break;
-					
-				case 10:
-					if (!fog.IsInCompleteFog (hit.point)){
-						hoverOver = HoverOver.Building;
-				}
-					break;
+                        case 13:
+                            hoverOver = HoverOver.neutral;
+                            break;
+                    }
+                }
+            }
+        }
+ 
+		if (hoverOver == HoverOver.Menu || SelectedManager.main.ActiveObjectsCount () == 0) {
 
-				case 13:	
-					if(!fog.IsInCompleteFog(hit.point)){
-					hoverOver = HoverOver.neutral;}
-					break;
-				
-				}				
-			} else {
-				hoverOver = HoverOver.Menu;
+            //Nothing orderable Selected or mouse is over menu 
+            CalculateInteraction (hoverOver, ref interactionState);
+		} else if (SelectedManager.main.ActiveObjectsCount () > 0 && (hoverOver == HoverOver.Unit || hoverOver == HoverOver.Building)) {
 
-			}
-
-		}
-
-		if (hoverOver == HoverOver.Menu || m_SelectedManager.ActiveObjectsCount () == 0) {
-			//Nothing orderable Selected or mouse is over menu 
-			CalculateInteraction (hoverOver, ref interactionState);
-		} else if (m_SelectedManager.ActiveObjectsCount () > 0 && (hoverOver == HoverOver.Unit || hoverOver == HoverOver.Building)) {
-			//One object selected
-			CalculateInteraction (m_SelectedManager.FirstActiveObject (), hoverOver, ref interactionState);
+            //One object selected
+            CalculateInteraction (SelectedManager.main.FirstActiveObject (), hoverOver, ref interactionState);
 		} else {
-			interactionState = InteractionState.Nothing;
-		}
 
-				
-		//Tell the cursor manager to update itself based on the interactionstate
-		//CursorManager.main.UpdateCursor (interactionState);	
+            interactionState = InteractionState.Nothing;
+		}
 	}
 	
 	private void CalculateInteraction(HoverOver hoveringOver, ref InteractionState interactionState)
-	{interactionState = InteractionState.Select;
+	{
+        interactionState = InteractionState.Select;
 		if (hoveringOver == HoverOver.Terrain) {
 			
 			interactionState = InteractionState.Nothing;
@@ -364,7 +342,6 @@ public class UIManager : MonoBehaviour, IUIManager {
 				CursorManager.main.selectMode ();
 			}
 		}
-
 	}
 	
 	private void CalculateInteraction(RTSObject obj, HoverOver hoveringOver, ref InteractionState interactionState)
@@ -376,7 +353,7 @@ public class UIManager : MonoBehaviour, IUIManager {
 
 		Selected select = currentObject.GetComponentInParent<Selected> ();
 
-		if(select)
+        if (select)
 			{select.tempSelect ();}
 
 		UnitManager manag = currentObject.GetComponentInParent<UnitManager> ();
@@ -389,19 +366,14 @@ public class UIManager : MonoBehaviour, IUIManager {
 
 	private void ModePlaceBuildingBehaviour()
 	{
-		//Get current location and place building on that location
-		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-		RaycastHit hit;
+		//Get current location and place building on that location		
 		if (!clickOverUI) {
-			if (Physics.Raycast (ray, out hit, Mathf.Infinity, GroundsCast)) {
-                currentObject = hit.collider.gameObject;
+            RaycastHit hit = Raycast(GroundsCast);
+            if (hit.collider) {
 				m_ObjectBeingPlaced.transform.position = hit.point;
                 tempBuildingPlacer.GetComponent<BuildingPlacer>().canBuild(hit.collider.gameObject);
 
-               // m_SelectedManager.checkValidTarget(hit.point, hit.collider.gameObject, currentAbilityNUmber);
-
-			}
-		
+			}		
 		}
 	}
 
@@ -413,31 +385,18 @@ public class UIManager : MonoBehaviour, IUIManager {
         return hit;
     }
 
-        //----------------------Mouse Button Handler------------------------------------
-        private void ButtonClickedHandler(object sender, MouseEventArgs e)
-	{//Debug.Log ("Here "  + this.gameObject);
-			e.Command ();
-	}
 
 	//------------------------Mouse Button Commands--------------------------------------------
 	public void LeftButton_SingleClickDown(MouseEventArgs e)
-	{	clickOverUI = isPointerOverUIObject ();
-		//Debug.Log ("Single Click");
+	{
+        clickOverUI = isPointerOverUIObject ();
 
-		if(hoverOver != HoverOver.Menu)
-		switch (m_Mode)
+		if(m_Mode == Mode.Normal && hoverOver != HoverOver.Menu)
 		{
-		case Mode.Normal:
-			//We've left clicked, what have we left clicked on?
-			//int currentObjLayer = currentObject.layer;
 			originalPosition = Input.mousePosition;
-			break;
-
-		}
-		
+		}		
 	}
 
-	PointerEventData eventDatacurrenPosition;
 	public bool isPointerOverUIObject()
 	{
 		return  inputSystem.overUILayer ();
@@ -464,17 +423,14 @@ public class UIManager : MonoBehaviour, IUIManager {
 
 	public void LeftButton_DoubleClickDown(MouseEventArgs e)
 	{
-		//Debug.Log ("Double click");
-		lastClickDouble = Time.time;
-	
-			//Select all units of that type on screen
-			int currentObjLayer = currentObject.layer;//layer tells us what we clicked on
-	
+        //Select all units of that type on screen
+        lastClickDouble = Time.time;
+
 			//if we're not dragging and clicked on a unit
-			if (!m_GuiManager.Dragging && (currentObjLayer == 9 || currentObjLayer == 10)) {
+			if (!m_GuiManager.Dragging && (currentObject.layer == 9 || currentObject.layer == 10)) {
 
 
-				if (!isPointerOverUIObject()) {
+				if (!clickOverUI) {
 				
 					/*  TARGET RULES
                     shift selects units without affecting others
@@ -482,25 +438,17 @@ public class UIManager : MonoBehaviour, IUIManager {
                 */
 					//deselect if none of the modifiers are being used
 					if (!IsShiftDown && !IsControlDown) {
-						m_SelectedManager.DeselectAll ();
+                    SelectedManager.main.DeselectAll ();
 					}
-
-
-				if (currentObject.GetComponentInParent<UnitManager> ()) {
-					
-					foreach (UnitManager obj in raceManager.getUnitOnScreen(true,currentObject.GetComponentInParent<UnitManager>().UnitName)) {
-
-			
-						m_SelectedManager.AddObject (obj);
-					}
+                    
+				if (getUnitManagerFromObject(currentObject)) {
+                    SelectedManager.main.AddObjects(raceManager.getUnitOnScreen(true, currentObject.GetComponentInParent<UnitManager>().UnitName));
 				}
-				m_SelectedManager.CreateUIPages (0);
-			} 
-					
-	
+                SelectedManager.main.CreateUIPages (0);
+			} 	
 		}
-
 	}
+
 	//Double click
 	public void LeftButton_SingleClickUp(MouseEventArgs e)
 	{
@@ -510,10 +458,6 @@ public class UIManager : MonoBehaviour, IUIManager {
 		}
 		clickOverUI = isPointerOverUIObject ();
 
-
-		Vector3 targetPoint = Vector3.zero;
-			Ray ray;
-		RaycastHit hit;
 		switch (m_Mode) {
 			case Mode.Menu:
 			
@@ -523,7 +467,6 @@ public class UIManager : MonoBehaviour, IUIManager {
 			//If we've just switched from another mode, don't execute
 		
 			if (m_Placed) {
-				//Debug.Log ("Was being placed");
 				m_Placed = false;
 				return;
 			}
@@ -536,13 +479,10 @@ public class UIManager : MonoBehaviour, IUIManager {
 				break;
 			}
 
-			int currentObjLayer = currentObject.layer;//layer tells us what we clicked on
-            
 				//if we're not dragging and clicked on a unit
-			if (!m_GuiManager.Dragging && (currentObjLayer == 9 || currentObjLayer == 10)) {
-				//Debug.Log ("in the loop");
+			if (!m_GuiManager.Dragging && (currentObject.layer == 9 || currentObject.layer == 10)) {
 
-				if (!isPointerOverUIObject()) {
+				if (!clickOverUI) {
 
 				/*  TARGET RULES
                     shift selects units without affecting others
@@ -550,7 +490,7 @@ public class UIManager : MonoBehaviour, IUIManager {
                 */
 					//deselect if none of the modifiers are being used
 					if (!IsShiftDown ) {
-						m_SelectedManager.DeselectAll ();
+                            SelectedManager.main.DeselectAll ();
 					}
 
 					//if only shift is down, remove the unit from selection
@@ -559,23 +499,23 @@ public class UIManager : MonoBehaviour, IUIManager {
 					
 						foreach (UnitManager obj in raceManager.getUnitOnScreen(true,currentObject.GetComponentInParent<UnitManager>().UnitName)) {
 							if (!Input.GetKey (KeyCode.LeftAlt)) {
-								m_SelectedManager.AddObject (obj);
+                                    SelectedManager.main.AddObject (obj);
 							} else {
-								m_SelectedManager.DeselectObject (obj);
+                                    SelectedManager.main.DeselectObject (obj);
 							}
-								}
+						}
 
 					}
                 //if only shift is down, add the unit to selection
                 else if (!IsControlDown && IsShiftDown) {
 
-						m_SelectedManager.AddRemoveObject (getUnitManagerFromObject (currentObject));
+                      SelectedManager.main.AddRemoveObject (getUnitManagerFromObject (currentObject));
 					} 
 				else {
 
-						m_SelectedManager.AddObject (getUnitManagerFromObject (currentObject));
-					}
-				m_SelectedManager.CreateUIPages (0);
+                      SelectedManager.main.AddObject (getUnitManagerFromObject (currentObject));
+					 }
+                    SelectedManager.main.CreateUIPages (0);
 				}
 			}
             //or if we are dragging and clicked on empty air
@@ -592,16 +532,20 @@ public class UIManager : MonoBehaviour, IUIManager {
 						//if we're control-dragging, deselect everything in the drag area
 				if (IsControlDown) {
 					foreach (UnitManager obj in raceManager.getUnitSelection(upperLeft, bottRight)) {
-						m_SelectedManager.DeselectObject (obj);
+                            SelectedManager.main.DeselectObject (obj);
 						Refresh = true;
 					}
 				}
                 //if we're shift-dragging, add everything in the drag area  
-                else if (IsShiftDown) {
-					foreach (UnitManager obj in raceManager.getUnitSelection(upperLeft, bottRight)) {
-						m_SelectedManager.AddObject (obj);
-						Refresh = true;
-					}
+                else if (IsShiftDown)
+                {
+                        List<UnitManager> toAdd = raceManager.getUnitSelection(upperLeft, bottRight);
+                        if (toAdd.Count > 0)
+                        {
+                            Refresh = true;
+                            SelectedManager.main.AddObjects(raceManager.getUnitSelection(upperLeft, bottRight));
+                        }
+					
 				}
                 //if we're dragging, deselect everything, then add everything in the drag area
                 else {
@@ -609,94 +553,42 @@ public class UIManager : MonoBehaviour, IUIManager {
 					List<UnitManager> unitSel = raceManager.getUnitSelection (upperLeft, bottRight);
 					if (unitSel.Count > 0) {
 						Refresh = true;
-						m_SelectedManager.DeselectAll ();
-					
-						foreach (UnitManager obj in raceManager.getUnitSelection(upperLeft,bottRight)) {
-							m_SelectedManager.AddObject (obj);
-						}
+                            SelectedManager.main.DeselectAll ();
+                            SelectedManager.main.AddObjects(unitSel);
+  
 					}
 				}
 						//refresh GUI elements
 				if (Refresh) {
-					m_SelectedManager.CreateUIPages (0);
+                        SelectedManager.main.CreateUIPages (0);
 				}
-				}
+			 }
 			
 				break;
 
 		case Mode.targetAbility:
 			
 			if (!clickOverUI) {
-				ray = Camera.main.ScreenPointToRay (Input.mousePosition);
-			
+                RaycastHit hitB = FindTarget();
+     
+				if (SelectedManager.main.checkValidTarget (hitB.point, currentObject, currentAbilityNUmber)) {
+                        SelectedManager.main.fireAbility (currentObject, hitB.point, currentAbilityNUmber);
 
-				bool hitSomething;
-				if (currentAbility.myTargetType == TargetAbility.targetType.ground) {
-					hitSomething = Physics.Raycast (ray, out hit, Mathf.Infinity, GroundsCast);
-				} else {
-					hitSomething = Physics.Raycast (ray, out hit, Mathf.Infinity,EverythinCast);
-				}
-
-				if (hitSomething) {
-					targetPoint = hit.point;
-			
-
-					AbilityTargeter.transform.position = targetPoint;
-					currentObject = hit.collider.gameObject;
-
-					if (currentObject.transform.parent && currentObject.transform.parent.GetComponent<UnitManager> ()) {
-						currentObject = currentObject.transform.parent.gameObject;
-					}
-
-					if (currentObject.layer == 9 || currentObject.layer == 10 || currentObject.layer == 13) {
-				
-					} else {
-						currentObject = null;
-					}
-				}
-
-
-				if (m_SelectedManager.checkValidTarget (targetPoint, currentObject, currentAbilityNUmber)) {
-				//	Debug.Log ("Valid Spot");
-					m_SelectedManager.fireAbility (currentObject, targetPoint, currentAbilityNUmber);
 					if (!Input.GetKey (KeyCode.LeftShift)) {
 						SwitchMode (Mode.Normal);
 					}
 				}
 			}
-				break;
+			break;
 
 		case Mode.globalAbility:
 
 			if (!clickOverUI) {
-				ray = Camera.main.ScreenPointToRay (Input.mousePosition);
-		
-				bool hitSomethingB;
-				if (currentAbility.myTargetType == TargetAbility.targetType.ground) {
-					hitSomethingB = Physics.Raycast (ray, out hit, Mathf.Infinity, GroundsCast);
-				} else {
-					hitSomethingB = Physics.Raycast (ray, out hit, Mathf.Infinity, EverythinCast);
-				}
 
-				if (hitSomethingB) {
-					targetPoint = hit.point;
-
-
-					AbilityTargeter.transform.position = targetPoint;
-					currentObject = hit.collider.gameObject;
-
-					if (currentObject.transform.parent && currentObject.transform.parent.GetComponent<UnitManager> ()) {
-						currentObject = currentObject.transform.parent.gameObject;
-					}
-					if (currentObject.layer == 9 || currentObject.layer == 10 || currentObject.layer == 13) {
-
-					} else {
-						currentObject = null;
-					}
-				}
-                    if (currentAbility.isValidTarget(currentObject, targetPoint))
+                    RaycastHit hitB = FindTarget();
+                    if (currentAbility.isValidTarget(currentObject, hitB.point))
                     {
-                        ((TargetAbility)currentAbility).Cast(currentObject, targetPoint);
+                        ((TargetAbility)currentAbility).Cast(currentObject, hitB.point);
                         raceManager.castedGlobal(currentAbility);
                         if (currentAbility.chargeCount > 0)
                         {
@@ -725,35 +617,36 @@ public class UIManager : MonoBehaviour, IUIManager {
 				break;
 			
 		case Mode.PlaceBuilding:
-                Debug.Log("over here");
 			if (!clickOverUI) {
-			if (tempBuildingPlacer.GetComponent<BuildingPlacer> ().canBuild (currentObject) ) {
-			
+                    if (tempBuildingPlacer.GetComponent<BuildingPlacer>().canBuild(currentObject))
+                    {
 
-					if (!clickOverUI) {
-						ray = Camera.main.ScreenPointToRay (Input.mousePosition);
+                        if (!clickOverUI)
+                        {
+                            RaycastHit hit = Raycast(GroundsCast);
+                            {
+                                if (hit.collider)
+                                {
 
-						if (Physics.Raycast (ray, out hit, Mathf.Infinity, GroundsCast)) {
-							targetPoint = hit.point;
+                                    SelectedManager.main.fireAbility(m_ObjectBeingPlaced, hit.point, currentAbilityNUmber);
 
-						}
-
-						m_SelectedManager.fireAbility (m_ObjectBeingPlaced, targetPoint, currentAbilityNUmber);
-				
-						if (!Input.GetKey (KeyCode.LeftShift)) {
-						
-							SwitchMode (Mode.Normal);
-							m_ObjectBeingPlaced = null;
-						} else {
-							m_ObjectBeingPlaced = null;
-							SwitchToModePlacingBuilding (thingToBeBuilt, null);
-						}
-					}
-				}
+                                    if (!Input.GetKey(KeyCode.LeftShift))
+                                    {
+                                        SwitchMode(Mode.Normal);
+                                        m_ObjectBeingPlaced = null;
+                                    }
+                                    else
+                                    {
+                                        m_ObjectBeingPlaced = null;
+                                        SwitchToModePlacingBuilding(thingToBeBuilt, null);
+                                    }
+                                }
+                            }
+                        }
+                    }
 			}
-				break;
-			}
-		
+			break;
+		}		
 	}
 
 	public void DestroyGhost(GameObject obj)
@@ -767,39 +660,28 @@ public class UIManager : MonoBehaviour, IUIManager {
 		case Mode.Menu:
 			return false;
 
-
 		case Mode.globalAbility:
 			return false;
 		
-
 		case Mode.targetAbility:
 			return false;
-		
-
-		case Mode.Normal:
-			return true;
-		
-
+	
 		case Mode.PlaceBuilding:
 			return false;
-		
 
 		}
-		return true;
+		return true; // normal
 	}
 
 	//Called if a fule group of units is killed to see ifthey were in target mode.
 	public void checkForDeadUnit(string unitName)
-	{
-		
+	{		
 		if (unitName == currentTargetUnit) {
 			if (m_Mode == Mode.targetAbility) {
-				m_SelectedManager.stoptarget ();
+                SelectedManager.main.stoptarget (currentAbilityNUmber);
 				SwitchMode (Mode.Normal);
-			}
-		
+			}		
 		}
-
 	}
 
 	string currentTargetUnit;
@@ -811,17 +693,27 @@ public class UIManager : MonoBehaviour, IUIManager {
 		currentAbility = (TargetAbility)abil;
 
 
-		if (currentAbility.myTargetType == TargetAbility.targetType.unit) {
-
-			AbilityTargeter.SetActive(false); // This might break with things like the vulcans targeted abilities
-
-		} else {
-
-			CursorManager.main.offMode ();
-			AbilityTargeter.SetActive (true);
-			AbilityTargeter.GetComponentInChildren<Light> ().cookie = currentAbility.targetArea;
-			AbilityTargeter.GetComponentInChildren<Light> ().spotAngle = currentAbility.areaSize;
-		}
+        if (currentAbility.myTargetType == TargetAbility.targetType.unit)
+        {
+            AbilityTargeter.SetActive(false); // This might break with things like the vulcans targeted abilities
+        }
+        else
+        {
+            CursorManager.main.offMode();
+            AbilityTargeter.SetActive(true);
+            AbilityTargeter.GetComponentInChildren<Light>().enabled = !UseSpriteTarget;
+            AbilityTargeter.GetComponentInChildren<Canvas>().enabled = UseSpriteTarget;
+            if (UseSpriteTarget)
+            {
+                AbilityTargeter.GetComponentInChildren<SVGImage>().sprite = currentAbility.targetArea;
+                AbilityTargeter.GetComponentInChildren<SVGImage>().transform.localScale = Vector3.one * currentAbility.areaSize;
+            }
+            else
+            {             
+                AbilityTargeter.GetComponentInChildren<Light>().cookie = currentAbility.targetArea.texture;
+                AbilityTargeter.GetComponentInChildren<Light>().spotAngle = currentAbility.areaSize;
+            }
+        }
 		Update ();
 	}
 
@@ -839,8 +731,6 @@ public class UIManager : MonoBehaviour, IUIManager {
 
     public void RightButton_SingleClick(MouseEventArgs e)
 	{
-		
-		lineRender.enabled = false;
 		rightClickDrag = false;
 		if (hoverOver != HoverOver.Menu) {
 			
@@ -850,52 +740,46 @@ public class UIManager : MonoBehaviour, IUIManager {
 
 			case Mode.Normal:
 			//We've right clicked, have we right clicked on ground, interactable object or enemy?
-				int currentObjLayer = currentObject.layer;
 
-
-				if (currentObjLayer == 8 || currentObjLayer == 16 || currentObjLayer == 11) {
+				if (currentObject.layer == 8 || currentObject.layer == 16 || currentObject.layer == 11) {
 					//Terrain -> Move Command
 
-					Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
-					RaycastHit hit;		
+                    RaycastHit hit = Raycast(EverythinCast);		
 				
-					if (Physics.Raycast (ray, out hit, Mathf.Infinity, EverythinCast)) { // Took out 1 << 16
+					if (hit.collider) {
 						Vector3 attackMovePoint = hit.point;
 			
 
 						if (Vector2.Distance (rightClickOrigin, Input.mousePosition) > 45) {
 
-							m_SelectedManager.GiveMoveSpread (rightClickOrThree, attackMovePoint);
+                                SelectedManager.main.GiveMoveSpread (rightClickOrThree, attackMovePoint);
 
 						} else {
 								if (Input.GetKey(KeyCode.LeftControl))
 								{
-									m_SelectedManager.attackMoveO(Vector3.zero);
+                                    SelectedManager.main.attackMoveO(Vector3.zero);
 								}
 								else
 								{
-									m_SelectedManager.GiveOrder(Orders.CreateMoveOrder(attackMovePoint));
+                                    SelectedManager.main.GiveOrder(Orders.CreateMoveOrder(attackMovePoint));
 								}
 						}
 					}
-				} else if (currentObjLayer == 9 || currentObjLayer == 10 || currentObjLayer == 13) {
-				
-					m_SelectedManager.GiveOrder (Orders.CreateInteractCommand (currentObject));						
+				} else if (currentObject.layer == 9 || currentObject.layer == 10 || currentObject.layer == 13) {
 
+                        SelectedManager.main.GiveOrder (Orders.CreateInteractCommand (currentObject));						
 				}
 		
 		
 				break;
 
 			case Mode.targetAbility:
-				m_SelectedManager.stoptarget ();
-				SwitchMode (Mode.Normal);
-				
+                SelectedManager.main.stoptarget (currentAbilityNUmber);
+				SwitchMode (Mode.Normal);				
 				break;
 
 			case Mode.globalAbility:
 				SwitchMode (Mode.Normal);
-
 				break;
 
 			
@@ -917,95 +801,56 @@ public class UIManager : MonoBehaviour, IUIManager {
 	List<GameObject> formationLights = new List<GameObject>();
 	GameObject formationLight;
 	Coroutine formationCoroutine = null;
-	IEnumerator formationDisplay()
-	{ // The code here is basically a duplicate of the code in the selectedManager for formation Ordering
-		Vector3 superUp = Vector3.up * 40;
+
+    IEnumerator formationDisplay()
+	{ 		
 		yield return new WaitForSeconds (.01f);
 
-		while (rightClickDrag && m_SelectedManager.ActiveObjectList ().Count > 0) {
+		while (rightClickDrag && SelectedManager.main.ActiveObjectList ().Count > 0) {
 
-			if (Vector2.Distance (Input.mousePosition, rightClickOrigin) > 45) {
+            if (Vector2.Distance (Input.mousePosition, rightClickOrigin) > 45) {
 
-				List<RTSObject> trueMovers = new List< RTSObject> ();
+                RaycastHit hitb = Raycast(GroundsCast);
+                if (hitb.collider)
+                {
+                    rightClickEnd = hitb.point + Vector3.up * 2;
+                }
+                lineRender.enabled = true;
+                lineRender.SetPositions(new Vector3[2] { rightClickOrThree, rightClickEnd });
 
-				Vector3 middlePoint = Vector3.zero;
-				foreach (RTSObject obj in m_SelectedManager.ActiveObjectList ()) {
-					if (obj.getUnitManager ().cMover) {
-						trueMovers.Add (obj);
-						middlePoint += obj.transform.position;
-					}
-				}
-				
-				middlePoint /= trueMovers.Count;
-
-				float angle = (float)(Mathf.Atan2 (rightClickEnd.x - rightClickOrThree.x, rightClickEnd.z - rightClickOrThree.z) / Mathf.PI) * 180;
-		
-				if (angle < 0) {
-					angle += 360;
-				}
-				angle += 90;
-				Vector3 newPoint = Vector3.Lerp (rightClickOrThree, rightClickEnd, .5f);
-
-				float sepDistance = Vector3.Distance (newPoint, rightClickEnd) / 15;
-				sepDistance = Math.Max (sepDistance, 1.2f);
-				List<Vector3> points = Formations.getFormation (trueMovers.Count, Mathf.Min (5f, sepDistance));
-				for (int t = 0; t < points.Count; t++) {
-					points [t] = Quaternion.Euler (0, angle, 0) * points [t] + newPoint;
-				}
-
-
-
-				int x = formationLights.Count;
-				for (int n = x; n < trueMovers.Count; n++) {
-					formationLights.Add (Instantiate<GameObject> (formationLight));
-				}
-
-				for (int i = 0; i < formationLights.Count; i++) {
-					if (i < trueMovers.Count) {
-						formationLights [i].SetActive (true);
-						formationLights [i].transform.position = points [i] + superUp;
-						formationLights [i].transform.localEulerAngles = new Vector3 (0,angle,0);
-					} else {
-						formationLights [i].SetActive (false);
-					}
-				}
+                Formations.SetObjectPositions(formationLights, rightClickOrThree,rightClickEnd, formationLight);
 				yield return null;
 		
-			} else {
-				for (int i = 0; i < formationLights.Count; i++) {
+			}
+            else
+            {
+                lineRender.enabled = false;
+                
+                for (int i = 0; i < formationLights.Count; i++) {
 					formationLights [i].SetActive (false);
 				}
 			}
 			yield return null;
 		}
-		formationCoroutine = null;
+        lineRender.enabled = false;
+        formationCoroutine = null;
 		for (int i = 0; i < formationLights.Count; i++) {
 			formationLights [i].SetActive (false);
 		}
 
 	}
-
-	public void MiddleButton_SingleClick(MouseEventArgs e)
-	{
-		
-	}
-	
+  	
 
 	//------------------------------------------------------------------------------------------
 	
 	private void ScrollWheelHandler(object sender, ScrollWheelEventArgs e)
 	{
-		//Zoom In/Out
-		//Debug.Log("Zooming in UI manager");
 		m_Camera.Zoom (sender, e);
-		//m_MiniMapController.ReCalculateViewRect ();
 	}
 	
 	private void MouseAtScreenEdgeHandler(object sender, ScreenEdgeEventArgs e)
-	{
-	
+	{	
 		m_Camera.Pan (sender, e);
-		//m_MiniMapController.ReCalculateViewRect ();
 	}
 	
 	//-----------------------------------KeyBoard Handler---------------------------------
@@ -1013,9 +858,17 @@ public class UIManager : MonoBehaviour, IUIManager {
 	{
 		e.Command();
 	}
-	//-------------------------------------------------------------------------------------
-	
-	public bool IsCurrentUnit(RTSObject obj)
+
+    //----------------------Mouse Button Handler------------------------------------
+    private void ButtonClickedHandler(object sender, MouseEventArgs e)
+    {
+        e.Command();
+    }
+
+
+    //-------------------------------------------------------------------------------------
+
+    public bool IsCurrentUnit(RTSObject obj)
 	{
 		return currentObject == obj.gameObject;
 	}
@@ -1029,41 +882,43 @@ public class UIManager : MonoBehaviour, IUIManager {
 	
 	public void SwitchMode(Mode mode)
 	{
-		switch (mode)
+        if (CurrentMode == Mode.targetAbility)
+        {
+            if (currentAbility)
+                SelectedManager.main.stoptarget(currentAbilityNUmber);
+        }
+        switch (mode)
 		{
 		case Mode.Normal:
 			SwitchToModeNormal ();
-		
 			break;
 			
 		case Mode.Menu:
-			AbilityTargeter.SetActive (false);
+                AbilityTargeter.SetActive (false);
 			break;
 
 		case Mode.targetAbility:
+                Debug.Log("Turning off " + currentAbility);
+                    
+                
 			CursorManager.main.targetMode ();
-			m_Mode = Mode.targetAbility;
-
-			if (fastCast) { //MouseEventArgs
+               
+			if (fastCast) { 
 				StartCoroutine(fastCastMe());
 			}
 
-			//AbilityTargeter.SetActive (true);
 			break;
-			
-		case Mode.Disabled:
-			
-			break;
+		
 
 		case Mode.globalAbility:
-			m_Mode = Mode.globalAbility;
 			AbilityTargeter.SetActive (true);
 			CursorManager.main.targetMode ();
 			break;
 
 		}
-	
-	}
+        m_Mode = mode;
+
+    }
 
 	IEnumerator fastCastMe()
 	{
@@ -1074,7 +929,7 @@ public class UIManager : MonoBehaviour, IUIManager {
 
 
 	public void SwitchToModeNormal(bool destroyPlacer =  false)
-	{//buildingPlacer.SetActive (false);
+	{
 		if (m_Mode != Mode.Normal) {
 			AbilityTargeter.SetActive (false);
 			CursorManager.main.normalMode ();
@@ -1085,10 +940,7 @@ public class UIManager : MonoBehaviour, IUIManager {
 		}
 	}
 
-
-
-
-
+    
 	public void SwitchToModePlacingBuilding(GameObject item, UnitProduction abil)
 	{
         Debug.Log("Switching to here");
@@ -1099,19 +951,17 @@ public class UIManager : MonoBehaviour, IUIManager {
 			}
 		}
 		m_Mode = Mode.PlaceBuilding;
-		//buildingPlacer.SetActive (true);
 
 		//Debug.Log ("Making a " + item);
 		m_ObjectBeingPlaced = (GameObject)Instantiate (item);
 		tempBuildingPlacer = (GameObject)Instantiate (buildingPlacer, m_ObjectBeingPlaced.transform.position, Quaternion.identity);
 
 		tempBuildingPlacer .SetActive (true);
-		BuildingPlacer p = tempBuildingPlacer .GetComponent<BuildingPlacer> ();
+		BuildingPlacer p = tempBuildingPlacer.GetComponent<BuildingPlacer> ();
        
 		p.reset (m_ObjectBeingPlaced, goodPlacement,  badPlacement, currentAbilityNUmber);
         if (abil)
         {
-            Debug.Log("ROOTING");
             abil.InitializeGhostPlacer(tempBuildingPlacer);
         }
         tempBuildingPlacer .transform.SetParent (m_ObjectBeingPlaced.transform);
@@ -1121,20 +971,9 @@ public class UIManager : MonoBehaviour, IUIManager {
         {
             Destroy(behave);
         }
-
-       // StartCoroutine (delayBuildDeath (m_ObjectBeingPlaced));
 	
 	}
-	IEnumerator delayBuildDeath(GameObject m_objectBeingPlaced)
-	{
-		yield return new WaitForSeconds(.01f);
-		raceManager.UnitDying (m_ObjectBeingPlaced.GetComponent<UnitManager>(), null,false);
-	}
 
-
-	public void setToMenu()
-	{m_Mode = Mode.Menu;
-	}
 }
 
 public enum HoverOver
@@ -1164,5 +1003,4 @@ public enum Mode
 	targetAbility,
 	globalAbility,
 	PlaceBuilding,
-	Disabled,
 }

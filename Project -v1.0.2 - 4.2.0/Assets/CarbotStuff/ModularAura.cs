@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class ModularAura : MonoBehaviour
 {
+    // We store a list of enums that show which stats are being changed, 
+    //so we don't have to apply a stat change of "0" on stats that aren't used 
 
-    public List<StatChanger.BuffType> myBuffs;
-    public List<ModularAura.ICustomAura> customAuras = new List<ModularAura.ICustomAura>();
+
+    public List<StatChanger.BuffType> myBuffs = new List<StatChanger.BuffType>();
+    [Tooltip("Any script in this list should extend the ICustomAura interface ")]
+    public List<MonoBehaviour> customAuras = new List<MonoBehaviour>();
     public bool Stacks;
 
     public float Armor;
@@ -40,9 +44,16 @@ public class ModularAura : MonoBehaviour
 
 
     UnitManager myManager;
-    private void Start()
+    private void Awake()
     {
         myManager = GetComponent<UnitManager>();
+        foreach (MonoBehaviour behave in GetComponents<MonoBehaviour>())
+        {
+            if (behave is ICustomAura)
+            {
+                customAuras.Add(behave);
+            }
+        }
     }
 
     public void ApplyBuff(UnitManager manager)
@@ -98,7 +109,7 @@ public class ModularAura : MonoBehaviour
         {
             if (aura != null)
             {
-                aura.Apply(myManager);
+                aura.Apply(manager);
             }
         }
     }
@@ -152,11 +163,11 @@ public class ModularAura : MonoBehaviour
             }
         }
 
-        foreach (ICustomAura aura in customAuras)
+        foreach (MonoBehaviour aura in customAuras)
         {
-            if (aura != null)
+            if (aura != null && aura is ICustomAura)
             {
-                aura.Remove(myManager);
+                ((ICustomAura)aura).Remove(manager);
             }
         }
     }

@@ -108,7 +108,7 @@ public class GameMenu : MonoBehaviour {
 	else
 	{setMenu (myCanvas);
 			if (uimanage) {
-				uimanage.setToMenu ();
+				uimanage.SwitchMode(Mode.Menu);
 			}
 		pause ();
 	}

@@ -50,7 +50,7 @@ public class IWeapon : MonoBehaviour {
 	protected int originIndex = 0;
 	private UnitManager enemy;
 	public float damagePoint;
-
+    [Tooltip("Time between when the unit starts the attack animation and damage is dealt or projectile is fired")]
 	public float AttackDelay;
 
 	//private bool onDamagePoint;
@@ -65,7 +65,6 @@ public class IWeapon : MonoBehaviour {
 	public List<Validator> validators = new List<Validator>();
 
 	protected Lean.LeanPool myBulletPool;
-
 	public void setBulletPool(Lean.LeanPool pool)
 	{
 		myBulletPool = pool;
@@ -385,16 +384,14 @@ private List<attackSpeedMod> DamageMod = new List<attackSpeedMod>();
 
 	void LookAtTarget(GameObject target)
 	{
+
 		if(target){
-		if (turretClass) {
-				turretClass.Target (target.gameObject);
-		}
-		else{
-			//if (!(this is AngleWeapon)) {
-				Vector3 spotter = target.transform.position;
-			spotter.y = this.transform.position.y;
-			this.gameObject.transform.LookAt (spotter);
-			//	}
+		    if (turretClass) {
+				    turretClass.Target (target.gameObject);
+		    }
+		    else{
+
+                myManager.LookAtTarget(target.transform.position);
 			}
 		}
 	}

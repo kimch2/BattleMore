@@ -8,7 +8,9 @@ public class PunchAbility : SingleTargetCombo {
 	public Vector2 PunchDistance;
 	public float ComboBonusDamage;
 	public float DashSpeed = 150;
-	override
+    //public bool TargetGround;
+
+    override
 	public  bool Cast(GameObject tar, Vector3 location)
 	{
 		target = tar;
@@ -31,9 +33,7 @@ public class PunchAbility : SingleTargetCombo {
 			Vector3 startPosition = transform.position;
 			Vector3 dashLocation = targetGuy.transform.position - (targetGuy.transform.position - transform.position).normalized * 5;
 
-
-
-			PhysicsSimulator.main.Dash (manage, dashLocation, new Vector2( DashSpeed,0), 
+            PhysicsSimulator.main.Dash (manage, dashLocation, new Vector2( DashSpeed,0), 
 				() =>{
 					if(this.gameObject && targetGuy){
 						PhysicsSimulator.main.KnockBack (startPosition, targetGuy, PunchDistance, () => { 
@@ -55,12 +55,7 @@ public class PunchAbility : SingleTargetCombo {
 				}
 				}
 			);
-
-
-
-
 		}
-
 	}
 
 }

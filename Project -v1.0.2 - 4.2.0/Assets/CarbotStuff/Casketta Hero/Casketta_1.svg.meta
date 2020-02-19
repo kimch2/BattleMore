@@ -11,15 +11,15 @@ ScriptedImporter:
   svgType: 0
   texturedSpriteMeshType: 0
   svgPixelsPerUnit: 100
-  gradientResolution: 128
-  alignment: 9
-  customPivot: {x: 0.5, y: 0.5}
+  gradientResolution: 16
+  alignment: 0
+  customPivot: {x: 0.51613647, y: 0.6267865}
   generatePhysicsShape: 0
   viewportOptions: 1
   preserveViewport: 0
   advancedMode: 0
-  predefinedResolutionIndex: 2
-  targetResolution: 720
+  predefinedResolutionIndex: 3
+  targetResolution: 480
   resolutionMultiplier: 1
   stepDistance: 10
   samplingStepDistance: 100
@@ -39,9 +39,9 @@ ScriptedImporter:
     SpriteRect:
       name: Casketta_1Sprite
       originalName: 
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5158934, y: 0.62668884}
       alignment: 9
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 335, y: 507, z: 282, w: 182}
       rect:
         serializedVersion: 2
         x: 0

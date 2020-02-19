@@ -83,7 +83,7 @@ public class CustomRVO : IMover {
 		RecalculatePath();
 		//Debug.Log ("Setting move path " + target);
 		
-		manager.animMove ();
+		//manager.animMove ();
 	}
 
 
@@ -143,38 +143,43 @@ public class CustomRVO : IMover {
 	{if (controller) {
 			controller.Move (Vector3.zero);
 		}
+   
 		GetComponent<UnitManager> ().animStop();
 	}
 
+    override
+    public void  LockRotation(bool LockIt)
+    {
+        controller.enableRotation = !LockIt;
+    }
+
 
 	override 
-	public bool move()
+	public bool Move()
 	{
 		
 		if (Time.time >= nextRepath && canSearchAgain) {
 			RecalculatePath();
 
 		}
-
-
-
+        
 		if (path == null && !pathSet) {
 			if (controller) {
-				//Debug.Log ("Zeroa");
+
 				controller.Move (Vector3.zero);
 			}
-			//Debug.Log ("Returning 3"+this.gameObject);
+
 			return true;
 		} else if (pathSet && path == null) {
-			//Debug.Log ("Returning 2"+this.gameObject);
-			return false;}
 
+			return false;
+        }
 
+        /*
 
 		if (currentWaypoint >= path.vectorPath.Count) {
 			myspeed = 0;
-
-		
+            
 			path = null;
 			pathSet = false;
 			if (controller) {
@@ -184,7 +189,7 @@ public class CustomRVO : IMover {
 			//Debug.Log ("Returning 1"+this.gameObject);
 			return true;
 		}
-
+        */
 		if (myspeed < getMaxSpeed()) {
 			myspeed += acceleration * Time.deltaTime;
 
@@ -204,7 +209,9 @@ public class CustomRVO : IMover {
 		//Debug.Log ("Moving " + dir);
 
 		if(controller){
-			controller.Move (dir);}
+            manager.animMove();
+            controller.Move (dir);
+        }
 		else{
 			Debug.Log (this.gameObject +  " is missing its rvocontroller");
 		}
@@ -215,14 +222,17 @@ public class CustomRVO : IMover {
 
 			currentWaypoint++;
 			latestDistance = 100000;
+            return CheckForPathEnd();
 			//Debug.Log (" is movingB"+this.gameObject);
-			return false;
+		//	return false;
 		} else {
 			latestDistance = dist;}
 
 		if (dist < 2) {
 			//Debug.Log ("Waypoint " + currentWaypoint + "   total " +path.vectorPath.Count   + "  distance  " + Vector3.Distance (transform.position,path.vectorPath[currentWaypoint]));
 			currentWaypoint++;
+            CheckForPathEnd();
+
 		
 		}
 		//Debug.Log (" is movingA"+this.gameObject);
@@ -231,7 +241,23 @@ public class CustomRVO : IMover {
 	}
 
 
+    bool CheckForPathEnd()
+    {
+        if (currentWaypoint >= path.vectorPath.Count)
+        {
+            myspeed = 0;
 
+            path = null;
+            pathSet = false;
+            if (controller)
+            {
+                controller.Move(Vector3.zero);
+            }
+
+            return true;
+        }
+        return false;
+    }
 
 
 	override

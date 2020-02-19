@@ -80,6 +80,8 @@ public class ModularAuraEditor : Editor
         }
 
         GUILayout.EndHorizontal();
+
+
     }
 }
 

@@ -27,6 +27,11 @@ public class SingleTarget:  TargetAbility {
         myType = type.target;
 		mySelect = GetComponent<Selected> ();
 		manage = this.gameObject.GetComponent<UnitManager> ();
+
+        if (!manage)
+        {
+            manage = this.gameObject.GetComponentInParent<UnitManager>();
+        }
 		if (manage)
 		{
 			playerOwner = manage.PlayerOwner;
@@ -178,7 +183,7 @@ public class SingleTarget:  TargetAbility {
 
 			if (missile) {
 				Vector3 pos = this.gameObject.transform.position;
-				pos.y += this.gameObject.GetComponent<CharacterController> ().radius;
+				pos.y += this.gameObject.GetComponentInParent<CharacterController> ().radius;
 				proj = myBulletPool.FastSpawn(transform.position, Quaternion.identity);
 
 
