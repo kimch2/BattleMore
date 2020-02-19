@@ -87,8 +87,6 @@
     <Compile Include="Assets\AstarPathfindingEditor\Editor\RVOSquareObstacleEditor.cs" />
     <Compile Include="Assets\AstarPathfindingEditor\Editor\SeekerEditor.cs" />
     <Compile Include="Assets\CarbotStuff\Editor\ModularAuraEditor.cs" />
-    <Compile Include="Assets\Colorify\Editor\Colorify_create_mask.cs" />
-    <Compile Include="Assets\Colorify\Editor\ColorifyStandardShaderGUI.cs" />
     <Compile Include="Assets\Editor\AbstractCostEditor.cs" />
     <Compile Include="Assets\Editor\CinematicCameraEditor.cs" />
     <Compile Include="Assets\Editor\comboTagEditor.cs" />
