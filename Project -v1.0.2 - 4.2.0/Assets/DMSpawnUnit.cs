@@ -18,7 +18,8 @@ public class DMSpawnUnit : Ability
         for (int i = 0; i < spawnCount; i++)
         {
            GameObject newGuy = unitMan.CreateInstance(getSpawnLocation() + Vector3.forward * i * 5, myManager.PlayerOwner);
-           newGuy.GetComponent<UnitManager>().GiveOrder(Orders.CreateAttackMove(transform.position + Vector3.right * 500, true));
+            Debug.Log(transform.position + "   " + (transform.position + Vector3.right * 75));
+           newGuy.GetComponent<UnitManager>().GiveOrder(Orders.CreateAttackMove(transform.position + Vector3.right * 75, true));
         }
     }
 

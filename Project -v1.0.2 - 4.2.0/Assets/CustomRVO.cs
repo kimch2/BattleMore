@@ -78,7 +78,7 @@ public class CustomRVO : IMover {
 	override
 	public void resetMoveLocation (Vector3 target) {
 		
-	//	Debug.Log ("Resetting to " + target);
+		//Debug.Log ("Resetting to " + target + "  " + Time.deltaTime);
 		this.target = target;
 		RecalculatePath();
 		//Debug.Log ("Setting move path " + target);
@@ -101,6 +101,7 @@ public class CustomRVO : IMover {
 	}
 
 	public void OnPathComplete (Path _p) {
+        //Debug.Log("Completing  " + Time.deltaTime);
 		ABPath p = _p as ABPath;
 		currentWaypoint =1;
 		canSearchAgain = true;
@@ -170,8 +171,8 @@ public class CustomRVO : IMover {
 			}
 
 			return true;
-		} else if (pathSet && path == null) {
-
+		} else if (pathSet && (path == null || path.vectorPath.Count == 0)) {
+            Debug.Log("Exiting here" + pathSet + "  " + path);
 			return false;
         }
 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UnitCrusher : MonoBehaviour, Notify {
 
-
+    // Used by Death Cubes to flatten enemies
 
 	public float stunTime;
 

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Zoomer : MonoBehaviour {
 
+    //Used in campaign hub so the camera can move between the different areas
+
 
 	float lastZoom;
 	public EventManager PureArmory;
