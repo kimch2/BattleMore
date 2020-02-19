@@ -173,7 +173,10 @@ public abstract class Ability : MonoBehaviour {
                     myManager = GetComponentInParent<UnitManager>();
                 }
             }
-            select = myManager.getUnitStats().getSelector();
+            if (myManager)
+            {
+                select = myManager.getUnitStats().getSelector();
+            }
         }
     }
 
