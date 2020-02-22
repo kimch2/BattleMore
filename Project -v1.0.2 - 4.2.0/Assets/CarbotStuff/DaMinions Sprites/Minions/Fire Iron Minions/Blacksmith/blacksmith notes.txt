@@ -1,0 +1,7 @@
+1 idle
+9 move
+14 attack
+22 attack lands
+34 death
+44 knocked back
+45 armor buff

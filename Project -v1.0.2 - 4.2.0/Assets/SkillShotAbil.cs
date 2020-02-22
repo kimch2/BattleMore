@@ -136,8 +136,10 @@ public class SkillShotAbil : TargetAbility
             Vector3 newDirection = Quaternion.Euler(0, RandomizedArcLimit, 0) * direction;
 
             proj.GetComponent<SkillShotProjectile>().setTarget(proj.transform.position + newDirection);
-
-            yield return new WaitForSeconds(SkillShotProjectile.timeBetweenShots);
+            if (SkillShotProjectile.timeBetweenShots > 0)
+            {
+                yield return new WaitForSeconds(SkillShotProjectile.timeBetweenShots);
+            }
         }
         myManager.cMover.LockRotation(false);
         // myManager.setStun(false, this, false);

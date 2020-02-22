@@ -1,0 +1,5 @@
+1 idle
+7 move
+16 attack
+24 death
+37 projectile

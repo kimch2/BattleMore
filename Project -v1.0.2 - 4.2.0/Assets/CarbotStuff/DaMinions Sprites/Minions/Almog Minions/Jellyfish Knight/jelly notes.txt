@@ -1,0 +1,4 @@
+1 idle/move
+12 attack
+16 death
+27 lightning

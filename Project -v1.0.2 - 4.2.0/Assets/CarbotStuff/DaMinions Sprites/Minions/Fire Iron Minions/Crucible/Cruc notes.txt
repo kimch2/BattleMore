@@ -1,0 +1,6 @@
+1 idle
+36 attack channeling
+71 pieces
+73 fire heat stream
+82 lava bubble
+91 lava pool

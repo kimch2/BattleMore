@@ -1,0 +1,24 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="none" x="0px" y="0px" width="1000px" height="1000px" viewBox="0 0 1000 1000">
+<defs>
+<g id="Lightning_Strike_8_Layer0_0_FILL">
+<path fill="#FFFFFF" stroke="none" d="
+M 37.65 383.95
+L 37.65 371.7 48.85 354.15 33.65 317.85 35.25 355.8 31.2 368.75 37.65 383.95
+M 41.05 251.45
+L 45.95 265.9 34.15 272.75 52.35 282.4 36.75 298.5 69.35 281.15 52.7 270 58.4 266.6 41.05 251.45
+M 32.75 128.1
+L 20.8 126.25 24.8 129.45 4.25 138.95 29.25 157.15 17.25 138 32.75 128.1
+M 37.4 7.15
+L 23.5 55.35 40.6 108.95 38.1 116.3 54.65 102.4 31.1 59.15 37.4 7.15 Z"/>
+</g>
+</defs>
+
+<g transform="matrix( 0.5844268798828125, 0, 0, 0.5844268798828125, 422.65,249.95) ">
+<g transform="matrix( 0, -1.527679443359375, 0.95428466796875, 0, -9.95,296.7) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#Lightning_Strike_8_Layer0_0_FILL"/>
+</g>
+</g>
+</g>
+</svg>

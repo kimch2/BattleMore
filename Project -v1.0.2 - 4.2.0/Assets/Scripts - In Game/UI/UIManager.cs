@@ -898,7 +898,7 @@ public class UIManager : MonoBehaviour, IUIManager {
 			break;
 
 		case Mode.targetAbility:
-                Debug.Log("Turning off " + currentAbility);
+               // Debug.Log("Turning off " + currentAbility);
                     
                 
 			CursorManager.main.targetMode ();

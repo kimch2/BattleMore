@@ -1,0 +1,26 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="none" x="0px" y="0px" width="100px" height="100px" viewBox="0 0 100 100">
+<defs>
+<g id="little_star_6_Layer1_0_FILL">
+<path fill="#00CCFF" stroke="none" d="
+M 108.7 35.55
+Q 106.35 29.95 88.3 23.6 75.1 16.9 68.4 7.2 59.35 -7.75 51.45 -5.1 44.45 2.4 32.8 15.3 25.4 21 14.95 24.8 2.15 28.65 -2.7 32.35 -5.25 35.55 4.95 39.2 14.3 42.65 23 46.95 35.75 53.9 44 67.2 56.1 87.25 67.5 64.35 74.35 53.3 85.15 47.45 91.5 44.05 99 41.25 106.65 38.25 108.7 35.55 Z"/>
+</g>
+
+<g id="little_star_6_Layer0_0_FILL">
+<path fill="#FFFFFF" stroke="none" d="
+M 83.6 36.7
+Q 85.75 34.05 83.9 31.75 81.3 28.6 76 25.15 71.25 21.6 67.35 18.15 58.75 8.7 51.5 11.75 44.85 14.8 36.15 22.95 30.7 26.6 26.7 30.4 22.4 34 24.4 37.15 26.85 40.1 33.45 43.85 38.6 46.95 44.15 51 55.95 61.95 65.7 51.7 71.4 46.45 78.05 41.65 81.55 39.05 83.6 36.7 Z"/>
+</g>
+</defs>
+
+<g transform="matrix( 0.683990478515625, 0, 0, 0.683990478515625, 15.6,29.75) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#little_star_6_Layer1_0_FILL"/>
+</g>
+
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#little_star_6_Layer0_0_FILL"/>
+</g>
+</g>
+</svg>

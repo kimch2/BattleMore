@@ -1,0 +1,18 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="none" x="0px" y="0px" width="1000px" height="1000px" viewBox="0 0 1000 1000">
+<defs>
+<g id="water_shot_0_Layer0_0_FILL">
+<path fill="#00CCFF" stroke="none" d="
+M 222.5 20.2
+Q 222.5 9.8 215.15 2.45 207.85 -4.85 197.45 -4.85 187.1 -4.85 179.75 2.45 172.45 9.8 172.45 20.15 172.45 30.55 179.75 37.85 187.1 45.2 197.45 45.2 207.85 45.2 215.15 37.85 222.5 30.55 222.5 20.2 Z"/>
+</g>
+</defs>
+
+<g transform="matrix( 0.6446075439453125, 0, 0, 0.6446075439453125, 460.2,498.55) ">
+<g transform="matrix( 1, 0, 0, 1, -134.2,-15.45) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#water_shot_0_Layer0_0_FILL"/>
+</g>
+</g>
+</g>
+</svg>

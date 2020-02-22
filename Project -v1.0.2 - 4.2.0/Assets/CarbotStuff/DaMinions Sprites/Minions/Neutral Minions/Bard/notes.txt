@@ -1,0 +1,5 @@
+bard 1 idle
+
+bard 9 death
+
+bard 23 music note buff

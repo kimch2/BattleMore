@@ -1,0 +1,6 @@
+1 idle
+4 move
+13 attack
+47 knocked back
+48 pieces
+51 projectile

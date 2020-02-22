@@ -1,0 +1,7 @@
+1-7 fire spout
+8,9,10 cast iron projectiles
+11-15 ground smash effect
+16-20 ground smash forward effect
+21-33 heated anvil
+34,35,36 impact crators
+37-41 fireball

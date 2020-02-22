@@ -1,0 +1,18 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="none" x="0px" y="0px" width="1000px" height="1000px" viewBox="0 0 1000 1000">
+<defs>
+<g id="effect_slow_15_Layer1_0_FILL">
+<path fill="#004FFF" stroke="none" d="
+M 108.2 -19.05
+Q 108.2 -51.85 85.05 -75.2 61.9 -98.2 29.05 -98.2 -3.6 -98.2 -27 -75.2 -50.15 -51.85 -50.15 -19.05 -50.15 13.8 -27 36.9 -3.6 60.25 29.05 60.25 61.9 60.25 85.05 36.9 108.2 13.8 108.2 -19.05
+M 15.35 -32.5
+Q 21 -38.1 29 -38.1 37 -38.1 42.6 -32.5 48.25 -26.85 48.25 -18.85 48.25 -10.85 42.6 -5.25 37 0.4 29 0.4 21 0.4 15.35 -5.25 9.75 -10.85 9.75 -18.85 9.75 -26.85 15.35 -32.5 Z"/>
+</g>
+</defs>
+
+<g transform="matrix( 1, 0, 0, 1, 470.9,519.45) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#effect_slow_15_Layer1_0_FILL"/>
+</g>
+</g>
+</svg>

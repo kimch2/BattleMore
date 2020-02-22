@@ -47,13 +47,13 @@ public class PunchAbility : SingleTargetCombo {
 									}
 								}
 							}
-				} ,false);
+				        } ,false);
 
 			
 					targetGuy.myStats.TakeDamage (ComboBonusDamage, this.gameObject,DamageTypes.DamageType.Regular, manage );
 
 				
-				}
+				    }
 				}
 			);
 		}

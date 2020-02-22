@@ -1,0 +1,114 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="none" x="0px" y="0px" width="650px" height="550px" viewBox="0 0 650 550">
+<defs>
+<filter id="Filter_1" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB">
+<feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0 0 0 0 0 0.8 0 0 0 0 1 0 0 0 1 0" result="result1"/>
+</filter>
+
+<g id="Splash_FULL_17_Layer1_0_FILL">
+<path fill="#00CCFF" stroke="none" d="
+M 380.9 223.6
+Q 392.7 219.7 382.85 216.3 373.05 212.85 372.2 212.35 377 211.95 375.95 208.4 374.85 204.85 358.45 202.75 342.05 200.6 339.4 202.6 336.7 204.6 327.95 205.85 319.15 207.05 326.05 210.05 326.8 210.35 327.45 210.6 309.45 215.25 314.4 217.8 319.35 220.25 321.85 223.9 324.4 227.5 339.95 226 355.5 224.5 362.35 226 369.15 227.5 380.9 223.6 Z"/>
+</g>
+
+<g id="Splash_Splash_03_copy_0_Layer0_0_FILL">
+<path fill="#00CCFF" stroke="none" d="
+M 86.6 57.95
+Q 87.7 53.35 82.95 47.95 78.25 42.55 70.5 39.6 62.75 36.65 56.45 37.85 50.2 39.05 49.1 43.65 48 48.25 52.7 53.65 56.2095703125 57.6822265625 61.4 60.35 61.09375 62.7943359375 63.2 65.45 65.5 68.4 69.4 69.9 73.35 71.4 76.55 70.55 79.75 69.75 80.35 67.1 80.7705078125 65.41796875 79.95 63.6 85.5677734375 62.266796875 86.6 57.95
+M 95.75 74.35
+Q 92.55 75.2 91.95 77.85 91.3 80.5 93.6 83.45 95.9 86.4 99.8 87.85 103.75 89.35 106.95 88.5 110.15 87.65 110.75 85 111.4 82.35 109.1 79.4 106.85 76.45 102.9 74.95 99 73.5 95.75 74.35 Z"/>
+</g>
+</defs>
+
+<g transform="matrix( -0.57574462890625, 0, 0, 0.5655975341796875, 536.8,333) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use filter="url(#Filter_1)" xlink:href="#Splash_FULL_17_Layer1_0_FILL"/>
+</g>
+
+<g transform="matrix( 1, 0, 0, 1, 111.95,68.5) ">
+<g transform="matrix( 0.374603271484375, -1.26507568359375, 0.2012176513671875, 0.9024810791015625, -19.9,27.6) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use filter="url(#Filter_1)" xlink:href="#Splash_Splash_03_copy_0_Layer0_0_FILL"/>
+</g>
+</g>
+</g>
+
+<g transform="matrix( -1, 0, 0, 1, 609.35,56.55) ">
+<g transform="matrix( 0.374603271484375, -1.26507568359375, 0.2012176513671875, 0.9024810791015625, -19.9,27.6) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use filter="url(#Filter_1)" xlink:href="#Splash_Splash_03_copy_0_Layer0_0_FILL"/>
+</g>
+</g>
+</g>
+
+<g transform="matrix( -0.675384521484375, 0, 0, 0.675384521484375, 428.15,85.7) ">
+<g transform="matrix( 0.374603271484375, -1.26507568359375, 0.2012176513671875, 0.9024810791015625, -19.9,27.6) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use filter="url(#Filter_1)" xlink:href="#Splash_Splash_03_copy_0_Layer0_0_FILL"/>
+</g>
+</g>
+</g>
+
+<g transform="matrix( 0.4836273193359375, 0, 0, 0.4836273193359375, 109.1,127.55) ">
+<g transform="matrix( 0.374603271484375, -1.26507568359375, 0.2012176513671875, 0.9024810791015625, -19.9,27.6) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use filter="url(#Filter_1)" xlink:href="#Splash_Splash_03_copy_0_Layer0_0_FILL"/>
+</g>
+</g>
+</g>
+
+<g transform="matrix( 0.63238525390625, 0, 0, 1.557403564453125, 242.15,-19.2) ">
+<g transform="matrix( 0.374603271484375, -1.26507568359375, 0.2012176513671875, 0.9024810791015625, -19.9,27.6) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use filter="url(#Filter_1)" xlink:href="#Splash_Splash_03_copy_0_Layer0_0_FILL"/>
+</g>
+</g>
+</g>
+</g>
+
+<g transform="matrix( 0.359771728515625, 0, 0, 0.424224853515625, 190.1,308.2) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use filter="url(#Filter_1)" xlink:href="#Splash_FULL_17_Layer1_0_FILL"/>
+</g>
+
+<g transform="matrix( 1, 0, 0, 1, 111.95,68.5) ">
+<g transform="matrix( 0.374603271484375, -1.26507568359375, 0.2012176513671875, 0.9024810791015625, -19.9,27.6) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use filter="url(#Filter_1)" xlink:href="#Splash_Splash_03_copy_0_Layer0_0_FILL"/>
+</g>
+</g>
+</g>
+
+<g transform="matrix( -1, 0, 0, 1, 609.35,56.55) ">
+<g transform="matrix( 0.374603271484375, -1.26507568359375, 0.2012176513671875, 0.9024810791015625, -19.9,27.6) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use filter="url(#Filter_1)" xlink:href="#Splash_Splash_03_copy_0_Layer0_0_FILL"/>
+</g>
+</g>
+</g>
+
+<g transform="matrix( -0.675384521484375, 0, 0, 0.675384521484375, 428.15,85.7) ">
+<g transform="matrix( 0.374603271484375, -1.26507568359375, 0.2012176513671875, 0.9024810791015625, -19.9,27.6) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use filter="url(#Filter_1)" xlink:href="#Splash_Splash_03_copy_0_Layer0_0_FILL"/>
+</g>
+</g>
+</g>
+
+<g transform="matrix( 0.4836273193359375, 0, 0, 0.4836273193359375, 109.1,127.55) ">
+<g transform="matrix( 0.374603271484375, -1.26507568359375, 0.2012176513671875, 0.9024810791015625, -19.9,27.6) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use filter="url(#Filter_1)" xlink:href="#Splash_Splash_03_copy_0_Layer0_0_FILL"/>
+</g>
+</g>
+</g>
+
+<g transform="matrix( 0.63238525390625, 0, 0, 1.557403564453125, 242.15,-19.2) ">
+<g transform="matrix( 0.374603271484375, -1.26507568359375, 0.2012176513671875, 0.9024810791015625, -19.9,27.6) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use filter="url(#Filter_1)" xlink:href="#Splash_Splash_03_copy_0_Layer0_0_FILL"/>
+</g>
+</g>
+</g>
+</g>
+</svg>

@@ -1,0 +1,104 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="none" x="0px" y="0px" width="1000px" height="1000px" viewBox="0 0 1000 1000">
+<defs>
+<radialGradient id="Gradient_1" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="15.649999999999977" fx="0" fy="0" gradientTransform="matrix( 1.0000000000000016, 0, 0, 1.0000000000000016, 348.4,166.2) " spreadMethod="pad">
+<stop  offset="0%" stop-color="#FFFFFF"/>
+
+<stop  offset="28.235294117647058%" stop-color="#FFFEF4"/>
+
+<stop  offset="49.411764705882355%" stop-color="#FFD200"/>
+
+<stop  offset="74.11764705882354%" stop-color="#FF0000"/>
+</radialGradient>
+
+<radialGradient id="Gradient_2" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="33.14999999999998" fx="0" fy="0" gradientTransform="matrix( 1.0000000000000007, 0, 0, 1.0000000000000007, 371.2,141.25) " spreadMethod="pad">
+<stop  offset="0%" stop-color="#FFFFFF"/>
+
+<stop  offset="28.235294117647058%" stop-color="#FFFEF4"/>
+
+<stop  offset="49.411764705882355%" stop-color="#FFD200"/>
+
+<stop  offset="74.11764705882354%" stop-color="#FF0000"/>
+</radialGradient>
+
+<radialGradient id="Gradient_3" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="21.44999999999999" fx="0" fy="0" gradientTransform="matrix( 1.0000000000000007, 0, 0, 1.0000000000000007, 334.75,111.45) " spreadMethod="pad">
+<stop  offset="0%" stop-color="#FFFFFF"/>
+
+<stop  offset="28.235294117647058%" stop-color="#FFFEF4"/>
+
+<stop  offset="49.411764705882355%" stop-color="#FFD200"/>
+
+<stop  offset="74.11764705882354%" stop-color="#FF0000"/>
+</radialGradient>
+
+<radialGradient id="Gradient_4" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="9.350000000000023" fx="0" fy="0" gradientTransform="matrix( 0.9999999999999977, 0, 0, 0.9999999999999977, 389.2,111.2) " spreadMethod="pad">
+<stop  offset="0%" stop-color="#FFFFFF"/>
+
+<stop  offset="28.235294117647058%" stop-color="#FFFEF4"/>
+
+<stop  offset="49.411764705882355%" stop-color="#FFD200"/>
+
+<stop  offset="74.11764705882354%" stop-color="#FF0000"/>
+</radialGradient>
+
+<radialGradient id="Gradient_5" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="56.25" fx="0" fy="0" gradientTransform="matrix( 1, 0, 0, 1, 363.6,152.2) " spreadMethod="pad">
+<stop  offset="0%" stop-color="#FFFFFF"/>
+
+<stop  offset="28.235294117647058%" stop-color="#FFFEF4"/>
+
+<stop  offset="49.411764705882355%" stop-color="#FFD200"/>
+
+<stop  offset="74.11764705882354%" stop-color="#FF0000"/>
+</radialGradient>
+
+<radialGradient id="Gradient_6" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="37.69999999999999" fx="0" fy="0" gradientTransform="matrix( 1.0000000000000002, 0, 0, 1.0000000000000002, 360.6,106.4) " spreadMethod="pad">
+<stop  offset="0%" stop-color="#FFFFFF"/>
+
+<stop  offset="28.235294117647058%" stop-color="#FFFEF4"/>
+
+<stop  offset="49.411764705882355%" stop-color="#FFD200"/>
+
+<stop  offset="74.11764705882354%" stop-color="#FF0000"/>
+</radialGradient>
+
+<g id="Bam_2_Layer0_0_FILL">
+<path fill="url(#Gradient_1)" stroke="none" d="
+M 342.5 175.15
+Q 347.8 178.8 351.25 181.25 350.6 177.1 346.3 163.4 349.75 179.3 336.35 170.95 338.95 172.75 342.5 175.15 Z"/>
+
+<path fill="url(#Gradient_2)" stroke="none" d="
+M 359.95 163.85
+Q 359.9 165 359 166.35 357.5 167.5 353.15 165.55 358.8 168.6 368.65 174.1 363.65 168.3 359.95 163.85 Z"/>
+
+<path fill="url(#Gradient_3)" stroke="none" d="
+M 332.8 107.25
+Q 340.7 98.5 338.95 107.05 341.8 98.45 343.85 92.2 338.55 99.75 332.8 107.25 Z"/>
+
+<path fill="url(#Gradient_4)" stroke="none" d="
+M 393.9 109.2
+Q 388.9 110.15 381.7 111.2 391.4 110.4 381.25 116.15 388.4 112.3 393.9 109.2 Z"/>
+
+<path fill="url(#Gradient_5)" stroke="none" d="
+M 392.05 138.05
+Q 415.9 143.8 389.3 147.2
+L 418.5 144.15
+Q 409.5 141.7 392.05 138.05 Z"/>
+
+<path fill="url(#Gradient_6)" stroke="none" d="
+M 383.25 76.25
+Q 375.95 81.5 369.85 85.95 375.35 84.3 365.1 97.25 365.8 98.1 366.5 98.95 374.55 87.7 383.25 76.25 Z"/>
+</g>
+</defs>
+
+<g transform="matrix( -0.7840118408203125, 0.18511962890625, -0.218475341796875, -0.9263763427734375, 782.45,568.15) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#Bam_2_Layer0_0_FILL"/>
+</g>
+</g>
+
+<g transform="matrix( 0.770294189453125, -0.2360382080078125, 0.276702880859375, 0.91058349609375, 215.6,447.1) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#Bam_2_Layer0_0_FILL"/>
+</g>
+</g>
+</svg>

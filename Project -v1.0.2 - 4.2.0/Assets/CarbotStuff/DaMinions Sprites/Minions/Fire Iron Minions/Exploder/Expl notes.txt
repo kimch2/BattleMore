@@ -1,0 +1,6 @@
+1 idle
+11 walk
+23 attack
+35 death
+54 keg charge up
+101 explosion

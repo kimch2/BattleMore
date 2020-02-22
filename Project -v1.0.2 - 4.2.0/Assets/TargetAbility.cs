@@ -74,6 +74,9 @@ public abstract class TargetAbility : Ability
     public void DisableSkillShotIndicator()
     {
         Debug.Log("Disableing");
-        myIndicator.SetActive(false);
+        if (myIndicator)
+        {
+            myIndicator.SetActive(false);
+        }
     }
 }

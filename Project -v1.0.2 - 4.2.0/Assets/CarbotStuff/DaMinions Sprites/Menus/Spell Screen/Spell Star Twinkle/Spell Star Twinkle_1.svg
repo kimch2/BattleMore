@@ -1,0 +1,26 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="none" x="0px" y="0px" width="100px" height="100px" viewBox="0 0 100 100">
+<defs>
+<g id="little_star_0_Layer1_0_FILL">
+<path fill="#00CCFF" stroke="none" d="
+M 119.25 34.8
+Q 115.65 29.15 93.4 23.85 76.8 18.3 69 10.35 58.9 -2.05 51.4 0.2 44.9 6.2 31.2 17.75 22.45 22.7 9.7 26.4 -5.8 30.2 -12.05 34.35 -14.9 37.75 -2.7 40.95 8.55 44 19.2 47.2 34.9 52.75 43.75 63.3 55.8 79.9 68.05 61.1 76.25 52.05 90 46.6 97.95 43.55 107.25 40.7 116.85 37.55 119.25 34.8 Z"/>
+</g>
+
+<g id="little_star_0_Layer0_0_FILL">
+<path fill="#FFFFFF" stroke="none" d="
+M 81.5 36.35
+Q 83.25 33.7 81.75 31.4 79.7 28.3 75.05 25 70.9 21.5 66.95 17.95 58.1 7.85 51 11.15 44.2 14.7 37.2 22.65 32.75 26.2 29.9 29.7 26.75 33.05 28 36.35 29.55 39.4 34.9 43.85 39.05 47.6 44.15 52.75 55.55 66.65 65.5 53.75 71.15 47.2 77 41.65 79.85 38.7 81.5 36.35 Z"/>
+</g>
+</defs>
+
+<g transform="matrix( 0.683990478515625, 0, 0, 0.683990478515625, 15.6,29.75) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#little_star_0_Layer1_0_FILL"/>
+</g>
+
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#little_star_0_Layer0_0_FILL"/>
+</g>
+</g>
+</svg>

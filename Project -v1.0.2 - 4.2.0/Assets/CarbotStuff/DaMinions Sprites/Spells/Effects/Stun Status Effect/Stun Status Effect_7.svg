@@ -1,0 +1,48 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="none" x="0px" y="0px" width="1000px" height="1000px" viewBox="0 0 1000 1000">
+<defs>
+<linearGradient id="Gradient_1" gradientUnits="userSpaceOnUse" x1="30.8" y1="51" x2="30.8" y2="10.099999999999998" spreadMethod="pad">
+<stop  offset="0%" stop-color="#FFFFFF"/>
+
+<stop  offset="52.549019607843135%" stop-color="#FFEE00"/>
+
+<stop  offset="100%" stop-color="#FFB600"/>
+</linearGradient>
+
+<g id="star_dizzy_0_Layer0_0_FILL">
+<path fill="url(#Gradient_1)" stroke="none" d="
+M 45.9 36.25
+L 61.6 25.15 57.3 19.45 40.2 18.75 33.2 2.9 28.4 0 21.75 18.75 4.05 18.95 0 23.95 16.05 36.25 11.65 52.3 14.4 58.5 31 47.1 48.75 58.8 51.7 52.4 45.9 36.25
+M 43.4 43.3
+L 41.65 47.2 30.9 40.1 20.9 47 19.25 43.25 21.9 33.55 12.2 26.15 14.65 23.1 25.35 23 29.35 11.7 32.25 13.45 36.45 23 46.8 23.4 49.4 26.85 39.9 33.55 43.4 43.3 Z"/>
+
+<path fill="#FFFFFF" stroke="none" d="
+M 41.65 47.2
+L 43.4 43.3 39.9 33.55 49.4 26.85 46.8 23.4 36.45 23 32.25 13.45 29.35 11.7 25.35 23 14.65 23.1 12.2 26.15 21.9 33.55 19.25 43.25 20.9 47 30.9 40.1 41.65 47.2 Z"/>
+</g>
+</defs>
+
+<g transform="matrix( 0.7068939208984375, 0, 0, 0.7068939208984375, 517.9,481.65) ">
+<g transform="matrix( 0.1391143798828125, 0, 0, 0.1391143798828125, 34,29.9) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#star_dizzy_0_Layer0_0_FILL"/>
+</g>
+</g>
+</g>
+
+<g transform="matrix( 0.7068939208984375, 0, 0, 0.7068939208984375, 464.15,439.9) ">
+<g transform="matrix( 0.0774383544921875, 0, 0, -0.0774383544921875, 13.7,38.2) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#star_dizzy_0_Layer0_0_FILL"/>
+</g>
+</g>
+</g>
+
+<g transform="matrix( 0.7068939208984375, 0, 0, 0.7068939208984375, 437.5,493.6) ">
+<g transform="matrix( 0.8114013671875, 0, 0, 0.8114013671875, 1.9,21.25) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#star_dizzy_0_Layer0_0_FILL"/>
+</g>
+</g>
+</g>
+</svg>

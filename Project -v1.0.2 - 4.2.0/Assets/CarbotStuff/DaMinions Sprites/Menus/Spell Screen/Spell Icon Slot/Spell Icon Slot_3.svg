@@ -1,0 +1,22 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="none" x="0px" y="0px" width="200px" height="200px" viewBox="0 0 200 200">
+<defs>
+<g id="Spells_0_Layer0_0_FILL">
+<path fill="#FFFFFF" stroke="none" d="
+M 124.4 75.3
+Q 124.4 55 110 40.6 95.65 26.25 75.35 26.25 55 26.25 40.6 40.6 26.25 55 26.25 75.3 26.25 95.65 40.6 110 55 124.4 75.35 124.4 95.65 124.4 110 110 124.4 95.65 124.4 75.3 Z"/>
+</g>
+
+<path id="Spells_0_Layer0_0_1_STROKES" stroke="#FFFFFF" stroke-width="1" stroke-linejoin="round" stroke-linecap="round" fill="none" d="
+M 150.55 75.25
+Q 150.55 106.45 128.45 128.45 106.45 150.55 75.3 150.55 44.1 150.55 22.05 128.45 0 106.45 0 75.25 0 44.1 22.05 22 44.1 0 75.3 0 106.45 0 128.45 22 150.55 44.1 150.55 75.25 Z"/>
+</defs>
+
+<g transform="matrix( 1, 0, 0, 1, 26.8,28.8) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#Spells_0_Layer0_0_FILL"/>
+
+<use xlink:href="#Spells_0_Layer0_0_1_STROKES"/>
+</g>
+</g>
+</svg>

@@ -1,0 +1,48 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="none" x="0px" y="0px" width="1000px" height="1000px" viewBox="0 0 1000 1000">
+<defs>
+<radialGradient id="Gradient_1" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="270.75" fx="0" fy="0" gradientTransform="matrix( 1, 0, 0, 0.9764081255771008, 155.55,262.45) " spreadMethod="pad">
+<stop  offset="43.529411764705884%" stop-color="#FFFFFF"/>
+
+<stop  offset="72.94117647058823%" stop-color="#FFCC00"/>
+
+<stop  offset="99.2156862745098%" stop-color="#FF5400"/>
+</radialGradient>
+
+<g id="exploscircle01_0_Layer0_0_FILL">
+<path fill="url(#Gradient_1)" stroke="none" d="
+M 286.8 48.75
+Q 237.55 0 168 0 98.4 0 49.2 48.75 0 97.55 0 166.5 0.00390625 235.4486328125 41.6 252.75 83.1880859375 270.053515625 152.95 270.95 222.76171875 271.8462890625 279.35 253.65 335.9958984375 235.451171875 336 166.5 336 97.55 286.8 48.75 Z"/>
+</g>
+</defs>
+
+<g id="Layer_2">
+<g transform="matrix( 0.8203582763671875, 0, 0, 0.8203582763671875, 455.25,327.1) ">
+<g transform="matrix( 1, 0, 0, 1, 56.65,2.1) ">
+<g id="Layer_11"/>
+
+<g id="Layer_7"/>
+
+<g id="Layer_4"/>
+
+<g id="Layer_8"/>
+
+<g id="Layer_3"/>
+
+<g id="Layer_10">
+<g transform="matrix( 0.759674072265625, 0, 0, 0.759674072265625, -143.2,17.2) ">
+<g id="Layer_1">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#exploscircle01_0_Layer0_0_FILL"/>
+</g>
+</g>
+</g>
+</g>
+
+<g id="Layer_9"/>
+
+<g id="Layer_12"/>
+</g>
+</g>
+</g>
+</svg>
