@@ -249,4 +249,32 @@ public abstract class Ability : MonoBehaviour {
             currentCharger = StartCoroutine(increaseCharges());
         }
     }
+
+    protected continueOrder BaseCanActivate(bool ShowError)
+    {
+        continueOrder order = new continueOrder();
+        
+        if (myCost && !myCost.canActivate(this))
+        {
+            order.canCast = false;
+            if (myCost.energy == 0 && myCost.resourceCosts.MyResources.Count == 0 && chargeCount > 0)
+            {
+                order.canCast = true;
+                order.nextUnitCast = false;
+            }
+        }
+        else
+        {
+            order.nextUnitCast = false;
+        }
+        return order;
+    }
+
+    protected void BaseSetAutoCast(bool isOn)
+    {
+        if (canAutoCast)
+        {
+            autocast = isOn;
+        }
+    }
 }

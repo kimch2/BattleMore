@@ -7,20 +7,16 @@ public class BoneQuillAbil : TargetAbility
     // Fires X number of projectiles equal to charge count in a line, get charge counters back with cooldown (~2 seconds)
     // Killing an enemy with this refunds a charge count, for the next time it is cast.
 
-    protected Selected mySelect;
     public GameObject ToSpawn;
     public int QuillNumber = 9;
-    int recastCount;
+
     public float QuillDelay = .33f;
 
     // Use this for initialization
     new void Start()
     {
-        recastCount = QuillNumber;
         base.Start();
         myType = type.target;
-    
-        mySelect = GetComponent<Selected>();
         InitializeCharges();
     }
 
@@ -74,7 +70,8 @@ public class BoneQuillAbil : TargetAbility
 
     override
     public bool Cast(GameObject target, Vector3 location)
-    {
+    {/*
+        Debug.Log("Cast A");
         Vector3 direction = location - transform.parent.position;
         direction.y = 0;
       
@@ -82,12 +79,13 @@ public class BoneQuillAbil : TargetAbility
        // changeCharge(-1 * chargeCount);
 
         myCost.payCost();
-
+        */
         return false;
     }
     override
     public void Cast()
     {
+        Debug.Log("Cast B");
         Vector3 direction = location - transform.parent.position;
         direction.y = 0;
 

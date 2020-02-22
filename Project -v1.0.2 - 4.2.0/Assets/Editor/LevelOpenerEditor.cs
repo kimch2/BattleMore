@@ -154,4 +154,17 @@ public class LevelOpenerEditor : EditorWindow
 		EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo();
 		EditorSceneManager.OpenScene("Assets/Scenes/SwapOutLocks.unity");
 	}
+
+    [MenuItem("DaMinionz/ Combat Scene")]
+    public static void V()
+    {
+        EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo();
+        EditorSceneManager.OpenScene("Assets/CarbotStuff/DaMinionsMap.unity");
+    }
+    [MenuItem("DaMinionz/ Main Menu")]
+    public static void W()
+    {
+        EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo();
+        EditorSceneManager.OpenScene("Assets/CarbotStuff/DaMinionsMainMenu.unity");
+    }
 }

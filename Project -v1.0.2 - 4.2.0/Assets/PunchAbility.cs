@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PunchAbility : SingleTargetCombo {
 
+    // Dashes at target, then punches them , knocing them back
 
 	public Vector2 PunchDistance;
 	public float ComboBonusDamage;

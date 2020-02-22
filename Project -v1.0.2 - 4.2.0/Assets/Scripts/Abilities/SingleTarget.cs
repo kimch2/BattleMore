@@ -57,18 +57,7 @@ public class SingleTarget:  TargetAbility {
 	override
 	public continueOrder canActivate(bool showError){
 
-		continueOrder order = new continueOrder ();
-
-		if (myCost && !myCost.canActivate (this)) {
-			order.canCast = false;
-			if (myCost.energy == 0 && myCost.resourceCosts.MyResources.Count == 0 && chargeCount > 0) {
-				order.canCast = true;
-				order.nextUnitCast = false;
-			}
-		} else {
-			order.nextUnitCast = false;
-		}
-		return order;
+        return BaseCanActivate(showError);
 	}
 
 	override
@@ -171,7 +160,6 @@ public class SingleTarget:  TargetAbility {
 	}
 	override
 	public void Cast(){
-
 
 	//	Debug.Log ("Casting in other");
 		if (target) {
