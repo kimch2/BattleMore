@@ -61,7 +61,7 @@ public class AreaTargetComboAbil : TargetAbility
         proj = (GameObject)Instantiate(ObjectToSpawn, pos, Quaternion.identity);
 
 
-        proj.SendMessage("setSource", this.gameObject, SendMessageOptions.DontRequireReceiver);
+        proj.SendMessage("setSource", myManager.gameObject, SendMessageOptions.DontRequireReceiver);
     }
 
     public override bool Cast(GameObject target, Vector3 location)

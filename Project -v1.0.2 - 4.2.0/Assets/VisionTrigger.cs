@@ -4,6 +4,7 @@ using UnityEngine;
 
 public abstract class VisionTrigger : MonoBehaviour {
 
+    [Tooltip("The player number that we are looking for")]
 	public int PlayerNumber;
 	public List<int> AdditionaPlayerNums;
 	public List<UnitManager> InVision;

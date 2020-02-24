@@ -11,7 +11,9 @@ public class DeathInjector :MonoBehaviour,  Notify {
 	public float DamageAmount =15;
 	private UnitStats myStats;
 	public GameObject effect;
+    [Tooltip("only use this if the thing that is spawning is the thign that this is on, which causing reference errors, because it will refer to itself and not the prefab")]
 	public string toSpawn;
+    public GameObject toSpawnObject;
 	GameObject myEffect;
 	// Use this for initialization
 	void Start () {
@@ -55,6 +57,7 @@ public class DeathInjector :MonoBehaviour,  Notify {
 		inject.effect = effect;
 		inject.toSpawn = toSpawn;
 		inject.DamageOverTime (DamageAmount,DamageTime);
+        inject.toSpawnObject = toSpawnObject;
 
 		return damage;
 	}
@@ -83,10 +86,18 @@ public class DeathInjector :MonoBehaviour,  Notify {
 
 	public void Dying()
 	{
-		//Debug.Log ("Dying " + onTarget + "  -" + toSpawn);
-		if (onTarget ) {
-			Instantiate (Resources.Load<GameObject>(toSpawn), this.transform.position + Vector3.up* 3, Quaternion.identity);
-		}
+        //Debug.Log ("Dying " + onTarget + "  -" + toSpawn);
+        if (onTarget)
+        {
+            if (toSpawnObject)
+            {
+                Instantiate(toSpawnObject, this.transform.position + Vector3.up * 3, Quaternion.identity);
+            }
+            else
+            {
+                Instantiate(Resources.Load<GameObject>(toSpawn), this.transform.position + Vector3.up * 3, Quaternion.identity);
+            }
+        }
 	}
 
 }

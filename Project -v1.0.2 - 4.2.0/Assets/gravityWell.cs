@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class gravityWell : MonoBehaviour, Modifier {
 
-
+    // Used by Street Sweeper to clean up toxic spills
 	public List<GameObject> Protecters = new List<GameObject>();
 	public float duration;
 

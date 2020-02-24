@@ -420,6 +420,7 @@ public class MainCamera : MonoBehaviour, ICamera {
     Vector3 BeforeSmashPosition;
     public void SmashCamera(GameObject target, float duration = .47f)
     {
+        Debug.Log("Smashing from");
         if (!CurrentlySmashing)
             StartCoroutine(SwoopCamera(target, duration));
     }

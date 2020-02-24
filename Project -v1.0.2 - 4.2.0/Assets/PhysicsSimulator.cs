@@ -5,14 +5,12 @@ using UnityEngine;
 public class PhysicsSimulator : MonoBehaviour {
 
 	public static PhysicsSimulator main;
-
-
+    
 	void Start()
 	{
 		main = this;
 	}
-
-
+    
 	Dictionary<UnitManager, Coroutine> currentlyMoving = new Dictionary<UnitManager, Coroutine>();
 	Dictionary<UnitManager, Vector3> currentTargets = new Dictionary<UnitManager, Vector3>();
 	// When a force hits a unit with more force than what is remaining in that guys coruotine, it will have priority
@@ -34,19 +32,9 @@ public class PhysicsSimulator : MonoBehaviour {
 		}
 
 		if (TenacityReduce) {
-			if (target.myStats.isUnitType (UnitTypes.UnitTypeTag.Medium)) 
-			{
-				force *= .75f;
-			}
-			else if(target.myStats.isUnitType (UnitTypes.UnitTypeTag.Large))
-			{
-				force *= .5f;
-			}
-			else if(target.myStats.isUnitType (UnitTypes.UnitTypeTag.Massive))
-			{
-				force *= .25f;
-			}
-		}
+
+			force *=   target.myStats.getTenacityMultiplier();
+        }
 
        // Debug.Log(startLocation +"  " + sourceLocation + "   " + (startLocation - sourceLocation).normalized);
 
@@ -137,7 +125,6 @@ public class PhysicsSimulator : MonoBehaviour {
 
 	public void Dash (UnitManager target, Vector3 location, Vector2 speed,  System.Action onFinish)
 	{
-
 		Vector3 startLocation = target.transform.position;
 
 		Vector3 ActualTarget =  (Vector3)AstarPath.active.graphs [0].GetNearest (location).node.position;

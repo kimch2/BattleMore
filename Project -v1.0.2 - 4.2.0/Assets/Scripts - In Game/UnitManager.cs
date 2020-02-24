@@ -966,7 +966,7 @@ public class UnitManager : Unit, IOrderable {
 	public void StunForTime(Object source, float duration, bool showIcon = true)
 	{
 
-		StartCoroutine (stunOverTime (source, duration));
+		StartCoroutine (stunOverTime (source, duration * (1 - myStats.Tenacity)));
 		if (showIcon && isStunned && StunRun == null) {
 			StunRun = StartCoroutine (stunnedIcon());
 		}
@@ -992,6 +992,15 @@ public class UnitManager : Unit, IOrderable {
 		enabled = !(stunSources.Count > 0);
 		
 	}
+
+    public void ExternalMove(Vector3 translationAmount, bool isFriendly)
+    {
+        if (!isFriendly)
+        {
+            translationAmount *= myStats.getTenacityMultiplier();
+        }
+        transform.Translate(translationAmount,Space.World);
+    }
 
 
 	public void setSilence(bool input, Object source)

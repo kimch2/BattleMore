@@ -476,5 +476,7 @@ private List<attackSpeedMod> DamageMod = new List<attackSpeedMod>();
 				Gizmos.DrawSphere ((transform.rotation) *vec.position + this.gameObject.transform.position, .5f);
 			}
 		}
+        Gizmos.DrawLine(transform.position, transform.position + Vector3.left*range);
+
 	}
 }

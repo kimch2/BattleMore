@@ -27,6 +27,7 @@ public class UnitStats : MonoBehaviour {
 
 	public float supply;    //positive gives supply, negative uses it
 
+    [Tooltip("The higher the attack priority, the more enemies will focus it. 3 is what most combar units are on")]
 	public float attackPriority = 1;
 	[HideInInspector]
 	public byte DefensePriority; // Am I an Air/Ground/ Both unit , this is a bitmask to be compared against the attackers agressionPriority
@@ -35,6 +36,10 @@ public class UnitStats : MonoBehaviour {
 
 	public float armor;
 	public float spellResist;
+
+    [Tooltip("Resistance to movement altering, stun and silence effects (not implemented yet)")]
+    public float Tenacity = 0;
+
 	public float cost;
 	public ResourceManager Cost;
 	[HideInInspector]
@@ -233,6 +238,11 @@ public class UnitStats : MonoBehaviour {
         
     }
 
+    public float getTenacityMultiplier()
+    {
+        return 1 - Tenacity;
+    }
+
 	public Selected getSelector()
 	{
 		if (!mySelection)
@@ -250,6 +260,11 @@ public class UnitStats : MonoBehaviour {
 		return (typeBitMask &  n) ==  n;
 	}
 
+    /// <summary>
+    /// This is currently depricated
+    /// </summary>
+    /// <param name="input"></param>
+    /// <param name="stack"></param>
 	public void addBuff(Buff input, bool stack)
 	{
 		if (stack || !goodBuffs.Contains (input)) {
