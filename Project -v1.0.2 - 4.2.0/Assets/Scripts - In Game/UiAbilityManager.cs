@@ -424,7 +424,7 @@ public class UiAbilityManager : MonoBehaviour {
 				foreach (RTSObject obj in currentPage.rows [j]) {
 					UnitManager Uman = obj.getUnitManager ();
 
-					if (!Uman.Silenced () && !Uman.Stunned ()) {
+					if (Uman.metaStatus.canCast){ // && !Uman.Stunned ()) {
 						active = (Uman.abilityList [i].active);
 					}
 					if (active) {
@@ -510,12 +510,16 @@ public class UiAbilityManager : MonoBehaviour {
 				foreach (RTSObject obj in currentPage.rows [j]) {
 					UnitManager Uman = obj.getUnitManager ();
 
-					if (!Uman.Silenced () && !Uman.Stunned ()) {
-						active = (Uman.abilityList [i].active);
-					}
-					if (active) {
-						break;
-					}
+                    if (Uman.metaStatus.canCast)
+                    {
+                        //if (!Uman.Silenced () && !Uman.Stunned ()) {
+                        active = (Uman.abilityList[i].active);
+
+                        if (active)
+                        {
+                            break;
+                        }
+                    }
 				}
 
 			
@@ -821,8 +825,9 @@ public class UiAbilityManager : MonoBehaviour {
 				bool active = false;
 				foreach (RTSObject obj in currentPage.rows [j]) {
 					UnitManager Uman = obj.getUnitManager();
-
-					if (!Uman.Silenced() && !Uman.Stunned()) {
+                    if (Uman.metaStatus.canCast)
+                    {
+                       // if (!Uman.Silenced() && !Uman.Stunned()) {
 						active = (Uman.abilityList [i].active);
 					}
 					if (active) {

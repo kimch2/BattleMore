@@ -37,9 +37,13 @@ public class StatChanger
 	/// <summary>
 	///  .2f as a perent means a 20% increase in attackspeed, .2 flat slows it down. applies to all weapons
 	/// </summary>
-	public void changeAttackSpeed(float perc, float flat, UnityEngine.Object obj, bool stackable = false)
-	{
-		NumberAlter number = GetNumberAlter("AttackSpeed");
+	public void changeAttackSpeed(float perc, float flat, UnityEngine.Object obj, bool isFriendly, bool stackable = false)
+    {
+        if (isFriendly && !myStats.myManager.metaStatus.CanBuff || !isFriendly && !myStats.myManager.metaStatus.canDebuff)
+        {
+            return;
+        }
+        NumberAlter number = GetNumberAlter("AttackSpeed");
         number.AddBuff(perc, flat, obj, stackable);   
         foreach (IWeapon weap in myStats.myManager.myWeapon)
         {
@@ -74,9 +78,13 @@ public class StatChanger
 
 
 
-	public void changeSpecAttSpeed(float perc, float flat, UnityEngine.Object obj, IWeapon specificWeap, bool stackable = false)
-	{
-		NumberAlter number = GetNumberAlter("AttackSpeed" + specificWeap.GetHashCode());
+	public void changeSpecAttSpeed(float perc, float flat, UnityEngine.Object obj, IWeapon specificWeap, bool isFriendly, bool stackable = false)
+    {
+        if (isFriendly && !myStats.myManager.metaStatus.CanBuff || !isFriendly && !myStats.myManager.metaStatus.canDebuff)
+        {
+            return;
+        }
+        NumberAlter number = GetNumberAlter("AttackSpeed" + specificWeap.GetHashCode());
 		number.AddBuff(perc, flat, obj, stackable);
 		specificWeap.attackPeriod = NumberAlter.adjustTotalSpeedInverse(new List<NumberAlter>() { number, GetNumberAlter("AttackSpeed") }, specificWeap.baseAttackPeriod, .05f, 100);
 	}
@@ -92,9 +100,13 @@ public class StatChanger
 	/// <summary>
 	///  .2f as a perent means a 20% increase, This will apply to all weapons
 	/// </summary>
-	public void changeWeaponDamage(float perc, float flat, UnityEngine.Object obj, bool stackable = false)
-	{
-		NumberAlter number = GetNumberAlter("Damage");
+	public void changeWeaponDamage(float perc, float flat, UnityEngine.Object obj, bool isFriendly, bool stackable = false)
+    {
+        if (isFriendly && !myStats.myManager.metaStatus.CanBuff || !isFriendly && !myStats.myManager.metaStatus.canDebuff)
+        {
+            return;
+        }
+        NumberAlter number = GetNumberAlter("Damage");
 		number.AddBuff(perc, flat, obj, stackable);
 		foreach (IWeapon weap in myStats.myManager.myWeapon)
 		{
@@ -127,10 +139,13 @@ public class StatChanger
 	}
 
 
-	public void changeSpecWeapDamage(float perc, float flat, UnityEngine.Object obj, IWeapon specificWeap, bool stackable = false)
+	public void changeSpecWeapDamage(float perc, float flat, UnityEngine.Object obj, IWeapon specificWeap, bool isFriendly, bool stackable = false)
 	{
-
-		NumberAlter number = GetNumberAlter("Damage" + specificWeap.GetHashCode());
+        if (isFriendly && !myStats.myManager.metaStatus.CanBuff || !isFriendly && !myStats.myManager.metaStatus.canDebuff)
+        {
+            return;
+        }
+        NumberAlter number = GetNumberAlter("Damage" + specificWeap.GetHashCode());
 		number.AddBuff(perc, flat, obj, stackable);
 		specificWeap.baseDamage = NumberAlter.AdjustTotalSpeed(new List<NumberAlter>() { number, GetNumberAlter("AttackSpeed") }, specificWeap.getInitialDamage(), .05f, 10000);
 	}
@@ -147,9 +162,13 @@ public class StatChanger
 	/// <summary>
 	///  .2f as a perent means a 20% increase, This will apply to all weapons
 	/// </summary>
-	public void changeWeaponRange(float perc, float flat, UnityEngine.Object obj, bool stackable = false)
-	{
-		NumberAlter number = GetNumberAlter("Range");
+	public void changeWeaponRange(float perc, float flat, UnityEngine.Object obj, bool isFriendly, bool stackable = false)
+    {
+        if (isFriendly && !myStats.myManager.metaStatus.CanBuff || !isFriendly && !myStats.myManager.metaStatus.canDebuff)
+        {
+            return;
+        }
+        NumberAlter number = GetNumberAlter("Range");
 		number.AddBuff(perc, flat, obj, stackable);
 		foreach (IWeapon weap in myStats.myManager.myWeapon)
 		{
@@ -170,9 +189,13 @@ public class StatChanger
 	/// <summary>
 	///  .2f as a perent means a 20% increase, This will apply to all weapons
 	/// </summary>
-	public void changeMoveSpeed(float perc, float flat, UnityEngine.Object obj, bool stackable = false)
-	{
-		NumberAlter number = GetNumberAlter("MoveSpeed");
+	public void changeMoveSpeed(float perc, float flat, UnityEngine.Object obj, bool isFriendly, bool stackable = false)
+    {
+        if (isFriendly && !myStats.myManager.metaStatus.CanBuff || !isFriendly && !myStats.myManager.metaStatus.canDebuff)
+        {
+            return;
+        }
+        NumberAlter number = GetNumberAlter("MoveSpeed");
 		number.AddBuff(perc, flat, obj, stackable);
 		if (myStats.myManager.cMover)
 		{
@@ -208,9 +231,13 @@ public class StatChanger
 	/// <summary>
 	///  .2f as a perent means a 20% increase, This will apply to all weapons
 	/// </summary>
-	public void changeHealthMax(float perc, float flat, UnityEngine.Object obj, bool stackable = false)
-	{
-		NumberAlter number = GetNumberAlter("HealthMax");
+	public void changeHealthMax(float perc, float flat, UnityEngine.Object obj, bool isFriendly, bool stackable = false)
+    {
+        if (isFriendly && !myStats.myManager.metaStatus.CanBuff || !isFriendly && !myStats.myManager.metaStatus.canDebuff)
+        {
+            return;
+        }
+        NumberAlter number = GetNumberAlter("HealthMax");
 		number.AddBuff(perc, flat, obj, stackable);
 		myStats.Maxhealth = number.ApplyBuffs(number.baseAmount);
         myStats.StatsChanged = true;
@@ -225,9 +252,13 @@ public class StatChanger
     }
 	//===================================================================================================
 
-	public void changeEnergyMax(float perc, float flat, UnityEngine.Object obj, bool stackable = false)
-	{
-		NumberAlter number = GetNumberAlter("EnergyMax");
+	public void changeEnergyMax(float perc, float flat, UnityEngine.Object obj, bool isFriendly, bool stackable = false)
+    {
+        if (isFriendly && !myStats.myManager.metaStatus.CanBuff || !isFriendly && !myStats.myManager.metaStatus.canDebuff)
+        {
+            return;
+        }
+        NumberAlter number = GetNumberAlter("EnergyMax");
 		number.AddBuff(perc, flat, obj, stackable);
 		myStats.MaxEnergy = number.ApplyBuffs(number.baseAmount);
         myStats.StatsChanged = true;
@@ -244,8 +275,12 @@ public class StatChanger
     //===================================================================================================
 
 
-    public void changeEnergyRegen(float perc, float flat, UnityEngine.Object obj, bool stackable = false)
+    public void changeEnergyRegen(float perc, float flat, UnityEngine.Object obj, bool isFriendly, bool stackable = false)
     {
+        if (isFriendly && !myStats.myManager.metaStatus.CanBuff || !isFriendly && !myStats.myManager.metaStatus.canDebuff)
+        {
+            return;
+        }
         NumberAlter number = GetNumberAlter("EnergyRegen");
         number.AddBuff(perc, flat, obj, stackable);
         myStats.setEnergyRegen(number.ApplyBuffs(number.baseAmount));
@@ -261,8 +296,12 @@ public class StatChanger
     //===================================================================================================
 
 
-    public void changeHealthRegen(float perc, float flat, UnityEngine.Object obj, bool stackable = false)
+    public void changeHealthRegen(float perc, float flat, UnityEngine.Object obj, bool isFriendly, bool stackable = false)
     {
+        if (isFriendly && !myStats.myManager.metaStatus.CanBuff || !isFriendly && !myStats.myManager.metaStatus.canDebuff)
+        {
+            return;
+        }
         NumberAlter number = GetNumberAlter("HealthRegen");
         number.AddBuff(perc, flat, obj, stackable);
         myStats.setHealRate(number.ApplyBuffs(number.baseAmount));
@@ -279,9 +318,13 @@ public class StatChanger
     /// <summary>
     ///  .2f as a perent means a 20% increase, This will apply to all weapons
     /// </summary>
-    public void changeArmor(float perc, float flat, UnityEngine.Object obj, bool stackable = false)
-	{
-		NumberAlter number = GetNumberAlter("Armor");
+    public void changeArmor(float perc, float flat, UnityEngine.Object obj, bool isFriendly, bool stackable = false)
+    {
+        if (isFriendly && !myStats.myManager.metaStatus.CanBuff || !isFriendly && !myStats.myManager.metaStatus.canDebuff)
+        {
+            return;
+        }
+        NumberAlter number = GetNumberAlter("Armor");
 		number.AddBuff(perc, flat, obj, stackable);
 		myStats.armor = number.ApplyBuffs(number.baseAmount);
         myStats.StatsChanged = true;
@@ -299,9 +342,13 @@ public class StatChanger
 	/// <summary>
 	///  .2f as a perent means a 20% increase, This will apply to all weapons
 	/// </summary>
-	public void changeCooldown(float perc, float flat, UnityEngine.Object obj, bool stackable = false)
-	{
-		NumberAlter number = GetNumberAlter("Cooldown");
+	public void changeCooldown(float perc, float flat, UnityEngine.Object obj, bool isFriendly, bool stackable = false)
+    {
+        if (isFriendly && !myStats.myManager.metaStatus.CanBuff || !isFriendly && !myStats.myManager.metaStatus.canDebuff)
+        {
+            return;
+        }
+        NumberAlter number = GetNumberAlter("Cooldown");
 		number.AddBuff(perc, flat, obj, stackable);
 		foreach (Ability ab in myStats.myManager.abilityList)
 		{
@@ -329,9 +376,13 @@ public class StatChanger
 	/// <summary>
 	///  .2f as a perent means a 20% increase, This will apply to all weapons
 	/// </summary>
-	public void changeVisionRange(float perc, float flat, UnityEngine.Object obj, bool stackable = false)
-	{
-		NumberAlter number = GetNumberAlter("VisionRange");
+	public void changeVisionRange(float perc, float flat, UnityEngine.Object obj, bool isFriendly, bool stackable = false)
+    {
+        if (isFriendly && !myStats.myManager.metaStatus.CanBuff || !isFriendly && !myStats.myManager.metaStatus.canDebuff)
+        {
+            return;
+        }
+        NumberAlter number = GetNumberAlter("VisionRange");
 		number.AddBuff(perc, flat, obj, stackable);
 		myStats.myManager.visionRange = number.ApplyBuffs(number.baseAmount);
 		myStats.myManager.getVisionSphere().radius = myStats.myManager.visionRange;
@@ -348,8 +399,12 @@ public class StatChanger
 	/// <summary>
 	///  .2f as a perent means a 20% increase, This will apply to all weapons
 	/// </summary>
-	public void changeCastRange(float perc, float flat, UnityEngine.Object obj, bool stackable = false)
+	public void changeCastRange(float perc, float flat, UnityEngine.Object obj, bool isFriendly, bool stackable = false)
 	{
+        if(isFriendly && !myStats.myManager.metaStatus.CanBuff || !isFriendly && !myStats.myManager.metaStatus.canDebuff)
+        {
+            return;
+        }
 		NumberAlter number = GetNumberAlter("CastRange");
 		number.AddBuff(perc, flat, obj, stackable);
 		foreach (Ability ab in myStats.myManager.abilityList)

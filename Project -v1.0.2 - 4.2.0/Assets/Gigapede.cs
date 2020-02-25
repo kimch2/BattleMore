@@ -44,7 +44,7 @@ public class Gigapede : VisionTrigger, Modifier {
 	public override void  UnitEnterTrigger(UnitManager manager)
 	{
 		if(segmentLeft >1 && manager.gameObject != gameObject){
-			manager.myStats.statChanger.changeWeaponDamage(0, segmentLeft - 1, this);
+			manager.myStats.statChanger.changeWeaponDamage(0, segmentLeft - 1, this, true);
 		}
 		
 	}
@@ -61,7 +61,7 @@ public class Gigapede : VisionTrigger, Modifier {
 
 
 		if(this &&manager && gameObject && segmentLeft >1 && manager.gameObject != gameObject){
-			manager.myStats.statChanger.changeWeaponDamage(0, segmentLeft - 1, this);
+			manager.myStats.statChanger.changeWeaponDamage(0, segmentLeft - 1, this, true);
 		}
 	}
 

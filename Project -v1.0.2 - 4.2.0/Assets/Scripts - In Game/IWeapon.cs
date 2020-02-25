@@ -146,7 +146,7 @@ private List<attackSpeedMod> DamageMod = new List<attackSpeedMod>();
 	IEnumerator ComeOffDamagePoint(float length)
 	{
 		yield return new WaitForSeconds (length);
-		PointSource.myStats.statChanger.removeMoveSpeed (this);
+        PointSource.metaStatus.UnRoot(this);
 	}
 
 
@@ -272,7 +272,7 @@ private List<attackSpeedMod> DamageMod = new List<attackSpeedMod>();
 	
 
 		if (toStun && damagePoint > 0) {
-			toStun.myStats.statChanger.changeMoveSpeed(-1, 0, this);
+			toStun.metaStatus.Root(toStun, this, true, 0);
 
 			StartCoroutine (ComeOffDamagePoint (damagePoint));
 

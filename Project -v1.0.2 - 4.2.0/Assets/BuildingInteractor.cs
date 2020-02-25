@@ -45,7 +45,7 @@ public class BuildingInteractor : MonoBehaviour, Iinteract {
 				underConstruction = 1;
 
 			} else {
-				myManager.setStun (true, this, false);
+				myManager.metaStatus.Stun(myManager, this, true);
 			}
 			if (!myAnim) {
 				myAnim = GetComponentInChildren<Animator> ();
@@ -164,7 +164,7 @@ public class BuildingInteractor : MonoBehaviour, Iinteract {
 			GameManager.main.playerList [myManager.PlayerOwner - 1].addUnit (myManager);
 			doneConstruction = true;
 			//Debug.Log ("Finished up");
-			myManager.setStun (false, this, true);
+			myManager.metaStatus.UnStun(this);
 			if (myAnim) {
 				myAnim.SetInteger ("State", 1);
 			}

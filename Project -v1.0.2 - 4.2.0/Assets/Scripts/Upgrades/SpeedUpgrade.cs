@@ -24,7 +24,7 @@ public class SpeedUpgrade  : Upgrade {
 			if (manager.UnitName.Contains(ua.UnitName)) {
 				
 
-				manager.myStats.statChanger.changeMoveSpeed(ua.percAmount, ua.flatamount, null);
+				manager.myStats.statChanger.changeMoveSpeed(ua.percAmount, ua.flatamount, null, true);
 
 			}
 		}

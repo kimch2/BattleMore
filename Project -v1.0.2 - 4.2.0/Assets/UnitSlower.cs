@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UnitSlower : MonoBehaviour {
 
-
+    // Is this script used specifically on the Payload maps of battlemore?
 	public bool slowUnits;
 
 	int playerOwner;
@@ -58,8 +58,6 @@ public class UnitSlower : MonoBehaviour {
 		}
 
 		inSight.Clear ();
-
-
 	}
 
 	IEnumerator waitForSec( UnitManager manage)
@@ -68,9 +66,9 @@ public class UnitSlower : MonoBehaviour {
 		inSight.Add (manage);
 
 		if (slowUnits) {
-			manage.myStats.statChanger.changeMoveSpeed(slowAmount,0, this);
+			manage.myStats.statChanger.changeMoveSpeed(slowAmount,0, this, true);
 		} else {
-			manage.myStats.statChanger.changeMoveSpeed(slowAmount, 0, this);
+			manage.myStats.statChanger.changeMoveSpeed(slowAmount, 0, this, true);
 		}
 
 

@@ -66,7 +66,7 @@ public class StimPack : Ability {
 
 			if (!on) {
 
-				myManager.myStats.statChanger.changeMoveSpeed (0,speedBoost,this);
+				myManager.myStats.statChanger.changeMoveSpeed (0,speedBoost,this,true);
 
 			
 				BoostEffect.continueEffect ();

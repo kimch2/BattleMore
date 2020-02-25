@@ -37,9 +37,6 @@ public class UnitManager : Unit, IOrderable {
 
     private UnitState myState;     // used for StateMachine
 
-    private List<Object> stunSources = new List<Object>();     // Used to keep track of stun lengths and duration, to ensure the strongest one is always applied.
-    private List<Object> silenceSources = new List<Object>();
-
     public voiceResponse myVoices;
 
     //List of weapons modifiers that need to be applied to weapons as they are put on this guy
@@ -59,8 +56,7 @@ public class UnitManager : Unit, IOrderable {
 
     }
 
-    private bool isStunned;
-    private bool isSilenced;
+    public MetaStatus metaStatus;
 
     public List<StartCommand> startingCommand;
     [Tooltip("Use this if you do not put anything in Starting COmmand List")]
@@ -71,6 +67,8 @@ public class UnitManager : Unit, IOrderable {
 
     new void Awake()
     {
+        metaStatus = new MetaStatus(this);
+
         if (interactor == null) {
             interactor = (Iinteract)gameObject.GetComponent(typeof(Iinteract));
         }
@@ -336,7 +334,7 @@ public class UnitManager : Unit, IOrderable {
 	public bool UseAbility(int n, bool queue)
 	{
 		
-		if (!isStunned && !isSilenced) {
+		if (metaStatus.canCast) {
 
 			continueOrder order = null;
 			if (abilityList [n] != null) {
@@ -358,7 +356,7 @@ public class UnitManager : Unit, IOrderable {
 	public bool UseTargetAbility(GameObject obj, Vector3 loc, int n, bool queue) // Either the obj - target or the location can be null.
 	{//Debug.Log("Targeting " + isStunned);
 		continueOrder order = new continueOrder();
-		if ((!isStunned && !isSilenced) || (isStunned && queue)) { // If stuff breaks with abilities, this second bool operator may have broken it, also look in the page where the queue is forcibly set
+		if (metaStatus.canCast || (!metaStatus.canCast && queue)) { // If stuff breaks with abilities, this second bool operator may have broken it, also look in the page where the queue is forcibly set
 			if (abilityList [n] != null) {
 	
 				order = abilityList [n].canActivate (true);
@@ -690,7 +688,7 @@ public class UnitManager : Unit, IOrderable {
 	// make sure that Queue front and queueback are never both true
 	public void changeState(UnitState nextState, bool Queuefront, bool QueueBack)
 	{
-		if (nextState != null && !isStunned) {
+		if (nextState != null && metaStatus.CanRecieveRightClick) {
 			enabled = true;
 		} // THIS MAY BREAK THINGS - IT Did, stun no longer works
 
@@ -922,76 +920,7 @@ public class UnitManager : Unit, IOrderable {
 	{
 		allies.RemoveAll(item => item == null);
 	}
-		public void setStun(bool StunOrNot, Object source,bool  showIcon)
-	{
-
-		if (StunOrNot) {
-			stunSources.Add (source);
-			if (cMover) {
-				cMover.stop ();
-			}
-		} else {
-			
-			stunSources.Remove (source);
-			stunSources.RemoveAll (item => item == null);
-
-		}
-	//	Debug.Log ("StunningBB " + StunOrNot + "   " + stunSources.Count + "   " + stunSources[0]);
-		enabled = !(stunSources.Count > 0);
-		isStunned = (stunSources.Count > 0);
-
-		//Debug.Log ("Is stunned ");
-		if (isStunned && StunRun == null && showIcon ) {
-			StunRun = StartCoroutine (stunnedIcon());
-		}
-		
-	}
-
-	Coroutine StunRun;
-
-	IEnumerator stunnedIcon()
-	{
-	//	Debug.Log ("Starting stun");
-
-		GameObject icon =  PopUpMaker.CreateStunIcon (this.gameObject);
-		while (isStunned) {
-		
-			yield return null;
-		}
-
-		Destroy (icon);
-		StunRun = null;
-	}
-
-	public void StunForTime(Object source, float duration, bool showIcon = true)
-	{
-
-		StartCoroutine (stunOverTime (source, duration * (1 - myStats.Tenacity)));
-		if (showIcon && isStunned && StunRun == null) {
-			StunRun = StartCoroutine (stunnedIcon());
-		}
-
-	}
-
-	IEnumerator stunOverTime(Object source, float duration)
-	{
-		if (cMover) {
-			cMover.stop ();
-		}
-		stunSources.Add (source);
-		isStunned = (stunSources.Count > 0);
-		enabled = !(stunSources.Count > 0);
-		yield return new WaitForSeconds (duration);
-		if (stunSources.Contains (source)) {
-			stunSources.Remove (source);
-		} else {
-			stunSources.RemoveAll (item => item == null);
-		}
-
-	isStunned = (stunSources.Count > 0);
-		enabled = !(stunSources.Count > 0);
-		
-	}
+	
 
     public void ExternalMove(Vector3 translationAmount, bool isFriendly)
     {
@@ -1001,29 +930,6 @@ public class UnitManager : Unit, IOrderable {
         }
         transform.Translate(translationAmount,Space.World);
     }
-
-
-	public void setSilence(bool input, Object source)
-	{
-		if (input) {
-			silenceSources.Add (source);
-		} else {
-			if (silenceSources.Contains (source)) {
-
-				silenceSources.Remove (source);}
-		}
-
-		isSilenced= (silenceSources.Count > 0);
-	}
-
-
-	public bool Silenced()
-	{return isSilenced;
-	}
-
-	public bool Stunned()
-	{return isStunned;
-	}
 
 
 	public void setWeapon(IWeapon weap)

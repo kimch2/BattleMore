@@ -38,7 +38,7 @@ public class ArmorBackHeal : Ability,Modifier {
 
 				IsArmored = true;
 				myStats.armor += ArmorAmount;
-				myManager.setStun (true, this, false);
+				myManager.metaStatus.Stun (myManager, this, true);
 				myAnimator.Play ("ArmorUp");
 				//myAnimator.SetInteger ("State", 0);
 				lastArmorTime = Time.time;
@@ -60,7 +60,7 @@ public class ArmorBackHeal : Ability,Modifier {
 			totalTime -= .333f;
 		}
 
-		myManager.setStun (false, this, false);
+		myManager.metaStatus.UnStun(this);
 		myAnimator.CrossFade ("BeetleIdle", 1);//.SetInteger ("State", 1);
 		myStats.armor -= ArmorAmount;
 		IsArmored = false;

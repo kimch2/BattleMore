@@ -92,7 +92,7 @@ public class EarthQuake : MonoBehaviour {
 				for (int i = 0; i < unitListCopy.Length; i++) {
 					if(Vector3.Distance(QuakeBuilding.transform.position, unitListCopy[i].transform.position) < maxDistance){
 						unitListCopy[i].myStats.TakeDamage (damage, null, DamageTypes.DamageType.Penetrating);
-						unitListCopy[i].StunForTime (QuakeBuilding, 10);
+						unitListCopy[i].metaStatus.Stun(null,this, false, 10);
 					}
 				}
 			}

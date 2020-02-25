@@ -158,7 +158,10 @@ public class CustomRVO : IMover {
 	override 
 	public bool Move()
 	{
-		
+
+        if (!enabled)
+        { return false; }
+
 		if (Time.time >= nextRepath && canSearchAgain) {
 			RecalculatePath();
 

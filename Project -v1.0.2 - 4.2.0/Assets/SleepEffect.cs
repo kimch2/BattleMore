@@ -59,9 +59,9 @@ public class SleepEffect : MonoBehaviour, Notify, Modifier
         TimePutToSleep = Time.time;
         Debug.Log("Putting to sleep");
         OnTarget = true;
-        GetComponent<UnitManager>().setStun(true, this, true);
+        GetComponent<UnitManager>().metaStatus.Stun(null, this, false, sleepTime);
         GetComponent<UnitStats>().addModifier(this);
-        Invoke("WakeUp", sleepTime); // Multiply this by tenacity later
+        //Invoke("WakeUp", sleepTime); // Multiply this by tenacity later
 
     }
 
@@ -79,7 +79,7 @@ public class SleepEffect : MonoBehaviour, Notify, Modifier
     void WakeUp()
     {
         Debug.Log("Wake up");
-        GetComponent<UnitManager>().setStun(false, this, false);
+        GetComponent<UnitManager>().metaStatus.UnStun(this);
         GetComponent<UnitStats>().removeModifier(this);
     }
 

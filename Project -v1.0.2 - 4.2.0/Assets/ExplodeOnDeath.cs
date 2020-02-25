@@ -100,7 +100,7 @@ public class ExplodeOnDeath : IEffect, Modifier {
 		UnitManager manager = target.GetComponent<UnitManager>();
 		if (manager.cMover)
 		{
-			manager.myStats.statChanger.changeMoveSpeed(speedboost, 0, null);
+			manager.myStats.statChanger.changeMoveSpeed(speedboost, 0, null, true);
 		}
 	}
 

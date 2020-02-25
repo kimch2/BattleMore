@@ -66,6 +66,8 @@ public class airmover : IMover {
 	override
 	public bool Move()
 	{
+        if (!enabled)
+        { return false; }
 
 		if (!workingframe) {
 			workingframe = !workingframe;

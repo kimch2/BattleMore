@@ -106,7 +106,7 @@ public class UltimateApplier : MonoBehaviour {
 
 		else if (myRace.UltTwo == ab) {
 	
-			thingy.GetComponent<UnitStats> ().statChanger.changeAttackSpeed (-.2f * NimbusOne,0, null);
+			thingy.GetComponent<UnitStats> ().statChanger.changeAttackSpeed (-.2f * NimbusOne,0, null,true);
 
 
 			if (NimbusTwo == 1) {

@@ -118,7 +118,7 @@ public class ShieldSpeedBoost : Buff,Modifier,Notify {
 	void activateSPeedBoost()
 	{
 		//ShieldsDown = true;
-		mymanager.myStats.statChanger.changeMoveSpeed(speedBoost,0,this);
+		mymanager.myStats.statChanger.changeMoveSpeed(speedBoost,0,this,true);
 		BoostEffect.continueEffect ();
 
 		if (select.IsSelected) {

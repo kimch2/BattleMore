@@ -40,7 +40,7 @@ public class OnTakeDamage : MonoBehaviour, Modifier {
 	IEnumerator Changer()
 	{
 		turnOffTime = Time.time + duration;
-		myManager.myStats.statChanger.changeMoveSpeed (0,speedChange,this);
+		myManager.myStats.statChanger.changeMoveSpeed (0,speedChange,this, speedChange > 0);
 
 
 		while (Time.time < turnOffTime) {

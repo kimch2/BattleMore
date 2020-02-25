@@ -31,7 +31,7 @@ public class DeathCubeDeactivator : Ability,EnemySighted{
 	public void EnemySpotted (UnitManager otherManager)
 	{
 		if (otherManager.UnitName == "Death Cube") {
-			otherManager.myStats.statChanger.changeMoveSpeed (-.5f,0,this);
+			otherManager.myStats.statChanger.changeMoveSpeed (-.5f,0,this, false);
 			otherManager.getUnitStats ().armor -= 99;
 
 			if (enemyOne == null) {

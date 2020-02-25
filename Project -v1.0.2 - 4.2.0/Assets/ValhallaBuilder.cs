@@ -89,7 +89,7 @@ public class ValhallaBuilder : UnitProduction
 
         UnitManager UnitMan = inConstruction.GetComponent<UnitManager>();
         UnitMan.Start();
-        UnitMan.setStun(true, this, false);
+        UnitMan.metaStatus.Stun(null, this, true);
 
 
     }  // returns whether or not the next unit in the same group should also cast it

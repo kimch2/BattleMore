@@ -41,7 +41,7 @@ public class CoagulateAura : MonoBehaviour {
 			}
 			nextaction += .5f;
 			myStats.statChanger.removeMoveSpeed(this);
-			myStats.statChanger.changeMoveSpeed(- (1 - (myStats.health / myStats.Maxhealth)), 0,this);
+			myStats.statChanger.changeMoveSpeed(- (1 - (myStats.health / myStats.Maxhealth)), 0,this, false);
 
 		}
 
@@ -64,7 +64,7 @@ public class CoagulateAura : MonoBehaviour {
 			myAura.transform.Rotate (new Vector3 (-90, 0, 0));
 		}
 		myStats.statChanger.removeMoveSpeed(this);
-		myStats.statChanger.changeMoveSpeed(-(1 - (myStats.health / myStats.Maxhealth)), 0, this);
+		myStats.statChanger.changeMoveSpeed(-(1 - (myStats.health / myStats.Maxhealth)), 0, this, false);
 
 	}
 }

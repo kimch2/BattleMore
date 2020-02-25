@@ -67,8 +67,8 @@ public class AetherOvercharge : Buff, Notify{
 		AetherEffect.transform.SetParent (this.gameObject.transform);
 
 
-		unitman.myStats.statChanger.changeAttackSpeed(attackSpeed, 0, this);
-		unitman.myStats.statChanger.changeWeaponDamage(attackDamage, 0, this);
+		unitman.myStats.statChanger.changeAttackSpeed(attackSpeed, 0, this,true);
+		unitman.myStats.statChanger.changeWeaponDamage(attackDamage, 0, this,true);
 
 		foreach (IWeapon weap in unitman.myWeapon)
 		{

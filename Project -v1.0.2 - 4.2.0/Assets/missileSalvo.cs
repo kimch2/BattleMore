@@ -242,7 +242,7 @@ public class missileSalvo :  Ability, Iinteract, Validator, Notify{
 
 		GetComponent<CharacterController> ().radius = 2.1f;
 
-		myManager.StunForTime (this, landingTime);
+		myManager.metaStatus.Stun(myManager, this, true,landingTime);
 		StopCoroutine (ReFill);
 
 		yield return new WaitForSeconds (1.5f);
@@ -252,7 +252,7 @@ public class missileSalvo :  Ability, Iinteract, Validator, Notify{
 		yield return new WaitForSeconds (1.2f);
 
 		ReFill = null;
-		myManager.setStun (false, this, false);
+		myManager.metaStatus.UnStun ( this);
 
 		inLanding = false;
 		if (home) {

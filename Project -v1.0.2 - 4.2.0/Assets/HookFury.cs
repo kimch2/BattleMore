@@ -28,7 +28,7 @@ public class HookFury : MonoBehaviour,  Notify {
 		//Debug.Log ("Changing " + toChange);
 
 		myStats.statChanger.removeAttackSpeed(this);
-		myStats.statChanger.changeAttackSpeed(toChange, 0, this);
+		myStats.statChanger.changeAttackSpeed(toChange, 0, this, true);
 		return damage;
 	}
 

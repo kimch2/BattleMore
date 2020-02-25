@@ -22,7 +22,7 @@ public class UnitCrusher : MonoBehaviour, Notify {
 		StartCoroutine (CrushGuy ());
 	}
 	IEnumerator CrushGuy()
-	{	GetComponent<UnitManager> ().StunForTime (null, 15);
+	{	GetComponent<UnitManager> ().metaStatus.Stun( null, this, false);
 		float startY = transform.localScale.y;
 		for (float i = 0; i < 6; i += Time.deltaTime) { 
 			yield return null;

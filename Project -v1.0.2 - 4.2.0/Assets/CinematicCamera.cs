@@ -148,10 +148,18 @@ public class CinematicCamera : SceneEventTrigger {
 		foreach (int n in myScenes[currentScene].playersToStun) {
 			foreach (KeyValuePair<string, List<UnitManager>> pairs in  GameManager.main.playerList[n-1].getFastUnitList()) {
 				foreach (UnitManager manage in pairs.Value) {
-					if (manage) {
-						//Debug.Log ("Stunning " + manage.gameObject +"  " + active);
-						manage.setStun (active, this, false);
-					}
+                    if (manage) {
+                        //Debug.Log ("Stunning " + manage.gameObject +"  " + active);
+                        if (active)
+                        {
+                            manage.metaStatus.Stun(manage, this, true);
+                        }
+                        else
+                        {
+                            manage.metaStatus.UnStun(this);
+                        }
+
+                    }
 				}
 			}
 		}

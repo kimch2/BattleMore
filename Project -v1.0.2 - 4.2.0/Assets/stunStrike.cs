@@ -38,7 +38,7 @@ public class stunStrike : MonoBehaviour, Notify {
 					return damage;}
 			}
 		
-			target.StunForTime (source, stunTime);
+			target.metaStatus.Stun (source.GetComponent<UnitManager>(), source, false, stunTime);
 
 		}
 		return damage;

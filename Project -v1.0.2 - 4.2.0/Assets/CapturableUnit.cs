@@ -33,7 +33,7 @@ public class CapturableUnit : MonoBehaviour, Modifier  {
 		yield return null;
 		foreach (UnitManager manager in myManagers) {
 			manager.myStats.addModifier (this);
-			manager.setStun (true, this, false);
+			manager.metaStatus.Stun (manager, this, true);
 			manager.getVisionSphere ().radius = captureRange;
 		}
 
@@ -131,7 +131,7 @@ public class CapturableUnit : MonoBehaviour, Modifier  {
 
 		manage.getVisionSphere ().radius = manage.visionRange;
 
-		manage.setStun (false, this, false);
+		manage.metaStatus.UnStun( this);
 		manage.myStats.veternStat.playerOwner = 1;
 
 		manage.PlayerOwner = 1;

@@ -93,7 +93,7 @@ public class PhysicsSimulator : MonoBehaviour {
 	{
 		Vector3 startPoint = target.transform.position;
 	
-		target.StunForTime (target,travelTime, !linear);
+		target.metaStatus.Stun (target, this, true,travelTime); // How to determine if its friendly or not???
 
 		float UpSpeed = UpForce;
 

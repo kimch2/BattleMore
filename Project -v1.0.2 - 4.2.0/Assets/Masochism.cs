@@ -63,8 +63,8 @@ public class Masochism : Ability {
 					this.gameObject.AddComponent<SlowDebuff> ();
 				}
 				GetComponent<SlowDebuff> ().initialize (duration, -speedBoost, 0,0,0, true);
-				myManager.myStats.statChanger.changeAttackSpeed(.5f,0,this);
-				myManager.myStats.statChanger.changeMoveSpeed(speedBoost, 0, this);
+				myManager.myStats.statChanger.changeAttackSpeed(.5f,0,this, true);
+				myManager.myStats.statChanger.changeMoveSpeed(speedBoost, 0, this, true);
 
 
 				myCost.payCost ();
