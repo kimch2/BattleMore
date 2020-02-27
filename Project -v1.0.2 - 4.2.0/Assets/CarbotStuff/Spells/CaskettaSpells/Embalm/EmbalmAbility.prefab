@@ -47,7 +47,7 @@ MonoBehaviour:
   Name: Embalm
   Descripton: Poison enemy minions in a small area indefinitely dealing 1 damage per
     second, increasing its damage by 1 every second.
-  iconPic: {fileID: 3286163911610860551, guid: 88394cd57c1d5394e98f25eabb271bad, type: 3}
+  iconPic: {fileID: 21300000, guid: e1a570795ffc70849be77d98fcf14cb5, type: 3}
   myCost: {fileID: 7607037698507902302}
   continueMoving: 1
   RequiredUnit: []

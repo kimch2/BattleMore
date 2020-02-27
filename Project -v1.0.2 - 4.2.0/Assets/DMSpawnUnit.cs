@@ -14,12 +14,22 @@ public class DMSpawnUnit : Ability
     public override void Activate()
     {
         myCost.payCost();
-        UnitManager unitMan = ToSpawn.GetComponent<UnitManager>();
+
         for (int i = 0; i < spawnCount; i++)
         {
-           GameObject newGuy = unitMan.CreateInstance(getSpawnLocation() + Vector3.forward * i * 5, myManager.PlayerOwner);
-            Debug.Log(transform.position + "   " + (transform.position + Vector3.right * 75));
-           newGuy.GetComponent<UnitManager>().GiveOrder(Orders.CreateAttackMove(transform.position + Vector3.right * 75, true));
+            GameObject newGuy = GameObject.Instantiate<GameObject>(ToSpawn);// unitMan.CreateInstance(getSpawnLocation() + Vector3.forward * i * 5, myManager.PlayerOwner);
+            newGuy.transform.position = getSpawnLocation() + Vector3.forward * i * 5;
+            // Debug.Log(transform.position + "   " + (transform.position + Vector3.right * 75));
+            foreach (UnitManager man in newGuy.GetComponentsInChildren<UnitManager>())
+            {
+
+                myManager.Initialize(myManager.PlayerOwner, true, man.getUnitStats().isUnitType(UnitTypes.UnitTypeTag.Structure));
+                if (man.cMover)
+                {                  
+                    man.GiveOrder(Orders.CreateAttackMove(transform.position + Vector3.right * 75, true));
+                }
+            } 
+          // newGuy.GetComponent<UnitManager>().GiveOrder(Orders.CreateAttackMove(transform.position + Vector3.right * 75, true));
         }
     }
 

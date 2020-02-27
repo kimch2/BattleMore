@@ -60,7 +60,10 @@ public class MetaStatus
 
     void DisableMovement()
     {
-        myManager.cMover.enabled = false;
+        if (myManager.cMover)
+        {
+            myManager.cMover.enabled = false;
+        }
         canMove = false;
     }
 
@@ -94,7 +97,10 @@ public class MetaStatus
     {
         if (!cachedStatus.ContainsKey(statusType.Stun) && !cachedStatus.ContainsKey(statusType.Root))
         {
-            myManager.cMover.enabled = true;
+            if (myManager.cMover)
+            {
+                myManager.cMover.enabled = true;
+            }
             canMove = true;
         }
     }

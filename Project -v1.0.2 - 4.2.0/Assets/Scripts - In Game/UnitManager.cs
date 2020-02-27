@@ -189,25 +189,25 @@ public class UnitManager : Unit, IOrderable {
     }
 
 
-	bool hasStarted = false;
-	public void Start()
-	{
+    bool hasStarted = false;
+    public void Start()
+    {
 
-		if (!hasStarted) {
+        if (!hasStarted) {
 
-			if (startingCommand.Count > 0 || cMover) {
-				Invoke ("GiveStartCommand", .1f);
-			}
+            if (startingCommand.Count > 0 || cMover) {
+                Invoke("GiveStartCommand", .1f);
+            }
             //Debug.Log("IN here " + (Time.timeSinceLevelLoad < 1) +"    "+!myStats.isUnitType(UnitTypes.UnitTypeTag.Structure) + "    " + myStats.isUnitType(UnitTypes.UnitTypeTag.Add_On));
-			if (Time.timeSinceLevelLoad < 1 || !myStats.isUnitType (UnitTypes.UnitTypeTag.Structure) || myStats.isUnitType (UnitTypes.UnitTypeTag.Add_On)) {
+            if (Time.timeSinceLevelLoad < 1 || !myStats.isUnitType(UnitTypes.UnitTypeTag.Structure) || myStats.isUnitType(UnitTypes.UnitTypeTag.Add_On)) {
 
-                GameManager.getInstance ().playerList [PlayerOwner - 1].addUnit (this);
-			}
+                GameManager.getInstance().playerList[PlayerOwner - 1].addUnit(this);
+            }
 
-			myStats.setAggressionPriority();
-			myRacer = GameManager.main.playerList[PlayerOwner - 1];
-			hasStarted = true;
-			initializeVision();
+            myStats.setAggressionPriority();
+            myRacer = GameManager.main.playerList[PlayerOwner - 1];
+            hasStarted = true;
+            initializeVision();
             if (myAnim)
             {
                 foreach (AnimatorControllerParameter parem in myAnim.parameters)
@@ -221,7 +221,28 @@ public class UnitManager : Unit, IOrderable {
             }
 
         }
-	}
+    }
+
+    /// <summary>
+    /// Call this when you spawn this unit, 
+    /// ApplySupply only if its not being applied elsewhere (like when you reserve suplly while he is being constructed)
+    /// </summary>
+    /// <param name="playerNumber"></param>
+    public void Initialize(int playerNumber, bool applySupply, bool isStructure)
+    {
+      PlayerOwner = playerNumber;
+
+       setInteractor();
+       interactor.initializeInteractor();
+        if (applySupply)
+        {
+           getRaceManager().UnitCreated(getUnitStats().supply);
+        }
+        if (isStructure)
+        {
+            // TO DO!
+        }
+    }
 
 	public RaceManager getRaceManager()
 	{

@@ -33,25 +33,25 @@ public class CarbotCamera : MainCamera
         MaxXDistance = HeroToFollow.transform.position.x - HeroOffset;
     }
 
-   /* public override void Update()
-    {
-        if (!CurrentlySmashing)
-        {
-            if (HeroToFollow)
-            {
-                MaxXDistance = Mathf.Max(HeroToFollow.transform.position.x - HeroOffset, MaxXDistance);
-                if (MaxXDistance == HeroToFollow.transform.position.x - HeroOffset)
-                {
-                    transform.position = new Vector3(MaxXDistance - HeroOffset, transform.position.y, transform.position.z);
-                    ProgressSlider.value = (transform.position.x - startPoint.x) / (endPoint.x - startPoint.x);
-                }
-            }
-            else
-            {
-                ErrorPrompt.instance.notEnoughEnergy();
-            }
-        }
-    }*/
+    /* public override void Update()
+     {
+         if (!CurrentlySmashing)
+         {
+             if (HeroToFollow)
+             {
+                 MaxXDistance = Mathf.Max(HeroToFollow.transform.position.x - HeroOffset, MaxXDistance);
+                 if (MaxXDistance == HeroToFollow.transform.position.x - HeroOffset)
+                 {
+                     transform.position = new Vector3(MaxXDistance - HeroOffset, transform.position.y, transform.position.z);
+                     ProgressSlider.value = (transform.position.x - startPoint.x) / (endPoint.x - startPoint.x);
+                 }
+             }
+             else
+             {
+                 ErrorPrompt.instance.notEnoughEnergy();
+             }
+         }
+     }*/
     /*
     public override void Zoom(object sender, ScrollWheelEventArgs e)
     {
@@ -92,6 +92,37 @@ public class CarbotCamera : MainCamera
         CurrentlySmashing = false;
     }
     */
+
+    public Vector3 getRightScreenEdge(Vector3 unitLocation)
+    {
+        Vector3 screenPoint = myCamera.WorldToScreenPoint(unitLocation);
+        screenPoint.x =Screen.width;
+        Ray ray = myCamera.ScreenPointToRay(screenPoint, Camera.MonoOrStereoscopicEye.Mono);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit))
+        {
+            return hit.point;
+        }
+        Debug.Log(" Could not find a terrain on the right side of the screen");
+        return unitLocation;
+    }
+
+    public Vector3 getLeftScreenEdge(Vector3 unitLocation)
+    {
+        Vector3 screenPoint = myCamera.WorldToScreenPoint(unitLocation);
+        screenPoint.x = 0;
+        Ray ray = myCamera.ScreenPointToRay(screenPoint, Camera.MonoOrStereoscopicEye.Mono);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit))
+        {
+            return hit.point;
+        }
+        Debug.Log(" Could not find a terrain on the Left side of the screen");
+        return unitLocation;
+    }
+
     protected override void OnDrawGizmos()
     {
         base.OnDrawGizmos();

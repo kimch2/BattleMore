@@ -285,7 +285,7 @@ public class DeployTurret  : TargetAbility{
 	override
 	public  bool Cast(GameObject target, Vector3 location)
 	{
-        Debug.Log("Firing");
+
 		if (chargeCount == maxChargeCount) {
 			currentReplciation = StartCoroutine (replicateTurrets ());
 		} 

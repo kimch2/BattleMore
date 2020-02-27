@@ -1,0 +1,82 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6112760354417249669
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 418628824792808139}
+  - component: {fileID: 6629069441160826077}
+  - component: {fileID: 6112760354417249668}
+  m_Layer: 0
+  m_Name: Call Home Ability
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &418628824792808139
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6112760354417249669}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -549.99023, y: 30.096788, z: 107.2542}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6629069441160826077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6112760354417249669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8565709075defc741b27fcdf0b778b1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showCooldown: 0
+  resourceCosts:
+    MyResources: []
+  health: 0
+  energy: 20
+  cooldown: 0
+  cooldownTimer: 0
+  StartsRefreshed: 1
+  UsedFor: 
+--- !u!114 &6112760354417249668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6112760354417249669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ef536b1408e8f7458d72ed4face0ead, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Call Home
+  Descripton: Sacrifice all of your minions and refund their casting cost.
+  iconPic: {fileID: 21300000, guid: b401c622ee262b446933d763f81870f5, type: 3}
+  myCost: {fileID: 6629069441160826077}
+  continueMoving: 1
+  RequiredUnit: []
+  canAutoCast: 0
+  autocast: 0
+  active: 1
+  maxChargeCount: 0
+  chargeCount: -1
+  soundEffect: {fileID: 0}
+  ResourceReturnRate: 1
+  UnitsToIgnore:
+  - Skelly

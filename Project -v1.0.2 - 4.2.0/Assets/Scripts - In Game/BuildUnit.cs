@@ -159,10 +159,9 @@ public class BuildUnit : UnitProduction {
 		GameObject unit = (GameObject)Instantiate(unitToBuild, location, Quaternion.identity);
 		unit.transform.LookAt (location + Vector3.right + Vector3.back);
 		UnitManager unitMan = unit.GetComponent<UnitManager> ();
-		unitMan.PlayerOwner = myManage.PlayerOwner;
 
-		unitMan.setInteractor();
-		unitMan.interactor.initializeInteractor();
+        unitMan.Initialize(myManage.PlayerOwner, false, false);
+
         if (myInteractor != null) {
 
 			//Sends units outside of the Construction yard, so it looks like they were built inside.
