@@ -146,7 +146,7 @@ public class explosion : MonoBehaviour {
 					}
 				}
 			}
-			foreach (UnitManager unit in toDamage)
+			foreach (UnitManager unit in toDamage) // Gotta do this in a separate loop so we don't get iteration errors when a guy dies
 			{
 				DealDamage(unit, TempDamageAmount);
 			}

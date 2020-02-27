@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MassSalvage : Ability
+public class MassSalvage : TargetAbility
 {
     [Tooltip("should be between 0-1, 1 being 100% of the original Cast Cost")]
     public float ResourceReturnRate = 1;
@@ -45,4 +45,18 @@ public class MassSalvage : Ability
 
     }
 
+    public override void Cast()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override bool Cast(GameObject target, Vector3 location)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override bool isValidTarget(GameObject target, Vector3 location)
+    {
+        throw new System.NotImplementedException();
+    }
 }

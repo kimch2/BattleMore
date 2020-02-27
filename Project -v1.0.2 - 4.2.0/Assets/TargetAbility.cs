@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-
+using System.Collections.Generic;
 using System.Collections;
 
 public abstract class TargetAbility : Ability
@@ -79,4 +79,68 @@ public abstract class TargetAbility : Ability
             myIndicator.SetActive(false);
         }
     }
+    /// <summary>
+    ///  The Active Player is 1, enemy is 2, nuetral is 3, 4+ are other enemies
+    /// </summary>
+    /// <param name="Origin"></param>
+    /// <param name="playerNumber"></param>
+    /// <param name="radius"></param>
+    /// <returns></returns>
+    protected List<UnitManager> GetUnitsInRange(Vector3 Origin, int playerNumber, float radius)
+    {
+        float sizeSquared = radius * radius;
+        List<UnitManager> toTarget = new List<UnitManager>();
+
+        foreach (KeyValuePair<string, List<UnitManager>> unitList in GameManager.main.playerList[playerNumber - 1].getUnitList())
+        {
+            foreach (UnitManager unit in unitList.Value)
+            {
+                if (unit == null)
+                {
+                    continue;
+                }
+
+                if (new Vector2(unit.transform.position.x - Origin.x, unit.transform.position.z - Origin.z).sqrMagnitude <= Mathf.Pow(sizeSquared + unit.CharController.radius, 2))
+                {
+                    toTarget.Add(unit);
+                }
+            }
+        }
+        return toTarget;
+    }
+
+    /// <summary>
+    /// Checks for chargeCount and Costs. Next cast should be true if multiple selected units should all cast the spell, like stim pack
+    /// </summary>
+    /// <param name="NextCast"></param>
+    /// <param name="error"></param>
+    /// <returns></returns>
+    protected continueOrder DefaultCanActivate(bool NextCast,  bool error)
+    {
+        continueOrder order = new continueOrder();
+        if (chargeCount == 0 && chargeCount != -1)
+        {
+            order.canCast = false;
+        }
+
+        if (!myCost.canActivate(this))
+        {
+            order.canCast = false;
+            // FIX THIS LINE IN THE FUTURE IF IT BREAKS! its currently in here to allow guys with multiple charges to use them even though the cooldown timer is shown.
+            if (myCost.energy == 0 && myCost.resourceCosts.MyResources.Count == 0 && chargeCount > 0)
+            {
+                order.canCast = true;
+            }
+        }
+        else
+        {
+            order.nextUnitCast = NextCast;
+        }
+        if (order.canCast)
+        {
+            order.nextUnitCast = NextCast;
+        }
+        return order;
+    }
+
 }
