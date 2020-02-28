@@ -391,11 +391,13 @@ public class UnitManager : Unit, IOrderable {
 					} else if (abilityList [n] is SummonStructure) {
 						((SummonStructure)abilityList [n]).setBuildSpot (loc, obj);
 						((SummonStructure)abilityList [n]).Activate ();
-					}
+                        WorldRecharger.main.SpellWasCast(PlayerOwner, gameObject);
+                    }
                     else if (abilityList[n] is ValhallaBuilder)
                     {
                         ((ValhallaBuilder)abilityList[n]).setBuildSpot(loc, obj);
                         ((ValhallaBuilder)abilityList[n]).Activate();
+                        WorldRecharger.main.SpellWasCast(PlayerOwner, gameObject);
                     }
 
                 }

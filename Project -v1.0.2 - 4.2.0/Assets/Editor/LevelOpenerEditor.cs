@@ -167,4 +167,10 @@ public class LevelOpenerEditor : EditorWindow
         EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo();
         EditorSceneManager.OpenScene("Assets/CarbotStuff/DaMinionsMainMenu.unity");
     }
+    [MenuItem("DaMinionz/ Aaron Test Level")]
+    public static void Z()
+    {
+        EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo();
+        EditorSceneManager.OpenScene("Assets/CarbotStuff/DMAaronTestLevel.unity");
+    }
 }

@@ -129,8 +129,8 @@ public class Page  {
 							queue = true;
 						}
 						unit.UseTargetAbility (obj, loc, X, queue);
-				
-					}
+                       // WorldRecharger.main.SpellWasCast(unit.getUnitManager().PlayerOwner, unit.gameObject);
+                    }
 
 				}
 

@@ -76,7 +76,8 @@ public class AbilityFollowState  : UnitState {
 			myAbility.setTarget(location, target);
 			if (myAbility.canActivate (false).canCast) {
 				myAbility.Cast ();
-			}
+                WorldRecharger.main.SpellWasCast(myManager.PlayerOwner, myManager.gameObject);
+            }
 		
 			myManager.changeState(new DefaultState());
 			return;

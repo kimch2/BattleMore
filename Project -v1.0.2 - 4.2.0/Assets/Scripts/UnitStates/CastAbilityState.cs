@@ -27,17 +27,12 @@ public class CastAbilityState  : UnitState {
 
 	// Update is called once per frame
 	override
-	public void Update () {
-
+	public void Update () {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+                                                                                                                                                                                                                                                                
 
 		myAbility.Activate();
-
-		myManager.nextState ();
-		//myManager.changeState(new DefaultState());
-			
-	
-
-
+        WorldRecharger.main.SpellWasCast(myManager.PlayerOwner,myManager.gameObject);
+        myManager.nextState ();
 
 
 	}
