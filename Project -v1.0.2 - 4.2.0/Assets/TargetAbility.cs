@@ -73,7 +73,6 @@ public abstract class TargetAbility : Ability
 
     public void DisableSkillShotIndicator()
     {
-        Debug.Log("Disableing");
         if (myIndicator)
         {
             myIndicator.SetActive(false);
@@ -88,7 +87,8 @@ public abstract class TargetAbility : Ability
     /// <returns></returns>
     protected List<UnitManager> GetUnitsInRange(Vector3 Origin, int playerNumber, float radius)
     {
-        float sizeSquared = radius * radius;
+
+        radius /= 2;
         List<UnitManager> toTarget = new List<UnitManager>();
 
         foreach (KeyValuePair<string, List<UnitManager>> unitList in GameManager.main.playerList[playerNumber - 1].getUnitList())
@@ -99,8 +99,7 @@ public abstract class TargetAbility : Ability
                 {
                     continue;
                 }
-
-                if (new Vector2(unit.transform.position.x - Origin.x, unit.transform.position.z - Origin.z).sqrMagnitude <= Mathf.Pow(sizeSquared + unit.CharController.radius, 2))
+                if (new Vector2(unit.transform.position.x - Origin.x, unit.transform.position.z - Origin.z).sqrMagnitude <= Mathf.Pow(radius + unit.CharController.radius, 2))
                 {
                     toTarget.Add(unit);
                 }

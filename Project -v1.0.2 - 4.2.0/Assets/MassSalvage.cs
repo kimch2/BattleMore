@@ -11,28 +11,12 @@ public class MassSalvage : TargetAbility
 
     public override void Start() // We have this here so other source can call Start and any of this guy's inheriters will have it called instead
     {
-        myType = type.activated;
+        myType = type.target;
     }
 
     public override void Activate()
     {
-        myCost.payCost();
-
-        foreach (KeyValuePair<string, List<UnitManager>> pairs in myManager.myRacer.getUnitList())
-        {
-            if (!UnitsToIgnore.Contains(pairs.Key))
-            {
-                foreach (UnitManager man in pairs.Value)
-                {
-                    if (man != myManager)
-                    {
-                        float resources = man.myStats.cost / man.myStats.supply;
-                        man.myStats.kill(null); // This won't work if they are invulnerable, Need a sacrifice outlet?
-                        myManager.myStats.changeEnergy(resources);
-                    }
-                }
-            }
-        }   
+  
     }
 
     public override continueOrder canActivate(bool error)
@@ -47,16 +31,28 @@ public class MassSalvage : TargetAbility
 
     public override void Cast()
     {
-        throw new System.NotImplementedException();
+        myCost.payCost();
+
+        foreach (UnitManager pairs in GetUnitsInRange( location, myManager.PlayerOwner, areaSize))
+        {
+            if (!UnitsToIgnore.Contains(pairs.UnitName))
+            {
+                float resources = pairs.myStats.cost / pairs.myStats.supply;
+                pairs.myStats.kill(null); // This won't work if they are invulnerable, Need a sacrifice outlet?
+                myManager.myStats.changeEnergy(resources);     
+            }
+        }
+
     }
 
     public override bool Cast(GameObject target, Vector3 location)
     {
-        throw new System.NotImplementedException();
+
+        return true;
     }
 
     public override bool isValidTarget(GameObject target, Vector3 location)
     {
-        throw new System.NotImplementedException();
+        return true;
     }
 }

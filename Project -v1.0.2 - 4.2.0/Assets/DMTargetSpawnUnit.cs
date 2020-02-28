@@ -37,7 +37,7 @@ public class DMTargetSpawnUnit : TargetAbility
             // Debug.Log(transform.position + "   " + (transform.position + Vector3.right * 75));
             foreach (UnitManager man in newGuy.GetComponentsInChildren<UnitManager>())
             {
-
+                man.myStats.cost = myCost.energy;
                 myManager.Initialize(myManager.PlayerOwner, true, man.getUnitStats().isUnitType(UnitTypes.UnitTypeTag.Structure));
                 if (man.cMover)
                 {

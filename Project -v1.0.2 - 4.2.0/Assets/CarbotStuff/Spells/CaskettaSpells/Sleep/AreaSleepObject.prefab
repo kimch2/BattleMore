@@ -69,8 +69,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   source: {fileID: 0}
   sourceInt: 1
-  particleEff: {fileID: 6537020709821693806, guid: 274d7bd9de043c047af3be96d8762f3e,
-    type: 3}
+  particleEff: {fileID: 0}
   friendlyFireRatio: 0
   damageAmount: 10
   type: 0

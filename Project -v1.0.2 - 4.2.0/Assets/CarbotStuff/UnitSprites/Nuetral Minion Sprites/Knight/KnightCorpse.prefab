@@ -192,6 +192,7 @@ MonoBehaviour:
   myRenderer: {fileID: 5675629171897566212}
   frameRate: 12
   StartSprites:
+  - {fileID: 3286163911610860551, guid: 71a54f125e7ef0a4990cafe02deed5c0, type: 3}
   - {fileID: 3286163911610860551, guid: 4eca3ec4219abb74091866ecfdf59f24, type: 3}
   - {fileID: 3286163911610860551, guid: 5402194440981cb44a0aad4115ec090b, type: 3}
   - {fileID: 3286163911610860551, guid: 1f682b28fef1c2c478cbea860b44f703, type: 3}
@@ -200,10 +201,8 @@ MonoBehaviour:
   - {fileID: 3286163911610860551, guid: ef6270d2578462c40a81e04ff87bd75c, type: 3}
   - {fileID: 3286163911610860551, guid: af42f01e8c7fb68468be145deba43bdf, type: 3}
   - {fileID: 3286163911610860551, guid: 054f7190a5655e44ba4ede948124697c, type: 3}
-  - {fileID: 3286163911610860551, guid: 71a54f125e7ef0a4990cafe02deed5c0, type: 3}
-  - {fileID: 3286163911610860551, guid: dbb3984501d4a4440a36031832751971, type: 3}
   LoopSprites:
-  - {fileID: 3286163911610860551, guid: 4eca3ec4219abb74091866ecfdf59f24, type: 3}
+  - {fileID: 3286163911610860551, guid: 054f7190a5655e44ba4ede948124697c, type: 3}
 --- !u!114 &7733270251562453450
 MonoBehaviour:
   m_ObjectHideFlags: 0

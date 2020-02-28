@@ -930,7 +930,7 @@ MonoBehaviour:
   myIcon: {fileID: 21300000, guid: 26b59e5a237653d4b83214f0ea586275, type: 3}
   myManager: {fileID: 494265798218600512}
   OnHitEffect: {fileID: 0}
-  attackSoundEffect: {fileID: 8300000, guid: 2444f341ed7d87149b07664d6752657d, type: 3}
+  attackSoundEffect: {fileID: 8300000, guid: 44b3696bd5132401cafdca8526812f63, type: 3}
   myAnimator: {fileID: 0}
   AnimationName: Attack
   attackPeriod: 5

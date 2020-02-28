@@ -680,7 +680,7 @@ MonoBehaviour:
   EnergyRegenPerSec: 0
   EnergyRegenPerHalf: 0
   Icon: {fileID: 3286163911610860551, guid: 24c8c7dd34467e042afbb8386aca2cf3, type: 3}
-  supply: 3
+  supply: 1
   attackPriority: 3
   DefensePriority: 0
   agressionPriority: 0
@@ -792,7 +792,7 @@ MonoBehaviour:
   myIcon: {fileID: 21300000, guid: 26b59e5a237653d4b83214f0ea586275, type: 3}
   myManager: {fileID: 6166594910967440780}
   OnHitEffect: {fileID: 0}
-  attackSoundEffect: {fileID: 8300000, guid: 2444f341ed7d87149b07664d6752657d, type: 3}
+  attackSoundEffect: {fileID: 8300000, guid: f3645d7388d9f4efc88a56c59b3a70d4, type: 3}
   myAnimator: {fileID: 0}
   AnimationName: Attack
   attackPeriod: 1

@@ -21,7 +21,7 @@ public class DMSpawnUnit : Ability
             newGuy.transform.position = getSpawnLocation() + Vector3.forward * i * 5;
             foreach (UnitManager man in newGuy.GetComponentsInChildren<UnitManager>())
             {
-
+                man.myStats.cost = myCost.energy;
                 myManager.Initialize(myManager.PlayerOwner, true, man.getUnitStats().isUnitType(UnitTypes.UnitTypeTag.Structure));
                 if (man.cMover)
                 {                  
