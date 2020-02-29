@@ -24,7 +24,7 @@ public class PhysicsSimulator : MonoBehaviour {
 	/// <param name="target">Target.</param>
 	/// <param name="force">The max distance the guy should be knocked back</param>
 	/// <param name="HPReduce">If set to <c>true</c> HP reduce.</param>
-	public void KnockBack (Vector3 sourceLocation, UnitManager target, Vector2 force, System.Action onFinish,  bool TenacityReduce = false)
+	public void KnockBack (Vector3 sourceLocation, UnitManager target, UnityEngine.Object sourceComponent, Vector2 force, System.Action onFinish,  bool TenacityReduce = false)
 	{
 		Vector3 startLocation = target.transform.position;
 		if (target.myStats.isUnitType (UnitTypes.UnitTypeTag.Structure)) {
@@ -82,18 +82,18 @@ public class PhysicsSimulator : MonoBehaviour {
 		travelTime /= 150;
         //Debug.Log("Actual " + ActualTarget);
 		
-		Coroutine toAdd = StartCoroutine (fly(target, ActualTarget,travelTime, force.y,false, onFinish));
+		Coroutine toAdd = StartCoroutine (fly(target,sourceComponent, ActualTarget,travelTime, force.y,false, onFinish));
 		currentlyMoving.Add(target, toAdd);
 		currentTargets.Add(target, ActualTarget);
 	}
 
 
-
-	IEnumerator fly(UnitManager target, Vector3 targetLocation, float travelTime, float UpForce, bool linear,  System.Action onFinish)
+    
+	IEnumerator fly(UnitManager target, UnityEngine.Object sourceComp, Vector3 targetLocation, float travelTime, float UpForce, bool linear,  System.Action onFinish)
 	{
 		Vector3 startPoint = target.transform.position;
 	
-		target.metaStatus.Stun (target, this, true,travelTime); // How to determine if its friendly or not???
+		target.metaStatus.Stun (target, sourceComp, true,travelTime); // How to determine if its friendly or not???
 
 		float UpSpeed = UpForce;
 
@@ -110,6 +110,9 @@ public class PhysicsSimulator : MonoBehaviour {
 		
 			yield return null;
 		}
+
+
+        target.metaStatus.UnStun(sourceComp); // MIGHT HAVE PROBLEMS IF THE SOURCE DIES BEFORE REACHING THIS POINT
 		if (target) {
 			if (target.fogger) {
 				target.fogger.hasMoved = true;
@@ -123,12 +126,12 @@ public class PhysicsSimulator : MonoBehaviour {
 		currentTargets.Remove(target);
 	}
 
-	public void Dash (UnitManager target, Vector3 location, Vector2 speed,  System.Action onFinish)
+	public void Dash (UnitManager target,UnityEngine.Object sourceComp, Vector3 location, Vector2 speed,  System.Action onFinish)
 	{
 		Vector3 startLocation = target.transform.position;
 
 		Vector3 ActualTarget =  (Vector3)AstarPath.active.graphs [0].GetNearest (location).node.position;
-		StartCoroutine (fly(target, ActualTarget, Vector3.Distance(target.transform.position, location) / speed.x, speed.y, true, onFinish));
+		StartCoroutine (fly(target, sourceComp, ActualTarget, Vector3.Distance(target.transform.position, location) / speed.x, speed.y, true, onFinish));
 	}
 
 

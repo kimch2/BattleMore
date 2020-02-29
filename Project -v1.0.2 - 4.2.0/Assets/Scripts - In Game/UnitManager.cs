@@ -313,6 +313,7 @@ public class UnitManager : Unit, IOrderable {
 		if (myState != null) {
 			//Debug.Log ("This " + this.gameObject  + "  " + myState);
 			myState.Update ();
+            metaStatus.Update();
 		} else {
 			enabled = false;
 		}

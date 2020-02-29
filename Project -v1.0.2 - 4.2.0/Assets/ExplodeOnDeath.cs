@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ExplodeOnDeath : IEffect, Modifier {
+
+
+    // BATTLEMORE SPECIFIC SCRIPT
+
 	private UnitStats unitStats;
 	public GameObject explosion;
 	[Tooltip("If this unit has less than this amount of energy it wont explode")]
@@ -68,7 +72,7 @@ public class ExplodeOnDeath : IEffect, Modifier {
 	}
 
 
-	public override void apply(GameObject source, GameObject target)
+	public override void applyTo(GameObject source, GameObject target)
 	{
 		ExplodeOnDeath deather = target.GetComponent<ExplodeOnDeath>();
 		if (!deather)

@@ -40,7 +40,7 @@ public class UndyingArmor :  IEffect, Modifier{
 
 	}
 
-	public override void apply (GameObject source, GameObject target)
+	public override void applyTo (GameObject source, GameObject target)
 	{
 		target.AddComponent<UndyingArmor> ();
 		target.GetComponent<UndyingArmor> ().initialize (source,myEffect);

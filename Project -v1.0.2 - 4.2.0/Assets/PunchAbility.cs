@@ -34,10 +34,10 @@ public class PunchAbility : SingleTargetCombo {
 			Vector3 startPosition = transform.position;
 			Vector3 dashLocation = targetGuy.transform.position - (targetGuy.transform.position - transform.position).normalized * 5;
 
-            PhysicsSimulator.main.Dash (manage, dashLocation, new Vector2( DashSpeed,0), 
+            PhysicsSimulator.main.Dash (manage,this, dashLocation, new Vector2( DashSpeed,0), 
 				() =>{
 					if(this.gameObject && targetGuy){
-						PhysicsSimulator.main.KnockBack (startPosition, targetGuy, PunchDistance, () => { 
+						PhysicsSimulator.main.KnockBack (startPosition, targetGuy, this, PunchDistance, () => { 
 					if(targetGuy != null){
 								if (ComboTag.CastTag (target, TagType, Combination)) {
 									targetGuy.myStats.TakeDamage (ComboBonusDamage, this.gameObject,DamageTypes.DamageType.Regular, manage );

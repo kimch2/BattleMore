@@ -29,7 +29,7 @@ public class KnockbackAttack : MonoBehaviour, Notify
 			{
 				
 				Vector3 origin = proj.GetComponent<Projectile>().getOrigin();
-				PhysicsSimulator.main.KnockBack(origin, target, new Vector2(knockDistance, 0), () => { });
+				PhysicsSimulator.main.KnockBack(origin, target,this, new Vector2(knockDistance, 0), () => { });
 			}
 		}
 		return damage;

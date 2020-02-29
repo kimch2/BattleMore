@@ -12,6 +12,8 @@ public class AreaAuraApplier : MonoBehaviour
 
     private int playerNumber;
     public ModularAura AuraToApply;
+    public List<IEffect> effectsToApply;
+
     // TODO still have to make it so it doesn't stack and possibility of removing the aura if it leaves the area
 
 
@@ -41,10 +43,18 @@ public class AreaAuraApplier : MonoBehaviour
         {
             if ((manage.PlayerOwner != playerNumber && affectsEnemies) || (manage.PlayerOwner == playerNumber && affectsAllies))
             {
+                if (AuraToApply)
+                {
+                    GameObject newAura = Instantiate<GameObject>(AuraToApply.gameObject, other.transform);
+                    newAura.transform.localPosition = Vector3.zero;
+                    newAura.GetComponent<ModularAura>().ApplyBuff(manage);
+                }
+                foreach (IEffect fect in effectsToApply)
+                {
+                    fect.applyTo(source, manage.gameObject);
+                }
 
-                GameObject newAura = Instantiate<GameObject>(AuraToApply.gameObject, other.transform);
-                newAura.transform.localPosition = Vector3.zero;
-                newAura.GetComponent<ModularAura>().ApplyBuff(manage);
+
                 // Add in code that sets the source
             }
         }

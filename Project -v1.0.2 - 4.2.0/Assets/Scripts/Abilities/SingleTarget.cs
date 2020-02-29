@@ -149,7 +149,7 @@ public class SingleTarget:  TargetAbility {
 
 			} else {
 
-				AttributeEffect.apply (this.gameObject, tar);
+				AttributeEffect.applyTo (this.gameObject, tar);
 			}
 		}
 
@@ -189,7 +189,7 @@ public class SingleTarget:  TargetAbility {
 
 			} else {
 
-				AttributeEffect.apply (this.gameObject, target);
+				AttributeEffect.applyTo (this.gameObject, target);
 			}
 		}
 

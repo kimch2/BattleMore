@@ -24,6 +24,27 @@ public class MetaStatus
         myManager = manager;
     }
 
+    List<StatusEffect> TimerQueue = new List<StatusEffect>();
+
+
+
+    public void Update()
+    {
+        // May need to optimize this at some point, maybe a while loop instead, or someway to turn itself off if there is nothing to update.
+        for (int i = 0; i < TimerQueue.Count; i++)
+        {
+            if (TimerQueue[i].EndTime < Time.time)
+            {
+                TimerQueue.RemoveAt(0);
+                 i-- ;
+            }
+            else
+            {
+                break;
+            }
+        }
+    }
+
     List<StatusEffect> GetStatusList(statusType myType)
     {
         if (cachedStatus.ContainsKey(myType))
@@ -35,10 +56,28 @@ public class MetaStatus
         cachedStatus.Add(myType, alter);
         return alter;
     }
-
+    
     void StoreStatus(statusType theType, UnitManager sourceunit, UnityEngine.Object sourceComponent, bool friendly, float duration = 0)
     {
         StatusEffect effect = new StatusEffect(sourceunit, sourceComponent, friendly, duration);
+        if (duration > 0)
+        {
+            if (TimerQueue.Count > 0)
+            {
+                for (int i = 0; i < TimerQueue.Count; i++)
+                {
+                    if (effect.EndTime < TimerQueue[i].EndTime)
+                    {
+                        TimerQueue.Insert(i, effect);  // IN THEORY, We only need to check the first thing in the list if they are ordered by when they end.
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                TimerQueue.Add(effect);
+            }
+        }
         GetStatusList(theType).Add(effect);
     }
 
@@ -46,7 +85,16 @@ public class MetaStatus
     bool UnCacheStatus(statusType theType, UnityEngine.Object sourceComponent)
     {
         List<StatusEffect> list = GetStatusList(theType);
+        for (int i = TimerQueue.Count -1; i >-1; i++)
+        {
+            if (TimerQueue[i].sourceComp == sourceComponent)
+            {
+                TimerQueue.RemoveAt(i);
+            }
+        }
+
         list.RemoveAll(item => item.sourceComp ==  sourceComponent);
+
         if (list.Count == 0) // Delete the list if its size is zero? probably not, to cut down on memory management, But we do save on computations elswhere
         {
             cachedStatus.Remove(theType);

@@ -87,25 +87,7 @@ public abstract class TargetAbility : Ability
     /// <returns></returns>
     protected List<UnitManager> GetUnitsInRange(Vector3 Origin, int playerNumber, float radius)
     {
-
-        radius /= 2;
-        List<UnitManager> toTarget = new List<UnitManager>();
-
-        foreach (KeyValuePair<string, List<UnitManager>> unitList in GameManager.main.playerList[playerNumber - 1].getUnitList())
-        {
-            foreach (UnitManager unit in unitList.Value)
-            {
-                if (unit == null)
-                {
-                    continue;
-                }
-                if (new Vector2(unit.transform.position.x - Origin.x, unit.transform.position.z - Origin.z).sqrMagnitude <= Mathf.Pow(radius + unit.CharController.radius, 2))
-                {
-                    toTarget.Add(unit);
-                }
-            }
-        }
-        return toTarget;
+       return GameManager.GetUnitsInRange(Origin, playerNumber, radius);
     }
 
     /// <summary>
