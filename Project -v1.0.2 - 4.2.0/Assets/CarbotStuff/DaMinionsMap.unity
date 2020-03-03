@@ -3678,8 +3678,9 @@ MonoBehaviour:
   HeroToFollow: {fileID: 0}
   startPoint: {x: -582.6, y: 29.24, z: 152.9}
   endPoint: {x: -324.7, y: 29.24, z: 152.9}
-  HeroOffset: -5
+  HeroOffset: -22
   ProgressSlider: {fileID: 1666017256}
+  LockedCamera: 1
 --- !u!4 &596731451
 Transform:
   m_ObjectHideFlags: 0
@@ -9821,7 +9822,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 807175803}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -711, y: -59.3, z: 313}
+  m_LocalPosition: {x: -711, y: 23, z: 313}
   m_LocalScale: {x: 1885.6783, y: 10, z: 1608.5253}
   m_Children: []
   m_Father: {fileID: 0}
@@ -12125,7 +12126,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1235113779}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 139.6, y: 33, z: 121.1}
+  m_LocalPosition: {x: 86.6, y: 33, z: 121.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1987951675}

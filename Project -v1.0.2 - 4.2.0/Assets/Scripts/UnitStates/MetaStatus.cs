@@ -59,7 +59,7 @@ public class MetaStatus
     
     void StoreStatus(statusType theType, UnitManager sourceunit, UnityEngine.Object sourceComponent, bool friendly, float duration = 0)
     {
-        StatusEffect effect = new StatusEffect(sourceunit, sourceComponent, friendly, duration);
+        StatusEffect effect = new StatusEffect(sourceunit, sourceComponent, friendly, friendly ? duration: myManager.myStats.getTenacityMultiplier() *  duration);
         if (duration > 0)
         {
             if (TimerQueue.Count > 0)
@@ -415,19 +415,13 @@ public class MetaStatus
         public float EndTime;
         public bool friendly;
 
-        public StatusEffect(UnitManager myManager, UnityEngine.Object sourceC, bool friend , float Duration)
+        public StatusEffect(UnitManager sourceMan, UnityEngine.Object sourceC, bool friend , float Duration)
         {         
-            SourceManager = myManager;
+            SourceManager = sourceMan;
             sourceComp = sourceC;
             friendly = friend;
-            if (friendly)
-            {
-                EndTime = Time.time + Duration;
-            }
-            else
-            { // We apply the tenacity modifier only if its an unfriendly effect
-                EndTime = Time.time + Duration * myManager.myStats.getTenacityMultiplier();
-            }
+            EndTime = Time.time + Duration;
+
         }
     }
 

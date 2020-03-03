@@ -17,7 +17,8 @@ public class CarbotCamera : MainCamera
 
     //bool CurrentlySmashing;
     public static CarbotCamera singleton;
-    
+    public bool LockedCamera;
+
     public override void Start()
     {
         singleton = this;
@@ -35,7 +36,10 @@ public class CarbotCamera : MainCamera
 
      public override void Update()
      {
-        base.Update();
+        if (!LockedCamera)
+        {
+            base.Update();
+        }
         // if (!CurrentlySmashing)
          {
              if (HeroToFollow)
@@ -44,8 +48,11 @@ public class CarbotCamera : MainCamera
                  MaxXDistance = Mathf.Max(HeroToFollow.transform.position.x - startPoint.x, MaxXDistance);
                  if (MaxXDistance != prev)
                  {
-                //     transform.position = new Vector3(MaxXDistance - HeroOffset, transform.position.y, transform.position.z);
-                     ProgressSlider.value = (MaxXDistance) / (endPoint.x - startPoint.x);
+                    if (LockedCamera)
+                    {
+                        transform.position = new Vector3(startPoint.x + MaxXDistance - HeroOffset, transform.position.y, transform.position.z);
+                    }
+                    ProgressSlider.value = (MaxXDistance) / (endPoint.x - startPoint.x);
                  }
              }
              else
@@ -95,11 +102,11 @@ public class CarbotCamera : MainCamera
     }
     */
 
-    public Vector3 getRightScreenEdge(Vector3 unitLocation)
+    public Vector3 getRightScreenEdge(Vector3 unitLocation, float YVariance)
     {
-        Vector3 screenPoint = myCamera.WorldToScreenPoint(unitLocation);
-        screenPoint.x =Screen.width;
-        Ray ray = myCamera.ScreenPointToRay(screenPoint, Camera.MonoOrStereoscopicEye.Mono);
+        Vector2 screenPoint = new Vector3(0, Screen.height / 2); //myCamera.WorldToScreenPoint(unitLocation);
+        //screenPoint.x =Screen.width;
+        Ray ray = myCamera.ScreenPointToRay(screenPoint);
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit))
@@ -110,15 +117,17 @@ public class CarbotCamera : MainCamera
         return unitLocation;
     }
 
-    public Vector3 getLeftScreenEdge(Vector3 unitLocation)
+    public Vector3 getLeftScreenEdge(Vector3 unitLocation, float YVariance)
     {
-        Vector3 screenPoint = myCamera.WorldToScreenPoint(unitLocation);
-        screenPoint.x = 0;
-        Ray ray = myCamera.ScreenPointToRay(screenPoint, Camera.MonoOrStereoscopicEye.Mono);
+        Vector2 screenPoint = new Vector3(0, Screen.height/2); //myCamera.WorldToScreenPoint(unitLocation);
+        Debug.Log("Screenpoint is " + screenPoint);
+
+        Ray ray = myCamera.ScreenPointToRay(screenPoint);
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit))
         {
+            Debug.Log("hit is " + hit.point + "   " + hit.collider.gameObject);
             return hit.point;
         }
         Debug.Log(" Could not find a terrain on the Left side of the screen");

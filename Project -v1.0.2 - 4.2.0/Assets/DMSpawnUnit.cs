@@ -17,8 +17,9 @@ public class DMSpawnUnit : Ability
 
         for (int i = 0; i < spawnCount; i++)
         {
-            GameObject newGuy = GameObject.Instantiate<GameObject>(ToSpawn);// unitMan.CreateInstance(getSpawnLocation() + Vector3.forward * i * 5, myManager.PlayerOwner);
-            newGuy.transform.position = getSpawnLocation() + Vector3.forward * i * 5;
+            float offset = spawnCount * 10 - i * 5;
+            GameObject newGuy = GameObject.Instantiate<GameObject>(ToSpawn, getSpawnLocation() + Vector3.forward* offset, Quaternion.identity);// unitMan.CreateInstance(getSpawnLocation() + Vector3.forward * i * 5, myManager.PlayerOwner);
+           
             foreach (UnitManager man in newGuy.GetComponentsInChildren<UnitManager>())
             {
                 man.myStats.cost = myCost.energy;
@@ -27,7 +28,7 @@ public class DMSpawnUnit : Ability
                 {                  
                     man.GiveOrder(Orders.CreateAttackMove(transform.position + Vector3.right * 75, true));
                 }
-            } 
+            }
         }
     }
 
@@ -43,12 +44,19 @@ public class DMSpawnUnit : Ability
 
     Vector3 getSpawnLocation()
     {
-        return transform.position + Vector3.left * 15;
+        if (myManager.PlayerOwner == 1)
+        {
+            return CarbotCamera.singleton.getLeftScreenEdge(myManager.transform.position, 10);
+        }
+        else
+        {
+            return CarbotCamera.singleton.getRightScreenEdge(myManager.transform.position, 10);
+        }
     }
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawSphere(getSpawnLocation(), 1);
+        //Gizmos.DrawSphere(getSpawnLocation(), 1);
     }
 
 }

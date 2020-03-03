@@ -175,7 +175,7 @@ public class CustomRVO : IMover {
 
 			return true;
 		} else if (pathSet && (path == null || path.vectorPath.Count == 0)) {
-            Debug.Log("Exiting here" + pathSet + "  " + path);
+          //  Debug.Log("Exiting here" + pathSet + "  " + path);
 			return false;
         }
 
