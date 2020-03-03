@@ -166,7 +166,8 @@ public class GamePlayMenu : MonoBehaviour {
 	}
 
 	public void resetScrollSpeed()
-	{cam.ScrollSpeed = scrollSpeed.value * 700 + 100;
+	{
+        cam.ScrollSpeed = scrollSpeed.value * 700 + 100;
 	}
 
 

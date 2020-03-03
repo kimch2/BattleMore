@@ -2,71 +2,213 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TriggeredAbility : MonoBehaviour, Modifier
+public class TriggeredAbility : ActivatedAbility, Modifier, Notify, LethalDamageinterface
 {
-    public enum TriggerType {OnSpawn, OnDeath, RepeatTimer, OnDamaged, OnSpellCast}
-    public List<TriggerData> TriggerEvents;
+    public enum TriggerType { OnSpawn, OnAttack, OnDamaged, OnLethalDamage, OnDeath,
+                            RepeatTimer, OnSpellCast, OnAllyDeath, OnEnemyDeath, OnHealed }
 
-    public UnityEngine.Events.UnityEvent OnTrigger;
+    [Tooltip("If not checked, this will be a passive ability, Always on")]
+    public bool Activatable;
+    public TriggerType triggerType;
+    [Tooltip("Used for some - RepeatTimer - how often, OnSpellCast - playerNumber to listen to")]
+    public float VariableNumber = 1;
 
-    private void Start()
+
+
+
+    public override void Start()
     {
-        if (TriggerEvents.FindAll(item => item.myTriggerType == TriggerType.OnSpawn).Count > 0)
+        base.Start();
+
+        if (triggerType == TriggerType.OnSpawn)
         {
-            OnTrigger.Invoke();
-        }
-        List<TriggerData> repeaters = TriggerEvents.FindAll(item => item.myTriggerType == TriggerType.RepeatTimer);
-        if (repeaters.Count > 0)
-        {
-            InvokeRepeating("RepeatedInvoke", repeaters[0].variableNumber, repeaters[0].variableNumber);
+            OnActivate.Invoke();
+            myType = type.passive;
+            return;
         }
 
-        if (TriggerEvents.FindAll(item => item.myTriggerType == TriggerType.OnDamaged).Count > 0)
+        if (Activatable)
         {
-            UnitManager manager = GetComponent<UnitManager>();
-            if (!manager)
-            {
-                manager = GetComponentInParent<UnitManager>();
-                if (manager)
-                { manager.myStats.addModifier(this); }
-                else
+            myType = type.activated;
+        }
+        else
+        {
+            myType = type.passive;
+            StartListening();
+        }
+    }
+
+    public override void Activate()
+    { 
+         autocast = !autocast;
+         if (autocast)
+         {
+             StartListening();
+             if (DurationWhenActivated > 0)
                 {
-                    Debug.LogError("Could not find a Unitmanager on the TriggerAbility script for OnDamaged");
+                    Invoke("TurnOff", DurationWhenActivated);
                 }
-            }       
+         }
+         else
+         {
+            StopListening();
+            CancelInvoke("TurnOff");
+         }       
+    }
+
+
+    void StartListening()
+    {
+
+        if (triggerType == TriggerType.RepeatTimer)
+        {
+            InvokeRepeating("Fire", VariableNumber, VariableNumber);
         }
+        else if (triggerType == TriggerType.OnDamaged)
+        {
+            if (myManager)
+            {
+                myManager.myStats.addModifier(this);
+            }
+            else
+            {
+                Debug.LogError("Could not find a Unitmanager on the TriggerAbility script for OnDamaged");
+            }
+        }
+        else if (triggerType == TriggerType.OnSpellCast)
+        {
+            WorldRecharger.main.AddSpellCastNotifier(new int[1] { (int)VariableNumber }, this);
+        }
+        else if (triggerType == TriggerType.OnAttack)
+        {
+            foreach (IWeapon myWeap in myManager.myWeapon) // WILL HAVE PROBLEMS IF WEAPONS CAN SWAP OUT
+            {
+                myWeap.addNotifyTrigger(this);
+            }
+        }
+        else if (triggerType == TriggerType.OnDeath)
+        {
+            myManager.myStats.addDeathTrigger(this);
+        }
+        else if (triggerType == TriggerType.OnLethalDamage)
+        {
+            myManager.myStats.addLethalTrigger(this);
+        }
+        else if (triggerType == TriggerType.OnHealed)
+        {
+            myManager.myStats.addHealModifier(this);
+        }
+        else if (triggerType == TriggerType.OnEnemyDeath)
+        {
+            if (myManager.PlayerOwner == 1)
+            {
+                // MAYBE CHANGE THE FUNCTION CALLBACK INTERFACE TYPE? (Its hardly ever used)
+                GameManager.main.playerList[1].removeActualDeathWatcher(this);
+            }
+            else
+            {
+                GameManager.main.playerList[0].removeActualDeathWatcher(this);
+            }
+        }
+        else if (triggerType == TriggerType.OnAllyDeath)
+        {
+            if (myManager.PlayerOwner == 1)
+            {
+                GameManager.main.playerList[0].removeActualDeathWatcher(this);
+            }
+            else
+            {
+                GameManager.main.playerList[1].removeActualDeathWatcher(this);
+            }
+        }
+    }
 
-
-        // STILL NEED GLOBAL LISTENER FOR SPELLS CAST!
+    void StopListening()
+    {
+        if (triggerType == TriggerType.RepeatTimer)
+        {
+            CancelInvoke("RepeatedInvoke");
+        }
+        else if (triggerType == TriggerType.OnDamaged)
+        {
+            if (myManager)
+            {
+                myManager.myStats.removeModifier(this);
+            }
+            else
+            {
+                Debug.LogError("Could not find a Unitmanager on the TriggerAbility script for OnDamaged");
+            }
+        }
+        else if (triggerType == TriggerType.OnSpellCast)
+        {
+            WorldRecharger.main.RemoveSpellCaster(this);
+        }
+        else if (triggerType == TriggerType.OnAttack)
+        {
+            foreach (IWeapon myWeap in myManager.myWeapon)
+            {
+                myWeap.removeNotifyTrigger(this);
+            }
+        }
+        else if (triggerType == TriggerType.OnDeath)
+        {
+            myManager.myStats.removeDeathTrigger(this);
+        }
+        else if (triggerType == TriggerType.OnLethalDamage)
+        {
+            myManager.myStats.removeLethalTrigger(this);
+        }
+        else if (triggerType == TriggerType.OnHealed)
+        {
+            myManager.myStats.removeHealModifier(this);
+        }
+        else if (triggerType == TriggerType.OnEnemyDeath)
+        {
+            if (myManager.PlayerOwner == 1)
+            {
+                GameManager.main.playerList[1].addDeathWatcher(this);
+            }
+            else
+            {
+                GameManager.main.playerList[0].addDeathWatcher(this);
+            }
+        }
+        else if (triggerType == TriggerType.OnAllyDeath)
+        {
+            if (myManager.PlayerOwner == 1)
+            {
+                GameManager.main.playerList[0].addDeathWatcher(this);
+            }
+            else
+            {
+                GameManager.main.playerList[1].addDeathWatcher(this);
+            }
+        }
     }
 
     void RepeatedInvoke()
     {
-        OnTrigger.Invoke();
+       Trigger();
     }
 
-
-
-    public void Dying()
+    /// Used for OnAttack, OnDeath
+    public virtual float modify(float damage, GameObject source, DamageTypes.DamageType theType)
     {
-        if (TriggerEvents.FindAll(item => item.myTriggerType == TriggerType.OnDeath).Count > 0)
-        {
-            OnTrigger.Invoke();
-        }
-    }
-
-    public float modify(float damage, GameObject source, DamageTypes.DamageType theType)
-    {
-        OnTrigger.Invoke();
+        Trigger();
         return damage;
     }
 
-}
 
-public class TriggerData
-{
-    public TriggeredAbility.TriggerType myTriggerType;
-    [Tooltip("How often on Repeat Timer or how many spells cast")]
-    public float variableNumber =4;
+    public virtual float trigger(GameObject source, GameObject projectile, UnitManager target, float damage)
+    {
+        Trigger();
+        return damage;
+    }
 
+    public virtual bool lethalDamageTrigger(UnitManager unit, GameObject deathSource)
+    {
+        Trigger();
+        return true;
+    }
 }

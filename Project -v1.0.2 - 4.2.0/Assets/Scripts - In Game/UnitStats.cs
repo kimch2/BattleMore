@@ -61,7 +61,8 @@ public class UnitStats : MonoBehaviour {
 	public UnitTypes.SizeTag sizeType;
 	public UnitTypes.HeightType myHeight;
 	private List<Modifier> deathTriggers = new List<Modifier>();
-	public List<KillModifier> killMods = new List<KillModifier>();
+    private List<Modifier> LethalTriggers = new List<Modifier>();
+    public List<KillModifier> killMods = new List<KillModifier>();
 
     Dictionary<System.Object, float> ShieldSources = new Dictionary<System.Object, float>();
 
@@ -79,11 +80,12 @@ public class UnitStats : MonoBehaviour {
 
 	public GameObject deathCorpse;
 	public GameObject deathEffect;
-	[Tooltip("Not surrently used")]
-	public GameObject takeDamageEffect;
 	public Sprite UnitPortrait;
 	bool tagSet = false;
 
+    /// <summary>
+    /// these show little icons in the hud.
+    /// </summary>
 	public List<Buff> goodBuffs = new List<Buff>();
 	public List<Buff> badBuffs = new List<Buff>();
 
@@ -403,7 +405,15 @@ public class UnitStats : MonoBehaviour {
 		health -= amount;
 		
 		if (health < 1) {
-			kill (source, srcManager);
+            if (RunLethalDamage(amount))
+            {
+                kill(source, srcManager);
+            }
+            else
+            {
+                health = 1;
+                updateHealthBar();
+            }
 		} else {
 			updateHealthBar ();
 		}
@@ -582,11 +592,33 @@ public class UnitStats : MonoBehaviour {
 		}
 	}
 
-	public void addLethalTrigger()//Method method)
-	{ // not implemented yet
-	}
+    bool RunLethalDamage(float damage)
+    {
+        foreach (Modifier mod in LethalTriggers)
+        {
+            if (mod.modify(damage, null, DamageTypes.DamageType.Regular) > 0)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
 
-	public void removeDeathTrigger (Modifier mod)
+    /// <summary>
+    /// Lethal Damage Triggers should return the damage passed in if it doesn't actually stop death. Return 0 if Death is halted
+    /// </summary>
+    /// <param name="mod"></param>
+	public void addLethalTrigger(Modifier mod)
+	{
+        LethalTriggers.Add(mod);
+    }
+
+    public void removeLethalTrigger(Modifier mod)
+    {
+        LethalTriggers.Remove(mod);
+    }
+
+    public void removeDeathTrigger (Modifier mod)
 	{
 		deathTriggers.Remove (mod);
 	}

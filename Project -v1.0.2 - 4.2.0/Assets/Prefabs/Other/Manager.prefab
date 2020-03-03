@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 11400004}
   - component: {fileID: 11400000}
   - component: {fileID: 114066115491632836}
+  - component: {fileID: 7939299561336382117}
   m_Layer: 0
   m_Name: Manager
   m_TagString: manager
@@ -114,3 +115,25 @@ MonoBehaviour:
   ToEnergize: []
   ToSuperEnergize: []
   ToRoam: []
+--- !u!114 &7939299561336382117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea51226664ecb4d4fa29de47bc02c66d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Stun: {fileID: 2420249465572577678, guid: 9a3322c76484d9244afe35c9e332fb42, type: 3}
+  Criticalhit: {fileID: 3113955156969779200, guid: f0e3ee775e7766846ad35a3d8163f390,
+    type: 3}
+  Crater: {fileID: 1127135538431422173, guid: 1d13df6dec95cbb43ab0eb8def1df0c9, type: 3}
+  Dust: {fileID: 6485885999842385613, guid: d9e5d4055d691904396ddb22cb4de65a, type: 3}
+  Healing: {fileID: 3905043724441489747, guid: 5ab532ba9dd717c40965b8f7756f284b, type: 3}
+  SlowMovement: {fileID: 3091081441630444358, guid: f8a2c67bc95e0834fb8afe4cff695963,
+    type: 3}
+  ArmorBlock: {fileID: 7998864675716234774, guid: 3c202612843e40c4282250f5c8bc588a,
+    type: 3}

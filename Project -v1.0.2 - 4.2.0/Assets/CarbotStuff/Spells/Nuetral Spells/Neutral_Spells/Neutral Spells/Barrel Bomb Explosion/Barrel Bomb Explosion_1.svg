@@ -1,0 +1,26 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="none" x="0px" y="0px" width="625px" height="600px" viewBox="0 0 625 600">
+<defs>
+<radialGradient id="Gradient_1" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="270.75" fx="0" fy="0" gradientTransform="matrix( 1, 0, 0, 0.9764081255771008, 155.55,262.45) " spreadMethod="pad">
+<stop  offset="43.529411764705884%" stop-color="#FFFFFF"/>
+
+<stop  offset="72.94117647058823%" stop-color="#FFCC00"/>
+
+<stop  offset="99.2156862745098%" stop-color="#FF5400"/>
+</radialGradient>
+
+<g id="Duplicate_Items_Folder_exploscircle03_0_Layer0_0_FILL">
+<path fill="url(#Gradient_1)" stroke="none" d="
+M 286.8 48.75
+Q 237.55 0 168 0 98.4 0 49.2 48.75 0 97.55 0 166.5 -0.0013671875 235.4541015625 46.35 279.25 92.7615234375 323.0349609375 162.75 325.15 232.78828125 327.26484375 284.4 281.35 336.001171875 235.445703125 336 166.5 336 97.55 286.8 48.75 Z"/>
+</g>
+</defs>
+
+<g transform="matrix( 0.5390167236328125, 0, 0, 0.5390167236328125, 315.9,272.65) ">
+<g transform="matrix( 0.759674072265625, 0, 0, 0.759674072265625, -143.2,17.2) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#Duplicate_Items_Folder_exploscircle03_0_Layer0_0_FILL"/>
+</g>
+</g>
+</g>
+</svg>

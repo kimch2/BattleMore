@@ -538,7 +538,6 @@ public class RaceManager : MonoBehaviour, ManagerWatcher {
 
     public void addUnit(UnitManager obj)
     {
-        Debug.Log("Adding " + obj);  
         if (!unitRoster.ContainsKey(obj.UnitName))
         {
             unitRoster.Add(obj.UnitName, new List<UnitManager>());
@@ -1005,7 +1004,10 @@ public class RaceManager : MonoBehaviour, ManagerWatcher {
     public void addActualDeathWatcher(LethalDamageinterface input) {
         deathTrigger.Add(input);
     }
-
+    public void removeActualDeathWatcher(LethalDamageinterface input)
+    {
+        deathTrigger.Remove(input);
+    }
 
 
     public void useAbilityOne()

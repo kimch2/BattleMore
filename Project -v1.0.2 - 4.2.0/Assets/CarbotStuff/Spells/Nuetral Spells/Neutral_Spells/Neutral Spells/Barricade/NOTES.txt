@@ -1,0 +1,7 @@
+4 frames per piece of barricade and there are 4 pieces 
+(1-4,5-8,9-12,13-16) Barricade 1
+(17-20,21-24,25-28,29-32) Barricade 2 (alternate visual)
+
+when spawning the barricade it will randomly choose the look of version 1 or 2
+each piece spawns right after the other so all 4 pieces spawn within less than half
+a second

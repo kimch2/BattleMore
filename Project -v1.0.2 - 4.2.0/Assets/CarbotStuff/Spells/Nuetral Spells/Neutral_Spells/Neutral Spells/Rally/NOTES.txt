@@ -1,0 +1,2 @@
+banner should drop from the sky very quickly (1-2 frames) 
+Flag part should have physicals if possible.  It reacts when its spawned (dropping from sky) and when explosions/spells happen near it making it move a bit or flutter.

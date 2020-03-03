@@ -33,17 +33,19 @@ public class CarbotCamera : MainCamera
         MaxXDistance = HeroToFollow.transform.position.x - HeroOffset;
     }
 
-    /* public override void Update()
+     public override void Update()
      {
-         if (!CurrentlySmashing)
+        base.Update();
+        // if (!CurrentlySmashing)
          {
              if (HeroToFollow)
              {
-                 MaxXDistance = Mathf.Max(HeroToFollow.transform.position.x - HeroOffset, MaxXDistance);
-                 if (MaxXDistance == HeroToFollow.transform.position.x - HeroOffset)
+                float prev = MaxXDistance;
+                 MaxXDistance = Mathf.Max(HeroToFollow.transform.position.x - startPoint.x, MaxXDistance);
+                 if (MaxXDistance != prev)
                  {
-                     transform.position = new Vector3(MaxXDistance - HeroOffset, transform.position.y, transform.position.z);
-                     ProgressSlider.value = (transform.position.x - startPoint.x) / (endPoint.x - startPoint.x);
+                //     transform.position = new Vector3(MaxXDistance - HeroOffset, transform.position.y, transform.position.z);
+                     ProgressSlider.value = (MaxXDistance) / (endPoint.x - startPoint.x);
                  }
              }
              else
@@ -51,7 +53,7 @@ public class CarbotCamera : MainCamera
                  ErrorPrompt.instance.notEnoughEnergy();
              }
          }
-     }*/
+     }
     /*
     public override void Zoom(object sender, ScrollWheelEventArgs e)
     {

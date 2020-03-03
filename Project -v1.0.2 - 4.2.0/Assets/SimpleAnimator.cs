@@ -11,11 +11,28 @@ public class SimpleAnimator : MonoBehaviour
     [Tooltip("The StartSprites are played only once, then the Loop Sprites play indefinitely")]
     public List<Sprite> StartSprites;
     public List<Sprite> LoopSprites;
+    [Tooltip("This will Disable this object, If you want to replay, call the start function, if 0, this will run indefinitly")]
+    public float Duration;
+    float TurnOffTime;
+    Coroutine myRoutine;
 
-    private void Start()
+    public void Start()
     {
+        if (myRoutine != null)
+        {
+            StopCoroutine(myRoutine);
+        }
+        enabled = true;
         if (StartSprites.Count > 0 || LoopSprites.Count > 0)
         {
+            if (Duration > 0)
+            {
+                TurnOffTime = Time.time + Duration;
+            }
+            else
+            {
+                TurnOffTime = Time.time + 100000;
+            }
             StartCoroutine(animate());
         }
     }
@@ -34,12 +51,19 @@ public class SimpleAnimator : MonoBehaviour
         if (LoopSprites.Count > 0)
         { 
         currentIndex = 0;
+
             while (true)
             {
                 myRenderer.sprite = LoopSprites[currentIndex % LoopSprites.Count];
                 yield return new WaitForSeconds(frameLength);
-                currentIndex++;               
+                currentIndex++;
+                if (Time.time > TurnOffTime)  // Make a separate function to optimize this?
+                {
+                    break;
+                }
             }
+            
         }
+        myRoutine = null;
     }
 }

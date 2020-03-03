@@ -402,8 +402,11 @@ public class MetaStatus
                 UnTaunt(sourceComp);
                 break;
         }
-        
+      
+
     }
+
+
 
     class StatusEffect {
 
@@ -427,4 +430,76 @@ public class MetaStatus
             }
         }
     }
+
+
+    // =================================================================================================
+    // =================OnHit Special FX======================================================
+
+    Dictionary<string, SimpleAnimator> CachedEffects = new Dictionary<string, SimpleAnimator>();
+
+    public void ShowCriticalHit()
+    {
+        SimpleAnimator anim;
+        if (!CachedEffects.TryGetValue("Crit", out anim))
+        {
+            anim = GenericEffectsManager.CriticalHitEffect().GetComponent<SimpleAnimator>();
+            CachedEffects.Add("Crit", anim);
+            anim.gameObject.transform.parent = myManager.transform;
+            anim.gameObject.transform.localPosition = Vector3.zero;
+        }
+        else
+        {
+            anim.Start();
+        }
+    }
+
+    public void ShowHealing()
+    {
+        SimpleAnimator anim;
+        if (!CachedEffects.TryGetValue("Heal", out anim))
+        {
+            anim = GenericEffectsManager.HealingEffect().GetComponent<SimpleAnimator>();
+            CachedEffects.Add("Heal", anim);
+            anim.gameObject.transform.parent = myManager.transform;
+            anim.gameObject.transform.localPosition = Vector3.zero;
+        }
+        else
+        {
+            anim.Start();
+        }
+    }
+
+    public void ShowStunEffect()
+    {
+        SimpleAnimator anim;
+        if (!CachedEffects.TryGetValue("Stun", out anim))
+        {
+            anim = GenericEffectsManager.StunEffect().GetComponent<SimpleAnimator>();
+            CachedEffects.Add("Stun", anim);
+            anim.gameObject.transform.parent = myManager.transform;
+            anim.gameObject.transform.localPosition = Vector3.zero;
+        }
+        else
+        {
+            anim.Start();
+        }
+    }
+
+    public void ShowSlowEffect()
+    {
+        SimpleAnimator anim;
+        if (!CachedEffects.TryGetValue("Slow", out anim))
+        {
+            anim = GenericEffectsManager.SlowMovementEffect().GetComponent<SimpleAnimator>();
+            CachedEffects.Add("Slow",anim);
+            anim.gameObject.transform.parent = myManager.transform;
+            anim.gameObject.transform.localPosition = Vector3.zero;
+        }
+        else
+        {
+            anim.Start();
+        }
+    }
+
+ 
 }

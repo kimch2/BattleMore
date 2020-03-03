@@ -12,9 +12,16 @@ public class DaminionsInitializer : MonoBehaviour
 
     public Slider ManaSlider;
     public Text ManaText;
+    public static DaminionsInitializer main;
 
-    UnitManager MyHero;
-    // Start is called before the first frame update
+    [Tooltip("The hero that has been spawned into the scene")]
+    public UnitManager MyHero;
+
+    private void Awake()
+    {
+        main = this;
+    }
+
     void Start()
     {
         GameObject hero = null;
