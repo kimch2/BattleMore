@@ -160,8 +160,11 @@ public class CustomRVO : IMover {
 	{
 
         if (!enabled)
-        { return false; }
+        {
+            controller.Move(Vector3.zero);
+            return false; }
 
+        //Debug.Log(this.gameObject + "  moving");
 		if (Time.time >= nextRepath && canSearchAgain) {
 			RecalculatePath();
 

@@ -89,6 +89,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdd2b38231dbb0b49be79ed6b3dcff58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sleepTime: 10
+  sleepTime: 5
   mustTarget: 9
   OnTarget: 0

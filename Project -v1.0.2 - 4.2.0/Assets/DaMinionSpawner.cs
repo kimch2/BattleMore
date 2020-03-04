@@ -15,6 +15,9 @@ public class DaMinionSpawner : MonoBehaviour
     public float SpawnOffset = 100;
     public float ZRange = 40;
 
+    [Tooltip("This is based on where the progress on the level is (the bar at the top)")]
+    public AnimationCurve spawnCurve;
+
     private void Start()
     {
         Invoke("SpawnEnemy", firstSpawn);
@@ -22,7 +25,7 @@ public class DaMinionSpawner : MonoBehaviour
 
     void SpawnEnemy()
     {
-        Debug.Log("Hi there");
+      
         Vector3 spawnPoint = DaminionsInitializer.main.MyHero.transform.position + Vector3.right * SpawnOffset;
         spawnPoint.z += Random.Range(-1*ZRange, ZRange);
 
@@ -32,7 +35,7 @@ public class DaMinionSpawner : MonoBehaviour
 
         unitMan.GiveOrder(Orders.CreateAttackMove(spawnPoint + Vector3.left*SpawnOffset));
 
-        Invoke("SpawnEnemy", Mathf.Max(1, spawnRate + Random.Range(-spawnRate/3, spawnRate/3)));
+        Invoke("SpawnEnemy", Mathf.Max(1, (1- spawnCurve.Evaluate( CarbotCamera.singleton.getProgress())) * spawnRate + Random.Range(-spawnRate/3, spawnRate/3)));
     }
 
 }

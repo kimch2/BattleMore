@@ -19,11 +19,21 @@ public class CarbotCamera : MainCamera
     public static CarbotCamera singleton;
     public bool LockedCamera;
 
+   public float CurrentSpeed;
+    public float acceleration = 1;
+    public float topSpeed = 1;
+
     public override void Start()
     {
         singleton = this;
         initialPosition = transform.position;
         HeightAboveGround = transform.position.y;
+
+        if (LockedCamera)
+        {
+            transform.position = new Vector3(startPoint.x , transform.position.y, transform.position.z);
+
+        }
     }
    
 
@@ -31,7 +41,7 @@ public class CarbotCamera : MainCamera
     public void setHero(GameObject toSet)
     {
         HeroToFollow = toSet;
-        MaxXDistance = HeroToFollow.transform.position.x - HeroOffset;
+      //  MaxXDistance = HeroToFollow.transform.position.x - HeroOffset;
     }
 
      public override void Update()
@@ -45,7 +55,22 @@ public class CarbotCamera : MainCamera
              if (HeroToFollow)
              {
                 float prev = MaxXDistance;
-                 MaxXDistance = Mathf.Max(HeroToFollow.transform.position.x - startPoint.x, MaxXDistance);
+                if (HeroToFollow.transform.position.x - startPoint.x > MaxXDistance + topSpeed)
+                {
+                    CurrentSpeed += acceleration * Time.deltaTime;
+                    CurrentSpeed = Mathf.Min(CurrentSpeed, topSpeed);
+                    MaxXDistance += CurrentSpeed * Time.deltaTime;
+
+                }
+                else if (CurrentSpeed > 0) 
+                {
+                    CurrentSpeed -= acceleration * Time.deltaTime;
+                    CurrentSpeed = Mathf.Max(CurrentSpeed, 0);
+                    MaxXDistance += CurrentSpeed * Time.deltaTime;
+
+                }
+
+                 //MaxXDistance = Mathf.Max(HeroToFollow.transform.position.x - startPoint.x, MaxXDistance);
                  if (MaxXDistance != prev)
                  {
                     if (LockedCamera)
@@ -61,6 +86,12 @@ public class CarbotCamera : MainCamera
              }
          }
      }
+
+    public float getProgress()
+    {
+        return (MaxXDistance) / (endPoint.x - startPoint.x);
+    }
+
     /*
     public override void Zoom(object sender, ScrollWheelEventArgs e)
     {
@@ -120,14 +151,12 @@ public class CarbotCamera : MainCamera
     public Vector3 getLeftScreenEdge(Vector3 unitLocation, float YVariance)
     {
         Vector2 screenPoint = new Vector3(0, Screen.height/2); //myCamera.WorldToScreenPoint(unitLocation);
-        Debug.Log("Screenpoint is " + screenPoint);
 
         Ray ray = myCamera.ScreenPointToRay(screenPoint);
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit))
-        {
-            Debug.Log("hit is " + hit.point + "   " + hit.collider.gameObject);
+        {         
             return hit.point;
         }
         Debug.Log(" Could not find a terrain on the Left side of the screen");

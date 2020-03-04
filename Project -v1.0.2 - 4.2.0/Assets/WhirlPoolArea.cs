@@ -29,9 +29,12 @@ public class WhirlPoolArea : VisionTrigger
     {
         foreach (UnitManager man in InVision)
         {
-            Vector3 LookAtDirection = Quaternion.Euler(0, 10, 0) * (transform.position - man.transform.position ).normalized * Time.deltaTime * spinSpeed;
-            LookAtDirection.y = 0;
-            man.ExternalMove(LookAtDirection, false);         
+            if (man)
+            {
+                Vector3 LookAtDirection = Quaternion.Euler(0, 10, 0) * (transform.position - man.transform.position).normalized * Time.deltaTime * spinSpeed;
+                LookAtDirection.y = 0;
+                man.ExternalMove(LookAtDirection, false);
+            }
         }
     }
 

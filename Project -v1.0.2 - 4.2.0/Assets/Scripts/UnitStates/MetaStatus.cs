@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MetaStatus
+public class MetaStatus : Modifier
 {
     //Class that handles all interactions regarding stuns, silences, fears, roots etc.
 
     UnitManager myManager;
 
-    public enum statusType { Stun, Root, Silence, Pacify, Taunt, Fear, CastMove, Bless, Curse, Channel }
+    public enum statusType { Stun, Root, Silence, Pacify, Taunt, Fear, CastMove, Bless, Curse, Channel, Sleep }
     Dictionary<statusType, List<StatusEffect>> cachedStatus = new Dictionary<statusType, List< StatusEffect>>();
 
     // Do we need these?
@@ -30,12 +30,17 @@ public class MetaStatus
 
     public void Update()
     {
+        if (TimerQueue.Count > 0)
+        {
+            Debug.Log("updating");
+        }
         // May need to optimize this at some point, maybe a while loop instead, or someway to turn itself off if there is nothing to update.
         for (int i = 0; i < TimerQueue.Count; i++)
         {
             if (TimerQueue[i].EndTime < Time.time)
             {
-                TimerQueue.RemoveAt(0);
+                CancelEffect(TimerQueue[0]);
+                //TimerQueue.RemoveAt(0);
                  i-- ;
             }
             else
@@ -85,7 +90,7 @@ public class MetaStatus
     bool UnCacheStatus(statusType theType, UnityEngine.Object sourceComponent)
     {
         List<StatusEffect> list = GetStatusList(theType);
-        for (int i = TimerQueue.Count -1; i >-1; i++)
+        for (int i = TimerQueue.Count -1; i >-1; i--)
         {
             if (TimerQueue[i].sourceComp == sourceComponent)
             {
@@ -142,8 +147,9 @@ public class MetaStatus
 
     
     void EnableMovement()
-    {
-        if (!cachedStatus.ContainsKey(statusType.Stun) && !cachedStatus.ContainsKey(statusType.Root))
+    {        
+        if (!cachedStatus.ContainsKey(statusType.Stun) && !cachedStatus.ContainsKey(statusType.Root)
+            && !cachedStatus.ContainsKey(statusType.Sleep))
         {
             if (myManager.cMover)
             {
@@ -156,7 +162,8 @@ public class MetaStatus
     void EnableAttacks()
     {
         if (!cachedStatus.ContainsKey(statusType.Stun) && !cachedStatus.ContainsKey(statusType.CastMove) 
-         && !cachedStatus.ContainsKey(statusType.Channel) && !cachedStatus.ContainsKey(statusType.Pacify))
+         && !cachedStatus.ContainsKey(statusType.Channel) && !cachedStatus.ContainsKey(statusType.Pacify)
+         && !cachedStatus.ContainsKey(statusType.Sleep))
         {
             canAttack = true;
         }
@@ -165,7 +172,8 @@ public class MetaStatus
     void EnableRightClicks()
     {
         if (!cachedStatus.ContainsKey(statusType.Stun) && !cachedStatus.ContainsKey(statusType.Channel)
-            && !cachedStatus.ContainsKey(statusType.Fear) && !cachedStatus.ContainsKey(statusType.Taunt))
+            && !cachedStatus.ContainsKey(statusType.Fear) && !cachedStatus.ContainsKey(statusType.Taunt)
+            && !cachedStatus.ContainsKey(statusType.Sleep))
         {
             CanRecieveRightClick = true;
         }
@@ -173,7 +181,8 @@ public class MetaStatus
     void EnableCasting()
     {
         if (!cachedStatus.ContainsKey(statusType.Stun) && !cachedStatus.ContainsKey(statusType.Silence)
-           && !cachedStatus.ContainsKey(statusType.Taunt) && !cachedStatus.ContainsKey(statusType.Fear))
+           && !cachedStatus.ContainsKey(statusType.Taunt) && !cachedStatus.ContainsKey(statusType.Fear)
+           && !cachedStatus.ContainsKey(statusType.Sleep))
         {
             canCast = true;
         }
@@ -202,7 +211,8 @@ public class MetaStatus
         DisableCasting();
     }
     public void UnStun(UnityEngine.Object sourceComponent)
-    { if (UnCacheStatus(statusType.Stun, sourceComponent))
+    {
+        if (UnCacheStatus(statusType.Stun, sourceComponent))
         {
             EnableAttacks();
             EnableMovement();
@@ -210,6 +220,29 @@ public class MetaStatus
             EnableCasting();
         }
     }
+
+    public void Sleep(UnitManager sourceunit, UnityEngine.Object sourceComponent, bool friendly, float duration = 0)
+    {
+        Debug.Log("Putting to sleep " + duration );
+        StoreStatus(statusType.Sleep, sourceunit, sourceComponent, friendly, duration);
+        DisableMovement();
+        DisableAttacks();
+        DisableRightClicks();
+        DisableCasting();
+        myManager.myStats.addModifier(this);
+    }
+    public void UnSleep(UnityEngine.Object sourceComponent)
+    {
+        Debug.Log("Waking up");
+        if (UnCacheStatus(statusType.Sleep, sourceComponent))
+        {
+            EnableAttacks();
+            EnableMovement();
+            EnableRightClicks();
+            EnableCasting();
+        }
+    }
+
 
     public void Channel(UnitManager sourceunit, UnityEngine.Object sourceComponent, float duration = 0)
     {
@@ -358,7 +391,21 @@ public class MetaStatus
     }
 
     //This is a little less efficient than simply calling the specific kind of function to remove the effect
-    public void RemoveEffect(statusType theType, UnityEngine.Object sourceComp)
+    void CancelEffect(StatusEffect toRemove)
+    {
+        foreach (KeyValuePair<statusType, List<StatusEffect>> pair in cachedStatus)
+        {
+            if (pair.Value.Contains(toRemove))
+            {
+                RemoveEffect(pair.Key, toRemove.sourceComp);
+                break;
+            }
+        }
+    }
+
+
+        //This is a little less efficient than simply calling the specific kind of function to remove the effect
+        public void RemoveEffect(statusType theType, UnityEngine.Object sourceComp)
     {
         switch (theType)
         {
@@ -400,6 +447,10 @@ public class MetaStatus
 
             case statusType.Taunt:
                 UnTaunt(sourceComp);
+                break;
+
+            case statusType.Sleep:
+                UnSleep(sourceComp);
                 break;
         }
       
@@ -495,5 +546,20 @@ public class MetaStatus
         }
     }
 
- 
+    // This is her for sleeps
+    public float modify(float damage, GameObject source, DamageTypes.DamageType theType)
+    {
+        List<StatusEffect> list = GetStatusList(statusType.Sleep);
+       while (list.Count > 0){
+        
+             UnCacheStatus(statusType.Sleep,list[0].sourceComp);
+        }
+
+        EnableAttacks();
+        EnableMovement();
+        EnableRightClicks();
+        EnableCasting();
+        myManager.myStats.removeModifier(this);
+        return damage;
+    }
 }

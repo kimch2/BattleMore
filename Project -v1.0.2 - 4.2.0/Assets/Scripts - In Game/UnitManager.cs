@@ -899,7 +899,8 @@ public class UnitManager : Unit, IOrderable {
 
 	public IWeapon isValidTarget(UnitManager obj)
 	{
-
+        if (!metaStatus.canAttack)
+        { return null; } //TODO NEED TO DO THIS THROUGH A STATE OR SOMETHING LATER
 		foreach (IWeapon weap in myWeapon) {
 			if( weap.isValidTarget(obj)){
 				return weap; 

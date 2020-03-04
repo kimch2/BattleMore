@@ -380,9 +380,9 @@ public class UnitStats : MonoBehaviour {
 		}
 			
 		if (type != DamageTypes.DamageType.True) {
-			foreach (Modifier mod in damageModifiers) {
-				if (mod != null) {
-					amount = mod.modify (amount, source, type);
+            for(int i = damageModifiers.Count -1; i >-1; i--) { 
+				if (damageModifiers[i]  != null) {
+					amount = damageModifiers[i].modify (amount, source, type);
 					if (amount <= 0) {
 						return 0;
 						}

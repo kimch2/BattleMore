@@ -21,7 +21,6 @@ public class SleepEffect : MonoBehaviour, Notify, Modifier
         if (myexplode)
         {
             myexplode.triggers.Add(this);
-
         }
     }
 
@@ -31,36 +30,41 @@ public class SleepEffect : MonoBehaviour, Notify, Modifier
 
     public float trigger(GameObject source, GameObject proj, UnitManager target, float damage)
     {
-        Debug.Log("Triugginer sleep " + target);
+
         if (target && source != target)
         {
-            Debug.Log("A");
+           // Debug.Log("A");
 
             if (mustTarget != UnitTypes.UnitTypeTag.Dead)
             {
-                Debug.Log("B");
+               // Debug.Log("B");
                 if (!target.myStats.isUnitType(mustTarget))
                 {
-                    Debug.Log("C");
+                   // Debug.Log("C");
                     return damage;
                 }
             }
 
-            Debug.Log("D");
-            target.gameObject.AddComponent<SleepEffect>().PutToSleep();
-
+        //    Debug.Log("D");
+            SleepEffect eff = target.gameObject.AddComponent<SleepEffect>();
+            if (!eff)
+            {
+               eff = target.gameObject.AddComponent<SleepEffect>();
+            }
+            eff.PutToSleep(sleepTime);
         }
         return damage;
     }
 
 
-    public void PutToSleep()
+    public void PutToSleep(float duration)
     {
+        sleepTime = duration;
         TimePutToSleep = Time.time;
         Debug.Log("Putting to sleep");
         OnTarget = true;
-        GetComponent<UnitManager>().metaStatus.Stun(null, this, false, sleepTime);
-        GetComponent<UnitStats>().addModifier(this);
+        GetComponent<UnitManager>().metaStatus.Sleep(null, this, false, sleepTime);
+       // GetComponent<UnitStats>().addModifier(this);
         //Invoke("WakeUp", sleepTime); // Multiply this by tenacity later
 
     }
@@ -79,8 +83,8 @@ public class SleepEffect : MonoBehaviour, Notify, Modifier
     void WakeUp()
     {
         Debug.Log("Wake up");
-        GetComponent<UnitManager>().metaStatus.UnStun(this);
-        GetComponent<UnitStats>().removeModifier(this);
+        GetComponent<UnitManager>().metaStatus.UnSleep(this);
+       // GetComponent<UnitStats>().removeModifier(this);
     }
 
 }
