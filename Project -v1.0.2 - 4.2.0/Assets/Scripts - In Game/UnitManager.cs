@@ -373,6 +373,13 @@ public class UnitManager : Unit, IOrderable {
 		return true;
 	}
 
+    public void BecameStunned()
+    {
+        foreach (IWeapon weap in myWeapon)
+        {
+            weap.ResetAttackCooldown();
+        }
+    }
 
 	override
 	public bool UseTargetAbility(GameObject obj, Vector3 loc, int n, bool queue) // Either the obj - target or the location can be null.
@@ -690,7 +697,7 @@ public class UnitManager : Unit, IOrderable {
 					myState.initialize ();
 				}
 			} else {
-				changeState (new DefaultState ());
+                changeState (new DefaultState ());
 			}
 		} 
 	}
@@ -712,6 +719,7 @@ public class UnitManager : Unit, IOrderable {
 	// make sure that Queue front and queueback are never both true
 	public void changeState(UnitState nextState, bool Queuefront, bool QueueBack)
 	{
+       
 		if (nextState != null && metaStatus.CanRecieveRightClick) {
 			enabled = true;
 		} // THIS MAY BREAK THINGS - IT Did, stun no longer works
@@ -848,7 +856,7 @@ public class UnitManager : Unit, IOrderable {
         if (hasAnimState)
         {
             myAnim.SetInteger("State", 1);
-        }
+        }       
 	}
 
     public void LookAtTarget(Vector3 target)
@@ -953,7 +961,7 @@ public class UnitManager : Unit, IOrderable {
         {
             translationAmount *= myStats.getTenacityMultiplier();
         }
-        transform.Translate(translationAmount,Space.World);
+        transform.Translate(translationAmount * Time.deltaTime,Space.World);
     }
 
 

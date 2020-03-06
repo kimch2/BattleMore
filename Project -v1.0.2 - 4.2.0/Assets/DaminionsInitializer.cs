@@ -17,6 +17,10 @@ public class DaminionsInitializer : MonoBehaviour
     [Tooltip("The hero that has been spawned into the scene")]
     public UnitManager MyHero;
 
+    public List<Image> CrystalChildren;
+    public List<Text> AbilityCosts;
+    float lastEnergy;
+
     private void Awake()
     {
         main = this;
@@ -73,7 +77,24 @@ public class DaminionsInitializer : MonoBehaviour
                 Abil.transform.localPosition = Vector3.zero;
                 hero.GetComponent<UnitManager>().abilityList.Add(Abil.GetComponent<Ability>());
             }
-        
+
+        for (int i = 0; i < CrystalChildren.Count; i++)
+        {
+            CrystalChildren[i].transform.parent.gameObject.SetActive(MyHero.myStats.MaxEnergy > i);
+        }
+
+        for (int i = 0; i < AbilityCosts.Count; i++)
+        {
+            if (MyHero.abilityList[i] && MyHero.abilityList[i].myCost)
+            {
+                AbilityCosts[i].text = MyHero.abilityList[i].myCost.energy + "";
+            }
+            else
+            {
+                AbilityCosts[i].text = "";
+            }
+        }
+
     }
 
     void SelectHero()
@@ -84,10 +105,17 @@ public class DaminionsInitializer : MonoBehaviour
 
     private void Update()
     {
-        if (MyHero)
+        if (MyHero && MyHero.getUnitStats().currentEnergy != lastEnergy)
         {
-            ManaSlider.value = MyHero.getUnitStats().currentEnergy / MyHero.getUnitStats().MaxEnergy;
-            ManaText.text = (int)MyHero.getUnitStats().currentEnergy + "/" + MyHero.getUnitStats().MaxEnergy;
+            lastEnergy = MyHero.getUnitStats().currentEnergy;
+            for (int i = 0; i < CrystalChildren.Count; i++)
+            {
+                CrystalChildren[i].enabled = (lastEnergy > i);
+            }
+            
+
+            //ManaSlider.value = MyHero.getUnitStats().currentEnergy / MyHero.getUnitStats().MaxEnergy;
+           // ManaText.text = (int)MyHero.getUnitStats().currentEnergy + "/" + MyHero.getUnitStats().MaxEnergy;
         }
     }
 }

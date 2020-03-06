@@ -13,6 +13,7 @@ public class GenericEffectsManager : MonoBehaviour
     public GameObject Healing;
     public GameObject SlowMovement;
     public GameObject ArmorBlock;
+    public GameObject Sleep;
 
     // Start is called before the first frame update
     void Start()
@@ -54,5 +55,10 @@ public class GenericEffectsManager : MonoBehaviour
     public static GameObject ArmorBlockEffect()
     {
         return Instantiate<GameObject>(main.ArmorBlock);
+    }
+
+    public static GameObject SleepEffect()
+    {
+        return Instantiate<GameObject>(main.Sleep);
     }
 }

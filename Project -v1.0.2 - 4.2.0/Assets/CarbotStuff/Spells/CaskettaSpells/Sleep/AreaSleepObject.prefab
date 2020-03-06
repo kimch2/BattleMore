@@ -69,7 +69,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   source: {fileID: 0}
   sourceInt: 1
-  particleEff: {fileID: 0}
+  particleEff: {fileID: 4480752012596088843, guid: cef60534dfb95e245a4b2b53d93fc473,
+    type: 3}
   friendlyFireRatio: 0
   damageAmount: 10
   type: 0
@@ -89,6 +90,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdd2b38231dbb0b49be79ed6b3dcff58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sleepTime: 5
+  sleepTime: 12
   mustTarget: 9
   OnTarget: 0

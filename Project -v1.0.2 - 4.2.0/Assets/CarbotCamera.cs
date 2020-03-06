@@ -31,7 +31,8 @@ public class CarbotCamera : MainCamera
 
         if (LockedCamera)
         {
-            transform.position = new Vector3(startPoint.x , transform.position.y, transform.position.z);
+
+            transform.position = new Vector3(startPoint.x + MaxXDistance - HeroOffset, transform.position.y, transform.position.z);
 
         }
     }

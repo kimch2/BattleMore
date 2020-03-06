@@ -31,9 +31,13 @@ public class WhirlPoolArea : VisionTrigger
         {
             if (man)
             {
-                Vector3 LookAtDirection = Quaternion.Euler(0, 10, 0) * (transform.position - man.transform.position).normalized * Time.deltaTime * spinSpeed;
-                LookAtDirection.y = 0;
-                man.ExternalMove(LookAtDirection, false);
+                float distanceToMiddle = Vector3.Distance(transform.position, man.transform.position);
+
+                Vector3 ToRotate = (transform.position - man.transform.position).normalized;
+                Vector3 LookAtDirection = Quaternion.Euler(0, 82, 0) * ToRotate * spinSpeed;
+
+                  man.ExternalMove(LookAtDirection, false);
+
             }
         }
     }

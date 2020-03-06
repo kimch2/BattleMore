@@ -32,9 +32,12 @@ public class AreaTargetComboAbil : TargetAbility
         myCost.payCost();
         changeCharge(-1);
         GameObject proj = null;
-        audioSrc.PlayOneShot(soundEffect);
+        if (soundEffect)
+        {
+            audioSrc.PlayOneShot(soundEffect);
+        }
         Vector3 pos = location;
-        pos.y += 5;
+        //pos.y += 5;
         proj = (GameObject)Instantiate(ObjectToSpawn, pos, Quaternion.identity);
 
 
@@ -47,7 +50,7 @@ public class AreaTargetComboAbil : TargetAbility
         myCost.payCost();
 
         Vector3 pos = location;
-        pos.y += 5;
+        //pos.y += 5;
         GameObject proj = (GameObject)Instantiate(ObjectToSpawn, pos, Quaternion.identity);
 
         proj.SendMessage("setSource", this.gameObject);

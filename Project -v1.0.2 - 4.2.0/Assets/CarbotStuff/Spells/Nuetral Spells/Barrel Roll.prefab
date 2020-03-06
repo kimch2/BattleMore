@@ -88,7 +88,7 @@ MonoBehaviour:
   resourceCosts:
     MyResources: []
   health: 0
-  energy: 0
+  energy: 3
   cooldown: 2
   cooldownTimer: 0
   StartsRefreshed: 1

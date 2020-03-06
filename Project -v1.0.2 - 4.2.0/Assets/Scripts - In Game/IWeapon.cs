@@ -11,7 +11,7 @@ public class IWeapon : MonoBehaviour {
 	public UnitManager myManager;
 
 	public GameObject OnHitEffect;
-	protected MultiShotParticle fireEffect;
+	protected MultiShotParticle fireEffect; // Maybe can be removed?
 
 	public AudioClip attackSoundEffect;
 	protected AudioSource audioSrc;
@@ -48,14 +48,12 @@ public class IWeapon : MonoBehaviour {
 	}
 
 	protected int originIndex = 0;
-	private UnitManager enemy;
 	public float damagePoint;
     [Tooltip("Time between when the unit starts the attack animation and damage is dealt or projectile is fired")]
 	public float AttackDelay;
 
 	//private bool onDamagePoint;
 	//private float PointEnd;
-	private UnitManager PointSource;
 
 
 	protected bool offCooldown = true;
@@ -69,17 +67,7 @@ public class IWeapon : MonoBehaviour {
 	{
 		myBulletPool = pool;
 	}
-	/*
-	private struct attackSpeedMod{
-		public float perc;
-		public float flat;
-		public Object source;
-	}*/
 
-	/*
-private List<attackSpeedMod> ASMod = new List<attackSpeedMod>();
-private List<attackSpeedMod> DamageMod = new List<attackSpeedMod>();
-*/
 	public List<UnitTypes.UnitTypeTag> cantAttackTypes = new List<UnitTypes.UnitTypeTag>();
 
 	[System.Serializable]
@@ -140,20 +128,14 @@ private List<attackSpeedMod> DamageMod = new List<attackSpeedMod>();
 	{
 		yield return new WaitForSeconds (length);
 		offCooldown = true;
-
-	}
-
-	IEnumerator ComeOffDamagePoint(float length)
-	{
-		yield return new WaitForSeconds (length);
-        PointSource.metaStatus.UnRoot(this);
 	}
 
 
 
 	public bool isOffCooldown()
-		{return offCooldown;
-		}
+	{
+        return offCooldown;
+	}
 	
 
 	// Does not check for range
@@ -264,19 +246,15 @@ private List<attackSpeedMod> DamageMod = new List<attackSpeedMod>();
 	{
 		offCooldown = true;
 		StopAllCoroutines ();
+        myManager.metaStatus.UnRoot(this); // WIll this break with things with turrets??? (instead of having a coroutine that unroots it)
 	}
 
 	public void attack(UnitManager target, UnitManager toStun)
 	{
 		offCooldown = false;
-	
-
+        
 		if (toStun && damagePoint > 0) {
-			toStun.metaStatus.Root(toStun, this, true, 0);
-
-			StartCoroutine (ComeOffDamagePoint (damagePoint));
-
-			PointSource = toStun;
+			toStun.metaStatus.Root(toStun, this, true, damagePoint);
 		}
 		for (int i = 0; i < numOfAttacks; i++) {
 			StartCoroutine( Fire ((i * RepeatDelay + AttackDelay), target));
@@ -287,7 +265,8 @@ private List<attackSpeedMod> DamageMod = new List<attackSpeedMod>();
 
 
 	IEnumerator Fire (float time, UnitManager target)
-	{if (myAnimator && AnimationName != "") {
+	{
+        if (myAnimator && AnimationName != "") {
 			myAnimator.Play (AnimationName);
 		}
 		else if (myManager) { // Adding an Else to the IF here, so we don't play the same animation twice
@@ -297,7 +276,6 @@ private List<attackSpeedMod> DamageMod = new List<attackSpeedMod>();
 		LookAtTarget (target.gameObject);
 		yield return new WaitForSeconds(time);
 
-		enemy = target;
 		if (target) {
 			LookAtTarget (target.gameObject);
 
@@ -309,7 +287,6 @@ private List<attackSpeedMod> DamageMod = new List<attackSpeedMod>();
 			}
 
 			DealDamage (damage, target);
-
 
 			if (firePoints[originIndex].myParticle) {
 

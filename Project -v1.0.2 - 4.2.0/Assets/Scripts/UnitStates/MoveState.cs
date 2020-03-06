@@ -19,7 +19,8 @@ public class MoveState : UnitState{
 	}
 
 	public MoveState(Vector3 loc, UnitManager man, bool assumed)
-	{assumedMove = assumed;
+	{
+        assumedMove = assumed;
 		myManager = man;
 
 		location = loc;

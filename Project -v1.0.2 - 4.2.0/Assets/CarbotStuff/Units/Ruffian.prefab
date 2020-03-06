@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 857897096165384145}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.477, z: 0}
+  m_LocalPosition: {x: 0, y: 0.37, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1661666932766265809}
@@ -183,7 +183,7 @@ MonoBehaviour:
   RatioLevels:
   - minimum: 0
     HPBarColor: {r: 0.19117647, g: 0.19675452, b: 1, a: 1}
-  BarWidth: 8
+  BarWidth: 3
 --- !u!1 &1661666930982008445
 GameObject:
   m_ObjectHideFlags: 0
@@ -399,7 +399,7 @@ MonoBehaviour:
     HPBarColor: {r: 1, g: 0.8896551, b: 0, a: 1}
   - minimum: 0
     HPBarColor: {r: 0.8602941, g: 0, b: 0, a: 1}
-  BarWidth: 8
+  BarWidth: 3
 --- !u!1 &1661666931913843629
 GameObject:
   m_ObjectHideFlags: 0
@@ -505,7 +505,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1661666931956724388}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 4.65, z: 0}
+  m_LocalPosition: {x: 0, y: -0.83, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1661666931268563076}
@@ -721,7 +721,7 @@ MonoBehaviour:
   RatioLevels:
   - minimum: 0
     HPBarColor: {r: 1, g: 1, b: 1, a: 1}
-  BarWidth: 8
+  BarWidth: 3
 --- !u!1 &1661666932324250326
 GameObject:
   m_ObjectHideFlags: 0
@@ -1082,7 +1082,6 @@ MonoBehaviour:
   deathCorpse: {fileID: 7150057853635262097, guid: ad50ad8662682c44fba10407e38bc511,
     type: 3}
   deathEffect: {fileID: 0}
-  takeDamageEffect: {fileID: 0}
   UnitPortrait: {fileID: 21300000, guid: 04195376b29c3154496ecaa88bee0b4d, type: 3}
   goodBuffs: []
   badBuffs: []

@@ -13,10 +13,8 @@ public class StandardInteract : MonoBehaviour, Iinteract {
 
 	// Use this for initialization
 	void Awake () {
-
 		myManager = GetComponent<UnitManager> ();
-		myManager.setInteractor (this);
-	
+		myManager.setInteractor (this);	
 	}
 
 
@@ -25,10 +23,9 @@ public class StandardInteract : MonoBehaviour, Iinteract {
         Awake ();
 	}
 	public virtual UnitState computeState(UnitState s)
-	{
-		//Debug.Log ("Getting called up here");
+    { 
 		return s;
-	}
+    }
 
 	// When creating other interactor classes, make sure to pass all relevant information into whatever new state is being created (IMover, IWeapon, UnitManager)
 	public virtual void computeInteractions (Order order)
