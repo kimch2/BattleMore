@@ -2,28 +2,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using DigitalRuby.SoundManagerNamespace;
+
 public  class Projectile : MonoBehaviour {
-
-
-
+    
 	public UnitManager target;
- 	protected UnitManager SourceMan;
-	public float damage;
+
+    public GameObject Source;
+    public int sourceInt = 1;
+    protected VeteranStats vetSource;
+    public OnHitContainer MyHitContainer;
+
+    public float damage;
 	public float speed;
 
-	public bool trackTarget;
-
-	protected float distance;
+	protected float distance; // Used in a bunch of child classes
 	protected float currentDistance;
 
-	//public ProjectileMover mover;
-	public GameObject Source;
-	public int sourceInt =1;
-	protected VeteranStats vetSource;
+    
 	public DamageTypes.DamageType damageType = DamageTypes.DamageType.Regular;
-	public AudioClip mySound;
 	protected AudioSource AudSrc;
-	//private bool selfDest = false;
 	protected CharacterController control;
 
 	//If you are using an explosion , you should set the variables in the explosion prefab itself.
@@ -31,28 +28,25 @@ public  class Projectile : MonoBehaviour {
 	public bool SepDamWithExplos;
 	public GameObject SpecialEffect;
 
-	public List<Notify> triggers = new List<Notify> ();
-
 	protected Vector3 lastLocation;
 
-	public float FriendlyFire;
 	protected Vector3 randomOffset;
-	protected Vector3 originPoint;
+	protected Vector3 originPoint; // Used by abilities that need to know where the shot was fired from (FrontalShield)
 
-	GameObject myEffect;
+	GameObject cachedEffect; 
 	MultiShotParticle multiParticle;
 
 	protected Lean.LeanPool myBulletPool;
 
 	List<TrailRenderer> renders = new List<TrailRenderer>();
-	// Use this for initialization
+
 	public void Start () {	
 		if (!myBulletPool) {
 			myBulletPool = Lean.LeanPool.getSpawnPool (this.gameObject);
 		}
 
 		AudSrc= GetComponent<AudioSource> ();
-		if (AudSrc && mySound) {
+		if (AudSrc && AudSrc.clip) {
 			AudSrc.priority += Random.Range (-60, 0);
 			AudSrc.volume = ((float)Random.Range (1, 5)) / 10;
 			AudSrc.pitch +=((float)Random.Range (-3, 3)) / 10;
@@ -73,29 +67,27 @@ public  class Projectile : MonoBehaviour {
 	public void OnSpawn()
 	{	currentDistance = 0;
 		originPoint = transform.position;
-		if (AudSrc && mySound) {
+		if (AudSrc && AudSrc.clip) {
 			AudSrc.pitch +=((float)Random.Range (-3, 3)) / 10;
-			SoundManager.PlayOneShotSound (AudSrc, mySound);
+			SoundManager.PlayOneShotSound (AudSrc, AudSrc.clip);
 		}
 		foreach (TrailRenderer rend in renders) {
 			rend.Clear ();	
 		}
 	}
 
-	public Vector3 getOrigin()
+	public void Initialize(UnitManager targ, float dam, UnitManager src, OnHitContainer hitContain)
 	{
-		return originPoint;
-	}
-
-	public void Initialize(UnitManager targ, float dam, UnitManager src)
-	{
-		//Debug.Log ("Setting target " + targ);
 		target = targ;
-		damage = dam;
-		Source = src.gameObject;
-		SourceMan = src;
+        if (dam >= 0)
+        {
+            damage = dam;
+        }
+		//Source = src.gameObject;
 		sourceInt = src.PlayerOwner;
 		vetSource = src.myStats.veternStat;
+        MyHitContainer = hitContain;
+        setup();
 	}
 
 	public virtual void setup()
@@ -114,57 +106,50 @@ public  class Projectile : MonoBehaviour {
 			lastLocation = target.transform.position + randomOffset;
 			distance = Vector3.Distance (this.gameObject.transform.position, lastLocation);
 
-		
-			InvokeRepeating ("lookAtTarget", .05f, .05f);
-		}
-		lookAtTarget ();
-			
+		}		
 	}
 
-	protected virtual void onHit()
+    public Vector3 getOrigin()
+    {
+        return originPoint;
+    }
+
+    protected virtual void onTerminate()
 	{}
 		
 
-	protected void lookAtTarget()
-	{
-		if (target != null) {
-			lastLocation = target.transform.position + randomOffset;
-		}
-
-		gameObject.transform.LookAt (lastLocation);
-	}
-
 	public void setLocation(Vector3 loc)
 	{
-
 		lastLocation = loc + randomOffset;
-
 		gameObject.transform.LookAt (lastLocation);
 		distance = Vector3.Distance (this.gameObject.transform.position, lastLocation);
 	}
 
-	protected float yAmount;
-
 	float movementAmount;
-	// Update is called once per frame
 	protected virtual void Update () {
 
 		movementAmount = speed * Time.deltaTime;
 		gameObject.transform.Translate (Vector3.forward* movementAmount);
 
-		if(target && trackTarget){
-			if (Vector3.Distance (target.transform.position + randomOffset, transform.position) < movementAmount) {
-				Terminate (target);
-			}
-		}
+		if(target){
+            if (Vector3.Distance(target.transform.position + randomOffset, transform.position) < movementAmount)
+            {
+                Terminate(target);
+            }
+            else
+            {
+                lastLocation = target.transform.position + randomOffset;
+                gameObject.transform.LookAt(lastLocation);
+            }
+        }
 		else
 		{
 			if (Vector3.Distance (lastLocation, transform.position) < movementAmount) {
 				Terminate (target);
+                return;
 			}
 		}
-
-	}
+    }
 
 	protected virtual void OnControllerColliderHit(ControllerColliderHit other)
 	{
@@ -172,16 +157,15 @@ public  class Projectile : MonoBehaviour {
 			return;}
 		
 		if (other.gameObject == target || other.gameObject.transform.IsChildOf(target.transform)|| (Source && Source.transform.IsChildOf(other.transform))) {
-			Terminate (other.gameObject.GetComponent<UnitManager>());
+            Debug.Log("Terminating on " + target + "   Source is "); 
+                Terminate (other.gameObject.GetComponent<UnitManager>());
 		}
 
-		if (currentDistance / distance < .5) {
-			return;
-		}
-
-		if(!trackTarget && Source&& (other.gameObject!= Source && !other.gameObject.transform.IsChildOf(Source.transform) &&  (!Source.transform.IsChildOf(other.transform))))
-		{
-			Terminate(null);}
+		if(Source && (other.gameObject!= Source && !other.gameObject.transform.IsChildOf(Source.transform) &&  (!Source.transform.IsChildOf(other.transform))))
+        {
+            Debug.Log("Terminating on " + target + "   Source is " + Source);
+            Terminate(null);
+        }
 	}
 		
 
@@ -192,9 +176,7 @@ public  class Projectile : MonoBehaviour {
 
 	public virtual void Terminate(UnitManager target)
 	{
-		//Debug.Log ("Terminating on " + target + "   Source is " + Source);
-		if (!gameObject.activeSelf) { 
-		
+		if (!gameObject.activeSelf) { 		
 			return;
 		}
 		try{
@@ -204,62 +186,60 @@ public  class Projectile : MonoBehaviour {
 
 			explosion Escript = explode.GetComponent<explosion> ();
 			if (Escript) {
-				Escript.setSource (Source);
-				Escript.damageAmount = this.damage;
-				Escript.friendlyFireRatio = FriendlyFire;
+                    Escript.Initialize(Source, vetSource, this.damage, MyHitContainer, sourceInt);
 			} else {
 					explode.SendMessage("setVeteran", vetSource ,SendMessageOptions.DontRequireReceiver);
 			}
 		}
 
-		if (explosionO && SepDamWithExplos && target || !explosionO && target) {
-			
-			foreach (Notify not in triggers) {
-				if (not != null) {
-					not.trigger (Source, this.gameObject, target, damage);
-				}
-			}
-			if (target != null && target.myStats != null) {
+            if (target && (!explosionO || explosionO && SepDamWithExplos))
+            {
+                if (MyHitContainer)
+                {
+                    MyHitContainer.trigger(this.gameObject, target, damage);
+                }
 
-				//Debug.Log ("Giveing damage");
-					float total =  target.myStats.TakeDamage (damage, Source,damageType, SourceMan);
-				if (SourceMan)
-					{
-					SourceMan.myStats.veteranDamage (total);
+                // Check if Target is still alive after OnHit effects?
+                float total = target.myStats.TakeDamage(damage, Source, damageType, vetSource != null ? vetSource.myUnit : null);
+                if (vetSource != null)
+                {
+                    vetSource.UpdamageDone(total);
+                }
 
-				}
-			}
-			if (target == null) {
-				{
-					SourceMan.cleanEnemy ();}
-			}
-		} 
-	
+                if (target == null && vetSource.myUnit)
+                {
+                    {
+                        vetSource.myUnit.cleanEnemy();
+                    }
+                }
 
-		if (SpecialEffect) {
 
-			if (!myEffect) {
-				myEffect = Instantiate (SpecialEffect, transform.position, transform.rotation);
-				multiParticle = myEffect.GetComponent<MultiShotParticle> ();
 
-			}
-			else {
-				myEffect.transform.position = (transform.position + lastLocation + randomOffset) * .5f;
-				myEffect.transform.rotation = transform.rotation;
+                if (SpecialEffect)
+                {
+                    if (!cachedEffect)
+                    {
+                        cachedEffect = Instantiate(SpecialEffect, transform.position, transform.rotation);
+                        multiParticle = cachedEffect.GetComponent<MultiShotParticle>();
+                    }
+                    else
+                    {
+                        cachedEffect.transform.position = (transform.position + lastLocation + randomOffset) * .5f;
+                        cachedEffect.transform.rotation = transform.rotation;
+                    }
 
-			}
+                    if (multiParticle)
+                    {
+                        multiParticle.playEffect();
+                    }
+                }
 
-			if (multiParticle) {
-				multiParticle.playEffect ();
-			}
-
-		} 
-
-		onHit ();
+               
+            }
 		}catch(System.Exception e) {
 			Debug.Log ("Projectile Broke: " + e);
 		}
-		CancelInvoke ("lookAtTarget");
+        onTerminate();
 		myBulletPool.FastDespawn (this.gameObject, 0);
 
 	}
@@ -268,38 +248,38 @@ public  class Projectile : MonoBehaviour {
 
 	public void Despawn()
 	{
-		triggers.Clear ();
+        MyHitContainer = null;
 	}
 
 
 	public void setSource(GameObject so)
-	{
-		
-		Source = so;
-		SourceMan = so.GetComponent<UnitManager> ();
+	{		
+		//Source = so;
+		UnitManager SourceMan = so.GetComponent<UnitManager> ();
 		if (SourceMan) {
 			sourceInt = SourceMan.PlayerOwner;
+            vetSource = SourceMan.myStats.veternStat;
 		} else {
 			sourceInt = 1;
 		}
-
 	}
 	
 	
 
 
 	public void selfDestruct()
-	{target = null;
+	{
+        target = null;
 
 		if (SpecialEffect) {
 
-			if (!myEffect) {
-				myEffect = Instantiate (SpecialEffect, transform.position, transform.rotation);
-				multiParticle = myEffect.GetComponent<MultiShotParticle> ();
+			if (!cachedEffect) {
+                cachedEffect = Instantiate (SpecialEffect, transform.position, transform.rotation);
+				multiParticle = cachedEffect.GetComponent<MultiShotParticle> ();
 
 			} else {
-				myEffect.transform.position = (transform.position + lastLocation + randomOffset) * .5f;
-				myEffect.transform.rotation = transform.rotation;
+                cachedEffect.transform.position = (transform.position + lastLocation + randomOffset) * .5f;
+                cachedEffect.transform.rotation = transform.rotation;
 
 			}
 
@@ -308,12 +288,8 @@ public  class Projectile : MonoBehaviour {
 			}
 		}
 
-		onHit ();
+		onTerminate ();
 		myBulletPool.FastDespawn (this.gameObject, 0);
 		
 	}
-
-
-
-
 }

@@ -1956,7 +1956,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TypesToSpawn:
-  - {fileID: 2776605538683397694, guid: c47b4358d0980514cba4b1f5f6cab967, type: 3}
+  - {fileID: 5636270701877033806, guid: 25e06b4c5c0fd9b4c9d35eb08b43cec3, type: 3}
   firstSpawn: 5
   spawnRate: 2
   SpawnOffset: 100

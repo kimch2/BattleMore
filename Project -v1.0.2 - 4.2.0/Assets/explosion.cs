@@ -4,35 +4,34 @@ using System.Collections.Generic;
 
 public class explosion : MonoBehaviour {
 
-
-	public GameObject source;
+    UnitManager mySrcMan;
 	public int sourceInt = 1;
-	public GameObject particleEff;
-	public float friendlyFireRatio;
+    VeteranStats vetStats;
+
+    public GameObject particleEff;
+
 	public float damageAmount;
 	public DamageTypes.DamageType type;
-	public float maxSize= 5.0f;
-	VeteranStats vetStats;
+	public float maxSize = 5.0f;
+
 	public bool UseYFOrDetection;
-	public List<Notify> triggers = new List<Notify> ();
+
     [Tooltip("The time between the spawn of this object (and the above effect) and when the damage is applied")]
     public float DamageDelay = .01f;
 	float friendlyAmount;
 	float sizeSquared;
 	public IWeapon.bonusDamage[] extraDamage;
+    public OnHitContainer MyHitContainer;
 
-	UnitManager mySrcMan;
 
-	// Use this for initialization
 	IEnumerator Start () {
 
-	//	Debug.Log("Starting");
 		if (particleEff) {
 			GameObject obj = 	(GameObject)Instantiate (particleEff, this.gameObject.transform.position, Quaternion.identity);
 			obj.SendMessage ("setOwner", sourceInt, SendMessageOptions.DontRequireReceiver);
 
 		}
-        //transform.localScale = Vector3.one * maxSize;
+
         yield return new WaitForSeconds(DamageDelay);
 		sizeSquared = maxSize;
 		FindTargets();
@@ -45,9 +44,8 @@ public class explosion : MonoBehaviour {
 
 	public void setSource(GameObject sr)
 	{
-		source = sr;
-		if (source) {
-			mySrcMan = source.GetComponent<UnitManager> ();
+		if (sr) {
+			mySrcMan = sr.GetComponent<UnitManager> ();
 		}
 		if (mySrcMan) {
 			sourceInt = mySrcMan.PlayerOwner;
@@ -56,48 +54,40 @@ public class explosion : MonoBehaviour {
 
 	public void setVeteran(VeteranStats sr)
 	{
-
 		mySrcMan = sr.myUnit;
 		vetStats = sr;
-
-		if (mySrcMan) {
-			source = sr.myUnit.gameObject;
-		}
 		sourceInt = sr.playerOwner;
 	}
 
 	public void setDamage(float amount)
 	{
 		damageAmount = amount;
-		friendlyAmount = damageAmount * friendlyFireRatio;
+        friendlyAmount = damageAmount * MyHitContainer.FriendlyFireRatio ;
 	}
 
-	/*
-	void OnTriggerEnter(Collider other)
-	{
+    //SOmetimes sources are global abilities which are not attached to Units, so we have to pass in additional ownershipInfo
+    public void Initialize(GameObject source, VeteranStats vets, float DamageAmount, OnHitContainer container, int PlayerOwner )
+    {
+        mySrcMan = vets.myUnit;
+        vetStats = vets;
+        damageAmount = DamageAmount;
+        MyHitContainer = container;
+        if (!MyHitContainer)
+        {
+            MyHitContainer = gameObject.AddComponent<OnHitContainer>();
+            Debug.LogError("No HitContainer for this object " + this.gameObject + " sourced from " + source);
+        }
 
-		if (other.isTrigger) {
-			return;}
-	
-		UnitManager manager = other.gameObject.GetComponent<UnitManager> ();
+        friendlyAmount = damageAmount * MyHitContainer.FriendlyFireRatio;
+        if (mySrcMan)
+        {
+            source = mySrcMan.gameObject;
+        }
+        sourceInt = PlayerOwner;
+    }
 
-		if (manager) {
-			if (manager.PlayerOwner == sourceInt)
-			{
-				DealDamage(manager, damageAmount * friendlyFireRatio);
-			}
-			else
-			{
-				//If i use this, add back in friendly fire modifer here
-				DealDamage(manager, damageAmount);
-			}
-		
-		}
 
-	}
-	*/
-
-	void FindTargets()
+    void FindTargets()
 	{
 		float TempDamageAmount;
 		/* Commenting this out so explosions can be used to trigger status effects
@@ -110,13 +100,13 @@ public class explosion : MonoBehaviour {
 		{
 			if (manager.playerNumber == sourceInt)
 			{
-				if (friendlyFireRatio == 0)
+				if (MyHitContainer.FriendlyFireRatio == 0)
 				{
 					continue;
 				}
 				else
 				{
-					TempDamageAmount = damageAmount * friendlyFireRatio;
+					TempDamageAmount = damageAmount * MyHitContainer.FriendlyFireRatio;
 				}
 			}
 			else
@@ -151,26 +141,18 @@ public class explosion : MonoBehaviour {
 				DealDamage(unit, TempDamageAmount);
 			}
 		}
-
 	}
 
 
 
 	float getDistance(UnitManager unit)
 	{
-
-		float f;
 		if (UseYFOrDetection) {
-			f =  new Vector2(unit.transform.position.x - transform.position.x, unit.transform.position.z - transform.position.z).sqrMagnitude;
+			return new Vector2(unit.transform.position.x - transform.position.x, unit.transform.position.z - transform.position.z).sqrMagnitude;
 		}
 		else {
-		f = (unit.transform.position - transform.position).sqrMagnitude;
+		return (unit.transform.position - transform.position).sqrMagnitude;
 		}
-
-
-		//f -= (unit.CharController.radius * unit.CharController.radius);
-		
-		return f;
 	}
 
 	
@@ -184,19 +166,14 @@ public class explosion : MonoBehaviour {
 				baseAmount += tag.bonus;
 			}
 		}
+        MyHitContainer.trigger(null, manager, baseAmount);
 
-		float total = stats.TakeDamage(baseAmount, source, type, mySrcMan);
+        float total = stats.TakeDamage(baseAmount, mySrcMan ? mySrcMan.gameObject : null, type, mySrcMan);
 
 
 		if (mySrcMan)
 		{
 			mySrcMan.myStats.veteranDamage(total);
 		}
-
-		foreach (Notify not in triggers)
-		{
-			not.trigger(source, null, manager, baseAmount);
-		}
-
 	}
 }

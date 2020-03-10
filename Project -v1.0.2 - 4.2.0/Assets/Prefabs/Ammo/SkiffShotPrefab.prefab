@@ -197,7 +197,6 @@ GameObject:
   - component: {fileID: 135000013209316846}
   - component: {fileID: 114000011303087864}
   - component: {fileID: 143000012822433148}
-  - component: {fileID: 114000011233836916}
   m_Layer: 15
   m_Name: SkiffShotPrefab
   m_TagString: Projectile
@@ -254,18 +253,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  damage: 0
-  speed: 52
-  trackTarget: 1
   Source: {fileID: 0}
   sourceInt: 0
+  MyHitContainer: {fileID: 0}
+  damage: 0
+  speed: 52
   damageType: 0
-  mySound: {fileID: 0}
   explosionO: {fileID: 0}
   SepDamWithExplos: 0
   SpecialEffect: {fileID: 1557438351287830, guid: e38621fd73e8b354fa89f34159492cea,
     type: 3}
-  FriendlyFire: 0
 --- !u!143 &143000012822433148
 CharacterController:
   m_ObjectHideFlags: 0
@@ -284,20 +281,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114000011233836916
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1000013282120444}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2f18b0330f4dec44bb4f96e49598324, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  toShow: 
-  myColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &1199252132898094
 GameObject:
   m_ObjectHideFlags: 0

@@ -46,9 +46,6 @@ public class EmpMissile :  TargetAbility {
 			}
 		}
 	
-
-
-
 		return true;
 
 	}

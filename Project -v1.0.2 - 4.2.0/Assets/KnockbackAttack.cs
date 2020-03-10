@@ -7,20 +7,6 @@ public class KnockbackAttack : MonoBehaviour, Notify
 	public float knockDistance;
 	public UnitTypes.UnitTypeTag mustTarget;
 
-
-	// Use this for initialization
-	void Start()
-	{
-		if (GetComponent<Projectile>())
-		{
-			GetComponent<Projectile>().triggers.Add(this);
-		}
-	}
-
-
-
-
-
 	public float trigger(GameObject source, GameObject proj, UnitManager target, float damage)
 	{
 		if (target)

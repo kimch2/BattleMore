@@ -52,8 +52,9 @@ public class IWeapon : MonoBehaviour {
     [Tooltip("Time between when the unit starts the attack animation and damage is dealt or projectile is fired")]
 	public float AttackDelay;
 
-	//private bool onDamagePoint;
-	//private float PointEnd;
+    //private bool onDamagePoint;
+    //private float PointEnd;
+    public OnHitContainer myHitContainer;
 
 
 	protected bool offCooldown = true;
@@ -119,6 +120,11 @@ public class IWeapon : MonoBehaviour {
 		if (turret) {
 			turretClass = turret.GetComponent<turret> ();
 		}
+
+        if (!myHitContainer)
+        {
+            myHitContainer = OnHitContainer.CreateDefaultContainer(myManager, Title);
+        }
 	}
 
 
@@ -340,8 +346,7 @@ public class IWeapon : MonoBehaviour {
 
 			//Debug.Log ("Creating " + script);
 			if (script) {
-				script.Initialize (target, damage, myManager);
-				script.setup ();
+				script.Initialize (target, damage, myManager, myHitContainer);
 			} else {
 
 				proj.SendMessage ("setSource", this.gameObject, SendMessageOptions.DontRequireReceiver);
@@ -350,7 +355,8 @@ public class IWeapon : MonoBehaviour {
 			}
 		} else {
 
-			damage = fireTriggers (this.gameObject, proj, target, damage); 
+			damage = fireTriggers (this.gameObject, proj, target, damage);
+            myHitContainer.trigger(null, target, damage); 
 			if (damage > 0) {
 				damage = target.myStats.TakeDamage (damage, this.gameObject, DamageTypes.DamageType.Regular);
 				myManager.myStats.veteranDamage (damage);

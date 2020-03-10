@@ -38,7 +38,7 @@ namespace AssetUsageFinder
 
             public static Style Instance
             {
-                get { return _style ?? (_style = DependencyStyle.Instance.DependencyWindow); }
+                get { return _style ?? (_style = new DependencyWindow.Style()); }// DependencyStyle.Instance.DependencyWindow); }
             }
 
             private static Style _style;
@@ -106,7 +106,7 @@ namespace AssetUsageFinder
             var window = CreateInstance<DependencyWindow>();
             window.Init(new FileDependency(Selection.activeObject));
             var p = window.position;
-            p.size = Style.Instance.Size;
+            p.size =  Style.Instance.Size;
             window.position = p;
             window.Show();
         }

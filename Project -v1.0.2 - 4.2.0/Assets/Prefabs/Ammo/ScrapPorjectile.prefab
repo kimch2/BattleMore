@@ -151,18 +151,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  damage: 0
-  speed: 128
-  trackTarget: 1
   Source: {fileID: 0}
   sourceInt: 0
+  damage: 0
+  speed: 128
   damageType: 0
-  mySound: {fileID: 0}
+  MyHitContainer: {fileID: 0}
   explosionO: {fileID: 0}
   SepDamWithExplos: 0
   SpecialEffect: {fileID: 1223292871522050, guid: ba159759364432740be023ac4582720e,
     type: 3}
-  FriendlyFire: 0
 --- !u!143 &143000010577205148
 CharacterController:
   m_ObjectHideFlags: 0

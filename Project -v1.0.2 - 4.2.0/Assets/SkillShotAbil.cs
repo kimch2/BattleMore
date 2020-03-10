@@ -6,6 +6,8 @@ public class SkillShotAbil : TargetAbility
 {
     public SkillShotData SkillShotProjectile;
     bool Casting; // NEED TO HAVE THIS CHECK A CHANNEL STATE IN THE UNITMANAGER!!
+    public OnHitContainer myHitContainer;
+    public float Damage;
 
     // Use this for initialization
     new void Start()
@@ -13,6 +15,10 @@ public class SkillShotAbil : TargetAbility
         base.Start();
         myType = type.target;
         InitializeCharges();
+        if (!myHitContainer)
+        {
+            OnHitContainer.CreateDefaultContainer(myManager, Name);
+        }
     }
 
 
@@ -85,10 +91,13 @@ public class SkillShotAbil : TargetAbility
         // changeCharge(-1 * chargeCount);
 
         myCost.payCost();
-
-
     }
 
+    public override void OnDeath()
+    {
+        base.OnDeath();
+        myHitContainer.Detach();
+    }
 
     IEnumerator StringCast(int quillNumber, Vector3 direction)
     {
@@ -120,8 +129,10 @@ public class SkillShotAbil : TargetAbility
             proj.GetComponent<SkillShotProjectile>().OnKill.AddListener(() => {
                // changeCharge(1);
             });
-            proj.GetComponent<SkillShotProjectile>().TotalRange = range;
-            proj.SendMessage("setSource", this.gameObject, SendMessageOptions.DontRequireReceiver);
+            SkillShotProjectile skillShotComp = proj.GetComponent<SkillShotProjectile>();
+
+            skillShotComp.TotalRange = range;
+            skillShotComp.Initialize(null, Damage, myManager, myHitContainer);
 
             float CurrentAngle = i * anglePerShot;                            
             CurrentAngle -= SkillShotProjectile.SpreadAngle;             
@@ -135,14 +146,13 @@ public class SkillShotAbil : TargetAbility
 
             Vector3 newDirection = Quaternion.Euler(0, RandomizedArcLimit, 0) * direction;
 
-            proj.GetComponent<SkillShotProjectile>().setTarget(proj.transform.position + newDirection);
+            skillShotComp.setTarget(proj.transform.position + newDirection);
             if (SkillShotProjectile.timeBetweenShots > 0)
             {
                 yield return new WaitForSeconds(SkillShotProjectile.timeBetweenShots);
             }
         }
         myManager.cMover.LockRotation(false);
-        // myManager.setStun(false, this, false);
         Casting = false;
     }
 

@@ -9,18 +9,13 @@ public class UnitCrusher : MonoBehaviour, Notify {
 	public float stunTime;
 
 	public bool onTarget;
-	// Use this for initialization
-	void Start () {
-		if (GetComponent<Projectile> ()) {
-			GetComponent<Projectile> ().triggers.Add (this);
-		}
 
-	}
 
 	public void startCrush()
 	{
 		StartCoroutine (CrushGuy ());
 	}
+
 	IEnumerator CrushGuy()
 	{	GetComponent<UnitManager> ().metaStatus.Stun( null, this, false);
 		float startY = transform.localScale.y;

@@ -19,7 +19,7 @@ public class SleepEffect : IEffect
         return true;
     }
 
-    public override void applyTo(GameObject source, GameObject target)
+    public override void applyTo(GameObject source, UnitManager target)
     {
         SleepEffect eff = target.gameObject.AddComponent<SleepEffect>();
         if (!eff)

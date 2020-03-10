@@ -112,10 +112,15 @@ public class DaminionsInitializer : MonoBehaviour
             {
                 CrystalChildren[i].enabled = (lastEnergy > i);
             }
-            
+
 
             //ManaSlider.value = MyHero.getUnitStats().currentEnergy / MyHero.getUnitStats().MaxEnergy;
-           // ManaText.text = (int)MyHero.getUnitStats().currentEnergy + "/" + MyHero.getUnitStats().MaxEnergy;
+            // ManaText.text = (int)MyHero.getUnitStats().currentEnergy + "/" + MyHero.getUnitStats().MaxEnergy;
+        }
+        else if (!MyHero)
+        {
+            VictoryTrigger.instance.Lose();
+            this.enabled = false;
         }
     }
 }

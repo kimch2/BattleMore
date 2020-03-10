@@ -550,7 +550,12 @@ public class UnitStats : MonoBehaviour {
 			if (deathEffect) {
 				Instantiate (deathEffect, this.gameObject.transform.position, Quaternion.identity);
 			}
-	
+
+            foreach (Ability ab in myManager.abilityList)
+            {
+                if (ab)
+                { ab.OnDeath(); }
+            }
 			
 			this.gameObject.SendMessage ("Dying", SendMessageOptions.DontRequireReceiver);
 			veternStat.Died = true;

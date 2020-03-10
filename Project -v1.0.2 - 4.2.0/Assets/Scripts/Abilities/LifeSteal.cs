@@ -5,23 +5,26 @@ public class LifeSteal : MonoBehaviour, Notify {
 
 	// Use this for initialization
 	private UnitStats myStats;
-
-	private PopUpMaker popper;
-	public float percentage = .5f;
+	public float percentage = 50;
+    public float MinimumPopUpAmount = 30;
 
 	void Start () {
-		myStats = GetComponent<UnitStats> ();
-		this.GetComponent<IWeapon> ().triggers.Add (this);
-		popper = GetComponent<PopUpMaker> ();
+        OnHitContainer hitContain = gameObject.GetComponent<OnHitContainer>();   
+        myStats = hitContain.myManager.myStats;
 	}
 	
 
-
-
 	public float trigger(GameObject source, GameObject projectile,UnitManager target, float damage)
 	{
-		myStats.heal (damage * percentage);
-		popper.CreatePopUp ("+" + (int)(damage * percentage), Color.green);
+        if (myStats)
+        {
+            float amount = damage * percentage * .01f;
+            myStats.heal(amount);
+            if (amount > MinimumPopUpAmount)
+            {
+                PopUpMaker.CreateGlobalPopUp("+" + (int)(amount), Color.green, myStats.transform.position);
+            }
+        }
 		return damage;
 	}
 

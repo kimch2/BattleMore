@@ -156,7 +156,7 @@ MonoBehaviour:
   - {fileID: 6471087136803445289}
   - {fileID: 5682192309468901775}
   - {fileID: 2946366546712814290}
-  - {fileID: 1146363710758069315}
+  - {fileID: 8515744912332256619}
   - {fileID: 2709539464451581652}
   AbilityPriority: 0
   AbilityStartingRow: 0
@@ -388,6 +388,7 @@ MonoBehaviour:
     myParticle: {fileID: 0}
   damagePoint: 0.4
   AttackDelay: 0.3
+  myHitContainer: {fileID: 0}
   cantAttackTypes: 
   extraDamage: []
   projectile: {fileID: 4637789349980931960, guid: 54e8c52e4995bd94b8434c0b634b9d1f,
@@ -1506,18 +1507,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 4759360865348134254}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1146363710758069315 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5612636071173718317, guid: dcc5427559760a648bd50e26bf419ab3,
-    type: 3}
-  m_PrefabInstance: {fileID: 4759360865348134254}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 456fcef5a70bf3048bf9fb7881cafeb0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &5007371612793051300
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1856,6 +1845,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 5954084715319713894}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8515744912332256619 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2634368706298352909, guid: 145e8cd247fb1ca479d63af2d0453bbb,
+    type: 3}
+  m_PrefabInstance: {fileID: 5954084715319713894}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3bec2a86f9e38d45831bbf244b0509a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7097033466992329721
 PrefabInstance:
   m_ObjectHideFlags: 0

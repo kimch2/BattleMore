@@ -10,7 +10,7 @@ public class inflectionStarter : MonoBehaviour, Notify{
 	}
 	public GameObject barrier;
 	void Start () {
-		GetComponent<Projectile> ().triggers.Add (this);
+		//GetComponent<Projectile> ().triggers.Add (this);
 	}
 
 
@@ -56,10 +56,6 @@ public class inflectionStarter : MonoBehaviour, Notify{
 
 			}
 		}
-
-
-
-
 
 		return damage;
 	}

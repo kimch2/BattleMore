@@ -107,7 +107,6 @@ GameObject:
   - component: {fileID: 832185771481173256}
   - component: {fileID: 788761531342363760}
   - component: {fileID: 829449246223510570}
-  - component: {fileID: 3219549637758259460}
   m_Layer: 9
   m_Name: Chronomancer
   m_TagString: Enemy
@@ -129,6 +128,7 @@ Transform:
   - {fileID: 723460527736917232}
   - {fileID: 726487339065066696}
   - {fileID: 650159795170417612}
+  - {fileID: 1138196721771804614}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 265.628, z: 0}
@@ -285,7 +285,6 @@ MonoBehaviour:
   deathCorpse: {fileID: 1926876311947704, guid: c71eda118990c9d42aec2b7344494437,
     type: 3}
   deathEffect: {fileID: 152850, guid: 78a20778fc7495b47a7794a5850008e1, type: 3}
-  takeDamageEffect: {fileID: 0}
   UnitPortrait: {fileID: 0}
   goodBuffs: []
   badBuffs: []
@@ -371,6 +370,7 @@ MonoBehaviour:
     myParticle: {fileID: 0}
   damagePoint: 0
   AttackDelay: 0
+  myHitContainer: {fileID: 3914202431195079520}
   cantAttackTypes: 0a000000
   extraDamage: []
   projectile: {fileID: 0}
@@ -547,28 +547,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77f586f285b3847808d79083bd19ef1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &3219549637758259460
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 727633608878361424}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd0cfb27f3d3d4943aadefa3741baf75, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  BuffIsGood: 0
-  BuffType: 0
-  OnTarget: 0
-  speedDecrease: 0
-  speedPercent: -0.1
-  attackSpeedDecrease: 0
-  attackSpeedPercent: -0.1
-  duration: 3
-  stackable: 1
-  applyOnStart: 1
 --- !u!1 &727673291979042188
 GameObject:
   m_ObjectHideFlags: 0
@@ -2110,3 +2088,72 @@ MonoBehaviour:
   - minimum: 0
     HPBarColor: {r: 0.19117647, g: 0.19675452, b: 1, a: 1}
   BarWidth: 8
+--- !u!1 &4358356687465386966
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1138196721771804614}
+  - component: {fileID: 3914202431195079520}
+  - component: {fileID: 2358881799564209001}
+  m_Layer: 9
+  m_Name: OnHitContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1138196721771804614
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4358356687465386966}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 726303809721843530}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3914202431195079520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4358356687465386966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95cc792f619723c46b19c319c7e01d3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toApply: []
+  myManager: {fileID: 0}
+  FriendlyFireRatio: 0
+  AutoAddTriggers: 1
+--- !u!114 &2358881799564209001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4358356687465386966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd0cfb27f3d3d4943aadefa3741baf75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BuffIsGood: 0
+  BuffType: 0
+  OnTarget: 0
+  speedDecrease: 0
+  speedPercent: -0.1
+  attackSpeedDecrease: 0
+  attackSpeedPercent: -0.1
+  duration: 3
+  stackable: 1

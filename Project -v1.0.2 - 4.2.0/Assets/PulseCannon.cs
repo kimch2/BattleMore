@@ -53,8 +53,7 @@ public class PulseCannon : IWeapon {
 
 				Projectile script = proj.GetComponent<Projectile> ();
 				if (script) {
-					script.Initialize (target.GetComponent<UnitManager>(), baseDamage, myManager);
-					script.setup ();
+					script.Initialize (target.GetComponent<UnitManager>(), baseDamage, myManager, myHitContainer);
 				} else {
 
 					proj.SendMessage ("setSource", this.gameObject, SendMessageOptions.DontRequireReceiver);

@@ -12,8 +12,12 @@ public class MortarProjectile : Projectile {
 	public Texture indicatorPic;
 	public float indicatorSize;
 	private GameObject myIndiactor;
+    protected float yAmount;
 
-	protected override void Update () {
+    
+
+
+    protected override void Update () {
 		/*
 		if (Vector3.Distance (transform.position, lastLocation) < 2.5f) {
 			Terminate (target);
@@ -45,7 +49,7 @@ public class MortarProjectile : Projectile {
 			control = GetComponent<CharacterController> ();
 		}
 
-		if (TargetIndicator != null && SourceMan.PlayerOwner != 1 ) {
+		if (TargetIndicator != null && vetSource.myUnit.PlayerOwner != 1 ) {
 			TargetIndicator.GetComponentInChildren<Light> ().color = Color.red;
 		}
 
@@ -73,12 +77,36 @@ public class MortarProjectile : Projectile {
 		Update ();
 	}
 
-	protected override void onHit ()
+    protected override void OnControllerColliderHit(ControllerColliderHit other)
+    {
+        if (!target)
+        {
+            return;
+        }
+
+        if (other.gameObject == target || other.gameObject.transform.IsChildOf(target.transform) || (Source && Source.transform.IsChildOf(other.transform)))
+        {
+            Debug.Log("Terminating on " + target + "   Source is " + Source);
+            Terminate(other.gameObject.GetComponent<UnitManager>());
+        }
+
+		if (currentDistance / distance < .5) {
+			return;
+		}
+
+        if (Source && (other.gameObject != Source && !other.gameObject.transform.IsChildOf(Source.transform) && (!Source.transform.IsChildOf(other.transform))))
+        {
+            Debug.Log("Terminating on " + target + "   Source is " + Source);
+            Terminate(null);
+        }
+    }
+
+
+
+    protected override void onTerminate ()
 	{
 		if (myIndiactor) {
 			Destroy (myIndiactor);
 		}
-	}
-		
-		
+	}			
 }

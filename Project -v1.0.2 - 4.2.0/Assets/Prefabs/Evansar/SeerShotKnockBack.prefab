@@ -197,7 +197,6 @@ GameObject:
   - component: {fileID: 8149068326448248709}
   - component: {fileID: 8168916009098048659}
   - component: {fileID: 8157385057082693399}
-  - component: {fileID: 912402488045810803}
   m_Layer: 15
   m_Name: SeerShotKnockBack
   m_TagString: Projectile
@@ -254,18 +253,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  damage: 0
-  speed: 130
-  trackTarget: 1
   Source: {fileID: 0}
   sourceInt: 0
+  MyHitContainer: {fileID: 0}
+  damage: 0
+  speed: 130
   damageType: 0
-  mySound: {fileID: 0}
   explosionO: {fileID: 0}
   SepDamWithExplos: 0
   SpecialEffect: {fileID: 1557438351287830, guid: e38621fd73e8b354fa89f34159492cea,
     type: 3}
-  FriendlyFire: 0
 --- !u!143 &8157385057082693399
 CharacterController:
   m_ObjectHideFlags: 0
@@ -284,20 +281,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &912402488045810803
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8127693572433873047}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6a914b80020a1d4d82576631b2a10d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  knockDistance: 33
-  mustTarget: 10
 --- !u!1 &8127953735476938611
 GameObject:
   m_ObjectHideFlags: 0

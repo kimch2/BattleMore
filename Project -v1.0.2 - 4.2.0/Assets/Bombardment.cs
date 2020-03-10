@@ -112,7 +112,8 @@ public class Bombardment : TargetAbility{
 			script.sourceInt = 1;
 			script.Source = this.gameObject;
 			script.setLocation (hitzone);
-			script.FriendlyFire = FriendlyFire;
+            // FIX THIS BY ADDING A ONHITCONTAINER!!
+            //script.FriendlyFire = FriendlyFire;
 
 		}
 		

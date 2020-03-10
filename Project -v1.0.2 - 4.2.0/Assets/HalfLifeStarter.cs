@@ -7,7 +7,7 @@ public class HalfLifeStarter : MonoBehaviour, Notify{
 
 	// Use this for initialization
 	void Start () {
-		this.gameObject.GetComponent<Projectile> ().triggers.Add (this);
+		//this.gameObject.GetComponent<Projectile> ().triggers.Add (this);
 
 
 	}

@@ -137,11 +137,9 @@ public class SingleTarget:  TargetAbility {
 				Projectile script = proj.GetComponent<Projectile> ();
 
 				if (script) {
+                    // SET THE ONHIT CONTAINER!
+					script.Initialize (target.GetComponent<UnitManager>(),0,manage, null);
 
-					script.target = target.GetComponent<UnitManager> ();
-					script.Source = this.gameObject;
-					script.Initialize (target.GetComponent<UnitManager>(),0,manage);
-					script.setup();
 				} else {
 					proj.SendMessage ("setSource", this.gameObject,SendMessageOptions.DontRequireReceiver);
 					proj.SendMessage ("setTarget", tar,SendMessageOptions.DontRequireReceiver);
@@ -149,7 +147,7 @@ public class SingleTarget:  TargetAbility {
 
 			} else {
 
-				AttributeEffect.applyTo (this.gameObject, tar);
+				AttributeEffect.applyTo (this.gameObject, tar.GetComponent<UnitManager>());
 			}
 		}
 
@@ -177,8 +175,9 @@ public class SingleTarget:  TargetAbility {
 
 				Projectile script = proj.GetComponent<Projectile> ();
 				if (script) {
-					script.Initialize (target.GetComponent<UnitManager>(),0, manage);
-					script.setup ();
+                    // SET THE ONHITCONTAINER!
+					script.Initialize (target.GetComponent<UnitManager>(),0, manage, null);
+
 				} else {
 
 					proj.SendMessage ("setSource", this.gameObject, SendMessageOptions.DontRequireReceiver);
@@ -189,7 +188,7 @@ public class SingleTarget:  TargetAbility {
 
 			} else {
 
-				AttributeEffect.applyTo (this.gameObject, target);
+				AttributeEffect.applyTo (this.gameObject, target.GetComponent<UnitManager>());
 			}
 		}
 

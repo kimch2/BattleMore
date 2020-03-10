@@ -715,6 +715,13 @@ public class UnitManager : Unit, IOrderable {
 		{
 			states.endState ();
 		}
+        foreach (IWeapon weap in myWeapon)
+        {
+            if (weap)
+            {
+                weap.myHitContainer.Detach(); // This makes it so OnHitEffects can still happen after this unit has died
+            }
+        }
 	}
 	// make sure that Queue front and queueback are never both true
 	public void changeState(UnitState nextState, bool Queuefront, bool QueueBack)

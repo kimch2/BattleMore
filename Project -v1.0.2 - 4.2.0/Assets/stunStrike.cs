@@ -4,33 +4,13 @@ using System.Collections;
 public class stunStrike : MonoBehaviour, Notify {
 
 
-	private explosion myexplode;
-
 	public float stunTime;
 	public UnitTypes.UnitTypeTag mustTarget;
 
-
-	// Use this for initialization
-	void Start () {
-		if (GetComponent<Projectile> ()) {
-			GetComponent<Projectile> ().triggers.Add (this);
-		}
-
-		myexplode = this.gameObject.GetComponent<explosion>();
-		if (myexplode) {
-			myexplode.triggers.Add (this);
-
-		}
-	}
-
-
-
-
-
+    
 	public float trigger(GameObject source,GameObject proj, UnitManager target, float damage)
 	{
-
-
+        
 		if (target && source != target) {
 
 			if (mustTarget != UnitTypes.UnitTypeTag.Dead) {
@@ -38,7 +18,7 @@ public class stunStrike : MonoBehaviour, Notify {
 					return damage;}
 			}
 		
-			target.metaStatus.Stun (source.GetComponent<UnitManager>(), source, false, stunTime);
+			target.metaStatus.Stun (null, source, false, stunTime);
 
 		}
 		return damage;

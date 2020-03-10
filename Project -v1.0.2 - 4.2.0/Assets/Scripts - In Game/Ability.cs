@@ -277,4 +277,6 @@ public abstract class Ability : MonoBehaviour {
             autocast = isOn;
         }
     }
+
+    public virtual void OnDeath() { }
 }

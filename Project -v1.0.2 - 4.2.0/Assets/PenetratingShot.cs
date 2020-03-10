@@ -53,19 +53,11 @@ public class PenetratingShot : Projectile {
 
 				gameObject.transform.position = newPos;
 			}
-		
-
-
-
 		}
 
 		gameObject.transform.Translate (Vector3.forward* speed * Time.deltaTime );
 
 		currentDistance += speed * Time.deltaTime ;
-	
-
-
-
 	}
 
 
@@ -81,7 +73,6 @@ public class PenetratingShot : Projectile {
 			lastLocation = target.transform.position + randomOffset;
 			distance = Vector3.Distance (this.gameObject.transform.position, lastLocation);
 		}
-		lookAtTarget ();
 	}
 
 	public void OnDespawn()

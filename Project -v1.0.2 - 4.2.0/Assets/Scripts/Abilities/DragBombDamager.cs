@@ -9,7 +9,6 @@ public class DragBombDamager : VisionTrigger
 	public GameObject explosionO;
 	public UnitManager Source;
 	public VeteranStats vetSource;
-	public float friendlyFireRatio;
 	public float chainLength = 60;
 
 	public LineRenderer lineRender;
@@ -175,7 +174,6 @@ public class DragBombDamager : VisionTrigger
 				Escript.setSource(Source.gameObject);
 			}
 			Escript.damageAmount = explodeDamage;
-			Escript.friendlyFireRatio = friendlyFireRatio;
 			Escript.setVeteran(vetSource);
 		}
 		else

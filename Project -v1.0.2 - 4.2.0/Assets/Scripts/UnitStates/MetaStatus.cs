@@ -358,9 +358,12 @@ public class MetaStatus
 
     public void Fear(UnitManager sourceunit, UnityEngine.Object sourceComponent, bool friendly, float duration = 0)
     {
+       // if(cached)
         StoreStatus(statusType.Fear, sourceunit, sourceComponent, friendly, duration);
+
         DisableRightClicks();
     }
+
     public void UnFear(UnityEngine.Object sourceComponent)
     { if (UnCacheStatus(statusType.Fear, sourceComponent))
         {

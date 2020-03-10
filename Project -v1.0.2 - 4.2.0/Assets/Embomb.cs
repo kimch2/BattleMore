@@ -9,10 +9,10 @@ public class Embomb : IEffect, Modifier
     [HideInInspector]
     public GameObject Source;
 
-    public override void applyTo(GameObject source, GameObject target)
+    public override void applyTo(GameObject source, UnitManager target)
     {
         
-        Embomb targetEmbomb = target.AddComponent<Embomb>();
+        Embomb targetEmbomb = target.gameObject.AddComponent<Embomb>();
         targetEmbomb.Source = source;
         targetEmbomb.DamageAmount = DamageAmount;
         targetEmbomb.gameObject.GetComponent<UnitStats>().addDeathTrigger(targetEmbomb);
@@ -28,7 +28,7 @@ public class Embomb : IEffect, Modifier
     {
         foreach (UnitManager man in GameManager.GetUnitsInRange(transform.position, GetComponent<UnitManager>().PlayerOwner, radius)){
             
-            applyTo(null, man.gameObject);
+            applyTo(null, man);
             man.myStats.TakeDamage(DamageAmount, Source, DamageTypes.DamageType.Energy);
         }
         return damage;

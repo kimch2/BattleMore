@@ -8,31 +8,21 @@ public class PoisonStarter : MonoBehaviour, Notify{
 	public float damageRate;
 
 
-	// Use this for initialization
-	void Start () {
-		this.gameObject.GetComponent<Projectile> ().triggers.Add (this);
-
-	
-	}
-	
 
 	public float trigger(GameObject source,GameObject proj, UnitManager target, float damage)
 	{
 		Poison enemyPois = target.GetComponent<Poison> ();
-	if (enemyPois == null) {
-
+	    if (enemyPois == null)
+        {
 			enemyPois = target.gameObject.AddComponent<Poison> ();
-
 			enemyPois.startPoison(poisonEffect);
-
 			enemyPois.remainingPoison = damageAmount;
 			enemyPois.damageRate = damageRate;
-
-		} else {
-		
-
+		}
+        else
+        {
 			enemyPois.AddPoisonStack();
-			}
+		}
 
 		return damage;
 		}

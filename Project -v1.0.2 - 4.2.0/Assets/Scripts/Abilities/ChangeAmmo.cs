@@ -8,6 +8,7 @@ public class ChangeAmmo : Ability {
 
 	//UnitManager myManager;
 	public GameObject myAmmo;
+    public OnHitContainer NewOnHitContainer;
 	public IWeapon myWeapon;
 	public float range;
 	public float attackPeriod;
@@ -24,6 +25,7 @@ public class ChangeAmmo : Ability {
 	[Tooltip("If 0, will be permanant, used by Seer")]
 	public float Duration = 0;
 	public GameObject PreviousAmmo;
+    OnHitContainer PreviousOnHitContianer;
 
 	new void Awake()
 	{
@@ -96,6 +98,7 @@ public class ChangeAmmo : Ability {
 
 		autocast = true;
 		myWeapon.projectile = myAmmo;
+        myWeapon.myHitContainer = NewOnHitContainer;
 		myWeapon.baseDamage = attackDamage + myWeapon.getUpgradeLevel()*5;
 		myWeapon.AnimationName = AnimationName;
 		myWeapon.range = range;
@@ -121,7 +124,8 @@ public class ChangeAmmo : Ability {
 	void switchBack()
 	{
 		myWeapon.projectile = PreviousAmmo;
-		myWeapon.setBulletPool(Lean.LeanPool.getSpawnPool (PreviousAmmo));
+        myWeapon.myHitContainer = PreviousOnHitContianer;
+        myWeapon.setBulletPool(Lean.LeanPool.getSpawnPool (PreviousAmmo));
 	}
 
 }

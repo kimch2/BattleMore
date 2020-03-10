@@ -5,7 +5,7 @@ using UnityEngine;
 public class SalvageTarget : IEffect {
 
 	// Designed to be used with Ore and Waste
-	public override void applyTo (GameObject source, GameObject target){
+	public override void applyTo (GameObject source, UnitManager target){
 
 		UnitManager manage = target.GetComponent<UnitManager>();
 		if (manage.myStats.Cost.MyResources.Count == 0)

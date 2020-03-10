@@ -72,12 +72,12 @@ public class ExplodeOnDeath : IEffect, Modifier {
 	}
 
 
-	public override void applyTo(GameObject source, GameObject target)
+	public override void applyTo(GameObject source, UnitManager target)
 	{
 		ExplodeOnDeath deather = target.GetComponent<ExplodeOnDeath>();
 		if (!deather)
 		{
-			deather = target.AddComponent<ExplodeOnDeath>();
+			deather = target.gameObject.AddComponent<ExplodeOnDeath>();
 		}
 
 		deather.onTarget = true;
@@ -90,7 +90,7 @@ public class ExplodeOnDeath : IEffect, Modifier {
 		selfDestructTimer destruct = target.GetComponent<selfDestructTimer>();
 		if (!destruct)
 		{
-			destruct = target.AddComponent<selfDestructTimer>();
+			destruct = target.gameObject.AddComponent<selfDestructTimer>();
 			destruct.timer = 40;
 			destruct.showTimer = true;
 		}

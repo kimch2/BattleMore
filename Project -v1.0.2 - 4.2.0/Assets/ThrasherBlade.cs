@@ -25,14 +25,16 @@ public class ThrasherBlade : Projectile {
 		dir.y = 0;
 
 		lastLocation = target.transform.position -this.gameObject.transform.position ;
-		lookAtTarget ();
-		trueROlltime = rollTime;
+        gameObject.transform.LookAt(lastLocation);
+        trueROlltime = rollTime;
 		initialSpeed = speed /1.25f;
 		GetComponent<MiningSawDamager> ().Owner = sourceInt;
 
-		GetComponent<MiningSawDamager> ().myManager = SourceMan;
+	
 		GetComponent<MiningSawDamager> ().myVets = vetSource;
-	}
+        GetComponent<MiningSawDamager>().myManager = vetSource.myUnit;
+
+    }
 
 	protected override void Update () {
 

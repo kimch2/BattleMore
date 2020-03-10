@@ -16,7 +16,8 @@ public class Poison : MonoBehaviour {
 	public float drainEnergyAmount=0;
 
 	// Use this for initialization
-	void Start () {targetStats = this.gameObject.GetComponent<UnitStats> ();
+	void Start () {
+        targetStats = this.gameObject.GetComponent<UnitStats> ();
 		nextActionTime = Time.time;
 		if(GetComponent<PopUpMaker>() ==null)
 		{
@@ -39,7 +40,8 @@ public class Poison : MonoBehaviour {
 
 	}
 	// Update is called once per frame
-	void Update () {	if (Time.time > nextActionTime) {
+	void Update () {
+        if (Time.time > nextActionTime) {
 
 			nextActionTime = Time.time +  1f;
 
@@ -66,5 +68,5 @@ public class Poison : MonoBehaviour {
 	public void AddPoisonStack()
 	{remainingPoison += stackAmount;
 
-}
+    }
 }

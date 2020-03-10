@@ -51,7 +51,7 @@ public class AreaAuraApplier : MonoBehaviour
                 }
                 foreach (IEffect fect in effectsToApply)
                 {
-                    fect.applyTo(source, manage.gameObject);
+                    fect.applyTo(source, manage);
                 }
 
 

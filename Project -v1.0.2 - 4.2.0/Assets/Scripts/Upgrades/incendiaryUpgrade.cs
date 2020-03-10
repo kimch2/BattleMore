@@ -5,14 +5,17 @@ public class incendiaryUpgrade:SpecificUpgrade{
 
 	public override void applyUpgrade (GameObject obj){
 
-		if (confirmUnit (obj)) {
+        if (confirmUnit(obj)) {
 
-
-			SlowDebuff debuff = obj.AddComponent<SlowDebuff> ();
-			debuff.duration = 3;
-			debuff.speedDecrease = 0;
-			debuff.speedPercent = -.3f;
-			debuff.AddToWeapon ();
+            UnitManager manager = obj.GetComponent<UnitManager>();
+            foreach (IWeapon weap in manager.myWeapon)
+             {
+                SlowDebuff debuff =  weap.myHitContainer.gameObject.AddComponent<SlowDebuff>();
+                debuff.duration = 3;
+                debuff.speedDecrease = 0;
+                debuff.speedPercent = -.3f;
+                weap.myHitContainer.AddDamageTrigger(debuff);
+            }
 
 		}
 	}

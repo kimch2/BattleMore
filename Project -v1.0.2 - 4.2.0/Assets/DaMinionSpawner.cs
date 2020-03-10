@@ -25,17 +25,18 @@ public class DaMinionSpawner : MonoBehaviour
 
     void SpawnEnemy()
     {
-      
-        Vector3 spawnPoint = DaminionsInitializer.main.MyHero.transform.position + Vector3.right * SpawnOffset;
-        spawnPoint.z += Random.Range(-1*ZRange, ZRange);
+        if (DaminionsInitializer.main.MyHero)
+        {
+            Vector3 spawnPoint = DaminionsInitializer.main.MyHero.transform.position + Vector3.right * SpawnOffset;
+            spawnPoint.z += Random.Range(-1 * ZRange, ZRange);
 
-        GameObject unit = (GameObject)Instantiate(TypesToSpawn[Random.Range(0, TypesToSpawn.Count)], spawnPoint, Quaternion.identity);
-        UnitManager unitMan = unit.GetComponent<UnitManager>();
-        unitMan.Initialize(2, true, false);
+            GameObject unit = (GameObject)Instantiate(TypesToSpawn[Random.Range(0, TypesToSpawn.Count)], spawnPoint, Quaternion.identity);
+            UnitManager unitMan = unit.GetComponent<UnitManager>();
+            unitMan.Initialize(2, true, false);
 
-        unitMan.GiveOrder(Orders.CreateAttackMove(spawnPoint + Vector3.left*SpawnOffset));
+            unitMan.GiveOrder(Orders.CreateAttackMove(spawnPoint + Vector3.left * SpawnOffset));
 
-        Invoke("SpawnEnemy", Mathf.Max(1, (1- spawnCurve.Evaluate( CarbotCamera.singleton.getProgress())) * spawnRate + Random.Range(-spawnRate/3, spawnRate/3)));
+            Invoke("SpawnEnemy", Mathf.Max(1, (1 - spawnCurve.Evaluate(CarbotCamera.singleton.getProgress())) * spawnRate + Random.Range(-spawnRate / 3, spawnRate / 3)));
+        }
     }
-
 }

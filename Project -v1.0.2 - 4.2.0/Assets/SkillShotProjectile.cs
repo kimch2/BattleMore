@@ -19,6 +19,7 @@ public class SkillShotProjectile  : Projectile {
         }
     }
 
+
     new void OnSpawn()
     {
         currentDistance = -3;
@@ -74,10 +75,7 @@ public class SkillShotProjectile  : Projectile {
 
     public void setTarget(Vector3 Location)
     {
-
         lastLocation = Location + Vector3.up * 2;
-        
-
 
         if (Physics.Raycast(this.gameObject.transform.position + Vector3.up * 10, Vector3.down, out objecthit, 100, (1 << 8)))
         {
@@ -101,11 +99,14 @@ public class SkillShotProjectile  : Projectile {
         }
 
         UnitManager manage = col.GetComponent<UnitManager>();
-        if (manage && manage.PlayerOwner != sourceInt && manage.PlayerOwner != 3)
+        if (manage && manage.PlayerOwner != sourceInt)// && manage.PlayerOwner != 3)
         {
             //Debug.Log("Hit " + manage.gameObject);
+
+            MyHitContainer.trigger(this.gameObject, manage, damage);
+
             manage.getUnitStats().TakeDamage(damage, Source, damageType);
-            //	Debug.Log ("Dealing " + damage * (1 - NumGuysHit * PercDamLost*.01f) + " to  "+ manage.gameObject );
+
             if (SpecialEffect)
             {
                 Instantiate(SpecialEffect, transform.position, Quaternion.identity);
@@ -123,11 +124,7 @@ public class SkillShotProjectile  : Projectile {
             Lean.LeanPool.Despawn(this.gameObject, 0);
 
         }
-
     }
-
-
-
-
+   
 }
 
