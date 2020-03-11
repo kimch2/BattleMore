@@ -1050,20 +1050,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8205286698552316850, guid: 40a87d2102784c0499e53aa08053884d,
-        type: 3}
-      propertyPath: HealthRegenPerSec
-      value: 20
-      objectReference: {fileID: 0}
     - target: {fileID: 8205286698552316857, guid: 40a87d2102784c0499e53aa08053884d,
         type: 3}
       propertyPath: m_Name
       value: Almog
-      objectReference: {fileID: 0}
-    - target: {fileID: 9006338845527717906, guid: 40a87d2102784c0499e53aa08053884d,
-        type: 3}
-      propertyPath: changeDuration
-      value: 0.35
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 40a87d2102784c0499e53aa08053884d, type: 3}
@@ -2401,7 +2391,7 @@ PrefabInstance:
     - target: {fileID: 3528171702064570660, guid: 52ef2681c170a334db7ed864b57f2a56,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 375.36
       objectReference: {fileID: 0}
     - target: {fileID: 3528171702064570660, guid: 52ef2681c170a334db7ed864b57f2a56,
         type: 3}
@@ -19294,6 +19284,85 @@ Transform:
   m_Father: {fileID: 1790899775}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!1001 &1946087547
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 434365666581434819, guid: f19ef68e40c4cc4489a3f2dc3df4a5f2,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -482.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 434365666581434819, guid: f19ef68e40c4cc4489a3f2dc3df4a5f2,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 31.596788
+      objectReference: {fileID: 0}
+    - target: {fileID: 434365666581434819, guid: f19ef68e40c4cc4489a3f2dc3df4a5f2,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 138
+      objectReference: {fileID: 0}
+    - target: {fileID: 434365666581434819, guid: f19ef68e40c4cc4489a3f2dc3df4a5f2,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 434365666581434819, guid: f19ef68e40c4cc4489a3f2dc3df4a5f2,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 434365666581434819, guid: f19ef68e40c4cc4489a3f2dc3df4a5f2,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 434365666581434819, guid: f19ef68e40c4cc4489a3f2dc3df4a5f2,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 434365666581434819, guid: f19ef68e40c4cc4489a3f2dc3df4a5f2,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 434365666581434819, guid: f19ef68e40c4cc4489a3f2dc3df4a5f2,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 434365666581434819, guid: f19ef68e40c4cc4489a3f2dc3df4a5f2,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 434365666581434819, guid: f19ef68e40c4cc4489a3f2dc3df4a5f2,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 434365666581434835, guid: f19ef68e40c4cc4489a3f2dc3df4a5f2,
+        type: 3}
+      propertyPath: m_Name
+      value: Jellyfish Knight
+      objectReference: {fileID: 0}
+    - target: {fileID: 434365666581434840, guid: f19ef68e40c4cc4489a3f2dc3df4a5f2,
+        type: 3}
+      propertyPath: Maxhealth
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 434365666581434840, guid: f19ef68e40c4cc4489a3f2dc3df4a5f2,
+        type: 3}
+      propertyPath: health
+      value: 70
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f19ef68e40c4cc4489a3f2dc3df4a5f2, type: 3}
 --- !u!1 &1947406299
 GameObject:
   m_ObjectHideFlags: 0
