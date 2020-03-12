@@ -516,7 +516,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 434365666581434835}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -219.7, y: -32, z: 16.45}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 434365666222618079}
@@ -673,7 +673,6 @@ MonoBehaviour:
   deathCorpse: {fileID: 256940973940138146, guid: 65aae77506526694882183394087ae1a,
     type: 3}
   deathEffect: {fileID: 0}
-  takeDamageEffect: {fileID: 0}
   UnitPortrait: {fileID: 3286163911610860551, guid: 60f879e4cd661ec4d8250d598f8f718a,
     type: 3}
   goodBuffs: []
@@ -756,10 +755,11 @@ MonoBehaviour:
   range: 75
   turret: {fileID: 0}
   firePoints:
-  - position: {x: 4.06, y: 12, z: 0}
+  - position: {x: 4, y: 5, z: 0}
     myParticle: {fileID: 0}
   damagePoint: 0.2
   AttackDelay: 0.52
+  myHitContainer: {fileID: 0}
   cantAttackTypes: 
   extraDamage: []
   projectile: {fileID: 1465514992492211230, guid: 727df2d53a975a649b34bf5305b4d33f,
