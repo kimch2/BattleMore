@@ -68,7 +68,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Drop the Anchor!
   Descripton: Damages and Stuns enemies in an area.
-  iconPic: {fileID: 21300000, guid: b285abe679a65754d920836ab5ea6130, type: 3}
+  iconPic: {fileID: 21300000, guid: 278c0ad7727b4bb4ba58228829269b58, type: 3}
   myCost: {fileID: 9002522510767911560}
   continueMoving: 0
   RequiredUnit: []
@@ -84,10 +84,12 @@ MonoBehaviour:
   targetArea: {fileID: 21300000, guid: 9dead7b94ebdb144c83e28ac38bed79d, type: 3}
   areaSize: 30
   myTargetType: 0
+  myHitContainer: {fileID: 0}
   ObjectToSpawn: {fileID: 5164414903442694681, guid: c51e1fba41ece764db09f5b4c8f02da9,
     type: 3}
   TagType: 0
   Combination: 
+  Damage: 0
 --- !u!82 &1338268438334050972
 AudioSource:
   m_ObjectHideFlags: 0

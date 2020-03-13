@@ -450,7 +450,9 @@ public class MetaStatus
 
     // Removes all Debuffs
     public void Cleanse(UnitManager sourceunit, UnityEngine.Object sourceComponent, bool friendly)
-    {foreach (KeyValuePair<statusType, List<StatusEffect>> pair in cachedStatus)
+    {
+        // ToDo Remove all effects from StatChanger in UnitStats
+        foreach (KeyValuePair<statusType, List<StatusEffect>> pair in cachedStatus)
         {
             foreach (StatusEffect eff in pair.Value)
             {
@@ -465,6 +467,7 @@ public class MetaStatus
     //Removes all Buffs
     public void DeCleanse(UnitManager sourceunit, UnityEngine.Object sourceComponent, bool friendly)
     {
+        // ToDo Remove all effects from StatChanger in UnitStats
         foreach (KeyValuePair<statusType, List<StatusEffect>> pair in cachedStatus)
         {
             foreach (StatusEffect eff in pair.Value)
@@ -491,8 +494,8 @@ public class MetaStatus
     }
 
 
-        //This is a little less efficient than simply calling the specific kind of function to remove the effect
-        public void RemoveEffect(statusType theType, UnityEngine.Object sourceComp)
+    //This is a little less efficient than simply calling the specific kind of function to remove the effect
+    public void RemoveEffect(statusType theType, UnityEngine.Object sourceComp)
     {
         switch (theType)
         {

@@ -1040,7 +1040,7 @@ MonoBehaviour:
   currentEnergy: 0
   EnergyRegenPerSec: 0
   EnergyRegenPerHalf: 0
-  Icon: {fileID: 3286163911610860551, guid: 12a052fd2a68d1743a3947079af92b97, type: 3}
+  Icon: {fileID: 21300000, guid: b90084ff2fa72ec408e8c45311d214b2, type: 3}
   supply: 1
   attackPriority: 3
   DefensePriority: 0
@@ -1082,7 +1082,7 @@ MonoBehaviour:
   deathCorpse: {fileID: 7150057853635262097, guid: ad50ad8662682c44fba10407e38bc511,
     type: 3}
   deathEffect: {fileID: 0}
-  UnitPortrait: {fileID: 21300000, guid: 04195376b29c3154496ecaa88bee0b4d, type: 3}
+  UnitPortrait: {fileID: 21300000, guid: b90084ff2fa72ec408e8c45311d214b2, type: 3}
   goodBuffs: []
   badBuffs: []
 --- !u!114 &1661666932704040669
@@ -1167,6 +1167,7 @@ MonoBehaviour:
     myParticle: {fileID: 0}
   damagePoint: 0.2
   AttackDelay: 0.52
+  myHitContainer: {fileID: 0}
   cantAttackTypes: 
   extraDamage: []
   projectile: {fileID: 1000012881470146, guid: 6282b22819b422947af7757b6f753c6f, type: 3}

@@ -542,6 +542,7 @@ public class RaceManager : MonoBehaviour, ManagerWatcher {
         {
             unitRoster.Add(obj.UnitName, new List<UnitManager>());
         }
+
         List<UnitManager> tempRefList = unitRoster[obj.UnitName];
         tempRefList.Add(obj);
         tempRefList.RemoveAll(item => item == null);

@@ -9,10 +9,6 @@ public class SleepEffect : IEffect
     float TimePutToSleep;
 
 
-    public override bool canCast()
-    {
-        return true;
-    }
 
     public override bool validTarget(GameObject target)
     {
@@ -40,5 +36,10 @@ public class SleepEffect : IEffect
     void WakeUp()
     {
         GetComponent<UnitManager>().metaStatus.UnSleep(this);
+    }
+
+    public override void RemoveEffect(UnitManager target)
+    {
+        target.metaStatus.UnSleep(this);
     }
 }

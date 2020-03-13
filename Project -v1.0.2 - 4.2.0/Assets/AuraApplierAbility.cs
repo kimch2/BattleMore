@@ -72,12 +72,10 @@ public class AuraApplierAbility : TargetAbility
     override
     public bool Cast(GameObject target, Vector3 location)
     {
-        Debug.Log("Cast");
-      
         Cast();
         return false;
-
     }
+
     override
     public void Cast()
     {
@@ -95,7 +93,4 @@ public class AuraApplierAbility : TargetAbility
         aura.affectsEnemies = appliesToEnemies;
         aura.setSource(myManager.gameObject);
     }
-
-
-
 }

@@ -2,34 +2,37 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EmbalmAura : MonoBehaviour, ModularAura.ICustomAura
+public class EmbalmAura : IEffect
 {
 
     public float initialDPS = 1;
     public float perSecIncrease = 1;
     public GameObject effect;
     public float MaxDuration = 15;
-   // GameObject instantiatedEffect;
-    UnitManager myManager;
-
-
-    public void Apply(UnitManager manage)
-    {
-       myManager = manage;
-       currentPoison = StartCoroutine(Poison());
-        effect.SetActive(true);
-      // instantiatedEffect = Instantiate<GameObject>(effect, manage.transform);
-
-    }
-
-    public void Remove(UnitManager manage)
-    {
-        StopCoroutine(currentPoison);
-        effect.SetActive(false);
-       // Destroy(instantiatedEffect);
-    }
-
+    GameObject CurrentEffect;
     Coroutine currentPoison;
+
+
+    public override bool validTarget(GameObject target)
+    {
+        return true;
+    }
+
+    public override void applyTo(GameObject source, UnitManager target)
+    {
+        EmbalmAura Copy = (EmbalmAura)CopyIEffect(target);
+        Copy.BeginToPoison();
+    }
+
+    public void BeginToPoison()
+    {
+        if (currentPoison == null)
+        {
+            currentPoison = StartCoroutine(Poison());
+            CurrentEffect = Instantiate<GameObject>(effect, transform);
+            CurrentEffect.transform.localPosition = Vector3.zero;
+        }
+    }
 
     IEnumerator Poison()
     {
@@ -37,11 +40,19 @@ public class EmbalmAura : MonoBehaviour, ModularAura.ICustomAura
         float damage = initialDPS;
         for(int i = 0; i <= MaxDuration; i++)
         {
-            myManager.getUnitStats().TakeDamage(damage, null, DamageTypes.DamageType.True, null);
+            OnTargetManager.getUnitStats().TakeDamage(damage, null, DamageTypes.DamageType.True, null);
             damage += perSecIncrease;
             yield return new WaitForSeconds(1);
         }
+        currentPoison = null;
     }
 
-  
+    public override void RemoveEffect(UnitManager target)
+    {
+
+        StopAllCoroutines();
+        currentPoison = null;
+        Destroy(CurrentEffect);
+        Destroy(this);
+    }
 }

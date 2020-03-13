@@ -6,7 +6,6 @@ public class SkillShotAbil : TargetAbility
 {
     public SkillShotData SkillShotProjectile;
     bool Casting; // NEED TO HAVE THIS CHECK A CHANNEL STATE IN THE UNITMANAGER!!
-    public OnHitContainer myHitContainer;
     public float Damage;
 
     // Use this for initialization
@@ -93,11 +92,6 @@ public class SkillShotAbil : TargetAbility
         myCost.payCost();
     }
 
-    public override void OnDeath()
-    {
-        base.OnDeath();
-        myHitContainer.Detach();
-    }
 
     IEnumerator StringCast(int quillNumber, Vector3 direction)
     {
@@ -132,8 +126,8 @@ public class SkillShotAbil : TargetAbility
             SkillShotProjectile skillShotComp = proj.GetComponent<SkillShotProjectile>();
 
             skillShotComp.TotalRange = range;
-            skillShotComp.Initialize(null, Damage, myManager, myHitContainer);
-
+            SetOnHitContainer(proj, Damage, null);
+            
             float CurrentAngle = i * anglePerShot;                            
             CurrentAngle -= SkillShotProjectile.SpreadAngle;             
             if (SkillShotProjectile.NumOfShots == 1)

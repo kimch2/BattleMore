@@ -19,10 +19,7 @@ public class Embomb : IEffect, Modifier
 
     }
 
-    public override bool canCast()
-    {
-        return true;
-    }
+
 
     public float modify(float damage, GameObject source, DamageTypes.DamageType theType)
     {
@@ -32,6 +29,11 @@ public class Embomb : IEffect, Modifier
             man.myStats.TakeDamage(DamageAmount, Source, DamageTypes.DamageType.Energy);
         }
         return damage;
+    }
+
+    public override void RemoveEffect(UnitManager target)
+    {
+        throw new System.NotImplementedException();
     }
 
     public override bool validTarget(GameObject target)

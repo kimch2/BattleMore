@@ -10,6 +10,9 @@ public class AreaTargetComboAbil : TargetAbility
 
     public List<ComboTag.AbilType> Combination;
 
+    [Tooltip("This will only be used if the thing spawning is an explosion/projectile. But Projectiles shouldn't be spawned from this class (AreaTargetComboAbil), only from a inheritor class")]
+    public float Damage;
+
     new void Start()
     {
         base.Start();
@@ -31,17 +34,18 @@ public class AreaTargetComboAbil : TargetAbility
     {
         myCost.payCost();
         changeCharge(-1);
-        GameObject proj = null;
+
         if (soundEffect)
         {
             audioSrc.PlayOneShot(soundEffect);
         }
         Vector3 pos = location;
-        //pos.y += 5;
-        proj = (GameObject)Instantiate(ObjectToSpawn, pos, Quaternion.identity);
 
-
-        proj.SendMessage("setSource", myManager.gameObject, SendMessageOptions.DontRequireReceiver);
+        GameObject proj = (GameObject)Instantiate(ObjectToSpawn, pos, Quaternion.identity);
+        if (!SetOnHitContainer(proj,Damage, null))
+        {
+            proj.SendMessage("setSource", myManager.gameObject, SendMessageOptions.DontRequireReceiver);
+        }
     }
 
     public override bool Cast(GameObject target, Vector3 location)
@@ -52,9 +56,10 @@ public class AreaTargetComboAbil : TargetAbility
         Vector3 pos = location;
         //pos.y += 5;
         GameObject proj = (GameObject)Instantiate(ObjectToSpawn, pos, Quaternion.identity);
-
-        proj.SendMessage("setSource", this.gameObject);
-
+        if (!SetOnHitContainer(proj,Damage, null))
+        {
+            proj.SendMessage("setSource", this.gameObject);
+        }
         return false;
     }
 

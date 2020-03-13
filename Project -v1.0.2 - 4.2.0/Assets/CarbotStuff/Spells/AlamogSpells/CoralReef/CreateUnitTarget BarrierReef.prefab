@@ -67,8 +67,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Barrier Reef
-  Descripton: Spawn Unit at location
-  iconPic: {fileID: 21300000, guid: b9375aa928938ee4b86eb21e3dea9d06, type: 3}
+  Descripton: 'Create a Wall of Reefs
+
+'
+  iconPic: {fileID: 21300000, guid: 86e33b2857178bd4b89d4f1a0a554248, type: 3}
   myCost: {fileID: 3210053974082336775}
   continueMoving: 0
   RequiredUnit: []
@@ -85,6 +87,7 @@ MonoBehaviour:
     type: 3}
   areaSize: 10
   myTargetType: 0
+  myHitContainer: {fileID: 0}
   ToSpawn: {fileID: 3732330866544374659, guid: 46f5a6957500bf941bf1ecfa02b62854, type: 3}
   spawnCount: 1
 --- !u!82 &47494996060547308

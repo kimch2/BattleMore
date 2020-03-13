@@ -58,12 +58,14 @@ public class UndyingArmor :  IEffect, Modifier{
 		return damage;
 	}
 
-	public override bool canCast() { return true; }
 
 	public override bool validTarget(GameObject target)
 	{
 		return true;
 	}
 
-
+    public override void RemoveEffect(UnitManager target)
+    {
+        throw new System.NotImplementedException();
+    }
 }

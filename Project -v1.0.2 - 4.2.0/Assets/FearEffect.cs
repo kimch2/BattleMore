@@ -33,11 +33,10 @@ public class FearEffect : IEffect
         }
     }
 
-    public override bool canCast()
+    public override void RemoveEffect(UnitManager target)
     {
-        return true;
+        target.metaStatus.UnFear(this);
     }
-
 
     public float trigger(GameObject source, GameObject proj, UnitManager target, float damage)
     {       

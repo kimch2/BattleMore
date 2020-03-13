@@ -15,15 +15,13 @@ public abstract class TargetAbility : Ability
     public enum targetType { ground, unit, skillShot }
     public targetType myTargetType;
     GameObject myIndicator;
+    public OnHitContainer myHitContainer;
 
     public bool inRange(Vector3 location)
     {
-
         float pyth = Mathf.Pow(myManager.transform.position.x - location.x, 2) + Mathf.Pow(myManager.transform.position.z - location.z, 2);
         if (Mathf.Pow(pyth, .5f) < range)
         { return true; }
-
-
         //Debug.Log ("Distance " + Vector3.Distance(this.gameObject.transform.position, location));
         return false;
 
@@ -123,5 +121,46 @@ public abstract class TargetAbility : Ability
         }
         return order;
     }
+
+    public override void OnDeath()
+    {
+        base.OnDeath();
+        myHitContainer.Detach();
+    }
+
+
+    /// <summary>
+    /// Returns true if the Thing was successfully set
+    /// </summary>
+    /// <param name="spawnedObject"></param>
+    /// <returns></returns>
+    protected bool SetOnHitContainer(GameObject spawnedObject, float Damage, UnitManager target)
+    {
+        // Create a path that will check for over-Time Effectors?
+        Projectile proj = spawnedObject.GetComponent<Projectile>();
+        if (proj)
+        {
+            proj.Initialize(target, Damage, myManager, myHitContainer);
+            return true;
+        }
+
+        explosion sploder = spawnedObject.GetComponent<explosion>();
+        if (sploder)
+        {
+            sploder.Initialize(myManager.gameObject, myManager.myStats.veternStat, Damage, myHitContainer, myManager.PlayerOwner);
+            return true;
+        }
+
+        OverTimeApplier Timer = spawnedObject.GetComponent<OverTimeApplier>();
+        if (Timer)
+        {
+            Timer.myHitContainer = myHitContainer;
+            return true;
+        }
+
+        return false;
+    }
+
+
 
 }

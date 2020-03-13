@@ -2,123 +2,103 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ModularAura : MonoBehaviour
+public class ModularAura : IEffect
 {
     // We store a list of enums that show which stats are being changed, 
     //so we don't have to apply a stat change of "0" on stats that aren't used 
 
 
-    public List<StatChanger.BuffType> myBuffs = new List<StatChanger.BuffType>();
+    public List<AuraNumber> myBuffs = new List<AuraNumber>();
     [Tooltip("Any script in this list should extend the ICustomAura interface ")]
-    public List<MonoBehaviour> customAuras = new List<MonoBehaviour>();
+   
     public bool Stacks;
-
-    public float Armor;
-
-    public float HealthFlat;
-    public float HealthPerc;
-
-    public float HealthRegenFlat;
-    public float HealthRegenPerc;
-
-    public float MoveSpeedFlat;
-    public float MoveSpeedPerc;
-
-    public float DamageFlat;
-    public float DamagePerc;
-
-    [Tooltip("This changes the attack period, -.2 will decrease period and increase attack speed")]
-    public float AttackSpeedFlat;
-    public float AttackSpeedPerc;
-
-    public float EnergyFlat;
-    public float EnergyPerc;
-
-    public float EnergyRegenFlat;
-    public float EnergyRegenPerc;
-
-    public float CooldownPerc;
-
-    public float RangeFlat;
-    public float RangePerc;
+    [Tooltip("If this is 0, it is permanant")]
+    public float Duration = 0;
 
 
-    UnitManager myManager;
-    private void Awake()
+    public override bool validTarget(GameObject target)
     {
-        myManager = GetComponent<UnitManager>();
-        foreach (MonoBehaviour behave in GetComponents<MonoBehaviour>())
+        return true;
+    }
+
+    public override void applyTo(GameObject source, UnitManager target)
+    {
+        ApplyBuff(target);
+        if (Duration > 0)
         {
-            if (behave is ICustomAura)
-            {
-                customAuras.Add(behave);
-            }
+            StartCoroutine(DelayedRemove(target));
         }
+    }
+
+    IEnumerator DelayedRemove(UnitManager target)
+    {
+        yield return new WaitForSeconds(Duration);
+        if (target)
+        {
+            RemoveBuff(target);
+        }
+    }
+
+    public override void RemoveEffect(UnitManager target)
+    {
+        RemoveBuff(target);      
     }
 
     public void ApplyBuff(UnitManager manager)
     {
-        foreach (StatChanger.BuffType buff in myBuffs)
+        foreach (AuraNumber buff in myBuffs)
         {
-            switch (buff)
+            switch (buff.buffType)
             {
                 case StatChanger.BuffType.Armor:
-                    manager.myStats.statChanger.changeArmor(0,Armor, this,Stacks);
+                    manager.myStats.statChanger.changeArmor(buff.Percent, buff.Flat, this,Stacks);
                     break;
 
                 case StatChanger.BuffType.AttackSpeed:
-                    manager.myStats.statChanger.changeAttackSpeed(AttackSpeedPerc, AttackSpeedFlat, this, Stacks);
+                    manager.myStats.statChanger.changeAttackSpeed(buff.Percent, buff.Flat, this, Stacks);
                     break;
 
                 case StatChanger.BuffType.Damage:
-                    manager.myStats.statChanger.changeWeaponDamage(DamagePerc,DamageFlat,this,Stacks);
+                    manager.myStats.statChanger.changeWeaponDamage(buff.Percent, buff.Flat, this,Stacks);
                     break;
 
                 case StatChanger.BuffType.Energy:
-                    manager.myStats.statChanger.changeEnergyMax(EnergyPerc, EnergyFlat, this, Stacks);
+                    manager.myStats.statChanger.changeEnergyMax(buff.Percent, buff.Flat, this, Stacks);
                     break;
 
                 case StatChanger.BuffType.EnergyRegen:
-                    manager.myStats.statChanger.changeEnergyRegen(EnergyRegenPerc, EnergyRegenFlat, this, Stacks);
+                    manager.myStats.statChanger.changeEnergyRegen(buff.Percent, buff.Flat, this, Stacks);
                     break;
 
                 case StatChanger.BuffType.HP:
-                    manager.myStats.statChanger.changeHealthMax(HealthPerc, HealthFlat, this, Stacks);
+                    manager.myStats.statChanger.changeHealthMax(buff.Percent, buff.Flat, this, Stacks);
                     break;
 
                 case StatChanger.BuffType.HPRegen:
-                    manager.myStats.statChanger.changeHealthRegen(HealthRegenPerc, HealthRegenFlat, this, Stacks);
+                    manager.myStats.statChanger.changeHealthRegen(buff.Percent, buff.Flat, this, Stacks);
                     break;
 
                 case StatChanger.BuffType.MoveSpeed:
-                    manager.myStats.statChanger.changeMoveSpeed(MoveSpeedPerc,MoveSpeedFlat, this, Stacks);
+                    manager.myStats.statChanger.changeMoveSpeed(buff.Percent, buff.Flat, this, Stacks);
                     break;
 
                 case StatChanger.BuffType.Cooldown:
-                    manager.myStats.statChanger.changeCooldown(CooldownPerc,0, this, Stacks);
+                    manager.myStats.statChanger.changeCooldown(buff.Percent, buff.Flat, this, Stacks);
                     break;
 
                 case StatChanger.BuffType.Range:
-                    manager.myStats.statChanger.changeWeaponRange(RangePerc, RangeFlat, this, Stacks);
+                    manager.myStats.statChanger.changeWeaponRange(buff.Percent, buff.Flat, this, Stacks);
                     break;
 
-            }
-        }
-
-        foreach (ICustomAura aura in customAuras)
-        {
-            if (aura != null)
-            {
-                aura.Apply(manager);
             }
         }
     }
 
     public void RemoveBuff(UnitManager manager)
     {
-        foreach (StatChanger.BuffType buff in myBuffs)
+        foreach (AuraNumber buff in myBuffs)
         {
-            switch (buff)
+            switch (buff.buffType)
             {
                 case StatChanger.BuffType.Armor:
                     manager.myStats.statChanger.removeArmor(this);
@@ -162,20 +142,13 @@ public class ModularAura : MonoBehaviour
 
             }
         }
-
-        foreach (MonoBehaviour aura in customAuras)
-        {
-            if (aura != null && aura is ICustomAura)
-            {
-                ((ICustomAura)aura).Remove(manager);
-            }
-        }
     }
+}
 
-
-    public interface ICustomAura
-    {
-        void Apply(UnitManager manage);
-        void Remove(UnitManager manage);
-    }
+[System.Serializable]
+public class AuraNumber
+{
+    public StatChanger.BuffType buffType;
+    public float Percent;
+    public float Flat;
 }

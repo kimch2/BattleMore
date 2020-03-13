@@ -109,13 +109,12 @@ public class ExplodeOnDeath : IEffect, Modifier {
 	}
 
 
-	public override bool canCast()
-	{
-		return true;
-	}
-
 	public override bool validTarget(GameObject target) {
 		return true;
 	}
 
+    public override void RemoveEffect(UnitManager target)
+    {
+        throw new System.NotImplementedException();
+    }
 }

@@ -49,7 +49,7 @@ MonoBehaviour:
   Name: Bone Quill
   Descripton: Fires 9 Bone Quills in a lines. If a Quill kills an opponent, it will
     refund its charge count. Gains a charge count every 2 seconds.
-  iconPic: {fileID: 21300000, guid: c57b52b8ff534754cbefc99459c9bb53, type: 3}
+  iconPic: {fileID: 21300000, guid: 8d9bfbca3cc15b54ca717c502b0c4dc2, type: 3}
   myCost: {fileID: 6041225056090289848}
   continueMoving: 0
   RequiredUnit: []
@@ -65,6 +65,7 @@ MonoBehaviour:
   targetArea: {fileID: 21300000, guid: aed5a9665c22a6046bc95b6269dbc544, type: 3}
   areaSize: 0
   myTargetType: 2
+  myHitContainer: {fileID: 0}
   ToSpawn: {fileID: 6747855988861954716, guid: 0c3c75da0f7478e4599516a22a587ef8, type: 3}
   QuillNumber: 9
   QuillDelay: 0.2
@@ -228,7 +229,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95cc792f619723c46b19c319c7e01d3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MyWeapons: []
   toApply: []
   myManager: {fileID: 0}
   FriendlyFireRatio: 0
+  AutoAddTriggers: 1

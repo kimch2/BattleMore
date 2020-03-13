@@ -29,7 +29,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -506.84955, y: 30.096788, z: 136.06683}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 2845284502417190124}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -69,7 +70,7 @@ MonoBehaviour:
   Name: Whirl Pool
   Descripton: Pulls enemies in the center of the selected area for 8 seconds, lowering
     minions armor by 2 per second.
-  iconPic: {fileID: 21300000, guid: 7fe1ce35ef92e9b4d939edc6453ed159, type: 3}
+  iconPic: {fileID: 21300000, guid: 3cc3558249c978a499978e995839cb93, type: 3}
   myCost: {fileID: 4380495904400598082}
   continueMoving: 0
   RequiredUnit: []
@@ -85,10 +86,12 @@ MonoBehaviour:
   targetArea: {fileID: 21300000, guid: 9dead7b94ebdb144c83e28ac38bed79d, type: 3}
   areaSize: 30
   myTargetType: 0
+  myHitContainer: {fileID: 3138640507117051787}
   ObjectToSpawn: {fileID: 4145113546753119480, guid: bcaa6440ceb0145488c0dac8c2d3fe13,
     type: 3}
   TagType: 0
   Combination: 
+  Damage: 0
 --- !u!82 &6765915820983991614
 AudioSource:
   m_ObjectHideFlags: 0
@@ -185,3 +188,73 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &4192922574714430009
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2845284502417190124}
+  - component: {fileID: 3138640507117051787}
+  - component: {fileID: 4340553759689605762}
+  m_Layer: 0
+  m_Name: OnHitContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2845284502417190124
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4192922574714430009}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8457241861547281285}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3138640507117051787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4192922574714430009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95cc792f619723c46b19c319c7e01d3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toApply: []
+  myManager: {fileID: 0}
+  FriendlyFireRatio: 0
+  AutoAddTriggers: 1
+--- !u!114 &4340553759689605762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4192922574714430009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 550c744d482bf4b44836df6193654658, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onTarget: 0
+  myBuffs:
+  - buffType: 0
+    Percent: 0
+    Flat: -2
+  - buffType: 5
+    Percent: -1
+    Flat: 0
+  Stacks: 0
+  Duration: 0

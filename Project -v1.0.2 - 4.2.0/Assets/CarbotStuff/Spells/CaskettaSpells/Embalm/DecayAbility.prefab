@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7607037698507902300}
-  - component: {fileID: 2660562338872388965}
+  - component: {fileID: 2273859205666280334}
   - component: {fileID: 7607037698507902302}
   - component: {fileID: 1362466273956575536}
   m_Layer: 0
@@ -29,11 +29,12 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 539.5619, y: 308.75177, z: 8.267273}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 8261390763485943577}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2660562338872388965
+--- !u!114 &2273859205666280334
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,13 +43,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 7607037698507902297}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c926dfa6a5116240a14ef6498648236, type: 3}
+  m_Script: {fileID: 11500000, guid: 456fcef5a70bf3048bf9fb7881cafeb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Decay
   Descripton: Poison enemy minions in a small area indefinitely dealing 1 damage per
     second, increasing its damage by 1 every second.
-  iconPic: {fileID: 21300000, guid: e1a570795ffc70849be77d98fcf14cb5, type: 3}
+  iconPic: {fileID: 21300000, guid: 69e1f6e5c33a66442a82e07c06c5ea55, type: 3}
   myCost: {fileID: 7607037698507902302}
   continueMoving: 1
   RequiredUnit: []
@@ -58,18 +59,19 @@ MonoBehaviour:
   maxChargeCount: -1
   chargeCount: -1
   soundEffect: {fileID: 0}
-  range: 150
+  range: 200
   target: {fileID: 0}
   location: {x: 0, y: 0, z: 0}
-  targetArea: {fileID: 3286163911610860551, guid: 9954f3b9b3055b444a966610dc7ba2f8,
+  targetArea: {fileID: 3286163911610860551, guid: f0381717f8278a7449a37229a8588e0a,
     type: 3}
   areaSize: 40
   myTargetType: 0
-  AuraToApply: {fileID: 4757558477695721181, guid: 6fc16d8aaaa3f5e4cb5ea532eb0012b4,
+  myHitContainer: {fileID: 1456512900439209891}
+  ObjectToSpawn: {fileID: 2201566050018567808, guid: c7efe6520b37cbe4b9b649672ef5c05d,
     type: 3}
-  appliesToEnemies: 1
-  AppliesToAllies: 0
-  duration: 0.1
+  TagType: 0
+  Combination: 
+  Damage: 0
 --- !u!114 &7607037698507902302
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,3 +189,68 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &8661412301560237918
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8261390763485943577}
+  - component: {fileID: 1456512900439209891}
+  - component: {fileID: 6434747724858341849}
+  m_Layer: 0
+  m_Name: OnHitContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8261390763485943577
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8661412301560237918}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7607037698507902300}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1456512900439209891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8661412301560237918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95cc792f619723c46b19c319c7e01d3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toApply: []
+  myManager: {fileID: 0}
+  FriendlyFireRatio: 0
+  AutoAddTriggers: 1
+--- !u!114 &6434747724858341849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8661412301560237918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 231bf5fec0b21774c9fe03777cf02208, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onTarget: 0
+  initialDPS: 1
+  perSecIncrease: 1
+  effect: {fileID: 4757558477695721181, guid: 6fc16d8aaaa3f5e4cb5ea532eb0012b4, type: 3}
+  MaxDuration: 15

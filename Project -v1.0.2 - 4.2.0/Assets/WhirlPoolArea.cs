@@ -2,26 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WhirlPoolArea : VisionTrigger
+public class WhirlPoolArea : OverTimeApplier
 {
 
     public float spinSpeed  =25;
     public float duration = 5;
 
 
-    public void setSource(GameObject source)
+    private void Start()
     {
-        UnitManager sourceMan = source.GetComponent<UnitManager>();
-        if (sourceMan.PlayerOwner == 1)
+        if (myHitContainer)
         {
-            PlayerNumber = 2;
-        }
-        else
-        {
-            PlayerNumber = 1;
-        }
+            UnitManager sourceMan = myHitContainer.myManager;
+            if (sourceMan.PlayerOwner == 1)
+            {
+                PlayerNumber = 2;
+            }
+            else
+            {
+                PlayerNumber = 1;
+            }
 
-        Invoke("TurnOff", duration);
+            Invoke("TurnOff", duration);
+        }
     }
 
 
@@ -40,18 +43,6 @@ public class WhirlPoolArea : VisionTrigger
 
             }
         }
-    }
-
-    public override void UnitEnterTrigger(UnitManager manager)
-    {
-        manager.myStats.statChanger.changeArmor(0,-2,this, true);
-        manager.myStats.statChanger.changeMoveSpeed(-1, 0,this, true);
-    }
-
-    public override void UnitExitTrigger(UnitManager manager)
-    {
-        manager.myStats.statChanger.removeArmor(this);
-        manager.myStats.statChanger.removeMoveSpeed(this);
     }
 
     public void TurnOff()

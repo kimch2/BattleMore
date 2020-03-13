@@ -10,7 +10,9 @@ public class OnHitContainer : MonoBehaviour
     public List<IEffect> toApply = new List<IEffect>();
     public UnitManager myManager;
     GameObject source; // Will become null once source unit dies, if it wasn't already (world effect)
+
     public float FriendlyFireRatio;
+
     [Tooltip("Will add all Ieffects and Notify Triggers already attached to this gameobject on Start()")]
     public bool AutoAddTriggers = true;
 
@@ -53,6 +55,7 @@ public class OnHitContainer : MonoBehaviour
     {
         if (!toApply.Contains(toAdd))
         {
+            toAdd.SetManagers(myManager, null);
             toApply.Add(toAdd);
         }
     }
@@ -90,21 +93,28 @@ public class OnHitContainer : MonoBehaviour
 
     public void trigger(GameObject proj, UnitManager target, float Damage)
     {
-
         if (target)
         {
             //if (!myManager || myManager.gameObject != target) // Applies to the source if it hits it? I think yes
+            
+            foreach (IEffect fect in toApply)
             {
-                foreach (IEffect fect in toApply)
-                {
-                    fect.applyTo(source, target);
-                }
-
-                foreach (Notify mod in DamageTriggers)
-                {
-                    mod.trigger(source, proj, target, Damage);
-                }
+                fect.applyTo(source, target);                
             }
+
+            foreach (Notify mod in DamageTriggers)
+            {
+                mod.trigger(source, proj, target, Damage);
+            }           
+        }
+    }
+
+    // This going to work?? (on things that we apply a copy of the effect to)
+    public void RemoveEffect(UnitManager target)
+    {
+        foreach (IEffect fect in toApply)
+        {
+            fect.RemoveEffect(target);
         }
     }
 

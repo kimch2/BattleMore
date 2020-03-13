@@ -32,10 +32,12 @@ public class SalvageTarget : IEffect {
 		GameManager.main.playerList[0].collectOneResource(new ResourceTank(ResourceType.Ore, (int)amountA), false );
 		GameManager.main.playerList[0].collectOneResource(new ResourceTank(ResourceType.Waste, (int)amountB), false);
 	}
-	 
-	public override bool canCast() { return true; }
 
-	public override bool validTarget(GameObject target) {
+    public override void RemoveEffect(UnitManager target)
+    {
+    }
+
+    public override bool validTarget(GameObject target) {
 		return true;
 	}
 

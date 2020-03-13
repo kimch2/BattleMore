@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 6815054525646250664}
   - component: {fileID: 6815054525660748450}
   - component: {fileID: 6815054525654480008}
-  - component: {fileID: 6716830937112093951}
   m_Layer: 0
   m_Name: AreaSleepObject
   m_TagString: Untagged
@@ -67,29 +66,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f89bf2b44f707544fb7e345bff99bd4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  source: {fileID: 0}
   sourceInt: 1
   particleEff: {fileID: 4480752012596088843, guid: cef60534dfb95e245a4b2b53d93fc473,
     type: 3}
-  friendlyFireRatio: 0
   damageAmount: 10
   type: 0
   maxSize: 15
   UseYFOrDetection: 0
   DamageDelay: 0
   extraDamage: []
---- !u!114 &6716830937112093951
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6815054525647365854}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bdd2b38231dbb0b49be79ed6b3dcff58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sleepTime: 12
-  mustTarget: 9
-  OnTarget: 0
+  MyHitContainer: {fileID: 0}
+  PlayersToApplyTo: 02000000

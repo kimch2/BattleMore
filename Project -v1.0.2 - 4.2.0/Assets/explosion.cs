@@ -22,6 +22,8 @@ public class explosion : MonoBehaviour {
 	float sizeSquared;
 	public IWeapon.bonusDamage[] extraDamage;
     public OnHitContainer MyHitContainer;
+    [Tooltip("This will apply to all if this list is empty")]
+    public List<int> PlayersToApplyTo;
 
 
 	IEnumerator Start () {
@@ -88,61 +90,53 @@ public class explosion : MonoBehaviour {
 
 
     void FindTargets()
-	{
-		float TempDamageAmount;
-		/* Commenting this out so explosions can be used to trigger status effects
-		if (damageAmount == 0 && extraDamage.Length == 0)
-		{
-			return;
-		}*/
+    {
+        float TempDamageAmount =0;
 
-		foreach (RaceManager manager in GameManager.main.playerList)
-		{
-			if (manager.playerNumber == sourceInt)
-			{
-				if (MyHitContainer.FriendlyFireRatio == 0)
-				{
-					continue;
-				}
-				else
-				{
-					TempDamageAmount = damageAmount * MyHitContainer.FriendlyFireRatio;
-				}
-			}
-			else
-			{
-				TempDamageAmount = damageAmount;
-			}
+        foreach (RaceManager manager in GameManager.main.playerList)
+        {
+            if (PlayersToApplyTo.Count == 0 || PlayersToApplyTo.Contains(manager.playerNumber))
+            {
+                if (manager.playerNumber == sourceInt)
+                {
+                    if (MyHitContainer.FriendlyFireRatio == 0)
+                    {
+                       // continue;
+                    }
+                    else
+                    {
+                        TempDamageAmount = damageAmount * MyHitContainer.FriendlyFireRatio;
+                    }
+                }
+                else
+                {
+                    TempDamageAmount = damageAmount;
+                }
 
-			if (TempDamageAmount == 0 )
-			{
-				continue;
-			}
+                List<UnitManager> toDamage = new List<UnitManager>();
 
-			List<UnitManager> toDamage = new List<UnitManager>();
 
-			foreach (KeyValuePair<string, List<UnitManager>> unitList in manager.getUnitList())
-			{
-				foreach (UnitManager unit in unitList.Value)
-				{
-					if (unit == null)
-					{
-						continue;
-					}
-					
-					if (getDistance(unit) <= Mathf.Pow (sizeSquared + unit.CharController.radius, 2))
-					{
-						toDamage.Add(unit);
-					}
-				}
-			}
-			foreach (UnitManager unit in toDamage) // Gotta do this in a separate loop so we don't get iteration errors when a guy dies
-			{
-				DealDamage(unit, TempDamageAmount);
-			}
-		}
-	}
-
+                foreach (KeyValuePair<string, List<UnitManager>> unitList in manager.getUnitList())
+                {
+                    foreach (UnitManager unit in unitList.Value)
+                    {
+                        if (unit == null)
+                        {
+                            continue;
+                        }
+                        if (getDistance(unit) <= Mathf.Pow(sizeSquared + unit.CharController.radius, 2))
+                        {
+                            toDamage.Add(unit);
+                        }
+                    }
+                }
+                foreach (UnitManager unit in toDamage) // Gotta do this in a separate loop so we don't get iteration errors when a guy dies
+                {
+                    DealDamage(unit, TempDamageAmount);
+                }
+            }
+        }
+    }
 
 
 	float getDistance(UnitManager unit)
@@ -159,6 +153,7 @@ public class explosion : MonoBehaviour {
 	void DealDamage(UnitManager manager, float baseAmount)
 	{
 		UnitStats stats = manager.myStats;
+
 		foreach (IWeapon.bonusDamage tag in extraDamage)
 		{
 			if (manager.myStats.isUnitType(tag.type))
@@ -167,13 +162,15 @@ public class explosion : MonoBehaviour {
 			}
 		}
         MyHitContainer.trigger(null, manager, baseAmount);
+        if (baseAmount > 0)
+        {
+            float total = stats.TakeDamage(baseAmount, mySrcMan ? mySrcMan.gameObject : null, type, mySrcMan);
+            if (mySrcMan)
+            {
+                mySrcMan.myStats.veteranDamage(total);
+            }
+        }
 
-        float total = stats.TakeDamage(baseAmount, mySrcMan ? mySrcMan.gameObject : null, type, mySrcMan);
-
-
-		if (mySrcMan)
-		{
-			mySrcMan.myStats.veteranDamage(total);
-		}
+		
 	}
 }

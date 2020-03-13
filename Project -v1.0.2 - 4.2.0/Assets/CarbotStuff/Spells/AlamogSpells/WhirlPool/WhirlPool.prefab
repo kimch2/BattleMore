@@ -71,6 +71,7 @@ MonoBehaviour:
   AdditionaPlayerNums: 
   InVision: []
   CheckForDeaths: 0
+  myHitContainer: {fileID: 0}
   spinSpeed: 25
   duration: 8
 --- !u!1 &7146873201248118065
@@ -192,3 +193,4 @@ MonoBehaviour:
   - {fileID: 3286163911610860551, guid: 6ab3b60913c71db4395bc43af08e8f91, type: 3}
   - {fileID: 3286163911610860551, guid: 7a972aaea6578cf47b3b35f2bd44a113, type: 3}
   - {fileID: 3286163911610860551, guid: f117e4f06f2934147be1ed258f38ec43, type: 3}
+  Duration: 0
