@@ -49,7 +49,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 26b63c26a53b745469acbdf8147ec2be, type: 2}
+  - {fileID: 2100000, guid: 238e425597b45754bb4af89194ce226c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -70,7 +70,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 3286163911610860551, guid: 4eca3ec4219abb74091866ecfdf59f24,
+  m_Sprite: {fileID: 3286163911610860551, guid: 758a0d8218cfef24a86568b86f568c7c,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -110,6 +110,7 @@ MonoBehaviour:
   - {fileID: 3286163911610860551, guid: b847e6ae9445f914cb8401552d100cd7, type: 3}
   LoopSprites:
   - {fileID: 3286163911610860551, guid: b847e6ae9445f914cb8401552d100cd7, type: 3}
+  Duration: 0
 --- !u!1 &5621502477169282343
 GameObject:
   m_ObjectHideFlags: 0
@@ -120,6 +121,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1741774065696688224}
   - component: {fileID: 9159577818599379977}
+  - component: {fileID: 4477847831368564994}
   m_Layer: 0
   m_Name: ArcherCorpse
   m_TagString: Untagged
@@ -156,6 +158,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timer: 1.5
   showTimer: 0
+--- !u!114 &4477847831368564994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5621502477169282343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83e132145817800418281bc8ca6c37e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mySkins: []
+  ColoredSkins: []
+  ColoredSprites:
+  - {fileID: 238869336597080449}
+  mySkinner: {fileID: 0}
 --- !u!1 &6446206953432869063
 GameObject:
   m_ObjectHideFlags: 0

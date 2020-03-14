@@ -4,13 +4,19 @@ using UnityEngine;
 
 public class SkinUnlocker : MonoBehaviour {
 
-	public List<Skin> mySkins;
+    int Owner = -1;
+    public List<Skin> mySkins;
 	public List<MeshRenderer> ColoredSkins;
     public List<SpriteRenderer> ColoredSprites;
     List<Material> DefaultMaterials = new List<Material>();
 
 	public SkinColorManager mySkinner;
 	bool setFalse;
+
+    public void SetSource(int i)
+    {      
+        Owner = i;
+    }
 
 	void Awake()
 	{	if (!setFalse) {
@@ -28,16 +34,24 @@ public class SkinUnlocker : MonoBehaviour {
     {
         if (!mySkinner)
         {
-            UnitManager manager = GetComponent<UnitManager>();
-            RaceManager racer = GameManager.main.playerList[manager.PlayerOwner - 1];
-            mySkinner = racer.getColorManager();
+            if (Owner >= 0)
+            {
+                RaceManager racer = GameManager.main.playerList[Owner - 1];
+                mySkinner = racer.getColorManager();
+            }
+            else
+            {
+                UnitManager manager = GetComponent<UnitManager>();
+                RaceManager racer = GameManager.main.playerList[manager.PlayerOwner - 1];
+                mySkinner = racer.getColorManager();
+            }
         }
         for (int i = 0; i < ColoredSkins.Count; i++)
         {
             DefaultMaterials.Add(ColoredSkins[i].material);
             ColoredSkins[i].material = mySkinner.getSkin(DefaultMaterials[i]);
-
         }
+
         for (int i = 0; i < ColoredSprites.Count; i++)
         {
             ColoredSprites[i].material = mySkinner.getSpriteMaterial();

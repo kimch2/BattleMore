@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 6275768195298681231}
   - component: {fileID: 3344256293389374007}
   - component: {fileID: 7193540893143437369}
-  - component: {fileID: 862674187500904441}
   m_Layer: 9
   m_Name: GameObject (1)
   m_TagString: Untagged
@@ -28,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 3003475378369561489}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -0.477, z: 0}
-  m_LocalScale: {x: 0.71, y: 0.71, z: 0.71}
+  m_LocalScale: {x: 1, y: 1, z: 0.71}
   m_Children: []
   m_Father: {fileID: 1593301525098145948}
   m_RootOrder: 0
@@ -50,7 +49,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 26b63c26a53b745469acbdf8147ec2be, type: 2}
+  - {fileID: 2100000, guid: 238e425597b45754bb4af89194ce226c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -109,20 +108,7 @@ MonoBehaviour:
   - {fileID: 3286163911610860551, guid: cffefea3071eb4b4f8f68463d2832b09, type: 3}
   LoopSprites:
   - {fileID: 3286163911610860551, guid: cffefea3071eb4b4f8f68463d2832b09, type: 3}
---- !u!114 &862674187500904441
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3003475378369561489}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4d1d13abbebabb4bbc31a05895f27c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timer: 1.5
-  showTimer: 0
+  Duration: 0
 --- !u!1 &7150057853635262097
 GameObject:
   m_ObjectHideFlags: 0
@@ -133,6 +119,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3825116620915373014}
   - component: {fileID: 5919091634794229695}
+  - component: {fileID: 6798642811591842798}
   m_Layer: 0
   m_Name: RuffianCorpse
   m_TagString: Untagged
@@ -169,6 +156,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timer: 1.5
   showTimer: 0
+--- !u!114 &6798642811591842798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7150057853635262097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83e132145817800418281bc8ca6c37e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mySkins: []
+  ColoredSkins: []
+  ColoredSprites:
+  - {fileID: 3344256293389374007}
+  mySkinner: {fileID: 0}
 --- !u!1 &8380084097020089201
 GameObject:
   m_ObjectHideFlags: 0
@@ -193,9 +197,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8380084097020089201}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 1}
+  m_LocalRotation: {x: -0, y: -0.46088174, z: -0, w: -0.8874616}
+  m_LocalPosition: {x: 0, y: 0.39, z: 0}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children:
   - {fileID: 6275768195298681231}
   m_Father: {fileID: 3825116620915373014}

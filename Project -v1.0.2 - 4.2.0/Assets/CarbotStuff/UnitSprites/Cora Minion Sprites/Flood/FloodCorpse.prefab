@@ -58,6 +58,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5517717072499629890}
   - component: {fileID: 3144501304585208619}
+  - component: {fileID: 9016632048424100083}
   m_Layer: 0
   m_Name: FloodCorpse
   m_TagString: Untagged
@@ -94,6 +95,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timer: 1.5
   showTimer: 0
+--- !u!114 &9016632048424100083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1926782534260316677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83e132145817800418281bc8ca6c37e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mySkins: []
+  ColoredSkins: []
+  ColoredSprites:
+  - {fileID: 6336136264772632227}
+  mySkinner: {fileID: 0}
 --- !u!1 &5776193953501097733
 GameObject:
   m_ObjectHideFlags: 0
@@ -105,7 +123,6 @@ GameObject:
   - component: {fileID: 3359497107123752219}
   - component: {fileID: 6336136264772632227}
   - component: {fileID: 1897073627877555373}
-  - component: {fileID: 8250454500562400109}
   m_Layer: 9
   m_Name: GameObject (1)
   m_TagString: Untagged
@@ -122,7 +139,7 @@ Transform:
   m_GameObject: {fileID: 5776193953501097733}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -0.477, z: 0}
-  m_LocalScale: {x: 0.71, y: 0.71, z: 0.71}
+  m_LocalScale: {x: 1, y: 1, z: 0.71}
   m_Children: []
   m_Father: {fileID: 8042266158071055368}
   m_RootOrder: 0
@@ -144,7 +161,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 26b63c26a53b745469acbdf8147ec2be, type: 2}
+  - {fileID: 2100000, guid: 238e425597b45754bb4af89194ce226c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -209,17 +226,4 @@ MonoBehaviour:
   - {fileID: 3286163911610860551, guid: 34d2740d8b3dea74c8b563f41dde34bd, type: 3}
   LoopSprites:
   - {fileID: 3286163911610860551, guid: 34d2740d8b3dea74c8b563f41dde34bd, type: 3}
---- !u!114 &8250454500562400109
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5776193953501097733}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4d1d13abbebabb4bbc31a05895f27c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timer: 1.5
-  showTimer: 0
+  Duration: 0

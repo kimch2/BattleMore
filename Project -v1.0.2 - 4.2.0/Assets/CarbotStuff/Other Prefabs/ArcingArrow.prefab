@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 6910962934882749261}
   m_LocalRotation: {x: 0, y: 0.7082228, z: 0, w: 0.705989}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5.2179923, y: 5.2179923, z: 5.2179923}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_Children: []
   m_Father: {fileID: 7576047930380349135}
   m_RootOrder: 1
@@ -344,18 +344,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  damage: 0
-  speed: 48
-  trackTarget: 0
   Source: {fileID: 0}
   sourceInt: 1
+  MyHitContainer: {fileID: 0}
+  damage: 0
+  speed: 48
   damageType: 0
-  mySound: {fileID: 0}
   explosionO: {fileID: 2173679568725128437, guid: e348f35290029f44b861389fa30ecb2a,
     type: 3}
   SepDamWithExplos: 0
   SpecialEffect: {fileID: 0}
-  FriendlyFire: 0
   inaccuracy: 10
   arcAngle: 90
   myModel: {fileID: 0}
