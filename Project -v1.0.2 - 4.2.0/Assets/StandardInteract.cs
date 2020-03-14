@@ -59,7 +59,6 @@ public class StandardInteract : MonoBehaviour, Iinteract {
 
 		// ATTACK MOVE - Move towards a location and attack enemies on the way.
 		case Const.ORDER_AttackMove:
-		//	Debug.Log ("Setting to attack move");
 			if (myManager.cMover) {
 				AttackMove (order);
 			}
@@ -81,7 +80,8 @@ public class StandardInteract : MonoBehaviour, Iinteract {
 
 	// Attack move towards a ground location (Tab - ground)
 	public virtual void  AttackMove(Order order)
-	{if (!myManager) {
+	{
+        if (!myManager) {
 			return;
 		}
 		if (myManager.myWeapon.Count > 0) {

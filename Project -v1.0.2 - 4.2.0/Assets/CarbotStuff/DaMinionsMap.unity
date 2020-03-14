@@ -2463,6 +2463,11 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3527843826943763654, guid: 52ef2681c170a334db7ed864b57f2a56,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.9000015
+      objectReference: {fileID: 0}
     - target: {fileID: 3527848962687650170, guid: 52ef2681c170a334db7ed864b57f2a56,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -2486,7 +2491,7 @@ PrefabInstance:
     - target: {fileID: 3527975197242419582, guid: 52ef2681c170a334db7ed864b57f2a56,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -1.4656258
+      value: -20.7
       objectReference: {fileID: 0}
     - target: {fileID: 3527976206301619672, guid: 52ef2681c170a334db7ed864b57f2a56,
         type: 3}
@@ -2561,7 +2566,7 @@ PrefabInstance:
     - target: {fileID: 3528084954737397624, guid: 52ef2681c170a334db7ed864b57f2a56,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -1.4656258
+      value: -20
       objectReference: {fileID: 0}
     - target: {fileID: 3528093234934194626, guid: 52ef2681c170a334db7ed864b57f2a56,
         type: 3}
@@ -2641,7 +2646,7 @@ PrefabInstance:
     - target: {fileID: 3528335741604739992, guid: 52ef2681c170a334db7ed864b57f2a56,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -1.4656143
+      value: -19.6
       objectReference: {fileID: 0}
     - target: {fileID: 3528345467454222324, guid: 52ef2681c170a334db7ed864b57f2a56,
         type: 3}
@@ -3018,6 +3023,11 @@ PrefabInstance:
       propertyPath: myCam
       value: 
       objectReference: {fileID: 596731450}
+    - target: {fileID: 7398930062764883628, guid: 52ef2681c170a334db7ed864b57f2a56,
+        type: 3}
+      propertyPath: ControllableHero
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7802118044714474215, guid: 52ef2681c170a334db7ed864b57f2a56,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -4327,12 +4337,12 @@ MonoBehaviour:
   HeroToFollow: {fileID: 0}
   startPoint: {x: -640.7, y: 29.24, z: 152.9}
   endPoint: {x: -324.7, y: 29.24, z: 152.9}
-  HeroOffset: -22
+  HeroOffset: -35
   ProgressSlider: {fileID: 1666017256}
   LockedCamera: 1
   CurrentSpeed: 0
   acceleration: 3
-  topSpeed: 4
+  topSpeed: 7
 --- !u!4 &596731451
 Transform:
   m_ObjectHideFlags: 0
@@ -17542,7 +17552,7 @@ MonoBehaviour:
   playerNumber: 3
   resourceManager:
     MyResources: []
-  supplyMax: 0
+  supplyMax: 30
   currentSupply: 0
   supplyCap: 100
   IgnoreUlts: 1
@@ -17577,7 +17587,7 @@ MonoBehaviour:
   playerNumber: 2
   resourceManager:
     MyResources: []
-  supplyMax: 15
+  supplyMax: 30
   currentSupply: 0
   supplyCap: 100
   IgnoreUlts: 1
@@ -17612,7 +17622,7 @@ MonoBehaviour:
   playerNumber: 1
   resourceManager:
     MyResources: []
-  supplyMax: 15
+  supplyMax: 30
   currentSupply: 0
   supplyCap: 100
   IgnoreUlts: 1
@@ -17669,7 +17679,7 @@ MonoBehaviour:
   playerNumber: 4
   resourceManager:
     MyResources: []
-  supplyMax: 0
+  supplyMax: 30
   currentSupply: 0
   supplyCap: 100
   IgnoreUlts: 0
@@ -17701,7 +17711,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c009379349bfcd49a19a33f5255d0e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HueShift: 0.5
+  HueShift: 0.38
   Saturation: 1
   Value: 1
   ColorPickerShader: {fileID: 4800000, guid: 28df99b2fbb6dec4ca9ea6833dd00c21, type: 3}

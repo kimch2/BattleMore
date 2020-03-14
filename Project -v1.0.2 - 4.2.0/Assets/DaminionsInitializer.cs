@@ -20,6 +20,7 @@ public class DaminionsInitializer : MonoBehaviour
     public List<Image> CrystalChildren;
     public List<Text> AbilityCosts;
     float lastEnergy;
+    public bool ControllableHero = true;
 
     private void Awake()
     {
@@ -41,6 +42,12 @@ public class DaminionsInitializer : MonoBehaviour
         MyHero = hero.GetComponent<UnitManager>();
         myCam.setHero(hero);
         Invoke("SelectHero", .1f);
+        if (!ControllableHero)
+        {
+            Invoke("GiveOrder", 2f);
+            MyHero.myStats.statChanger.changeMoveSpeed(-.5f, 0, this, true);
+        }
+
 
         bool clearList = false;
         foreach (GameObject obj in DMCollectionManager.ChosenUnits)
@@ -101,6 +108,22 @@ public class DaminionsInitializer : MonoBehaviour
     {
         SelectedManager.main.AddObject(MyHero);
         SelectedManager.main.CreateUIPages(0);
+        if (!ControllableHero)
+        {
+            SelectedManager.main.CanGiveOrders = false;
+        }
+    }
+
+    void GiveOrders()
+    {
+        MyHero.GiveOrder(Orders.CreateAttackMove(MyHero.transform.position + Vector3.right * 50));
+        MyHero.GiveOrder(Orders.CreateAttackMove(MyHero.transform.position + Vector3.right * 100, true));
+        MyHero.GiveOrder(Orders.CreateAttackMove(MyHero.transform.position + Vector3.right * 150, true));
+        MyHero.GiveOrder(Orders.CreateAttackMove(MyHero.transform.position + Vector3.right * 200, true));
+        MyHero.GiveOrder(Orders.CreateAttackMove(MyHero.transform.position + Vector3.right * 250, true));
+        MyHero.GiveOrder(Orders.CreateAttackMove(MyHero.transform.position + Vector3.right * 300, true));
+        MyHero.GiveOrder(Orders.CreateAttackMove(MyHero.transform.position + Vector3.right * 350, true));
+        MyHero.GiveOrder(Orders.CreateAttackMove(MyHero.transform.position + Vector3.right * 400, true));
     }
 
     private void Update()

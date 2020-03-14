@@ -726,7 +726,7 @@ public class UnitManager : Unit, IOrderable {
 	// make sure that Queue front and queueback are never both true
 	public void changeState(UnitState nextState, bool Queuefront, bool QueueBack)
 	{
-       
+        //Debug.Log("Changing state " + nextState + "  " + QueueBack);
 		if (nextState != null && metaStatus.CanRecieveRightClick) {
 			enabled = true;
 		} // THIS MAY BREAK THINGS - IT Did, stun no longer works

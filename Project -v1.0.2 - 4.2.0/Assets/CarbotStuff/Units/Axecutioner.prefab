@@ -763,8 +763,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UnitDescription: Heavy frontline tank
   isHero: 0
-  Maxhealth: 1200
-  health: 1200
+  Maxhealth: 600
+  health: 600
   HealthRegenPerSec: 0
   HealthRegenPerHalf: 0
   MaxEnergy: 0

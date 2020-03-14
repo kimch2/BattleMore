@@ -99,6 +99,7 @@ MonoBehaviour:
   attackSound: {fileID: 0}
   unitResponseFrequancy: 0
   HeroSelectOnly: 0
+  CanGiveOrders: 1
 --- !u!114 &114066115491632836
 MonoBehaviour:
   m_ObjectHideFlags: 0

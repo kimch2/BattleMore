@@ -53,7 +53,6 @@ public class HeroDisplayBar : DisplayBar
 		bool toReturn = base.updateRatio(ratio, unitIcon, slider);
 		updateSplashRatio(ratio);
 
-
         if (currentShieldAmount > 0)
         {
             toReturn = true;
@@ -96,6 +95,10 @@ public class HeroDisplayBar : DisplayBar
         {
             SplashVector.x -= changeDuration * Time.deltaTime ;
             SplashBar.transform.localScale = SplashVector;
+            if (SplashVector.x < TargetVector.x)
+            {
+                SplashVector.x = TargetVector.x;
+            }
             yield return null;
         }
 

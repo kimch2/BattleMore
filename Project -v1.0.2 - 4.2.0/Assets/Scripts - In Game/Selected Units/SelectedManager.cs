@@ -44,6 +44,7 @@ public class SelectedManager : MonoBehaviour, ISelectedManager
 
 	public float unitResponseFrequancy; // between .35 (14 second min and 2 (2.5 second minimum))
    public bool HeroSelectOnly; // For use in DaMinionz
+    public bool CanGiveOrders = true;
     void Start()
 	{
 		GameMenu.main.addDisableScript (this);
@@ -772,8 +773,10 @@ public class SelectedManager : MonoBehaviour, ISelectedManager
 	public void GiveOrder(Order order)
 	{//fix this once we get to multiplayer games
 
-		if(SelectedObjects.Count <= 0 || SelectedObjects[0].getUnitManager().PlayerOwner != 1)
-			{return;}
+		if(SelectedObjects.Count <= 0 || SelectedObjects[0].getUnitManager().PlayerOwner != 1 || !CanGiveOrders)
+		{
+            return;
+        }
 			
 
 		Vector3 location = order.OrderLocation;
