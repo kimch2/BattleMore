@@ -5181,6 +5181,7 @@ MonoBehaviour:
   Saturation: 1
   Value: 1
   ColorPickerShader: {fileID: 4800000, guid: 28df99b2fbb6dec4ca9ea6833dd00c21, type: 3}
+  defaultSpriteMat: {fileID: 0}
   useColoredSkins: 1
 --- !u!114 &739680190
 MonoBehaviour:
@@ -5198,6 +5199,7 @@ MonoBehaviour:
   Saturation: 1
   Value: 1
   ColorPickerShader: {fileID: 4800000, guid: 28df99b2fbb6dec4ca9ea6833dd00c21, type: 3}
+  defaultSpriteMat: {fileID: 0}
   useColoredSkins: 1
 --- !u!114 &739680191
 MonoBehaviour:
@@ -14730,6 +14732,7 @@ MonoBehaviour:
   - {fileID: 1660055209}
   - {fileID: 844504142}
   - {fileID: 2014413922}
+  ColoredSprites: []
   mySkinner: {fileID: 0}
 --- !u!114 &1447707207
 MonoBehaviour:
@@ -17452,6 +17455,8 @@ GameObject:
   - component: {fileID: 1778871853}
   - component: {fileID: 1778871855}
   - component: {fileID: 1778871854}
+  - component: {fileID: 1778871841}
+  - component: {fileID: 1778871840}
   m_Layer: 0
   m_Name: GameRaceManager
   m_TagString: GameRaceManager
@@ -17473,6 +17478,42 @@ Transform:
   m_Father: {fileID: 1987951675}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1778871840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1778871838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c009379349bfcd49a19a33f5255d0e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HueShift: 0.5
+  Saturation: 1
+  Value: 1
+  ColorPickerShader: {fileID: 4800000, guid: 28df99b2fbb6dec4ca9ea6833dd00c21, type: 3}
+  defaultSpriteMat: {fileID: 2100000, guid: 238e425597b45754bb4af89194ce226c, type: 2}
+  useColoredSkins: 1
+--- !u!114 &1778871841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1778871838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c009379349bfcd49a19a33f5255d0e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HueShift: 0.5
+  Saturation: 1
+  Value: 1
+  ColorPickerShader: {fileID: 4800000, guid: 28df99b2fbb6dec4ca9ea6833dd00c21, type: 3}
+  defaultSpriteMat: {fileID: 2100000, guid: 238e425597b45754bb4af89194ce226c, type: 2}
+  useColoredSkins: 1
 --- !u!114 &1778871842
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17520,7 +17561,7 @@ MonoBehaviour:
   uiManager: {fileID: 0}
   economyManager: {fileID: 0}
   unitsLost: 0
-  colorManager: {fileID: 0}
+  colorManager: {fileID: 1778871841}
 --- !u!114 &1778871850
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17647,7 +17688,7 @@ MonoBehaviour:
   uiManager: {fileID: 0}
   economyManager: {fileID: 0}
   unitsLost: 0
-  colorManager: {fileID: 0}
+  colorManager: {fileID: 1778871840}
 --- !u!114 &1778871854
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17660,10 +17701,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c009379349bfcd49a19a33f5255d0e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HueShift: 235
+  HueShift: 0.5
   Saturation: 1
   Value: 1
   ColorPickerShader: {fileID: 4800000, guid: 28df99b2fbb6dec4ca9ea6833dd00c21, type: 3}
+  defaultSpriteMat: {fileID: 2100000, guid: 238e425597b45754bb4af89194ce226c, type: 2}
   useColoredSkins: 1
 --- !u!114 &1778871855
 MonoBehaviour:
@@ -17677,10 +17719,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c009379349bfcd49a19a33f5255d0e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HueShift: 0
+  HueShift: 0.5
   Saturation: 1
   Value: 1
   ColorPickerShader: {fileID: 4800000, guid: 28df99b2fbb6dec4ca9ea6833dd00c21, type: 3}
+  defaultSpriteMat: {fileID: 2100000, guid: 238e425597b45754bb4af89194ce226c, type: 2}
   useColoredSkins: 1
 --- !u!1 &1790899774
 GameObject:
@@ -30018,6 +30061,7 @@ MonoBehaviour:
   - {fileID: 3657459118101940663}
   - {fileID: 3658824021614610347}
   - {fileID: 3657956564946628981}
+  ColoredSprites: []
   mySkinner: {fileID: 0}
 --- !u!4 &6366798185810660321
 Transform:

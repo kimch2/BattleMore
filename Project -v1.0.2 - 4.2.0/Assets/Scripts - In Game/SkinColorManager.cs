@@ -9,6 +9,9 @@ public class SkinColorManager : MonoBehaviour
 	public float Saturation = 1.6f;
 	public float Value = 1;
 	public Shader ColorPickerShader;
+    public Material defaultSpriteMat;
+
+    Material alteredSpriteMaterial;
 
 	private void Awake()
 	{
@@ -16,8 +19,10 @@ public class SkinColorManager : MonoBehaviour
 		{
 			ColorPickerShader = Shader.Find("Custom/ColorPicker");
 		}
-
-	}
+        alteredSpriteMaterial = new Material(defaultSpriteMat);
+        alteredSpriteMaterial.SetVector("_HSVAAdjust", new Vector4(HueShift,0,0,0));
+        alteredSpriteMaterial.name = "CopiedMaterial";
+    }
 
 	public bool useColoredSkins;
 	Dictionary<Material, Material> colorMapper = new Dictionary<Material, Material>();
@@ -66,5 +71,10 @@ public class SkinColorManager : MonoBehaviour
 
 		return newMat;
 	}
+
+    public Material getSpriteMaterial()
+    {
+        return alteredSpriteMaterial;
+    }
 
 }

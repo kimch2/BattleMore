@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2776605537801224781}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 9.23, z: 0}
+  m_LocalPosition: {x: 0, y: -1.69, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2776605539261202541}
@@ -373,7 +373,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2776605538303853103}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.2150006, z: -0.0000030696392}
+  m_LocalPosition: {x: 0, y: 6.14, z: -0.0000030696392}
   m_LocalScale: {x: 1.0000005, y: 1, z: 1.0000005}
   m_Children:
   - {fileID: 2776605539245478430}
@@ -399,7 +399,7 @@ MonoBehaviour:
   RatioLevels:
   - minimum: 0
     HPBarColor: {r: 1, g: 1, b: 1, a: 1}
-  BarWidth: 8
+  BarWidth: 4
 --- !u!1 &2776605538358891140
 GameObject:
   m_ObjectHideFlags: 0
@@ -629,6 +629,7 @@ GameObject:
   - component: {fileID: 2776605538683397682}
   - component: {fileID: 2776605538683397692}
   - component: {fileID: 2776605538683397695}
+  - component: {fileID: 1394852619232180258}
   m_Layer: 9
   m_Name: Archer
   m_TagString: Enemy
@@ -1052,6 +1053,23 @@ MonoBehaviour:
   minimumRange: 0
   attackArc: 100
   projectileSpeed: 55
+--- !u!114 &1394852619232180258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2776605538683397694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83e132145817800418281bc8ca6c37e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mySkins: []
+  ColoredSkins: []
+  ColoredSprites:
+  - {fileID: 3277586690375914388}
+  mySkinner: {fileID: 0}
 --- !u!1 &2776605538742978971
 GameObject:
   m_ObjectHideFlags: 0
@@ -1188,7 +1206,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2776605539091994446}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 4.1150007, z: -0.0000030696392}
+  m_LocalPosition: {x: 0, y: 7.04, z: -0.0000030696392}
   m_LocalScale: {x: 1.0000005, y: 1, z: 1.0000005}
   m_Children:
   - {fileID: 2776605538358891141}
@@ -1214,7 +1232,7 @@ MonoBehaviour:
   RatioLevels:
   - minimum: 0
     HPBarColor: {r: 0.19117647, g: 0.19675452, b: 1, a: 1}
-  BarWidth: 8
+  BarWidth: 4
 --- !u!1 &2776605539245478425
 GameObject:
   m_ObjectHideFlags: 0
@@ -1320,7 +1338,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2776605539261202540}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 5.02, z: -0.0000030696392}
+  m_LocalPosition: {x: 0, y: 7.944999, z: -0.0000030696392}
   m_LocalScale: {x: 1.0000005, y: 1, z: 1.0000005}
   m_Children:
   - {fileID: 2776605538577443109}
@@ -1350,7 +1368,7 @@ MonoBehaviour:
     HPBarColor: {r: 1, g: 0.8896551, b: 0, a: 1}
   - minimum: 0
     HPBarColor: {r: 0.8602941, g: 0, b: 0, a: 1}
-  BarWidth: 8
+  BarWidth: 4
 --- !u!1 &4206588133984939832
 GameObject:
   m_ObjectHideFlags: 0
@@ -1400,7 +1418,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 26b63c26a53b745469acbdf8147ec2be, type: 2}
+  - {fileID: 2100000, guid: 238e425597b45754bb4af89194ce226c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

@@ -49,7 +49,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 26b63c26a53b745469acbdf8147ec2be, type: 2}
+  - {fileID: 2100000, guid: 238e425597b45754bb4af89194ce226c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -902,6 +902,7 @@ GameObject:
   - component: {fileID: 1661666932704040666}
   - component: {fileID: 1661666932704040667}
   - component: {fileID: 1661666932704040661}
+  - component: {fileID: 8683550372938206702}
   m_Layer: 9
   m_Name: Ruffian
   m_TagString: Enemy
@@ -1331,6 +1332,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77f586f285b3847808d79083bd19ef1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8683550372938206702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1661666932704040663}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83e132145817800418281bc8ca6c37e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mySkins: []
+  ColoredSkins: []
+  ColoredSprites:
+  - {fileID: 2088336489500566397}
+  mySkinner: {fileID: 0}
 --- !u!1 &1661666932724013517
 GameObject:
   m_ObjectHideFlags: 0

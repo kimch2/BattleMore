@@ -6,7 +6,8 @@ public class SkinUnlocker : MonoBehaviour {
 
 	public List<Skin> mySkins;
 	public List<MeshRenderer> ColoredSkins;
-	List<Material> DefaultMaterials = new List<Material>();
+    public List<SpriteRenderer> ColoredSprites;
+    List<Material> DefaultMaterials = new List<Material>();
 
 	public SkinColorManager mySkinner;
 	bool setFalse;
@@ -23,20 +24,25 @@ public class SkinUnlocker : MonoBehaviour {
 		}
 	}
 
-	public void Start()
-	{
-		if (!mySkinner)
-		{
-			UnitManager manager = GetComponent<UnitManager>();
-			RaceManager racer = GameManager.main.playerList[manager.PlayerOwner - 1];
-			mySkinner = racer.getColorManager();
-		}
-		for (int i = 0; i < ColoredSkins.Count; i++)
-		{
-			DefaultMaterials.Add(ColoredSkins[i].material);
-			ColoredSkins[i].material = mySkinner.getSkin(DefaultMaterials[i]);
-		}
-	}
+    public void Start()
+    {
+        if (!mySkinner)
+        {
+            UnitManager manager = GetComponent<UnitManager>();
+            RaceManager racer = GameManager.main.playerList[manager.PlayerOwner - 1];
+            mySkinner = racer.getColorManager();
+        }
+        for (int i = 0; i < ColoredSkins.Count; i++)
+        {
+            DefaultMaterials.Add(ColoredSkins[i].material);
+            ColoredSkins[i].material = mySkinner.getSkin(DefaultMaterials[i]);
+
+        }
+        for (int i = 0; i < ColoredSprites.Count; i++)
+        {
+            ColoredSprites[i].material = mySkinner.getSpriteMaterial();
+        }
+    }
 
 	[System.Serializable]
 	public class Skin

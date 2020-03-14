@@ -562,6 +562,7 @@ GameObject:
   - component: {fileID: 5636270701877033794}
   - component: {fileID: 5636270701877033804}
   - component: {fileID: 6007908948176354711}
+  - component: {fileID: -6612402152661984733}
   m_Layer: 9
   m_Name: Catapult
   m_TagString: Enemy
@@ -995,6 +996,23 @@ MonoBehaviour:
   minimumRange: 20
   attackArc: 180
   projectileSpeed: 40
+--- !u!114 &-6612402152661984733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5636270701877033806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83e132145817800418281bc8ca6c37e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mySkins: []
+  ColoredSkins: []
+  ColoredSprites:
+  - {fileID: 5029432177833463524}
+  mySkinner: {fileID: 0}
 --- !u!1 &5636270701913781332
 GameObject:
   m_ObjectHideFlags: 0
@@ -1101,7 +1119,7 @@ Transform:
   m_GameObject: {fileID: 5636270701939784884}
   m_LocalRotation: {x: -0, y: -0.46088174, z: -0, w: -0.8874616}
   m_LocalPosition: {x: 0, y: 0.39, z: 0}
-  m_LocalScale: {x: 2.5, y: 2.5, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children:
   - {fileID: 8152111717334911135}
   m_Father: {fileID: 5636270701877033822}
@@ -1411,7 +1429,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 26b63c26a53b745469acbdf8147ec2be, type: 2}
+  - {fileID: 2100000, guid: 238e425597b45754bb4af89194ce226c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

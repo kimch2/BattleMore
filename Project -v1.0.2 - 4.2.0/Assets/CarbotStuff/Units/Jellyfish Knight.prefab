@@ -501,6 +501,7 @@ GameObject:
   - component: {fileID: 434365666581434846}
   - component: {fileID: 434365666581434847}
   - component: {fileID: 434365666581434833}
+  - component: {fileID: 7836313376384633202}
   m_Layer: 9
   m_Name: Jellyfish Knight
   m_TagString: Enemy
@@ -924,6 +925,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77f586f285b3847808d79083bd19ef1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7836313376384633202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 434365666581434835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83e132145817800418281bc8ca6c37e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mySkins: []
+  ColoredSkins: []
+  ColoredSprites:
+  - {fileID: 1940942441031325910}
+  mySkinner: {fileID: 0}
 --- !u!1 &434365666626576073
 GameObject:
   m_ObjectHideFlags: 0
@@ -1030,7 +1048,7 @@ Transform:
   m_GameObject: {fileID: 434365666652050985}
   m_LocalRotation: {x: -0, y: -0.46088174, z: -0, w: -0.8874616}
   m_LocalPosition: {x: 0, y: 0.39, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 1}
+  m_LocalScale: {x: 3.5, y: 3.5, z: 1}
   m_Children:
   - {fileID: 4115513222799827458}
   m_Father: {fileID: 434365666581434819}
@@ -1401,7 +1419,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 26b63c26a53b745469acbdf8147ec2be, type: 2}
+  - {fileID: 2100000, guid: 238e425597b45754bb4af89194ce226c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
