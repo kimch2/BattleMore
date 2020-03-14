@@ -378,8 +378,8 @@ public class UnitStats : MonoBehaviour {
 		if (isUnitType(UnitTypes.UnitTypeTag.Invulnerable)) {
 			return 0;
 		}
-			
-		if (type != DamageTypes.DamageType.True) {
+
+        if (type != DamageTypes.DamageType.True) {
             for(int i = damageModifiers.Count -1; i >-1; i--) { 
 				if (damageModifiers[i]  != null) {
 					amount = damageModifiers[i].modify (amount, source, type);
@@ -390,7 +390,7 @@ public class UnitStats : MonoBehaviour {
 				}
 		}
 
-		if (type == DamageTypes.DamageType.Regular || type == DamageTypes.DamageType.Wound ) {
+        if (type == DamageTypes.DamageType.Regular || type == DamageTypes.DamageType.Wound ) {
 
 			amount = Mathf.Max (amount - armor, 1);
 		}

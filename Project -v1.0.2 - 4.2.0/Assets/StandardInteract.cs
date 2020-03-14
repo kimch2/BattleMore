@@ -71,11 +71,7 @@ public class StandardInteract : MonoBehaviour, Iinteract {
 				Follow (order);
 				break;
 
-
-
 			}
-
-
 	}
 
 	// Attack move towards a ground location (Tab - ground)

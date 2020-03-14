@@ -6,6 +6,7 @@ public class DMSpawnUnit : Ability
 {
     public GameObject ToSpawn;
     public int spawnCount;
+    public bool SpawnAtScreenEdge = true;
     public override void Start() // We have this here so other source can call Start and any of this guy's inheriters will have it called instead
     {
         myType = type.activated;
@@ -13,7 +14,10 @@ public class DMSpawnUnit : Ability
 
     public override void Activate()
     {
-        myCost.payCost();
+        if (myCost)
+        {
+            myCost.payCost();
+        }
         UnitStats potentSpawn = ToSpawn.GetComponent<UnitStats>();
         if (!potentSpawn)
         {
@@ -30,7 +34,10 @@ public class DMSpawnUnit : Ability
 
             foreach (UnitManager man in newGuy.GetComponentsInChildren<UnitManager>())
             {
-                man.myStats.cost = myCost.energy;
+                    if (myCost)
+                    {
+                        man.myStats.cost = myCost.energy;
+                    }
                 myManager.Initialize(myManager.PlayerOwner, true, man.getUnitStats().isUnitType(UnitTypes.UnitTypeTag.Structure));
                 if (man.cMover)
                 {
@@ -53,14 +60,19 @@ public class DMSpawnUnit : Ability
 
     Vector3 getSpawnLocation()
     {
-        if (myManager.PlayerOwner == 1)
+        if (SpawnAtScreenEdge)
         {
-            return CarbotCamera.singleton.getLeftScreenEdge(myManager.transform.position, 10);
+            if (myManager.PlayerOwner == 1)
+            {
+                return CarbotCamera.singleton.getLeftScreenEdge(myManager.transform.position, 10);
+            }
+            else
+            {
+                return CarbotCamera.singleton.getRightScreenEdge(myManager.transform.position, 10);
+            }
         }
         else
-        {
-            return CarbotCamera.singleton.getRightScreenEdge(myManager.transform.position, 10);
-        }
+        { return myManager.transform.position; }
     }
 
     private void OnDrawGizmos()

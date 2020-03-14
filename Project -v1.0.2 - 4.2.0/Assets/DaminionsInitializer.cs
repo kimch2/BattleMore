@@ -87,7 +87,7 @@ public class DaminionsInitializer : MonoBehaviour
 
         for (int i = 0; i < CrystalChildren.Count; i++)
         {
-            CrystalChildren[i].transform.parent.gameObject.SetActive(MyHero.myStats.MaxEnergy > i);
+            CrystalChildren[i].transform.parent.gameObject.SetActive(MyHero.myStats.MaxEnergy> i);
         }
 
         for (int i = 0; i < AbilityCosts.Count; i++)
@@ -133,7 +133,7 @@ public class DaminionsInitializer : MonoBehaviour
             lastEnergy = MyHero.getUnitStats().currentEnergy;
             for (int i = 0; i < CrystalChildren.Count; i++)
             {
-                CrystalChildren[i].enabled = (lastEnergy > i);
+                CrystalChildren[i].enabled = (lastEnergy - .5f > i);
             }
 
 

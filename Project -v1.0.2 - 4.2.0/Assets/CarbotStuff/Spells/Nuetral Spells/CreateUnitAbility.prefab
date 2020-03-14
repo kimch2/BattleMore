@@ -49,7 +49,7 @@ MonoBehaviour:
   Descripton: 
   iconPic: {fileID: 21300000, guid: 03a36bf08d17c6d4496985d73565e53c, type: 3}
   myCost: {fileID: 8122154421309857550}
-  continueMoving: 0
+  continueMoving: 1
   RequiredUnit: []
   canAutoCast: 0
   autocast: 0

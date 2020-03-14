@@ -43,13 +43,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f89bf2b44f707544fb7e345bff99bd4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  source: {fileID: 0}
   sourceInt: 1
   particleEff: {fileID: 0}
-  friendlyFireRatio: 0
   damageAmount: 45
   type: 0
-  maxSize: 2
+  maxSize: 3
   UseYFOrDetection: 0
   DamageDelay: 0.01
   extraDamage: []
+  MyHitContainer: {fileID: 0}
+  PlayersToApplyTo: 

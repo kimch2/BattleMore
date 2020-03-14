@@ -641,7 +641,7 @@ MonoBehaviour:
   EnergyRegenPerSec: 0
   EnergyRegenPerHalf: 0
   Icon: {fileID: 3286163911610860551, guid: 12a052fd2a68d1743a3947079af92b97, type: 3}
-  supply: 1
+  supply: 0
   attackPriority: 3
   DefensePriority: 0
   agressionPriority: 0

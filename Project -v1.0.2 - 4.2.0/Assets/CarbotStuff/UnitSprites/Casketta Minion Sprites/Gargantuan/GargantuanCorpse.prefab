@@ -209,7 +209,6 @@ MonoBehaviour:
   myRenderer: {fileID: 7401646489930520924}
   frameRate: 12
   StartSprites:
-  - {fileID: 3286163911610860551, guid: 896eb9ed8d282d145859e6bb12e84c3d, type: 3}
   - {fileID: 3286163911610860551, guid: 7be2171c9eaad094d8cf9444b1df8a03, type: 3}
   - {fileID: 3286163911610860551, guid: f14725af9e9254b478bb622761d8472e, type: 3}
   - {fileID: 3286163911610860551, guid: d36b38a7b716f134fbfabce8e87d375d, type: 3}

@@ -86,7 +86,7 @@ public class MortarProjectile : Projectile {
 
         if (other.gameObject == target || other.gameObject.transform.IsChildOf(target.transform) || (Source && Source.transform.IsChildOf(other.transform)))
         {
-            Debug.Log("Terminating on " + target + "   Source is " + Source);
+       //     Debug.Log("Terminating on " + target + "   Source is " + Source);
             Terminate(other.gameObject.GetComponent<UnitManager>());
         }
 
@@ -96,7 +96,7 @@ public class MortarProjectile : Projectile {
 
         if (Source && (other.gameObject != Source && !other.gameObject.transform.IsChildOf(Source.transform) && (!Source.transform.IsChildOf(other.transform))))
         {
-            Debug.Log("Terminating on " + target + "   Source is " + Source);
+         //   Debug.Log("Terminating on " + target + "   Source is " + Source);
             Terminate(null);
         }
     }
