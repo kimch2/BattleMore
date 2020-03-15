@@ -15,6 +15,7 @@ public class AbstractCost : MonoBehaviour {
 	public float energy;
 
 	public float cooldown;
+    [HideInInspector]
 	public float cooldownTimer;
 	public bool StartsRefreshed = true;
 		

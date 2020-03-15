@@ -5,11 +5,13 @@ using DigitalRuby.SoundManagerNamespace;
 
 public  class Projectile : MonoBehaviour {
     
+    [HideInInspector]
 	public UnitManager target;
-
+    [HideInInspector]
     public GameObject Source;
     public int sourceInt = 1;
     protected VeteranStats vetSource;
+    [HideInInspector]
     public OnHitContainer MyHitContainer;
 
     public float damage;

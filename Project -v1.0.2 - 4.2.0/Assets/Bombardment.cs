@@ -9,12 +9,15 @@ public class Bombardment : TargetAbility{
 	public float myDamage = 40;
 
 	public float FriendlyFire = 1;
+    public bool shakeTheCamera = true;
 
 
 	Lean.LeanPool myBulletPool;
     public override void Start()
     {
 		base.Start();
+        myTargetType = targetType.ground;
+        myType = type.target;
 		if (Explosion) {
 			myBulletPool = Lean.LeanPool.getSpawnPool (Explosion);
 		}
@@ -49,21 +52,23 @@ public class Bombardment : TargetAbility{
 
 
 	override
-	public  bool Cast(GameObject target, Vector3 location)
+	public  bool Cast(GameObject target, Vector3 locat)
 	{
 		myCost.payCost ();
 
 		for (int i = 0; i < shotCount; i++) {
 		
-			StartCoroutine( Fire ((i * .087f), location, i));
+			StartCoroutine( Fire ((i * .087f), locat, i));
 		}
 		GameObject sight = new GameObject("SightObject");
-		sight.transform.position = location;
+		sight.transform.position = locat;
 		FogOfWarUnit fogger = sight.AddComponent<FogOfWarUnit>();
 		fogger.radius = 55;
 		fogger.hasMoved = true;
-
-		StartCoroutine( shakeCamera ());
+        if (shakeTheCamera)
+        {
+            StartCoroutine(shakeCamera());
+        }
 		return false;
 	}
 
@@ -74,15 +79,15 @@ public class Bombardment : TargetAbility{
 	}
 
 
-	IEnumerator Fire (float time, Vector3 location, int index)
+	IEnumerator Fire (float time, Vector3 locat, int index)
 	{
 
 		yield return new WaitForSeconds(time);
 		GameObject proj = null;
 
 
-		Vector3 hitzone = location;
-		float radius = Mathf.Sqrt( ((float)index/(float)shotCount ))* 43;
+		Vector3 hitzone = locat;
+		float radius = Mathf.Sqrt( ((float)index/(float)shotCount ))* areaSize;
 		float angle = index * 15;
 
 		if (index % 2 == 1) {
@@ -100,11 +105,12 @@ public class Bombardment : TargetAbility{
 		}
 		Vector3 spawnLoc = hitzone;
 		spawnLoc.y += 192;
-
+          
 
 		proj = myBulletPool.FastSpawn  (spawnLoc, Quaternion.identity);//Instantiate (Explosion, spawnLoc, Quaternion.identity);
 
 		Projectile script = proj.GetComponent<Projectile> ();
+        SetOnHitContainer(proj, myDamage, null);
 		//proj.SendMessage ("setSource", this.gameObject, SendMessageOptions.DontRequireReceiver);
 		script.setSource (this.gameObject);
 		if (script) {
@@ -123,7 +129,8 @@ public class Bombardment : TargetAbility{
 
 	override
 	public void Cast(){
-	}
+        Cast(target, location);
+    }
 
 
 }

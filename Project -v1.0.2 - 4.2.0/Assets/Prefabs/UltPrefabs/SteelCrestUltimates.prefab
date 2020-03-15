@@ -75,6 +75,7 @@ MonoBehaviour:
   targetArea: {fileID: 21300000, guid: 782809f7d909d1d44ba82eb1647f4647, type: 3}
   areaSize: 50
   myTargetType: 0
+  myHitContainer: {fileID: 0}
   prefab: {fileID: 162976, guid: 2a8104eb86550c9478cd83f1e439fe5c, type: 3}
 --- !u!114 &114600988269272908
 MonoBehaviour:
@@ -132,6 +133,7 @@ MonoBehaviour:
   targetArea: {fileID: 21300000, guid: 84683673a3224014692c1a4a5770b8d6, type: 3}
   areaSize: 0
   myTargetType: 0
+  myHitContainer: {fileID: 0}
   prefab: {fileID: 164778, guid: baec9ba3686440741b38e2bb0d18544f, type: 3}
 --- !u!114 &114215743487327694
 MonoBehaviour:
@@ -185,6 +187,7 @@ MonoBehaviour:
   targetArea: {fileID: 21300000, guid: 9dead7b94ebdb144c83e28ac38bed79d, type: 3}
   areaSize: 50
   myTargetType: 0
+  myHitContainer: {fileID: 0}
   prefab: {fileID: 179344, guid: 733cfa0b0d6178947aefbb88ebc0954d, type: 3}
 --- !u!114 &114338973017284132
 MonoBehaviour:
@@ -240,8 +243,9 @@ MonoBehaviour:
   target: {fileID: 0}
   location: {x: 0, y: 0, z: 0}
   targetArea: {fileID: 21300000, guid: 706b8576d4d39df4fa48f80ea6d1d1a7, type: 3}
-  areaSize: 65
+  areaSize: 45
   myTargetType: 0
+  myHitContainer: {fileID: 0}
   Explosion: {fileID: 1000012247445134, guid: 7525c97942ef29e47a6b88c54b738f56, type: 3}
   shotCount: 45
   myDamage: 60
