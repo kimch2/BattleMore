@@ -40,6 +40,7 @@ public class ActivatedAbility : Ability
     protected void Trigger()
     {
         OnActivate.Invoke();
+        
     }
 
     protected void TurnOff()

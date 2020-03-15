@@ -111,10 +111,9 @@ public class PhysicsSimulator : MonoBehaviour {
 			yield return null;
 		}
 
-
-        target.metaStatus.UnStun(sourceComp); // MIGHT HAVE PROBLEMS IF THE SOURCE DIES BEFORE REACHING THIS POINT
-		if (target) {
-			if (target.fogger) {
+       if (target)
+            { target.metaStatus.UnStun(sourceComp);
+                if (target.fogger) {
 				target.fogger.hasMoved = true;
 			}
 			target.transform.position = targetLocation;

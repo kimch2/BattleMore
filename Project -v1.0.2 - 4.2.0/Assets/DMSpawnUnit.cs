@@ -42,7 +42,10 @@ public class DMSpawnUnit : Ability
                 if (man.cMover)
                 {
                     man.GiveOrder(Orders.CreateAttackMove(transform.position + Vector3.right * 75, true));
-                }
+                    man.GiveOrder(Orders.CreateAttackMove(transform.position + Vector3.right * 150, true));
+                    man.GiveOrder(Orders.CreateAttackMove(transform.position + Vector3.right * 250, true));
+                    man.GiveOrder(Orders.CreateAttackMove(transform.position + Vector3.right * 350, true));
+                    }
             }
         }
     }
@@ -64,11 +67,11 @@ public class DMSpawnUnit : Ability
         {
             if (myManager.PlayerOwner == 1)
             {
-                return CarbotCamera.singleton.getLeftScreenEdge(myManager.transform.position, 10);
+                return CarbotCamera.singleton.getLeftScreenEdge(myManager.transform.position, 15);
             }
             else
             {
-                return CarbotCamera.singleton.getRightScreenEdge(myManager.transform.position, 10);
+                return CarbotCamera.singleton.getRightScreenEdge(myManager.transform.position, 15);
             }
         }
         else

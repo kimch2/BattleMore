@@ -26,7 +26,7 @@ public class OnHitContainer : MonoBehaviour
 
             }
         }
-        if (!myManager)
+        if (myManager)
         {
             source = myManager.gameObject;
         }
@@ -96,15 +96,15 @@ public class OnHitContainer : MonoBehaviour
         if (target)
         {
             //if (!myManager || myManager.gameObject != target) // Applies to the source if it hits it? I think yes
-            
-            foreach (IEffect fect in toApply)
+
+            for (int i = toApply.Count - 1; i >= 0; i--)
             {
-                fect.applyTo(source, target);                
+                toApply[i].applyTo(source, target);                
             }
 
-            foreach (Notify mod in DamageTriggers)
+            for (int i = DamageTriggers.Count - 1; i >= 0; i--)
             {
-                mod.trigger(source, proj, target, Damage);
+                DamageTriggers[i].trigger(source, proj, target, Damage);
             }           
         }
     }
@@ -116,6 +116,11 @@ public class OnHitContainer : MonoBehaviour
         {
             fect.RemoveEffect(target);
         }
+    }
+
+    public void RemoveNotifier(Component target)
+    {
+        DamageTriggers.Remove((Notify)target);
     }
 
     public void SelfDestruct()

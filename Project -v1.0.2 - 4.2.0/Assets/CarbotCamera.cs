@@ -143,7 +143,7 @@ public class CarbotCamera : MainCamera
 
         if (Physics.Raycast(ray, out hit))
         {
-            return hit.point;
+            return hit.point + Vector3.forward * Random.Range(-1 * YVariance, YVariance); ;
         }
         Debug.Log(" Could not find a terrain on the right side of the screen");
         return unitLocation;
@@ -151,14 +151,14 @@ public class CarbotCamera : MainCamera
 
     public Vector3 getLeftScreenEdge(Vector3 unitLocation, float YVariance)
     {
-        Vector2 screenPoint = new Vector3(0, Screen.height/2); //myCamera.WorldToScreenPoint(unitLocation);
+        Vector2 screenPoint = new Vector3(-0, Screen.height/2); //myCamera.WorldToScreenPoint(unitLocation);
 
         Ray ray = myCamera.ScreenPointToRay(screenPoint);
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit))
-        {         
-            return hit.point;
+        {
+            return hit.point + Vector3.forward * Random.Range(-1*YVariance , YVariance) ;
         }
         Debug.Log(" Could not find a terrain on the Left side of the screen");
         return unitLocation;

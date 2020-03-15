@@ -58,7 +58,8 @@ public class CustomRVO : IMover {
 		manager = GetComponent<UnitManager>();
 		initialSpeed = getMaxSpeed();
 		seeker = GetComponent<Seeker>();
-	}
+        controller = GetComponent<RVOController>();
+    }
 
 
 
@@ -69,7 +70,7 @@ public class CustomRVO : IMover {
 	
 #endif
 		//resetMoveLocation(-transform.position); // + transform.forward * 400);
-		controller = GetComponent<RVOController>();
+		//controller = GetComponent<RVOController>();
 
 	}
 

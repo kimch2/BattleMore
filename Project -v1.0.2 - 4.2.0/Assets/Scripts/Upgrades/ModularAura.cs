@@ -8,13 +8,23 @@ public class ModularAura : IEffect
     //so we don't have to apply a stat change of "0" on stats that aren't used 
 
 
+
     public List<AuraNumber> myBuffs = new List<AuraNumber>();
     [Tooltip("Any script in this list should extend the ICustomAura interface ")]
    
     public bool Stacks;
     [Tooltip("If this is 0, it is permanant")]
     public float Duration = 0;
+    [Tooltip("This will immediately give it to the guy this is attached to, instead of having to be applied via spell")]
+    public bool ApplyOnStart;
 
+    private void Start()
+    {
+        if (ApplyOnStart)
+        {
+            applyTo(SourceManager.gameObject, SourceManager);
+        }
+    }
 
     public override bool validTarget(GameObject target)
     {

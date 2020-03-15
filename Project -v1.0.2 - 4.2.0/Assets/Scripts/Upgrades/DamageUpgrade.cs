@@ -21,6 +21,7 @@ public class DamageUpgrade : Upgrade {
 	}
 
 	public List<unitAmount> unitsToUpgrade = new List<unitAmount> ();
+    [Tooltip("Applies a roughly 10% damage buff to units (rounded up to nearest whole number)")]
 	public bool standardUpgrade = false;
 
 	override

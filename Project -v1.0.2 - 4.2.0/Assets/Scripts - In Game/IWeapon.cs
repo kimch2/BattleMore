@@ -401,11 +401,14 @@ public class IWeapon : MonoBehaviour {
 	public float fireTriggers(GameObject source, GameObject proj, UnitManager target, float damage)
 	{	
 		triggers.RemoveAll (item => item == null);
-		foreach (Notify obj in triggers) {
-			
-			if(obj != null){
-				damage =  obj.trigger(source,proj,target, damage);}
-		}
+        for (int i = triggers.Count - 1; i >= 0; i--)
+        {
+            if (triggers[i] != null)
+            {
+                damage =triggers[i].trigger(source, proj, target, damage);
+            }
+        }
+
 		return damage;
 	}
 

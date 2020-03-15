@@ -10,16 +10,15 @@ public class TriggeredAbility : ActivatedAbility, Modifier, Notify, LethalDamage
     [Tooltip("If not checked, this will be a passive ability, Always on")]
     public bool Activatable;
     public TriggerType triggerType;
-    [Tooltip("Used for some - RepeatTimer - how often, OnSpellCast - playerNumber to listen to")]
+    [Tooltip("Used for some - RepeatTimer - how often, OnSpellCast - playerNumber to listen to, OnAttack - Number of Attacks (0 =indefinite)")]
     public float VariableNumber = 1;
-
-
-
+    float hiddenVariableStored;
+    public GameObject OnTriggerEffect;
 
     public override void Start()
     {
         base.Start();
-
+                                             
         if (triggerType == TriggerType.OnSpawn)
         {
             OnActivate.Invoke();
@@ -59,7 +58,7 @@ public class TriggeredAbility : ActivatedAbility, Modifier, Notify, LethalDamage
 
     void StartListening()
     {
-
+        hiddenVariableStored = VariableNumber;
         if (triggerType == TriggerType.RepeatTimer)
         {
             InvokeRepeating("Fire", VariableNumber, VariableNumber);
@@ -79,7 +78,7 @@ public class TriggeredAbility : ActivatedAbility, Modifier, Notify, LethalDamage
         {
             WorldRecharger.main.AddSpellCastNotifier(new int[1] { (int)VariableNumber }, this);
         }
-        else if (triggerType == TriggerType.OnAttack)
+        else if (triggerType == TriggerType.OnAttack && !GetComponent<OnHitContainer>()) // This is so if its on an onHitContainer, it doesn't add twice 
         {
             foreach (IWeapon myWeap in myManager.myWeapon) // WILL HAVE PROBLEMS IF WEAPONS CAN SWAP OUT
             {
@@ -146,6 +145,7 @@ public class TriggeredAbility : ActivatedAbility, Modifier, Notify, LethalDamage
         }
         else if (triggerType == TriggerType.OnAttack)
         {
+            Debug.Log("Removing");
             foreach (IWeapon myWeap in myManager.myWeapon)
             {
                 myWeap.removeNotifyTrigger(this);
@@ -195,13 +195,35 @@ public class TriggeredAbility : ActivatedAbility, Modifier, Notify, LethalDamage
     /// Used for OnAttack, OnDeath
     public virtual float modify(float damage, GameObject source, DamageTypes.DamageType theType)
     {
+        Debug.Log("Attacking");
+       
         Trigger();
+
+        if (OnTriggerEffect)
+        {
+            Instantiate<GameObject>(OnTriggerEffect, myManager.transform.position +myManager.transform.forward*2, Quaternion.identity);
+        }
+
         return damage;
     }
 
 
     public virtual float trigger(GameObject source, GameObject projectile, UnitManager target, float damage)
     {
+        if (VariableNumber > 0)
+        {
+            hiddenVariableStored--;
+            if (hiddenVariableStored == 0)
+            {
+                StopListening();
+                CancelInvoke("TurnOff");
+            }
+        }
+        if (OnTriggerEffect)
+        {
+            Instantiate<GameObject>(OnTriggerEffect, myManager.transform.position + myManager.transform.forward * 5, Quaternion.identity);
+        }
+
         Trigger();
         return damage;
     }

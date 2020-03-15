@@ -22,6 +22,7 @@ public class SimpleAnimator : MonoBehaviour
         {
             StopCoroutine(myRoutine);
         }
+        myRenderer.enabled = true;
         enabled = true;
         if (StartSprites.Count > 0 || LoopSprites.Count > 0)
         {
@@ -64,6 +65,7 @@ public class SimpleAnimator : MonoBehaviour
             }
             
         }
+        myRenderer.enabled = false;
         myRoutine = null;
     }
 }
