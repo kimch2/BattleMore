@@ -51,8 +51,16 @@ public class DMAssigner : MonoBehaviour,IDragHandler,IDropHandler, IEndDragHandl
         else if (toassign.MyAbility)
         {
             Ability MyAbility = toassign.MyAbility.GetComponent<Ability>();
-            firstText.text = "" + MyAbility.myCost.cooldown;
-            secondText.text = "" + MyAbility.chargeCount;
+            firstText.text = "";
+            if (MyAbility.chargeCount > 0)
+            {
+                firstText.text += MyAbility.myCost.cooldown;
+            }
+
+            secondText.text = "";
+            if (MyAbility.chargeCount > 0) {
+                secondText.text +=MyAbility.chargeCount;
+            }
         }
         else if (toassign.myUpgrade)
         {

@@ -106,7 +106,7 @@ public class Bombardment : TargetAbility{
         Vector3 spawnLoc;
         if (CastFromScreenEdge)
         {
-            spawnLoc = CarbotCamera.singleton.getLeftScreenEdge(locat, 10);
+            spawnLoc = DaminionsInitializer.main.getScreenEdge(locat, 15, myManager.PlayerOwner, true);
             spawnLoc.y += 75;
         }
         else

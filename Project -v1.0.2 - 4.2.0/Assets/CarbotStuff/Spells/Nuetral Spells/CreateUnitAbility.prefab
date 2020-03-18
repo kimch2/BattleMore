@@ -59,6 +59,7 @@ MonoBehaviour:
   soundEffect: {fileID: 0}
   ToSpawn: {fileID: 0}
   spawnCount: 1
+  SpawnAtScreenEdge: 1
 --- !u!114 &8122154421309857550
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -75,7 +76,7 @@ MonoBehaviour:
   resourceCosts:
     MyResources: []
   health: 0
-  energy: 20
+  energy: 2
   cooldown: 0
   cooldownTimer: 0
   StartsRefreshed: 1

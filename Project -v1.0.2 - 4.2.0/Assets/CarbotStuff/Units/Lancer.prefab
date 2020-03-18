@@ -256,14 +256,14 @@ MonoBehaviour:
   EnergyRegenPerSec: 0
   EnergyRegenPerHalf: 0
   Icon: {fileID: 21300000, guid: 7abe330153422eb4a9b3aade17d50a91, type: 3}
-  supply: 1
+  supply: 2
   attackPriority: 3
   DefensePriority: 0
   agressionPriority: 0
   armor: 3
   spellResist: 0
   Tenacity: 0
-  cost: 30
+  cost: 6
   Cost:
     MyResources:
     - resType: 0
@@ -518,7 +518,7 @@ MonoBehaviour:
   maxSpeed: 35
   height: 1
   locked: 0
-  lockWhenNotMoving: 0
+  lockWhenNotMoving: 1
   agentTimeHorizon: 0.5
   obstacleTimeHorizon: 2
   neighbourDist: 10

@@ -8,8 +8,9 @@ public class CarbotCamera : MainCamera
     public GameObject HeroToFollow;
 
     float progression;
-    public Vector3 startPoint;
-    public Vector3 endPoint;
+    public Vector3 LeftSide;
+    public Vector3 RightSide;
+    public float BattleFieldHeight = 100;
     float MaxXDistance;
     public float HeroOffset = 0;
     public UnityEngine.UI.Slider ProgressSlider;
@@ -19,7 +20,7 @@ public class CarbotCamera : MainCamera
     public static CarbotCamera singleton;
     public bool LockedCamera;
 
-   public float CurrentSpeed;
+    float CurrentSpeed;
     public float acceleration = 1;
     public float topSpeed = 1;
 
@@ -32,7 +33,7 @@ public class CarbotCamera : MainCamera
         if (LockedCamera)
         {
 
-            transform.position = new Vector3(startPoint.x + MaxXDistance - HeroOffset, transform.position.y, transform.position.z);
+            transform.position = new Vector3(LeftSide.x + MaxXDistance - HeroOffset, transform.position.y, transform.position.z);
 
         }
     }
@@ -56,7 +57,7 @@ public class CarbotCamera : MainCamera
              if (HeroToFollow)
              {
                 float prev = MaxXDistance;
-                if (HeroToFollow.transform.position.x - startPoint.x > MaxXDistance + topSpeed)
+                if (HeroToFollow.transform.position.x - LeftSide.x > MaxXDistance + topSpeed)
                 {
                     CurrentSpeed += acceleration * Time.deltaTime;
                     CurrentSpeed = Mathf.Min(CurrentSpeed, topSpeed);
@@ -76,9 +77,9 @@ public class CarbotCamera : MainCamera
                  {
                     if (LockedCamera)
                     {
-                        transform.position = new Vector3(startPoint.x + MaxXDistance - HeroOffset, transform.position.y, transform.position.z);
+                        transform.position = new Vector3(LeftSide.x + MaxXDistance - HeroOffset, transform.position.y, transform.position.z);
                     }
-                    ProgressSlider.value = (MaxXDistance) / (endPoint.x - startPoint.x);
+                    ProgressSlider.value = (MaxXDistance) / (RightSide.x - LeftSide.x);
                  }
              }
              else
@@ -90,7 +91,7 @@ public class CarbotCamera : MainCamera
 
     public float getProgress()
     {
-        return (MaxXDistance) / (endPoint.x - startPoint.x);
+        return (MaxXDistance) / (RightSide.x - LeftSide.x);
     }
 
     /*
@@ -134,43 +135,25 @@ public class CarbotCamera : MainCamera
     }
     */
 
-    public Vector3 getRightScreenEdge(Vector3 unitLocation, float YVariance)
+
+    public Vector3 ClampYLocation(Vector3 location)
     {
-        Vector2 screenPoint = new Vector3(0, Screen.height / 2); //myCamera.WorldToScreenPoint(unitLocation);
-        //screenPoint.x =Screen.width;
-        Ray ray = myCamera.ScreenPointToRay(screenPoint);
-        RaycastHit hit;
-
-        if (Physics.Raycast(ray, out hit))
-        {
-            return hit.point + Vector3.forward * Random.Range(-1 * YVariance, YVariance); ;
-        }
-        Debug.Log(" Could not find a terrain on the right side of the screen");
-        return unitLocation;
+        location.y = Mathf.Clamp(location.y, LeftSide.y - BattleFieldHeight/2, LeftSide.y + BattleFieldHeight / 2);
+        return location;
+            
     }
-
-    public Vector3 getLeftScreenEdge(Vector3 unitLocation, float YVariance)
-    {
-        Vector2 screenPoint = myCamera.WorldToScreenPoint(unitLocation);// new Vector3(-0, Screen.height/2); //myCamera.WorldToScreenPoint(unitLocation);
-        screenPoint.x = 0;
-        Ray ray = myCamera.ScreenPointToRay(screenPoint);
-        RaycastHit hit;
-
-        if (Physics.Raycast(ray, out hit))
-        {
-            return hit.point + Vector3.forward * Random.Range(-1*YVariance , YVariance) ;
-        }
-        Debug.Log(" Could not find a terrain on the Left side of the screen");
-        return unitLocation;
-    }
+    
 
     protected override void OnDrawGizmos()
     {
         base.OnDrawGizmos();
         Gizmos.color = Color.red;
-        Gizmos.DrawSphere(startPoint, 4);
+        Gizmos.DrawSphere(LeftSide, 4);
         Gizmos.color = Color.blue;
-        Gizmos.DrawSphere(endPoint, 4);
-
+        Gizmos.DrawSphere(RightSide, 4);
+        Gizmos.DrawLine(LeftSide + Vector3.forward * BattleFieldHeight / 2, LeftSide - Vector3.forward * BattleFieldHeight / 2);
+        Gizmos.DrawLine(RightSide + Vector3.forward * BattleFieldHeight / 2, RightSide - Vector3.forward * BattleFieldHeight / 2);
+        Gizmos.DrawLine(LeftSide + Vector3.forward * BattleFieldHeight / 2, RightSide + Vector3.forward * BattleFieldHeight / 2);
+        Gizmos.DrawLine(LeftSide - Vector3.forward * BattleFieldHeight / 2, RightSide - Vector3.forward * BattleFieldHeight / 2);
     }
 }

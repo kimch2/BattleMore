@@ -29,15 +29,16 @@ public class DMSpawnUnit : Ability
         {
             if (potentSpawn.supply > 0 && myManager.myRacer.hasSupplyAvailable(potentSpawn.supply))
             {
-                float offset = spawnCount * 10 - i * 5;
+            float offset = (i+1) * 6 - spawnCount * 3 ;
             GameObject newGuy = GameObject.Instantiate<GameObject>(ToSpawn, getSpawnLocation() + Vector3.forward * offset, Quaternion.identity);// unitMan.CreateInstance(getSpawnLocation() + Vector3.forward * i * 5, myManager.PlayerOwner);
-
+                
             foreach (UnitManager man in newGuy.GetComponentsInChildren<UnitManager>())
             {
-                    if (myCost)
-                    {
-                        man.myStats.cost = myCost.energy;
-                    }
+                if (myCost)
+                {
+                   man.myStats.cost = myCost.energy;
+                }
+                man.myStats.supply = 1;
                 myManager.Initialize(myManager.PlayerOwner, true, man.getUnitStats().isUnitType(UnitTypes.UnitTypeTag.Structure));
                 if (man.cMover)
                 {
@@ -45,7 +46,7 @@ public class DMSpawnUnit : Ability
                     man.GiveOrder(Orders.CreateAttackMove(transform.position + Vector3.right * 150, true));
                     man.GiveOrder(Orders.CreateAttackMove(transform.position + Vector3.right * 250, true));
                     man.GiveOrder(Orders.CreateAttackMove(transform.position + Vector3.right * 350, true));
-                    }
+                }
             }
         }
     }
@@ -65,17 +66,12 @@ public class DMSpawnUnit : Ability
     {
         if (SpawnAtScreenEdge)
         {
-            if (myManager.PlayerOwner == 1)
-            {
-                return CarbotCamera.singleton.getLeftScreenEdge(myManager.transform.position, 15);
-            }
-            else
-            {
-                return CarbotCamera.singleton.getRightScreenEdge(myManager.transform.position, 15);
-            }
+            return DaminionsInitializer.main.getSpawnLocation( myManager.PlayerOwner, spawnCount < 4);  
         }
         else
-        { return myManager.transform.position; }
+        {
+            return myManager.transform.position;
+        }
     }
 
     private void OnDrawGizmos()

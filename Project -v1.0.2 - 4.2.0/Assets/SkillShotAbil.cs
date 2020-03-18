@@ -153,7 +153,7 @@ public class SkillShotAbil : TargetAbility
             if (CastFromScreenEdge)
             {
 
-                proj.transform.position = CarbotCamera.singleton.getLeftScreenEdge(LastTargetLocation, SkillShotProjectile.SpreadAngle);
+                proj.transform.position = DaminionsInitializer.main.getScreenEdge(LastTargetLocation, SkillShotProjectile.SpreadAngle, myManager.PlayerOwner, true);
                 skillShotComp.TotalRange = 150;
                 newDirection = direction;
             }
@@ -189,7 +189,7 @@ public class SkillShotAbil : TargetAbility
 
         if (CastFromScreenEdge)
         {
-            myIndicator.transform.position = CarbotCamera.singleton.getLeftScreenEdge(TargetSpot, 0);
+            myIndicator.transform.position = DaminionsInitializer.main.getScreenEdge(TargetSpot, 0, myManager.PlayerOwner, true);
             myIndicator.transform.LookAt(myIndicator.transform.position + Vector3.right, Vector3.up);
         }
         else

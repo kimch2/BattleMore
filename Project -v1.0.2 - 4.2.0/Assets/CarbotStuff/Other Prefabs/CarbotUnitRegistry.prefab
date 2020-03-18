@@ -63,6 +63,7 @@ MonoBehaviour:
   - {fileID: 5636270701877033806, guid: 25e06b4c5c0fd9b4c9d35eb08b43cec3, type: 3}
   - {fileID: 494265798218600535, guid: c8a720e9814dbe64dafdfe67cf0558e9, type: 3}
   - {fileID: 9125053377235848844, guid: 6b1754e373f1f834287b8ed8542a95c0, type: 3}
+  - {fileID: 494265798218600535, guid: c8a720e9814dbe64dafdfe67cf0558e9, type: 3}
   buildingList:
   - {fileID: 1334204865568742351, guid: 9784f001b7b7a204a97a012579d7acb4, type: 3}
   attachmentsList:

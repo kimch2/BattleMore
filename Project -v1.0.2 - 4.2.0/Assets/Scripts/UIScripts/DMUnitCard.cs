@@ -8,7 +8,7 @@ public class DMUnitCard : MonoBehaviour , IDragHandler, IEndDragHandler
 {
     public Text Cost;
     public Text UnitCount;
-    public SVGImage UnitIcon;
+    public Image UnitIcon;
     public Text UnitDescription;
     public Text UnitName;
     public Text UnitTags;
@@ -81,6 +81,8 @@ public class DMUnitCard : MonoBehaviour , IDragHandler, IEndDragHandler
     public void OnDrag(PointerEventData eventData)
     {
         UnitIcon.transform.position = Input.mousePosition;
+        //Debug.Log("A" + UnitIcon);
+        //Debug.Log("B" + DMCollectionManager.instance);
         UnitIcon.transform.SetParent(DMCollectionManager.instance.transform);
         DMCollectionManager.instance.currentDragger = this;
     }

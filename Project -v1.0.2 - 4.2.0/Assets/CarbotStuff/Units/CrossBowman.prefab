@@ -740,7 +740,7 @@ MonoBehaviour:
   armor: 0
   spellResist: 0
   Tenacity: 0
-  cost: 50
+  cost: 5
   Cost:
     MyResources:
     - resType: 0
@@ -961,7 +961,7 @@ MonoBehaviour:
   maxSpeed: 23
   height: 1
   locked: 0
-  lockWhenNotMoving: 0
+  lockWhenNotMoving: 1
   agentTimeHorizon: 0.5
   obstacleTimeHorizon: 2
   neighbourDist: 10

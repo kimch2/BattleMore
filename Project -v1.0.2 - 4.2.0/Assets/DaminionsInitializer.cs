@@ -21,6 +21,7 @@ public class DaminionsInitializer : MonoBehaviour
     public List<Text> AbilityCosts;
     float lastEnergy;
     public bool ControllableHero = true;
+    public bool TravelingRight = true;
 
     private void Awake()
     {
@@ -44,7 +45,7 @@ public class DaminionsInitializer : MonoBehaviour
         Invoke("SelectHero", .1f);
         if (!ControllableHero)
         {
-            Invoke("GiveOrder", 2f);
+            InvokeRepeating("GiveOrder", 2,1.5f);
             MyHero.myStats.statChanger.changeMoveSpeed(-.5f, 0, this, true);
         }
 
@@ -61,29 +62,36 @@ public class DaminionsInitializer : MonoBehaviour
         {
             hero.GetComponent<UnitManager>().abilityList.Clear();
         }
-            foreach (GameObject obj in DMCollectionManager.ChosenUnits)
-            {
-                if (obj != null)
-                {
-                    GameObject Spawner = Instantiate<GameObject>(SpawnUnitPrefab, hero.transform);
-                    Spawner.transform.localPosition = Vector3.zero;
-                    DMSpawnUnit spawner = Spawner.GetComponent<DMSpawnUnit>();
-                    spawner.ToSpawn = obj;
-                    spawner.iconPic = obj.GetComponent<UnitStats>().UnitPortrait;
-                    spawner.myCost.energy = obj.GetComponent<UnitStats>().cost;
-                    hero.GetComponent<UnitManager>().abilityList.Add(spawner);
-                }
-            }
+        foreach (GameObject obj in DMCollectionManager.ChosenUnits)
+        {
+             if (obj != null)
+             {
+                GameObject Spawner = Instantiate<GameObject>(SpawnUnitPrefab, hero.transform);
+                Spawner.transform.localPosition = Vector3.zero;
+                DMSpawnUnit spawner = Spawner.GetComponent<DMSpawnUnit>();
+                spawner.ToSpawn = obj;
+
+                UnitManager man = obj.GetComponent<UnitManager>();                
+                spawner.Name = man.UnitName;
+
+                UnitStats stats = obj.GetComponent<UnitStats>();
+                spawner.Descripton = stats.UnitDescription;
+                spawner.iconPic = stats.UnitPortrait;
+                spawner.myCost.energy = stats.cost;
+                spawner.spawnCount = (int)stats.supply;
+                hero.GetComponent<UnitManager>().abilityList.Add(spawner);
+             }
+        }
         
 
-            foreach (GameObject obj in DMCollectionManager.ChosenAbilities)
+        foreach (GameObject obj in DMCollectionManager.ChosenAbilities)
         
-            if (obj != null)
-            {
-                GameObject Abil = Instantiate<GameObject>(obj, hero.transform);
-                Abil.transform.localPosition = Vector3.zero;
-                hero.GetComponent<UnitManager>().abilityList.Add(Abil.GetComponent<Ability>());
-            }
+        if (obj != null)
+        {
+            GameObject Abil = Instantiate<GameObject>(obj, hero.transform);
+            Abil.transform.localPosition = Vector3.zero;
+            hero.GetComponent<UnitManager>().abilityList.Add(Abil.GetComponent<Ability>());
+        }
 
         for (int i = 0; i < CrystalChildren.Count; i++)
         {
@@ -101,7 +109,6 @@ public class DaminionsInitializer : MonoBehaviour
                 AbilityCosts[i].text = "";
             }
         }
-
     }
 
     void SelectHero()
@@ -114,16 +121,12 @@ public class DaminionsInitializer : MonoBehaviour
         }
     }
 
-    void GiveOrders()
+    void GiveOrder()
     {
-        MyHero.GiveOrder(Orders.CreateAttackMove(MyHero.transform.position + Vector3.right * 50));
-        MyHero.GiveOrder(Orders.CreateAttackMove(MyHero.transform.position + Vector3.right * 100, true));
-        MyHero.GiveOrder(Orders.CreateAttackMove(MyHero.transform.position + Vector3.right * 150, true));
-        MyHero.GiveOrder(Orders.CreateAttackMove(MyHero.transform.position + Vector3.right * 200, true));
-        MyHero.GiveOrder(Orders.CreateAttackMove(MyHero.transform.position + Vector3.right * 250, true));
-        MyHero.GiveOrder(Orders.CreateAttackMove(MyHero.transform.position + Vector3.right * 300, true));
-        MyHero.GiveOrder(Orders.CreateAttackMove(MyHero.transform.position + Vector3.right * 350, true));
-        MyHero.GiveOrder(Orders.CreateAttackMove(MyHero.transform.position + Vector3.right * 400, true));
+        if (MyHero.getState() is DefaultState)
+        {
+            MyHero.GiveOrder(Orders.CreateAttackMove(MyHero.transform.position + Vector3.right * 50, true));
+        }
     }
 
     private void Update()
@@ -146,4 +149,99 @@ public class DaminionsInitializer : MonoBehaviour
             this.enabled = false;
         }
     }
+
+
+
+    GameObject PlayerSpawnOverride;
+    GameObject EnemySpawnOverride;
+
+    public void SetSpawnLocation(GameObject thingy, int playerNumber)
+    {
+        if (playerNumber == 1)
+        {
+            PlayerSpawnOverride = thingy;
+        }
+        else
+        {
+            EnemySpawnOverride = thingy;
+        }
+    }
+
+    public Vector3 getSpawnLocation(int playerNumber, bool Vary)
+    {
+        if (playerNumber == 1)
+        {
+            if (PlayerSpawnOverride)
+            {
+                return PlayerSpawnOverride.transform.position;
+            }
+        }
+        else
+        {
+            if (EnemySpawnOverride)
+            {
+                return EnemySpawnOverride.transform.position;
+            }
+        }
+        return getScreenMiddle(Vary? 18 : 0, playerNumber, true);
+    }
+
+
+    public float GetXPosition(int playerNumber)
+    {
+        if (playerNumber == 1) {
+            if (TravelingRight)
+            {
+                return 0;
+            }
+            else
+            {
+                return Screen.width;
+            }
+        }
+        else
+        {
+            if (TravelingRight)
+            {
+                return Screen.width;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+    }
+
+    public Vector3 getScreenMiddle(float YVariance, int playerNumber, bool StartingSide)
+    {
+        Ray ray = MainCamera.main.myCamera.ScreenPointToRay(new Vector2(GetXPosition(playerNumber),  Screen.height/2));
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit))
+        {
+            return CarbotCamera.singleton.ClampYLocation(hit.point + Vector3.forward * Random.Range(-1 * YVariance, YVariance));
+        }
+        Debug.Log(" Could not find a terrain on the side of the screen");
+        return Vector3.zero;
+    }
+
+  
+
+    public Vector3 getScreenEdge(Vector3 unitLocation, float YVariance, int playerNumber, bool StartingSide)
+    {
+        Vector2 screenPoint = MainCamera.main.myCamera.WorldToScreenPoint(unitLocation);// new Vector3(-0, Screen.height/2); //myCamera.WorldToScreenPoint(unitLocation);
+        screenPoint.x = GetXPosition(playerNumber);
+        Ray ray = MainCamera.main.myCamera.ScreenPointToRay(screenPoint);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit))
+        {
+            return CarbotCamera.singleton.ClampYLocation(hit.point + Vector3.forward * Random.Range(-1 * YVariance, YVariance));
+        }
+        Debug.Log(" Could not find a terrain on the side of the screen");
+        return unitLocation;
+    }
+    
+
+
 }
