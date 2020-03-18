@@ -44,8 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sourceInt: 1
-  particleEff: {fileID: 8607829211197796737, guid: 213d3ebb33eb1c245861a4b71ed076a0,
-    type: 3}
+  particleEff: {fileID: 0}
   damageAmount: 45
   type: 0
   maxSize: 2
@@ -54,3 +53,5 @@ MonoBehaviour:
   extraDamage: []
   MyHitContainer: {fileID: 0}
   PlayersToApplyTo: 
+  AppliesToEnemy: 1
+  AppliesToAlly: 0

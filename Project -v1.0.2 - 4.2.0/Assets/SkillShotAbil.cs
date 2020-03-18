@@ -7,6 +7,9 @@ public class SkillShotAbil : TargetAbility
     public SkillShotData SkillShotProjectile;
     bool Casting; // NEED TO HAVE THIS CHECK A CHANNEL STATE IN THE UNITMANAGER!!
     public float Damage;
+    [Tooltip("Only do this in DaMinionz mode")]
+
+    Vector3 LastTargetLocation;
 
     // Use this for initialization
     new void Start()
@@ -26,7 +29,7 @@ public class SkillShotAbil : TargetAbility
     public continueOrder canActivate(bool showError)
     {
         continueOrder order = new continueOrder();
-        if (chargeCount == 0 || Casting) 
+        if (chargeCount == 0 || Casting)
         {
             order.canCast = false;
         }
@@ -70,8 +73,17 @@ public class SkillShotAbil : TargetAbility
     override
     public bool Cast(GameObject target, Vector3 location)
     {
-        Vector3 direction = location - transform.parent.position;
-        direction.y = 0;
+        Vector3 direction;
+        if (CastFromScreenEdge)
+        {
+            LastTargetLocation = location;
+            direction = Vector3.right; // SHould be left if we are moving from the right side  
+        }
+        else
+        {
+            direction = location - transform.parent.position;
+            direction.y = 0;
+        }
 
         StartCoroutine(StringCast(chargeCount, direction.normalized));
         // changeCharge(-1 * chargeCount);
@@ -83,8 +95,17 @@ public class SkillShotAbil : TargetAbility
     override
     public void Cast()
     {
-        Vector3 direction = location - transform.parent.position;
-        direction.y = 0;
+        Vector3 direction;
+        if (CastFromScreenEdge)
+        {
+            LastTargetLocation = location;
+            direction = Vector3.right; // SHould be left if we are moving from the right side  
+        }
+        else
+        {
+            direction = location - transform.parent.position;
+            direction.y = 0;
+        }
 
         StartCoroutine(StringCast(chargeCount, direction.normalized));
         // changeCharge(-1 * chargeCount);
@@ -120,26 +141,38 @@ public class SkillShotAbil : TargetAbility
             }
 
             GameObject proj = (GameObject)Instantiate(toFire, transform.parent.position, Quaternion.identity);
-            proj.GetComponent<SkillShotProjectile>().OnKill.AddListener(() => {
-               // changeCharge(1);
+
+            proj.GetComponent<SkillShotProjectile>().OnKill.AddListener(() =>
+            {
+                // changeCharge(1);
             });
             SkillShotProjectile skillShotComp = proj.GetComponent<SkillShotProjectile>();
-
-            skillShotComp.TotalRange = range;
             SetOnHitContainer(proj, Damage, null);
-            
-            float CurrentAngle = i * anglePerShot;                            
-            CurrentAngle -= SkillShotProjectile.SpreadAngle;             
-            if (SkillShotProjectile.NumOfShots == 1)
+            Vector3 newDirection;
+
+            if (CastFromScreenEdge)
             {
-                CurrentAngle = 0;
+
+                proj.transform.position = CarbotCamera.singleton.getLeftScreenEdge(LastTargetLocation, SkillShotProjectile.SpreadAngle);
+                skillShotComp.TotalRange = 150;
+                newDirection = direction;
             }
+            else
+            {
+                skillShotComp.TotalRange = range;
 
-            float RandomizedArcLimit = CurrentAngle + Random.Range(-1 * SkillShotProjectile.SpreadAngle, SkillShotProjectile.SpreadAngle) * SkillShotProjectile.SpreadRandomness;
-            RandomizedArcLimit = Mathf.Clamp(RandomizedArcLimit, -1 * SkillShotProjectile.SpreadAngle, SkillShotProjectile.SpreadAngle);
+                float CurrentAngle = i * anglePerShot;
+                CurrentAngle -= SkillShotProjectile.SpreadAngle;
+                if (SkillShotProjectile.NumOfShots == 1)
+                {
+                    CurrentAngle = 0;
+                }
 
-            Vector3 newDirection = Quaternion.Euler(0, RandomizedArcLimit, 0) * direction;
+                float RandomizedArcLimit = CurrentAngle + Random.Range(-1 * SkillShotProjectile.SpreadAngle, SkillShotProjectile.SpreadAngle) * SkillShotProjectile.SpreadRandomness;
+                RandomizedArcLimit = Mathf.Clamp(RandomizedArcLimit, -1 * SkillShotProjectile.SpreadAngle, SkillShotProjectile.SpreadAngle);
 
+                newDirection = Quaternion.Euler(0, RandomizedArcLimit, 0) * direction;
+            }
             skillShotComp.setTarget(proj.transform.position + newDirection);
             if (SkillShotProjectile.timeBetweenShots > 0)
             {
@@ -150,8 +183,21 @@ public class SkillShotAbil : TargetAbility
         Casting = false;
     }
 
-}
+    public override void ShowSkillShotIndicator(Vector3 TargetSpot)
+    {
+        base.ShowSkillShotIndicator(TargetSpot);
 
+        if (CastFromScreenEdge)
+        {
+            myIndicator.transform.position = CarbotCamera.singleton.getLeftScreenEdge(TargetSpot, 0);
+            myIndicator.transform.LookAt(myIndicator.transform.position + Vector3.right, Vector3.up);
+        }
+        else
+        {
+            myIndicator.transform.LookAt(TargetSpot, Vector3.up);
+        }
+    }
+}
 [System.Serializable]
 public class SkillShotData{
     public int NumOfShots= 1;

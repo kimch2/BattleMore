@@ -376,6 +376,7 @@ public class UnitStats : MonoBehaviour {
 	{
 
 		if (isUnitType(UnitTypes.UnitTypeTag.Invulnerable)) {
+            Debug.Log("returning 0");
 			return 0;
 		}
 
@@ -607,9 +608,9 @@ public class UnitStats : MonoBehaviour {
 
     bool RunLethalDamage(float damage)
     {
-        foreach (Modifier mod in LethalTriggers)
-        {
-            if (mod.modify(damage, null, DamageTypes.DamageType.Regular) > 0)
+        for (int i = LethalTriggers.Count - 1; i >= 0; i--)
+        { 
+            if (LethalTriggers[i].modify(damage, null, DamageTypes.DamageType.Regular) > 0)
             {
                 return false;
             }

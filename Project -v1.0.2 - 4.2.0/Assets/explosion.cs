@@ -23,10 +23,11 @@ public class explosion : MonoBehaviour {
 	public IWeapon.bonusDamage[] extraDamage;
     public OnHitContainer MyHitContainer;
     [Tooltip("This will apply to all if this list is empty")]
-    public List<int> PlayersToApplyTo;
+    public List<int> PlayersToApplyTo; // Maybe get rid of this since there are bools for it?
+    public bool AppliesToEnemy = true;
+    public bool AppliesToAlly;
 
-
-	IEnumerator Start () {
+    IEnumerator Start () {
 
 		if (particleEff) {
 			GameObject obj = 	(GameObject)Instantiate (particleEff, this.gameObject.transform.position, Quaternion.identity);
@@ -95,21 +96,23 @@ public class explosion : MonoBehaviour {
 
         foreach (RaceManager manager in GameManager.main.playerList)
         {
-            if (PlayersToApplyTo.Count == 0 || PlayersToApplyTo.Contains(manager.playerNumber))
-            {
-                if (manager.playerNumber == sourceInt)
+            if (manager.playerNumber == sourceInt)
                 {
-                    if (MyHitContainer.FriendlyFireRatio == 0)
+                    if (!AppliesToAlly)
                     {
-                       // continue;
+                        continue;
                     }
                     else
                     {
                         TempDamageAmount = damageAmount * MyHitContainer.FriendlyFireRatio;
                     }
                 }
-                else
+                else if (manager.playerNumber != sourceInt && !AppliesToEnemy)
                 {
+                    continue;
+                }
+                else
+                { 
                     TempDamageAmount = damageAmount;
                 }
 
@@ -134,7 +137,7 @@ public class explosion : MonoBehaviour {
                 {
                     DealDamage(unit, TempDamageAmount);
                 }
-            }
+            
         }
     }
 
@@ -161,7 +164,7 @@ public class explosion : MonoBehaviour {
 				baseAmount += tag.bonus;
 			}
 		}
-        MyHitContainer.trigger(null, manager, baseAmount);
+        MyHitContainer.trigger(this.gameObject, manager, baseAmount);
         if (baseAmount > 0)
         {
             float total = stats.TakeDamage(baseAmount, mySrcMan ? mySrcMan.gameObject : null, type, mySrcMan);

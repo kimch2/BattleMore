@@ -1956,10 +1956,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TypesToSpawn:
-  - {fileID: 2776605538683397694, guid: c47b4358d0980514cba4b1f5f6cab967, type: 3}
-  - {fileID: 6166594910967440795, guid: ac7c9eb6f8326b54bb72f97c4a68bca6, type: 3}
+  - {fileID: 3300769391594791438, guid: 5848e347433bcdf488145bd600a42f9e, type: 3}
   firstSpawn: 5
-  spawnRate: 2
+  spawnRate: 4
   SpawnOffset: 100
   ZRange: 20
   spawnCurve:
@@ -5296,6 +5295,7 @@ MonoBehaviour:
   areaSize: 50
   myTargetType: 0
   myHitContainer: {fileID: 0}
+  CastFromScreenEdge: 0
   prefab: {fileID: 179344, guid: 733cfa0b0d6178947aefbb88ebc0954d, type: 3}
 --- !u!114 &739680194
 MonoBehaviour:
@@ -5362,6 +5362,7 @@ MonoBehaviour:
   areaSize: 65
   myTargetType: 0
   myHitContainer: {fileID: 0}
+  CastFromScreenEdge: 0
   Explosion: {fileID: 1000012247445134, guid: 7525c97942ef29e47a6b88c54b738f56, type: 3}
   shotCount: 45
   myDamage: 60
@@ -5419,6 +5420,7 @@ MonoBehaviour:
   areaSize: 0
   myTargetType: 0
   myHitContainer: {fileID: 0}
+  CastFromScreenEdge: 0
   prefab: {fileID: 164778, guid: baec9ba3686440741b38e2bb0d18544f, type: 3}
 --- !u!114 &739680199
 MonoBehaviour:
@@ -5473,6 +5475,7 @@ MonoBehaviour:
   areaSize: 50
   myTargetType: 0
   myHitContainer: {fileID: 0}
+  CastFromScreenEdge: 0
   prefab: {fileID: 162976, guid: 2a8104eb86550c9478cd83f1e439fe5c, type: 3}
 --- !u!114 &739680201
 MonoBehaviour:
@@ -14319,7 +14322,7 @@ MonoBehaviour:
     file_cachedStartup: {fileID: 0}
     data_cachedStartup: 
     cacheStartup: 0
-  showNavGraphs: 1
+  showNavGraphs: 0
   showUnwalkableNodes: 1
   debugMode: 0
   debugFloor: 0

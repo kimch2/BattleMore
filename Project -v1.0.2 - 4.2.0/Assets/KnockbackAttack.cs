@@ -9,21 +9,28 @@ public class KnockbackAttack : MonoBehaviour, Notify
 
 	public float trigger(GameObject source, GameObject proj, UnitManager target, float damage)
 	{
-        Debug.Log("Knocking back");
 		if (target)
 		{
             if (target.myStats.isUnitType(mustTarget))
             {
-                Vector3 origin;
+                Vector3 origin = source.transform.position;
 
                 if (proj)
                 {
-                    origin = proj.GetComponent<Projectile>().getOrigin();
+                    Projectile projectile = proj.GetComponent<Projectile>();
+                    if (projectile)
+                    {
+                        origin = projectile.getOrigin();
+                    }
+                    else
+                    {
+                        explosion explos = proj.GetComponent<explosion>();
+                        if (explos)
+                        {
+                            origin = proj.transform.position;
+                        }
+                    }
                 }
-                else {
-                    origin = source.transform.position;
-                }
-
                 PhysicsSimulator.main.KnockBack(origin, target,this, new Vector2(knockDistance, 0), () => { });
 			}
 		}

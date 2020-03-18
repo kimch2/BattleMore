@@ -14,8 +14,9 @@ public abstract class TargetAbility : Ability
     public float areaSize;
     public enum targetType { ground, unit, skillShot }
     public targetType myTargetType;
-    GameObject myIndicator;
+    protected GameObject myIndicator;
     public OnHitContainer myHitContainer;
+    public bool CastFromScreenEdge;  
 
     public bool inRange(Vector3 location)
     {
@@ -45,7 +46,7 @@ public abstract class TargetAbility : Ability
         location = position;
     }
 
-    public void ShowSkillShotIndicator(Vector3 TargetSpot)
+    public virtual void ShowSkillShotIndicator(Vector3 TargetSpot)
     {
         if (myTargetType == targetType.skillShot)
         {
@@ -66,6 +67,7 @@ public abstract class TargetAbility : Ability
             }
             myIndicator.SetActive(true);
             myIndicator.transform.LookAt(TargetSpot, Vector3.up);
+            
         }
     }
 

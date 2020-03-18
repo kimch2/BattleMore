@@ -79,7 +79,7 @@ public class PhysicsSimulator : MonoBehaviour {
 			}
 
 		}
-		travelTime /= 150;
+		travelTime /= 120;
         //Debug.Log("Actual " + ActualTarget);
 		
 		Coroutine toAdd = StartCoroutine (fly(target,sourceComponent, ActualTarget,travelTime, force.y,false, onFinish));

@@ -151,8 +151,8 @@ public class CarbotCamera : MainCamera
 
     public Vector3 getLeftScreenEdge(Vector3 unitLocation, float YVariance)
     {
-        Vector2 screenPoint = new Vector3(-0, Screen.height/2); //myCamera.WorldToScreenPoint(unitLocation);
-
+        Vector2 screenPoint = myCamera.WorldToScreenPoint(unitLocation);// new Vector3(-0, Screen.height/2); //myCamera.WorldToScreenPoint(unitLocation);
+        screenPoint.x = 0;
         Ray ray = myCamera.ScreenPointToRay(screenPoint);
         RaycastHit hit;
 

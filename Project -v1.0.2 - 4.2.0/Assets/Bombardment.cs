@@ -103,9 +103,17 @@ public class Bombardment : TargetAbility{
 		{
 			hitzone = objecthit.point;
 		}
-		Vector3 spawnLoc = hitzone;
-		spawnLoc.y += 192;
-          
+        Vector3 spawnLoc;
+        if (CastFromScreenEdge)
+        {
+            spawnLoc = CarbotCamera.singleton.getLeftScreenEdge(locat, 10);
+            spawnLoc.y += 75;
+        }
+        else
+        {
+            spawnLoc = hitzone;
+            spawnLoc.y += 192;
+        } 
 
 		proj = myBulletPool.FastSpawn  (spawnLoc, Quaternion.identity);//Instantiate (Explosion, spawnLoc, Quaternion.identity);
 

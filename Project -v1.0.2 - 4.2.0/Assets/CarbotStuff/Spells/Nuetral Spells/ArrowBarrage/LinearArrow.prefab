@@ -272,7 +272,8 @@ MonoBehaviour:
   explosionO: {fileID: 2817276424730760989, guid: 1c3f316b947e6b542a258cd2da7f7a64,
     type: 3}
   SepDamWithExplos: 0
-  SpecialEffect: {fileID: 0}
+  SpecialEffect: {fileID: 8607829211197796737, guid: 213d3ebb33eb1c245861a4b71ed076a0,
+    type: 3}
 --- !u!1 &2887962625933550492
 GameObject:
   m_ObjectHideFlags: 0

@@ -102,27 +102,15 @@ public class SkillShotProjectile  : Projectile {
         if (manage && manage.PlayerOwner != sourceInt)// && manage.PlayerOwner != 3)
         {
             //Debug.Log("Hit " + manage.gameObject);
-
-            MyHitContainer.trigger(this.gameObject, manage, damage);
-
-            manage.getUnitStats().TakeDamage(damage, Source, damageType);
-
-            if (SpecialEffect)
+            Terminate(manage);
+            if (!explosionO)
             {
-                Instantiate(SpecialEffect, transform.position, Quaternion.identity);
-            }
-            OnHit.Invoke();
-            OnHit.RemoveAllListeners();
+                if (!manage || manage.myStats.health <= 0)
+                {
 
-            
-            if (!manage || manage.myStats.health <= 0)
-            {
-                Debug.Log("We killed him ");
-                OnKill.Invoke();
-            }
-
-            Lean.LeanPool.Despawn(this.gameObject, 0);
-
+                    OnKill.Invoke();
+                }
+            }      
         }
     }
    

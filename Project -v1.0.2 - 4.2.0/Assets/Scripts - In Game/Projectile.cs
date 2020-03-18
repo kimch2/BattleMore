@@ -182,7 +182,8 @@ public  class Projectile : MonoBehaviour {
 			return;
 		}
 		try{
-		if (explosionO) {
+		    if (explosionO)
+            {
 
 			GameObject explode = (GameObject)Instantiate (explosionO, transform.position, Quaternion.identity);
 
@@ -192,7 +193,7 @@ public  class Projectile : MonoBehaviour {
 			} else {
 					explode.SendMessage("setVeteran", vetSource ,SendMessageOptions.DontRequireReceiver);
 			}
-		}
+		    }
 
             if (target && (!explosionO || explosionO && SepDamWithExplos))
             {
@@ -214,12 +215,10 @@ public  class Projectile : MonoBehaviour {
                         vetSource.myUnit.cleanEnemy();
                     }
                 }
-
-
-
+            }
                 if (SpecialEffect)
                 {
-                    if (!cachedEffect)
+                    if (!cachedEffect || cachedEffect.activeSelf) // Will this second statement cause stuff to get left in the scene?
                     {
                         cachedEffect = Instantiate(SpecialEffect, transform.position, transform.rotation);
                         multiParticle = cachedEffect.GetComponent<MultiShotParticle>();
@@ -236,10 +235,8 @@ public  class Projectile : MonoBehaviour {
                     }
                 }
 
-               
-            }
 		}catch(System.Exception e) {
-			Debug.Log ("Projectile Broke: " + e);
+			Debug.LogError ("Projectile Broke: " + e);
 		}
         onTerminate();
 		myBulletPool.FastDespawn (this.gameObject, 0);

@@ -969,8 +969,8 @@ MonoBehaviour:
   mask:
     serializedVersion: 2
     m_Bits: 327936
-  layer: 1
-  collidesWith: -1
+  layer: 8
+  collidesWith: 8
   wallAvoidForce: 1
   wallAvoidFalloff: 1
   center: {x: 0, y: 0, z: 0}
