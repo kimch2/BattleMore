@@ -70,8 +70,7 @@ public class SkillShotAbil : TargetAbility
     }
 
 
-    override
-    public bool Cast(GameObject target, Vector3 location)
+    override public bool Cast(GameObject target, Vector3 location)
     {
         Vector3 direction;
         if (CastFromScreenEdge)
@@ -86,14 +85,14 @@ public class SkillShotAbil : TargetAbility
         }
 
         StartCoroutine(StringCast(chargeCount, direction.normalized));
-        // changeCharge(-1 * chargeCount);
+        changeCharge(-1);
 
         myCost.payCost();
 
         return false;
     }
-    override
-    public void Cast()
+
+    override public void Cast()
     {
         Vector3 direction;
         if (CastFromScreenEdge)
@@ -108,7 +107,7 @@ public class SkillShotAbil : TargetAbility
         }
 
         StartCoroutine(StringCast(chargeCount, direction.normalized));
-        // changeCharge(-1 * chargeCount);
+        changeCharge(-1);
 
         myCost.payCost();
     }
@@ -140,19 +139,15 @@ public class SkillShotAbil : TargetAbility
                 toFire = SkillShotProjectile.SkillShotPrefabs[i % SkillShotProjectile.SkillShotPrefabs.Count];
             }
 
-            GameObject proj = (GameObject)Instantiate(toFire, transform.parent.position, Quaternion.identity);
-
-            proj.GetComponent<SkillShotProjectile>().OnKill.AddListener(() =>
-            {
-                // changeCharge(1);
-            });
+            GameObject proj = (GameObject)Instantiate(toFire, transform.parent.position, Quaternion.identity);            
             SkillShotProjectile skillShotComp = proj.GetComponent<SkillShotProjectile>();
+            skillShotComp.OnSpawn();
+            AlterProjectile(skillShotComp);
             SetOnHitContainer(proj, Damage, null);
-            Vector3 newDirection;
 
+            Vector3 newDirection;
             if (CastFromScreenEdge)
             {
-
                 proj.transform.position = DaminionsInitializer.main.getScreenEdge(LastTargetLocation, SkillShotProjectile.SpreadAngle, myManager.PlayerOwner, true);
                 skillShotComp.TotalRange = 150;
                 newDirection = direction;
@@ -173,7 +168,7 @@ public class SkillShotAbil : TargetAbility
 
                 newDirection = Quaternion.Euler(0, RandomizedArcLimit, 0) * direction;
             }
-            skillShotComp.setTarget(proj.transform.position + newDirection);
+            skillShotComp.setTarget(proj.transform.position + newDirection * range);
             if (SkillShotProjectile.timeBetweenShots > 0)
             {
                 yield return new WaitForSeconds(SkillShotProjectile.timeBetweenShots);
@@ -182,6 +177,18 @@ public class SkillShotAbil : TargetAbility
         myManager.cMover.LockRotation(false);
         Casting = false;
     }
+
+    protected virtual void AlterProjectile(SkillShotProjectile proj)
+    {
+        /*
+         Should we do this as a separate component???
+         Example:
+        proj.GetComponent<SkillShotProjectile>().OnKill.AddListener(() =>
+        {
+             changeCharge(1);
+        });*/
+    }
+
 
     public override void ShowSkillShotIndicator(Vector3 TargetSpot)
     {

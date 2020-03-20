@@ -66,7 +66,7 @@ public class AfterLifeEffect :IEffect, Modifier {
 
     public override void applyTo(GameObject source, UnitManager target)
     {
-        AfterLifeEffect after = (AfterLifeEffect)CopyIEffect(target);
+        AfterLifeEffect after = (AfterLifeEffect)CopyIEffect(target, true);
         after.InitializeOnTarget();
     }
 

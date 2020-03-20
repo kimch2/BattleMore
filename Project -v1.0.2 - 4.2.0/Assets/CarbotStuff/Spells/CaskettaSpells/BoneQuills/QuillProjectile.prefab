@@ -24,13 +24,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4162556555192710741}
-  m_LocalRotation: {x: 0.50000006, y: -0.50000006, z: 0.5, w: 0.5}
+  m_LocalRotation: {x: 0.5000001, y: -0.4999999, z: 0.4999999, w: 0.5000001}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 3.8792336, y: 7.6473227, z: 3}
   m_Children: []
   m_Father: {fileID: 6750911159855385442}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 90.00001, y: 0, z: 90}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 89.99999}
 --- !u!212 &7680449404767366547
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -93,7 +93,6 @@ GameObject:
   - component: {fileID: 6762139922253506424}
   - component: {fileID: 6655428684571631204}
   - component: {fileID: 6721118064013917530}
-  - component: {fileID: 6644559302172578714}
   - component: {fileID: 6699074733772418340}
   - component: {fileID: 8982043894968555660}
   m_Layer: 15
@@ -157,34 +156,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 4.68, y: 9.02, z: 5}
   m_Center: {x: 0, y: -1.22, z: 0}
---- !u!114 &6644559302172578714
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6747855988861954716}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1957cd95c84e06546a7812d21f7c029b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  damage: 20
-  speed: 88
-  trackTarget: 0
-  Source: {fileID: 0}
-  sourceInt: 1
-  damageType: 0
-  mySound: {fileID: 0}
-  explosionO: {fileID: 0}
-  SepDamWithExplos: 0
-  SpecialEffect: {fileID: 0}
-  FriendlyFire: 0
-  hitGuys: []
-  NumGuysHit: 0
-  PercDamLost: 20
-  TotalRange: 60
 --- !u!96 &6699074733772418340
 TrailRenderer:
   serializedVersion: 2
@@ -312,26 +283,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  damage: 0
-  speed: 0
-  trackTarget: 0
   Source: {fileID: 0}
   sourceInt: 1
+  MyHitContainer: {fileID: 0}
+  damage: 0
+  speed: 120
   damageType: 0
-  mySound: {fileID: 0}
   explosionO: {fileID: 0}
   SepDamWithExplos: 0
   SpecialEffect: {fileID: 8454496327734205096, guid: 32215e9c0f3bc564ca707bcfb1d23f69,
     type: 3}
-  FriendlyFire: 0
-  TotalRange: 0
+  TotalRange: 50
   OnHit:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   OnKill:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null

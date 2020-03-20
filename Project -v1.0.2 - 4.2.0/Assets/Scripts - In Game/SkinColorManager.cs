@@ -51,10 +51,19 @@ public class SkinColorManager : MonoBehaviour
 			return toChange;
 		}
 
-		Material newMat;
+        toChange.shader = ColorPickerShader;
+        toChange.SetFloat("_HueShift", HueShift);
+        toChange.SetFloat("_Sat", Saturation);
+        toChange.SetFloat("_Val", Value);
+
+        toChange.renderQueue = 2000;
+        return toChange;
+
+        Material newMat;
 
 		if (!colorMapper.ContainsKey(toChange))
 		{
+            
 			newMat = new Material(toChange);
 			newMat.shader = ColorPickerShader;
 			newMat.SetFloat("_HueShift", HueShift);

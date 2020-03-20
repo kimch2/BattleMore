@@ -106,26 +106,29 @@ public class IWeapon : MonoBehaviour {
 		if (firePoints.Count == 0) {
 			firePoints.Add(new AnimationPoint());
 		}
-	}
+        if (!myManager)
+        {
+            myManager = GetComponent<UnitManager>();
+        }
+
+        if (!myHitContainer)
+        {
+            myHitContainer = OnHitContainer.CreateDefaultContainer(myManager, Title);
+        }
+    }
+
 	// Use this for initialization
 	public virtual void Start () {
 		audioSrc = GetComponent<AudioSource> ();
 		if (audioSrc) {
 			audioSrc.priority += Random.Range (-60, 0);
 		}
-		if (!myManager) {
-			myManager = GetComponent<UnitManager> ();
-		}
+
 
 		if (turret) {
 			turretClass = turret.GetComponent<turret> ();
 		}
-
-        if (!myHitContainer)
-        {
-            myHitContainer = OnHitContainer.CreateDefaultContainer(myManager, Title);
-        }
-	}
+    }
 
 
 

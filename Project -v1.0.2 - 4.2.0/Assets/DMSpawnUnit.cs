@@ -39,6 +39,7 @@ public class DMSpawnUnit : Ability
                    man.myStats.cost = myCost.energy;
                 }
                 man.myStats.supply = 1;
+                DaminionsInitializer.main.AlterUnit(man);
                 myManager.Initialize(myManager.PlayerOwner, true, man.getUnitStats().isUnitType(UnitTypes.UnitTypeTag.Structure));
                 if (man.cMover)
                 {

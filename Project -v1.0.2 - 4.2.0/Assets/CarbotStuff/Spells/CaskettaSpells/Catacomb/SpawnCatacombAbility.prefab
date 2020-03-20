@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &701269819794333703
+--- !u!1 &900929942742165671
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,81 +8,76 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4019874925922088029}
-  - component: {fileID: 4266345090196414008}
-  - component: {fileID: 6041225056090289848}
-  - component: {fileID: 7628081894648321745}
+  - component: {fileID: 900929942742165666}
+  - component: {fileID: 8835853148280387184}
+  - component: {fileID: 900929942742165664}
+  - component: {fileID: 8645060404190960846}
   m_Layer: 0
-  m_Name: BoneQuillAbil
+  m_Name: SpawnCatacombAbility
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4019874925922088029
+--- !u!4 &900929942742165666
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 701269819794333703}
+  m_GameObject: {fileID: 900929942742165671}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -464.818, y: 26.439293, z: 133.77214}
+  m_LocalPosition: {x: -619.4049, y: 30.096788, z: 136.66663}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4104753108818246073}
+  - {fileID: 1708909733198213863}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4266345090196414008
+--- !u!114 &8835853148280387184
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 701269819794333703}
+  m_GameObject: {fileID: 900929942742165671}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2339dec32095cc40b6d0f5755da2381, type: 3}
+  m_Script: {fileID: 11500000, guid: 456fcef5a70bf3048bf9fb7881cafeb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Bone Quill
-  Descripton: Fires 9 Bone Quills in a lines. If a Quill kills an opponent, it will
-    refund its charge count. Gains a charge count every 2 seconds.
-  iconPic: {fileID: 21300000, guid: 8d9bfbca3cc15b54ca717c502b0c4dc2, type: 3}
-  myCost: {fileID: 6041225056090289848}
-  continueMoving: 0
+  Name: Catacombs
+  Descripton: Creates a new spawn point for your units for 10 seconds.
+  iconPic: {fileID: 21300000, guid: 44d15c87997217542940678ba5bfd479, type: 3}
+  myCost: {fileID: 900929942742165664}
+  continueMoving: 1
   RequiredUnit: []
   canAutoCast: 0
   autocast: 0
   active: 1
-  maxChargeCount: 3
-  chargeCount: 3
+  maxChargeCount: -1
+  chargeCount: -1
   soundEffect: {fileID: 0}
-  range: 120
+  range: 200
   target: {fileID: 0}
   location: {x: 0, y: 0, z: 0}
-  targetArea: {fileID: 21300000, guid: aed5a9665c22a6046bc95b6269dbc544, type: 3}
-  areaSize: 5
-  myTargetType: 2
-  myHitContainer: {fileID: 4262156856287949555}
-  CastFromScreenEdge: 1
-  SkillShotProjectile:
-    NumOfShots: 9
-    SpreadAngle: 12
-    SpreadRandomness: 0.5
-    timeBetweenShots: 0.1
-    SkillShotPrefabs:
-    - {fileID: 6747855988861954716, guid: 0c3c75da0f7478e4599516a22a587ef8, type: 3}
-    randomPrefabSelection: 0
-  Damage: 30
---- !u!114 &6041225056090289848
+  targetArea: {fileID: 21300000, guid: 9dead7b94ebdb144c83e28ac38bed79d, type: 3}
+  areaSize: 15
+  myTargetType: 0
+  myHitContainer: {fileID: 8153641496643015261}
+  CastFromScreenEdge: 0
+  ObjectToSpawn: {fileID: 4380317571634321993, guid: e9e87c9ca09009a46b63399e82c3c68b,
+    type: 3}
+  TagType: 0
+  Combination: 
+  Damage: 0
+--- !u!114 &900929942742165664
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 701269819794333703}
+  m_GameObject: {fileID: 900929942742165671}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8565709075defc741b27fcdf0b778b1b, type: 3}
@@ -92,18 +87,18 @@ MonoBehaviour:
   resourceCosts:
     MyResources: []
   health: 0
-  energy: 2
-  cooldown: 9
+  energy: 5
+  cooldown: 10
   cooldownTimer: 0
   StartsRefreshed: 1
   UsedFor: 
---- !u!82 &7628081894648321745
+--- !u!82 &8645060404190960846
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 701269819794333703}
+  m_GameObject: {fileID: 900929942742165671}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
@@ -193,7 +188,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!1 &6288759652608345343
+--- !u!1 &2099411766165056160
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -201,36 +196,36 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4104753108818246073}
-  - component: {fileID: 4262156856287949555}
+  - component: {fileID: 1708909733198213863}
+  - component: {fileID: 8153641496643015261}
   m_Layer: 0
-  m_Name: HitContainer
+  m_Name: OnHitContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4104753108818246073
+--- !u!4 &1708909733198213863
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6288759652608345343}
+  m_GameObject: {fileID: 2099411766165056160}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 4019874925922088029}
+  m_Father: {fileID: 900929942742165666}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4262156856287949555
+--- !u!114 &8153641496643015261
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6288759652608345343}
+  m_GameObject: {fileID: 2099411766165056160}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 95cc792f619723c46b19c319c7e01d3a, type: 3}

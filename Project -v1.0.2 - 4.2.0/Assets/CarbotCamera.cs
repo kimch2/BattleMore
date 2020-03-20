@@ -24,16 +24,23 @@ public class CarbotCamera : MainCamera
     public float acceleration = 1;
     public float topSpeed = 1;
 
+    protected override void Awake()
+    {
+        base.Awake();
+        singleton = this;
+
+    }
+
+
     public override void Start()
     {
-        singleton = this;
         initialPosition = transform.position;
         HeightAboveGround = transform.position.y;
 
         if (LockedCamera)
         {
 
-            transform.position = new Vector3(LeftSide.x + MaxXDistance - HeroOffset, transform.position.y, transform.position.z);
+            transform.position = new Vector3(LeftSide.x + MaxXDistance + 60 , transform.position.y, transform.position.z);
 
         }
     }
@@ -56,31 +63,45 @@ public class CarbotCamera : MainCamera
          {
              if (HeroToFollow)
              {
+                Vector2 ScreenPoint = myCamera.WorldToScreenPoint(HeroToFollow.transform.position);
+
                 float prev = MaxXDistance;
-                if (HeroToFollow.transform.position.x - LeftSide.x > MaxXDistance + topSpeed)
+                if (ScreenPoint.x > Screen.width /2.5f)
                 {
                     CurrentSpeed += acceleration * Time.deltaTime;
                     CurrentSpeed = Mathf.Min(CurrentSpeed, topSpeed);
                     MaxXDistance += CurrentSpeed * Time.deltaTime;
 
                 }
-                else if (CurrentSpeed > 0) 
+                else if (ScreenPoint.x < Screen.width/5)
+                {
+                    CurrentSpeed -= acceleration * Time.deltaTime;
+                    CurrentSpeed = Mathf.Max(CurrentSpeed, -1 * topSpeed);
+                    MaxXDistance += CurrentSpeed * Time.deltaTime;
+                }
+                else if (CurrentSpeed > 0)
                 {
                     CurrentSpeed -= acceleration * Time.deltaTime;
                     CurrentSpeed = Mathf.Max(CurrentSpeed, 0);
                     MaxXDistance += CurrentSpeed * Time.deltaTime;
 
                 }
+                else
+                {
+                    CurrentSpeed += acceleration * Time.deltaTime;
+                    CurrentSpeed = Mathf.Min(CurrentSpeed, 0);
+                    MaxXDistance += CurrentSpeed * Time.deltaTime;
+                }
 
-                 //MaxXDistance = Mathf.Max(HeroToFollow.transform.position.x - startPoint.x, MaxXDistance);
-                 if (MaxXDistance != prev)
-                 {
+                if (MaxXDistance != prev)
+                {
                     if (LockedCamera)
                     {
-                        transform.position = new Vector3(LeftSide.x + MaxXDistance - HeroOffset, transform.position.y, transform.position.z);
+                        transform.position = new Vector3(Mathf.Clamp(LeftSide.x + MaxXDistance - HeroOffset, LeftSide.x, RightSide.x), transform.position.y, transform.position.z);
                     }
                     ProgressSlider.value = (MaxXDistance) / (RightSide.x - LeftSide.x);
-                 }
+                }
+
              }
              else
              {
@@ -94,14 +115,14 @@ public class CarbotCamera : MainCamera
         return (MaxXDistance) / (RightSide.x - LeftSide.x);
     }
 
-    /*
+    
     public override void Zoom(object sender, ScrollWheelEventArgs e)
     {
       
     }
 
     public override void Pan(object sender, ScreenEdgeEventArgs e)
-    { }*/
+    {}
     /*
     public void SmashCamera(GameObject target)
     {

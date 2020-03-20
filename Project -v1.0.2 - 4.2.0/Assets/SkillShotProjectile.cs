@@ -20,8 +20,10 @@ public class SkillShotProjectile  : Projectile {
     }
 
 
-    new void OnSpawn()
+    public new void OnSpawn()
     {
+        OnHit.RemoveAllListeners(); // SHOULD THESE CLEAR???
+        OnKill.RemoveAllListeners();
         currentDistance = -3;
     }
 
@@ -57,7 +59,7 @@ public class SkillShotProjectile  : Projectile {
             }
         }
 
-        gameObject.transform.Translate(Vector3.forward * speed * Time.deltaTime);
+        gameObject.transform.Translate(Vector3.forward * speed * Time.deltaTime, Space.Self);
 
         currentDistance += speed * Time.deltaTime;
     }
@@ -75,8 +77,8 @@ public class SkillShotProjectile  : Projectile {
 
     public void setTarget(Vector3 Location)
     {
-        lastLocation = Location + Vector3.up * 2;
-
+        lastLocation = Location;
+        lastLocation.y = transform.position.y;
         if (Physics.Raycast(this.gameObject.transform.position + Vector3.up * 10, Vector3.down, out objecthit, 100, (1 << 8)))
         {
             Vector3 newPos = transform.position;

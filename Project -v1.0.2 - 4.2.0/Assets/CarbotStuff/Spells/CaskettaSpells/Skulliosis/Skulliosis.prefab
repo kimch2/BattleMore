@@ -48,4 +48,5 @@ MonoBehaviour:
   DamageAmount: 0
   effect: {fileID: 0}
   toSpawn: Skelly
-  toSpawnObject: {fileID: 0}
+  toSpawnObject: {fileID: 2899125463594918715, guid: 6a834b794bfba244fa3da60819856b23,
+    type: 3}

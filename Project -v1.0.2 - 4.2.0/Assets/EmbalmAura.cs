@@ -20,7 +20,7 @@ public class EmbalmAura : IEffect
 
     public override void applyTo(GameObject source, UnitManager target)
     {
-        EmbalmAura Copy = (EmbalmAura)CopyIEffect(target);
+        EmbalmAura Copy = (EmbalmAura)CopyIEffect(target, true);
         Copy.BeginToPoison();
     }
 

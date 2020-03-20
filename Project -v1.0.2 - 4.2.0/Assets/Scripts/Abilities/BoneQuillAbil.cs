@@ -2,72 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BoneQuillAbil : TargetAbility
+public class BoneQuillAbil : SkillShotAbil
 {
     // Fires X number of projectiles equal to charge count in a line, get charge counters back with cooldown (~2 seconds)
     // Killing an enemy with this refunds a charge count, for the next time it is cast.
-
-    public GameObject ToSpawn;
-    public int QuillNumber = 9;
-
-    public float QuillDelay = .33f;
-
-    // Use this for initialization
-    new void Start()
-    {
-        base.Start();
-        myType = type.target;
-        InitializeCharges();
-    }
-
-
-
-    override
-    public continueOrder canActivate(bool showError)
-    {
-
-        continueOrder order = new continueOrder();
-        if (chargeCount == 0  || Casting)
-        {
-            order.canCast = false;
-        }
-
-        if (!myCost.canActivate(this))
-        {
-            order.canCast = false;
-            // FIX THIS LINE IN THE FUTURE IF IT BREAKS! its currently in here to allow guys with multiple charges to use them even though the cooldown timer is shown.
-            if (myCost.energy == 0 && myCost.resourceCosts.MyResources.Count == 0 && chargeCount > 0)
-            {
-                order.canCast = true;
-            }
-        }
-        else
-        {
-            order.nextUnitCast = false;
-        }
-        if (order.canCast)
-        {
-            order.nextUnitCast = false;
-        }
-        return order;
-    }
 
     override
     public void Activate()
     {
     }  // returns whether or not the next unit in the same group should also cast it
 
-
-    override
-    public void setAutoCast(bool offOn)
-    { }
-
-    public override bool isValidTarget(GameObject target, Vector3 location)
+    protected override void AlterProjectile(SkillShotProjectile proj)
     {
-        return true;
+
+        proj.OnKill.AddListener(() =>
+        {
+            myCost.cooldownTimer -= 2;
+        });
     }
 
 
+
+    /*
     override
     public bool Cast(GameObject target, Vector3 location)
     {/*
@@ -79,9 +35,11 @@ public class BoneQuillAbil : TargetAbility
        // changeCharge(-1 * chargeCount);
 
         myCost.payCost();
-        */
+        
         return false;
     }
+
+
     override
     public void Cast()
     {
@@ -123,5 +81,5 @@ public class BoneQuillAbil : TargetAbility
         // myManager.setStun(false, this, false);
         Casting = false;
     }
-
+*/
 }

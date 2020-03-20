@@ -24,25 +24,49 @@ public abstract class IEffect : MonoBehaviour{
         
     }
 
-    public Component CopyIEffect(UnitManager toCopyTo)
+    public Component CopyIEffect(UnitManager toCopyTo, bool CopyToAsTarget)
     {
         System.Type type = this.GetType();
-        
-        
-        IEffect copy = (IEffect)toCopyTo.gameObject.GetComponent(type);
-        if (copy == null)
+        IEffect copy = null;
+
+        if (!CopyToAsTarget) // If we are applying this thing as a source effect, IE giving a unit an ability, (not giving it to them as an effect)
         {
-            copy = (IEffect)toCopyTo.gameObject.AddComponent(type);
+            foreach (OnHitContainer contain in toCopyTo.GetComponentsInChildren<OnHitContainer>())
+            {
+                copy = (IEffect)contain.gameObject.GetComponent(type);
+                if (copy == null || !copy.onTarget)
+                {
+                    copy = (IEffect)contain.gameObject.AddComponent(type);
+                }
+
+                copy.SetManagers(contain.myManager, null);
+                copy.onTarget = CopyToAsTarget;
+                contain.AddEffectApplier(copy);
+
+                System.Reflection.FieldInfo[] fields = type.GetFields();
+                foreach (System.Reflection.FieldInfo field in fields)
+                {
+                    field.SetValue(copy, field.GetValue(this));
+                }
+            }
         }
-        // Copied fields can be restricted with BindingFlags
-        System.Reflection.FieldInfo[] fields = type.GetFields();
-        foreach (System.Reflection.FieldInfo field in fields)
+        else
         {
-            field.SetValue(copy, field.GetValue(this));
+            copy = (IEffect)toCopyTo.gameObject.GetComponent(type);
+            if (copy == null)
+            {
+                copy = (IEffect)toCopyTo.gameObject.AddComponent(type);
+               
+
+            }
+            System.Reflection.FieldInfo[] fields = type.GetFields();
+            foreach (System.Reflection.FieldInfo field in fields)
+            {
+                field.SetValue(copy, field.GetValue(this));
+            }
+            copy.SetManagers(SourceManager, toCopyTo);
+            copy.onTarget = CopyToAsTarget;
         }
-        ((IEffect)copy).SetManagers(SourceManager, toCopyTo);
-        ((IEffect)copy).onTarget = true;
         return copy;
     }
-
 }

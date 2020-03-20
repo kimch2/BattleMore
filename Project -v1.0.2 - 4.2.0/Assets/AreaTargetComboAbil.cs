@@ -58,7 +58,7 @@ public class AreaTargetComboAbil : TargetAbility
         GameObject proj = (GameObject)Instantiate(ObjectToSpawn, pos, Quaternion.identity);
         if (!SetOnHitContainer(proj,Damage, null))
         {
-            proj.SendMessage("setSource", this.gameObject);
+            proj.SendMessage("setSource", myManager.gameObject, SendMessageOptions.DontRequireReceiver);
         }
         return false;
     }

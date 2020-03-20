@@ -2,65 +2,31 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DeathInjector :MonoBehaviour,  Notify {
+public class DeathInjector : IEffect
+{
 
-	// Unit modifier that make them attack faster the less health they have
-
-	public bool onTarget;
 	public float DamageTime =15;
 	public float DamageAmount =15;
-	private UnitStats myStats;
 	public GameObject effect;
     [Tooltip("only use this if the thing that is spawning is the thign that this is on, which causing reference errors, because it will refer to itself and not the prefab")]
 	public string toSpawn;
     public GameObject toSpawnObject;
 	GameObject myEffect;
 	// Use this for initialization
+
+
 	void Start () {
 
-		myStats = GetComponent<UnitStats> ();
-
-		if (!onTarget) {
-
-            if (GetComponents<IWeapon>().Length > 1)
+		if (onTarget)
+        {            
+            if (myEffect)
             {
-                foreach (IWeapon weap in GetComponents<IWeapon>())
-                {
-                    weap.addNotifyTrigger(this);
-                }
+                myEffect = Instantiate<GameObject>(effect, this.transform.position, Quaternion.identity, transform);
             }
-            else
-            {
-                foreach (IWeapon weap in GetComponentsInParent<IWeapon>())
-                {
-                    weap.addNotifyTrigger(this);
-                }
-            }
-			
-		} else {
-            if(myEffect)
-			myEffect =	Instantiate<GameObject> (effect, this.transform.position, Quaternion.identity, transform);
-		}
+            DamageOverTime(DamageAmount, DamageTime);
+        }
 	}
 
-
-
-
-	public float trigger(GameObject source, GameObject projectile,UnitManager target, float damage)
-	{
-		//Need to fix this if this script is on both allied and enemy units
-		DeathInjector inject = target.gameObject.GetComponent<DeathInjector> ();
-		if (!inject) {
-			inject = target.gameObject.AddComponent<DeathInjector> ();
-
-		}
-		inject.effect = effect;
-		inject.toSpawn = toSpawn;
-		inject.DamageOverTime (DamageAmount,DamageTime);
-        inject.toSpawnObject = toSpawnObject;
-
-		return damage;
-	}
 
 	public void DamageOverTime(float damagePerSecond, float duration)
 	{
@@ -76,17 +42,20 @@ public class DeathInjector :MonoBehaviour,  Notify {
 
 	IEnumerator OverTime()
 	{
-		for (float i = 0; i < DamageTime; i++) {
-			yield return new WaitForSeconds (1);
-			myStats.TakeDamage (DamageAmount, null, DamageTypes.DamageType.True);
-		}
+        for (float i = 0; i < DamageTime; i++)
+        {
+            yield return new WaitForSeconds(1);
+            if (DamageAmount > 0)
+            {
+               OnTargetManager.myStats.TakeDamage(DamageAmount, null, DamageTypes.DamageType.True);
+            }
+        }
 		Destroy (myEffect);
 		Destroy (this);
 	}
 
 	public void Dying()
 	{
-        //Debug.Log ("Dying " + onTarget + "  -" + toSpawn);
         if (onTarget)
         {
             if (toSpawnObject)
@@ -100,4 +69,26 @@ public class DeathInjector :MonoBehaviour,  Notify {
         }
 	}
 
+    public override bool validTarget(GameObject target)
+    {
+        return true;
+    }
+
+    public override void applyTo(GameObject source, UnitManager target)
+    {
+        UnitManager manag = source.GetComponent<UnitManager>();
+        if (manag && manag.PlayerOwner == target.PlayerOwner) // Gives this ability to friends
+        {
+            CopyIEffect(target, false);
+        }
+        else
+        {
+            CopyIEffect(target, true);
+        }
+    }
+
+    public override void RemoveEffect(UnitManager target)
+    {
+        Debug.LogError("Not implemented!");
+    }
 }

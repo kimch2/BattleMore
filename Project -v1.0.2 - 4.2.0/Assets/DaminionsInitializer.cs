@@ -33,11 +33,11 @@ public class DaminionsInitializer : MonoBehaviour
         GameObject hero = null;
         if (DMCollectionManager.ChosenHero)
         {
-            hero = Instantiate<GameObject>(DMCollectionManager.ChosenHero, GameObject.FindObjectOfType<sPoint>().transform.position, Quaternion.identity);
+            hero = Instantiate<GameObject>(DMCollectionManager.ChosenHero, CarbotCamera.singleton.LeftSide, Quaternion.identity);
         }
         else
         {
-            hero = Instantiate<GameObject>(DefaultHero, GameObject.FindObjectOfType<sPoint>().transform.position, Quaternion.identity);
+            hero = Instantiate<GameObject>(DefaultHero, CarbotCamera.singleton.LeftSide, Quaternion.identity);
 
         }
         MyHero = hero.GetComponent<UnitManager>();
@@ -46,7 +46,7 @@ public class DaminionsInitializer : MonoBehaviour
         if (!ControllableHero)
         {
             InvokeRepeating("GiveOrder", 2,1.5f);
-            MyHero.myStats.statChanger.changeMoveSpeed(-.5f, 0, this, true);
+            MyHero.myStats.statChanger.changeMoveSpeed(-.6f, 0, this, true);
         }
 
 
@@ -152,10 +152,32 @@ public class DaminionsInitializer : MonoBehaviour
 
 
 
-    GameObject PlayerSpawnOverride;
-    GameObject EnemySpawnOverride;
+    SpawnPointOverride PlayerSpawnOverride;
+    SpawnPointOverride EnemySpawnOverride;
 
-    public void SetSpawnLocation(GameObject thingy, int playerNumber)
+    /// <summary>
+    /// This is used when there is a SpawnOverride object in the scene
+    /// </summary>
+    /// <param name="man"></param>
+    public void AlterUnit(UnitManager man)
+    {
+        if (man.PlayerOwner == 1)
+        {
+            if (PlayerSpawnOverride)
+            {
+                PlayerSpawnOverride.myHitContainer.trigger(MyHero.gameObject, man, 0);
+            }
+        }
+        else
+        {
+            if (EnemySpawnOverride)
+            {
+                EnemySpawnOverride.myHitContainer.trigger(null, man, 0);
+            }
+        }
+    }
+
+    public void SetSpawnLocation(SpawnPointOverride thingy, int playerNumber)
     {
         if (playerNumber == 1)
         {

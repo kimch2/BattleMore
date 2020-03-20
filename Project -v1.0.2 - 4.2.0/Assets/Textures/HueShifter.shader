@@ -46,6 +46,7 @@
 		   _StencilWriteMask("Stencil Write Mask", Float) = 255
 		   _StencilReadMask("Stencil Read Mask", Float) = 255
 		   _ColorMask("Color Mask", Float) = 15
+		  // _Light("Lightness", Float) = 1
 		}
 			SubShader
 		   {
@@ -81,7 +82,7 @@
 				   float _HSVRangeMin;
 				   float _HSVRangeMax;
 				   float4 _HSVAAdjust;
-
+				  // float _Light
 				   struct Vertex
 				   {
 					   float4 vertex : POSITION;
@@ -129,6 +130,7 @@
 					   float3 hsv = rgb2hsv(color.rgb);
 					   float affectMult = step(_HSVRangeMin, hsv.r) * step(hsv.r, _HSVRangeMax);
 					   float3 rgb = hsv2rgb(hsv + _HSVAAdjust.xyz * affectMult);
+					   
 					   return float4(rgb, color.a + _HSVAAdjust.a);
 				   }
 

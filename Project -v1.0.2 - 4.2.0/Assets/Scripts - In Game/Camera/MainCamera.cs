@@ -45,7 +45,7 @@ public class MainCamera : MonoBehaviour, ICamera {
 	//TESTING
 	public Vector3 TopRightBorder;
 	public Vector3 BottomLeftBorder;
-	void Awake()
+	protected virtual void Awake()
 	{
         myCamera = GetComponent<Camera>();
         myCamera.cullingMask &= ~(1 << LayerMask.NameToLayer("MinimapIcon"));
