@@ -171,6 +171,6 @@ public class LevelOpenerEditor : EditorWindow
     public static void Z()
     {
         EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo();
-        EditorSceneManager.OpenScene("Assets/CarbotStuff/DMAaronTestLevel.unity");
+        EditorSceneManager.OpenScene("Assets/CarbotStuff/DaMinionsMapAaron.unity");
     }
 }
