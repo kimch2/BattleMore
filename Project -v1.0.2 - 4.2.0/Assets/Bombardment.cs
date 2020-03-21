@@ -10,6 +10,7 @@ public class Bombardment : TargetAbility{
 
 	public float FriendlyFire = 1;
     public bool shakeTheCamera = true;
+    public float timeBetweenShots = .087f;
 
 
 	Lean.LeanPool myBulletPool;
@@ -58,7 +59,7 @@ public class Bombardment : TargetAbility{
 
 		for (int i = 0; i < shotCount; i++) {
 		
-			StartCoroutine( Fire ((i * .087f), locat, i));
+			StartCoroutine( Fire ((i * timeBetweenShots), locat, i));
 		}
 		GameObject sight = new GameObject("SightObject");
 		sight.transform.position = locat;

@@ -48,9 +48,7 @@ public class ActivatedAbility : Ability
         OnTurnOff.Invoke();
     }
 
-
-
-
+   
     public override continueOrder canActivate(bool error)
     {
         return BaseCanActivate(error);

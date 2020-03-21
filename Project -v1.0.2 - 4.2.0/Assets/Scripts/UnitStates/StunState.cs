@@ -20,9 +20,15 @@ public class StunState : UnitState {
 	public override void initialize()
 	{
         //myManager.cMover.resetMoveLocation(myManager.transform.position);
-        myManager.cMover.stop();
+        if (myManager.cMover)
+        {
+            myManager.cMover.stop();
+        }
         myManager.animStop();
-        myManager.myAnim.Play("Idle");
+        if (myManager.myAnim)
+        {
+            myManager.myAnim.Play("Idle");
+        }
     }
 
 

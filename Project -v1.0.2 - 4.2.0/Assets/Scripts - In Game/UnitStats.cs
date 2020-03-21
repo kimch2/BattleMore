@@ -167,7 +167,7 @@ public class UnitStats : MonoBehaviour {
 		if (EnergyRegenPerSec > 0 && !WorldRecharger.main.ToEnergize.Contains(this)) {
 			WorldRecharger.main.addEnergy(this);
 		}
-		if (HealthRegenPerSec > 0 && !WorldRecharger.main.ToHeal.Contains(this)) {
+		if (HealthRegenPerSec != 0 && !WorldRecharger.main.ToHeal.Contains(this)) {
 			WorldRecharger.main.addHeal(this);
 		}
 		veternStat.playerOwner = myManager.PlayerOwner;
@@ -197,7 +197,7 @@ public class UnitStats : MonoBehaviour {
 
 	public void setHealRate(float amount)
 	{
-		if (amount == 0 && HealthRegenPerSec > 0) {
+		if (amount == 0 && HealthRegenPerSec != 0) {
 			WorldRecharger.main.removeHeal(this);
 		}
 		else if (amount > 0 && HealthRegenPerSec == 0) {
@@ -758,10 +758,13 @@ public class UnitStats : MonoBehaviour {
 	/// <param name="type">Type.</param>
 	public float heal(float n, DamageTypes.DamageType type = DamageTypes.DamageType.Regular)
 	{
-      
-		if (health == Maxhealth) {
-			return 0;
-		}
+        if (n > 0)
+        {
+            if (health == Maxhealth)
+            {
+                return 0;
+            }
+        }
         //Debug.Log("HEaling " + health + "  " + Maxhealth);
         foreach (Modifier mod in HealModifiers) {
 			if (mod != null)

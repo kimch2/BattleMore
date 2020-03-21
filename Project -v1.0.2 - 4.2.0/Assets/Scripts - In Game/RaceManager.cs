@@ -524,6 +524,7 @@ public class RaceManager : MonoBehaviour, ManagerWatcher {
 
     public void addDeathWatcher(LethalDamageinterface input)
     {
+        Debug.Log("Adding death watcher " + playerNumber);
         lethalTrigger.Add(input);
     }
 
@@ -598,9 +599,9 @@ public class RaceManager : MonoBehaviour, ManagerWatcher {
 
     //Truedeath applies to thing like summons and building placers. they aren't real units so they shouldnt be treated as such.
     public bool UnitDying(UnitManager Unit, GameObject deathSource, bool trueDeath)
-    { bool finishDeath = true;
-
-
+    {
+        bool finishDeath = true;
+  
         if (trueDeath) {
             foreach (LethalDamageinterface trigger in lethalTrigger) {
                 if (trigger != null) {
@@ -652,9 +653,7 @@ public class RaceManager : MonoBehaviour, ManagerWatcher {
             if (trueDeath && !Unit.myStats.isUnitType(UnitTypes.UnitTypeTag.Turret) && !Unit.myStats.isUnitType(UnitTypes.UnitTypeTag.Summon)) {
 
                 unitsLost++;
-            }
 
-            if (trueDeath) {
                 foreach (LethalDamageinterface trigger in deathTrigger) {
                     trigger.lethalDamageTrigger(Unit, deathSource);
                 }

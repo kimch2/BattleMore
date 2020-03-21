@@ -10,7 +10,8 @@ public class TriggeredAbility : ActivatedAbility, Modifier, Notify, LethalDamage
     [Tooltip("If not checked, this will be a passive ability, Always on")]
     public bool Activatable;
     public TriggerType triggerType;
-    [Tooltip("Used for some - RepeatTimer - how often, OnSpellCast - playerNumber to listen to, OnAttack - Number of Attacks (0 =indefinite)")]
+    [Tooltip("Used for some - RepeatTimer - how often, OnSpellCast - playerNumber to listen to, " +
+        "OnAttack - Number of Attacks (0 =indefinite), OnAllyDeath/EnemyDeath - max range")]
     public float VariableNumber = 1;
     float hiddenVariableStored;
     public GameObject OnTriggerEffect;
@@ -102,22 +103,22 @@ public class TriggeredAbility : ActivatedAbility, Modifier, Notify, LethalDamage
             if (myManager.PlayerOwner == 1)
             {
                 // MAYBE CHANGE THE FUNCTION CALLBACK INTERFACE TYPE? (Its hardly ever used)
-                GameManager.main.playerList[1].removeActualDeathWatcher(this);
+                GameManager.main.playerList[1].addActualDeathWatcher(this);
             }
             else
             {
-                GameManager.main.playerList[0].removeActualDeathWatcher(this);
+                GameManager.main.playerList[0].addActualDeathWatcher(this);
             }
         }
         else if (triggerType == TriggerType.OnAllyDeath)
         {
             if (myManager.PlayerOwner == 1)
             {
-                GameManager.main.playerList[0].removeActualDeathWatcher(this);
+                GameManager.main.playerList[0].addActualDeathWatcher(this);
             }
             else
             {
-                GameManager.main.playerList[1].removeActualDeathWatcher(this);
+                GameManager.main.playerList[1].addActualDeathWatcher(this);
             }
         }
     }
@@ -145,7 +146,6 @@ public class TriggeredAbility : ActivatedAbility, Modifier, Notify, LethalDamage
         }
         else if (triggerType == TriggerType.OnAttack)
         {
-            Debug.Log("Removing");
             foreach (IWeapon myWeap in myManager.myWeapon)
             {
                 myWeap.removeNotifyTrigger(this);
@@ -167,22 +167,22 @@ public class TriggeredAbility : ActivatedAbility, Modifier, Notify, LethalDamage
         {
             if (myManager.PlayerOwner == 1)
             {
-                GameManager.main.playerList[1].addDeathWatcher(this);
+                GameManager.main.playerList[1].removeActualDeathWatcher(this);
             }
             else
             {
-                GameManager.main.playerList[0].addDeathWatcher(this);
+                GameManager.main.playerList[0].removeActualDeathWatcher(this);
             }
         }
         else if (triggerType == TriggerType.OnAllyDeath)
         {
             if (myManager.PlayerOwner == 1)
             {
-                GameManager.main.playerList[0].addDeathWatcher(this);
+                GameManager.main.playerList[0].removeActualDeathWatcher(this);
             }
             else
             {
-                GameManager.main.playerList[1].addDeathWatcher(this);
+                GameManager.main.playerList[1].removeActualDeathWatcher(this);
             }
         }
     }
@@ -230,7 +230,10 @@ public class TriggeredAbility : ActivatedAbility, Modifier, Notify, LethalDamage
 
     public virtual bool lethalDamageTrigger(UnitManager unit, GameObject deathSource)
     {
-        Trigger();
+        if (!unit ||  Vector3.Distance( unit.transform.position, myManager.transform.position) < VariableNumber)
+        {         
+            Trigger();
+        }
         return true;
     }
 }

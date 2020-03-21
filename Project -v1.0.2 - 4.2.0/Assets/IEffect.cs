@@ -16,7 +16,9 @@ public abstract class IEffect : MonoBehaviour{
 
 	public abstract bool validTarget(GameObject target);
 
-	public abstract void applyTo (GameObject source, UnitManager target);
+
+    //public abstract void GiveAsAbility(GameObject source, UnitManager target);
+    public abstract void applyTo (GameObject source, UnitManager target);
     public abstract void RemoveEffect(UnitManager target);
 
     public void RegisterBuff(UnitManager manager, bool isFriendly)

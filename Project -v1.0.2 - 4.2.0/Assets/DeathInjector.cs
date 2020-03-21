@@ -73,6 +73,7 @@ public class DeathInjector : DamagerIeffect
         return true;
     }
 
+
     public override void applyTo(GameObject source, UnitManager target)
     {
         UnitManager manag = source.GetComponent<UnitManager>();
@@ -88,6 +89,16 @@ public class DeathInjector : DamagerIeffect
 
     public override void RemoveEffect(UnitManager target)
     {
-        Debug.LogError("Not implemented!");
+        DeathInjector inject = target.GetComponent<DeathInjector>();
+        if (inject &&  !inject.onTarget)
+        {
+            inject.EndEffect();
+        }
+    }
+
+    public void EndEffect()
+    {
+        Destroy(myEffect);
+        Destroy(this);
     }
 }

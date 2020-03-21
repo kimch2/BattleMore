@@ -872,6 +872,7 @@ MonoBehaviour:
   - {fileID: 3286163911610860551, guid: b324f9772df7ab641bfca4e0736628c9, type: 3}
   - {fileID: 3286163911610860551, guid: d925b65031d83b1468a6f72a1aecad1a, type: 3}
   - {fileID: 3286163911610860551, guid: 08c27d945d7ff0d40aa1b293062a919d, type: 3}
+  Duration: 0
 --- !u!1 &1010613889074517133
 GameObject:
   m_ObjectHideFlags: 0
@@ -1337,7 +1338,6 @@ MonoBehaviour:
     mySprite: {fileID: 0}
   deathCorpse: {fileID: 0}
   deathEffect: {fileID: 0}
-  takeDamageEffect: {fileID: 0}
   UnitPortrait: {fileID: 0}
   goodBuffs: []
   badBuffs: []
@@ -1495,6 +1495,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mySkins: []
   ColoredSkins: []
+  ColoredSprites: []
   mySkinner: {fileID: 0}
 --- !u!114 &1187481376337058921
 MonoBehaviour:
@@ -2310,7 +2311,6 @@ MonoBehaviour:
     mySprite: {fileID: 0}
   deathCorpse: {fileID: 0}
   deathEffect: {fileID: 0}
-  takeDamageEffect: {fileID: 0}
   UnitPortrait: {fileID: 0}
   goodBuffs: []
   badBuffs: []
@@ -2468,6 +2468,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mySkins: []
   ColoredSkins: []
+  ColoredSprites: []
   mySkinner: {fileID: 0}
 --- !u!114 &6033262588426490498
 MonoBehaviour:
@@ -3678,6 +3679,7 @@ MonoBehaviour:
   - {fileID: 3286163911610860551, guid: b324f9772df7ab641bfca4e0736628c9, type: 3}
   - {fileID: 3286163911610860551, guid: d925b65031d83b1468a6f72a1aecad1a, type: 3}
   - {fileID: 3286163911610860551, guid: 08c27d945d7ff0d40aa1b293062a919d, type: 3}
+  Duration: 0
 --- !u!1 &4327392914684294123
 GameObject:
   m_ObjectHideFlags: 0
@@ -3870,6 +3872,7 @@ MonoBehaviour:
   - {fileID: 3286163911610860551, guid: b324f9772df7ab641bfca4e0736628c9, type: 3}
   - {fileID: 3286163911610860551, guid: d925b65031d83b1468a6f72a1aecad1a, type: 3}
   - {fileID: 3286163911610860551, guid: 08c27d945d7ff0d40aa1b293062a919d, type: 3}
+  Duration: 0
 --- !u!1 &4389444176328482313
 GameObject:
   m_ObjectHideFlags: 0
@@ -4194,6 +4197,7 @@ MonoBehaviour:
   - {fileID: 3286163911610860551, guid: b324f9772df7ab641bfca4e0736628c9, type: 3}
   - {fileID: 3286163911610860551, guid: d925b65031d83b1468a6f72a1aecad1a, type: 3}
   - {fileID: 3286163911610860551, guid: 08c27d945d7ff0d40aa1b293062a919d, type: 3}
+  Duration: 0
 --- !u!1 &4627905122231519360
 GameObject:
   m_ObjectHideFlags: 0
@@ -4439,7 +4443,6 @@ MonoBehaviour:
     mySprite: {fileID: 0}
   deathCorpse: {fileID: 0}
   deathEffect: {fileID: 0}
-  takeDamageEffect: {fileID: 0}
   UnitPortrait: {fileID: 0}
   goodBuffs: []
   badBuffs: []
@@ -4597,6 +4600,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mySkins: []
   ColoredSkins: []
+  ColoredSprites: []
   mySkinner: {fileID: 0}
 --- !u!114 &1930844737396481070
 MonoBehaviour:
@@ -4742,6 +4746,7 @@ MonoBehaviour:
   - {fileID: 3286163911610860551, guid: b324f9772df7ab641bfca4e0736628c9, type: 3}
   - {fileID: 3286163911610860551, guid: d925b65031d83b1468a6f72a1aecad1a, type: 3}
   - {fileID: 3286163911610860551, guid: 08c27d945d7ff0d40aa1b293062a919d, type: 3}
+  Duration: 0
 --- !u!1 &4789979344770312475
 GameObject:
   m_ObjectHideFlags: 0
@@ -5907,7 +5912,6 @@ MonoBehaviour:
     mySprite: {fileID: 0}
   deathCorpse: {fileID: 0}
   deathEffect: {fileID: 0}
-  takeDamageEffect: {fileID: 0}
   UnitPortrait: {fileID: 0}
   goodBuffs: []
   badBuffs: []
@@ -6065,6 +6069,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mySkins: []
   ColoredSkins: []
+  ColoredSprites: []
   mySkinner: {fileID: 0}
 --- !u!114 &3788458804422731048
 MonoBehaviour:
@@ -6210,6 +6215,7 @@ MonoBehaviour:
   - {fileID: 3286163911610860551, guid: b324f9772df7ab641bfca4e0736628c9, type: 3}
   - {fileID: 3286163911610860551, guid: d925b65031d83b1468a6f72a1aecad1a, type: 3}
   - {fileID: 3286163911610860551, guid: 08c27d945d7ff0d40aa1b293062a919d, type: 3}
+  Duration: 0
 --- !u!1 &6688483871759676569
 GameObject:
   m_ObjectHideFlags: 0
@@ -7930,7 +7936,6 @@ MonoBehaviour:
     mySprite: {fileID: 0}
   deathCorpse: {fileID: 0}
   deathEffect: {fileID: 0}
-  takeDamageEffect: {fileID: 0}
   UnitPortrait: {fileID: 0}
   goodBuffs: []
   badBuffs: []
@@ -8088,6 +8093,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mySkins: []
   ColoredSkins: []
+  ColoredSprites: []
   mySkinner: {fileID: 0}
 --- !u!114 &8854355311579471754
 MonoBehaviour:
@@ -8366,7 +8372,6 @@ MonoBehaviour:
     mySprite: {fileID: 0}
   deathCorpse: {fileID: 0}
   deathEffect: {fileID: 0}
-  takeDamageEffect: {fileID: 0}
   UnitPortrait: {fileID: 0}
   goodBuffs: []
   badBuffs: []
@@ -8524,6 +8529,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mySkins: []
   ColoredSkins: []
+  ColoredSprites: []
   mySkinner: {fileID: 0}
 --- !u!114 &2417631996164866683
 MonoBehaviour:

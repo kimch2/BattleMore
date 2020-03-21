@@ -120,6 +120,7 @@ public class OnHitContainer : MonoBehaviour
 
             for (int i = toApply.Count - 1; i >= 0; i--)
             {
+                Debug.Log("Applying Ieffect " + target);
                 toApply[i].applyTo(source, target);
             }
 

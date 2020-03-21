@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EmbalmAura : IEffect
+public class EmbalmAura : DamagerIeffect
 {
 
     public float initialDPS = 1;
@@ -11,6 +11,15 @@ public class EmbalmAura : IEffect
     public float MaxDuration = 15;
     GameObject CurrentEffect;
     Coroutine currentPoison;
+
+    private void Start()
+    {
+        if (onTarget)
+        {
+            OnTargetManager = myHitContainer.myManager;
+           BeginToPoison();
+        }
+    }
 
 
     public override bool validTarget(GameObject target)
@@ -29,8 +38,11 @@ public class EmbalmAura : IEffect
         if (currentPoison == null)
         {
             currentPoison = StartCoroutine(Poison());
-            CurrentEffect = Instantiate<GameObject>(effect, transform);
-            CurrentEffect.transform.localPosition = Vector3.zero;
+            if (effect)
+            {
+                CurrentEffect = Instantiate<GameObject>(effect, transform);
+                CurrentEffect.transform.localPosition = Vector3.zero;
+            }
         }
     }
 
@@ -40,7 +52,7 @@ public class EmbalmAura : IEffect
         float damage = initialDPS;
         for(int i = 0; i <= MaxDuration; i++)
         {
-            OnTargetManager.getUnitStats().TakeDamage(damage, null, DamageTypes.DamageType.True, null);
+            OnTargetManager.getUnitStats().TakeDamage(damage, null, DamageTypes.DamageType.True, myHitContainer);
             damage += perSecIncrease;
             yield return new WaitForSeconds(1);
         }

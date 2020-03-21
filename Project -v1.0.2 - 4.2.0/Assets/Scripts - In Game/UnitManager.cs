@@ -711,10 +711,13 @@ public class UnitManager : Unit, IOrderable {
 
 	public void Dying()
 	{
-		foreach(UnitState states in queuedStates)
-		{
-			states.endState ();
-		}
+        foreach (UnitState states in queuedStates)
+        {
+            if (states != null)
+            {
+                states.endState();
+            }
+        }
         foreach (IWeapon weap in myWeapon)
         {
             if (weap)
