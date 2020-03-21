@@ -8,9 +8,14 @@ public class SmogCloud : VisionTrigger
 	float DamageTime;
 	float angleChangeAmount;
 	float timeChange;
+    public OnHitContainer myHitContainer;
 
 	private void Start()
 	{
+        if (!myHitContainer)
+        {
+            myHitContainer = OnHitContainer.CreateDefaultContainer(this.gameObject, null, "Smog Cloud");
+        }
 		DamageTime = Time.time;
 	}
 
@@ -41,7 +46,7 @@ public class SmogCloud : VisionTrigger
 			{
 				if (manage && MyOwner != manage.PlayerOwner)
 				{
-					manage.myStats.TakeDamage(4 +( transform.localScale.x * 2), this.gameObject, DamageTypes.DamageType.Regular);
+					manage.myStats.TakeDamage(4 +( transform.localScale.x * 2), this.gameObject, DamageTypes.DamageType.Regular, myHitContainer);
 				}
 			}
 

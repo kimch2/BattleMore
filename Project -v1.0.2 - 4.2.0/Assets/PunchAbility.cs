@@ -40,7 +40,7 @@ public class PunchAbility : SingleTargetCombo {
 						PhysicsSimulator.main.KnockBack (startPosition, targetGuy, this, PunchDistance, () => { 
 					if(targetGuy != null){
 								if (ComboTag.CastTag (target, TagType, Combination)) {
-									targetGuy.myStats.TakeDamage (ComboBonusDamage, this.gameObject,DamageTypes.DamageType.Regular, manage );
+									targetGuy.myStats.TakeDamage (ComboBonusDamage, this.gameObject,DamageTypes.DamageType.Regular, myHitContainer );
 									if(myCost)
 									{
 										myCost.cooldownTimer = 0;
@@ -48,11 +48,8 @@ public class PunchAbility : SingleTargetCombo {
 								}
 							}
 				        } ,false);
-
 			
-					targetGuy.myStats.TakeDamage (ComboBonusDamage, this.gameObject,DamageTypes.DamageType.Regular, manage );
-
-				
+					targetGuy.myStats.TakeDamage (ComboBonusDamage, this.gameObject,DamageTypes.DamageType.Regular,myHitContainer);				
 				    }
 				}
 			);

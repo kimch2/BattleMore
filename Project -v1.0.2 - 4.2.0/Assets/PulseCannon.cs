@@ -53,7 +53,7 @@ public class PulseCannon : IWeapon {
 
 				Projectile script = proj.GetComponent<Projectile> ();
 				if (script) {
-					script.Initialize (target.GetComponent<UnitManager>(), baseDamage, myManager, myHitContainer);
+					script.Initialize (target.GetComponent<UnitManager>(), baseDamage, myHitContainer);
 				} else {
 
 					proj.SendMessage ("setSource", this.gameObject, SendMessageOptions.DontRequireReceiver);
@@ -62,14 +62,10 @@ public class PulseCannon : IWeapon {
 				}
 
 
-
-				//script.target = target.GetComponent<UnitManager>();
-				//script.Source = this.gameObject;
-
 			} else {
 
 				//OnAttacking();
-				baseDamage = target.GetComponent<UnitStats> ().TakeDamage (baseDamage, this.gameObject, DamageTypes.DamageType.Regular);
+				baseDamage = target.GetComponent<UnitStats> ().TakeDamage (baseDamage, this.gameObject, DamageTypes.DamageType.Regular, myHitContainer);
 				myManager.myStats.veteranDamage (baseDamage);
 
 			}

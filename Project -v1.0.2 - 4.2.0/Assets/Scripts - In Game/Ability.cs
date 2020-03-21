@@ -39,6 +39,7 @@ public abstract class Ability : MonoBehaviour {
 	protected AudioSource audioSrc;
 	protected Selected select;
     Coroutine currentCharger;
+    public OnHitContainer myHitContainer;
 
     public virtual void Start() // We have this here so other source can call Start and any of this guy's inheriters will have it called instead
 	{

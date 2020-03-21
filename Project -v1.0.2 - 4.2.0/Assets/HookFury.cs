@@ -1,35 +1,24 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-public class HookFury : MonoBehaviour,  Notify {
+public class HookFury : MonoBehaviour {
 
-	// Unit modifier that make them attack faster the less health they have
-	public List<IWeapon> myWeapon;
+    // Changes attack speed based on this guys current health percentage
+
 
 	private UnitStats myStats;
-	// Use this for initialization
+
 	void Start () {
-		myWeapon = new List<IWeapon>(GetComponents<IWeapon> ());
-		//Debug.Log ("Length is " + myWeapon.Count);
-
 		myStats = GetComponent<UnitStats> ();
-
-		foreach (IWeapon weap in myWeapon) {
-			weap.addNotifyTrigger (this);
-		}
 	}
-	
 
-
-
-	public float trigger(GameObject source, GameObject projectile,UnitManager target, float damage)
+	public void trigger()
 	{
 		float toChange = -(.5f - (myStats.health / myStats.Maxhealth) / 2);
 		//Debug.Log ("Changing " + toChange);
 
 		myStats.statChanger.removeAttackSpeed(this);
 		myStats.statChanger.changeAttackSpeed(toChange, 0, this, true);
-		return damage;
 	}
 
 

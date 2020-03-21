@@ -38,16 +38,15 @@ public abstract class IEffect : MonoBehaviour{
                 {
                     copy = (IEffect)contain.gameObject.AddComponent(type);
                 }
-
                 copy.SetManagers(contain.myManager, null);
                 copy.onTarget = CopyToAsTarget;
-                contain.AddEffectApplier(copy);
-
+              
                 System.Reflection.FieldInfo[] fields = type.GetFields();
                 foreach (System.Reflection.FieldInfo field in fields)
                 {
                     field.SetValue(copy, field.GetValue(this));
                 }
+                contain.AddEffectApplier(copy);
             }
         }
         else
@@ -55,10 +54,9 @@ public abstract class IEffect : MonoBehaviour{
             copy = (IEffect)toCopyTo.gameObject.GetComponent(type);
             if (copy == null)
             {
-                copy = (IEffect)toCopyTo.gameObject.AddComponent(type);
-               
-
+                copy = (IEffect)toCopyTo.gameObject.AddComponent(type);             
             }
+            copy.enabled = true;
             System.Reflection.FieldInfo[] fields = type.GetFields();
             foreach (System.Reflection.FieldInfo field in fields)
             {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KineticBarrier : MonoBehaviour, Modifier{
+public class KineticBarrier : DamagerMonoBehavior, Modifier{
 	// Ability used by Codan's ult. applies a shield that restores energy and then if combo'ed, at the end releases an explosion
 
 	public UnitStats myStats;
@@ -10,10 +10,8 @@ public class KineticBarrier : MonoBehaviour, Modifier{
 
 	public Selected mySelected;
 	public float duration = 6;
-	public VeteranStats source;
 	public GameObject EndExplosion;
 	float initialHP;
-	// Use this for initialization
 
 	void Start () {
 		
@@ -55,9 +53,8 @@ public class KineticBarrier : MonoBehaviour, Modifier{
         mySelected.outsideAttchement = false;
 		if (EndExplosion) {
 			GameObject explode = Instantiate<GameObject> (EndExplosion, transform.position,Quaternion.identity);
-
-			explode.SendMessage ("setVeteran", source, SendMessageOptions.DontRequireReceiver);
-			explode.SendMessage ("setDamage", initialHP - HP , SendMessageOptions.DontRequireReceiver);
+            explosion explody = explode.GetComponent<explosion>();
+            explody.Initialize(initialHP - HP, myHitContainer);
 		}
 		Destroy (this.gameObject);
 

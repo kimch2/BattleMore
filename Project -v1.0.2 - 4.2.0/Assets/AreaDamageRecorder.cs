@@ -17,10 +17,8 @@ public class AreaDamageRecorder : AreaDamage{
 					if (!DamageNonStacker.instance.DealDamage (gameObject.name, s, damage)) {
 						return;
 					}
-				}	s.TakeDamage (damage + (s.isUnitType(BonusDamage.type)? BonusDamage.bonus : 0), this.gameObject.gameObject.gameObject, myType);
-		
-
-				float returned = s.TakeDamage(damage + (s.isUnitType(BonusDamage.type) ? BonusDamage.bonus : 0), this.gameObject.gameObject.gameObject, myType);
+				}
+				float returned = s.TakeDamage(damage + (s.isUnitType(BonusDamage.type) ? BonusDamage.bonus : 0), this.gameObject.gameObject.gameObject, myType,myHitContainer);
 
 				if (showPop) {
 					iter++;

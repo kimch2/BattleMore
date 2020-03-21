@@ -228,6 +228,7 @@ Transform:
   - {fileID: 224811812580657360}
   - {fileID: 6258116209797799569}
   - {fileID: 615796761288088627}
+  - {fileID: 2383966584150354479}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -649,7 +650,8 @@ MonoBehaviour:
   maxChargeCount: 0
   chargeCount: -1
   soundEffect: {fileID: 0}
-  myAmmo: {fileID: 8127693572433873047, guid: 4a0d09aeab019b34a96f409df8931812, type: 3}
+  myHitContainer: {fileID: 0}
+  myAmmo: {fileID: 1000013282120444, guid: 0575b97f36498954a9953a9cd1b71e94, type: 3}
   NewOnHitContainer: {fileID: 6377543115338276591}
   myWeapon: {fileID: 114000012058898232}
   range: 55
@@ -709,6 +711,7 @@ MonoBehaviour:
   maxChargeCount: 0
   chargeCount: -1
   soundEffect: {fileID: 0}
+  myHitContainer: {fileID: 8387810507951366451}
   ThingToMake: {fileID: 9041016312143617642, guid: 2b394f32395aa4a4dad7dec633e0fbb0,
     type: 3}
   secondClickDelayTime: 8
@@ -758,6 +761,7 @@ MonoBehaviour:
   - {fileID: 23872162299709960}
   - {fileID: 23872162299709960}
   - {fileID: 23330105415774838}
+  ColoredSprites: []
   mySkinner: {fileID: 0}
 --- !u!1 &1000011048402662
 GameObject:
@@ -17249,6 +17253,58 @@ Transform:
   m_Father: {fileID: 4000011407077914}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!1 &254859219160961610
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2383966584150354479}
+  - component: {fileID: 8387810507951366451}
+  m_Layer: 0
+  m_Name: DragBombHitContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2383966584150354479
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 254859219160961610}
+  m_LocalRotation: {x: -0, y: -1, z: -0, w: -0.00000016292068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4000011407077914}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8387810507951366451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 254859219160961610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95cc792f619723c46b19c319c7e01d3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toApply: []
+  OnKill:
+    m_PersistentCalls:
+      m_Calls: []
+  myManager: {fileID: 114000012058911320}
+  source: {fileID: 0}
+  playerNumber: 0
+  FriendlyFireRatio: 0
+  AutoAddTriggers: 1
 --- !u!1 &4169234053522057967
 GameObject:
   m_ObjectHideFlags: 0
@@ -17274,7 +17330,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4169234053522057967}
   m_LocalRotation: {x: -0, y: -1, z: -0, w: -0.00000016292068}
-  m_LocalPosition: {x: -0.00000032991463, y: -0.4699993, z: 1.0125008}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4000011407077914}
@@ -17293,7 +17349,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toApply: []
-  myManager: {fileID: 0}
+  OnKill:
+    m_PersistentCalls:
+      m_Calls: []
+  myManager: {fileID: 114000012058911320}
+  source: {fileID: 0}
+  playerNumber: 0
   FriendlyFireRatio: 0
   AutoAddTriggers: 1
 --- !u!1 &7759485177278224730
@@ -17322,7 +17383,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7759485177278224730}
   m_LocalRotation: {x: -0, y: -1, z: -0, w: -0.00000016292068}
-  m_LocalPosition: {x: -0.00000032991463, y: -0.4699993, z: 1.0125008}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4000011407077914}
@@ -17341,7 +17402,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toApply: []
-  myManager: {fileID: 0}
+  OnKill:
+    m_PersistentCalls:
+      m_Calls: []
+  myManager: {fileID: 114000012058911320}
+  source: {fileID: 0}
+  playerNumber: 0
   FriendlyFireRatio: 0
   AutoAddTriggers: 1
 --- !u!114 &3231397310329430807

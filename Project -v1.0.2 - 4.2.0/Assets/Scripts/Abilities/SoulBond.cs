@@ -43,7 +43,7 @@ public class SoulBond : TargetAbility, Modifier{
 					reduceBy = amount / 4;
 				}
 
-				myStats.TakeDamage (reduceBy, null, DamageTypes.DamageType.Regular);
+				myStats.TakeDamage (reduceBy, null, DamageTypes.DamageType.Regular, myHitContainer);
 			}
 		}
 		return amount -reduceBy;

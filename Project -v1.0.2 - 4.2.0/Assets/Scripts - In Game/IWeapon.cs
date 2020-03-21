@@ -113,7 +113,7 @@ public class IWeapon : MonoBehaviour {
 
         if (!myHitContainer)
         {
-            myHitContainer = OnHitContainer.CreateDefaultContainer(myManager, Title);
+            myHitContainer = OnHitContainer.CreateDefaultContainer(this.gameObject, myManager, Title);
         }
     }
 
@@ -349,9 +349,9 @@ public class IWeapon : MonoBehaviour {
 
 			//Debug.Log ("Creating " + script);
 			if (script) {
-				script.Initialize (target, damage, myManager, myHitContainer);
+				script.Initialize (target, damage,myHitContainer);
 			} else {
-
+                // Should only be used for things like summoning minions out of a weapon
 				proj.SendMessage ("setSource", this.gameObject, SendMessageOptions.DontRequireReceiver);
 				proj.SendMessage ("setTarget", target, SendMessageOptions.DontRequireReceiver);
 				proj.SendMessage ("setDamage", damage, SendMessageOptions.DontRequireReceiver);
@@ -361,9 +361,8 @@ public class IWeapon : MonoBehaviour {
 			damage = fireTriggers (this.gameObject, proj, target, damage);
             myHitContainer.trigger(null, target, damage); 
 			if (damage > 0) {
-				damage = target.myStats.TakeDamage (damage, this.gameObject, DamageTypes.DamageType.Regular);
-				myManager.myStats.veteranDamage (damage);
-			}
+                damage = target.myStats.TakeDamage(damage, this.gameObject, DamageTypes.DamageType.Regular, myHitContainer);
+            }
 
 		}
 	}

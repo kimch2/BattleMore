@@ -19,12 +19,17 @@ public class LandMineActivate : VisionTrigger {
 	public GameObject explosionEffect;
 	[Tooltip("If null, it will use clip already on explosion object")]
 	public AudioClip explosionSound;
-	UnitStats myVet;
+    public OnHitContainer myHitContainer;
+
 
 	// Use this for initialization
 	void Start () {
 		currentDamage = baseDamage;
 		StartCoroutine (chargeUp ());
+        if (!myHitContainer)
+        {
+            myHitContainer = OnHitContainer.CreateDefaultContainer(this.gameObject, null, "LandMine");
+        }
 	}
 
 	IEnumerator chargeUp()
@@ -96,13 +101,8 @@ public class LandMineActivate : VisionTrigger {
 		}
 
 		if (target) {
-			float amount;
-			if (myVet) {
-				amount = manager.getUnitStats ().TakeDamage (currentDamage, myVet.gameObject, DamageTypes.DamageType.True);
-				myVet.veteranDamage (amount);
-			} else {
-				amount = manager.getUnitStats ().TakeDamage (currentDamage, null, DamageTypes.DamageType.True);
-			}
+			float amount = manager.getUnitStats ().TakeDamage (currentDamage, null, DamageTypes.DamageType.True, myHitContainer);
+			
 			if (PlayerNumber == 1) {
 				PlayerPrefs.SetInt ("TotalPlasmaMineDamage", PlayerPrefs.GetInt ("TotalPlasmaMineDamage") + (int)amount);
 			}
@@ -113,13 +113,6 @@ public class LandMineActivate : VisionTrigger {
 		}
 		Destroy (this.gameObject);	
 	
-	}
-
-
-	public void setSource(GameObject obj)
-	{
-		myVet = obj.GetComponent<UnitStats> ();
-
 	}
 
 }

@@ -42,7 +42,7 @@ public class gravityWell : MonoBehaviour, Modifier {
 	void OnTriggerEnter(Collider other)
 	{
 		explosion e = other.GetComponent<explosion> ();
-		if (e && e.sourceInt != playerOwner) {
+		if (e && e.MyHitContainer.playerNumber != playerOwner) {
 			Destroy (other.gameObject);
 			return;
 		}

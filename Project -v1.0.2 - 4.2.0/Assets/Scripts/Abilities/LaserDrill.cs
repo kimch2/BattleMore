@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LaserDrill : MonoBehaviour {
+public class LaserDrill : DamagerMonoBehavior {
 
 	public static LaserDrill instance;
 
@@ -16,10 +16,9 @@ public class LaserDrill : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		instance = this;
-		
-
+		instance = this;	// There is only suppose to be one drill (for spotters)
 	}
+
 	public GameObject EndEffect;
 	protected MultiShotParticle fireEffect;
 
@@ -126,12 +125,12 @@ public class LaserDrill : MonoBehaviour {
 							shield.takeDamage (50);
 						}
 					} else {
-						currentTarget.myStats.TakeDamage (25, this.transform.root.gameObject, DamageTypes.DamageType.Regular);
+						currentTarget.myStats.TakeDamage (25, this.transform.root.gameObject, DamageTypes.DamageType.Regular, myHitContainer);
 					}
 				
 				} else {
 					
-					currentTarget.myStats.TakeDamage (25, this.transform.root.gameObject, DamageTypes.DamageType.Regular);
+					currentTarget.myStats.TakeDamage (25, this.transform.root.gameObject, DamageTypes.DamageType.Regular, myHitContainer);
 				}
 			}
 		}

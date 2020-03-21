@@ -19,7 +19,7 @@ public class SkillShotAbil : TargetAbility
         InitializeCharges();
         if (!myHitContainer)
         {
-            OnHitContainer.CreateDefaultContainer(myManager, Name);
+            OnHitContainer.CreateDefaultContainer(myManager.gameObject, myManager, Name);
         }
     }
 

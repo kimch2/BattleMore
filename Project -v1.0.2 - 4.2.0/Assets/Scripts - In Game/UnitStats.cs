@@ -371,12 +371,24 @@ public class UnitStats : MonoBehaviour {
 		return attackPriority + (((defensePri & agressionPriority) > 0) ? 1 :0); 
 	}
 
+    public void PayLife(float amount)
+    {
+        health -= amount;
 
-	public float TakeDamage(float amount, GameObject source, DamageTypes.DamageType type, UnitManager srcManager = null)
+        if (health < 1)
+        {
+            kill(null);
+        }
+        else
+        {
+            updateHealthBar();
+        }
+    }
+
+
+	public float TakeDamage(float amount, GameObject source, DamageTypes.DamageType type, OnHitContainer sourceHitContianer)
 	{
-
 		if (isUnitType(UnitTypes.UnitTypeTag.Invulnerable)) {
-            Debug.Log("returning 0");
 			return 0;
 		}
 
@@ -396,7 +408,7 @@ public class UnitStats : MonoBehaviour {
 			amount = Mathf.Max (amount - armor, 1);
 		}
 
-		AttackResponse(source, srcManager);
+		AttackResponse(source, sourceHitContianer.myManager);
 
 		if (veternStat != null) {
 			veternStat.UpMitigated(armor);
@@ -408,7 +420,8 @@ public class UnitStats : MonoBehaviour {
 		if (health < 1) {
             if (RunLethalDamage(amount))
             {
-                kill(source, srcManager);
+                sourceHitContianer.UnitKilled();
+                kill(source, sourceHitContianer.myManager);
             }
             else
             {
@@ -418,7 +431,7 @@ public class UnitStats : MonoBehaviour {
 		} else {
 			updateHealthBar ();
 		}
-		
+        sourceHitContianer.RecordDamageDone(amount);
 		return amount;
 	}
 
@@ -541,10 +554,11 @@ public class UnitStats : MonoBehaviour {
 			if (HealthRegenPerSec > 0) {
 				WorldRecharger.main.removeHeal(this);
 			}
-			
+
+			/*
 			if (srcManager) {
 				srcManager.myStats.upKills ();
-			}
+			}*/
 			
 				//fix this when we have multiplayer games, here for optimizations?
 			myManager.myRacer.UnitDied (supply, myManager);

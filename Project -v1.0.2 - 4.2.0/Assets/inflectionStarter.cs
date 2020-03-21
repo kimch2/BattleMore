@@ -39,7 +39,7 @@ public class inflectionStarter : MonoBehaviour, Notify{
 			} else {
 				GameObject obj = (GameObject)Instantiate (barrier, target.transform.position, target.transform.rotation);
 				obj.transform.SetParent (target.transform);
-				obj.GetComponent<KineticBarrier> ().source = GetComponent<Projectile>().getVet();
+				obj.GetComponent<KineticBarrier> ().myHitContainer = GetComponent<Projectile>().MyHitContainer;
 
 			}
 		}

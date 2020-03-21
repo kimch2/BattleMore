@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DeathInjector : IEffect
+public class DeathInjector : DamagerIeffect
 {
 
 	public float DamageTime =15;
@@ -12,11 +12,10 @@ public class DeathInjector : IEffect
 	public string toSpawn;
     public GameObject toSpawnObject;
 	GameObject myEffect;
-	// Use this for initialization
 
 
-	void Start () {
-
+	void Start ()
+    {
 		if (onTarget)
         {            
             if (myEffect)
@@ -47,7 +46,7 @@ public class DeathInjector : IEffect
             yield return new WaitForSeconds(1);
             if (DamageAmount > 0)
             {
-               OnTargetManager.myStats.TakeDamage(DamageAmount, null, DamageTypes.DamageType.True);
+               OnTargetManager.myStats.TakeDamage(DamageAmount, null, DamageTypes.DamageType.True, myHitContainer);
             }
         }
 		Destroy (myEffect);
@@ -79,7 +78,7 @@ public class DeathInjector : IEffect
         UnitManager manag = source.GetComponent<UnitManager>();
         if (manag && manag.PlayerOwner == target.PlayerOwner) // Gives this ability to friends
         {
-            CopyIEffect(target, false);
+            CopyIEffect(target, false);           
         }
         else
         {

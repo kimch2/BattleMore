@@ -48,6 +48,7 @@ Transform:
   - {fileID: 457724}
   - {fileID: 435298}
   - {fileID: 224761568806375796}
+  - {fileID: 5854299819426197288}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -179,7 +180,6 @@ MonoBehaviour:
   deathCorpse: {fileID: 1380990391213996, guid: efef66e0b595e7043a683a141597b001,
     type: 3}
   deathEffect: {fileID: 0}
-  takeDamageEffect: {fileID: 0}
   UnitPortrait: {fileID: 0}
   goodBuffs: []
   badBuffs: []
@@ -396,6 +396,7 @@ MonoBehaviour:
     myParticle: {fileID: 0}
   damagePoint: 0
   AttackDelay: 0
+  myHitContainer: {fileID: 6211294494227952920}
   cantAttackTypes: 0a000000020000000100000012000000
   extraDamage:
   - type: 8
@@ -2009,3 +2010,55 @@ Transform:
   m_Father: {fileID: 4330532584832756}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6134829428660254849
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5854299819426197288}
+  - component: {fileID: 6211294494227952920}
+  m_Layer: 0
+  m_Name: OnHitContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5854299819426197288
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6134829428660254849}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -238.33392, y: 8.801025, z: -265.18832}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 430480}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6211294494227952920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6134829428660254849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95cc792f619723c46b19c319c7e01d3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toApply: []
+  OnKill:
+    m_PersistentCalls:
+      m_Calls: []
+  myManager: {fileID: 11499036}
+  source: {fileID: 0}
+  playerNumber: 0
+  FriendlyFireRatio: 0
+  AutoAddTriggers: 1

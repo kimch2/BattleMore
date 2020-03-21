@@ -1,5 +1,57 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &256806627443495642
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4676651732539490506}
+  - component: {fileID: 668872461434807940}
+  m_Layer: 0
+  m_Name: WeaponOnHitContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4676651732539490506
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 256806627443495642}
+  m_LocalRotation: {x: -0, y: -0.99990135, z: -0, w: 0.014049542}
+  m_LocalPosition: {x: 297.4341, y: 13.00424, z: 337.65955}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2899125463594918699}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &668872461434807940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 256806627443495642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95cc792f619723c46b19c319c7e01d3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toApply: []
+  OnKill:
+    m_PersistentCalls:
+      m_Calls: []
+  myManager: {fileID: 0}
+  source: {fileID: 0}
+  playerNumber: 0
+  FriendlyFireRatio: 0
+  AutoAddTriggers: 1
 --- !u!1 &2899125462803928641
 GameObject:
   m_ObjectHideFlags: 0
@@ -523,6 +575,7 @@ Transform:
   - {fileID: 2899125463282091831}
   - {fileID: 2899125462846408518}
   - {fileID: 2899125463655965757}
+  - {fileID: 4676651732539490506}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 178.39, z: 0}
@@ -767,7 +820,7 @@ MonoBehaviour:
     myParticle: {fileID: 0}
   damagePoint: 0.2
   AttackDelay: 0.52
-  myHitContainer: {fileID: 0}
+  myHitContainer: {fileID: 668872461434807940}
   cantAttackTypes: 
   extraDamage: []
   projectile: {fileID: 1000012881470146, guid: 6282b22819b422947af7757b6f753c6f, type: 3}

@@ -7,8 +7,6 @@ public class DragBombDamager : VisionTrigger
 	public float velocityDamageMultiplier = 1.5f;
 	public float explodeDamage;
 	public GameObject explosionO;
-	public UnitManager Source;
-	public VeteranStats vetSource;
 	public float chainLength = 60;
 
 	public LineRenderer lineRender;
@@ -24,8 +22,9 @@ public class DragBombDamager : VisionTrigger
 	public AudioSource secondaryAudio;
 
 	public AudioClip TimerSound;
+    public OnHitContainer myHitContainer;
 
-
+    GameObject Source;
 	//Deal damage equal to speed of bombs
 
 	private void Awake()
@@ -33,22 +32,27 @@ public class DragBombDamager : VisionTrigger
 		detachTime = Time.time + DragDuration;
 		ExplodeTime = Time.time + DragDuration + 3 + UnityEngine.Random.value;
 		StartCoroutine(Drag());
+        
 	}
+    private void Start()
+    {
+        if (!myHitContainer)
+        {
+            myHitContainer = OnHitContainer.CreateDefaultContainer(this.gameObject, null, "DragBomb");
+        }
+    }
 
-	private void Update()
+    private void Update()
 	{
 		myAudio.volume = RBody.velocity.magnitude / 40;
 	}
 
-	public void setSource(GameObject source)
+	public void setSource(OnHitContainer source)
 	{
+        myHitContainer = source;
 		RBody = GetComponent<Rigidbody>();
-		Source = source.GetComponent<UnitManager>();
-
-		vetSource = Source.myStats.veternStat;
-		PlayerNumber = (Source.PlayerOwner == 1 ? 2 : 1);
-
-
+        Source = source.myManager.gameObject;
+		PlayerNumber = (myHitContainer.playerNumber == 1 ? 2 : 1);
 	}
 
 	float detachTime;
@@ -60,9 +64,9 @@ public class DragBombDamager : VisionTrigger
 		for (float i = 0; i < 1f; i += Time.deltaTime)
 		{
 
-			if (Source)
+			if (myHitContainer.myManager)
 			{
-				Vector3 force = (Source.transform.position - transform.position) * Time.deltaTime * 120;
+				Vector3 force = (myHitContainer.myManager.transform.position - transform.position) * Time.deltaTime * 120;
 				force.y = -1;
 				RBody.AddForce(force);
 			}
@@ -76,7 +80,7 @@ public class DragBombDamager : VisionTrigger
 
 		for (float i = 0; i < DragDuration - 2f; i += Time.deltaTime)
 		{
-			if (Source)
+			if (myHitContainer.myManager)
 			{
 				pullChain();
 			}
@@ -90,7 +94,7 @@ public class DragBombDamager : VisionTrigger
 		myRenderer.material = highlightMaterial;
 		for (float i = 0; i < 2f; i += Time.deltaTime)
 		{
-			if (Source)
+			if (myHitContainer.myManager)
 			{
 				pullChain();
 			}
@@ -131,7 +135,7 @@ public class DragBombDamager : VisionTrigger
 
 	public void SecondClick()
 	{
-		Source = null;
+        myHitContainer.myManager = null;
 	}
 
 	void pullChain()
@@ -169,16 +173,7 @@ public class DragBombDamager : VisionTrigger
 		explosion Escript = explode.GetComponent<explosion>();
 		if (Escript)
 		{
-			if (Source)
-			{
-				Escript.setSource(Source.gameObject);
-			}
-			Escript.damageAmount = explodeDamage;
-			Escript.setVeteran(vetSource);
-		}
-		else
-		{
-			explode.SendMessage("setVeteran", vetSource, SendMessageOptions.DontRequireReceiver);
+            Escript.Initialize(explodeDamage, myHitContainer);
 		}
 		Destroy(this.gameObject);
 	}
@@ -192,7 +187,7 @@ public class DragBombDamager : VisionTrigger
 		}
 		else
 		{
-			manager.myStats.TakeDamage(RBody.velocity.magnitude * velocityDamageMultiplier, Source != null ? Source.gameObject : null, DamageTypes.DamageType.Regular, Source);
+			manager.myStats.TakeDamage(RBody.velocity.magnitude * velocityDamageMultiplier, Source != null ? Source.gameObject : null, DamageTypes.DamageType.Regular, myHitContainer);
 		}
 	}
 

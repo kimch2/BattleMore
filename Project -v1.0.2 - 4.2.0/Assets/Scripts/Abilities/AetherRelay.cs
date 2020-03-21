@@ -8,8 +8,6 @@ public class AetherRelay : Ability, AllySighted,EnemySighted{
 	List<UnitStats> enemyStats = new List<UnitStats> ();
 	public float energyChargeRate;
 
-
-
 	public MultiShotParticle myEffect;
 	public GameObject chargeEffect;
 
@@ -17,7 +15,7 @@ public class AetherRelay : Ability, AllySighted,EnemySighted{
 	bool turnedOn;
     // Use this for initialization
     public override void Start()
-    { 
+    {
         myType = type.activated;
 		myManager.AddAllySighted (this);
 		myManager.AddEnemySighted (this);
@@ -43,7 +41,7 @@ public class AetherRelay : Ability, AllySighted,EnemySighted{
 
 				}
 				else{
-				myManager.getUnitStats ().TakeDamage (.1f, this.gameObject,DamageTypes.DamageType.Regular);
+				myManager.getUnitStats ().TakeDamage (.1f, this.gameObject,DamageTypes.DamageType.Regular, myHitContainer);
 				myManager.myStats.changeEnergy (-34.9f);
 					if (soundEffect) {
 						SoundManager.PlayOneShotSound(audioSrc, soundEffect);
@@ -53,7 +51,7 @@ public class AetherRelay : Ability, AllySighted,EnemySighted{
 					foreach (UnitStats us in enemyStats) {
 						if (us) {
 							if (Vector3.Distance (us.transform.position, this.transform.position) < 40) {
-								float actual = us.TakeDamage (damageRate, this.gameObject, DamageTypes.DamageType.Regular);
+								float actual = us.TakeDamage (damageRate, this.gameObject, DamageTypes.DamageType.Regular, myHitContainer);
 							myManager.myStats.veternStat.UpdamageDone (actual);
 							}
 						}
@@ -133,7 +131,7 @@ public class AetherRelay : Ability, AllySighted,EnemySighted{
 		turnedOn = !turnedOn;
 		autocast = turnedOn;
 		if (turnedOn) {
-			myManager.getUnitStats ().TakeDamage (.1f, this.gameObject, DamageTypes.DamageType.Regular);
+			myManager.getUnitStats ().TakeDamage (.1f, this.gameObject, DamageTypes.DamageType.Regular, myHitContainer);
 			myManager.getUnitStats ().changeEnergy (.1f);
 			myEffect.continueEffect ();
 			myCost.payCost ();

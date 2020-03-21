@@ -101,6 +101,58 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1 &9000027926841780342
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5723891890845227526}
+  - component: {fileID: 7931516649009217970}
+  m_Layer: 0
+  m_Name: OnHitContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5723891890845227526
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9000027926841780342}
+  m_LocalRotation: {x: -0, y: -0.99990135, z: -0, w: 0.014049542}
+  m_LocalPosition: {x: 382.4926, y: 13.004236, z: 351.17636}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 9125053377235848860}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7931516649009217970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9000027926841780342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95cc792f619723c46b19c319c7e01d3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toApply: []
+  OnKill:
+    m_PersistentCalls:
+      m_Calls: []
+  myManager: {fileID: 9125053377235848859}
+  source: {fileID: 0}
+  playerNumber: 0
+  FriendlyFireRatio: 0
+  AutoAddTriggers: 1
 --- !u!1 &9125053376453000182
 GameObject:
   m_ObjectHideFlags: 0
@@ -623,6 +675,7 @@ Transform:
   - {fileID: 9125053377132784256}
   - {fileID: 9125053376487385841}
   - {fileID: 9125053377305282954}
+  - {fileID: 5723891890845227526}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 178.39, z: 0}
@@ -1018,7 +1071,7 @@ MonoBehaviour:
   firePoints: []
   damagePoint: 0.2
   AttackDelay: 0.5
-  myHitContainer: {fileID: 0}
+  myHitContainer: {fileID: 7931516649009217970}
   cantAttackTypes: 
   extraDamage: []
   projectile: {fileID: 7576047930380089011, guid: dd134072969f6514f8fe15c30a857a36,

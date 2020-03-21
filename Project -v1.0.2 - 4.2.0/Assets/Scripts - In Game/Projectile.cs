@@ -9,8 +9,8 @@ public  class Projectile : MonoBehaviour {
 	public UnitManager target;
     [HideInInspector]
     public GameObject Source;
-    public int sourceInt = 1;
-    protected VeteranStats vetSource;
+
+    //protected VeteranStats vetSource;
     [HideInInspector]
     public OnHitContainer MyHitContainer;
 
@@ -78,16 +78,13 @@ public  class Projectile : MonoBehaviour {
 		}
 	}
 
-	public void Initialize(UnitManager targ, float dam, UnitManager src, OnHitContainer hitContain)
+	public void Initialize(UnitManager targ, float dam, OnHitContainer hitContain)
 	{
 		target = targ;
         if (dam >= 0)
         {
             damage = dam;
         }
-		//Source = src.gameObject;
-		sourceInt = src.PlayerOwner;
-		vetSource = src.myStats.veternStat;
         MyHitContainer = hitContain;
         setup();
 	}
@@ -169,12 +166,6 @@ public  class Projectile : MonoBehaviour {
             Terminate(null);
         }
 	}
-		
-
-	public VeteranStats getVet()
-	{
-		return vetSource;
-	}
 
 	public virtual void Terminate(UnitManager target)
 	{
@@ -188,11 +179,10 @@ public  class Projectile : MonoBehaviour {
 			GameObject explode = (GameObject)Instantiate (explosionO, transform.position, Quaternion.identity);
 
 			explosion Escript = explode.GetComponent<explosion> ();
-			if (Escript) {
-                    Escript.Initialize(Source, vetSource, this.damage, MyHitContainer, sourceInt);
-			} else {
-					explode.SendMessage("setVeteran", vetSource ,SendMessageOptions.DontRequireReceiver);
-			}
+			if (Escript)
+                {
+                    Escript.Initialize(this.damage, MyHitContainer);
+			    }
 		    }
 
             if (target && (!explosionO || explosionO && SepDamWithExplos))
@@ -203,18 +193,7 @@ public  class Projectile : MonoBehaviour {
                 }
 
                 // Check if Target is still alive after OnHit effects?
-                float total = target.myStats.TakeDamage(damage, Source, damageType, vetSource != null ? vetSource.myUnit : null);
-                if (vetSource != null)
-                {
-                    vetSource.UpdamageDone(total);
-                }
-
-                if (target == null && vetSource.myUnit)
-                {
-                    {
-                        vetSource.myUnit.cleanEnemy();
-                    }
-                }
+                float total = target.myStats.TakeDamage(damage, Source, damageType, MyHitContainer);
             }
                 if (SpecialEffect)
                 {
@@ -252,15 +231,8 @@ public  class Projectile : MonoBehaviour {
 
 
 	public void setSource(GameObject so)
-	{		
-		//Source = so;
-		UnitManager SourceMan = so.GetComponent<UnitManager> ();
-		if (SourceMan) {
-			sourceInt = SourceMan.PlayerOwner;
-            vetSource = SourceMan.myStats.veternStat;
-		} else {
-			sourceInt = 1;
-		}
+	{
+        MyHitContainer = so.GetComponent<OnHitContainer>();
 	}
 	
 	

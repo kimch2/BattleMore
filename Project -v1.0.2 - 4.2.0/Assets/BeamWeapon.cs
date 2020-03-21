@@ -34,12 +34,12 @@ public class BeamWeapon : IWeapon{
 						}
 					} else {
 					CreateEndEffect (target.transform.position + Vector3.up*2);
-					target.myStats.TakeDamage (damage, this.transform.root.gameObject, DamageTypes.DamageType.Regular);
+					target.myStats.TakeDamage (damage, this.transform.root.gameObject, DamageTypes.DamageType.Regular, myHitContainer);
 					}
 
 				} else {
 				CreateEndEffect (target.transform.position + Vector3.up*2);
-				target.myStats.TakeDamage (damage, this.transform.root.gameObject, DamageTypes.DamageType.Regular);
+				target.myStats.TakeDamage (damage, this.transform.root.gameObject, DamageTypes.DamageType.Regular, myHitContainer);
 				}
 			}
 

@@ -2,21 +2,14 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class BackLashAura : MonoBehaviour, Notify {
+public class BackLashAura : DamagerMonoBehavior, Notify {
 
 	private int numberOfClouds = 0;
 	List<IWeapon> myweap;
 	UnitStats myStats;
 	UnitManager manage;
 	UnitStats source;
-	// Use this for initialization
-	void Start () {
 
-	}
-
-	// Update is called once per frame
-	void Update () {
-	}
 
 	public void Initialize(UnitStats sor)
 	{source = sor;
@@ -45,9 +38,7 @@ public class BackLashAura : MonoBehaviour, Notify {
 			UnitUtility.removeWeaponTrigger (manage, this);
 
 			Destroy (this);
-
 		}
-
 	}
 
 
@@ -55,7 +46,7 @@ public class BackLashAura : MonoBehaviour, Notify {
 	{if (source) {
 			source.heal (damage / 4);
 		}
-		myStats.TakeDamage (damage / 2, source.gameObject, DamageTypes.DamageType.Regular);
+		myStats.TakeDamage (damage / 2, source.gameObject, DamageTypes.DamageType.Regular, myHitContainer);
 
 		return damage;
 	}

@@ -140,7 +140,6 @@ GameObject:
   - component: {fileID: 8193936695904740046}
   - component: {fileID: 9143385082240520952}
   - component: {fileID: 1258512011954728999}
-  - component: {fileID: 8230322688552708464}
   m_Layer: 0
   m_Name: Catacombs
   m_TagString: Untagged
@@ -160,6 +159,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 683014590528030563}
+  - {fileID: 8697671822825896219}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -289,23 +289,61 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95cc792f619723c46b19c319c7e01d3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toApply: []
+  toApply:
+  - {fileID: 541687854896664663}
+  OnKill:
+    m_PersistentCalls:
+      m_Calls: []
   myManager: {fileID: 0}
+  source: {fileID: 0}
+  playerNumber: 0
   FriendlyFireRatio: 0
   AutoAddTriggers: 1
---- !u!114 &8230322688552708464
+--- !u!1 &6089965389389993217
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8697671822825896219}
+  - component: {fileID: 541687854896664663}
+  m_Layer: 0
+  m_Name: GameObject (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8697671822825896219
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6089965389389993217}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 9, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4930069448133604439}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &541687854896664663
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4380317571634321993}
-  m_Enabled: 1
+  m_GameObject: {fileID: 6089965389389993217}
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6308cfa329f060e47b0040d0ae542a2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   onTarget: 0
+  myHitContainer: {fileID: 0}
   DamageTime: 5
   DamageAmount: 0
   effect: {fileID: 0}

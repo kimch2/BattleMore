@@ -14,11 +14,11 @@ public class BoneQuillAbil : SkillShotAbil
 
     protected override void AlterProjectile(SkillShotProjectile proj)
     {
-
+        /*
         proj.OnKill.AddListener(() =>
         {
             myCost.cooldownTimer -= 2;
-        });
+        });*/
     }
 
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using DigitalRuby.SoundManagerNamespace;
-public class ChainWhip : MonoBehaviour {
+public class ChainWhip : DamagerMonoBehavior {
 
 
 	public ChainWhip childWhip;
@@ -25,7 +25,7 @@ public class ChainWhip : MonoBehaviour {
 
 	public List<Vector3> ChainExtensionPoints;
 
-	void Start()
+   void Start()
 	{
 		if (childWhip) {
 
@@ -34,8 +34,7 @@ public class ChainWhip : MonoBehaviour {
 				//mySpinner = StartCoroutine (UpdateRotation ());
 			}
 		}
-
-	}
+    }
 
 	void OnTriggerEnter(Collider other)
 	{
@@ -69,7 +68,7 @@ public class ChainWhip : MonoBehaviour {
 		
 					} else if (!childWhip) {
 						float distance = Vector3.Distance (transform.position, manage.transform.position);
-						float amount = manage.myStats.TakeDamage (maxDamage * (distance / maxRadius), myManager.gameObject, DamageTypes.DamageType.Regular);
+						float amount = manage.myStats.TakeDamage (maxDamage * (distance / maxRadius), myManager.gameObject, DamageTypes.DamageType.Regular, myHitContainer);
 						myManager.myStats.veteranDamage (amount);
 						SoundManager.PlayOneShotSound (audioSource, hitSound);
 		

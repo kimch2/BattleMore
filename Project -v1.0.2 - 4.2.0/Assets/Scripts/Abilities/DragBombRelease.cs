@@ -48,7 +48,6 @@ public class DragBombRelease : Ability
 	override
 	public void Activate()
 	{
-
 		if (!firstClickHappened)
 		{
 			if (!myCost || myCost.canActivate(this))
@@ -66,7 +65,7 @@ public class DragBombRelease : Ability
 				for (int i = 0; i < numberToMake.Count; i++)
 				{
 					GameObject newObj = Instantiate<GameObject>(ThingToMake, transform.rotation * numberToMake[i].position + transform.position, Quaternion.identity, null);
-					newObj.SendMessage("setSource", myManager.gameObject, SendMessageOptions.DontRequireReceiver);
+                    newObj.GetComponent<DragBombDamager>().setSource(myHitContainer);
 					createdObjects.Add(newObj);
 				}
 			}

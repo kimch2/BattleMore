@@ -59,7 +59,7 @@ public class SplitterShot : Projectile {
 			//foreach(Notify not in triggers)
 			//{not.trigger(this.gameObject,this.gameObject, this.target, damage);}
 
-			this.target.GetComponent<UnitStats>().TakeDamage(damage,Source, DamageTypes.DamageType.Regular);
+			this.target.GetComponent<UnitStats>().TakeDamage(damage,Source, DamageTypes.DamageType.Regular, MyHitContainer);
 			if(this.target == null)
 			{Source.GetComponent<UnitManager>().enemies.RemoveAll(item => item == null);}
 		}

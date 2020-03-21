@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SanguinAura : MonoBehaviour {
+public class SanguinAura : DamagerMonoBehavior {
 
 
 
@@ -32,7 +32,7 @@ public class SanguinAura : MonoBehaviour {
 			float amount = Mathf.Min (myStats.health - 10, 5);
 			if (amount > 0) {
 				if (sourceStats) {
-					sourceStats.heal (myStats.TakeDamage (amount, sourceStats.gameObject, DamageTypes.DamageType.True) / 2);
+					sourceStats.heal (myStats.TakeDamage (amount, sourceStats.gameObject, DamageTypes.DamageType.True, myHitContainer) / 2);
 				} else {
 					Destroy (myEffect);
 					Destroy (this);

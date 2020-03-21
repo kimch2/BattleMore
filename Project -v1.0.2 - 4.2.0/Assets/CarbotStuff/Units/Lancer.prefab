@@ -1517,7 +1517,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toApply: []
-  myManager: {fileID: 0}
+  OnKill:
+    m_PersistentCalls:
+      m_Calls: []
+  myManager: {fileID: 1410361477267233332}
+  source: {fileID: 0}
+  playerNumber: 0
   FriendlyFireRatio: 0
   AutoAddTriggers: 1
 --- !u!114 &2769622501623093336
@@ -1533,7 +1538,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: 
-  Descripton: 
+  Descripton: Ends massive damage buff and knockback after first attack happens
   iconPic: {fileID: 0}
   myCost: {fileID: 0}
   continueMoving: 0

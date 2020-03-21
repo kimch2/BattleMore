@@ -96,6 +96,7 @@ public class ChangeAmmo : Ability {
 			myCost.payCost();
 		}
 
+        PreviousOnHitContianer = myWeapon.myHitContainer;
 		autocast = true;
 		myWeapon.projectile = myAmmo;
         myWeapon.myHitContainer = NewOnHitContainer;

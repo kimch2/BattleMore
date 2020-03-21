@@ -16,7 +16,6 @@ public class MortarProjectile : Projectile {
 
     
 
-
     protected override void Update () {
 		/*
 		if (Vector3.Distance (transform.position, lastLocation) < 2.5f) {
@@ -49,7 +48,7 @@ public class MortarProjectile : Projectile {
 			control = GetComponent<CharacterController> ();
 		}
 
-		if (TargetIndicator != null && vetSource.myUnit.PlayerOwner != 1 ) {
+		if (TargetIndicator != null && MyHitContainer.playerNumber != 1 ) {
 			TargetIndicator.GetComponentInChildren<Light> ().color = Color.red;
 		}
 

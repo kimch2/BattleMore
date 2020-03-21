@@ -4,9 +4,6 @@ using System.Collections.Generic;
 
 public class explosion : MonoBehaviour {
 
-    UnitManager mySrcMan;
-	public int sourceInt = 1;
-    VeteranStats vetStats;
 
     public GameObject particleEff;
 
@@ -31,7 +28,7 @@ public class explosion : MonoBehaviour {
 
 		if (particleEff) {
 			GameObject obj = 	(GameObject)Instantiate (particleEff, this.gameObject.transform.position, Quaternion.identity);
-			obj.SendMessage ("setOwner", sourceInt, SendMessageOptions.DontRequireReceiver);
+			obj.SendMessage ("setOwner", MyHitContainer.playerNumber, SendMessageOptions.DontRequireReceiver);
 
 		}
 
@@ -48,19 +45,10 @@ public class explosion : MonoBehaviour {
 	public void setSource(GameObject sr)
 	{
 		if (sr) {
-			mySrcMan = sr.GetComponent<UnitManager> ();
-		}
-		if (mySrcMan) {
-			sourceInt = mySrcMan.PlayerOwner;
+            MyHitContainer = sr.GetComponent<OnHitContainer>();
 		}
 	}
 
-	public void setVeteran(VeteranStats sr)
-	{
-		mySrcMan = sr.myUnit;
-		vetStats = sr;
-		sourceInt = sr.playerOwner;
-	}
 
 	public void setDamage(float amount)
 	{
@@ -69,24 +57,16 @@ public class explosion : MonoBehaviour {
 	}
 
     //SOmetimes sources are global abilities which are not attached to Units, so we have to pass in additional ownershipInfo
-    public void Initialize(GameObject source, VeteranStats vets, float DamageAmount, OnHitContainer container, int PlayerOwner )
+    public void Initialize(float DamageAmount, OnHitContainer container)
     {
-        mySrcMan = vets.myUnit;
-        vetStats = vets;
         damageAmount = DamageAmount;
         MyHitContainer = container;
         if (!MyHitContainer)
         {
             MyHitContainer = gameObject.AddComponent<OnHitContainer>();
-            Debug.LogError("No HitContainer for this object " + this.gameObject + " sourced from " + source);
+            Debug.LogError("No HitContainer for this object " + this.gameObject + " sourced from " + container.name);
         }
-
-        friendlyAmount = damageAmount * MyHitContainer.FriendlyFireRatio;
-        if (mySrcMan)
-        {
-            source = mySrcMan.gameObject;
-        }
-        sourceInt = PlayerOwner;
+        friendlyAmount = damageAmount * MyHitContainer.FriendlyFireRatio;  
     }
 
 
@@ -96,7 +76,7 @@ public class explosion : MonoBehaviour {
 
         foreach (RaceManager manager in GameManager.main.playerList)
         {
-            if (manager.playerNumber == sourceInt)
+            if (manager.playerNumber == MyHitContainer.playerNumber)
                 {
                     if (!AppliesToAlly)
                     {
@@ -107,7 +87,7 @@ public class explosion : MonoBehaviour {
                         TempDamageAmount = damageAmount * MyHitContainer.FriendlyFireRatio;
                     }
                 }
-                else if (manager.playerNumber != sourceInt && !AppliesToEnemy)
+                else if (manager.playerNumber != MyHitContainer.playerNumber && !AppliesToEnemy)
                 {
                     continue;
                 }
@@ -148,7 +128,7 @@ public class explosion : MonoBehaviour {
 			return new Vector2(unit.transform.position.x - transform.position.x, unit.transform.position.z - transform.position.z).sqrMagnitude;
 		}
 		else {
-		return (unit.transform.position - transform.position).sqrMagnitude;
+		    return (unit.transform.position - transform.position).sqrMagnitude;
 		}
 	}
 
@@ -167,13 +147,7 @@ public class explosion : MonoBehaviour {
         MyHitContainer.trigger(this.gameObject, manager, baseAmount);
         if (baseAmount > 0)
         {
-            float total = stats.TakeDamage(baseAmount, mySrcMan ? mySrcMan.gameObject : null, type, mySrcMan);
-            if (mySrcMan)
-            {
-                mySrcMan.myStats.veteranDamage(total);
-            }
-        }
-
-		
+            stats.TakeDamage(baseAmount, MyHitContainer.source, type,MyHitContainer);
+        }	
 	}
 }

@@ -274,7 +274,7 @@ public class AbstractCost : MonoBehaviour {
 		if (stats) {
 			if (health > 0) {
 
-				stats.TakeDamage (health, this.gameObject, DamageTypes.DamageType.True);
+				stats.PayLife (health);
 			}
 			if (energy > 0) {
 				stats.changeEnergy (-energy);

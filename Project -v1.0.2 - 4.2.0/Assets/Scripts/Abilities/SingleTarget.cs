@@ -138,7 +138,7 @@ public class SingleTarget:  TargetAbility {
 
 				if (script) {
                     // SET THE ONHIT CONTAINER!
-					script.Initialize (target.GetComponent<UnitManager>(),0,manage, null);
+					script.Initialize (target.GetComponent<UnitManager>(),0, null);
 
 				} else {
 					proj.SendMessage ("setSource", this.gameObject,SendMessageOptions.DontRequireReceiver);
@@ -176,7 +176,7 @@ public class SingleTarget:  TargetAbility {
 				Projectile script = proj.GetComponent<Projectile> ();
 				if (script) {
                     // SET THE ONHITCONTAINER!
-					script.Initialize (target.GetComponent<UnitManager>(),0, manage, null);
+					script.Initialize (target.GetComponent<UnitManager>(),0, null);
 
 				} else {
 

@@ -3,12 +3,10 @@
 	using System.Collections;
 	using System.Collections.Generic;
 
-	public class MiningSawDamager : MonoBehaviour {
+	public class MiningSawDamager : DamagerMonoBehavior {
 
 
-		private List<UnitStats> enemies = new List<UnitStats> ();
-
-
+	private List<UnitStats> enemies = new List<UnitStats> ();
 	public DamageTypes.DamageType myType = DamageTypes.DamageType.Regular;
 	public int Owner;
 	public GameObject cutEffect;
@@ -17,8 +15,7 @@
 	public float turretRatio = .2f;
 	private AudioSource myAudio;
 	public AudioClip chopSound;
-	public UnitManager myManager;
-	public VeteranStats myVets;
+
 	private int iter = 0;
 
 
@@ -40,11 +37,11 @@
 					foreach (UnitStats s in enemies) {
 
 					if (s.isUnitType (UnitTypes.UnitTypeTag.Turret)) {
-					amount += 	s.TakeDamage (damage * (turretRatio), this.gameObject.gameObject.gameObject, myType,myManager);
+					amount += 	s.TakeDamage (damage * (turretRatio), this.gameObject.gameObject.gameObject, myType,myHitContainer);
 				
 					} else {
 
-					amount += s.TakeDamage (damage, this.gameObject.gameObject.gameObject, myType,myManager);
+					amount += s.TakeDamage (damage, this.gameObject.gameObject.gameObject, myType,myHitContainer);
 
 						iter++;
 						if (iter == 6) {
@@ -56,15 +53,8 @@
 						Instantiate (cutEffect, getImpactLocation (), Quaternion.identity);
 					}
 					//obj.transform.SetParent (this.gameObject.transform);
-					}
-
-			if (myVets!= null) {
-				myVets.UpdamageDone (amount);
+				}
 			}
-
-			}
-
-
 		}
 
 
@@ -105,11 +95,8 @@
 			}
 
 			if (manage.PlayerOwner != Owner) {
-			float amount = manage.myStats.TakeDamage (damage, this.gameObject.gameObject.gameObject, myType, myManager);
-			if (myManager) {
-				myManager.myStats.veteranDamage (amount);
-			}
-				enemies.Add (manage.myStats);
+			manage.myStats.TakeDamage (damage, this.gameObject.gameObject.gameObject, myType, myHitContainer);
+			enemies.Add (manage.myStats);
 
 				return;
 			}

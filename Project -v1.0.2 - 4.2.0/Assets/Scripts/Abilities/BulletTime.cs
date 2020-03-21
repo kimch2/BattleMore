@@ -77,7 +77,7 @@ public class BulletTime : MonoBehaviour {
 
 			Projectile proj = other.GetComponent<Projectile>();
 
-			if (proj.sourceInt != 1)
+			if (proj.MyHitContainer.playerNumber != 1)
 			{
 
 				if (!bulletList.Contains(proj))

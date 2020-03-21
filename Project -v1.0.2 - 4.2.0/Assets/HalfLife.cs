@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class HalfLife : MonoBehaviour {
+public class HalfLife : DamagerMonoBehavior {
 
 
 	public GameObject AcidEffect;
@@ -42,10 +42,10 @@ public class HalfLife : MonoBehaviour {
 			nextActionTime += 3f;
 
 			if (targetStats.health > 20) {
-				targetStats.TakeDamage ((targetStats.health / 2) + 8, null, DamageTypes.DamageType.Penetrating);
+				targetStats.TakeDamage ((targetStats.health / 2) + 8, null, DamageTypes.DamageType.Penetrating, myHitContainer);
 				popper.CreatePopUp ("" + (int)(targetStats.health/2), Color.magenta);
 			} else {
-				targetStats.TakeDamage (18, null, DamageTypes.DamageType.Penetrating);
+				targetStats.TakeDamage (18, null, DamageTypes.DamageType.Penetrating, myHitContainer);
 				popper.CreatePopUp ("" + (int)(10), Color.magenta);
 			}
 		

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Embomb : IEffect, Modifier
+public class Embomb : DamagerIeffect, Modifier
 {
     public float DamageAmount;
     public float radius;
@@ -26,7 +26,7 @@ public class Embomb : IEffect, Modifier
         foreach (UnitManager man in GameManager.GetUnitsInRange(transform.position, GetComponent<UnitManager>().PlayerOwner, radius)){
             
             applyTo(null, man);
-            man.myStats.TakeDamage(DamageAmount, Source, DamageTypes.DamageType.Energy);
+            man.myStats.TakeDamage(DamageAmount, Source, DamageTypes.DamageType.Energy, myHitContainer);
         }
         return damage;
     }

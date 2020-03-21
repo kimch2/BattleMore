@@ -6,8 +6,6 @@ public class SkillShotProjectile  : Projectile {
 
 
     public float TotalRange;
-    public UnityEngine.Events.UnityEvent OnHit;
-    public UnityEngine.Events.UnityEvent OnKill;
     public new void Start()
     {
         AudSrc = GetComponent<AudioSource>();
@@ -22,8 +20,6 @@ public class SkillShotProjectile  : Projectile {
 
     public new void OnSpawn()
     {
-        OnHit.RemoveAllListeners(); // SHOULD THESE CLEAR???
-        OnKill.RemoveAllListeners();
         currentDistance = -3;
     }
 
@@ -101,18 +97,10 @@ public class SkillShotProjectile  : Projectile {
         }
 
         UnitManager manage = col.GetComponent<UnitManager>();
-        if (manage && manage.PlayerOwner != sourceInt)// && manage.PlayerOwner != 3)
+        if (manage && manage.PlayerOwner != MyHitContainer.playerNumber)// && manage.PlayerOwner != 3)
         {
             //Debug.Log("Hit " + manage.gameObject);
-            Terminate(manage);
-            if (!explosionO)
-            {
-                if (!manage || manage.myStats.health <= 0)
-                {
-
-                    OnKill.Invoke();
-                }
-            }      
+            Terminate(manage); 
         }
     }
    

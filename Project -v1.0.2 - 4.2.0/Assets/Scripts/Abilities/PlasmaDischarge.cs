@@ -11,19 +11,13 @@ public class PlasmaDischarge : Ability {
 	 GameObject mychargeUP;
 	public GameObject chargeUpEffect;
 	private float timer;
-	//private Selected select;
-	public MultiShotParticle BoostEffect;
 
 
 	public GameObject explodeEffect;
 	private GameObject popUp;
 
-	// Use this for initialization
-
-
-
 	new void Start () {
-	
+
 		audioSrc = GetComponent<AudioSource>();
 		myType = type.activated;
 	}
@@ -63,9 +57,7 @@ public class PlasmaDischarge : Ability {
 
 			if (!on) {
 				if (myCost.canActivate (this)) {
-					if (BoostEffect) {
-						BoostEffect.continueEffect ();
-					}
+
 					myCost.payCost ();
 					on = true;
 					timer = Time.time + duration;
@@ -88,21 +80,19 @@ public class PlasmaDischarge : Ability {
 
 	public void Deactivate()
 	{on = false;
-	//	Debug.Log ("Deactivating");
-		if (BoostEffect) {
-			BoostEffect.stopEffect ();
-		}
+
 		Destroy (mychargeUP);
 		if (explodeEffect) {
 			Instantiate (explodeEffect, this.transform.position, Quaternion.identity);
 		}
 
-		float totalDamage = 0;
+
+        float BaseDamage = (duration - (timer - Time.time)) * damagePerSecond;
 		foreach(UnitManager obj in myManager.enemies)
 		{
 			if (obj) {
-				UnitStats stat = obj.GetComponent<UnitStats> ();
-				totalDamage += stat.TakeDamage ((duration - (timer - Time.time)) * damagePerSecond, this.gameObject, DamageTypes.DamageType.Regular);
+
+				obj.myStats.TakeDamage (BaseDamage, this.gameObject, DamageTypes.DamageType.Regular, myHitContainer);
 				PopUpMaker.CreateGlobalPopUp ("-" + (int)((duration - (timer - Time.time)) * damagePerSecond), Color.red, obj.transform.position);
 				if (explodeEffect) {
 					Instantiate (explodeEffect, obj.transform.position, Quaternion.identity);
@@ -110,10 +100,8 @@ public class PlasmaDischarge : Ability {
 			}
 		
 		}
-		myManager.myStats.veteranDamage (totalDamage);
+
 		Destroy (popUp);
 
 	}
-
-
 }

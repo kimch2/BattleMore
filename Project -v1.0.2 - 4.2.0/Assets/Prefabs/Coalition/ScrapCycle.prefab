@@ -45,6 +45,7 @@ Transform:
   - {fileID: 4561254927264210}
   - {fileID: 422862}
   - {fileID: 4725144733724560}
+  - {fileID: 8678145091120310100}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -74.089005, z: 0}
@@ -205,7 +206,6 @@ MonoBehaviour:
   deathCorpse: {fileID: 1739742265993824, guid: ce96bf5b9ad3f4f448b7d58631de1668,
     type: 3}
   deathEffect: {fileID: 152850, guid: 78a20778fc7495b47a7794a5850008e1, type: 3}
-  takeDamageEffect: {fileID: 0}
   UnitPortrait: {fileID: 0}
   goodBuffs: []
   badBuffs: []
@@ -291,6 +291,7 @@ MonoBehaviour:
     myParticle: {fileID: 114040335337158422}
   damagePoint: 0.1
   AttackDelay: 0
+  myHitContainer: {fileID: 2276377125029993065}
   cantAttackTypes: 
   extraDamage: []
   projectile: {fileID: 1000012881470146, guid: 6282b22819b422947af7757b6f753c6f, type: 3}
@@ -488,6 +489,7 @@ MonoBehaviour:
   - {fileID: 23237585922020142}
   - {fileID: 23964977397017556}
   - {fileID: 23078341644272420}
+  ColoredSprites: []
   mySkinner: {fileID: 0}
 --- !u!1 &199400
 GameObject:
@@ -7763,7 +7765,7 @@ ParticleSystem:
 --- !u!199 &199480233458209362
 ParticleSystemRenderer:
   serializedVersion: 6
-  m_ObjectHideFlags: 2
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -8698,3 +8700,55 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!1 &255202914021383649
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8678145091120310100}
+  - component: {fileID: 2276377125029993065}
+  m_Layer: 0
+  m_Name: OnHitContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8678145091120310100
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 255202914021383649}
+  m_LocalRotation: {x: -0, y: -0.46088174, z: -0, w: -0.8874616}
+  m_LocalPosition: {x: -841.1874, y: 18.471025, z: 583.529}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 431336}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2276377125029993065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 255202914021383649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95cc792f619723c46b19c319c7e01d3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toApply: []
+  OnKill:
+    m_PersistentCalls:
+      m_Calls: []
+  myManager: {fileID: 11488276}
+  source: {fileID: 0}
+  playerNumber: 0
+  FriendlyFireRatio: 0
+  AutoAddTriggers: 1

@@ -1,0 +1,88 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3980603057419826089
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8784792797825161547}
+  - component: {fileID: 2569595756375911582}
+  - component: {fileID: 6100653087559899510}
+  m_Layer: 0
+  m_Name: TeleportAbility
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8784792797825161547
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3980603057419826089}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2569595756375911582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3980603057419826089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eef456a8386ce27428ccfb5c11b3caea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: TransLocate [S]
+  Descripton: Teleport to any location on the map.
+  iconPic: {fileID: 21300000, guid: 0394ec0661c55ca4d9a81eb7bc0a7b17, type: 3}
+  myCost: {fileID: 6100653087559899510}
+  continueMoving: 0
+  RequiredUnit: []
+  canAutoCast: 0
+  autocast: 0
+  active: 0
+  maxChargeCount: 0
+  chargeCount: -1
+  soundEffect: {fileID: 0}
+  myHitContainer: {fileID: 0}
+  range: 10000
+  target: {fileID: 0}
+  location: {x: 0, y: 0, z: 0}
+  targetArea: {fileID: 21300000, guid: 84683673a3224014692c1a4a5770b8d6, type: 3}
+  areaSize: 10
+  myTargetType: 0
+  CastFromScreenEdge: 0
+  effect: {fileID: 1000010153779520, guid: 1d850f20ac640034598f552f61d52d13, type: 3}
+--- !u!114 &6100653087559899510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3980603057419826089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8565709075defc741b27fcdf0b778b1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showCooldown: 0
+  resourceCosts:
+    MyResources: []
+  health: 0
+  energy: 0
+  cooldown: 20
+  cooldownTimer: 0
+  StartsRefreshed: 1
+  UsedFor: 

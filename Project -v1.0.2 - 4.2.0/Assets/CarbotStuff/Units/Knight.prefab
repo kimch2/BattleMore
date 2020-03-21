@@ -1,5 +1,57 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1440454132041240658
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2248632440178375892}
+  - component: {fileID: 2083217673674382816}
+  m_Layer: 0
+  m_Name: OnHitContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2248632440178375892
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1440454132041240658}
+  m_LocalRotation: {x: -0, y: -0.99990135, z: -0, w: 0.014049542}
+  m_LocalPosition: {x: 287.8383, y: 8.901024, z: 379.0468}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6166594910967440779}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2083217673674382816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1440454132041240658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95cc792f619723c46b19c319c7e01d3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toApply: []
+  OnKill:
+    m_PersistentCalls:
+      m_Calls: []
+  myManager: {fileID: 6166594910967440780}
+  source: {fileID: 0}
+  playerNumber: 0
+  FriendlyFireRatio: 0
+  AutoAddTriggers: 1
 --- !u!1 &5295271081226185885
 GameObject:
   m_ObjectHideFlags: 0
@@ -411,7 +463,7 @@ GameObject:
   - component: {fileID: 6166594910895973021}
   - component: {fileID: 6166594910895973023}
   m_Layer: 9
-  m_Name: GameObject
+  m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -571,6 +623,7 @@ Transform:
   - {fileID: 6166594911322194327}
   - {fileID: 6166594911697060326}
   - {fileID: 6166594910895973021}
+  - {fileID: 2248632440178375892}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 178.39, z: 0}
@@ -807,7 +860,7 @@ MonoBehaviour:
     myParticle: {fileID: 0}
   damagePoint: 0.2
   AttackDelay: 0.52
-  myHitContainer: {fileID: 0}
+  myHitContainer: {fileID: 2083217673674382816}
   cantAttackTypes: 
   extraDamage: []
   projectile: {fileID: 0}

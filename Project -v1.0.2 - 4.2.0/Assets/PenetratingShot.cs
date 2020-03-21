@@ -121,10 +121,10 @@ public class PenetratingShot : Projectile {
 
 			hitGuys.Add (col.gameObject);
 			UnitManager manage = col.GetComponent<UnitManager> ();
-			if (manage && manage.PlayerOwner != sourceInt && manage.PlayerOwner != 3) {
+			if (manage && manage.PlayerOwner != MyHitContainer.playerNumber && manage.PlayerOwner != 3) {
 				
 			
-				manage.getUnitStats ().TakeDamage (damage * (1 - NumGuysHit * PercDamLost * .01f), Source, GetComponent<Projectile> ().damageType);
+				manage.getUnitStats ().TakeDamage (damage * (1 - NumGuysHit * PercDamLost * .01f), Source, GetComponent<Projectile> ().damageType, MyHitContainer);
 				//	Debug.Log ("Dealing " + damage * (1 - NumGuysHit * PercDamLost*.01f) + " to  "+ manage.gameObject );
 				NumGuysHit++;
 				if (SpecialEffect) {
@@ -138,13 +138,6 @@ public class PenetratingShot : Projectile {
 			
 			
 			}
-
-
 		}
-
 	}
-
-
-
-
 }

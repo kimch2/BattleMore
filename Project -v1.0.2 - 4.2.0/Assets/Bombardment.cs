@@ -119,18 +119,8 @@ public class Bombardment : TargetAbility{
 
 		Projectile script = proj.GetComponent<Projectile> ();
         SetOnHitContainer(proj, myDamage, null);
-		//proj.SendMessage ("setSource", this.gameObject, SendMessageOptions.DontRequireReceiver);
-		script.setSource (this.gameObject);
-		if (script) {
-			script.damage = myDamage;
-			script.sourceInt = 1;
-			script.Source = this.gameObject;
-			script.setLocation (hitzone);
-            // FIX THIS BY ADDING A ONHITCONTAINER!!
-            //script.FriendlyFire = FriendlyFire;
-
-		}
-		
+        script.setLocation(hitzone);
+	
 	}
 
 

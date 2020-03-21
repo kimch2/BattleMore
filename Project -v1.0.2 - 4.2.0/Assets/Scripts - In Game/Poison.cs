@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Poison : MonoBehaviour {
+public class Poison : DamagerMonoBehavior{
 
 
 	public GameObject poisonEffect;
@@ -45,7 +45,7 @@ public class Poison : MonoBehaviour {
 
 			nextActionTime = Time.time +  1f;
 
-			targetStats.TakeDamage(damageRate,null, DamageTypes.DamageType.Penetrating);
+			targetStats.TakeDamage(damageRate,null, DamageTypes.DamageType.Penetrating, myHitContainer);
 			targetStats.changeEnergy (-drainEnergyAmount);
 			popper.CreatePopUp ("" + (int)remainingPoison, Color.magenta);
 			remainingPoison -= damageRate;

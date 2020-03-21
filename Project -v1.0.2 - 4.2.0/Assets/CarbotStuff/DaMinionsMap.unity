@@ -5291,13 +5291,13 @@ MonoBehaviour:
   maxChargeCount: 0
   chargeCount: -1
   soundEffect: {fileID: 0}
+  myHitContainer: {fileID: 0}
   range: 100000
   target: {fileID: 0}
   location: {x: 0, y: 0, z: 0}
   targetArea: {fileID: 2800000, guid: e9c6b16507968954bb699410884dd9d6, type: 3}
   areaSize: 50
   myTargetType: 0
-  myHitContainer: {fileID: 0}
   CastFromScreenEdge: 0
   prefab: {fileID: 179344, guid: 733cfa0b0d6178947aefbb88ebc0954d, type: 3}
 --- !u!114 &739680194
@@ -5358,13 +5358,13 @@ MonoBehaviour:
   maxChargeCount: 0
   chargeCount: -1
   soundEffect: {fileID: 0}
+  myHitContainer: {fileID: 0}
   range: 100000
   target: {fileID: 0}
   location: {x: 0, y: 0, z: 0}
   targetArea: {fileID: 2800000, guid: 9dead7b94ebdb144c83e28ac38bed79d, type: 3}
   areaSize: 65
   myTargetType: 0
-  myHitContainer: {fileID: 0}
   CastFromScreenEdge: 0
   Explosion: {fileID: 1000012247445134, guid: 7525c97942ef29e47a6b88c54b738f56, type: 3}
   shotCount: 45
@@ -5416,13 +5416,13 @@ MonoBehaviour:
   maxChargeCount: 0
   chargeCount: -1
   soundEffect: {fileID: 0}
+  myHitContainer: {fileID: 0}
   range: 0
   target: {fileID: 0}
   location: {x: 0, y: 0, z: 0}
   targetArea: {fileID: 2800000, guid: acc72a77f117c3b4d9dd604c44f10e83, type: 3}
   areaSize: 0
   myTargetType: 0
-  myHitContainer: {fileID: 0}
   CastFromScreenEdge: 0
   prefab: {fileID: 164778, guid: baec9ba3686440741b38e2bb0d18544f, type: 3}
 --- !u!114 &739680199
@@ -5471,13 +5471,13 @@ MonoBehaviour:
   maxChargeCount: 0
   chargeCount: -1
   soundEffect: {fileID: 0}
+  myHitContainer: {fileID: 0}
   range: 0
   target: {fileID: 0}
   location: {x: 0, y: 0, z: 0}
   targetArea: {fileID: 2800000, guid: 782809f7d909d1d44ba82eb1647f4647, type: 3}
   areaSize: 50
   myTargetType: 0
-  myHitContainer: {fileID: 0}
   CastFromScreenEdge: 0
   prefab: {fileID: 162976, guid: 2a8104eb86550c9478cd83f1e439fe5c, type: 3}
 --- !u!114 &739680201
@@ -14818,6 +14818,7 @@ MonoBehaviour:
   maxChargeCount: 0
   chargeCount: -1
   soundEffect: {fileID: 0}
+  myHitContainer: {fileID: 0}
   unitToBuild: {fileID: 2124787118008384809, guid: 2d55aa8d3b10e3f4189f046a2bad5a62,
     type: 3}
   buildTime: 1
@@ -14870,6 +14871,7 @@ MonoBehaviour:
   maxChargeCount: 0
   chargeCount: -1
   soundEffect: {fileID: 0}
+  myHitContainer: {fileID: 0}
   unitToBuild: {fileID: 1000013391519144, guid: 209475100dfa9904584829365bd1409b,
     type: 3}
   buildTime: 1
@@ -14923,6 +14925,7 @@ MonoBehaviour:
   maxChargeCount: 0
   chargeCount: -1
   soundEffect: {fileID: 0}
+  myHitContainer: {fileID: 0}
   unitToBuild: {fileID: 6230616036127662998, guid: 6ae02fcc55460d245af1b83f5f39cdfc,
     type: 3}
   buildTime: 1
@@ -14978,6 +14981,7 @@ MonoBehaviour:
   maxChargeCount: 0
   chargeCount: -1
   soundEffect: {fileID: 0}
+  myHitContainer: {fileID: 0}
   unitToBuild: {fileID: 129512, guid: 0bfc026fdf9f2d446a6924a3361db788, type: 3}
   buildTime: 1
   buildRate: 1
@@ -15007,6 +15011,7 @@ MonoBehaviour:
   maxChargeCount: 0
   chargeCount: -1
   soundEffect: {fileID: 0}
+  myHitContainer: {fileID: 0}
   myAugment: {fileID: 0}
   attachPoint: {x: -10.72, y: 11.8, z: 2.02}
   showPoint: 1
@@ -15055,6 +15060,7 @@ MonoBehaviour:
   maxChargeCount: 0
   chargeCount: -1
   soundEffect: {fileID: 0}
+  myHitContainer: {fileID: 0}
   unitToBuild: {fileID: 3058760669349931261, guid: 16d80896b0f196249a2926ff9850dc93,
     type: 3}
   buildTime: 1
@@ -15326,6 +15332,7 @@ MonoBehaviour:
   maxChargeCount: 0
   chargeCount: -1
   soundEffect: {fileID: 0}
+  myHitContainer: {fileID: 0}
   unitToBuild: {fileID: 2469843378734452416, guid: 7cf80e5cb1d654c4da979e8e7ba8ed27,
     type: 3}
   buildTime: 1
@@ -15377,6 +15384,7 @@ MonoBehaviour:
   maxChargeCount: 0
   chargeCount: -1
   soundEffect: {fileID: 0}
+  myHitContainer: {fileID: 0}
   unitToBuild: {fileID: 3578014801401904383, guid: d057d680b5b7b984c9478aaffda00503,
     type: 3}
   buildTime: 1
@@ -24576,6 +24584,7 @@ MonoBehaviour:
   maxChargeCount: 0
   chargeCount: -1
   soundEffect: {fileID: 0}
+  myHitContainer: {fileID: 0}
   unitToBuild: {fileID: 2124787118008384809, guid: 2d55aa8d3b10e3f4189f046a2bad5a62,
     type: 3}
   buildTime: 1
@@ -24669,6 +24678,7 @@ MonoBehaviour:
   maxChargeCount: 0
   chargeCount: -1
   soundEffect: {fileID: 0}
+  myHitContainer: {fileID: 0}
   unitToBuild: {fileID: 1000013391519144, guid: 209475100dfa9904584829365bd1409b,
     type: 3}
   buildTime: 1
@@ -24722,6 +24732,7 @@ MonoBehaviour:
   maxChargeCount: 0
   chargeCount: -1
   soundEffect: {fileID: 0}
+  myHitContainer: {fileID: 0}
   unitToBuild: {fileID: 6230616036127662998, guid: 6ae02fcc55460d245af1b83f5f39cdfc,
     type: 3}
   buildTime: 1
@@ -25431,6 +25442,7 @@ MonoBehaviour:
   maxChargeCount: 0
   chargeCount: -1
   soundEffect: {fileID: 0}
+  myHitContainer: {fileID: 0}
   unitToBuild: {fileID: 3578014801401904383, guid: d057d680b5b7b984c9478aaffda00503,
     type: 3}
   buildTime: 1
@@ -25486,6 +25498,7 @@ MonoBehaviour:
   maxChargeCount: 0
   chargeCount: -1
   soundEffect: {fileID: 0}
+  myHitContainer: {fileID: 0}
   myAugment: {fileID: 0}
   attachPoint: {x: -10.72, y: 11.8, z: 2.02}
   showPoint: 1
@@ -25603,6 +25616,7 @@ MonoBehaviour:
   maxChargeCount: 0
   chargeCount: -1
   soundEffect: {fileID: 0}
+  myHitContainer: {fileID: 0}
   unitToBuild: {fileID: 2469843378734452416, guid: 7cf80e5cb1d654c4da979e8e7ba8ed27,
     type: 3}
   buildTime: 1
@@ -25740,6 +25754,7 @@ MonoBehaviour:
   maxChargeCount: 0
   chargeCount: -1
   soundEffect: {fileID: 0}
+  myHitContainer: {fileID: 0}
   unitToBuild: {fileID: 129512, guid: 0bfc026fdf9f2d446a6924a3361db788, type: 3}
   buildTime: 1
   buildRate: 1
@@ -25787,6 +25802,7 @@ MonoBehaviour:
   maxChargeCount: 0
   chargeCount: -1
   soundEffect: {fileID: 0}
+  myHitContainer: {fileID: 0}
   unitToBuild: {fileID: 3058760669349931261, guid: 16d80896b0f196249a2926ff9850dc93,
     type: 3}
   buildTime: 1

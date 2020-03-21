@@ -584,6 +584,7 @@ Transform:
   - {fileID: 170516707681067870}
   - {fileID: 170516708121994031}
   - {fileID: 170516707840983124}
+  - {fileID: 6775365606485814580}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 178.39, z: 0}
@@ -829,7 +830,7 @@ MonoBehaviour:
     myParticle: {fileID: 0}
   damagePoint: 0.2
   AttackDelay: 0.52
-  myHitContainer: {fileID: 0}
+  myHitContainer: {fileID: 670917849793000259}
   cantAttackTypes: 
   extraDamage: []
   projectile: {fileID: 1000012881470146, guid: 6282b22819b422947af7757b6f753c6f, type: 3}
@@ -1101,7 +1102,7 @@ GameObject:
   - component: {fileID: 170516707840983124}
   - component: {fileID: 170516707840983126}
   m_Layer: 9
-  m_Name: GameObject
+  m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1478,3 +1479,55 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1 &5173926047985952719
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6775365606485814580}
+  - component: {fileID: 670917849793000259}
+  m_Layer: 0
+  m_Name: OnHitContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6775365606485814580
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5173926047985952719}
+  m_LocalRotation: {x: -0, y: -0.99990135, z: -0, w: 0.014049542}
+  m_LocalPosition: {x: 287.83688, y: 8.901024, z: 363.69077}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 170516707779807042}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &670917849793000259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5173926047985952719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95cc792f619723c46b19c319c7e01d3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toApply: []
+  OnKill:
+    m_PersistentCalls:
+      m_Calls: []
+  myManager: {fileID: 170516707779807045}
+  source: {fileID: 0}
+  playerNumber: 0
+  FriendlyFireRatio: 0
+  AutoAddTriggers: 1

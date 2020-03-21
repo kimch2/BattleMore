@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EarthQuake : MonoBehaviour {
+public class EarthQuake : DamagerMonoBehavior {
 
 
 	public Slider cooldownSlider;
@@ -22,8 +22,12 @@ public class EarthQuake : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		enemyRace = GameManager.main.playerList [1];
+        enemyRace = GameManager.main.playerList [1];
 		StartCoroutine (onCooldown ());
+        if (!myHitContainer)
+        {
+            myHitContainer = OnHitContainer.CreateDefaultContainer(this.gameObject, null, "Earthquake");
+        }
 	}
 
 
@@ -91,18 +95,12 @@ public class EarthQuake : MonoBehaviour {
 
 				for (int i = 0; i < unitListCopy.Length; i++) {
 					if(Vector3.Distance(QuakeBuilding.transform.position, unitListCopy[i].transform.position) < maxDistance){
-						unitListCopy[i].myStats.TakeDamage (damage, null, DamageTypes.DamageType.Penetrating);
+						unitListCopy[i].myStats.TakeDamage (damage, null, DamageTypes.DamageType.Penetrating, myHitContainer);
 						unitListCopy[i].metaStatus.Stun(null,this, false, 10);
 					}
 				}
-			}
-				
-
+			}				
 			StartCoroutine (onCooldown ());
-
 		}
-
 	}
-
-
 }

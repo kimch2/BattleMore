@@ -61,7 +61,7 @@ public class barrierShield : MonoBehaviour {
 		
 			Projectile proj = other.GetComponent<Projectile> ();
 
-			if (proj.sourceInt != 1) {
+			if (proj.MyHitContainer.playerNumber != 1) {
 				if (proj.Source) {
 					float dist = Vector3.Distance ( this.gameObject.transform.position,proj.Source.transform.position);
 					if (dist > radius ) {
@@ -72,13 +72,8 @@ public class barrierShield : MonoBehaviour {
 				{					
 					AbsorbShot (proj);
 				}
-
-
-
 			}
 		}
-
-
 	}
 
 
@@ -93,7 +88,7 @@ public class barrierShield : MonoBehaviour {
 
 		Projectile proj = other.GetComponent<Projectile> ();
 
-		if (proj.sourceInt != 1) {
+		if (proj.MyHitContainer.playerNumber != 1) {
 				
 			if (proj.Source) {
 				float dist = Vector3.Distance ( this.gameObject.transform.position,proj.Source.transform.position);
@@ -104,10 +99,8 @@ public class barrierShield : MonoBehaviour {
 			else
 			{					
 				AbsorbShot (proj);
-			}
-			
-			}
-
+			}			
+		}
 	}
 
 

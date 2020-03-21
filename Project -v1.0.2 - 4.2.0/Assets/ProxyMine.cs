@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProxyMine : MonoBehaviour {
+public class ProxyMine : DamagerMonoBehavior {
 
 
 	public int playerOwner;
@@ -71,8 +71,7 @@ public class ProxyMine : MonoBehaviour {
 		if (this.gameObject) {
 			if (explosion) {
 				GameObject obj =  (GameObject)Instantiate (explosion, transform.position, Quaternion.identity);
-				obj.GetComponent<explosion> ().damageAmount = damage;
-				obj.GetComponent<explosion> ().sourceInt = playerOwner;
+				obj.GetComponent<explosion> ().Initialize(damage, myHitContainer);
 			}
 
 			Destroy (this.gameObject);

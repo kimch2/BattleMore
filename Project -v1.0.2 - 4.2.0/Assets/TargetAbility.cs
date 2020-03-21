@@ -15,7 +15,6 @@ public abstract class TargetAbility : Ability
     public enum targetType { ground, unit, skillShot }
     public targetType myTargetType;
     protected GameObject myIndicator;
-    public OnHitContainer myHitContainer;
     public bool CastFromScreenEdge;  
 
     public bool inRange(Vector3 location)
@@ -142,14 +141,14 @@ public abstract class TargetAbility : Ability
         Projectile proj = spawnedObject.GetComponent<Projectile>();
         if (proj)
         {
-            proj.Initialize(target, Damage, myManager, myHitContainer);
+            proj.Initialize(target, Damage, myHitContainer);
             return true;
         }
 
         explosion sploder = spawnedObject.GetComponent<explosion>();
         if (sploder)
         {
-            sploder.Initialize(myManager.gameObject, myManager.myStats.veternStat, Damage, myHitContainer, myManager.PlayerOwner);
+            sploder.Initialize(Damage, myHitContainer);
             return true;
         }
 

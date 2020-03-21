@@ -44,8 +44,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toApply: []
-  myManager: {fileID: 0}
-  FriendlyFireRatio: 0
+  OnKill:
+    m_PersistentCalls:
+      m_Calls: []
+  myManager: {fileID: 5636270701877033817}
+  source: {fileID: 0}
+  playerNumber: 0
+  FriendlyFireRatio: 0.5
   AutoAddTriggers: 1
 --- !u!1 &5636270700693200156
 GameObject:

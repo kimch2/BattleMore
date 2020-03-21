@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AreaDamage : MonoBehaviour {
+public class AreaDamage : DamagerMonoBehavior {
 
 
 	public List<UnitStats> enemies = new List<UnitStats> ();
@@ -21,16 +21,18 @@ public class AreaDamage : MonoBehaviour {
 	protected int iter = 0;
 	public bool NonStack = false;
 
-
 	// Use this for initialization
 	void Start () {
 		myAudio = GetComponent<AudioSource> ();
-
+        if (!myHitContainer)
+        {
+            myHitContainer = OnHitContainer.CreateDefaultContainer(this.gameObject, null, "AreaDamage");
+        }
 		InvokeRepeating ("UpdateDamage", .1f, .2f);
 	}
 
 	// Update is called once per frame
-public	virtual void UpdateDamage () {
+    public	virtual void UpdateDamage () {
 
 		if (enemies.Count > 0) {
 
@@ -43,7 +45,7 @@ public	virtual void UpdateDamage () {
 					}
 				}
 		
-				s.TakeDamage (damage + (s.isUnitType(BonusDamage.type)? BonusDamage.bonus : 0), this.gameObject.gameObject.gameObject, myType);
+				s.TakeDamage (damage + (s.isUnitType(BonusDamage.type)? BonusDamage.bonus : 0), this.gameObject.gameObject.gameObject, myType, myHitContainer);
 		
 				if (showPop) {
 					iter++;
@@ -64,8 +66,6 @@ public	virtual void UpdateDamage () {
 
 	public void setVeteran(VeteranStats vet)
 	{
-
-		Debug.Log ("Setting me " + vet.playerOwner);
 		if (vet!= null) {
 			Owner = vet.playerOwner;
 		}

@@ -355,6 +355,8 @@ Transform:
   - {fileID: 4571945332128754}
   - {fileID: 4116606250834426}
   - {fileID: 224530996740482632}
+  - {fileID: 7713476499546822694}
+  - {fileID: 4903739638935361364}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -313.346, z: 0}
@@ -560,7 +562,6 @@ MonoBehaviour:
   deathCorpse: {fileID: 1527060274604930, guid: f746b119782b0a14a9bb73f59f483aac,
     type: 3}
   deathEffect: {fileID: 152850, guid: 78a20778fc7495b47a7794a5850008e1, type: 3}
-  takeDamageEffect: {fileID: 0}
   UnitPortrait: {fileID: 0}
   goodBuffs: []
   badBuffs: []
@@ -593,6 +594,7 @@ MonoBehaviour:
   firePoints: []
   damagePoint: 0
   AttackDelay: 0
+  myHitContainer: {fileID: 447550161489361605}
   cantAttackTypes: 0a000000
   extraDamage: []
   projectile: {fileID: 146456, guid: 59ad25c8c12c25848bd63af0a0a43754, type: 3}
@@ -929,6 +931,7 @@ MonoBehaviour:
     myParticle: {fileID: 114275307190171694}
   damagePoint: 0
   AttackDelay: 0
+  myHitContainer: {fileID: 2990856547797927009}
   cantAttackTypes: 09000000
   extraDamage: []
   projectile: {fileID: 1000013261760306, guid: 04437cfeaec014e4bada0ddeb2c113ce, type: 3}
@@ -1004,6 +1007,7 @@ MonoBehaviour:
   - {fileID: 23393650016248624}
   - {fileID: 23491620011710370}
   - {fileID: 23438089450761148}
+  ColoredSprites: []
   mySkinner: {fileID: 0}
 --- !u!114 &2176155305774870984
 MonoBehaviour:
@@ -6898,7 +6902,7 @@ ParticleSystem:
 --- !u!199 &199905717496790048
 ParticleSystemRenderer:
   serializedVersion: 6
-  m_ObjectHideFlags: 2
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -12201,7 +12205,7 @@ ParticleSystem:
 --- !u!199 &199812461777170146
 ParticleSystemRenderer:
   serializedVersion: 6
-  m_ObjectHideFlags: 2
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -17851,7 +17855,7 @@ ParticleSystem:
 --- !u!199 &199896422337171062
 ParticleSystemRenderer:
   serializedVersion: 6
-  m_ObjectHideFlags: 2
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -18838,3 +18842,107 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!1 &3218783462595594714
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4903739638935361364}
+  - component: {fileID: 447550161489361605}
+  m_Layer: 0
+  m_Name: AtGOnHitContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4903739638935361364
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3218783462595594714}
+  m_LocalRotation: {x: -0, y: -0.39597714, z: -0, w: 0.9182604}
+  m_LocalPosition: {x: 177.71541, y: -37.548977, z: 193.24872}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 415078}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &447550161489361605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3218783462595594714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95cc792f619723c46b19c319c7e01d3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toApply: []
+  OnKill:
+    m_PersistentCalls:
+      m_Calls: []
+  myManager: {fileID: 11467172}
+  source: {fileID: 0}
+  playerNumber: 0
+  FriendlyFireRatio: 0
+  AutoAddTriggers: 1
+--- !u!1 &7966510896702694723
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7713476499546822694}
+  - component: {fileID: 2990856547797927009}
+  m_Layer: 0
+  m_Name: AtAOnHitContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7713476499546822694
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7966510896702694723}
+  m_LocalRotation: {x: -0, y: -0.39597714, z: -0, w: 0.9182604}
+  m_LocalPosition: {x: 177.71541, y: -37.548977, z: 193.24872}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 415078}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2990856547797927009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7966510896702694723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95cc792f619723c46b19c319c7e01d3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toApply: []
+  OnKill:
+    m_PersistentCalls:
+      m_Calls: []
+  myManager: {fileID: 11467172}
+  source: {fileID: 0}
+  playerNumber: 0
+  FriendlyFireRatio: 0
+  AutoAddTriggers: 1

@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class SquareDamageZone : VisionTrigger {
 
-
 	public DamageTypes.DamageType myType = DamageTypes.DamageType.Regular;
-
+    public OnHitContainer myHitContainer;
 
 	// Use this for initialization
 	void Start () {
 		InvokeRepeating ("UpdateDamage", .1f, .5f);
+        if (!myHitContainer)
+        {
+            myHitContainer = OnHitContainer.CreateDefaultContainer(this.gameObject, null, "SquareZone");
+        }
 	}
 
 	// Update is called once per frame
@@ -20,7 +23,7 @@ public class SquareDamageZone : VisionTrigger {
 
 			InVision.RemoveAll (item => item == null);
 			foreach (UnitManager s in InVision) {
-				s.myStats.TakeDamage (Mathf.Sqrt( s.myStats.Maxhealth), this.gameObject.gameObject.gameObject, myType);
+				s.myStats.TakeDamage (Mathf.Sqrt( s.myStats.Maxhealth), this.gameObject.gameObject.gameObject, myType, myHitContainer);
 			}
 		}
 

@@ -55,7 +55,7 @@ public class inflectionBarrier : MonoBehaviour, Notify {
 	}
 
 
-	public float trigger(GameObject source, GameObject projectile,UnitManager target, float damage)
+	public float trigger(GameObject source, GameObject projectile, UnitManager target, float damage)
 	{
 		//Debug.Log ("Triggering");
 
@@ -69,7 +69,7 @@ public class inflectionBarrier : MonoBehaviour, Notify {
 				proj.Despawn ();
 				if (proj.explosionO) {
 
-					attachedUnit.myStats.TakeDamage (damage,source,DamageTypes.DamageType.Regular);
+					attachedUnit.myStats.TakeDamage (damage,source,DamageTypes.DamageType.Regular, proj.MyHitContainer );
 					explosion Escript =proj.explosionO.GetComponent<explosion> ();
 					if (Escript) {
 						

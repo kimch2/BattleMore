@@ -2,62 +2,46 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Thornmail : MonoBehaviour, Modifier {
+public class Thornmail : DamagerMonoBehavior{
+    
+    //Whenever this unit is attacked, it damaged all units within a radius
 
-	public float damagePerHit;
-	private UnitStats mystats;
-
-	private UnitManager manage;
+	public float damagePerHit = 5;
 	public bool canHitAir;
-	public float Range;
-	public float AllyDamageRatio = .5f;
-
-	// Use this for initialization
-	void Start () {
-		manage = GetComponent<UnitManager> ();
-
-		mystats = GetComponent<UnitStats> ();
-		mystats.addModifier (this);
-	}
+	public float Range = 25;
 
 
-
-
-	public float modify(float damage, GameObject source, DamageTypes.DamageType theType)
-	{
-
+    public void AttackEnemies()
+    {
 		float damageDone = 0;
-		foreach (UnitManager man in manage.enemies) {
+		foreach (UnitManager man in myHitContainer.myManager.enemies) {
 			if (man) {
 				if (!man.myStats.isUnitType (UnitTypes.UnitTypeTag.Structure)) {
 					if (canHitAir || !man.myStats.isUnitType (UnitTypes.UnitTypeTag.Air)) {
 						if (man.myStats.isUnitType (UnitTypes.UnitTypeTag.Turret)) {
 							continue;}
 				
-						if (Vector3.Distance (transform.position, manage.transform.position) <= Range) {
-							damageDone += man.myStats.TakeDamage (damagePerHit, this.gameObject, DamageTypes.DamageType.Regular);		
+						if (Vector3.Distance (transform.position, myHitContainer.myManager.transform.position) <= Range) {
+							damageDone += man.myStats.TakeDamage (damagePerHit, this.gameObject, DamageTypes.DamageType.Regular, myHitContainer);		
 						}
 					}
 				}
 			}
 		}
-		mystats.veteranDamage (damageDone);
 
-		foreach (UnitManager man in manage.allies) {
+		foreach (UnitManager man in myHitContainer.myManager.allies) {
 			if (man) {
 				if (!man.myStats.isUnitType (UnitTypes.UnitTypeTag.Structure)) {
 					if (canHitAir || !man.myStats.isUnitType (UnitTypes.UnitTypeTag.Air)) {
 						if (man.myStats.isUnitType (UnitTypes.UnitTypeTag.Turret)) {
 							continue;}
 
-						if (Vector3.Distance (transform.position, manage.transform.position) <= Range) {
-							man.myStats.TakeDamage (damagePerHit * AllyDamageRatio, this.gameObject, DamageTypes.DamageType.Regular);		
+						if (Vector3.Distance (transform.position, myHitContainer.myManager.transform.position) <= Range) {
+							man.myStats.TakeDamage (damagePerHit * myHitContainer.FriendlyFireRatio, this.gameObject, DamageTypes.DamageType.Regular, myHitContainer);		
 						}
 					}
 				}
 			}
 		}
-
-		return damage;
 	}
 }
