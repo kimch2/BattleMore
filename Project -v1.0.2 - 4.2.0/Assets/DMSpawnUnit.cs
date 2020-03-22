@@ -7,7 +7,9 @@ public class DMSpawnUnit : Ability
     public GameObject ToSpawn;
     public int spawnCount;
     public bool SpawnAtScreenEdge = true;
-    
+    [Tooltip("How many of this unit type are allowed at a time")]
+    public int MaxUnitCount = 50;
+    List<GameObject> CurrentUnits = new List<GameObject>();
 
     public override void Start() // We have this here so other source can call Start and any of this guy's inheriters will have it called instead
     {
@@ -16,7 +18,12 @@ public class DMSpawnUnit : Ability
 
     public override void Activate()
     {
-        
+        CurrentUnits.RemoveAll(item => item == null);
+        if (MaxUnitCount <= CurrentUnits.Count)
+        {
+            return;
+        }
+
         if (myCost)
         {
             myCost.payCost();
@@ -31,9 +38,10 @@ public class DMSpawnUnit : Ability
         {
             if (potentSpawn.supply == 0 || potentSpawn.supply > 0 && myManager.myRacer.hasSupplyAvailable(potentSpawn.supply))
             {
+                
                 float offset = (i+1) * 6 - spawnCount * 3 ;
                 GameObject newGuy = GameObject.Instantiate<GameObject>(ToSpawn, getSpawnLocation() + Vector3.forward * offset, Quaternion.identity);// unitMan.CreateInstance(getSpawnLocation() + Vector3.forward * i * 5, myManager.PlayerOwner);
-                
+                CurrentUnits.Add(newGuy);
                 foreach (UnitManager man in newGuy.GetComponentsInChildren<UnitManager>())
                 {
                     if (myCost)
@@ -57,7 +65,13 @@ public class DMSpawnUnit : Ability
 
     public override continueOrder canActivate(bool error)
     {
-        return new continueOrder(myCost.canActivate(this), false);
+        CurrentUnits.RemoveAll(item => item == null);
+        continueOrder order = new continueOrder(myCost.canActivate(this), false);
+        if (order.canCast)
+        {
+            order.canCast = MaxUnitCount > CurrentUnits.Count;
+        }
+        return order;
     }
 
     public void SetSpawnPointOverride()

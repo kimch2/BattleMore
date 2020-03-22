@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5956441824974435448}
+  - component: {fileID: 990304017521380354}
   m_Layer: 15
   m_Name: SpriteBillboard
   m_TagString: Untagged
@@ -23,14 +24,30 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 93974015849165489}
-  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1460230444408309832}
   m_Father: {fileID: 1460135273514613338}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &990304017521380354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 93974015849165489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d7cb5347282f3b42ba69b6d8643c06e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LookAtCam: {fileID: 0}
+  RandomRotate: 0
+  this_t_: {fileID: 0}
+  mySprite: {fileID: 1631220017858872212}
 --- !u!1 &1465514992492211230
 GameObject:
   m_ObjectHideFlags: 0
@@ -45,7 +62,7 @@ GameObject:
   - component: {fileID: 1562467506656219804}
   - component: {fileID: 1568545671071770010}
   m_Layer: 15
-  m_Name: Split Lightening
+  m_Name: JellyProjectile
   m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -85,7 +102,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 6.41
+  m_Radius: 15
   m_Center: {x: 1.8, y: 1.61, z: 0}
 --- !u!143 &1562467506656219804
 CharacterController:
@@ -119,16 +136,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   Source: {fileID: 0}
-  sourceInt: 2
   MyHitContainer: {fileID: 0}
   damage: 5
-  speed: 5
+  speed: 100
   damageType: 0
   explosionO: {fileID: 0}
   SepDamWithExplos: 0
   SpecialEffect: {fileID: 0}
-  hitTargets: []
-  chargesRemaning: 4
+  chargesRemaning: 3
   nearbyTargets: []
   ShotINstance: {fileID: 1465514992492211230}
   hitlist: {fileID: 0}
@@ -159,7 +174,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1465708876914246872}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -3.46, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 5956441824974435448}
@@ -182,7 +197,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f8f7cb53a618e2a4383982190cfdefcf, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

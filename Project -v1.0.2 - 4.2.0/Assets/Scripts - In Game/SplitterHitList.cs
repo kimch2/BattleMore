@@ -11,20 +11,20 @@ public class SplitterHitList : MonoBehaviour,Notify{
 
 
 	void Start()
-	{this.gameObject.GetComponent<IWeapon> ().triggers.Add (this);
+	{
+        this.gameObject.GetComponent<IWeapon> ().triggers.Add (this);
 		hitTargets = new List<UnitManager> ();
 
 	//	this.gameObject.GetComponent<IWeapon> ().attackPeriod = chargeCount * 2;
 	}
 
-
-
-
+    
 	public float trigger(GameObject source,GameObject proj, UnitManager target, float damage)
-		{
+	{
 
 		//Debug.Log ("Clearing the list");
 		proj.GetComponent<SplitterShot> ().chargesRemaning = chargeCount;
+        proj.GetComponent<SplitterShot>().hitlist = this;
 		hitTargets.Clear ();
 		hitTargets.Add (target);
 

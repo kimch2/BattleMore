@@ -654,8 +654,17 @@ public class RaceManager : MonoBehaviour, ManagerWatcher {
 
                 unitsLost++;
 
-                foreach (LethalDamageinterface trigger in deathTrigger) {
-                    trigger.lethalDamageTrigger(Unit, deathSource);
+                bool clearList = false;
+                foreach (LethalDamageinterface trigger in deathTrigger)
+                {
+                    if (trigger != null)
+                    {
+                        trigger.lethalDamageTrigger(Unit, deathSource);
+                    }
+                }
+                if (clearList)
+                {
+                    deathTrigger.RemoveAll(item => item == null);
                 }
             }
         }

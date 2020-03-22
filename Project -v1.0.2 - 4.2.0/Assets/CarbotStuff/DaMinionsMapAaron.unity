@@ -5371,6 +5371,7 @@ MonoBehaviour:
   myDamage: 60
   FriendlyFire: 1
   shakeTheCamera: 1
+  timeBetweenShots: 0.087
 --- !u!114 &739680197
 MonoBehaviour:
   m_ObjectHideFlags: 0

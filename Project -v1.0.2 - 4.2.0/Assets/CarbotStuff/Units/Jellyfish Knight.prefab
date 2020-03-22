@@ -502,6 +502,7 @@ GameObject:
   - component: {fileID: 434365666581434847}
   - component: {fileID: 434365666581434833}
   - component: {fileID: 7836313376384633202}
+  - component: {fileID: 2115046457190723883}
   m_Layer: 9
   m_Name: Jellyfish Knight
   m_TagString: Enemy
@@ -760,7 +761,7 @@ MonoBehaviour:
   - position: {x: 4, y: 5, z: 0}
     myParticle: {fileID: 0}
   damagePoint: 0.2
-  AttackDelay: 0.52
+  AttackDelay: 0.1
   myHitContainer: {fileID: 6094431166833746970}
   cantAttackTypes: 
   extraDamage: []
@@ -943,6 +944,20 @@ MonoBehaviour:
   ColoredSprites:
   - {fileID: 1940942441031325910}
   mySkinner: {fileID: 0}
+--- !u!114 &2115046457190723883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 434365666581434835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 897294b16320023458e424ddd188ac6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chargeCount: 3
+  hitTargets: []
 --- !u!1 &434365666626576073
 GameObject:
   m_ObjectHideFlags: 0
@@ -1070,8 +1085,7 @@ MonoBehaviour:
   LookAtCam: {fileID: 0}
   RandomRotate: 0
   this_t_: {fileID: 0}
-  mySprite: {fileID: 2668238478747446496, guid: 60f879e4cd661ec4d8250d598f8f718a,
-    type: 3}
+  mySprite: {fileID: 1940942441031325910}
 --- !u!1 &434365666787933814
 GameObject:
   m_ObjectHideFlags: 0

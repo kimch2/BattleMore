@@ -229,8 +229,8 @@ public class TriggeredAbility : ActivatedAbility, Modifier, Notify, LethalDamage
     }
 
     public virtual bool lethalDamageTrigger(UnitManager unit, GameObject deathSource)
-    {
-        if (!unit ||  Vector3.Distance( unit.transform.position, myManager.transform.position) < VariableNumber)
+    {      
+        if (myManager &&  Vector3.Distance( unit.transform.position, myManager.transform.position) < VariableNumber)
         {         
             Trigger();
         }

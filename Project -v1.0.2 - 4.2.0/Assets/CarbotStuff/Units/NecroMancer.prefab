@@ -159,6 +159,7 @@ MonoBehaviour:
   ToSpawn: {fileID: 2899125463594918715, guid: 6a834b794bfba244fa3da60819856b23, type: 3}
   spawnCount: 1
   SpawnAtScreenEdge: 0
+  MaxUnitCount: 4
 --- !u!1 &7815806263522567873
 GameObject:
   m_ObjectHideFlags: 0
