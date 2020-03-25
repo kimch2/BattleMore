@@ -115,9 +115,7 @@ public class OnHitContainer : MonoBehaviour
     public void trigger(GameObject proj, UnitManager target, float Damage)
     {
         if (target)
-        {
-            //if (!myManager || myManager.gameObject != target) // Applies to the source if it hits it? I think yes
-
+        {       
             for (int i = toApply.Count - 1; i >= 0; i--)
             {
               //  Debug.Log("Applying Ieffect " + target);

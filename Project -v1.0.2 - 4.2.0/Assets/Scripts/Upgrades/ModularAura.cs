@@ -32,7 +32,7 @@ public class ModularAura : IEffect
     }
 
     public override void applyTo(GameObject source, UnitManager target)
-    {
+    { 
         ApplyBuff(target);
         if (Duration > 0)
         {
@@ -100,6 +100,9 @@ public class ModularAura : IEffect
                     manager.myStats.statChanger.changeWeaponRange(buff.Percent, buff.Flat, this, SourceManager.PlayerOwner == manager.PlayerOwner, Stacks);
                     break;
 
+                case StatChanger.BuffType.Priority: // TAUNT - Should this go through the Meta-status class???
+                    manager.myStats.statChanger.changeAttackPriority(buff.Percent, buff.Flat, this, SourceManager.PlayerOwner == manager.PlayerOwner, Stacks);
+                    break;
             }
         }
     }
@@ -148,6 +151,10 @@ public class ModularAura : IEffect
 
                 case StatChanger.BuffType.Range:
                     manager.myStats.statChanger.removeWeaponRange(this);
+                    break;
+
+                case StatChanger.BuffType.Priority:
+                    manager.myStats.statChanger.removeAttackPriority(this);
                     break;
 
             }

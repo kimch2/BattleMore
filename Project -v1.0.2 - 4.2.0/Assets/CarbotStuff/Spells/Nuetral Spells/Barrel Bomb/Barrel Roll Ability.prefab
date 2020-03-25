@@ -80,7 +80,7 @@ GameObject:
   - component: {fileID: 1879197240877509776}
   - component: {fileID: 5594712691398145822}
   m_Layer: 0
-  m_Name: Barrel Roll
+  m_Name: Barrel Roll Ability
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

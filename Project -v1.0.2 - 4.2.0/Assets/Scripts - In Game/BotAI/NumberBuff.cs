@@ -10,7 +10,7 @@ public class NumberBuff
 public class StatChanger
 {
 	UnitStats myStats;
-    public enum BuffType {Armor,HP,HPRegen,Energy, EnergyRegen,MoveSpeed,Damage,AttackSpeed, Range, Cooldown }
+    public enum BuffType {Armor,HP,HPRegen,Energy, EnergyRegen,MoveSpeed,Damage,AttackSpeed, Range, Cooldown, Priority }
 
 	Dictionary<string, NumberAlter> cachedAlters = new Dictionary<string, NumberAlter>();
 
@@ -395,11 +395,36 @@ public class StatChanger
 		myStats.myManager.visionRange = number.ApplyBuffs(number.baseAmount);
 		myStats.myManager.getVisionSphere().radius = myStats.myManager.visionRange;
 	}
-	//===================================================================================================
-	/// <summary>
-	///  .2f as a perent means a 20% increase, This will apply to all weapons
-	/// </summary>
-	public void changeCastRange(float perc, float flat, UnityEngine.Object obj, bool isFriendly, bool stackable = false)
+
+    //===================================================================================================
+    /// <summary>
+    ///  .2f as a perent means a 20% increase, This will apply to all weapons
+    /// </summary>
+    public void changeAttackPriority(float perc, float flat, UnityEngine.Object obj, bool isFriendly, bool stackable = false)
+    {
+        if (isFriendly && !myStats.myManager.metaStatus.CanBuff || !isFriendly && !myStats.myManager.metaStatus.canDebuff)
+        {
+            return;
+        }
+        NumberAlter number = GetNumberAlter("Priority");
+        number.AddBuff(perc, flat, obj, stackable);
+        myStats.attackPriority = number.ApplyBuffs(number.baseAmount); 
+    }
+
+    public void removeAttackPriority(UnityEngine.Object obj)
+    {
+        NumberAlter number = GetNumberAlter("Priority");
+        number.RemoveBuff(obj);
+        myStats.attackPriority = number.ApplyBuffs(number.baseAmount);     
+    }
+
+
+
+    //===================================================================================================
+    /// <summary>
+    ///  .2f as a perent means a 20% increase, This will apply to all weapons
+    /// </summary>
+    public void changeCastRange(float perc, float flat, UnityEngine.Object obj, bool isFriendly, bool stackable = false)
 	{
         if(isFriendly && !myStats.myManager.metaStatus.CanBuff || !isFriendly && !myStats.myManager.metaStatus.canDebuff)
         {
@@ -647,7 +672,13 @@ public class NumberAlter
 				max = 2048;
 				break;
 
-			default:
+            case "Priority":
+                min = 0;
+                max = 10;
+                baseAmount = stats.attackPriority;
+                break;
+
+            default:
 				min = .01f;
 				max = 4096;
 				//Debug.Log("Adding " + numberName + "   but it isn't spelled right or it hasn't been catalogged");

@@ -23,7 +23,7 @@ public class SkillShotProjectile  : Projectile {
         currentDistance = -3;
     }
 
-    RaycastHit objecthit;
+    protected RaycastHit objecthit;
     protected override void Update()
     {
         //Debug.Log("Updating penetratiin g" + currentDistance +   "     "+TotalRange);
@@ -89,7 +89,7 @@ public class SkillShotProjectile  : Projectile {
     }
 
 
-    public void OnTriggerEnter(Collider col)
+    public virtual void OnTriggerEnter(Collider col)
     {
 
         if (col.isTrigger)
