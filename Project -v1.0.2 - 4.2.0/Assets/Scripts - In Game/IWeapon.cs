@@ -32,6 +32,7 @@ public class IWeapon : MonoBehaviour {
 	private float InitialBaseDamage;
 
 
+
 	[Tooltip("Having arange that is longer than the vision range is not supported yet")]
 	public float range = 5;
 
@@ -129,8 +130,6 @@ public class IWeapon : MonoBehaviour {
 			turretClass = turret.GetComponent<turret> ();
 		}
     }
-
-
 
 
 	IEnumerator ComeOffCooldown( float length)
@@ -453,9 +452,66 @@ public class IWeapon : MonoBehaviour {
 		return baseAttackPeriod;
 	}
 
-	
 
-	public void OnDrawGizmos()
+    protected UnitManager currentIter;
+    protected float currDistance;
+    protected float bestPriority;
+
+    public virtual UnitManager findBestEnemy(out float distance, UnitManager best) // Similar to above method but takes into account attack priority (enemy soldiers should be attacked before buildings)
+    {
+        float currentIterPriority;
+        if (best != null)
+        {
+            distance = Vector3.Distance(best.transform.position, transform.position);
+            bestPriority = best.myStats.getCombatPriority(myManager.myStats.DefensePriority);
+        }
+        else
+        {
+
+            distance = float.MaxValue;
+            bestPriority = -1;
+        }
+
+        for (int i = 0; i < myManager.enemies.Count; i++)
+        {
+
+            if (myManager.enemies[i] == null)
+            {
+                continue;
+            }
+
+            currentIter = myManager.enemies[i];
+
+            if (!isValidTarget(currentIter))
+            {
+                continue;
+            }
+            currentIterPriority = currentIter.myStats.getCombatPriority(myManager.myStats.DefensePriority);
+            if (currentIterPriority > bestPriority)
+            {
+                best = currentIter;
+                bestPriority = currentIterPriority;
+                distance = Vector3.Distance(currentIter.transform.position, this.gameObject.transform.position);
+            }
+            else if (currentIterPriority == bestPriority)
+            {
+                currDistance = Vector3.Distance(currentIter.transform.position, this.gameObject.transform.position);
+
+                if (currDistance < distance)
+                {
+                    best = currentIter;
+                    distance = currDistance;
+                }
+            }
+        }
+
+        return best;
+    }
+
+
+
+
+    public void OnDrawGizmos()
 	{
 	foreach (AnimationPoint vec in firePoints) {
 			if (turret) {

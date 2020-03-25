@@ -15,7 +15,7 @@ public class AbstractCost : MonoBehaviour {
 	public float energy;
 
 	public float cooldown;
-    [HideInInspector]
+   // [HideInInspector]
 	public float cooldownTimer;
 	public bool StartsRefreshed = true;
 		
@@ -65,7 +65,8 @@ public class AbstractCost : MonoBehaviour {
 				}
 			}
 			else
-			{cooldownTimer = 0;
+			{
+                cooldownTimer = 0;
              //   Debug.Log("Breaking");
 				break;
 			}

@@ -992,7 +992,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myspeed: 0
   acceleration: 40
-  MaxSpeed: 23
+  MaxSpeed: 17
   initialSpeed: 0
   myFogger: {fileID: 0}
   m_lockRotation: 0
@@ -1011,7 +1011,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 2.5
-  maxSpeed: 23
+  maxSpeed: 17
   height: 1
   locked: 0
   lockWhenNotMoving: 1
@@ -1066,7 +1066,7 @@ MonoBehaviour:
   numOfAttacks: 1
   RepeatDelay: 0.06
   baseDamage: 35
-  range: 100
+  range: 60
   turret: {fileID: 0}
   firePoints: []
   damagePoint: 0.2
@@ -1079,6 +1079,7 @@ MonoBehaviour:
   minimumRange: 0
   attackArc: 100
   projectileSpeed: 100
+  prioritizeFarAway: 0
 --- !u!1 &9125053377264107926
 GameObject:
   m_ObjectHideFlags: 0

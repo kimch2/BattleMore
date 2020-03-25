@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8386330351730734122
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8386330351730640296}
+  - component: {fileID: 8386330351719557828}
+  m_Layer: 19
+  m_Name: InkSplatExplosionCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8386330351730640296
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8386330351730734122}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -618.319, y: 30.096788, z: 132.34485}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8386330351719557828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8386330351730734122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f89bf2b44f707544fb7e345bff99bd4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particleEff: {fileID: 1841651952787439791, guid: 457a3edc9794d694bab65d23a27c2392,
+    type: 3}
+  damageAmount: 7
+  type: 0
+  maxSize: 10
+  UseYFOrDetection: 0
+  DamageDelay: 0.01
+  extraDamage: []
+  MyHitContainer: {fileID: 0}
+  PlayersToApplyTo: 
+  AppliesToEnemy: 1
+  AppliesToAlly: 0

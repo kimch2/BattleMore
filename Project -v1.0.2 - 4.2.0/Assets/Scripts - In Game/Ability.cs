@@ -200,7 +200,11 @@ public abstract class Ability : MonoBehaviour {
             active = false;
         }
         myCost.startCooldown();
-        yield return new WaitForSeconds(myCost.cooldown - .2f);
+        while (myCost.cooldownTimer > 0)
+        {
+            yield return new WaitForSeconds(.15f);
+        }
+       // yield return new WaitForSeconds(myCost.cooldown - .2f);
 
         active = true;
         changeCharge(1);

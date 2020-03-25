@@ -1247,11 +1247,11 @@ MonoBehaviour:
   - position: {x: -0.2, y: 4.61, z: 0.31}
     myParticle: {fileID: 0}
   damagePoint: 0.2
-  AttackDelay: 0.52
+  AttackDelay: 0.35
   myHitContainer: {fileID: 3935153736685980787}
   cantAttackTypes: 
   extraDamage: []
-  projectile: {fileID: 1000012881470146, guid: 6282b22819b422947af7757b6f753c6f, type: 3}
+  projectile: {fileID: 0}
 --- !u!82 &3300769391594791424
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1362,7 +1362,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myspeed: 0
   acceleration: 40
-  MaxSpeed: 23
+  MaxSpeed: 15
   initialSpeed: 0
   myFogger: {fileID: 0}
   m_lockRotation: 0
@@ -1381,7 +1381,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 4
-  maxSpeed: 23
+  maxSpeed: 15
   height: 1
   locked: 0
   lockWhenNotMoving: 1

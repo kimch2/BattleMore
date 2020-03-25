@@ -607,6 +607,8 @@ public class UnitManager : Unit, IOrderable {
 
 	public UnitManager findBestEnemy(out float distance, UnitManager best) // Similar to above method but takes into account attack priority (enemy soldiers should be attacked before buildings)
 	{
+        /*
+        Debug.Log("Finding bets");
 		float currentIterPriority;
 		if (best != null) {
 			distance = Vector3.Distance (best.transform.position, transform.position);
@@ -634,8 +636,8 @@ public class UnitManager : Unit, IOrderable {
 				bestPriority = currentIterPriority;
 				distance = Vector3.Distance (currentIter.transform.position, this.gameObject.transform.position);
 			}
-			else if (currentIterPriority == bestPriority) {
-			
+			else if (currentIterPriority == bestPriority)
+            {			
 				currDistance = Vector3.Distance (currentIter.transform.position, this.gameObject.transform.position);
 
 				if (currDistance < distance) {
@@ -644,8 +646,11 @@ public class UnitManager : Unit, IOrderable {
 				}
 			}
 		}
+        
 
-		return best;
+		return best;*/
+
+        return myWeapon[0].findBestEnemy(out distance, best);
 	}
 
 	public void setInteractor(Iinteract inter)
@@ -674,15 +679,15 @@ public class UnitManager : Unit, IOrderable {
     }
 
 	private UnitState popLastState()
-	{
-		
+	{		
 		UnitState us = queuedStates.Last.Value;
 		queuedStates.RemoveLast ();
 		return us;
 	}
 
 	public UnitState popFirstState()
-	{UnitState us = queuedStates.First.Value;
+	{
+        UnitState us = queuedStates.First.Value;
 		queuedStates.RemoveFirst ();
 		return us;
 	}

@@ -137,6 +137,8 @@ public abstract class TargetAbility : Ability
     /// <returns></returns>
     protected bool SetOnHitContainer(GameObject spawnedObject, float Damage, UnitManager target)
     {
+        myHitContainer.SetOnHitContainer(spawnedObject, Damage, target);
+
         // Create a path that will check for over-Time Effectors?
         Projectile proj = spawnedObject.GetComponent<Projectile>();
         if (proj)

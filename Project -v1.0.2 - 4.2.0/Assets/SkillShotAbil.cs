@@ -149,7 +149,7 @@ public class SkillShotAbil : TargetAbility
             if (CastFromScreenEdge)
             {
                 proj.transform.position = DaminionsInitializer.main.getScreenEdge(LastTargetLocation, SkillShotProjectile.SpreadAngle, myManager.PlayerOwner, true);
-                skillShotComp.TotalRange = 150;
+                skillShotComp.TotalRange = range * 2;
                 newDirection = direction;
             }
             else

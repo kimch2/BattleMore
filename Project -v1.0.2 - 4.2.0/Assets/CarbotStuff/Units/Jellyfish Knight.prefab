@@ -877,7 +877,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myspeed: 0
   acceleration: 40
-  MaxSpeed: 23
+  MaxSpeed: 16
   initialSpeed: 0
   myFogger: {fileID: 0}
   m_lockRotation: 0
@@ -896,7 +896,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 2.5
-  maxSpeed: 23
+  maxSpeed: 16
   height: 1
   locked: 0
   lockWhenNotMoving: 1

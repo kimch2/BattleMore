@@ -61,43 +61,43 @@ public class ModularAura : IEffect
             switch (buff.buffType)
             {
                 case StatChanger.BuffType.Armor:
-                    manager.myStats.statChanger.changeArmor(buff.Percent, buff.Flat, this,Stacks);
+                    manager.myStats.statChanger.changeArmor(buff.Percent, buff.Flat, this, SourceManager.PlayerOwner == manager.PlayerOwner,  Stacks);
                     break;
 
                 case StatChanger.BuffType.AttackSpeed:
-                    manager.myStats.statChanger.changeAttackSpeed(buff.Percent, buff.Flat, this, Stacks);
+                    manager.myStats.statChanger.changeAttackSpeed(buff.Percent, buff.Flat, this, SourceManager.PlayerOwner == manager.PlayerOwner, Stacks);
                     break;
 
                 case StatChanger.BuffType.Damage:
-                    manager.myStats.statChanger.changeWeaponDamage(buff.Percent, buff.Flat, this,Stacks);
+                    manager.myStats.statChanger.changeWeaponDamage(buff.Percent, buff.Flat, this, SourceManager.PlayerOwner == manager.PlayerOwner, Stacks);
                     break;
 
                 case StatChanger.BuffType.Energy:
-                    manager.myStats.statChanger.changeEnergyMax(buff.Percent, buff.Flat, this, Stacks);
+                    manager.myStats.statChanger.changeEnergyMax(buff.Percent, buff.Flat, this, SourceManager.PlayerOwner == manager.PlayerOwner, Stacks);
                     break;
 
                 case StatChanger.BuffType.EnergyRegen:
-                    manager.myStats.statChanger.changeEnergyRegen(buff.Percent, buff.Flat, this, Stacks);
+                    manager.myStats.statChanger.changeEnergyRegen(buff.Percent, buff.Flat, this, SourceManager.PlayerOwner == manager.PlayerOwner, Stacks);
                     break;
 
                 case StatChanger.BuffType.HP:
-                    manager.myStats.statChanger.changeHealthMax(buff.Percent, buff.Flat, this, Stacks);
+                    manager.myStats.statChanger.changeHealthMax(buff.Percent, buff.Flat, this, SourceManager.PlayerOwner == manager.PlayerOwner, Stacks);
                     break;
 
                 case StatChanger.BuffType.HPRegen:
-                    manager.myStats.statChanger.changeHealthRegen(buff.Percent, buff.Flat, this, Stacks);
+                    manager.myStats.statChanger.changeHealthRegen(buff.Percent, buff.Flat, this, SourceManager.PlayerOwner == manager.PlayerOwner, Stacks);
                     break;
 
                 case StatChanger.BuffType.MoveSpeed:
-                    manager.myStats.statChanger.changeMoveSpeed(buff.Percent, buff.Flat, this, Stacks);
+                    manager.myStats.statChanger.changeMoveSpeed(buff.Percent, buff.Flat, this, SourceManager.PlayerOwner == manager.PlayerOwner, Stacks);
                     break;
 
                 case StatChanger.BuffType.Cooldown:
-                    manager.myStats.statChanger.changeCooldown(buff.Percent, buff.Flat, this, Stacks);
+                    manager.myStats.statChanger.changeCooldown(buff.Percent, buff.Flat, this, SourceManager.PlayerOwner == manager.PlayerOwner, Stacks);
                     break;
 
                 case StatChanger.BuffType.Range:
-                    manager.myStats.statChanger.changeWeaponRange(buff.Percent, buff.Flat, this, Stacks);
+                    manager.myStats.statChanger.changeWeaponRange(buff.Percent, buff.Flat, this, SourceManager.PlayerOwner == manager.PlayerOwner, Stacks);
                     break;
 
             }

@@ -967,7 +967,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myspeed: 0
   acceleration: 40
-  MaxSpeed: 23
+  MaxSpeed: 18
   initialSpeed: 0
   myFogger: {fileID: 0}
   m_lockRotation: 0
@@ -986,7 +986,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 2.5
-  maxSpeed: 23
+  maxSpeed: 18
   height: 1
   locked: 0
   lockWhenNotMoving: 1
@@ -1041,7 +1041,7 @@ MonoBehaviour:
   numOfAttacks: 1
   RepeatDelay: 0.06
   baseDamage: 20
-  range: 60
+  range: 90
   turret: {fileID: 0}
   firePoints: []
   damagePoint: 0.2
@@ -1054,6 +1054,7 @@ MonoBehaviour:
   minimumRange: 0
   attackArc: 100
   projectileSpeed: 55
+  prioritizeFarAway: 1
 --- !u!114 &1394852619232180258
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1515,6 +1516,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toApply: []
+  OnKill:
+    m_PersistentCalls:
+      m_Calls: []
   myManager: {fileID: 0}
+  source: {fileID: 0}
+  playerNumber: 0
   FriendlyFireRatio: 0
   AutoAddTriggers: 1

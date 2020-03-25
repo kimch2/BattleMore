@@ -173,27 +173,25 @@ public  class Projectile : MonoBehaviour {
 			return;
 		}
 		try{
-		    if (explosionO)
+            if (explosionO)
             {
+                GameObject explode = (GameObject)Instantiate(explosionO, transform.position, Quaternion.identity);
 
-			GameObject explode = (GameObject)Instantiate (explosionO, transform.position, Quaternion.identity);
+                MyHitContainer.SetOnHitContainer(explode, this.damage, null);
 
-			explosion Escript = explode.GetComponent<explosion> ();
-			if (Escript)
+                if (target && (!explosionO || explosionO && SepDamWithExplos))
                 {
-                    Escript.Initialize(this.damage, MyHitContainer);
-			    }
-		    }
+                    if (MyHitContainer)
+                    {
+                        MyHitContainer.trigger(this.gameObject, target, damage);
+                    }
 
-            if (target && (!explosionO || explosionO && SepDamWithExplos))
-            {
-                if (MyHitContainer)
-                {
-                    MyHitContainer.trigger(this.gameObject, target, damage);
+                    target.myStats.TakeDamage(damage, Source, damageType, MyHitContainer);
                 }
-
-                // Check if Target is still alive after OnHit effects?
-                float total = target.myStats.TakeDamage(damage, Source, damageType, MyHitContainer);
+            }
+            else if(target)
+            {
+                target.myStats.TakeDamage(damage, Source, damageType, MyHitContainer);
             }
                 if (SpecialEffect)
                 {

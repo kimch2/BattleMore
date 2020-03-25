@@ -496,7 +496,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myspeed: 0
   acceleration: 50
-  MaxSpeed: 35
+  MaxSpeed: 30
   initialSpeed: 0
   myFogger: {fileID: 0}
   m_lockRotation: 0
@@ -515,7 +515,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 2.5
-  maxSpeed: 35
+  maxSpeed: 30
   height: 1
   locked: 0
   lockWhenNotMoving: 1
@@ -1549,6 +1549,7 @@ MonoBehaviour:
   maxChargeCount: 0
   chargeCount: -1
   soundEffect: {fileID: 0}
+  myHitContainer: {fileID: 0}
   OnActivate:
     m_PersistentCalls:
       m_Calls:

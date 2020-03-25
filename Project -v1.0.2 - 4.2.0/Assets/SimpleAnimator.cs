@@ -8,11 +8,13 @@ public class SimpleAnimator : MonoBehaviour
 
     public SpriteRenderer myRenderer;
     public float frameRate = 18;
-    [Tooltip("The StartSprites are played only once, then the Loop Sprites play indefinitely")]
+    [Tooltip("The StartSprites are played only once, then the Loop Sprites play indefinitely, If there are no loop sprites, this will disapear once the last Start frame is shown")]
     public List<Sprite> StartSprites;
+
     public List<Sprite> LoopSprites;
     [Tooltip("This will Disable this object, If you want to replay, call the start function, if 0, this will run indefinitly")]
     public float Duration;
+    
     float TurnOffTime;
     Coroutine myRoutine;
 
@@ -51,7 +53,7 @@ public class SimpleAnimator : MonoBehaviour
         }
         if (LoopSprites.Count > 0)
         { 
-        currentIndex = 0;
+            currentIndex = 0;
 
             while (true)
             {

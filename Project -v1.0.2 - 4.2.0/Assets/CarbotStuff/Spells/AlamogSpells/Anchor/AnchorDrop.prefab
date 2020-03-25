@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 5164414903441581679}
   - component: {fileID: 5164414903446085221}
   - component: {fileID: 5164414903448236111}
-  - component: {fileID: 5164414903448127045}
   m_Layer: 0
   m_Name: AnchorDrop
   m_TagString: Untagged
@@ -67,28 +66,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f89bf2b44f707544fb7e345bff99bd4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  source: {fileID: 0}
-  sourceInt: 1
   particleEff: {fileID: 6537020709821693806, guid: 274d7bd9de043c047af3be96d8762f3e,
     type: 3}
-  friendlyFireRatio: 0
   damageAmount: 50
   type: 0
   maxSize: 15
   UseYFOrDetection: 0
   DamageDelay: 0.37
   extraDamage: []
---- !u!114 &5164414903448127045
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5164414903442694681}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c4771c052d243747955a5d4eefc1f46, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stunTime: 5
-  mustTarget: 9
+  MyHitContainer: {fileID: 0}
+  PlayersToApplyTo: 
+  AppliesToEnemy: 1
+  AppliesToAlly: 0

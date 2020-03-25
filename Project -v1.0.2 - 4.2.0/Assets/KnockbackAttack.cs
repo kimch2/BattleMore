@@ -13,7 +13,12 @@ public class KnockbackAttack : MonoBehaviour, Notify
 		{
             if (target.myStats.isUnitType(mustTarget))
             {
-                Vector3 origin = source.transform.position;
+
+                Vector3 origin = Vector3.zero;
+                if (source)
+                {
+                    origin = source.transform.position;
+                }
 
                 if (proj)
                 {

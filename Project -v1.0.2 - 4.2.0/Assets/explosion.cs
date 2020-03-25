@@ -28,8 +28,11 @@ public class explosion : MonoBehaviour {
 
 		if (particleEff) {
 			GameObject obj = 	(GameObject)Instantiate (particleEff, this.gameObject.transform.position, Quaternion.identity);
-			obj.SendMessage ("setOwner", MyHitContainer.playerNumber, SendMessageOptions.DontRequireReceiver);
 
+            if (!MyHitContainer.SetOnHitContainer(obj, 0, null))
+            {
+                obj.SendMessage("setOwner", MyHitContainer.playerNumber, SendMessageOptions.DontRequireReceiver);
+            }
 		}
 
         yield return new WaitForSeconds(DamageDelay);

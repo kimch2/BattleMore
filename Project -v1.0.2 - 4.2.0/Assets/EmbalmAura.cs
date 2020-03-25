@@ -2,22 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EmbalmAura : DamagerIeffect
+public class EmbalmAura : DamagerIeffect, Modifier
 {
-
-    public float initialDPS = 1;
-    public float perSecIncrease = 1;
-    public GameObject effect;
-    public float MaxDuration = 15;
-    GameObject CurrentEffect;
-    Coroutine currentPoison;
+    // Causes the attached guy to explode on death
+    
+    public GameObject Exploder;
+    public GameObject AuraFX;
+    public float Duration = 3;
 
     private void Start()
     {
         if (onTarget)
         {
-            OnTargetManager = myHitContainer.myManager;
-           BeginToPoison();
+            OnTargetManager.myStats.addDeathTrigger(this);
+            Invoke("EndEffect", Duration);
+            GameObject CurrentEffect = Instantiate<GameObject>(AuraFX, transform);
+            CurrentEffect.transform.localPosition = Vector3.zero;
         }
     }
 
@@ -29,42 +29,18 @@ public class EmbalmAura : DamagerIeffect
 
     public override void applyTo(GameObject source, UnitManager target)
     {
-        EmbalmAura Copy = (EmbalmAura)CopyIEffect(target, true);
-        Copy.BeginToPoison();
+        EmbalmAura Copy = (EmbalmAura)CopyIEffect(target, true);       
     }
 
-    public void BeginToPoison()
+    void EndEffect()
     {
-        if (currentPoison == null)
-        {
-            currentPoison = StartCoroutine(Poison());
-            if (effect)
-            {
-                CurrentEffect = Instantiate<GameObject>(effect, transform);
-                CurrentEffect.transform.localPosition = Vector3.zero;
-            }
-        }
+        OnTargetManager.myStats.removeDeathTrigger(this);
     }
 
-    IEnumerator Poison()
+    public float modify(float damage, GameObject source, DamageTypes.DamageType theType)
     {
-        yield return null;
-        float damage = initialDPS;
-        for(int i = 0; i <= MaxDuration; i++)
-        {
-            OnTargetManager.getUnitStats().TakeDamage(damage, null, DamageTypes.DamageType.True, myHitContainer);
-            damage += perSecIncrease;
-            yield return new WaitForSeconds(1);
-        }
-        currentPoison = null;
-    }
-
-    public override void RemoveEffect(UnitManager target)
-    {
-
-        StopAllCoroutines();
-        currentPoison = null;
-        Destroy(CurrentEffect);
-        Destroy(this);
+        GameObject obj = Instantiate<GameObject>(Exploder, OnTargetManager.transform.position, Quaternion.identity);
+        myHitContainer.SetOnHitContainer(obj, DamageAmount, null);
+        return damage;
     }
 }

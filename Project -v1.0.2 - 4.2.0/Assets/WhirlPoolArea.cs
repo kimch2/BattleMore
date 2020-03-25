@@ -6,28 +6,8 @@ public class WhirlPoolArea : OverTimeApplier
 {
 
     public float spinSpeed  =25;
-    public float duration = 5;
 
-
-    private void Start()
-    {
-        if (myHitContainer)
-        {
-            UnitManager sourceMan = myHitContainer.myManager;
-            if (sourceMan.PlayerOwner == 1)
-            {
-                PlayerNumber = 2;
-            }
-            else
-            {
-                PlayerNumber = 1;
-            }
-
-            Invoke("TurnOff", duration);
-        }
-    }
-
-
+    
     private void Update()
     {
         foreach (UnitManager man in InVision)

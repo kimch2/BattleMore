@@ -120,7 +120,7 @@ public class OnHitContainer : MonoBehaviour
 
             for (int i = toApply.Count - 1; i >= 0; i--)
             {
-                Debug.Log("Applying Ieffect " + target);
+              //  Debug.Log("Applying Ieffect " + target);
                 toApply[i].applyTo(source, target);
             }
 
@@ -177,6 +177,42 @@ public class OnHitContainer : MonoBehaviour
             myManager.myStats.upKills();
         }
     }
+
+
+    /// <summary>
+    /// Returns true if the Thing was successfully set
+    /// </summary>
+    /// <param name="spawnedObject"></param>
+    /// <returns></returns>
+    public bool SetOnHitContainer(GameObject spawnedObject, float Damage, UnitManager target)
+    {
+        // Create a path that will check for over-Time Effectors?
+        Projectile proj = spawnedObject.GetComponent<Projectile>();
+        if (proj)
+        {
+            proj.Initialize(target, Damage, this);
+            return true;
+        }
+
+        explosion sploder = spawnedObject.GetComponent<explosion>();
+        if (sploder)
+        {
+            sploder.Initialize(Damage, this);
+            return true;
+        }
+
+        OverTimeApplier Timer = spawnedObject.GetComponent<OverTimeApplier>();
+        if (Timer)
+        {
+            Timer.myHitContainer = this;
+            return true;
+        }
+
+        return false;
+    }
+
+
+
 }
 
 // Scripts/prefabs that will need to be fixed  with this new class

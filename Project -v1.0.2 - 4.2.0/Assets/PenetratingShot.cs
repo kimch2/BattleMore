@@ -7,6 +7,7 @@ public class PenetratingShot : Projectile {
 	public List<GameObject> hitGuys = new List<GameObject>();
 
 	public int NumGuysHit;
+    public int MaxNumCanHit = 5;
 
 	public float PercDamLost;
 	public float TotalRange;
@@ -40,17 +41,16 @@ public class PenetratingShot : Projectile {
 
 		if (Physics.Raycast (this.gameObject.transform.position + Vector3.up * 5, Vector3.down, out objecthit, 30, ( 1 << 8))) {
 			float dist = Vector3.Distance (objecthit.point, transform.position);
-			if (dist < 5f) {
+			if (dist < 5f)
+            {
 				Vector3 newPos = transform.position;
 				newPos.y = objecthit.point.y + 5;
-
 				gameObject.transform.position = newPos;
-
-
-			} else if (dist > 9) {
+			}
+            else if (dist > 9)
+            {
 				Vector3 newPos = transform.position;
 				newPos.y = objecthit.point.y + 9;
-
 				gameObject.transform.position = newPos;
 			}
 		}
@@ -72,6 +72,7 @@ public class PenetratingShot : Projectile {
 
 			lastLocation = target.transform.position + randomOffset;
 			distance = Vector3.Distance (this.gameObject.transform.position, lastLocation);
+            setTarget(target);
 		}
 	}
 
@@ -79,33 +80,28 @@ public class PenetratingShot : Projectile {
 	{
 		currentDistance = -3;
 		NumGuysHit = 0;
-		hitGuys.Clear ();
-	
+		hitGuys.Clear ();	
 	}
 		
 	public void setTarget(UnitManager so)
 	{
-
 		target = so;
 
-		if (target) {
-			
+		if (target)
+        {		
 			lastLocation = target.transform.position + Vector3.up*2;
-			}
+		}
 
 
-		if (Physics.Raycast (this.gameObject.transform.position + Vector3.up * 10, Vector3.down, out objecthit, 100, ( 1 << 8))) {
+		if (Physics.Raycast (this.gameObject.transform.position + Vector3.up * 10, Vector3.down, out objecthit, 100, ( 1 << 8)))
+        {
 			Vector3 newPos = transform.position;
 			newPos.y = objecthit.point.y + 3;
-
 			gameObject.transform.position = newPos;
 		}
 
 		distance = Vector3.Distance (this.gameObject.transform.position, lastLocation);
-
-
 		gameObject.transform.LookAt (lastLocation);
-
 	}
 
 
@@ -131,7 +127,7 @@ public class PenetratingShot : Projectile {
 					Instantiate (SpecialEffect, transform.position, Quaternion.identity);
 				}
 
-				if (NumGuysHit * PercDamLost * .01f > 1) {
+				if (NumGuysHit * PercDamLost * .01f > 1 || NumGuysHit >= MaxNumCanHit) {
 					Lean.LeanPool.Despawn (this.gameObject, 0);
 					//Destroy (this.gameObject);
 				}

@@ -5,12 +5,10 @@ using UnityEngine;
 [System.Serializable]
 public class MortarWeapon : IWeapon {
 
-
-
-
 	public float minimumRange;
 	public float attackArc;
 	public float projectileSpeed;
+    public bool prioritizeFarAway;
 
 	public override bool checkMinimumRange(UnitManager target)
 	{
@@ -65,5 +63,62 @@ public class MortarWeapon : IWeapon {
 		return proj;
 
 	}
+
+
+
+    public override UnitManager findBestEnemy(out float distance, UnitManager best) // Similar to above method but takes into account attack priority (enemy soldiers should be attacked before buildings)
+    {if (prioritizeFarAway)
+        {
+            float currentIterPriority;
+            if (best != null)
+            {
+                distance = Vector3.Distance(best.transform.position, transform.position);
+                bestPriority = best.myStats.getCombatPriority(myManager.myStats.DefensePriority);
+            }
+            else
+            {
+                distance = 0;
+                bestPriority = -1;
+            }
+
+            for (int i = 0; i < myManager.enemies.Count; i++)
+            {
+
+                if (myManager.enemies[i] == null)
+                {
+                    continue;
+                }
+
+                currentIter = myManager.enemies[i];
+
+                if (!isValidTarget(currentIter))
+                {
+                    continue;
+                }
+                currentIterPriority = currentIter.myStats.getCombatPriority(myManager.myStats.DefensePriority);
+                if (currentIterPriority > bestPriority)
+                {
+                    best = currentIter;
+                    bestPriority = currentIterPriority;
+                    distance = Vector3.Distance(currentIter.transform.position, this.gameObject.transform.position);
+                }
+                else if (currentIterPriority == bestPriority)
+                {
+                    currDistance = Vector3.Distance(currentIter.transform.position, this.gameObject.transform.position);
+
+                    if (currDistance > distance && currDistance < range)
+                    {
+                        best = currentIter;
+                        distance = currDistance;
+                    }
+                }
+            }
+        }
+        else
+        {
+            return base.findBestEnemy(out distance, best);
+        }
+        return best;
+    }
 
 }

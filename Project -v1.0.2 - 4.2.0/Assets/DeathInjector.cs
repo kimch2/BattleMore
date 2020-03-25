@@ -6,7 +6,6 @@ public class DeathInjector : DamagerIeffect
 {
 
 	public float DamageTime =15;
-	public float DamageAmount =15;
 	public GameObject effect;
     [Tooltip("only use this if the thing that is spawning is the thign that this is on, which causing reference errors, because it will refer to itself and not the prefab")]
 	public string toSpawn;

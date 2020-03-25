@@ -59,10 +59,11 @@ public class TriggeredAbility : ActivatedAbility, Modifier, Notify, LethalDamage
 
     void StartListening()
     {
+       // Debug.Log("Start Listneing");
         hiddenVariableStored = VariableNumber;
         if (triggerType == TriggerType.RepeatTimer)
         {
-            InvokeRepeating("Fire", VariableNumber, VariableNumber);
+            InvokeRepeating("Trigger", VariableNumber, VariableNumber);
         }
         else if (triggerType == TriggerType.OnDamaged)
         {
@@ -125,6 +126,7 @@ public class TriggeredAbility : ActivatedAbility, Modifier, Notify, LethalDamage
 
     void StopListening()
     {
+        //Debug.Log("Stop Listneing");
         if (triggerType == TriggerType.RepeatTimer)
         {
             CancelInvoke("RepeatedInvoke");

@@ -29,6 +29,7 @@ public class SkillShotProjectile  : Projectile {
         //Debug.Log("Updating penetratiin g" + currentDistance +   "     "+TotalRange);
         if (currentDistance > TotalRange)
         {
+            Terminate(null);
             Lean.LeanPool.Despawn(this.gameObject, 0);
             //Destroy (this.gameObject);
         }

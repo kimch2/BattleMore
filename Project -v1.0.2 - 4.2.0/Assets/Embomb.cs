@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Embomb : DamagerIeffect, Modifier
 {
-    public float DamageAmount;
     public float radius;
     [HideInInspector]
     public GameObject Source;

@@ -81,7 +81,7 @@ public class UISetter : MonoBehaviour {
 		{
 
 			bool allTech = PlayerPrefs.GetInt("AllTech", 0) == 1;
-			Debug.Log("All Tech " + allTech);
+			//Debug.Log("All Tech " + allTech);
 
 			EnableUlt(0, allTech || comp.MyLevels[LevelNum].UIBarsNUlts.UltOneActivated);
 			EnableUlt(1, allTech || comp.MyLevels[LevelNum].UIBarsNUlts.UltTwoActivated);

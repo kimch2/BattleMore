@@ -3,6 +3,7 @@ using System.Collections;
 
 public class SuicideAttack : MonoBehaviour, Notify,Modifier {
 
+     // THIS NEEDS TO BE FIXED!!!
 	bool hasFired;
 
 	void Start()

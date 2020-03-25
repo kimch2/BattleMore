@@ -74,7 +74,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2866685519202151920}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.23, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8053994536866125922}
@@ -226,8 +226,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 4.68, y: 9.02, z: 5}
-  m_Center: {x: 0, y: -1.22, z: 0}
+  m_Size: {x: 7.09, y: 9.02, z: 7.49}
+  m_Center: {x: 0, y: -1.22, z: -2.15}
 --- !u!96 &4826513622374839937
 TrailRenderer:
   serializedVersion: 2
@@ -356,19 +356,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   Source: {fileID: 0}
-  sourceInt: 1
   MyHitContainer: {fileID: 0}
   damage: 50
   speed: 37
   damageType: 0
-  explosionO: {fileID: 1079216138654530450, guid: aec6d27bfbcbf6146a5830fe24decbb7,
+  explosionO: {fileID: 4763643768869254227, guid: f6ccbdfba05d6164f94b69a79ca6f8c9,
     type: 3}
   SepDamWithExplos: 0
   SpecialEffect: {fileID: 0}
   TotalRange: 0
-  OnHit:
-    m_PersistentCalls:
-      m_Calls: []
-  OnKill:
-    m_PersistentCalls:
-      m_Calls: []

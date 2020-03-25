@@ -5,12 +5,19 @@ using UnityEngine;
 public abstract class VisionTrigger : MonoBehaviour {
 
     [Tooltip("The player number that we are looking for")]
-	public int PlayerNumber;
-	public List<int> AdditionaPlayerNums;
-	public List<UnitManager> InVision;
-	public abstract void  UnitEnterTrigger(UnitManager manager);
-	public abstract void  UnitExitTrigger(UnitManager manager);
-	public bool CheckForDeaths = false;
+    public int PlayerNumber;
+    public List<int> AdditionaPlayerNums;
+    public List<UnitManager> InVision;
+    public abstract void UnitEnterTrigger(UnitManager manager);
+    public abstract void UnitExitTrigger(UnitManager manager);
+    public bool CheckForDeaths = false;
+    public bool AppliesToEnemies;
+    public bool AppliesToAllies;
+
+    public void SetOwner(int i)
+    {
+        Debug.Log("Setting owner");
+    }
 
 	void OnEnable()
 	{
@@ -38,7 +45,6 @@ public abstract class VisionTrigger : MonoBehaviour {
 			InVision.Add (otherManager);
 			UnitEnterTrigger (otherManager);
 		}
-
 	}
 
 	void OnTriggerExit(Collider other) {
@@ -51,7 +57,6 @@ public abstract class VisionTrigger : MonoBehaviour {
 			InVision.Remove(otherManager);
 			UnitExitTrigger (otherManager);
 		}
-
 	}
 
 

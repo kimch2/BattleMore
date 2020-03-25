@@ -9,11 +9,14 @@ public class ItemDropper : MonoBehaviour {
 
 	public float dropPeriod;
 	public GameObject toDrop;
-	// Use this for initialization
-	void Start () {
-
-		InvokeRepeating ("DropObject", dropPeriod, dropPeriod);
-	}
+    // Use this for initialization
+    void Start()
+    {
+        if (dropPeriod > 0)
+        {
+            InvokeRepeating("DropObject", dropPeriod, dropPeriod);
+        }
+    }
 
 
 	public void DropObject()
@@ -25,8 +28,6 @@ public class ItemDropper : MonoBehaviour {
 
 			Instantiate (toDrop, new Vector3(this.transform.position.x, objecthit.point.y, this.transform.position.z), Quaternion.identity);
 		}
-
-
 	}
 
 }
