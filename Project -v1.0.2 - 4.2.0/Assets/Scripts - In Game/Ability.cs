@@ -283,5 +283,11 @@ public abstract class Ability : MonoBehaviour {
         }
     }
 
-    public virtual void OnDeath() { }
+    public virtual void OnDeath()
+    {
+        if (myHitContainer)
+        {
+            myHitContainer.Detach();
+        }
+    }
 }

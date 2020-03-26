@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class Poison : DamagerIeffect
 {
+
     public float perSecIncrease = 1;
+    public float HPPercent;
     public GameObject effect;
     public float MaxDuration = 15;
-    GameObject CurrentEffect;
     Coroutine currentPoison;
 
     private void Start()
@@ -36,11 +37,6 @@ public class Poison : DamagerIeffect
         if (currentPoison == null)
         {
             currentPoison = StartCoroutine(Poisoned());
-            if (effect)
-            {
-                CurrentEffect = Instantiate<GameObject>(effect, transform);
-                CurrentEffect.transform.localPosition = Vector3.zero;
-            }
         }
     }
 
@@ -50,7 +46,7 @@ public class Poison : DamagerIeffect
         float damage = DamageAmount;
         for (int i = 0; i <= MaxDuration; i++)
         {
-            OnTargetManager.getUnitStats().TakeDamage(damage, null, DamageTypes.DamageType.True, myHitContainer);
+            OnTargetManager.getUnitStats().TakeDamage(OnTargetManager.getUnitStats().Maxhealth * HPPercent + damage, null, DamageTypes.DamageType.True, myHitContainer);
             damage += perSecIncrease;
             yield return new WaitForSeconds(1);
         }
@@ -59,10 +55,9 @@ public class Poison : DamagerIeffect
 
     public override void RemoveEffect(UnitManager target)
     {
-
+        base.RemoveVisualFX();
         StopAllCoroutines();
-        currentPoison = null;
-        Destroy(CurrentEffect);
+        currentPoison = null; 
         Destroy(this);
     }
 }

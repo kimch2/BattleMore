@@ -20,9 +20,6 @@ public class Buff : MonoBehaviour {
 	public void applyBuff()
 	{
 		myManager.myStats.addBuff (this, stacks);
-
-
-
 	}
 
 	public void applyDebuff()

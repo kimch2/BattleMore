@@ -254,6 +254,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onTarget: 0
+  VisualEffects:
+  - FXObject: {fileID: 2150544201110466808, guid: 02c9304216cdc614cb67305577364964,
+      type: 3}
+    tagLocation: 2
   myBuffs:
   - buffType: 10
     Percent: 0
@@ -261,3 +265,4 @@ MonoBehaviour:
   Stacks: 0
   Duration: 0
   ApplyOnStart: 0
+  Decays: 0

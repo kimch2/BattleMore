@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using System.Collections.Generic;
 public abstract class IEffect : MonoBehaviour{
 
 	public bool onTarget;
     protected UnitManager SourceManager;
     protected UnitManager OnTargetManager;
+    public List<EffectTag> VisualEffects;
+    List<GameObject> AppliedFX = new List<GameObject>();
 
     public void SetManagers(UnitManager source, UnitManager target)
     {
@@ -19,12 +21,15 @@ public abstract class IEffect : MonoBehaviour{
 
     //public abstract void GiveAsAbility(GameObject source, UnitManager target);
     public abstract void applyTo (GameObject source, UnitManager target);
-    public abstract void RemoveEffect(UnitManager target);
-
-    public void RegisterBuff(UnitManager manager, bool isFriendly)
+    public virtual void RemoveEffect(UnitManager target)
     {
-        
+        RemoveVisualFX();
     }
+
+   // public void RegisterBuff(UnitManager manager, bool isFriendly)
+    //{
+        
+   // }
 
     public Component CopyIEffect(UnitManager toCopyTo, bool CopyToAsTarget)
     {
@@ -66,7 +71,32 @@ public abstract class IEffect : MonoBehaviour{
             }
             copy.SetManagers(SourceManager, toCopyTo);
             copy.onTarget = CopyToAsTarget;
+            copy.ApplyFX();
         }
         return copy;
     }
+
+    public void ApplyFX()
+    {
+        foreach (EffectTag tag in VisualEffects)
+        {
+             AppliedFX.Add(OnTargetManager.myStats.getEffectTagContainer().AddVisualFX(tag));
+        }
+    }
+
+    public void RemoveVisualFX()
+    {
+        foreach (GameObject obj in AppliedFX)
+        {
+            Destroy(obj);
+        }
+        OnTargetManager.myStats.getEffectTagContainer().ResetFX();
+    }
+}
+
+[System.Serializable]
+public class EffectTag
+{
+    public GameObject FXObject;
+    public EffectTagContainer.TagLocation tagLocation;
 }

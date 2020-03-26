@@ -7,7 +7,6 @@ public class EmbalmAura : DamagerIeffect, Modifier
     // Causes the attached guy to explode on death
     
     public GameObject Exploder;
-    public GameObject AuraFX;
     public float Duration = 3;
 
     private void Start()
@@ -16,8 +15,6 @@ public class EmbalmAura : DamagerIeffect, Modifier
         {
             OnTargetManager.myStats.addDeathTrigger(this);
             Invoke("EndEffect", Duration);
-            GameObject CurrentEffect = Instantiate<GameObject>(AuraFX, transform);
-            CurrentEffect.transform.localPosition = Vector3.zero;
         }
     }
 
@@ -34,6 +31,7 @@ public class EmbalmAura : DamagerIeffect, Modifier
 
     void EndEffect()
     {
+        RemoveVisualFX();
         OnTargetManager.myStats.removeDeathTrigger(this);
     }
 

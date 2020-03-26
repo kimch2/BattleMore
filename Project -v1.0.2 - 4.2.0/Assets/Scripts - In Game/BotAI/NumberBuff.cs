@@ -318,7 +318,7 @@ public class StatChanger
     /// <summary>
     ///  .2f as a perent means a 20% increase, This will apply to all weapons
     /// </summary>
-    public void changeArmor(float perc, float flat, UnityEngine.Object obj, bool isFriendly, bool stackable = false)
+    public void changeArmor( float perc, float flat, UnityEngine.Object obj, bool isFriendly, bool stackable = false)
     {
         if (isFriendly && !myStats.myManager.metaStatus.CanBuff || !isFriendly && !myStats.myManager.metaStatus.canDebuff)
         {
@@ -470,7 +470,7 @@ public class NumberAlter
 	public float max;
 	public float baseAmount = 0;
 
-
+    // Assuming that if two of the same source are passed in and they don't stack, the new one should replace the old. for instance decaying buffs.
 	public void AddBuff(float perc, float flat, Object obj, bool stackable = false)
 	{
 		for (int i = 0; i < speedMods.Count; i++)
@@ -480,6 +480,8 @@ public class NumberAlter
 			{
 				if (!stackable)
 				{
+                    a.Flat = flat;
+                    a.Perc = perc;
 					return;
 				}
 				else

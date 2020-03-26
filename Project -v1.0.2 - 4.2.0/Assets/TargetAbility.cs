@@ -125,8 +125,7 @@ public abstract class TargetAbility : Ability
 
     public override void OnDeath()
     {
-        base.OnDeath();
-        myHitContainer.Detach();
+        base.OnDeath();       
     }
 
 

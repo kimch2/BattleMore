@@ -66,6 +66,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onTarget: 0
+  VisualEffects:
+  - FXObject: {fileID: 2150544201110466808, guid: 02c9304216cdc614cb67305577364964,
+      type: 3}
+    tagLocation: 2
   myHitContainer: {fileID: 2750239504498201648}
   DamageAmount: 100
   Exploder: {fileID: 3869978223919475233, guid: 7832e6aa498cafc4d90fa552d299a389,

@@ -90,6 +90,7 @@ public class UnitStats : MonoBehaviour {
 	public List<Buff> badBuffs = new List<Buff>();
 
 	public StatChanger statChanger; // This contains all thigns that can alter any numbers for this unit, like Range or attackSpeed
+    EffectTagContainer effectTags;// Things like shields and damage/status markers
 
 
 	void Awake()
@@ -362,6 +363,15 @@ public class UnitStats : MonoBehaviour {
 			DefensePriority = 0;
 		}
 	}
+
+    public EffectTagContainer getEffectTagContainer()
+    {
+        if (!effectTags)
+        {
+            effectTags = gameObject.AddComponent<EffectTagContainer>();
+        }
+        return effectTags;
+    }
 
 	/// <summary>
 	/// pass in the defensePriority of the guy targeting this guy

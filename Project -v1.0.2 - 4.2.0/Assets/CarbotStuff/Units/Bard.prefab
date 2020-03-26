@@ -859,9 +859,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6992310045781941710}
-  m_LocalRotation: {x: -0, y: -0.46088174, z: -0, w: -0.8874616}
-  m_LocalPosition: {x: 0, y: -1.49, z: 0}
-  m_LocalScale: {x: 4.9999995, y: 5, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -1.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6778969455062526437}
   m_Father: {fileID: 6992310045717813796}
@@ -1490,6 +1490,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onTarget: 0
+  VisualEffects: []
   myBuffs:
   - buffType: 5
     Percent: 0.1
@@ -1500,6 +1501,7 @@ MonoBehaviour:
   Stacks: 0
   Duration: 0
   ApplyOnStart: 0
+  Decays: 0
 --- !u!114 &7311890312888131541
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1610,8 +1612,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9070563461283926834}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.021, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 5, y: 5, z: 1}
   m_Children: []
   m_Father: {fileID: 6992310045781941554}
   m_RootOrder: 0

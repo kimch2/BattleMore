@@ -51,7 +51,7 @@ public class TerraTileChecker : MonoBehaviour
         currentlyOnFriendly = true;
         if (myAura)
         {
-            myAura.ApplyBuff(manager);
+            myAura.ApplyBuff(manager,1);
         }
         TerraTileController.main.ApplyAura(manager);
     }

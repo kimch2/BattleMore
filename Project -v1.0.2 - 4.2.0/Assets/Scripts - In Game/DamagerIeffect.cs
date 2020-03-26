@@ -12,9 +12,6 @@ public class DamagerIeffect : IEffect
         target.myStats.TakeDamage( DamageAmount, this.gameObject, DamageTypes.DamageType.Regular, myHitContainer);
     }
 
-    public override void RemoveEffect(UnitManager target)
-    {
-    }
 
     public override bool validTarget(GameObject target)
     {

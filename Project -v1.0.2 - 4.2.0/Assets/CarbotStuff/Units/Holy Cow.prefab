@@ -66,6 +66,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onTarget: 0
+  VisualEffects: []
   HealAmount: 5
 --- !u!1 &2909606169400030585
 GameObject:
@@ -93,8 +94,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2909606169400030585}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.477, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: -3, z: 0}
+  m_LocalScale: {x: 7, y: 7, z: 1}
   m_Children: []
   m_Father: {fileID: 3785362336866548601}
   m_RootOrder: 0
@@ -812,9 +813,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3785362336866548613}
-  m_LocalRotation: {x: -0, y: -0.46088174, z: -0, w: -0.8874616}
-  m_LocalPosition: {x: 0, y: 0.39, z: 0}
-  m_LocalScale: {x: 7, y: 7, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 833833060902457262}
   m_Father: {fileID: 3785362336937622639}
@@ -1627,3 +1628,4 @@ MonoBehaviour:
   OnTriggerEffect: {fileID: 0}
   thingToDrop: {fileID: 4831816047902403319, guid: d4f0fbed620d3714f906a8806cfdbde8,
     type: 3}
+  PossibleNumberAmount: 0

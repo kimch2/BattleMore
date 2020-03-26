@@ -17,6 +17,8 @@ public class ModularAura : IEffect
     public float Duration = 0;
     [Tooltip("This will immediately give it to the guy this is attached to, instead of having to be applied via spell")]
     public bool ApplyOnStart;
+    [Tooltip ("This only applies if there is a duration")]
+    public bool Decays;
 
     private void Start()
     {
@@ -33,7 +35,7 @@ public class ModularAura : IEffect
 
     public override void applyTo(GameObject source, UnitManager target)
     { 
-        ApplyBuff(target);
+        ApplyBuff(target, 1);
         if (Duration > 0)
         {
             StartCoroutine(DelayedRemove(target));
@@ -42,66 +44,93 @@ public class ModularAura : IEffect
 
     IEnumerator DelayedRemove(UnitManager target)
     {
-        yield return new WaitForSeconds(Duration);
-        if (target)
+        if (Decays)
         {
-            RemoveBuff(target);
+
+            for (float i = Duration; i > 0; i -= .5f)
+            {
+                yield return new WaitForSeconds(.5f);
+                if (target)
+                {
+                    ApplyBuff(target, i / Duration);
+                }
+                else
+                {
+                    break;
+                }
+            }
+            if (target)
+            {
+                RemoveBuff(target);
+            }
+        }
+        else
+        {
+            yield return new WaitForSeconds(Duration);
+
+            if (target)
+            {
+                RemoveBuff(target);
+            }
         }
     }
 
     public override void RemoveEffect(UnitManager target)
     {
+        base.RemoveEffect(target);
         RemoveBuff(target);      
     }
 
-    public void ApplyBuff(UnitManager manager)
+    public void ApplyBuff(UnitManager manager,float percentage) // percenetage being used when an effect decays over time
     {
         foreach (AuraNumber buff in myBuffs)
         {
+            float flat = buff.Flat * percentage;
+            float perc = buff.Percent * percentage;
             switch (buff.buffType)
             {
                 case StatChanger.BuffType.Armor:
-                    manager.myStats.statChanger.changeArmor(buff.Percent, buff.Flat, this, SourceManager.PlayerOwner == manager.PlayerOwner,  Stacks);
+                    manager.myStats.statChanger.changeArmor(perc,flat, this, SourceManager.PlayerOwner == manager.PlayerOwner,  Stacks);
                     break;
 
                 case StatChanger.BuffType.AttackSpeed:
-                    manager.myStats.statChanger.changeAttackSpeed(buff.Percent, buff.Flat, this, SourceManager.PlayerOwner == manager.PlayerOwner, Stacks);
+                    manager.myStats.statChanger.changeAttackSpeed(perc, flat, this, SourceManager.PlayerOwner == manager.PlayerOwner, Stacks);
                     break;
 
                 case StatChanger.BuffType.Damage:
-                    manager.myStats.statChanger.changeWeaponDamage(buff.Percent, buff.Flat, this, SourceManager.PlayerOwner == manager.PlayerOwner, Stacks);
+                    manager.myStats.statChanger.changeWeaponDamage(perc, flat, this, SourceManager.PlayerOwner == manager.PlayerOwner, Stacks);
                     break;
 
                 case StatChanger.BuffType.Energy:
-                    manager.myStats.statChanger.changeEnergyMax(buff.Percent, buff.Flat, this, SourceManager.PlayerOwner == manager.PlayerOwner, Stacks);
+                    manager.myStats.statChanger.changeEnergyMax(perc, flat, this, SourceManager.PlayerOwner == manager.PlayerOwner, Stacks);
                     break;
 
                 case StatChanger.BuffType.EnergyRegen:
-                    manager.myStats.statChanger.changeEnergyRegen(buff.Percent, buff.Flat, this, SourceManager.PlayerOwner == manager.PlayerOwner, Stacks);
+                    manager.myStats.statChanger.changeEnergyRegen(perc, flat, this, SourceManager.PlayerOwner == manager.PlayerOwner, Stacks);
                     break;
 
                 case StatChanger.BuffType.HP:
-                    manager.myStats.statChanger.changeHealthMax(buff.Percent, buff.Flat, this, SourceManager.PlayerOwner == manager.PlayerOwner, Stacks);
+                    manager.myStats.statChanger.changeHealthMax(perc, flat, this, SourceManager.PlayerOwner == manager.PlayerOwner, Stacks);
                     break;
 
                 case StatChanger.BuffType.HPRegen:
-                    manager.myStats.statChanger.changeHealthRegen(buff.Percent, buff.Flat, this, SourceManager.PlayerOwner == manager.PlayerOwner, Stacks);
+                    manager.myStats.statChanger.changeHealthRegen(perc, flat, this, SourceManager.PlayerOwner == manager.PlayerOwner, Stacks);
                     break;
 
                 case StatChanger.BuffType.MoveSpeed:
-                    manager.myStats.statChanger.changeMoveSpeed(buff.Percent, buff.Flat, this, SourceManager.PlayerOwner == manager.PlayerOwner, Stacks);
+                    manager.myStats.statChanger.changeMoveSpeed(perc, flat, this, SourceManager.PlayerOwner == manager.PlayerOwner, Stacks);
                     break;
 
                 case StatChanger.BuffType.Cooldown:
-                    manager.myStats.statChanger.changeCooldown(buff.Percent, buff.Flat, this, SourceManager.PlayerOwner == manager.PlayerOwner, Stacks);
+                    manager.myStats.statChanger.changeCooldown(perc, flat, this, SourceManager.PlayerOwner == manager.PlayerOwner, Stacks);
                     break;
 
                 case StatChanger.BuffType.Range:
-                    manager.myStats.statChanger.changeWeaponRange(buff.Percent, buff.Flat, this, SourceManager.PlayerOwner == manager.PlayerOwner, Stacks);
+                    manager.myStats.statChanger.changeWeaponRange(perc, flat, this, SourceManager.PlayerOwner == manager.PlayerOwner, Stacks);
                     break;
 
                 case StatChanger.BuffType.Priority: // TAUNT - Should this go through the Meta-status class???
-                    manager.myStats.statChanger.changeAttackPriority(buff.Percent, buff.Flat, this, SourceManager.PlayerOwner == manager.PlayerOwner, Stacks);
+                    manager.myStats.statChanger.changeAttackPriority(perc, flat, this, SourceManager.PlayerOwner == manager.PlayerOwner, Stacks);
                     break;
             }
         }

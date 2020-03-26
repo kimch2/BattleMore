@@ -67,6 +67,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onTarget: 0
+  VisualEffects: []
   myBuffs:
   - buffType: 0
     Percent: 0
@@ -74,6 +75,7 @@ MonoBehaviour:
   Stacks: 1
   Duration: 0
   ApplyOnStart: 0
+  Decays: 0
 --- !u!114 &9012251183095902171
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -87,6 +89,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onTarget: 0
+  VisualEffects: []
   myHitContainer: {fileID: 8197068723560711722}
   DamageAmount: 1
 --- !u!1 &7769992300745373838
@@ -115,8 +118,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7769992300745373838}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.079, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 8, y: 8, z: 1}
   m_Children: []
   m_Father: {fileID: 8591811788947830414}
   m_RootOrder: 0
@@ -995,7 +998,7 @@ Transform:
   m_GameObject: {fileID: 8591811788947830386}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -1, z: 0}
-  m_LocalScale: {x: 8, y: 8, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5198894986103112281}
   m_Father: {fileID: 8591811789017199000}

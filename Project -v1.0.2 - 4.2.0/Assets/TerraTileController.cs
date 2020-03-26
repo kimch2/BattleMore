@@ -61,11 +61,11 @@ public class TerraTileController : MonoBehaviour
     {
         if (manager.PlayerOwner == 1)
         {if(PlayerOneAura)
-            PlayerOneAura.ApplyBuff(manager);
+            PlayerOneAura.ApplyBuff(manager,1);
         }
         else {
             if(PlayerTwoAura)
-            PlayerTwoAura.ApplyBuff(manager);
+            PlayerTwoAura.ApplyBuff(manager,1);
         }
     }
 
