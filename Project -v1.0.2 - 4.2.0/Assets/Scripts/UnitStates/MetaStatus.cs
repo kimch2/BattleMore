@@ -10,7 +10,7 @@ public class MetaStatus
 
     public enum statusType { Stun, Root, Silence, Pacify, Taunt, Fear, CastMove, Bless, Curse, Channel, Sleep }
     Dictionary<statusType, List<StatusEffect>> cachedStatus = new Dictionary<statusType, List<StatusEffect>>();
-    Dictionary<statusType, GameObject> CachedFX = new Dictionary<statusType, GameObject>();
+    Dictionary<statusType, EffectTag> CachedFX = new Dictionary<statusType, EffectTag>();
     // Do we need these?
     public bool CanRecieveRightClick; // Stun, Taunt, Fear   
     public bool canMove = true; // Stun, Root
@@ -102,7 +102,7 @@ public class MetaStatus
             }
 
             list.RemoveAll(item => item.sourceComp == sourceComponent);
-
+            Debug.Log("List size is now " + list.Count);
             if (list.Count == 0) // Delete the list if its size is zero? probably not, to cut down on memory management, But we do save on computations elswhere
             {
                 cachedStatus.Remove(theType);
@@ -214,38 +214,53 @@ public class MetaStatus
     //Returns null if its already active
     GameObject TurnOnFX(statusType theType)
     {
-        GameObject toReturn = null;
+        EffectTag toReturn = null;
         CachedFX.TryGetValue(theType, out toReturn);
 
-        if (toReturn)
+        if (toReturn != null)
         {
-            if (toReturn.activeSelf)
+            if (toReturn.FXObject.activeSelf)
             {
                 return null;
             }
             else
             {
-                toReturn.SetActive(true);
+                toReturn.FXObject.SetActive(true);
+                myManager.myStats.getEffectTagContainer().AddVisualFX(toReturn, false);
             }
         }
         else if (theType == statusType.Sleep)
         {
-            toReturn = GenericEffectsManager.SleepEffect();
+            GameObject FXObject = GenericEffectsManager.SleepEffect();
+            toReturn = new EffectTag(FXObject, EffectTagContainer.TagLocation.HPBar);
             CachedFX.Add(statusType.Sleep, toReturn);
-            toReturn.transform.parent = myManager.transform;
-            toReturn.transform.localPosition = Vector3.up * myManager.CharController.radius;
+            myManager.myStats.getEffectTagContainer().AddVisualFX(toReturn, false);
         }
+        else if (theType == statusType.Stun)
+        {
+            GameObject FXObject = GenericEffectsManager.StunEffect();
+            toReturn = new EffectTag(FXObject, EffectTagContainer.TagLocation.HPBar);
+            CachedFX.Add(statusType.Stun, toReturn);
+            myManager.myStats.getEffectTagContainer().AddVisualFX(toReturn, false);
+        }
+        //To be continued
 
-        return toReturn;
+        return toReturn.FXObject;
     }
 
     void TurnOffFX(statusType theType)
     {
-        GameObject toReturn = null;
+        EffectTag toReturn = null;
         CachedFX.TryGetValue(theType, out toReturn);
-        if (toReturn)
+        if (toReturn != null)
         {
-            toReturn.SetActive(false);
+            Debug.Log("Turning off effec " + toReturn.FXObject);
+            myManager.myStats.getEffectTagContainer().RemoveEffect(toReturn, false);
+            toReturn.FXObject.SetActive(false);
+        }
+        else
+        {
+            Debug.Log("Couldn't find it");
         }
     }
 
@@ -260,11 +275,15 @@ public class MetaStatus
         DisableRightClicks();
         DisableCasting();
         myManager.changeState(new StunState(myManager), true, false);
+        TurnOnFX(statusType.Stun);
     }
+
     public void UnStun(UnityEngine.Object sourceComponent)
     {
+        Debug.Log("Calling UNstun");
         if (UnCacheStatus(statusType.Stun, sourceComponent))
         {
+            Debug.Log("Unstunned");
             EnableAttacks();
             EnableMovement();
             EnableRightClicks();
@@ -273,7 +292,7 @@ public class MetaStatus
             {
                 myManager.changeState(new DefaultState());
             }
-
+            TurnOffFX(statusType.Stun);
         }
     }
 
@@ -335,6 +354,7 @@ public class MetaStatus
         DisableAttacks();
         DisableCasting(); // Maybe not this one for early canceling of channelAbilties?
     }
+
     public void UnChannel(UnityEngine.Object sourceComponent)
     { if (UnCacheStatus(statusType.Channel, sourceComponent))
         {
@@ -585,7 +605,7 @@ public class MetaStatus
         }
         else
         {
-            anim.Start();
+            anim.OnEnable();
         }
     }
 
@@ -601,7 +621,7 @@ public class MetaStatus
         }
         else
         {
-            anim.Start();
+            anim.OnEnable();
         }
     }
 
@@ -617,7 +637,7 @@ public class MetaStatus
         }
         else
         {
-            anim.Start();
+            anim.OnEnable();
         }
     }
 
@@ -633,7 +653,7 @@ public class MetaStatus
         }
         else
         {
-            anim.Start();
+            anim.OnEnable();
         }
     }
 

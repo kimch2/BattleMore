@@ -18,7 +18,7 @@ public class SimpleAnimator : MonoBehaviour
     float TurnOffTime;
     Coroutine myRoutine;
 
-    public void Start()
+    public void OnEnable()
     {
         if (myRoutine != null)
         {
@@ -36,8 +36,13 @@ public class SimpleAnimator : MonoBehaviour
             {
                 TurnOffTime = Time.time + 100000;
             }
-            StartCoroutine(animate());
+            myRoutine = StartCoroutine(animate());
         }
+    }
+
+    private void OnDisable()
+    {
+        myRoutine = null;
     }
 
     IEnumerator animate()

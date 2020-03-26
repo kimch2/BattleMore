@@ -29,7 +29,7 @@ public class Poison : DamagerIeffect
     public override void applyTo(GameObject source, UnitManager target)
     {
         Poison Copy = (Poison)CopyIEffect(target, true);
-        Copy.BeginToPoison();
+       // Copy.BeginToPoison();
     }
 
     public void BeginToPoison()

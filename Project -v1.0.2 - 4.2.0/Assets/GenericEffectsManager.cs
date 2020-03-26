@@ -24,7 +24,7 @@ public class GenericEffectsManager : MonoBehaviour
 
     public static GameObject StunEffect()
     {
-        return Instantiate<GameObject>(main.Stun);
+        return  Instantiate<GameObject>(main.Stun);
     }
 
     public static GameObject CriticalHitEffect()

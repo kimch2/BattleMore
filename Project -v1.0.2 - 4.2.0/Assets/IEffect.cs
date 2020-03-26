@@ -58,9 +58,11 @@ public abstract class IEffect : MonoBehaviour{
         }
         else
         {
+            bool AlreadyExists = true;
             copy = (IEffect)toCopyTo.gameObject.GetComponent(type);
             if (copy == null)
             {
+                AlreadyExists = false;
                 copy = (IEffect)toCopyTo.gameObject.AddComponent(type);             
             }
             copy.enabled = true;
@@ -71,7 +73,10 @@ public abstract class IEffect : MonoBehaviour{
             }
             copy.SetManagers(SourceManager, toCopyTo);
             copy.onTarget = CopyToAsTarget;
-            copy.ApplyFX();
+            if (!AlreadyExists)
+            {
+                copy.ApplyFX();
+            }
         }
         return copy;
     }
@@ -80,7 +85,7 @@ public abstract class IEffect : MonoBehaviour{
     {
         foreach (EffectTag tag in VisualEffects)
         {
-             AppliedFX.Add(OnTargetManager.myStats.getEffectTagContainer().AddVisualFX(tag));
+             AppliedFX.Add(OnTargetManager.myStats.getEffectTagContainer().AddVisualFX(tag, true));
         }
     }
 
@@ -99,4 +104,10 @@ public class EffectTag
 {
     public GameObject FXObject;
     public EffectTagContainer.TagLocation tagLocation;
+
+    public EffectTag(GameObject obj, EffectTagContainer.TagLocation loc)
+    {
+        FXObject = obj;
+        tagLocation = loc;
+    }
 }

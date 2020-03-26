@@ -22,9 +22,17 @@ public class EffectTagContainer : MonoBehaviour
         HPOffset = HPBarTransform.GetChild(2).localPosition.y - 2;
     }
 
-    public GameObject AddVisualFX(EffectTag toAdd)
+    public GameObject AddVisualFX(EffectTag toAdd, bool SpawnObject)
     {
-        GameObject newObject = Instantiate<GameObject>(toAdd.FXObject);
+        GameObject newObject;
+        if (SpawnObject)
+        {
+            newObject = Instantiate<GameObject>(toAdd.FXObject);
+        }
+        else
+        {
+            newObject = toAdd.FXObject;
+        }
 
         if (toAdd.tagLocation == TagLocation.HPBar)
         {
@@ -53,6 +61,29 @@ public class EffectTagContainer : MonoBehaviour
 
         return newObject;
     }
+
+    public void RemoveEffect(EffectTag tag, bool DestroyObject)
+    {
+        if (tag.tagLocation == TagLocation.HPBar)
+        {
+            TopIcons.Remove(tag.FXObject);
+            ResetTopIcons();
+        }
+        else if (tag.tagLocation == TagLocation.Body)
+        {
+            FeetIcons.Remove(tag.FXObject);
+        }
+        else if (tag.tagLocation == TagLocation.Feet)
+        {
+            FeetIcons.Remove(tag.FXObject);
+            ResetFootIcons();
+        }
+        if (DestroyObject)
+        {
+            Destroy(tag.FXObject);
+        }
+    }
+
 
     public void ResetFX()
     {
