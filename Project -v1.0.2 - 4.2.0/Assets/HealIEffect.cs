@@ -10,7 +10,7 @@ public class HealIEffect : IEffect
         target.myStats.heal(HealAmount);
     }
 
-    public override void RemoveEffect(UnitManager target)
+    public override void BeginEffect()
     {
        
     }

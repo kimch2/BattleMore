@@ -33,9 +33,11 @@ public class SalvageTarget : IEffect {
 		GameManager.main.playerList[0].collectOneResource(new ResourceTank(ResourceType.Waste, (int)amountB), false);
 	}
 
-    public override void RemoveEffect(UnitManager target)
-    {
+    public override void BeginEffect()
+    {       
     }
+
+
 
     public override bool validTarget(GameObject target) {
 		return true;

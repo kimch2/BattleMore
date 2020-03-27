@@ -4,22 +4,11 @@ using UnityEngine;
 
 public class Poison : DamagerIeffect
 {
-
     public float perSecIncrease = 1;
     public float HPPercent;
     public GameObject effect;
     public float MaxDuration = 15;
     Coroutine currentPoison;
-
-    private void Start()
-    {
-        if (onTarget)
-        {
-            OnTargetManager = myHitContainer.myManager;
-            BeginToPoison();
-        }
-    }
-
 
     public override bool validTarget(GameObject target)
     {
@@ -29,15 +18,22 @@ public class Poison : DamagerIeffect
     public override void applyTo(GameObject source, UnitManager target)
     {
         Poison Copy = (Poison)CopyIEffect(target, true);
-       // Copy.BeginToPoison();
     }
 
-    public void BeginToPoison()
+    public override void BeginEffect()
     {
         if (currentPoison == null)
         {
             currentPoison = StartCoroutine(Poisoned());
         }
+    }
+
+    public override void EndEffect()
+    {
+        base.RemoveVisualFX();
+        StopAllCoroutines();
+        currentPoison = null;
+        Destroy(this);
     }
 
     IEnumerator Poisoned()
@@ -53,11 +49,5 @@ public class Poison : DamagerIeffect
         currentPoison = null;
     }
 
-    public override void RemoveEffect(UnitManager target)
-    {
-        base.RemoveVisualFX();
-        StopAllCoroutines();
-        currentPoison = null; 
-        Destroy(this);
-    }
+   
 }

@@ -67,13 +67,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 085004ebfd957fa4992888e2dd75bee8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerNumber: 2
-  AdditionaPlayerNums: 
+  ZoneName: WhirlPool
+  PlayerOwner: 0
   InVision: []
   CheckForDeaths: 0
+  AppliesToEnemies: 1
+  AppliesToAllies: 0
+  StacksEffect: 0
   myHitContainer: {fileID: 0}
-  spinSpeed: 25
+  CantTarget: 
   duration: 8
+  RepeatPeriod: 0
+  spinSpeed: 25
 --- !u!1 &7146873201248118065
 GameObject:
   m_ObjectHideFlags: 0

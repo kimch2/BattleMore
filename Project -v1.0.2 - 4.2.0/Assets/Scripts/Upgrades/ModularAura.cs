@@ -10,23 +10,31 @@ public class ModularAura : IEffect
 
 
     public List<AuraNumber> myBuffs = new List<AuraNumber>();
-    [Tooltip("Any script in this list should extend the ICustomAura interface ")]
-   
+
     public bool Stacks;
+
     [Tooltip("If this is 0, it is permanant")]
     public float Duration = 0;
-    [Tooltip("This will immediately give it to the guy this is attached to, instead of having to be applied via spell")]
-    public bool ApplyOnStart;
+
     [Tooltip ("This only applies if there is a duration")]
     public bool Decays;
 
-    private void Start()
+
+    public override void BeginEffect()
     {
-        if (ApplyOnStart)
+        ApplyBuff(OnTargetManager, 1);
+        if (Duration > 0)
         {
-            applyTo(SourceManager.gameObject, SourceManager);
+            StartCoroutine(DelayedRemove(OnTargetManager));
         }
     }
+
+    public override void EndEffect()
+    {
+        RemoveBuff(OnTargetManager);
+        base.EndEffect();
+    }
+
 
     public override bool validTarget(GameObject target)
     {
@@ -34,19 +42,14 @@ public class ModularAura : IEffect
     }
 
     public override void applyTo(GameObject source, UnitManager target)
-    { 
-        ApplyBuff(target, 1);
-        if (Duration > 0)
-        {
-            StartCoroutine(DelayedRemove(target));
-        }
+    {
+        ModularAura aura = (ModularAura)CopyIEffect(target, true);    
     }
 
     IEnumerator DelayedRemove(UnitManager target)
     {
         if (Decays)
         {
-
             for (float i = Duration; i > 0; i -= .5f)
             {
                 yield return new WaitForSeconds(.5f);
@@ -75,14 +78,10 @@ public class ModularAura : IEffect
         }
     }
 
-    public override void RemoveEffect(UnitManager target)
-    {
-        base.RemoveEffect(target);
-        RemoveBuff(target);      
-    }
 
     public void ApplyBuff(UnitManager manager,float percentage) // percenetage being used when an effect decays over time
     {
+        //Debug.Log("Applying buff");
         foreach (AuraNumber buff in myBuffs)
         {
             float flat = buff.Flat * percentage;
@@ -138,6 +137,7 @@ public class ModularAura : IEffect
 
     public void RemoveBuff(UnitManager manager)
     {
+       // Debug.Log("Removeing buff");
         foreach (AuraNumber buff in myBuffs)
         {
             switch (buff.buffType)

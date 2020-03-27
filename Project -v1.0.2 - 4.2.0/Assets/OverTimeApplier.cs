@@ -29,33 +29,24 @@ public class OverTimeApplier : VisionTrigger
     {
         if (myHitContainer)
         {
+            PlayersToLookFor.Clear();
             UnitManager sourceMan = myHitContainer.myManager;
+            PlayerOwner = sourceMan.PlayerOwner;
             if (AppliesToAllies && AppliesToEnemies)
             {
-                PlayerNumber = 1;
-                AdditionaPlayerNums.Add(2);
+                PlayersToLookFor.Add(1);
+                PlayersToLookFor.Add(2);
+                ZoneName += "12";
             }
             else if (AppliesToAllies)
             {
-                if (sourceMan.PlayerOwner == 1)
-                {
-                    PlayerNumber = 1;
-                }
-                else
-                {
-                    PlayerNumber = 2;
-                }               
+                PlayersToLookFor.Add(1);
+                ZoneName += "1";
             }
             else if (AppliesToEnemies)
             {
-                if (sourceMan.PlayerOwner == 1)
-                {
-                    PlayerNumber = 2;
-                }
-                else
-                {
-                    PlayerNumber = 1;
-                }
+                PlayersToLookFor.Add(2);
+                ZoneName += "2";
             }
         }
     }
@@ -77,20 +68,24 @@ public class OverTimeApplier : VisionTrigger
                 return;
             }
         }
-
+       // Debug.Log("seeing "+ manager);
+            
         myHitContainer.trigger(null,manager,0);
     }
 
     public override void UnitExitTrigger(UnitManager manager)
     {
-        foreach (UnitTypes.UnitTypeTag typ in CantTarget)
+        if (manager)
         {
-            if (manager.myStats.isUnitType(typ))
+            foreach (UnitTypes.UnitTypeTag typ in CantTarget)
             {
-                return;
+                if (manager.myStats.isUnitType(typ))
+                {
+                    return;
+                }
             }
+            myHitContainer.RemoveEffect(manager);
         }
-        myHitContainer.RemoveEffect(manager);
     }
 
 
@@ -99,7 +94,18 @@ public class OverTimeApplier : VisionTrigger
     {
         foreach (UnitManager man in InVision)
         {
-            UnitExitTrigger(man);
+            if (!StacksEffect)
+            {
+                Unstackables[ZoneName].Remove(man);
+                if (!Unstackables[ZoneName].Contains(man))
+                {
+                    UnitExitTrigger(man);
+                }
+            }
+            else
+            {
+                UnitExitTrigger(man);
+            }
         }
         Destroy(this.gameObject);
     }

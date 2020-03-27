@@ -968,7 +968,7 @@ MonoBehaviour:
   attackSoundEffect: {fileID: 8300000, guid: 2bc8225a23eb945578cfd49d8ba0dd67, type: 3}
   myAnimator: {fileID: 0}
   AnimationName: Attack
-  attackPeriod: 2
+  attackPeriod: 3
   baseAttackPeriod: 0
   numOfAttacks: 1
   RepeatDelay: 0.06
@@ -977,7 +977,7 @@ MonoBehaviour:
   turret: {fileID: 0}
   firePoints: []
   damagePoint: 0.2
-  AttackDelay: 0.5
+  AttackDelay: 0.2
   myHitContainer: {fileID: 6150736397262153315}
   cantAttackTypes: 
   extraDamage: []
@@ -1537,8 +1537,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 550c744d482bf4b44836df6193654658, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EffectName: OctoSlowZone
   onTarget: 0
-  VisualEffects: []
+  VisualEffects:
+  - FXObject: {fileID: 2256331201717204681, guid: 898f2ffccb774d0478e4dadf6aa41988,
+      type: 3}
+    tagLocation: 0
   myBuffs:
   - buffType: 5
     Percent: -0.75
@@ -1548,5 +1552,4 @@ MonoBehaviour:
     Flat: 0
   Stacks: 0
   Duration: 0
-  ApplyOnStart: 0
   Decays: 0

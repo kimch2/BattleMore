@@ -3,33 +3,46 @@ using System.Collections;
 using System.Collections.Generic;
 public abstract class IEffect : MonoBehaviour{
 
+
+    //The IEffect class is represents both the source and the thing applied to the target, the "onTarget" variable
+    // being the determiner.
+    // For one time effects like 'Heal target', you don't need to copy the effect to the target, just run the code to 
+    // heal the target
+
+    public string EffectName = "NameMe!";
 	public bool onTarget;
     protected UnitManager SourceManager;
     protected UnitManager OnTargetManager;
+
     public List<EffectTag> VisualEffects;
     List<GameObject> AppliedFX = new List<GameObject>();
+    int channelSource;
+
+    public abstract bool validTarget(GameObject target);
+    public abstract void applyTo(GameObject source, UnitManager target);
+    public abstract void BeginEffect(); // this gets called on the copied components
+
+    protected void Start()
+    {
+        if (onTarget)
+        {
+            BeginEffect();
+            ApplyFX();
+        }
+    }
+
+    /// Call this last if you are overriding to add additional things
+    public virtual void EndEffect()
+    {
+        RemoveVisualFX();
+        Destroy(this);
+    }
 
     public void SetManagers(UnitManager source, UnitManager target)
     {
         SourceManager = source;
         OnTargetManager = target;
     }
-
-
-	public abstract bool validTarget(GameObject target);
-
-
-    //public abstract void GiveAsAbility(GameObject source, UnitManager target);
-    public abstract void applyTo (GameObject source, UnitManager target);
-    public virtual void RemoveEffect(UnitManager target)
-    {
-        RemoveVisualFX();
-    }
-
-   // public void RegisterBuff(UnitManager manager, bool isFriendly)
-    //{
-        
-   // }
 
     public Component CopyIEffect(UnitManager toCopyTo, bool CopyToAsTarget)
     {
@@ -45,7 +58,7 @@ public abstract class IEffect : MonoBehaviour{
                 {
                     copy = (IEffect)contain.gameObject.AddComponent(type);
                 }
-                copy.SetManagers(contain.myManager, null);
+                copy.SetManagers(contain.myManager,null);
                 copy.onTarget = CopyToAsTarget;
               
                 System.Reflection.FieldInfo[] fields = type.GetFields();
@@ -59,7 +72,15 @@ public abstract class IEffect : MonoBehaviour{
         else
         {
             bool AlreadyExists = true;
-            copy = (IEffect)toCopyTo.gameObject.GetComponent(type);
+            foreach (Component fect in toCopyTo.gameObject.GetComponents(type))
+            {
+                copy = (IEffect)toCopyTo.gameObject.GetComponent(type);
+                if (copy.EffectName == this.EffectName)
+                {
+                    break;
+                }
+            }
+           
             if (copy == null)
             {
                 AlreadyExists = false;
@@ -71,7 +92,7 @@ public abstract class IEffect : MonoBehaviour{
             {
                 field.SetValue(copy, field.GetValue(this));
             }
-            copy.SetManagers(SourceManager, toCopyTo);
+            copy.SetManagers(SourceManager,toCopyTo);
             copy.onTarget = CopyToAsTarget;
             if (!AlreadyExists)
             {
@@ -89,7 +110,7 @@ public abstract class IEffect : MonoBehaviour{
         }
     }
 
-    public void RemoveVisualFX()
+    public void RemoveVisualFX ()
     {
         foreach (GameObject obj in AppliedFX)
         {

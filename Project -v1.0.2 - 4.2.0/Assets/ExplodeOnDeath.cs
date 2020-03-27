@@ -7,7 +7,6 @@ public class ExplodeOnDeath : IEffect, Modifier {
 
     // BATTLEMORE SPECIFIC SCRIPT
 
-	private UnitStats unitStats;
 	public GameObject explosion;
 	[Tooltip("If this unit has less than this amount of energy it wont explode")]
 	public float mininumEnergy = 7;
@@ -17,16 +16,19 @@ public class ExplodeOnDeath : IEffect, Modifier {
 
 	public GameObject Dynamite;
 
-	public void Start()
-	{
-		if (onTarget)
-		{
-			unitStats = GetComponent<UnitStats>();
-			unitStats.addDeathTrigger(this);
-		}
-	}
 
-	public float modify(float damage, GameObject source, DamageTypes.DamageType theType) {
+    public override void BeginEffect()
+    {
+        OnTargetManager.myStats.addDeathTrigger(this);
+    }
+
+    public override void EndEffect()
+    {
+        base.EndEffect();
+        OnTargetManager.myStats.removeDeathTrigger(this);
+    }
+
+    public float modify(float damage, GameObject source, DamageTypes.DamageType theType) {
 
 		
 		if (myDamage == 0)
@@ -34,7 +36,7 @@ public class ExplodeOnDeath : IEffect, Modifier {
 			DayexaShield dayexaShield = GetComponent<DayexaShield>();
 			if (dayexaShield)
 			{
-				float energy = unitStats.currentEnergy;
+				float energy = OnTargetManager.myStats.currentEnergy;
 				if (energy < mininumEnergy)
 				{
 					return damage;
@@ -113,8 +115,5 @@ public class ExplodeOnDeath : IEffect, Modifier {
 		return true;
 	}
 
-    public override void RemoveEffect(UnitManager target)
-    {
-        throw new System.NotImplementedException();
-    }
+
 }

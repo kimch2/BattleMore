@@ -12,6 +12,10 @@ public class DamagerIeffect : IEffect
         target.myStats.TakeDamage( DamageAmount, this.gameObject, DamageTypes.DamageType.Regular, myHitContainer);
     }
 
+    public override void BeginEffect()
+    {
+
+    }
 
     public override bool validTarget(GameObject target)
     {

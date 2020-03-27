@@ -10,14 +10,19 @@ public class Embomb : DamagerIeffect, Modifier
 
     public override void applyTo(GameObject source, UnitManager target)
     {
-        
-        Embomb targetEmbomb = target.gameObject.AddComponent<Embomb>();
-        targetEmbomb.Source = source;
-        targetEmbomb.DamageAmount = DamageAmount;
-        targetEmbomb.gameObject.GetComponent<UnitStats>().addDeathTrigger(targetEmbomb);
-
+        CopyIEffect(target, true);
     }
 
+    public override void BeginEffect()
+    {
+        GetComponent<UnitStats>().addDeathTrigger(this);
+    }
+
+    public override void EndEffect()
+    {
+        base.EndEffect();
+        GetComponent<UnitStats>().removeDeathTrigger(this);
+    }
 
 
     public float modify(float damage, GameObject source, DamageTypes.DamageType theType)
@@ -30,10 +35,7 @@ public class Embomb : DamagerIeffect, Modifier
         return damage;
     }
 
-    public override void RemoveEffect(UnitManager target)
-    {
-        throw new System.NotImplementedException();
-    }
+
 
     public override bool validTarget(GameObject target)
     {

@@ -4,22 +4,26 @@ using UnityEngine;
 
 public abstract class VisionTrigger : MonoBehaviour {
 
-    [Tooltip("The player number that we are looking for")]
-    public int PlayerNumber;
-    public List<int> AdditionaPlayerNums;
+    public string ZoneName;
+    [HideInInspector]
+    public int PlayerOwner;
+
+    protected List<int> PlayersToLookFor = new List<int>() {1};
+    [HideInInspector]
     public List<UnitManager> InVision;
-    public abstract void UnitEnterTrigger(UnitManager manager);
-    public abstract void UnitExitTrigger(UnitManager manager);
     public bool CheckForDeaths = false;
     public bool AppliesToEnemies;
     public bool AppliesToAllies;
+    public bool StacksEffect;
 
-    public void SetOwner(int i)
-    {
-        Debug.Log("Setting owner");
-    }
 
-	void OnEnable()
+    public abstract void UnitEnterTrigger(UnitManager manager);
+    public abstract void UnitExitTrigger(UnitManager manager);
+    
+    protected static Dictionary<string, List<UnitManager>> Unstackables = new Dictionary<string, List<UnitManager>>();
+
+
+    void OnEnable()
 	{
 		if (CheckForDeaths) {
 			InvokeRepeating ("CheckNull", .5f, .5f);
@@ -40,10 +44,29 @@ public abstract class VisionTrigger : MonoBehaviour {
 		}
 
 		UnitManager otherManager = other.gameObject.GetComponent<UnitManager> ();
-		if (otherManager && (otherManager.PlayerOwner.Equals (PlayerNumber) || AdditionaPlayerNums.Contains(otherManager.PlayerOwner))) {
+		if (otherManager && PlayersToLookFor.Contains(otherManager.PlayerOwner)) {
 
-			InVision.Add (otherManager);
-			UnitEnterTrigger (otherManager);
+            InVision.Add(otherManager);
+            if (!StacksEffect)
+            {
+                List<UnitManager> toReturn = null;
+                Unstackables.TryGetValue(ZoneName, out toReturn);
+                if (toReturn == null)
+                {
+                    toReturn = new List<UnitManager>();
+                    Unstackables.Add(ZoneName, toReturn);
+                    UnitEnterTrigger(otherManager);
+                }
+                else if (!toReturn.Contains(otherManager))
+                {
+                    UnitEnterTrigger(otherManager);
+                }
+                toReturn.Add(otherManager);
+            }
+            else
+            {
+                UnitEnterTrigger(otherManager);
+            }         
 		}
 	}
 
@@ -52,12 +75,21 @@ public abstract class VisionTrigger : MonoBehaviour {
 			return;
 		}
 		UnitManager otherManager = other.gameObject.GetComponent<UnitManager> ();
-		if (otherManager && InVision.Contains(otherManager)) {
-
-			InVision.Remove(otherManager);
-			UnitExitTrigger (otherManager);
-		}
+        if (otherManager && InVision.Contains(otherManager))
+        {
+            InVision.Remove(otherManager);
+            if (!StacksEffect)
+            {
+                Unstackables[ZoneName].Remove(otherManager);
+                if (!Unstackables[ZoneName].Contains(otherManager))
+                {
+                    UnitExitTrigger(otherManager);
+                }
+            }
+            else
+            {
+                UnitExitTrigger(otherManager);
+            }
+        }
 	}
-
-
 }

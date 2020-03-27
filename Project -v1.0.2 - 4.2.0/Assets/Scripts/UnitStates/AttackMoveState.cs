@@ -53,7 +53,9 @@ public class AttackMoveState : UnitState {
 
 
 	public UnitManager getEnemy()
-	{ return enemy; }
+	{
+        return enemy;
+    }
 
 	public override void initialize()
 	{

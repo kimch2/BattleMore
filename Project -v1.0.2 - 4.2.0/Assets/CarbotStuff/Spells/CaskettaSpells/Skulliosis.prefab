@@ -65,11 +65,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6308cfa329f060e47b0040d0ae542a2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EffectName: NameMe!
   onTarget: 0
+  VisualEffects: []
   myHitContainer: {fileID: 8731511295435502503}
-  DamageTime: 3
   DamageAmount: 0
-  effect: {fileID: 0}
+  DamageTime: 3
   toSpawn: Skelly
   toSpawnObject: {fileID: 2899125463594918715, guid: 6a834b794bfba244fa3da60819856b23,
     type: 3}

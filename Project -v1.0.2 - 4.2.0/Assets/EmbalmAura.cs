@@ -9,15 +9,6 @@ public class EmbalmAura : DamagerIeffect, Modifier
     public GameObject Exploder;
     public float Duration = 3;
 
-    private void Start()
-    {
-        if (onTarget)
-        {
-            OnTargetManager.myStats.addDeathTrigger(this);
-            Invoke("EndEffect", Duration);
-        }
-    }
-
 
     public override bool validTarget(GameObject target)
     {
@@ -29,7 +20,12 @@ public class EmbalmAura : DamagerIeffect, Modifier
         EmbalmAura Copy = (EmbalmAura)CopyIEffect(target, true);       
     }
 
-    void EndEffect()
+    public override void BeginEffect()
+    {
+        Invoke("EndEffect", Duration);
+    }
+
+    public override void EndEffect()
     {
         RemoveVisualFX();
         OnTargetManager.myStats.removeDeathTrigger(this);

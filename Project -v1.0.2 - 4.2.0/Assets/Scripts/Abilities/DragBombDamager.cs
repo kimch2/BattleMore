@@ -52,8 +52,16 @@ public class DragBombDamager : VisionTrigger
         myHitContainer = source;
 		RBody = GetComponent<Rigidbody>();
         Source = source.myManager.gameObject;
-		PlayerNumber = (myHitContainer.playerNumber == 1 ? 2 : 1);
-	}
+		PlayerOwner = myHitContainer.playerNumber ;
+        if (PlayerOwner == 1)
+        {
+            PlayersToLookFor.Add(2);
+        }
+        else
+        {
+            PlayersToLookFor.Add(1);
+        }
+    }
 
 	float detachTime;
 	float ExplodeTime;

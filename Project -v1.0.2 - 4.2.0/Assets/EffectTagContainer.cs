@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class EffectTagContainer : MonoBehaviour
 {
-
     public enum  TagLocation{Feet, Body,HPBar}
     List<GameObject> TopIcons = new List<GameObject>();
     List<GameObject> BodyIcons = new List<GameObject>();
@@ -96,7 +95,7 @@ public class EffectTagContainer : MonoBehaviour
         Vector3 BasePosition = Vector3.up * HPOffset - Vector3.right * TopIcons.Count;
         for (int i = 0; i < TopIcons.Count; i++)
         {
-            TopIcons[i].transform.localPosition =  Vector3.right * i*3 + BasePosition;
+         //   TopIcons[i].transform.localPosition =  Vector3.right * i*3 + BasePosition;
         }
     }
 
@@ -104,9 +103,10 @@ public class EffectTagContainer : MonoBehaviour
 
     void ResetFootIcons()
     {
+
         for (int i = 0; i < FeetIcons.Count; i++)
         {
-            // Change the size of them??
+          //  FeetIcons[i].transform.localScale = Vector3.one * (1 + i * .25f);
         }
     }
 }

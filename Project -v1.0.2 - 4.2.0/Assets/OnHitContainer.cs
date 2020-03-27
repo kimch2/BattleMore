@@ -131,12 +131,21 @@ public class OnHitContainer : MonoBehaviour
 
    
 
-    // This going to work?? (on things that we apply a copy of the effect to)
     public void RemoveEffect(UnitManager target)
     {
         foreach (IEffect fect in toApply)
         {
-            fect.RemoveEffect(target);
+            System.Type type = fect.GetType();
+            IEffect copy = null;
+
+            foreach (Component comp in target.gameObject.GetComponents(type))
+            {
+                copy = (IEffect)comp.gameObject.GetComponent(type);
+                if (copy.EffectName == fect.EffectName)
+                {
+                    copy.EndEffect();
+                }
+            }
         }
     }
 

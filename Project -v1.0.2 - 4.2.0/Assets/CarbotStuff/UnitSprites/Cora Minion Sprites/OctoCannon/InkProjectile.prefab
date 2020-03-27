@@ -266,7 +266,7 @@ MonoBehaviour:
   Source: {fileID: 0}
   MyHitContainer: {fileID: 0}
   damage: 0
-  speed: 48
+  speed: 60
   damageType: 0
   explosionO: {fileID: 8386330351730734122, guid: adee22b0a3d644048826f21d71b954de,
     type: 3}

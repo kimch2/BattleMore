@@ -9,18 +9,18 @@ public class AfterLifeEffect :IEffect, Modifier {
     public float TimeInvulnerable = 10;
 
 
-    public void InitializeOnTarget()
+    public override void BeginEffect()
     {      
         OnTargetManager.myStats.addLethalTrigger(this);
-        Invoke("endEffect", senserTime);
+        Invoke("EndEffect", senserTime);
     }
 
-    public void endEffect()
+    public override void EndEffect()
     {
+        RemoveVisualFX();
         OnTargetManager.myStats.otherTags.Remove(UnitTypes.UnitTypeTag.Invulnerable);
         OnTargetManager.myStats.SetTags();
         OnTargetManager.myStats.removeLethalTrigger(this);
-        RemoveVisualFX();
     }
 
     public float modify(float damage, GameObject source, DamageTypes.DamageType theType)
@@ -39,7 +39,7 @@ public class AfterLifeEffect :IEffect, Modifier {
         }
 
         StartCoroutine(EndInvulnerable());
-        CancelInvoke("endEffect");
+        CancelInvoke("EndEffect");
         return 0;
     }
 
@@ -62,17 +62,6 @@ public class AfterLifeEffect :IEffect, Modifier {
     public override void applyTo(GameObject source, UnitManager target)
     {
         AfterLifeEffect after = (AfterLifeEffect)CopyIEffect(target, true);
-        after.InitializeOnTarget();
     }
 
-    public override void RemoveEffect(UnitManager target)
-    {
-        AfterLifeEffect after = target.GetComponent<AfterLifeEffect>();
-        if (after)
-        {
-            after.RemoveVisualFX();
-            after.endEffect();
-        }
-       
-    }
 }

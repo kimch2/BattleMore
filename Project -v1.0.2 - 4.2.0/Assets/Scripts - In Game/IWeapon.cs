@@ -149,7 +149,7 @@ public class IWeapon : MonoBehaviour {
 	// Does not check for range
 	public bool simpleCanAttack(UnitManager target)
 	{
-		if (!offCooldown) {
+        if (!offCooldown) {
 			return false;}
 		if (!target) {
 			return false;}
@@ -168,6 +168,7 @@ public class IWeapon : MonoBehaviour {
 				return false;	}
 		}
 
+
 		return true;
 	}
 
@@ -183,7 +184,6 @@ public class IWeapon : MonoBehaviour {
 
 	public virtual bool canAttack(UnitManager target)
 	{
-
 		if (!offCooldown) {
 			return false;}
 		if (!target) {
@@ -474,13 +474,13 @@ public class IWeapon : MonoBehaviour {
 
         for (int i = 0; i < myManager.enemies.Count; i++)
         {
+            currentIter = myManager.enemies[i];
 
-            if (myManager.enemies[i] == null)
+            if (currentIter == null || currentIter.myStats.isUnitType(UnitTypes.UnitTypeTag.Invisible))
             {
                 continue;
             }
 
-            currentIter = myManager.enemies[i];
 
             if (!isValidTarget(currentIter))
             {

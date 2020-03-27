@@ -6,37 +6,27 @@ public class DeathInjector : DamagerIeffect
 {
 
 	public float DamageTime =15;
-	public GameObject effect;
     [Tooltip("only use this if the thing that is spawning is the thign that this is on, which causing reference errors, because it will refer to itself and not the prefab")]
 	public string toSpawn;
     public GameObject toSpawnObject;
-	GameObject myEffect;
+    Coroutine currentDamager;
 
-
-	void Start ()
+    public override void BeginEffect()
     {
-		if (onTarget)
-        {            
-            if (myEffect)
-            {
-                myEffect = Instantiate<GameObject>(effect, this.transform.position, Quaternion.identity, transform);
-            }
-            DamageOverTime(DamageAmount, DamageTime);
-        }
-	}
+        DamageOverTime(DamageAmount, DamageTime);
+    }
 
-
-	public void DamageOverTime(float damagePerSecond, float duration)
+    public void DamageOverTime(float damagePerSecond, float duration)
 	{
 		DamageTime = duration;
 		DamageAmount = damagePerSecond;
 		onTarget = true;
-		if (currentDamager != null) {
-			StopCoroutine (currentDamager);}
+		if (currentDamager != null)
+        {
+			StopCoroutine (currentDamager);
+        }
 		currentDamager = StartCoroutine (OverTime());
 	}
-
-	Coroutine currentDamager;
 
 	IEnumerator OverTime()
 	{
@@ -48,8 +38,7 @@ public class DeathInjector : DamagerIeffect
                OnTargetManager.myStats.TakeDamage(DamageAmount, null, DamageTypes.DamageType.True, myHitContainer);
             }
         }
-		Destroy (myEffect);
-		Destroy (this);
+        EndEffect();
 	}
 
 	public void Dying()
@@ -84,20 +73,5 @@ public class DeathInjector : DamagerIeffect
         {
             CopyIEffect(target, true);
         }
-    }
-
-    public override void RemoveEffect(UnitManager target)
-    {
-        DeathInjector inject = target.GetComponent<DeathInjector>();
-        if (inject &&  !inject.onTarget)
-        {
-            inject.EndEffect();
-        }
-    }
-
-    public void EndEffect()
-    {
-        Destroy(myEffect);
-        Destroy(this);
     }
 }

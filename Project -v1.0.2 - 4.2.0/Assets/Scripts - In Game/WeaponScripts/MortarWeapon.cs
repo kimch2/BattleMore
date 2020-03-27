@@ -67,7 +67,8 @@ public class MortarWeapon : IWeapon {
 
 
     public override UnitManager findBestEnemy(out float distance, UnitManager best) // Similar to above method but takes into account attack priority (enemy soldiers should be attacked before buildings)
-    {if (prioritizeFarAway)
+    {
+        if (prioritizeFarAway)
         {
             float currentIterPriority;
             if (best != null)
@@ -83,14 +84,13 @@ public class MortarWeapon : IWeapon {
 
             for (int i = 0; i < myManager.enemies.Count; i++)
             {
-
-                if (myManager.enemies[i] == null)
+                currentIter = myManager.enemies[i];
+                if (currentIter == null || currentIter.myStats.isUnitType(UnitTypes.UnitTypeTag.Invisible))
                 {
                     continue;
                 }
 
-                currentIter = myManager.enemies[i];
-
+               
                 if (!isValidTarget(currentIter))
                 {
                     continue;

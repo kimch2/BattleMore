@@ -5,7 +5,6 @@ public class UndyingArmor :  IEffect, Modifier{
 
 
 	public GameObject myEffect;
-	private GameObject effectOnChar;
 	private UnitStats mystat;
 	private float endtime;
 
@@ -16,45 +15,35 @@ public class UndyingArmor :  IEffect, Modifier{
 			if (Time.time > endtime) {
 
 				mystat.removeModifier (this);
-				Destroy (effectOnChar);
+
 				Destroy (this);
 				return;
 			}
 		}
 	}
 
-	public void initialize(GameObject source, GameObject e){
-		if (!onTarget) {
-			Vector3 loc = this.gameObject.transform.position;
-			loc.y += 4;
-			effectOnChar = (GameObject) Instantiate (e, loc, Quaternion.identity);
-			effectOnChar.transform.SetParent (this.gameObject.transform);
-		}
+    public override void BeginEffect()
+    {
+        OnTargetManager.myStats.addModifier(this);
+    }
 
-		onTarget = true;
-		endtime = Time.time + 10;
-		mystat = GetComponent<UnitManager> ().myStats;
-		mystat.addModifier (this);
+    public override void EndEffect()
+    {
+        OnTargetManager.myStats.removeModifier(this);
+        base.EndEffect();
+    }
 
 
-
-	}
-
-	public override void applyTo (GameObject source, UnitManager target)
+    public override void applyTo (GameObject source, UnitManager target)
 	{
-		target.gameObject.AddComponent<UndyingArmor> ();
-		target.GetComponent<UndyingArmor> ().initialize (source,myEffect);
-
+        CopyIEffect(target, true);
 	}
 
 
 	public float modify(float damage, GameObject source, DamageTypes.DamageType theType)
 	{
 		endtime -= .25f;
-
 		damage = Mathf.Min (damage, mystat.health -1);
-
-		Debug.Log ("Returning " + damage);
 		return damage;
 	}
 
@@ -64,8 +53,6 @@ public class UndyingArmor :  IEffect, Modifier{
 		return true;
 	}
 
-    public override void RemoveEffect(UnitManager target)
-    {
-        throw new System.NotImplementedException();
-    }
+
+ 
 }

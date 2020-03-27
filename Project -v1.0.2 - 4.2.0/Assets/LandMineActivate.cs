@@ -103,7 +103,7 @@ public class LandMineActivate : VisionTrigger {
 		if (target) {
 			float amount = manager.getUnitStats ().TakeDamage (currentDamage, null, DamageTypes.DamageType.True, myHitContainer);
 			
-			if (PlayerNumber == 1) {
+			if (PlayerOwner == 1) {
 				PlayerPrefs.SetInt ("TotalPlasmaMineDamage", PlayerPrefs.GetInt ("TotalPlasmaMineDamage") + (int)amount);
 			}
 		}

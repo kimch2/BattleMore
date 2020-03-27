@@ -600,56 +600,8 @@ public class UnitManager : Unit, IOrderable {
 		return best;
 	}
 
-
-	UnitManager currentIter;
-	float currDistance;
-	float bestPriority;
-
 	public UnitManager findBestEnemy(out float distance, UnitManager best) // Similar to above method but takes into account attack priority (enemy soldiers should be attacked before buildings)
 	{
-        /*
-        Debug.Log("Finding bets");
-		float currentIterPriority;
-		if (best != null) {
-			distance = Vector3.Distance (best.transform.position, transform.position);
-			bestPriority = best.myStats.getCombatPriority(myStats.DefensePriority);
-		} else {
-
-			distance = float.MaxValue;
-			bestPriority = -1;
-		}
-
-		for (int i = 0; i < enemies.Count; i ++) {
-
-			if (enemies[i] == null) {
-				continue;
-			}
-
-			currentIter = enemies [i];
-
-			if (!isValidTarget (currentIter)) {
-				continue;
-			}
-			currentIterPriority = currentIter.myStats.getCombatPriority(myStats.DefensePriority);
-			if (currentIterPriority > bestPriority) {
-				best = currentIter;
-				bestPriority = currentIterPriority;
-				distance = Vector3.Distance (currentIter.transform.position, this.gameObject.transform.position);
-			}
-			else if (currentIterPriority == bestPriority)
-            {			
-				currDistance = Vector3.Distance (currentIter.transform.position, this.gameObject.transform.position);
-
-				if (currDistance < distance) {
-					best = currentIter;
-					distance = currDistance;
-				}
-			}
-		}
-        
-
-		return best;*/
-
         return myWeapon[0].findBestEnemy(out distance, best);
 	}
 
@@ -915,7 +867,6 @@ public class UnitManager : Unit, IOrderable {
 					min = weap.range;
 				}
 			}
-
 		}
 		return best;
 	}
@@ -923,20 +874,33 @@ public class UnitManager : Unit, IOrderable {
 	public IWeapon isValidTarget(UnitManager obj)
 	{
         if (!metaStatus.canAttack)
-        { return null; } //TODO NEED TO DO THIS THROUGH A STATE OR SOMETHING LATER
-		foreach (IWeapon weap in myWeapon) {
-			if( weap.isValidTarget(obj)){
+        {
+            return null;
+        }
+        if (obj.myStats.isUnitType(UnitTypes.UnitTypeTag.Invisible))
+        {
+            return null;
+        }
+		foreach (IWeapon weap in myWeapon)
+        {
+			if( weap.isValidTarget(obj))
+            {
 				return weap; 
 			}
-
 		}
 		return null;
 	}
 
 	public IWeapon canAttack(UnitManager obj)
-	{IWeapon best = null;
+    {
+        Debug.Log("CanATtack");
+        IWeapon best = null;
 		float min= 100000000;
-		foreach (IWeapon weap in myWeapon) {
+        if (obj.myStats.isUnitType(UnitTypes.UnitTypeTag.Invisible))
+        {
+            return null;
+        }
+        foreach (IWeapon weap in myWeapon) {
 
 			if(weap.canAttack(obj)){
 
@@ -954,8 +918,8 @@ public class UnitManager : Unit, IOrderable {
 
 
 	public void enQueueState(UnitState nextState)
-	{queuedStates.AddLast (nextState);
-	
+	{
+        queuedStates.AddLast (nextState);
 	}
 
 

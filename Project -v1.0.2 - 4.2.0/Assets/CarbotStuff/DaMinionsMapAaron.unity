@@ -1957,8 +1957,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TypesToSpawn:
   - {fileID: 494265798218600535, guid: c8a720e9814dbe64dafdfe67cf0558e9, type: 3}
-  firstSpawn: 5
-  spawnRate: 8
+  firstSpawn: 3
+  spawnRate: 50
   SpawnOffset: 100
   ZRange: 20
   spawnCurve:

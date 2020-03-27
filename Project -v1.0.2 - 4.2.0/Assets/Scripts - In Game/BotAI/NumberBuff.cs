@@ -196,11 +196,13 @@ public class StatChanger
             return;
         }
         NumberAlter number = GetNumberAlter("MoveSpeed");
+
 		number.AddBuff(perc, flat, obj, stackable);
-		if (myStats.myManager.cMover)
-		{
-			//This will probably break because you also have to set it in the RVOController
-			myStats.myManager.cMover.MaxSpeed = number.ApplyBuffs(myStats.myManager.cMover.initialSpeed);
+
+        if (myStats.myManager.cMover)
+        {
+            //This will probably break because you also have to set it in the RVOController
+            myStats.myManager.cMover.MaxSpeed = number.ApplyBuffs(myStats.myManager.cMover.initialSpeed);
 			Pathfinding.RVO.RVOController rvo = myStats.gameObject.GetComponent<Pathfinding.RVO.RVOController>();
 			if (rvo)
 			{

@@ -12,13 +12,12 @@ public class MetaStatus
     Dictionary<statusType, List<StatusEffect>> cachedStatus = new Dictionary<statusType, List<StatusEffect>>();
     Dictionary<statusType, EffectTag> CachedFX = new Dictionary<statusType, EffectTag>();
     // Do we need these?
-    public bool CanRecieveRightClick; // Stun, Taunt, Fear   
+    public bool CanRecieveRightClick = true; // Stun, Taunt, Fear   
     public bool canMove = true; // Stun, Root
     public bool canCast = true; //Stun, Silence, CastMove
     public bool canAttack = true; // Stun, Pacify, Fear, CastMove
     public bool CanBuff = true; // Curse
     public bool canDebuff = true; // Bless
-
 
     int statusMask;
 
@@ -51,21 +50,64 @@ public class MetaStatus
 
     List<StatusEffect> GetStatusList(statusType myType)
     {
-        if (cachedStatus.ContainsKey(myType))
+        List<StatusEffect> toReturn;
+
+        if (cachedStatus.TryGetValue(myType, out toReturn))
         {
-            return cachedStatus[myType];
+            return toReturn;
         }
 
-        List<StatusEffect> alter = new List<StatusEffect>();// (myManager);
-        cachedStatus.Add(myType, alter);
-        return alter;
+        toReturn = new List<StatusEffect>();// (myManager);
+        cachedStatus.Add(myType, toReturn);       
+
+        return toReturn;
     }
 
-    void StoreStatus(statusType theType, UnitManager sourceunit, UnityEngine.Object sourceComponent, bool friendly, float duration = 0)
+    /// <summary>
+    /// Returns true if it the first effect from this source
+    /// </summary>
+    /// <param name="theType"></param>
+    /// <param name="sourceunit"></param>
+    /// <param name="sourceComponent"></param>
+    /// <param name="friendly"></param>
+    /// <param name="duration"></param>
+    /// <returns></returns>
+    bool StoreStatus(statusType theType, UnitManager sourceunit, UnityEngine.Object sourceComponent, bool friendly, float duration = 0)
     {
-        StatusEffect effect = new StatusEffect(sourceunit, sourceComponent, theType, friendly, friendly ? duration : myManager.myStats.getTenacityMultiplier() * duration);
+        List<StatusEffect> currentEffects = GetStatusList(theType);
+
+        bool AlreadyExists = false;
+        StatusEffect effect = null;
+        for (int i = 0; i < currentEffects.Count; i++)
+        {
+            if (currentEffects[i].sourceComp == sourceComponent)
+            {
+                AlreadyExists = true;
+                effect = currentEffects[i];
+                break;
+            }
+        }
+      
+        if (AlreadyExists)
+        {
+            effect.ResetDuration(friendly ? duration : myManager.myStats.getTenacityMultiplier() * duration);
+        }
+        else
+        {
+            effect = new StatusEffect(sourceComponent, theType, friendly, friendly ? duration : myManager.myStats.getTenacityMultiplier() * duration);
+        }
+
         if (duration > 0)
         {
+            if (AlreadyExists)
+            {
+                TimerQueue.Remove(effect);
+            }
+            else
+            {
+                currentEffects.Add(effect);
+            }
+
             if (TimerQueue.Count > 0)
             {
                 for (int i = 0; i < TimerQueue.Count; i++)
@@ -82,36 +124,46 @@ public class MetaStatus
                 TimerQueue.Add(effect);
             }
         }
-        GetStatusList(theType).Add(effect);
+
+        return !AlreadyExists;
     }
 
     // Returns true if there are no more effects of this type currently on this unit
     bool UnCacheStatus(statusType theType, UnityEngine.Object sourceComponent)
     {
         List<StatusEffect> list;
-        cachedStatus.TryGetValue(theType, out list);
 
-        if (list != null)
+        if (cachedStatus.TryGetValue(theType, out list))
         {
             for (int i = TimerQueue.Count - 1; i > -1; i--)
             {
                 if (TimerQueue[i].sourceComp == sourceComponent)
                 {
                     TimerQueue.RemoveAt(i);
+                    break;
                 }
             }
 
-            list.RemoveAll(item => item.sourceComp == sourceComponent);
-            Debug.Log("List size is now " + list.Count);
+            for (int i = 0; i < list.Count; i++)
+            {
+                if (list[i].sourceComp == sourceComponent)
+                {
+                    list.RemoveAt(i);
+                    break;
+                }
+            }
+            //list.Remove(item => item.sourceComp == sourceComponent);
+
+            return list.Count == 0;/*
             if (list.Count == 0) // Delete the list if its size is zero? probably not, to cut down on memory management, But we do save on computations elswhere
             {
-                cachedStatus.Remove(theType);
+                //cachedStatus.Remove(theType);
                 return true;
             }
             else
             {
                 return false;
-            }
+            }*/
         }
         return true;
     }
@@ -124,6 +176,7 @@ public class MetaStatus
         if (myManager.cMover)
         {
             myManager.cMover.enabled = false;
+            myManager.cMover.stop();
         }
         canMove = false;
     }
@@ -153,11 +206,20 @@ public class MetaStatus
         canDebuff = false;
     }
 
+    public bool HasSubscribers(statusType toCheck)
+    {
+        List<StatusEffect> toCompare;
+        if (!cachedStatus.TryGetValue(statusType.Stun, out toCompare))
+        {
+            return false;
+        }
+        return toCompare.Count > 0;
+    }
 
     void EnableMovement()
     {
-        if (!cachedStatus.ContainsKey(statusType.Stun) && !cachedStatus.ContainsKey(statusType.Root)
-            && !cachedStatus.ContainsKey(statusType.Sleep))
+        if (!HasSubscribers(statusType.Stun) && !HasSubscribers(statusType.Root)
+            && !HasSubscribers(statusType.Sleep))
         {
             if (myManager.cMover)
             {
@@ -169,9 +231,9 @@ public class MetaStatus
 
     void EnableAttacks()
     {
-        if (!cachedStatus.ContainsKey(statusType.Stun)    && !cachedStatus.ContainsKey(statusType.CastMove)
-         && !cachedStatus.ContainsKey(statusType.Channel) && !cachedStatus.ContainsKey(statusType.Pacify)
-         && !cachedStatus.ContainsKey(statusType.Sleep))
+        if (!HasSubscribers(statusType.Stun)    && !HasSubscribers(statusType.CastMove)
+         && !HasSubscribers(statusType.Channel) && !HasSubscribers(statusType.Pacify)
+         && !HasSubscribers(statusType.Sleep))
         {
             canAttack = true;
         }
@@ -179,31 +241,32 @@ public class MetaStatus
 
     void EnableRightClicks()
     {
-        if (!cachedStatus.ContainsKey(statusType.Stun)    && !cachedStatus.ContainsKey(statusType.Channel)
-            && !cachedStatus.ContainsKey(statusType.Fear) && !cachedStatus.ContainsKey(statusType.Taunt)
-            && !cachedStatus.ContainsKey(statusType.Sleep))
+        if (!HasSubscribers(statusType.Stun)    && !HasSubscribers(statusType.Channel)
+            && !HasSubscribers(statusType.Fear) && !HasSubscribers(statusType.Taunt)
+            && !HasSubscribers(statusType.Sleep))
         {
             CanRecieveRightClick = true;
         }
     }
     void EnableCasting()
     {
-        if (!cachedStatus.ContainsKey(statusType.Stun)    && !cachedStatus.ContainsKey(statusType.Silence)
-           && !cachedStatus.ContainsKey(statusType.Taunt) && !cachedStatus.ContainsKey(statusType.Fear)
-           && !cachedStatus.ContainsKey(statusType.Sleep))
-        {
+        if (!HasSubscribers(statusType.Stun)    && !HasSubscribers(statusType.Silence)
+           && !HasSubscribers(statusType.Taunt) && !HasSubscribers(statusType.Fear)
+           && !HasSubscribers(statusType.Sleep))
+        { 
             canCast = true;
         }
     }
+
     void EnableBuffing()
     {
-        if (!cachedStatus.ContainsKey(statusType.Curse))
+        if (!HasSubscribers(statusType.Curse) )
         { canCast = true; }
     }
 
     void EnableDeBuffing()
     {
-        if (!cachedStatus.ContainsKey(statusType.Bless))
+        if (!HasSubscribers(statusType.Bless) )
         { canCast = true; }
     }
 
@@ -214,10 +277,9 @@ public class MetaStatus
     //Returns null if its already active
     GameObject TurnOnFX(statusType theType)
     {
-        EffectTag toReturn = null;
-        CachedFX.TryGetValue(theType, out toReturn);
+        EffectTag toReturn;
 
-        if (toReturn != null)
+        if (CachedFX.TryGetValue(theType, out toReturn))
         {
             if (toReturn.FXObject.activeSelf)
             {
@@ -250,17 +312,12 @@ public class MetaStatus
 
     void TurnOffFX(statusType theType)
     {
-        EffectTag toReturn = null;
-        CachedFX.TryGetValue(theType, out toReturn);
-        if (toReturn != null)
+        EffectTag toReturn;
+
+        if (CachedFX.TryGetValue(theType, out toReturn))
         {
-            Debug.Log("Turning off effec " + toReturn.FXObject);
             myManager.myStats.getEffectTagContainer().RemoveEffect(toReturn, false);
             toReturn.FXObject.SetActive(false);
-        }
-        else
-        {
-            Debug.Log("Couldn't find it");
         }
     }
 
@@ -269,43 +326,53 @@ public class MetaStatus
 
     public void Stun(UnitManager sourceunit, UnityEngine.Object sourceComponent, bool friendly, float duration = 0)
     {
-        StoreStatus(statusType.Stun, sourceunit, sourceComponent, friendly, duration);
-        DisableMovement();
-        DisableAttacks();
-        DisableRightClicks();
-        DisableCasting();
-        myManager.changeState(new StunState(myManager), true, false);
-        TurnOnFX(statusType.Stun);
+
+        if (StoreStatus(statusType.Stun, sourceunit, sourceComponent, friendly, duration))
+        {
+            DisableMovement();
+            DisableAttacks();
+            DisableRightClicks();
+            DisableCasting();
+            if (cachedStatus[statusType.Stun].Count == 1)
+            {
+                myManager.changeState(new StunState(myManager), true, false);
+                TurnOnFX(statusType.Stun);
+            }
+        }
+        
+
     }
 
     public void UnStun(UnityEngine.Object sourceComponent)
     {
-        Debug.Log("Calling UNstun");
         if (UnCacheStatus(statusType.Stun, sourceComponent))
         {
-            Debug.Log("Unstunned");
             EnableAttacks();
             EnableMovement();
             EnableRightClicks();
             EnableCasting();
-            if (!cachedStatus.ContainsKey(statusType.Stun) && !cachedStatus.ContainsKey(statusType.Sleep))
+            TurnOffFX(statusType.Stun);
+            if (!(myManager.getState() is SleepState)) // shouldn't these be getting queued?
             {
                 myManager.changeState(new DefaultState());
-            }
-            TurnOffFX(statusType.Stun);
+            }            
         }
     }
 
     public void Sleep(UnitManager sourceunit, UnityEngine.Object sourceComponent, bool friendly, float duration = 0)
     {
-        StoreStatus(statusType.Sleep, sourceunit, sourceComponent, friendly, duration);
-        DisableMovement();
-        DisableAttacks();
-        DisableRightClicks();
-        DisableCasting();
-        myManager.changeState(new SleepState(myManager), true, false);
-        TurnOnFX(statusType.Sleep);
-
+        if (StoreStatus(statusType.Sleep, sourceunit, sourceComponent, friendly, duration))
+        {
+            DisableMovement();
+            DisableAttacks();
+            DisableRightClicks();
+            DisableCasting();
+            if (cachedStatus[statusType.Sleep].Count == 1)
+            {
+                myManager.changeState(new SleepState(myManager), true, false);
+                TurnOnFX(statusType.Sleep);
+            }
+        }
     }
 
     public void UnSleep()
@@ -336,7 +403,7 @@ public class MetaStatus
     void WakeUp()
     {
         TurnOffFX(statusType.Sleep);
-        if (!cachedStatus.ContainsKey(statusType.Stun))
+        if (!(myManager.getState() is StunState)) // !cachedStatus.ContainsKey(statusType.Stun))
         {
             myManager.changeState(new DefaultState());
         }
@@ -349,14 +416,17 @@ public class MetaStatus
 
     public void Channel(UnitManager sourceunit, UnityEngine.Object sourceComponent, float duration = 0)
     {
-        StoreStatus(statusType.Channel, sourceunit, sourceComponent, true, duration);
-        DisableMovement();
-        DisableAttacks();
-        DisableCasting(); // Maybe not this one for early canceling of channelAbilties?
+        if (StoreStatus(statusType.Channel, sourceunit, sourceComponent, true, duration))
+        {
+            DisableMovement();
+            DisableAttacks();
+            DisableCasting(); // Maybe not this one for early canceling of channelAbilties?
+        }
     }
 
     public void UnChannel(UnityEngine.Object sourceComponent)
-    { if (UnCacheStatus(statusType.Channel, sourceComponent))
+    {
+        if (UnCacheStatus(statusType.Channel, sourceComponent))
         {
             EnableAttacks();
             EnableMovement();
@@ -366,22 +436,29 @@ public class MetaStatus
 
     public void Root(UnitManager sourceunit, UnityEngine.Object sourceComponent, bool friendly, float duration = 0)
     {
-        StoreStatus(statusType.Root, sourceunit, sourceComponent, friendly, duration);
-        DisableMovement();
+        if (StoreStatus(statusType.Root, sourceunit, sourceComponent, friendly, duration))
+        {
+            DisableMovement();
+        }
     }
+
     public void UnRoot(UnityEngine.Object sourceComponent)
-    { if (UnCacheStatus(statusType.Root, sourceComponent))
+    {
+        if (UnCacheStatus(statusType.Root, sourceComponent))
         {
             EnableMovement();
         }
     }
 
-    public void Fear(UnitManager sourceunit, UnityEngine.Object sourceComponent, bool friendly, float duration = 0)
+    public void Fear(UnitManager sourceunit, UnityEngine.Object sourceComponent, bool friendly, Vector3 FearLocation, float duration = 0)
     {
-       // if(cached)
-        StoreStatus(statusType.Fear, sourceunit, sourceComponent, friendly, duration);
+        // if(cached)
+        if (StoreStatus(statusType.Fear, sourceunit, sourceComponent, friendly, duration))
+        {
+            DisableRightClicks();
+            //target.GiveOrder(Orders.CreateMoveOrder(RunToSide ? transform.position + Vector3.left * 20 : TargetLocation));
 
-        DisableRightClicks();
+        }
     }
 
     public void UnFear(UnityEngine.Object sourceComponent)
@@ -397,6 +474,7 @@ public class MetaStatus
         DisableRightClicks();
         DisableCasting();
     }
+
     public void UnTaunt(UnityEngine.Object sourceComponent)
     {if (UnCacheStatus(statusType.Taunt, sourceComponent))
         {
@@ -410,8 +488,10 @@ public class MetaStatus
         StoreStatus(statusType.Silence, sourceunit, sourceComponent, friendly, duration);
         DisableCasting();
     }
+
     public void UnSilence(UnityEngine.Object sourceComponent)
-    { if (UnCacheStatus(statusType.Silence, sourceComponent))
+    {
+        if (UnCacheStatus(statusType.Silence, sourceComponent))
         {
             EnableCasting();
         }
@@ -571,19 +651,24 @@ public class MetaStatus
 
     class StatusEffect {
 
-        public UnitManager SourceManager;
+      //  public UnitManager SourceManager;
         public UnityEngine.Object sourceComp;
         public float EndTime;
         public bool friendly;
         public statusType statType;
-
-        public StatusEffect(UnitManager sourceMan, UnityEngine.Object sourceC, statusType theType, bool friend , float Duration)
+        //UnitManager sourceMan,
+        public StatusEffect( UnityEngine.Object sourceC, statusType theType, bool friend , float Duration)
         {         
-            SourceManager = sourceMan;
+            //SourceManager = sourceMan;
             sourceComp = sourceC;
             friendly = friend;
             EndTime = Time.time + Duration;
             statType = theType;
+        }
+
+        public void ResetDuration(float duration)
+        {
+            EndTime = Time.time + duration;
         }
     }
 
