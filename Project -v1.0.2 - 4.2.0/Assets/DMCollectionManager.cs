@@ -103,7 +103,7 @@ public class DMCollectionManager : MonoBehaviour
         {
             assignedUnits.Add(PlayerPrefs.GetString(ChosenHero.GetComponent<UnitManager>().UnitName + "Unit" + i));
         }
-
+        Debug.Log("CHosen " + ChosenHero);
         foreach (RaceInfo info in UnitRegistryPrefab.GetComponents<RaceInfo>())
         {
             if (!info.UltimatePrefab || ChosenHero == info.UltimatePrefab)
@@ -157,6 +157,7 @@ public class DMCollectionManager : MonoBehaviour
                 {
                     assignedAbility.Add(PlayerPrefs.GetString(ChosenHero.GetComponent<UnitManager>().UnitName + "Relic" + i));
                 }
+                /*
                 foreach (GameObject obj in info.buildingList)
                 {
                     GameObject newButton = Instantiate<GameObject>(UnitCardPrefab, RelicCardScrollArea);
@@ -167,7 +168,7 @@ public class DMCollectionManager : MonoBehaviour
                     {
                         dmcard.AssignToCard(SelectedRelics[assignedRelics.IndexOf(obj.GetComponent<Upgrade>().Name)]);
                     }
-                }
+                }*/
             }
         }
     }

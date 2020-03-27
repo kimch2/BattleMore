@@ -66,6 +66,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 550c744d482bf4b44836df6193654658, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EffectName: NameMe!
   onTarget: 0
   VisualEffects: []
   myBuffs:
@@ -74,7 +75,6 @@ MonoBehaviour:
     Flat: -1
   Stacks: 1
   Duration: 0
-  ApplyOnStart: 0
   Decays: 0
 --- !u!114 &9012251183095902171
 MonoBehaviour:
@@ -88,6 +88,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc8b749fb2a624243b957798a45b2d79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EffectName: NameMe!
   onTarget: 0
   VisualEffects: []
   myHitContainer: {fileID: 8197068723560711722}
@@ -1222,7 +1223,7 @@ MonoBehaviour:
       totalHarvested: 0
   myManager: {fileID: 0}
   StatsChanged: 0
-  otherTags: 
+  otherTags: 16000000
   armorType: 2
   sizeType: 1
   myHeight: 0

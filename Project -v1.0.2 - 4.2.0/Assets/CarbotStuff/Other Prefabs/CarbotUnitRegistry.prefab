@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5812673444991382016}
   - component: {fileID: 4182021579801263353}
   - component: {fileID: 7924202164321618785}
+  - component: {fileID: 2862172543494624135}
   m_Layer: 0
   m_Name: CarbotUnitRegistry
   m_TagString: Untagged
@@ -63,12 +64,57 @@ MonoBehaviour:
   - {fileID: 5636270701877033806, guid: 25e06b4c5c0fd9b4c9d35eb08b43cec3, type: 3}
   - {fileID: 494265798218600535, guid: c8a720e9814dbe64dafdfe67cf0558e9, type: 3}
   - {fileID: 9125053377235848844, guid: 6b1754e373f1f834287b8ed8542a95c0, type: 3}
-  - {fileID: 494265798218600535, guid: c8a720e9814dbe64dafdfe67cf0558e9, type: 3}
+  - {fileID: 1410361477267233315, guid: 5c824e3c99ddfae409ca499b88e89c79, type: 3}
+  - {fileID: 6992310045717813812, guid: 183b58d8c50ffc844a46f89db0d1f4c3, type: 3}
+  - {fileID: 3785362336937622655, guid: 0c6ab976d8e9c6e49ad4fa1d5f342cf3, type: 3}
+  - {fileID: 4626269890849981224, guid: 62674176dd7a47a478ff234f78b39fde, type: 3}
   buildingList:
-  - {fileID: 1334204865568742351, guid: 9784f001b7b7a204a97a012579d7acb4, type: 3}
+  - {fileID: 7650506682765139971, guid: 4e740e9f25efdde41a4cf5fb97a512e9, type: 3}
+  - {fileID: -5651903444684855015, guid: 6fe33bbffa0b87c4c85b6d343efde54d, type: 3}
+  - {fileID: 29888620479176744, guid: 283d12ba6dca6b34cbfc187b77685d47, type: 3}
+  - {fileID: -8603953048252097611, guid: 601b329d8bdf4a841af6cf5385cc50ff, type: 3}
+  - {fileID: 8605210714856980802, guid: 4afb8022f5a2c4d499cf5817c4d50288, type: 3}
+  - {fileID: -3795161327639494788, guid: 5ae54aaf076d0bf4f9411a3c2dbc228a, type: 3}
+  - {fileID: -1816373222395542201, guid: 0126f8668cbc7474daf046d6b2f469b1, type: 3}
+  - {fileID: 3127085495551450350, guid: b2b2e067118baea4091dfc6cbcff4e30, type: 3}
+  - {fileID: 7918687641484333643, guid: a891b9d3d904d2a48822c8012843a64e, type: 3}
+  - {fileID: 1820973822159851859, guid: 18ed4f45698981748a804340b743d855, type: 3}
+  - {fileID: -3300191784520667558, guid: 9474bb7ac1b82544284a564acbc12498, type: 3}
+  - {fileID: -2472301739599503918, guid: d12ecc889dd6e4f40a09b7df08a0c787, type: 3}
+  - {fileID: -3828727111773613644, guid: 115d4b34ccce037448ca8dfffbea54ac, type: 3}
+  - {fileID: -8290191225480669501, guid: a0c19942df9919e4dadd1a3ddbc8dec8, type: 3}
+  - {fileID: 1887817195502088191, guid: 583ac587257dfcc42a5f5e8383e178d0, type: 3}
+  - {fileID: -5497534653117703663, guid: 4b3ba419a3a865546bdea083bfd68dbb, type: 3}
+  - {fileID: 6596929972879731477, guid: c63889da322028448999b20282cfb246, type: 3}
+  - {fileID: 2663460824797028439, guid: 6c483d80188c3f04081012cf087fbfc9, type: 3}
+  - {fileID: 6967204806901285088, guid: 85d362adf824eb341bcb47f57c4393f0, type: 3}
+  - {fileID: 7801081867935836033, guid: 76fb77ca3aaa1bf45bcf108433466d0f, type: 3}
+  - {fileID: -320709949022510492, guid: 1f5132b215b241743bf46f349f9ab815, type: 3}
+  - {fileID: -4333435193493995463, guid: 753f2eccf44e45a4a8ccb9489ef491d8, type: 3}
+  - {fileID: -3153969478358687353, guid: 5ab194480d7c5d54f9b9a1aed1a52115, type: 3}
+  - {fileID: 1028479790007846320, guid: e83ff94e916dde6458c10825187e9219, type: 3}
+  - {fileID: 5306005161092166416, guid: 8270fadfa9944134f8038ab39fb43244, type: 3}
+  - {fileID: 5779871508639571387, guid: bb8e3d2aea875294eab240d42cff9007, type: 3}
+  - {fileID: 4454531609221843369, guid: a8d3902aa72d27345bc0a7c78585f681, type: 3}
+  - {fileID: -1211178349880339193, guid: a8e6d5b453d64094babbb33f84c77ec2, type: 3}
+  - {fileID: -3310804708812424995, guid: 38e8607b1fbeb8f47afb4a3c5228ebd8, type: 3}
+  - {fileID: 4302789525087179647, guid: d0ca8b4223d864a4199a9255ac2c552a, type: 3}
+  - {fileID: -1398980321088915276, guid: e76054469af92e04eb23893665d2b241, type: 3}
+  - {fileID: -2273883863153559708, guid: cdea7c347705e7746b455985c8445174, type: 3}
+  - {fileID: -859104075177378500, guid: d3415b7e40408494aa81b706372b85e0, type: 3}
+  - {fileID: 3399966435344108960, guid: a51d1a183f3f2f94ab7b8961b6a7048c, type: 3}
+  - {fileID: 726792854041492313, guid: d127c49a790a785478d8f8987a8bf93a, type: 3}
+  - {fileID: 3765696396635289066, guid: 99daf77fa11717a429b01318b40be54f, type: 3}
+  - {fileID: 3874310591221981429, guid: c60e67b21ea645e499c1b133aeb69c2b, type: 3}
+  - {fileID: 5687522810462968151, guid: de354ecb296bd444883aa9979a01ed46, type: 3}
+  - {fileID: 2099382154653959126, guid: f691ba07ca4954f4080eb606003fc30d, type: 3}
+  - {fileID: 6421912959839290766, guid: 5fb50d4594d88a64b995d94f4f639a42, type: 3}
+  - {fileID: -7675300965473914352, guid: 0e77a5e80adcf3d41b63310c1ca6dc68, type: 3}
   attachmentsList:
-  - {fileID: 7607037698507902297, guid: d48cebea90df9554ca0576156f5b85c9, type: 3}
-  - {fileID: 5240933263949675368, guid: 378de70afd9749d41b03ca86f8151de7, type: 3}
+  - {fileID: 6508488380496963909, guid: 6794de5c8a7df2447b8aa4665a94bd50, type: 3}
+  - {fileID: 4646000603361557039, guid: 545b88401ae61914ab8b553e0d9b490a, type: 3}
+  - {fileID: 5668805336638608360, guid: e11d922b65e8e4f44ad5f45df3914568, type: 3}
+  - {fileID: 3282892007852514283, guid: def8fe01fc11ebc46b0b5270067beb8f, type: 3}
   DefaultFOne: []
   DefaultFTwo: []
   DefaultFThree: []
@@ -117,9 +163,72 @@ MonoBehaviour:
   FHotkeyString: 
   unitList:
   - {fileID: 3300769391594791438, guid: 5848e347433bcdf488145bd600a42f9e, type: 3}
-  - {fileID: 4472490268572283448, guid: 1e12dfd4fb05a7c49ba93992140ba1fe, type: 3}
+  - {fileID: 8481013731944333471, guid: c30186242ccea334cbc2efeb0bdd2511, type: 3}
+  - {fileID: 7815806263956882112, guid: 12563482428070a429def3566d31cd27, type: 3}
   buildingList: []
-  attachmentsList: []
+  attachmentsList:
+  - {fileID: 237220219095698852, guid: 9e11579520b4a8045a6c58e0bfdec372, type: 3}
+  - {fileID: 7279200157381514357, guid: 75d92146cc1e3c648a943f5853dce82b, type: 3}
+  - {fileID: 701269819794333703, guid: 94bad2ee1517d7648a29f1bb06cea0e0, type: 3}
+  - {fileID: 6112760354417249669, guid: 10bcf6c94b5d5fd4396e4d3d5d118a69, type: 3}
+  - {fileID: 7607037698507902297, guid: d48cebea90df9554ca0576156f5b85c9, type: 3}
+  - {fileID: 6597178608463048394, guid: 3b41377faf803f245a59ea9abeafc0f1, type: 3}
+  - {fileID: 900929942742165671, guid: 47394b5b0122260468a0bc504600948a, type: 3}
+  DefaultFOne: []
+  DefaultFTwo: []
+  DefaultFThree: []
+  DefaultFFour: []
+  myUIImages:
+    toReplace: []
+    UltBackGround: {fileID: 0}
+    FButtonbackgrounds: {fileID: 0}
+    BottomLeftPanel: {fileID: 0}
+    BottomCenterPanel: {fileID: 0}
+    MinimapBackground: {fileID: 0}
+    FTwelveImage: {fileID: 0}
+    SupplyImage: {fileID: 0}
+    supplyUnit: 
+    ControlGroup: {fileID: 0}
+    BasicCommands: {fileID: 0}
+    PageTab: {fileID: 0}
+    TinyButton: {fileID: 0}
+    GrayButton: {fileID: 0}
+    BlackButton: {fileID: 0}
+    SmallButton: {fileID: 0}
+    Panel: {fileID: 0}
+    SquareButton: {fileID: 0}
+    Plus: {fileID: 0}
+    Minus: {fileID: 0}
+    BorderlessButton: {fileID: 0}
+--- !u!114 &2862172543494624135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3308781901770115220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42e8d8f0d118eb14da6ca19029b47c68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ResourceTypes:
+    MyResources: []
+  UltimatePrefab: {fileID: 8205286698552316857, guid: 40a87d2102784c0499e53aa08053884d,
+    type: 3}
+  race: 0
+  factionIcon: {fileID: 0}
+  RaceDescription: Casketta
+  FHotkeyString: 
+  unitList:
+  - {fileID: 4472490268572283448, guid: 1e12dfd4fb05a7c49ba93992140ba1fe, type: 3}
+  - {fileID: 434365666581434835, guid: f19ef68e40c4cc4489a3f2dc3df4a5f2, type: 3}
+  - {fileID: 3225162869616002216, guid: 4b44842a2f4bc614faabf07487e0494b, type: 3}
+  buildingList: []
+  attachmentsList:
+  - {fileID: 5240933263949675368, guid: 378de70afd9749d41b03ca86f8151de7, type: 3}
+  - {fileID: 5922518107983526458, guid: f2d3ff922f5a78148930f3d75193d32a, type: 3}
+  - {fileID: 621019970433789346, guid: dcc5427559760a648bd50e26bf419ab3, type: 3}
   DefaultFOne: []
   DefaultFTwo: []
   DefaultFThree: []

@@ -699,7 +699,7 @@ MonoBehaviour:
       totalHarvested: 0
   myManager: {fileID: 0}
   StatsChanged: 0
-  otherTags: 
+  otherTags: 16000000
   armorType: 2
   sizeType: 1
   myHeight: 0
