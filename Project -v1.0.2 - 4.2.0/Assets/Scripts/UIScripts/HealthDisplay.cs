@@ -21,7 +21,6 @@ public class HealthDisplay : MonoBehaviour {
 		if (background) {
 			background.gameObject.SetActive (false);
 		}
-
 	}
 
 	// Use this for initialization
@@ -70,7 +69,8 @@ public class HealthDisplay : MonoBehaviour {
 	}
 
 	public void stopBuilding()
-	{BuildingUnit.sprite = null;
+	{
+        BuildingUnit.sprite = null;
 		BuildingUnit.gameObject.SetActive(false);
 		background.gameObject.SetActive (false);
 	}

@@ -25,13 +25,5 @@ public class WhirlPoolArea : OverTimeApplier
         }
     }
 
-    public void TurnOff()
-    {
-        foreach (UnitManager man in InVision)
-        {
-            UnitExitTrigger(man);
-        }
-        Destroy(this.gameObject);
-    }
 
 }

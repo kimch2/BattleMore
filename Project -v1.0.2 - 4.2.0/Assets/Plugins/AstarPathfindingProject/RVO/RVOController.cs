@@ -282,6 +282,13 @@ namespace Pathfinding.RVO {
 	
 		}
 
+        public void SetMaxSpeed(float amount)
+        {
+            maxSpeed = amount;
+            rvoAgent.MaxSpeed = amount;
+            
+        }
+
 		/** Teleport the agent to a new position.
 		 * The agent will be moved instantly and not show ugly interpolation artifacts during a split second.
 		 * Manually changing the position of the transform will in most cases be picked up as a teleport automatically

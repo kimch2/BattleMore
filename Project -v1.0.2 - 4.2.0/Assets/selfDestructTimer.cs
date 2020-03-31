@@ -1,37 +1,33 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class selfDestructTimer : MonoBehaviour {
-	public float timer;
+public class selfDestructTimer : MonoBehaviour
+{
+
+    public float timer;
 	public bool showTimer;
 	private float deathTime;
-
-	float originalTime;
 
 	private Selected hd;
 	// Use this for initialization
 	void Start () {
+        deathTime = Time.time + timer;
 
-		
-		if (showTimer) {
+        if (showTimer) {
 			StartCoroutine (checkForDeathWithUI ());
 
 
 		} else {
 			StartCoroutine (checkForDeath());
 		}
-		deathTime = Time.time + timer;
-
-
-
-	}
+    }
 
 	IEnumerator checkForDeath()
 	{
-		yield return new WaitForSeconds (timer);
-		//while (Time.time < deathTime) {
-			//yield return new WaitForSeconds (.07f);
-		//}
+
+	while (Time.time < deathTime) {
+			yield return null;
+		}
 
 		if (GetComponent<UnitStats> ()) {
 			GetComponent<UnitStats> ().kill (null);
@@ -41,11 +37,14 @@ public class selfDestructTimer : MonoBehaviour {
 
 	}
 
+    public void AddTime(float seconds)
+    {
+        deathTime += seconds;
+    }
+
 	public void modifyRemainingByPercent(float perc)
 	{
-		Debug.Log("before " + deathTime);
 		deathTime += (deathTime - Time.time) * perc;
-		Debug.Log("after " + deathTime);
 	}
 
 	IEnumerator checkForDeathWithUI()

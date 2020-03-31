@@ -27,7 +27,7 @@ public class DaMinionSpawner : MonoBehaviour
     {
         if (DaminionsInitializer.main.MyHero)
         {
-            Vector3 spawnPoint = DaminionsInitializer.main.MyHero.transform.position + Vector3.right * SpawnOffset;
+            Vector3 spawnPoint = DaminionsInitializer.main.getScreenMiddle(20, 2, true);
             spawnPoint.z += Random.Range(-1 * ZRange, ZRange);
 
             GameObject unit = (GameObject)Instantiate(TypesToSpawn[Random.Range(0, TypesToSpawn.Count)], spawnPoint, Quaternion.identity);
@@ -37,6 +37,24 @@ public class DaMinionSpawner : MonoBehaviour
             unitMan.GiveOrder(Orders.CreateAttackMove(spawnPoint + Vector3.left * SpawnOffset));
 
             Invoke("SpawnEnemy", Mathf.Max(1, (1 - spawnCurve.Evaluate(CarbotCamera.singleton.getProgress())) * spawnRate + Random.Range(-spawnRate / 3, spawnRate / 3)));
+        }
+    }
+
+    int NextUnitIndex = 0;
+    private void Update()
+    {
+        if ( NextUnitIndex < DaminionsInitializer.main.map.Units.Count)
+        {
+            UnitData nextUnit = DaminionsInitializer.main.map.Units[NextUnitIndex];
+            Vector3 Position = nextUnit.pos;
+
+            if (Position.x < DaminionsInitializer.main.getScreenEdge(Position, 0, 2, true).x +5)
+            {
+                GameObject unit = (GameObject)Instantiate(DaminionsInitializer.main.AllUnits.Find(item => item.UnitName == nextUnit.unitName).gameObject, Position, Quaternion.identity);
+                UnitManager unitMan = unit.GetComponent<UnitManager>();
+                unitMan.Initialize(2, true, false);
+                NextUnitIndex++;
+            }
         }
     }
 }

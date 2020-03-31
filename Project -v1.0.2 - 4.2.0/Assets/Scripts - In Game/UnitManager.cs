@@ -893,7 +893,6 @@ public class UnitManager : Unit, IOrderable {
 
 	public IWeapon canAttack(UnitManager obj)
     {
-        Debug.Log("CanATtack");
         IWeapon best = null;
 		float min= 100000000;
         if (obj.myStats.isUnitType(UnitTypes.UnitTypeTag.Invisible))

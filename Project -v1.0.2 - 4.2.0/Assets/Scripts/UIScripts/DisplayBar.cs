@@ -29,8 +29,6 @@ public class DisplayBar : MonoBehaviour
         GetComponentInChildren<SpriteRenderer>().size = new Vector2(BarWidth, sprite.size.y);
         sprite.transform.parent.localPosition = new Vector3(BarWidth / 2, 0, 0);
         sprite.transform.localPosition = new Vector2(0 - BarWidth / 2, 0);
-
-
     }
 
 
@@ -41,35 +39,35 @@ public class DisplayBar : MonoBehaviour
     /// <returns><c>true</c>, if ratio was updated, <c>false</c> otherwise.</returns>
     public virtual bool updateRatio(float ratio, UnitIconInfo unitIcon, UnitIconInfo slider)
     {
-        bool changeTo = (ratio < .99 && ratio > 0);
+        bool changeTo = (ratio < .99f && ratio > 0); // (ratio < .99 && ratio > 0);
 
         if (changeTo != gameObject.activeSelf)
         {
-            //Debug.Log("Updatint " + changeTo + "  " + this.gameObject);
             gameObject.SetActive(changeTo);
         }
-
-        healthVector.x = ratio;
-        colorBar.transform.localScale = healthVector;
 
         if (slider)
         {
             slider.updateSlider(ratio);
         }
 
-        foreach (HealthThreshHold hold in RatioLevels)
+        if (changeTo)
         {
-            if (ratio > hold.minimum)
+            healthVector.x = ratio;
+            colorBar.transform.localScale = healthVector;
+            foreach (HealthThreshHold hold in RatioLevels)
             {
-                sprite.color = hold.HPBarColor;
-                if (unitIcon)
+                if (ratio > hold.minimum)
                 {
-                    unitIcon.changeColor(hold.HPBarColor);
+                    sprite.color = hold.HPBarColor;
+                    if (unitIcon)
+                    {
+                        unitIcon.changeColor(hold.HPBarColor);
+                    }
+                    break;
                 }
-                break;
             }
         }
-
         return this.gameObject.activeSelf;
     }
 

@@ -1,0 +1,777 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &133748
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 413044}
+  - component: {fileID: 11408288}
+  - component: {fileID: 11422386}
+  - component: {fileID: 114992909758553868}
+  - component: {fileID: 114476935303677342}
+  - component: {fileID: 114810232477349278}
+  m_Layer: 0
+  m_Name: RaceInfoPacket(Battlemore)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &413044
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 133748}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1089.8849, y: 0.0000019073486, z: 1046.7004}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &11408288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 133748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42e8d8f0d118eb14da6ca19029b47c68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ResourceTypes:
+    MyResources:
+    - resType: 0
+      currentAmount: 0
+      totalHarvested: 0
+  UltimatePrefab: {fileID: 1003818602720912, guid: a2b210d29a8346042b67e7defdcce9e5,
+    type: 3}
+  race: 0
+  factionIcon: {fileID: 21300000, guid: a71ced2a3068ce045864b40b4f74c187, type: 3}
+  RaceDescription: 'The Steelcrest faction is a technologically advanced oligarchy
+    that imposes its reign over all it can reach. It utilizes a high-tech mix of customizable
+    tank armaments and Hit & Run tactics.
+
+
+    Units have semi-permiable shields that recharge quickly out of combat. A combination
+    of damage mitigation, hit & run tactics and high armor upgrades give high survivability
+    to Steelcrest units.
+
+
+    Steelcrest superweapons include the ability to transfer unit''s shields into their
+    weapons, the ability to deploy defensive barrier domes, a hail of firestorm bombs,
+    and the Powerful Nimbus Command Ship.'
+  FHotkeyString: Manticore,Zephyr,Vulcan,Triton,Chimera;Zephyr;Augmentor;SteelCrafter
+  unitList:
+  - {fileID: 169510, guid: 756cfa1f1da7ef44791cb81599b86b63, type: 3}
+  - {fileID: 3578014801401904383, guid: d057d680b5b7b984c9478aaffda00503, type: 3}
+  - {fileID: 2469843378734452416, guid: 7cf80e5cb1d654c4da979e8e7ba8ed27, type: 3}
+  - {fileID: 3058760669349931261, guid: 16d80896b0f196249a2926ff9850dc93, type: 3}
+  - {fileID: 1941871687761654228, guid: 7829273b2209e1f4888bde1c6ca7bf82, type: 3}
+  - {fileID: 129512, guid: 0bfc026fdf9f2d446a6924a3361db788, type: 3}
+  - {fileID: 1000013471108912, guid: 976d89c58089ac3439fec8c9fdaf201d, type: 3}
+  - {fileID: 6230616036127662998, guid: 6ae02fcc55460d245af1b83f5f39cdfc, type: 3}
+  - {fileID: 1000013391519144, guid: 209475100dfa9904584829365bd1409b, type: 3}
+  - {fileID: 101828, guid: 1ba4d4ee202da6b418bed057d76c2e61, type: 3}
+  - {fileID: 199192, guid: cba2a870dc60f82489800c6f77365f6c, type: 3}
+  buildingList:
+  - {fileID: 163582, guid: cc328ef1d82eb3a42afd2ca47e41d901, type: 3}
+  - {fileID: 177100, guid: 7ce8b8a08de8ce747a85094a64d343ab, type: 3}
+  - {fileID: 186302, guid: 6acc6b86a85e4024b8170b2a453ff4f3, type: 3}
+  - {fileID: 1000012110520544, guid: f245cd5a41d51d24ca837020fdce6b7b, type: 3}
+  - {fileID: 1000010270185594, guid: e62249f357b1d9a4781146ae16acc02e, type: 3}
+  - {fileID: 1129563696872908, guid: b8e9199fa8eb8034a99ccadaff38e849, type: 3}
+  - {fileID: 1000010933367254, guid: 9a441c6f911147142b2ff0ee75cbf78d, type: 3}
+  - {fileID: 1534374815667688, guid: c1db2aae7f381934f9d8e8ee067d1e96, type: 3}
+  attachmentsList:
+  - {fileID: 180688, guid: decf524ece56aa045a4126089e90b10f, type: 3}
+  - {fileID: 148520, guid: f8d3687671d75144eb55295f83d29482, type: 3}
+  - {fileID: 138060, guid: 6e34d5e2f9fe6f8409849201c4d770e0, type: 3}
+  - {fileID: 187662, guid: 960df2670bfd3c442a5870181394eb97, type: 3}
+  DefaultFOne:
+  - {fileID: 11417082, guid: cba2a870dc60f82489800c6f77365f6c, type: 3}
+  - {fileID: 11467172, guid: 0bfc026fdf9f2d446a6924a3361db788, type: 3}
+  - {fileID: 114000013864347480, guid: 976d89c58089ac3439fec8c9fdaf201d, type: 3}
+  - {fileID: 11491356, guid: 0be8fcb5847beb344bb166c11ff8fed3, type: 3}
+  - {fileID: 114000012819726740, guid: 209475100dfa9904584829365bd1409b, type: 3}
+  DefaultFTwo:
+  - {fileID: 11467172, guid: 0bfc026fdf9f2d446a6924a3361db788, type: 3}
+  DefaultFThree:
+  - {fileID: 11498048, guid: 1ba4d4ee202da6b418bed057d76c2e61, type: 3}
+  DefaultFFour:
+  - {fileID: 11499986, guid: 756cfa1f1da7ef44791cb81599b86b63, type: 3}
+  myUIImages:
+    toReplace: []
+    UltBackGround: {fileID: 21300000, guid: fa8998ea401f5a64ba4542c907b4d034, type: 3}
+    FButtonbackgrounds: {fileID: 21300000, guid: 417f0a42531faa746a52abe932ea8e76,
+      type: 3}
+    BottomLeftPanel: {fileID: 21300000, guid: c839dcc43dc984945a79554960c4ee24, type: 3}
+    BottomCenterPanel: {fileID: 21300000, guid: 3956e23751adf80489c27338a05e21f9,
+      type: 3}
+    MinimapBackground: {fileID: 21300000, guid: c3159bb6d164cd441adf03dabf3ac34c,
+      type: 3}
+    FTwelveImage: {fileID: 21300000, guid: 0d275e0b0954a8e45bccad31ed034661, type: 3}
+    SupplyImage: {fileID: 21300000, guid: c87c729237638234f99706ca72695ad2, type: 3}
+    supplyUnit: Aether Core
+    ControlGroup: {fileID: 21300000, guid: b56284f0d5cf022438136aa3037efaab, type: 3}
+    BasicCommands: {fileID: 21300000, guid: c49f6084425cd9a4abd7e7f498ef7371, type: 3}
+    PageTab: {fileID: 21300000, guid: 2c6687b38cb343541ab3174dbfee6f34, type: 3}
+    TinyButton: {fileID: 21300000, guid: d2cf79f9d1e54d84eb0d8181b99a3080, type: 3}
+    GrayButton: {fileID: 21300000, guid: 1a7b8ac77aba86846aec9d03c0d3e46d, type: 3}
+    BlackButton: {fileID: 21300000, guid: bafa6668b5c269849b7b63264c632b18, type: 3}
+    SmallButton: {fileID: 21300000, guid: b0d4d629f0c293f4c9550ea1887dc165, type: 3}
+    Panel: {fileID: 21300000, guid: 8b48d0cdec40425409b32229a749fe7d, type: 3}
+    SquareButton: {fileID: 21300000, guid: e47cb0da69dbf704a8a539d9d0a63e1a, type: 3}
+    Plus: {fileID: 21300002, guid: a64c66ce62793bf469be43170d2e71f3, type: 3}
+    Minus: {fileID: 21300000, guid: a64c66ce62793bf469be43170d2e71f3, type: 3}
+    BorderlessButton: {fileID: 21300000, guid: b20ca1de6cf33174f811a8aab08e2984, type: 3}
+--- !u!114 &11422386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 133748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42e8d8f0d118eb14da6ca19029b47c68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ResourceTypes:
+    MyResources:
+    - resType: 0
+      currentAmount: 0
+      totalHarvested: 0
+    - resType: 1
+      currentAmount: 0
+      totalHarvested: 0
+  UltimatePrefab: {fileID: 1097702435966960, guid: 8e73eed20ba57244ba69bebaa6872b92,
+    type: 3}
+  race: 1
+  factionIcon: {fileID: 21300000, guid: 0d2214fc59df62a47ae2cf6b675c7f17, type: 3}
+  RaceDescription: 'The Coalition faction is a ragtag bunch of outlaw miners, smugglers,
+    and industrialist. They have repurposed mining equipment into weapons and aren''t
+    above self destructing their own stuff if it means taking down the enemy.
+
+
+    Using the very waste of their operations as weapons, coalition units fling, chains,
+    drill, and chemical by products at their enemies. Most units are oriented to be
+    one-time use frontal assault units. once heavily damaged, they can be scrapped
+    for their materials.
+
+
+    Even the clouds themselves can be used as a weapon when filled with enough pollution.
+    Coalition superweapons can call down acid rain and consuming smog clouds to engulf
+    their foes.'
+  FHotkeyString: Crack Hammer,Scrap Cycle,Chembuchet,Blast Drone,Desolator,Chain Flail,DreadNaught;
+    Crack Hammer; Desolator; Chain Flail,DreadNaught
+  unitList:
+  - {fileID: 142154, guid: ce7868f5ae13b5245a5fe8db757f199d, type: 3}
+  - {fileID: 178134, guid: f346f4429a9f9d34fb3a9b64e4558c5d, type: 3}
+  - {fileID: 1000011005969790, guid: 2ee872193d8d7c44789e35f6816989e1, type: 3}
+  - {fileID: 136566, guid: 295c1eb8e6c99aa448e5b59374a22623, type: 3}
+  - {fileID: 1000011654559442, guid: 9e27f119a744b73459f60446d14c8142, type: 3}
+  - {fileID: 1897310814457356, guid: bcbd8673da255c74fad0f01778a9bab0, type: 3}
+  - {fileID: 1659693931662784, guid: 7a2355a976d3f624f86fd817b3211616, type: 3}
+  buildingList:
+  - {fileID: 1302577457788436, guid: 35cadec90aa9a324087a569ab0200102, type: 3}
+  - {fileID: 1494378391528060, guid: 2a5c607bc5c761d4da601484e5545246, type: 3}
+  - {fileID: 1138681596007860, guid: 86015a5e78fbcb345a7964f5c5df953c, type: 3}
+  - {fileID: 1468856874936854, guid: 77e34d5b05f9a6a46a273ab9c7e37dcb, type: 3}
+  - {fileID: 1876639785482450, guid: c5576e32d6ee14343ae1a62b37b64f36, type: 3}
+  - {fileID: 121164, guid: e8849b515e46c8c448a1f5a2dda52780, type: 3}
+  - {fileID: 170362, guid: 6c94b9362be92a0479e7086a4a48ff58, type: 3}
+  attachmentsList: []
+  DefaultFOne:
+  - {fileID: 11488276, guid: ce7868f5ae13b5245a5fe8db757f199d, type: 3}
+  - {fileID: 11404752, guid: f346f4429a9f9d34fb3a9b64e4558c5d, type: 3}
+  - {fileID: 114000010891887350, guid: 9e27f119a744b73459f60446d14c8142, type: 3}
+  - {fileID: 11493678, guid: 295c1eb8e6c99aa448e5b59374a22623, type: 3}
+  - {fileID: 114000012058911320, guid: 2ee872193d8d7c44789e35f6816989e1, type: 3}
+  - {fileID: 114768199386467536, guid: 7a2355a976d3f624f86fd817b3211616, type: 3}
+  - {fileID: 114270899138433142, guid: bcbd8673da255c74fad0f01778a9bab0, type: 3}
+  DefaultFTwo:
+  - {fileID: 114000012058911320, guid: 2ee872193d8d7c44789e35f6816989e1, type: 3}
+  DefaultFThree:
+  - {fileID: 11404752, guid: f346f4429a9f9d34fb3a9b64e4558c5d, type: 3}
+  DefaultFFour:
+  - {fileID: 11493678, guid: 295c1eb8e6c99aa448e5b59374a22623, type: 3}
+  myUIImages:
+    toReplace: []
+    UltBackGround: {fileID: 21300000, guid: b50b84a1e9afcf54eb0a0a5006006b61, type: 3}
+    FButtonbackgrounds: {fileID: 21300000, guid: edddf90e582935044b4fd6f957bdda43,
+      type: 3}
+    BottomLeftPanel: {fileID: 21300000, guid: f9381b87cfb3b29458a6309e90755750, type: 3}
+    BottomCenterPanel: {fileID: 21300000, guid: c7e53215e93ca8c4b80c0504d3ac2502,
+      type: 3}
+    MinimapBackground: {fileID: 21300000, guid: dbd65a865205eac4c9b4a3911dd190d9,
+      type: 3}
+    FTwelveImage: {fileID: 21300000, guid: 0d275e0b0954a8e45bccad31ed034661, type: 3}
+    SupplyImage: {fileID: 21300000, guid: c7e9ce0f2e239f24d8e82d74a91bc9b6, type: 3}
+    supplyUnit: Scrap Yard
+    ControlGroup: {fileID: 21300000, guid: ca6ead5b60d61144bb7a999e43d98491, type: 3}
+    BasicCommands: {fileID: 21300000, guid: 86ce131763b52434a90c2c0d5fe046fe, type: 3}
+    PageTab: {fileID: 21300000, guid: 13dd4bf99d2b08645b3b121be019a884, type: 3}
+    TinyButton: {fileID: 21300000, guid: 5e4827e40e02c3140bc100ff0fe98cc5, type: 3}
+    GrayButton: {fileID: 21300000, guid: 41b6ea0c4aca12c4b925d013e9367766, type: 3}
+    BlackButton: {fileID: 21300000, guid: cef2c1c697fdc5749b63f66f73c5e4f3, type: 3}
+    SmallButton: {fileID: 21300000, guid: 5e4827e40e02c3140bc100ff0fe98cc5, type: 3}
+    Panel: {fileID: 21300000, guid: 8dd85fef4610e4e4ca3bfda51fbd6989, type: 3}
+    SquareButton: {fileID: 21300000, guid: cef2c1c697fdc5749b63f66f73c5e4f3, type: 3}
+    Plus: {fileID: 21300002, guid: 7bae7c8d14b9ae4408e7b8eff667a857, type: 3}
+    Minus: {fileID: 21300000, guid: 7bae7c8d14b9ae4408e7b8eff667a857, type: 3}
+    BorderlessButton: {fileID: 21300000, guid: 5e4827e40e02c3140bc100ff0fe98cc5, type: 3}
+--- !u!114 &114992909758553868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 133748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42e8d8f0d118eb14da6ca19029b47c68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ResourceTypes:
+    MyResources:
+    - resType: 0
+      currentAmount: 0
+      totalHarvested: 0
+    - resType: 1
+      currentAmount: 0
+      totalHarvested: 0
+  UltimatePrefab: {fileID: 1003818602720912, guid: a2b210d29a8346042b67e7defdcce9e5,
+    type: 3}
+  race: 2
+  factionIcon: {fileID: 0}
+  RaceDescription: 
+  FHotkeyString: 
+  unitList:
+  - {fileID: 1764801411012174, guid: b62321bbc00555d478db6f7567453171, type: 3}
+  - {fileID: 1728264983956230, guid: 109f612a613325946aef8f898a4a085f, type: 3}
+  - {fileID: 1042620053197528, guid: d862c205e00731442939e60ce2818174, type: 3}
+  buildingList:
+  - {fileID: 1100717160328052, guid: ae1c0e76e961bfe4bae58f97e54225f0, type: 3}
+  attachmentsList: []
+  DefaultFOne: []
+  DefaultFTwo: []
+  DefaultFThree: []
+  DefaultFFour: []
+  myUIImages:
+    toReplace: []
+    UltBackGround: {fileID: 0}
+    FButtonbackgrounds: {fileID: 0}
+    BottomLeftPanel: {fileID: 0}
+    BottomCenterPanel: {fileID: 0}
+    MinimapBackground: {fileID: 0}
+    FTwelveImage: {fileID: 0}
+    SupplyImage: {fileID: 0}
+    supplyUnit: 
+    ControlGroup: {fileID: 0}
+    BasicCommands: {fileID: 0}
+    PageTab: {fileID: 0}
+    TinyButton: {fileID: 0}
+    GrayButton: {fileID: 0}
+    BlackButton: {fileID: 0}
+    SmallButton: {fileID: 0}
+    Panel: {fileID: 0}
+    SquareButton: {fileID: 0}
+    Plus: {fileID: 0}
+    Minus: {fileID: 0}
+    BorderlessButton: {fileID: 0}
+--- !u!114 &114476935303677342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 133748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42e8d8f0d118eb14da6ca19029b47c68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ResourceTypes:
+    MyResources: []
+  UltimatePrefab: {fileID: 1003818602720912, guid: a2b210d29a8346042b67e7defdcce9e5,
+    type: 3}
+  race: 3
+  factionIcon: {fileID: 0}
+  RaceDescription: 
+  FHotkeyString: 
+  unitList:
+  - {fileID: 1000010297989512, guid: 5648ffa0d040fb24fb690f88d346a72a, type: 3}
+  - {fileID: 1217028730228380, guid: 8c32aa546b19bff4cb2ff019dacf50f9, type: 3}
+  - {fileID: 1402335658762380, guid: fb7af36b55af9e8498896901bf0dc689, type: 3}
+  buildingList:
+  - {fileID: 1836169023413828, guid: 83b1bd2deb0d24d4d868143664773919, type: 3}
+  attachmentsList: []
+  DefaultFOne: []
+  DefaultFTwo: []
+  DefaultFThree: []
+  DefaultFFour: []
+  myUIImages:
+    toReplace: []
+    UltBackGround: {fileID: 0}
+    FButtonbackgrounds: {fileID: 0}
+    BottomLeftPanel: {fileID: 0}
+    BottomCenterPanel: {fileID: 0}
+    MinimapBackground: {fileID: 0}
+    FTwelveImage: {fileID: 0}
+    SupplyImage: {fileID: 0}
+    supplyUnit: 
+    ControlGroup: {fileID: 0}
+    BasicCommands: {fileID: 0}
+    PageTab: {fileID: 0}
+    TinyButton: {fileID: 0}
+    GrayButton: {fileID: 0}
+    BlackButton: {fileID: 0}
+    SmallButton: {fileID: 0}
+    Panel: {fileID: 0}
+    SquareButton: {fileID: 0}
+    Plus: {fileID: 0}
+    Minus: {fileID: 0}
+    BorderlessButton: {fileID: 0}
+--- !u!114 &114810232477349278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 133748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2fd055a3e62f4747973d43a46631a76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myComps:
+  - CompositionName: Basic Light
+    exposed: 0
+    ID: 21728
+    GizmoColor: {r: 1, g: 1, b: 1, a: 1}
+    RacePiles:
+    - myRace: 0
+      ID: 0
+      units:
+      - {fileID: 3578014801401904383, guid: d057d680b5b7b984c9478aaffda00503, type: 3}
+    - myRace: 1
+      ID: 0
+      units:
+      - {fileID: 142154, guid: ce7868f5ae13b5245a5fe8db757f199d, type: 3}
+    - myRace: 2
+      ID: 0
+      units:
+      - {fileID: 1764801411012174, guid: b62321bbc00555d478db6f7567453171, type: 3}
+    - myRace: 3
+      ID: 0
+      units:
+      - {fileID: 1000010297989512, guid: 5648ffa0d040fb24fb690f88d346a72a, type: 3}
+      - {fileID: 1000010297989512, guid: 5648ffa0d040fb24fb690f88d346a72a, type: 3}
+      - {fileID: 1000010297989512, guid: 5648ffa0d040fb24fb690f88d346a72a, type: 3}
+  - CompositionName: AntiArmor
+    exposed: 0
+    ID: 53065
+    GizmoColor: {r: 1, g: 1, b: 1, a: 1}
+    RacePiles:
+    - myRace: 0
+      ID: 0
+      units:
+      - {fileID: 2469843378734452416, guid: 7cf80e5cb1d654c4da979e8e7ba8ed27, type: 3}
+    - myRace: 1
+      ID: 0
+      units:
+      - {fileID: 178134, guid: f346f4429a9f9d34fb3a9b64e4558c5d, type: 3}
+    - myRace: 2
+      ID: 0
+      units:
+      - {fileID: 1042620053197528, guid: d862c205e00731442939e60ce2818174, type: 3}
+    - myRace: 3
+      ID: 0
+      units:
+      - {fileID: 1217028730228380, guid: 8c32aa546b19bff4cb2ff019dacf50f9, type: 3}
+      - {fileID: 1217028730228380, guid: 8c32aa546b19bff4cb2ff019dacf50f9, type: 3}
+  - CompositionName: Support
+    exposed: 0
+    ID: 81570
+    GizmoColor: {r: 1, g: 1, b: 1, a: 1}
+    RacePiles:
+    - myRace: 0
+      ID: 0
+      units:
+      - {fileID: 3058760669349931261, guid: 16d80896b0f196249a2926ff9850dc93, type: 3}
+    - myRace: 1
+      ID: 0
+      units:
+      - {fileID: 136566, guid: 295c1eb8e6c99aa448e5b59374a22623, type: 3}
+    - myRace: 2
+      ID: 0
+      units:
+      - {fileID: 1764801411012174, guid: b62321bbc00555d478db6f7567453171, type: 3}
+    - myRace: 3
+      ID: 0
+      units:
+      - {fileID: 1000010297989512, guid: 5648ffa0d040fb24fb690f88d346a72a, type: 3}
+      - {fileID: 1000010297989512, guid: 5648ffa0d040fb24fb690f88d346a72a, type: 3}
+  - CompositionName: Splash Damage
+    exposed: 0
+    ID: 15410
+    GizmoColor: {r: 1, g: 1, b: 1, a: 1}
+    RacePiles:
+    - myRace: 0
+      ID: 0
+      units:
+      - {fileID: 1941871687761654228, guid: 7829273b2209e1f4888bde1c6ca7bf82, type: 3}
+    - myRace: 1
+      ID: 0
+      units:
+      - {fileID: 1000011654559442, guid: 9e27f119a744b73459f60446d14c8142, type: 3}
+      - {fileID: 1000011654559442, guid: 9e27f119a744b73459f60446d14c8142, type: 3}
+    - myRace: 2
+      ID: 0
+      units:
+      - {fileID: 1728264983956230, guid: 109f612a613325946aef8f898a4a085f, type: 3}
+    - myRace: 3
+      ID: 0
+      units:
+      - {fileID: 1000010297989512, guid: 5648ffa0d040fb24fb690f88d346a72a, type: 3}
+      - {fileID: 1000010297989512, guid: 5648ffa0d040fb24fb690f88d346a72a, type: 3}
+  - CompositionName: AirCraftLight
+    exposed: 0
+    ID: 41044
+    GizmoColor: {r: 1, g: 1, b: 1, a: 1}
+    RacePiles:
+    - myRace: 0
+      ID: 0
+      units:
+      - {fileID: 129512, guid: 0bfc026fdf9f2d446a6924a3361db788, type: 3}
+    - myRace: 1
+      ID: 0
+      units:
+      - {fileID: 1000011005969790, guid: 2ee872193d8d7c44789e35f6816989e1, type: 3}
+    - myRace: 2
+      ID: 0
+      units:
+      - {fileID: 1728264983956230, guid: 109f612a613325946aef8f898a4a085f, type: 3}
+    - myRace: 3
+      ID: 0
+      units:
+      - {fileID: 1217028730228380, guid: 8c32aa546b19bff4cb2ff019dacf50f9, type: 3}
+  - CompositionName: AircraftHeavy
+    exposed: 0
+    ID: 75753
+    GizmoColor: {r: 1, g: 1, b: 1, a: 1}
+    RacePiles:
+    - myRace: 0
+      ID: 0
+      units:
+      - {fileID: 129512, guid: 0bfc026fdf9f2d446a6924a3361db788, type: 3}
+    - myRace: 1
+      ID: 0
+      units:
+      - {fileID: 1659693931662784, guid: 7a2355a976d3f624f86fd817b3211616, type: 3}
+    - myRace: 2
+      ID: 0
+      units:
+      - {fileID: 1728264983956230, guid: 109f612a613325946aef8f898a4a085f, type: 3}
+      - {fileID: 1728264983956230, guid: 109f612a613325946aef8f898a4a085f, type: 3}
+    - myRace: 3
+      ID: 0
+      units:
+      - {fileID: 1217028730228380, guid: 8c32aa546b19bff4cb2ff019dacf50f9, type: 3}
+      - {fileID: 1217028730228380, guid: 8c32aa546b19bff4cb2ff019dacf50f9, type: 3}
+  - CompositionName: Artillery
+    exposed: 0
+    ID: 95742
+    GizmoColor: {r: 1, g: 1, b: 1, a: 1}
+    RacePiles:
+    - myRace: 0
+      ID: 0
+      units:
+      - {fileID: 1000013391519144, guid: 209475100dfa9904584829365bd1409b, type: 3}
+    - myRace: 1
+      ID: 0
+      units:
+      - {fileID: 136566, guid: 295c1eb8e6c99aa448e5b59374a22623, type: 3}
+    - myRace: 2
+      ID: 0
+      units:
+      - {fileID: 1764801411012174, guid: b62321bbc00555d478db6f7567453171, type: 3}
+    - myRace: 3
+      ID: 0
+      units:
+      - {fileID: 1217028730228380, guid: 8c32aa546b19bff4cb2ff019dacf50f9, type: 3}
+  - CompositionName: HeavyGround
+    exposed: 0
+    ID: 38589
+    GizmoColor: {r: 1, g: 1, b: 1, a: 1}
+    RacePiles:
+    - myRace: 0
+      ID: 0
+      units:
+      - {fileID: 6230616036127662998, guid: 6ae02fcc55460d245af1b83f5f39cdfc, type: 3}
+    - myRace: 1
+      ID: 0
+      units:
+      - {fileID: 1897310814457356, guid: bcbd8673da255c74fad0f01778a9bab0, type: 3}
+    - myRace: 2
+      ID: 0
+      units:
+      - {fileID: 1042620053197528, guid: d862c205e00731442939e60ce2818174, type: 3}
+      - {fileID: 1042620053197528, guid: d862c205e00731442939e60ce2818174, type: 3}
+    - myRace: 3
+      ID: 0
+      units:
+      - {fileID: 1402335658762380, guid: fb7af36b55af9e8498896901bf0dc689, type: 3}
+  - CompositionName: SpellCaster
+    exposed: 0
+    ID: 81517
+    GizmoColor: {r: 1, g: 1, b: 1, a: 1}
+    RacePiles:
+    - myRace: 0
+      ID: 0
+      units:
+      - {fileID: 1000013471108912, guid: 976d89c58089ac3439fec8c9fdaf201d, type: 3}
+    - myRace: 1
+      ID: 0
+      units:
+      - {fileID: 142154, guid: ce7868f5ae13b5245a5fe8db757f199d, type: 3}
+      - {fileID: 142154, guid: ce7868f5ae13b5245a5fe8db757f199d, type: 3}
+    - myRace: 2
+      ID: 0
+      units:
+      - {fileID: 1764801411012174, guid: b62321bbc00555d478db6f7567453171, type: 3}
+    - myRace: 3
+      ID: 0
+      units:
+      - {fileID: 1000010297989512, guid: 5648ffa0d040fb24fb690f88d346a72a, type: 3}
+      - {fileID: 1000010297989512, guid: 5648ffa0d040fb24fb690f88d346a72a, type: 3}
+  - CompositionName: Worker
+    exposed: 0
+    ID: 4982
+    GizmoColor: {r: 1, g: 1, b: 1, a: 1}
+    RacePiles:
+    - myRace: 0
+      ID: 0
+      units:
+      - {fileID: 169510, guid: 756cfa1f1da7ef44791cb81599b86b63, type: 3}
+    - myRace: 1
+      ID: 0
+      units:
+      - {fileID: 178134, guid: f346f4429a9f9d34fb3a9b64e4558c5d, type: 3}
+    - myRace: 2
+      ID: 0
+      units:
+      - {fileID: 1764801411012174, guid: b62321bbc00555d478db6f7567453171, type: 3}
+    - myRace: 3
+      ID: 0
+      units:
+      - {fileID: 1000010297989512, guid: 5648ffa0d040fb24fb690f88d346a72a, type: 3}
+    - myRace: 3
+      ID: 0
+      units:
+      - {fileID: 1000010297989512, guid: 5648ffa0d040fb24fb690f88d346a72a, type: 3}
+  - CompositionName: GroundDefensiveBuilding
+    exposed: 0
+    ID: 26442
+    GizmoColor: {r: 1, g: 1, b: 1, a: 1}
+    RacePiles:
+    - myRace: 0
+      ID: 0
+      units:
+      - {fileID: 1534374815667688, guid: c1db2aae7f381934f9d8e8ee067d1e96, type: 3}
+    - myRace: 1
+      ID: 0
+      units:
+      - {fileID: 121164, guid: e8849b515e46c8c448a1f5a2dda52780, type: 3}
+    - myRace: 2
+      ID: 0
+      units:
+      - {fileID: 1100717160328052, guid: ae1c0e76e961bfe4bae58f97e54225f0, type: 3}
+    - myRace: 3
+      ID: 0
+      units:
+      - {fileID: 1836169023413828, guid: 83b1bd2deb0d24d4d868143664773919, type: 3}
+  - CompositionName: AirDefensiveBuilding
+    exposed: 0
+    ID: 66348
+    GizmoColor: {r: 1, g: 1, b: 1, a: 1}
+    RacePiles:
+    - myRace: 0
+      ID: 0
+      units:
+      - {fileID: 1534374815667688, guid: c1db2aae7f381934f9d8e8ee067d1e96, type: 3}
+    - myRace: 1
+      ID: 0
+      units:
+      - {fileID: 170362, guid: 6c94b9362be92a0479e7086a4a48ff58, type: 3}
+    - myRace: 2
+      ID: 0
+      units:
+      - {fileID: 1100717160328052, guid: ae1c0e76e961bfe4bae58f97e54225f0, type: 3}
+    - myRace: 3
+      ID: 0
+      units:
+      - {fileID: 1836169023413828, guid: 83b1bd2deb0d24d4d868143664773919, type: 3}
+  - CompositionName: SupplyBuilding
+    exposed: 0
+    ID: 41440
+    GizmoColor: {r: 1, g: 1, b: 1, a: 1}
+    RacePiles:
+    - myRace: 0
+      ID: 0
+      units:
+      - {fileID: 186302, guid: 6acc6b86a85e4024b8170b2a453ff4f3, type: 3}
+    - myRace: 1
+      ID: 0
+      units:
+      - {fileID: 1138681596007860, guid: 86015a5e78fbcb345a7964f5c5df953c, type: 3}
+    - myRace: 2
+      ID: 0
+      units: []
+    - myRace: 3
+      ID: 0
+      units: []
+  - CompositionName: TownHall
+    exposed: 0
+    ID: 61927
+    GizmoColor: {r: 1, g: 1, b: 1, a: 1}
+    RacePiles:
+    - myRace: 0
+      ID: 0
+      units:
+      - {fileID: 163582, guid: cc328ef1d82eb3a42afd2ca47e41d901, type: 3}
+    - myRace: 1
+      ID: 0
+      units:
+      - {fileID: 1302577457788436, guid: 35cadec90aa9a324087a569ab0200102, type: 3}
+    - myRace: 2
+      ID: 0
+      units: []
+    - myRace: 3
+      ID: 0
+      units: []
+  - CompositionName: ArmoryUnitMaker
+    exposed: 0
+    ID: 25182
+    GizmoColor: {r: 1, g: 1, b: 1, a: 1}
+    RacePiles:
+    - myRace: 0
+      ID: 0
+      units:
+      - {fileID: 177100, guid: 7ce8b8a08de8ce747a85094a64d343ab, type: 3}
+    - myRace: 1
+      ID: 0
+      units:
+      - {fileID: 1494378391528060, guid: 2a5c607bc5c761d4da601484e5545246, type: 3}
+    - myRace: 2
+      ID: 0
+      units: []
+    - myRace: 3
+      ID: 0
+      units: []
+  - CompositionName: UpgradeBuilding1
+    exposed: 0
+    ID: 78336
+    GizmoColor: {r: 1, g: 1, b: 1, a: 1}
+    RacePiles:
+    - myRace: 0
+      ID: 0
+      units:
+      - {fileID: 1000012110520544, guid: f245cd5a41d51d24ca837020fdce6b7b, type: 3}
+    - myRace: 1
+      ID: 0
+      units:
+      - {fileID: 1468856874936854, guid: 77e34d5b05f9a6a46a273ab9c7e37dcb, type: 3}
+    - myRace: 2
+      ID: 0
+      units: []
+    - myRace: 3
+      ID: 0
+      units: []
+  - CompositionName: UpgradeBuilding2
+    exposed: 0
+    ID: 48990
+    GizmoColor: {r: 1, g: 1, b: 1, a: 1}
+    RacePiles:
+    - myRace: 0
+      ID: 0
+      units:
+      - {fileID: 1129563696872908, guid: b8e9199fa8eb8034a99ccadaff38e849, type: 3}
+    - myRace: 1
+      ID: 0
+      units:
+      - {fileID: 1468856874936854, guid: 77e34d5b05f9a6a46a273ab9c7e37dcb, type: 3}
+    - myRace: 2
+      ID: 0
+      units: []
+    - myRace: 3
+      ID: 0
+      units: []
+  - CompositionName: UpgradeBuilding3
+    exposed: 0
+    ID: 88260
+    GizmoColor: {r: 1, g: 1, b: 1, a: 1}
+    RacePiles:
+    - myRace: 0
+      ID: 0
+      units:
+      - {fileID: 1000010270185594, guid: e62249f357b1d9a4781146ae16acc02e, type: 3}
+    - myRace: 1
+      ID: 0
+      units:
+      - {fileID: 1468856874936854, guid: 77e34d5b05f9a6a46a273ab9c7e37dcb, type: 3}
+    - myRace: 2
+      ID: 0
+      units: []
+    - myRace: 3
+      ID: 0
+      units: []
+  - CompositionName: UpgradeBuilding4
+    exposed: 0
+    ID: 35040
+    GizmoColor: {r: 1, g: 1, b: 1, a: 1}
+    RacePiles:
+    - myRace: 0
+      ID: 0
+      units:
+      - {fileID: 1000010933367254, guid: 9a441c6f911147142b2ff0ee75cbf78d, type: 3}
+    - myRace: 1
+      ID: 0
+      units:
+      - {fileID: 1468856874936854, guid: 77e34d5b05f9a6a46a273ab9c7e37dcb, type: 3}
+    - myRace: 2
+      ID: 0
+      units: []
+    - myRace: 3
+      ID: 0
+      units: []
+  raceInfos:
+  - {fileID: 11408288}
+  - {fileID: 11422386}
+  - {fileID: 114992909758553868}
+  - {fileID: 114476935303677342}
+  resourceInfos:
+  - resType: 0
+    ResourceColor: {r: 0.8867924, g: 0.8867924, b: 0.8867924, a: 1}
+    icon: {fileID: 21300000, guid: 9ed2aa03826170f4eacaa4deffea4052, type: 3}
+  - resType: 1
+    ResourceColor: {r: 0.051223423, g: 0.8301887, b: 0, a: 1}
+    icon: {fileID: 21300000, guid: fb31081ed99d70f47ace3fd799cf918c, type: 3}
+  - resType: 2
+    ResourceColor: {r: 1, g: 0, b: 0.2573738, a: 1}
+    icon: {fileID: 21300000, guid: e4ee0829372ec5e42ac6e453c28a18f3, type: 3}
+  - resType: 3
+    ResourceColor: {r: 0.11792451, g: 0.2899563, b: 1, a: 1}
+    icon: {fileID: 21300004, guid: 59bfe671eec6d4b4e952b53ee4efd9bd, type: 3}
+  - resType: 4
+    ResourceColor: {r: 1, g: 1, b: 1, a: 1}
+    icon: {fileID: 21300000, guid: 2741337eca41f0e46839059db8876bd3, type: 3}

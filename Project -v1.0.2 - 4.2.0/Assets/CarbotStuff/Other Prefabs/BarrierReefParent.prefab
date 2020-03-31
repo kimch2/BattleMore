@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1944720809156867854}
   - component: {fileID: 4465696265086016944}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: BackGround
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -85,6 +85,61 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &30728266927833376
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8574662900409651369}
+  - component: {fileID: 6809119193685886522}
+  m_Layer: 9
+  m_Name: OnHitContainer (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8574662900409651369
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 30728266927833376}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -8.699997}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3887158473186130239}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6809119193685886522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 30728266927833376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95cc792f619723c46b19c319c7e01d3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toApply: []
+  OnKillGeneric:
+    m_PersistentCalls:
+      m_Calls: []
+  onKillWithTarget:
+    m_PersistentCalls:
+      m_Calls: []
+  myManager: {fileID: 0}
+  source: {fileID: 0}
+  playerNumber: 0
+  FriendlyFireRatio: 0
+  AutoAddTriggers: 1
 --- !u!1 &126749751610562706
 GameObject:
   m_ObjectHideFlags: 0
@@ -95,7 +150,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3301109889961639584}
   - component: {fileID: 6922346481171464362}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: NewEnergy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -146,7 +201,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1046709607041962981}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: CooldownParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -178,7 +233,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1540713868045992008}
   - component: {fileID: 1194499474852572632}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: BigGameAch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -306,7 +361,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3623213252892969892}
   - component: {fileID: 7373605014176464377}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: BigGameAch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -376,6 +431,61 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &420246114239790658
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6776443334039509696}
+  - component: {fileID: 583563637351735654}
+  m_Layer: 9
+  m_Name: OnHitContainer (5)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6776443334039509696
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 420246114239790658}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -36.6}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3350042631179829355}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &583563637351735654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 420246114239790658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95cc792f619723c46b19c319c7e01d3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toApply: []
+  OnKillGeneric:
+    m_PersistentCalls:
+      m_Calls: []
+  onKillWithTarget:
+    m_PersistentCalls:
+      m_Calls: []
+  myManager: {fileID: 0}
+  source: {fileID: 0}
+  playerNumber: 0
+  FriendlyFireRatio: 0
+  AutoAddTriggers: 1
 --- !u!1 &605962938789082989
 GameObject:
   m_ObjectHideFlags: 0
@@ -386,7 +496,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7284868745237037322}
   - component: {fileID: 3248657744432332689}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: NewCooldown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -438,7 +548,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8237433549856312967}
   - component: {fileID: 2091556276104381224}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -518,7 +628,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4923461913220500707}
   - component: {fileID: 4637206304359152912}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: NewHealth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -574,7 +684,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2515723483154222495}
   - component: {fileID: 19111639245726821}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -654,7 +764,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6556017228811483270}
   - component: {fileID: 1881868169263088058}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: Building (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -738,7 +848,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2328839977297026785}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: CooldownParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -883,7 +993,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6054870307531153505}
   - component: {fileID: 5517081131461759405}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: BigGameAch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -963,7 +1073,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2899293694031346259}
   - component: {fileID: 4538549884417519471}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: BigGameAch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1043,7 +1153,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3929035246020844587}
   - component: {fileID: 8317474022911915011}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: HealthDisplay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1098,7 +1208,7 @@ GameObject:
   m_Component:
   - component: {fileID: 299635073820799166}
   - component: {fileID: 7681516239059740353}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: BackGround
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1191,8 +1301,9 @@ GameObject:
   - component: {fileID: 1647438647903852500}
   - component: {fileID: 2008470781781224871}
   - component: {fileID: 1187481376337058921}
-  - component: {fileID: 8461020518789341294}
-  m_Layer: 10
+  - component: {fileID: 268174799571637250}
+  - component: {fileID: 5892131257602870056}
+  m_Layer: 9
   m_Name: Barrier Reef (2)
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -1213,6 +1324,7 @@ Transform:
   - {fileID: 4223288472687249190}
   - {fileID: 7935830022842867827}
   - {fileID: 5728656973992895933}
+  - {fileID: 8574662900409651369}
   m_Father: {fileID: 5158824898390315531}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1289,8 +1401,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dece396e027e0343a65824dadc28c78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UnitDescription: Barrier that collapses after 10 seconds or when an enemy touches
-    it.
+  UnitDescription: Barrier that collapses after 10 seconds.
   isHero: 0
   Maxhealth: 300
   health: 300
@@ -1302,7 +1413,7 @@ MonoBehaviour:
   EnergyRegenPerHalf: 0
   Icon: {fileID: 21300000, guid: b9375aa928938ee4b86eb21e3dea9d06, type: 3}
   supply: -10
-  attackPriority: 3
+  attackPriority: 4
   DefensePriority: 0
   agressionPriority: 0
   armor: 1
@@ -1511,7 +1622,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timer: 10
   showTimer: 1
---- !u!114 &8461020518789341294
+--- !u!114 &268174799571637250
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1520,15 +1631,63 @@ MonoBehaviour:
   m_GameObject: {fileID: 1302134850259284577}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a74e54012530ce448f717ab77d63acb, type: 3}
+  m_Script: {fileID: 11500000, guid: fb54740c7a7a41141a4627d648915642, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rallyPoint: {x: 0, y: 0, z: 0}
-  rallyUnit: {fileID: 0}
-  AttackMoveSpawn: 0
-  RallyPointObj: {fileID: 0}
-  myLine: {fileID: 0}
-  myAnim: {fileID: 0}
+--- !u!114 &5892131257602870056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1302134850259284577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b39f8b2e2269964eb33b465d7395fc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: 
+  Descripton: Drops a bubble on death
+  iconPic: {fileID: 0}
+  myCost: {fileID: 0}
+  continueMoving: 0
+  RequiredUnit: []
+  canAutoCast: 0
+  autocast: 0
+  active: 0
+  maxChargeCount: 0
+  chargeCount: -1
+  soundEffect: {fileID: 0}
+  myHitContainer: {fileID: 6809119193685886522}
+  OnActivate:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5892131257602870056}
+        m_MethodName: DropItem
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnTurnOff:
+    m_PersistentCalls:
+      m_Calls: []
+  DurationWhenActivated: 0
+  ActivateWithTarget:
+    m_PersistentCalls:
+      m_Calls: []
+  Activatable: 0
+  triggerType: 4
+  VariableNumber: 0
+  OnTriggerEffect: {fileID: 0}
+  thingToDrop: {fileID: 850892373167587861, guid: 763412ef4beb0914abfcb289c7675d20,
+    type: 3}
+  PossibleNumberAmount: 0
+  NumberToSpawn: 2
 --- !u!1 &1352957173381705467
 GameObject:
   m_ObjectHideFlags: 0
@@ -1539,7 +1698,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3010741258506596405}
   - component: {fileID: 3485728986083717261}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: Building (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1624,7 +1783,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5316127203742369944}
   - component: {fileID: 1057345835690653315}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: BigGameAch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1703,7 +1862,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9030508968388243395}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: HealthParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1736,7 +1895,7 @@ GameObject:
   - component: {fileID: 3214610434665494910}
   - component: {fileID: 8458080780683077603}
   - component: {fileID: 8521253434669801126}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: DecalCircle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1851,6 +2010,61 @@ MonoBehaviour:
   RandomRotate: 0
   this_t_: {fileID: 0}
   mySprite: {fileID: 6774291236643075731}
+--- !u!1 &1770471404624074751
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2090242941692808621}
+  - component: {fileID: 1624186279888182481}
+  m_Layer: 9
+  m_Name: OnHitContainer (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2090242941692808621
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1770471404624074751}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -17.499996}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2995836748783866287}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1624186279888182481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1770471404624074751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95cc792f619723c46b19c319c7e01d3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toApply: []
+  OnKillGeneric:
+    m_PersistentCalls:
+      m_Calls: []
+  onKillWithTarget:
+    m_PersistentCalls:
+      m_Calls: []
+  myManager: {fileID: 0}
+  source: {fileID: 0}
+  playerNumber: 0
+  FriendlyFireRatio: 0
+  AutoAddTriggers: 1
 --- !u!1 &2041323429095425475
 GameObject:
   m_ObjectHideFlags: 0
@@ -1861,7 +2075,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1078663658757790788}
   - component: {fileID: 5291365194266453032}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: BigGameAch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1941,7 +2155,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1264487039733658571}
   - component: {fileID: 2938216282200791993}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: BigGameAch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2021,7 +2235,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4908994959418654240}
   - component: {fileID: 5370606309980804876}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: HealthDisplay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2076,7 +2290,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8120393708211715370}
   - component: {fileID: 345184718470773778}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2164,8 +2378,9 @@ GameObject:
   - component: {fileID: 2813291121655389872}
   - component: {fileID: 6683145273390907773}
   - component: {fileID: 6033262588426490498}
-  - component: {fileID: 8490968529533722023}
-  m_Layer: 10
+  - component: {fileID: 2111257253521521446}
+  - component: {fileID: 6295212858569030453}
+  m_Layer: 9
   m_Name: Barrier Reef (4)
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -2186,6 +2401,7 @@ Transform:
   - {fileID: 3929035246020844587}
   - {fileID: 249015525846679145}
   - {fileID: 8387115923852529561}
+  - {fileID: 5597613067158638813}
   m_Father: {fileID: 5158824898390315531}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2262,8 +2478,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dece396e027e0343a65824dadc28c78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UnitDescription: Barrier that collapses after 10 seconds or when an enemy touches
-    it.
+  UnitDescription: Barrier that collapses after 10 seconds.
   isHero: 0
   Maxhealth: 300
   health: 300
@@ -2275,7 +2490,7 @@ MonoBehaviour:
   EnergyRegenPerHalf: 0
   Icon: {fileID: 21300000, guid: b9375aa928938ee4b86eb21e3dea9d06, type: 3}
   supply: -10
-  attackPriority: 3
+  attackPriority: 4
   DefensePriority: 0
   agressionPriority: 0
   armor: 1
@@ -2484,7 +2699,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timer: 10
   showTimer: 1
---- !u!114 &8490968529533722023
+--- !u!114 &2111257253521521446
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2493,15 +2708,63 @@ MonoBehaviour:
   m_GameObject: {fileID: 3006997634418071479}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a74e54012530ce448f717ab77d63acb, type: 3}
+  m_Script: {fileID: 11500000, guid: fb54740c7a7a41141a4627d648915642, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rallyPoint: {x: 0, y: 0, z: 0}
-  rallyUnit: {fileID: 0}
-  AttackMoveSpawn: 0
-  RallyPointObj: {fileID: 0}
-  myLine: {fileID: 0}
-  myAnim: {fileID: 0}
+--- !u!114 &6295212858569030453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3006997634418071479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b39f8b2e2269964eb33b465d7395fc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: 
+  Descripton: Drops a bubble on death
+  iconPic: {fileID: 0}
+  myCost: {fileID: 0}
+  continueMoving: 0
+  RequiredUnit: []
+  canAutoCast: 0
+  autocast: 0
+  active: 0
+  maxChargeCount: 0
+  chargeCount: -1
+  soundEffect: {fileID: 0}
+  myHitContainer: {fileID: 176533572192620160}
+  OnActivate:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6295212858569030453}
+        m_MethodName: DropItem
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnTurnOff:
+    m_PersistentCalls:
+      m_Calls: []
+  DurationWhenActivated: 0
+  ActivateWithTarget:
+    m_PersistentCalls:
+      m_Calls: []
+  Activatable: 0
+  triggerType: 4
+  VariableNumber: 0
+  OnTriggerEffect: {fileID: 0}
+  thingToDrop: {fileID: 850892373167587861, guid: 763412ef4beb0914abfcb289c7675d20,
+    type: 3}
+  PossibleNumberAmount: 0
+  NumberToSpawn: 2
 --- !u!1 &3035442085228107950
 GameObject:
   m_ObjectHideFlags: 0
@@ -2512,7 +2775,7 @@ GameObject:
   m_Component:
   - component: {fileID: 362913129692628907}
   - component: {fileID: 4133803489014650994}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: BigGameAch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2591,7 +2854,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2988922091087811703}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: HealthParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2622,7 +2885,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4779455449568720286}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: CooldownParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2654,7 +2917,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6444599888749964904}
   - component: {fileID: 4990217361938079638}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: BigGameAch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2733,7 +2996,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4797410935820826095}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: HealthParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2765,7 +3028,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7152580143488962637}
   - component: {fileID: 196006210386193457}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2845,7 +3108,7 @@ GameObject:
   m_Component:
   - component: {fileID: 348822400214625150}
   - component: {fileID: 5418089731712136612}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: NewHealth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2901,7 +3164,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2883030656948719030}
   - component: {fileID: 8568436328757432609}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: Building (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3033,7 +3296,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8562209637420519898}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: CooldownParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3064,7 +3327,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1001727631124012170}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: CooldownParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3180,7 +3443,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9033600823930861421}
   - component: {fileID: 7209537195820489106}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: NewCooldown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3233,7 +3496,7 @@ GameObject:
   - component: {fileID: 2618678437604911756}
   - component: {fileID: 8681944688434586418}
   - component: {fileID: 7395614368260008007}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: DecalCircle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3310,7 +3573,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1878504070078648434}
   - component: {fileID: 8850062754295313774}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: HealthDisplay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3365,7 +3628,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8084937219464600801}
   - component: {fileID: 2416953741808542739}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: BigGameAch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3445,7 +3708,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2575906014789951079}
   - component: {fileID: 1299061673574329041}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: NewCooldown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3497,7 +3760,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5412409868560645891}
   - component: {fileID: 4356965110235163996}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3690,7 +3953,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2843856888793556156}
   - component: {fileID: 3724202941602740386}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3883,7 +4146,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3848396659662698921}
   - component: {fileID: 2520445268942192350}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: BigGameAch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3963,7 +4226,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1272463200781392138}
   - component: {fileID: 7136793641483354549}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: NewEnergy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4015,7 +4278,7 @@ GameObject:
   m_Component:
   - component: {fileID: 871226541793068925}
   - component: {fileID: 8519355880894542695}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: BigGameAch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4208,7 +4471,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8487350298174864500}
   - component: {fileID: 6577641102712433754}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4296,8 +4559,9 @@ GameObject:
   - component: {fileID: 1605458184957415528}
   - component: {fileID: 9173165087617858205}
   - component: {fileID: 1930844737396481070}
-  - component: {fileID: 3616693894520835340}
-  m_Layer: 10
+  - component: {fileID: 5658735309409368424}
+  - component: {fileID: 452002711191216400}
+  m_Layer: 9
   m_Name: Barrier Reef (3)
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -4318,6 +4582,7 @@ Transform:
   - {fileID: 1878504070078648434}
   - {fileID: 7387537597951373605}
   - {fileID: 1288064157462639027}
+  - {fileID: 2090242941692808621}
   m_Father: {fileID: 5158824898390315531}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4394,8 +4659,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dece396e027e0343a65824dadc28c78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UnitDescription: Barrier that collapses after 10 seconds or when an enemy touches
-    it.
+  UnitDescription: Barrier that collapses after 10 seconds.
   isHero: 0
   Maxhealth: 300
   health: 300
@@ -4407,7 +4671,7 @@ MonoBehaviour:
   EnergyRegenPerHalf: 0
   Icon: {fileID: 21300000, guid: b9375aa928938ee4b86eb21e3dea9d06, type: 3}
   supply: -10
-  attackPriority: 3
+  attackPriority: 4
   DefensePriority: 0
   agressionPriority: 0
   armor: 1
@@ -4616,7 +4880,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timer: 10
   showTimer: 1
---- !u!114 &3616693894520835340
+--- !u!114 &5658735309409368424
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4625,15 +4889,63 @@ MonoBehaviour:
   m_GameObject: {fileID: 4748377609334918021}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a74e54012530ce448f717ab77d63acb, type: 3}
+  m_Script: {fileID: 11500000, guid: fb54740c7a7a41141a4627d648915642, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rallyPoint: {x: 0, y: 0, z: 0}
-  rallyUnit: {fileID: 0}
-  AttackMoveSpawn: 0
-  RallyPointObj: {fileID: 0}
-  myLine: {fileID: 0}
-  myAnim: {fileID: 0}
+--- !u!114 &452002711191216400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4748377609334918021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b39f8b2e2269964eb33b465d7395fc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: 
+  Descripton: Drops a bubble on death
+  iconPic: {fileID: 0}
+  myCost: {fileID: 0}
+  continueMoving: 0
+  RequiredUnit: []
+  canAutoCast: 0
+  autocast: 0
+  active: 0
+  maxChargeCount: 0
+  chargeCount: -1
+  soundEffect: {fileID: 0}
+  myHitContainer: {fileID: 1624186279888182481}
+  OnActivate:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 452002711191216400}
+        m_MethodName: DropItem
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnTurnOff:
+    m_PersistentCalls:
+      m_Calls: []
+  DurationWhenActivated: 0
+  ActivateWithTarget:
+    m_PersistentCalls:
+      m_Calls: []
+  Activatable: 0
+  triggerType: 4
+  VariableNumber: 0
+  OnTriggerEffect: {fileID: 0}
+  thingToDrop: {fileID: 850892373167587861, guid: 763412ef4beb0914abfcb289c7675d20,
+    type: 3}
+  PossibleNumberAmount: 0
+  NumberToSpawn: 2
 --- !u!1 &4753763193050938231
 GameObject:
   m_ObjectHideFlags: 0
@@ -4757,7 +5069,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4998758057928074208}
   - component: {fileID: 1259455301733821993}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4837,7 +5149,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3849050667304978200}
   - component: {fileID: 6203094424944137535}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: BigGameAch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4917,7 +5229,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6351976645712274822}
   - component: {fileID: 3344338482315982191}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4997,7 +5309,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8955516556248576502}
   - component: {fileID: 4947303829787408591}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: BigGameAch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5076,7 +5388,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4571492760753836622}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: HealthParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5108,7 +5420,7 @@ GameObject:
   m_Component:
   - component: {fileID: 940658270345548803}
   - component: {fileID: 3937638642191214520}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: BackGround
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5193,7 +5505,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2529102503631784299}
   - component: {fileID: 8166628446056305322}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: BigGameAch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5273,7 +5585,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6171549516409142016}
   - component: {fileID: 7657207119696399537}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: BigGameAch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5353,7 +5665,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5678260914252967576}
   - component: {fileID: 2542918216461411312}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: NewEnergy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5404,7 +5716,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8687490841712193160}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: HealthParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5484,7 +5796,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3095336246287904114}
   - component: {fileID: 9024998859177632033}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: BigGameAch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5564,7 +5876,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5946035674308518697}
   - component: {fileID: 6974195794895915790}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: BackGround
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5649,7 +5961,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8297662263033495958}
   - component: {fileID: 8191739150630715494}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: NewHealth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5695,6 +6007,61 @@ MonoBehaviour:
   - minimum: 0
     HPBarColor: {r: 0.8602941, g: 0, b: 0, a: 1}
   BarWidth: 5
+--- !u!1 &6310678310694103976
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3223550237805265198}
+  - component: {fileID: 5738265124130646413}
+  m_Layer: 9
+  m_Name: OnHitContainer (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3223550237805265198
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6310678310694103976}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 197447038821392002}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5738265124130646413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6310678310694103976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95cc792f619723c46b19c319c7e01d3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toApply: []
+  OnKillGeneric:
+    m_PersistentCalls:
+      m_Calls: []
+  onKillWithTarget:
+    m_PersistentCalls:
+      m_Calls: []
+  myManager: {fileID: 0}
+  source: {fileID: 0}
+  playerNumber: 0
+  FriendlyFireRatio: 0
+  AutoAddTriggers: 1
 --- !u!1 &6496253930414152375
 GameObject:
   m_ObjectHideFlags: 0
@@ -5705,7 +6072,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4415313837642082776}
   - component: {fileID: 2334586595828854586}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: NewEnergy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5765,8 +6132,9 @@ GameObject:
   - component: {fileID: 4333578822610327974}
   - component: {fileID: 8963407420695314205}
   - component: {fileID: 3788458804422731048}
-  - component: {fileID: 4770854537696412383}
-  m_Layer: 10
+  - component: {fileID: 4258410553079376337}
+  - component: {fileID: 4422832356699228800}
+  m_Layer: 9
   m_Name: Barrier Reef (1)
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -5787,6 +6155,7 @@ Transform:
   - {fileID: 4908994959418654240}
   - {fileID: 4237439335100922362}
   - {fileID: 3214610434665494910}
+  - {fileID: 3223550237805265198}
   m_Father: {fileID: 5158824898390315531}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5863,8 +6232,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dece396e027e0343a65824dadc28c78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UnitDescription: Barrier that collapses after 10 seconds or when an enemy touches
-    it.
+  UnitDescription: Barrier that collapses after 10 seconds.
   isHero: 0
   Maxhealth: 300
   health: 300
@@ -5876,7 +6244,7 @@ MonoBehaviour:
   EnergyRegenPerHalf: 0
   Icon: {fileID: 21300000, guid: b9375aa928938ee4b86eb21e3dea9d06, type: 3}
   supply: -10
-  attackPriority: 3
+  attackPriority: 4
   DefensePriority: 0
   agressionPriority: 0
   armor: 1
@@ -6085,7 +6453,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timer: 10
   showTimer: 1
---- !u!114 &4770854537696412383
+--- !u!114 &4258410553079376337
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6094,15 +6462,63 @@ MonoBehaviour:
   m_GameObject: {fileID: 6547195775476745794}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a74e54012530ce448f717ab77d63acb, type: 3}
+  m_Script: {fileID: 11500000, guid: fb54740c7a7a41141a4627d648915642, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rallyPoint: {x: 0, y: 0, z: 0}
-  rallyUnit: {fileID: 0}
-  AttackMoveSpawn: 0
-  RallyPointObj: {fileID: 0}
-  myLine: {fileID: 0}
-  myAnim: {fileID: 0}
+--- !u!114 &4422832356699228800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6547195775476745794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b39f8b2e2269964eb33b465d7395fc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: 
+  Descripton: Drops a bubble on death
+  iconPic: {fileID: 0}
+  myCost: {fileID: 0}
+  continueMoving: 0
+  RequiredUnit: []
+  canAutoCast: 0
+  autocast: 0
+  active: 0
+  maxChargeCount: 0
+  chargeCount: -1
+  soundEffect: {fileID: 0}
+  myHitContainer: {fileID: 5738265124130646413}
+  OnActivate:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4422832356699228800}
+        m_MethodName: DropItem
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnTurnOff:
+    m_PersistentCalls:
+      m_Calls: []
+  DurationWhenActivated: 0
+  ActivateWithTarget:
+    m_PersistentCalls:
+      m_Calls: []
+  Activatable: 0
+  triggerType: 4
+  VariableNumber: 0
+  OnTriggerEffect: {fileID: 0}
+  thingToDrop: {fileID: 850892373167587861, guid: 763412ef4beb0914abfcb289c7675d20,
+    type: 3}
+  PossibleNumberAmount: 0
+  NumberToSpawn: 2
 --- !u!1 &6647510730539314761
 GameObject:
   m_ObjectHideFlags: 0
@@ -6226,7 +6642,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7545924356827032953}
   - component: {fileID: 4079452492267279643}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6306,7 +6722,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6797279255743611928}
   - component: {fileID: 4949169526666363540}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: BackGround
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6392,7 +6808,7 @@ GameObject:
   - component: {fileID: 1288064157462639027}
   - component: {fileID: 4505095571941835496}
   - component: {fileID: 3263533963212111466}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: DecalCircle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6468,7 +6884,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8731719623234690067}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: CooldownParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6500,7 +6916,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7661020332777404787}
   - component: {fileID: 3887994002800559810}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: BigGameAch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6580,7 +6996,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7382694216913785955}
   - component: {fileID: 104361526105204186}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: NewHealth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6637,7 +7053,7 @@ GameObject:
   - component: {fileID: 5728656973992895933}
   - component: {fileID: 6453725869263928109}
   - component: {fileID: 6254680160424302046}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: DecalCircle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6713,7 +7129,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6672610123711907659}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: CooldownParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6745,7 +7161,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7333988830446691817}
   - component: {fileID: 7223807202535209199}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: NewCooldown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6796,7 +7212,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7333727265797801397}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: CooldownParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6828,7 +7244,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7407530131581755999}
   - component: {fileID: 7432479881873540701}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: Building (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6912,7 +7328,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7333647218362881281}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: HealthParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6944,7 +7360,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7334094254264467827}
   - component: {fileID: 7432214056778927187}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: BigGameAch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7024,7 +7440,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7338832096208461911}
   - component: {fileID: 7224003884968597933}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: NewHealth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7080,7 +7496,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7333838408888282137}
   - component: {fileID: 7431898898274156393}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: BigGameAch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7160,7 +7576,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7333615352917678051}
   - component: {fileID: 7432534133321588319}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: BigGameAch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7240,7 +7656,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7333674181103340065}
   - component: {fileID: 7224024404963480345}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: NewEnergy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7292,7 +7708,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7333725062144651473}
   - component: {fileID: 7432097642337152789}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: BigGameAch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7372,7 +7788,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7407231170325965227}
   - component: {fileID: 7223908940712169669}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: HealthDisplay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7427,7 +7843,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7339150796819830549}
   - component: {fileID: 7431846403597165531}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7507,7 +7923,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7334027718119446771}
   - component: {fileID: 7432748981519766475}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7586,7 +8002,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7338753029637379277}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: CooldownParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7618,7 +8034,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7406709619430329227}
   - component: {fileID: 7432168665270140171}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: BackGround
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7704,7 +8120,7 @@ GameObject:
   - component: {fileID: 7338339669473329037}
   - component: {fileID: 7338339669474071195}
   - component: {fileID: 7338339669475085283}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: DecalCircle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7789,8 +8205,9 @@ GameObject:
   - component: {fileID: 7221064227481732181}
   - component: {fileID: 3184306662869617826}
   - component: {fileID: 8854355311579471754}
-  - component: {fileID: 2329485167097222162}
-  m_Layer: 10
+  - component: {fileID: 3690281425138448293}
+  - component: {fileID: 3828288363055119716}
+  m_Layer: 9
   m_Name: Barrier Reef
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -7811,6 +8228,7 @@ Transform:
   - {fileID: 7407231170325965227}
   - {fileID: 4938363967929015364}
   - {fileID: 7338339669473329037}
+  - {fileID: 3025847082427381003}
   m_Father: {fileID: 5158824898390315531}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7887,8 +8305,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dece396e027e0343a65824dadc28c78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UnitDescription: Barrier that collapses after 10 seconds or when an enemy touches
-    it.
+  UnitDescription: Barrier that collapses after 10 seconds.
   isHero: 0
   Maxhealth: 300
   health: 300
@@ -7900,7 +8317,7 @@ MonoBehaviour:
   EnergyRegenPerHalf: 0
   Icon: {fileID: 21300000, guid: b9375aa928938ee4b86eb21e3dea9d06, type: 3}
   supply: -10
-  attackPriority: 3
+  attackPriority: 4
   DefensePriority: 0
   agressionPriority: 0
   armor: 1
@@ -8109,7 +8526,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timer: 10
   showTimer: 1
---- !u!114 &2329485167097222162
+--- !u!114 &3690281425138448293
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8118,15 +8535,63 @@ MonoBehaviour:
   m_GameObject: {fileID: 7338339669473085819}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a74e54012530ce448f717ab77d63acb, type: 3}
+  m_Script: {fileID: 11500000, guid: fb54740c7a7a41141a4627d648915642, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rallyPoint: {x: 0, y: 0, z: 0}
-  rallyUnit: {fileID: 0}
-  AttackMoveSpawn: 0
-  RallyPointObj: {fileID: 0}
-  myLine: {fileID: 0}
-  myAnim: {fileID: 0}
+--- !u!114 &3828288363055119716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7338339669473085819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b39f8b2e2269964eb33b465d7395fc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: 
+  Descripton: Drops a bubble on death
+  iconPic: {fileID: 0}
+  myCost: {fileID: 0}
+  continueMoving: 0
+  RequiredUnit: []
+  canAutoCast: 0
+  autocast: 0
+  active: 0
+  maxChargeCount: 0
+  chargeCount: -1
+  soundEffect: {fileID: 0}
+  myHitContainer: {fileID: 6580307484543592274}
+  OnActivate:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3828288363055119716}
+        m_MethodName: DropItem
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnTurnOff:
+    m_PersistentCalls:
+      m_Calls: []
+  DurationWhenActivated: 0
+  ActivateWithTarget:
+    m_PersistentCalls:
+      m_Calls: []
+  Activatable: 0
+  triggerType: 4
+  VariableNumber: 0
+  OnTriggerEffect: {fileID: 0}
+  thingToDrop: {fileID: 850892373167587861, guid: 763412ef4beb0914abfcb289c7675d20,
+    type: 3}
+  PossibleNumberAmount: 0
+  NumberToSpawn: 2
 --- !u!1 &7410111533910757315
 GameObject:
   m_ObjectHideFlags: 0
@@ -8137,7 +8602,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1729359152737149815}
   - component: {fileID: 8466276149495754934}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: BigGameAch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8225,8 +8690,9 @@ GameObject:
   - component: {fileID: 4063075613449415413}
   - component: {fileID: 1450613369689987099}
   - component: {fileID: 2417631996164866683}
-  - component: {fileID: 4896546528729315072}
-  m_Layer: 10
+  - component: {fileID: 3531955981836348785}
+  - component: {fileID: 7252996546329228299}
+  m_Layer: 9
   m_Name: Barrier Reef (5)
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -8247,6 +8713,7 @@ Transform:
   - {fileID: 6947729135497236753}
   - {fileID: 8298666340221621985}
   - {fileID: 2618678437604911756}
+  - {fileID: 6776443334039509696}
   m_Father: {fileID: 5158824898390315531}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8323,8 +8790,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dece396e027e0343a65824dadc28c78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UnitDescription: Barrier that collapses after 10 seconds or when an enemy touches
-    it.
+  UnitDescription: Barrier that collapses after 10 seconds.
   isHero: 0
   Maxhealth: 300
   health: 300
@@ -8336,7 +8802,7 @@ MonoBehaviour:
   EnergyRegenPerHalf: 0
   Icon: {fileID: 21300000, guid: b9375aa928938ee4b86eb21e3dea9d06, type: 3}
   supply: -10
-  attackPriority: 3
+  attackPriority: 4
   DefensePriority: 0
   agressionPriority: 0
   armor: 1
@@ -8545,7 +9011,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timer: 10
   showTimer: 1
---- !u!114 &4896546528729315072
+--- !u!114 &3531955981836348785
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8554,15 +9020,63 @@ MonoBehaviour:
   m_GameObject: {fileID: 7478690963514586801}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a74e54012530ce448f717ab77d63acb, type: 3}
+  m_Script: {fileID: 11500000, guid: fb54740c7a7a41141a4627d648915642, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rallyPoint: {x: 0, y: 0, z: 0}
-  rallyUnit: {fileID: 0}
-  AttackMoveSpawn: 0
-  RallyPointObj: {fileID: 0}
-  myLine: {fileID: 0}
-  myAnim: {fileID: 0}
+--- !u!114 &7252996546329228299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7478690963514586801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b39f8b2e2269964eb33b465d7395fc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: 
+  Descripton: Drops a bubble on death
+  iconPic: {fileID: 0}
+  myCost: {fileID: 0}
+  continueMoving: 0
+  RequiredUnit: []
+  canAutoCast: 0
+  autocast: 0
+  active: 0
+  maxChargeCount: 0
+  chargeCount: -1
+  soundEffect: {fileID: 0}
+  myHitContainer: {fileID: 583563637351735654}
+  OnActivate:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7252996546329228299}
+        m_MethodName: DropItem
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnTurnOff:
+    m_PersistentCalls:
+      m_Calls: []
+  DurationWhenActivated: 0
+  ActivateWithTarget:
+    m_PersistentCalls:
+      m_Calls: []
+  Activatable: 0
+  triggerType: 4
+  VariableNumber: 0
+  OnTriggerEffect: {fileID: 0}
+  thingToDrop: {fileID: 850892373167587861, guid: 763412ef4beb0914abfcb289c7675d20,
+    type: 3}
+  PossibleNumberAmount: 0
+  NumberToSpawn: 2
 --- !u!1 &7735765137916456652
 GameObject:
   m_ObjectHideFlags: 0
@@ -8573,7 +9087,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3102474133420102775}
   - component: {fileID: 6564731205804401633}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: Building (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8648,6 +9162,61 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &7827111787666761126
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3025847082427381003}
+  - component: {fileID: 6580307484543592274}
+  m_Layer: 9
+  m_Name: OnHitContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3025847082427381003
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7827111787666761126}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7338339669473265421}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6580307484543592274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7827111787666761126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95cc792f619723c46b19c319c7e01d3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toApply: []
+  OnKillGeneric:
+    m_PersistentCalls:
+      m_Calls: []
+  onKillWithTarget:
+    m_PersistentCalls:
+      m_Calls: []
+  myManager: {fileID: 7338339669483288881}
+  source: {fileID: 0}
+  playerNumber: 0
+  FriendlyFireRatio: 0
+  AutoAddTriggers: 1
 --- !u!1 &7908447869558549929
 GameObject:
   m_ObjectHideFlags: 0
@@ -8658,7 +9227,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9099690062084885504}
   - component: {fileID: 6525041804742844974}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: Building (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8743,7 +9312,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1253570728787922191}
   - component: {fileID: 7957940083164125727}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: NewEnergy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8794,7 +9363,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1655407597780400195}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: CooldownParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8816,6 +9385,61 @@ Transform:
   m_Father: {fileID: 5678260914252967576}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8648045469614136897
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5597613067158638813}
+  - component: {fileID: 176533572192620160}
+  m_Layer: 9
+  m_Name: OnHitContainer (4)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5597613067158638813
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8648045469614136897}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -26.599997}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5903955493335742724}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &176533572192620160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8648045469614136897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95cc792f619723c46b19c319c7e01d3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toApply: []
+  OnKillGeneric:
+    m_PersistentCalls:
+      m_Calls: []
+  onKillWithTarget:
+    m_PersistentCalls:
+      m_Calls: []
+  myManager: {fileID: 0}
+  source: {fileID: 0}
+  playerNumber: 0
+  FriendlyFireRatio: 0
+  AutoAddTriggers: 1
 --- !u!1 &8738608621651072567
 GameObject:
   m_ObjectHideFlags: 0
@@ -8826,7 +9450,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6947729135497236753}
   - component: {fileID: 6580465522732088308}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: HealthDisplay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8881,7 +9505,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6694323481483560585}
   - component: {fileID: 8718556829494535865}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: NewCooldown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8932,7 +9556,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6711950672563387557}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: CooldownParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8964,7 +9588,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6159082959763246686}
   - component: {fileID: 3231601484394182060}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: NewHealth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9019,7 +9643,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4256385305164040747}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: CooldownParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9051,7 +9675,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4223288472687249190}
   - component: {fileID: 1886415141653992162}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: HealthDisplay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9106,7 +9730,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4254820261327958628}
   - component: {fileID: 1797553623764477}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: NewCooldown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9207,7 +9831,7 @@ GameObject:
   - component: {fileID: 8387115923852529561}
   - component: {fileID: 9128860571545740795}
   - component: {fileID: 8043156331170135612}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: DecalCircle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9284,7 +9908,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9042391404356345185}
   - component: {fileID: 8061241865710332148}
-  m_Layer: 14
+  m_Layer: 9
   m_Name: BigGameAch
   m_TagString: Untagged
   m_Icon: {fileID: 0}

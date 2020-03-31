@@ -43,7 +43,13 @@ public class ModularAura : IEffect
 
     public override void applyTo(GameObject source, UnitManager target)
     {
-        ModularAura aura = (ModularAura)CopyIEffect(target, true);    
+        bool AlreadyOnIt;
+        ModularAura aura = (ModularAura)CopyIEffect(target, true, out AlreadyOnIt);
+        if (AlreadyOnIt && Stacks)
+        {
+            aura.ApplyBuff(aura.OnTargetManager, 1);
+        }
+
     }
 
     IEnumerator DelayedRemove(UnitManager target)
@@ -81,7 +87,7 @@ public class ModularAura : IEffect
 
     public void ApplyBuff(UnitManager manager,float percentage) // percenetage being used when an effect decays over time
     {
-        //Debug.Log("Applying buff");
+
         foreach (AuraNumber buff in myBuffs)
         {
             float flat = buff.Flat * percentage;

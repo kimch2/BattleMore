@@ -203,6 +203,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4104753108818246073}
   - component: {fileID: 4262156856287949555}
+  - component: {fileID: 2490212247110211206}
   m_Layer: 0
   m_Name: HitContainer
   m_TagString: Untagged
@@ -237,11 +238,49 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toApply: []
-  OnKill:
+  OnKillGeneric:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6041225056090289848}
+        m_MethodName: ReduceCurrentCooldown
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 2
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onKillWithTarget:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2490212247110211206}
+        m_MethodName: AddSkullRemote
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   myManager: {fileID: 0}
   source: {fileID: 0}
   playerNumber: 0
   FriendlyFireRatio: 0
   AutoAddTriggers: 1
+--- !u!114 &2490212247110211206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6288759652608345343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 855941a9df96a3241975cd865dd42491, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PassiveSkullCollect: 0

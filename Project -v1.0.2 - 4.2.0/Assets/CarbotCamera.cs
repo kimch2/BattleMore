@@ -99,13 +99,13 @@ public class CarbotCamera : MainCamera
                     {
                         transform.position = new Vector3(Mathf.Clamp(LeftSide.x + MaxXDistance - HeroOffset, LeftSide.x, RightSide.x), transform.position.y, transform.position.z);
                     }
-                    ProgressSlider.value = (MaxXDistance) / (RightSide.x - LeftSide.x);
+                    ProgressSlider.value = (HeroToFollow.transform.position.x - LeftSide.x) / (RightSide.x - LeftSide.x);
                 }
 
              }
              else
              {
-                 ErrorPrompt.instance.notEnoughEnergy();
+                 //ErrorPrompt.instance.notEnoughEnergy();
              }
          }
      }

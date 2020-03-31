@@ -83441,6 +83441,8 @@ MonoBehaviour:
   myCam: {fileID: 0}
   DefaultHero: {fileID: 480551527993533262, guid: 8d6c8e651d76eaa44a83a5f4d03efaf3,
     type: 3}
+  UnitRegistry: {fileID: 3308781901770115220, guid: 87c441a1036c4374c8f098992981f916,
+    type: 3}
   ManaSlider: {fileID: 1535314282353758955}
   ManaText: {fileID: 4579019334084056910}
   MyHero: {fileID: 0}
@@ -83463,6 +83465,12 @@ MonoBehaviour:
   - {fileID: 381581868012637424}
   - {fileID: 1246573961938614624}
   ControllableHero: 1
+  TravelingRight: 1
+  LoadFileName: 
+  map:
+    MapLength: 500
+    Scenery: []
+    Units: []
 --- !u!1 &3742325794578849428
 GameObject:
   m_ObjectHideFlags: 0

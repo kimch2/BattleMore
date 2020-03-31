@@ -16,6 +16,7 @@ public class MainMenuManager : MonoBehaviour {
 	public Canvas SwapOutScreen;
 	public GameObject blackScreen;
 
+    public int SceneToReturnTo = 3;
 	public AudioSource audioSource;
 	private Canvas currentScreen;
 
@@ -123,7 +124,7 @@ public class MainMenuManager : MonoBehaviour {
 			LoadingScreen.enabled = true;
 		}
 		Cursor.lockState = CursorLockMode.Confined;
-		SceneManager.LoadScene (3);
+		SceneManager.LoadScene (SceneToReturnTo);
 	
 	}
 

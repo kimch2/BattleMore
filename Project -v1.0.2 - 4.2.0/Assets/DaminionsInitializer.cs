@@ -9,6 +9,7 @@ public class DaminionsInitializer : MonoBehaviour
     public GameObject SpawnUnitPrefab;
     public CarbotCamera myCam;
     public GameObject DefaultHero;
+    public GameObject UnitRegistry;
 
     public Slider ManaSlider;
     public Text ManaText;
@@ -22,6 +23,10 @@ public class DaminionsInitializer : MonoBehaviour
     float lastEnergy;
     public bool ControllableHero = true;
     public bool TravelingRight = true;
+    public string LoadFileName;
+    [HideInInspector]
+    public DaminionMap map;
+    public GameObject VictoryZone;
 
     private void Awake()
     {
@@ -30,6 +35,9 @@ public class DaminionsInitializer : MonoBehaviour
 
     void Start()
     {
+
+        SpawnUnitListeners.Add(1, new List<LethalDamageinterface>());
+        SpawnUnitListeners.Add(2, new List<LethalDamageinterface>());
         GameObject hero = null;
         if (DMCollectionManager.ChosenHero)
         {
@@ -45,7 +53,7 @@ public class DaminionsInitializer : MonoBehaviour
         Invoke("SelectHero", .1f);
         if (!ControllableHero)
         {
-            InvokeRepeating("GiveOrder", 2,1.5f);
+            InvokeRepeating("GiveOrder", 2, 1.5f);
             MyHero.myStats.statChanger.changeMoveSpeed(-.6f, 0, this, true);
         }
 
@@ -56,7 +64,7 @@ public class DaminionsInitializer : MonoBehaviour
             if (obj != null)
             {
                 clearList = true;
-            }    
+            }
         }
         if (clearList)
         {
@@ -64,14 +72,14 @@ public class DaminionsInitializer : MonoBehaviour
         }
         foreach (GameObject obj in DMCollectionManager.ChosenUnits)
         {
-             if (obj != null)
-             {
+            if (obj != null)
+            {
                 GameObject Spawner = Instantiate<GameObject>(SpawnUnitPrefab, hero.transform);
                 Spawner.transform.localPosition = Vector3.zero;
                 DMSpawnUnit spawner = Spawner.GetComponent<DMSpawnUnit>();
                 spawner.ToSpawn = obj;
 
-                UnitManager man = obj.GetComponent<UnitManager>();                
+                UnitManager man = obj.GetComponent<UnitManager>();
                 spawner.Name = man.UnitName;
 
                 UnitStats stats = obj.GetComponent<UnitStats>();
@@ -80,22 +88,22 @@ public class DaminionsInitializer : MonoBehaviour
                 spawner.myCost.energy = stats.cost;
                 spawner.spawnCount = (int)stats.supply;
                 hero.GetComponent<UnitManager>().abilityList.Add(spawner);
-             }
+            }
         }
-        
+
 
         foreach (GameObject obj in DMCollectionManager.ChosenAbilities)
-        
-        if (obj != null)
-        {
-            GameObject Abil = Instantiate<GameObject>(obj, hero.transform);
-            Abil.transform.localPosition = Vector3.zero;
-            hero.GetComponent<UnitManager>().abilityList.Add(Abil.GetComponent<Ability>());
-        }
+
+            if (obj != null)
+            {
+                GameObject Abil = Instantiate<GameObject>(obj, hero.transform);
+                Abil.transform.localPosition = Vector3.zero;
+                hero.GetComponent<UnitManager>().abilityList.Add(Abil.GetComponent<Ability>());
+            }
 
         for (int i = 0; i < CrystalChildren.Count; i++)
         {
-            CrystalChildren[i].transform.parent.gameObject.SetActive(MyHero.myStats.MaxEnergy> i);
+            CrystalChildren[i].transform.parent.gameObject.SetActive(MyHero.myStats.MaxEnergy > i);
         }
 
         for (int i = 0; i < AbilityCosts.Count; i++)
@@ -107,6 +115,76 @@ public class DaminionsInitializer : MonoBehaviour
             else
             {
                 AbilityCosts[i].text = "";
+            }
+        }
+
+
+        if (LoadFileName != "")
+        {
+            BuildSceneFromFile(LoadFileName);
+        }
+
+    }
+    [HideInInspector]
+   public List<UnitManager> AllUnits = new List<UnitManager>();
+    [HideInInspector]
+   public List<Sprite> AllScenery = new List<Sprite>();
+
+    public void BuildSceneFromFile(string fileName)
+    {
+        if (System.IO.File.Exists(Application.dataPath + "/" + fileName + ".dmm"))
+        {
+            foreach (RaceInfo info in UnitRegistry.GetComponents<RaceInfo>())
+            {
+                foreach (Sprite obj in info.myUIImages.toReplace)
+                {
+                    AllScenery.Add(obj);
+                }
+
+                foreach (GameObject manag in info.unitList)
+                {
+                    AllUnits.Add(manag.GetComponent<UnitManager>());
+                }
+            }
+            
+            map = JsonUtility.FromJson<DaminionMap>(System.IO.File.ReadAllText("Assets/" + fileName + ".dmm"));
+            CarbotCamera.singleton.RightSide = CarbotCamera.singleton.LeftSide + Vector3.right * map.MapLength;
+            VictoryZone.transform.position = CarbotCamera.singleton.RightSide;
+
+            foreach (SceneryData data in map.Scenery)
+            {
+                GameObject obj = new GameObject();
+                obj.AddComponent<SpriteRenderer>().sprite = AllScenery.Find(item => item.name == data.spriteName);
+                obj.transform.position = data.pos + CarbotCamera.singleton.LeftSide;
+                obj.transform.rotation = data.rot;
+                obj.transform.localScale = data.scale;
+                data.ex = obj;
+            }
+
+            // Ordered the units going left to right so they can be spawned easily and in order
+            if (map.Units.Count > 0)
+            {
+                List<UnitData> OrderedList = new List<UnitData>();
+                OrderedList.Add(map.Units[0]);
+                for (int j = 1; j < map.Units.Count; j++)
+                {
+                    map.Units[j].pos += CarbotCamera.singleton.LeftSide;
+                    bool placed = false;
+                    for (int i = 0; i < OrderedList.Count; i++)
+                    {
+
+                        if (!placed && map.Units[j].pos.x < OrderedList[i].pos.x)
+                        {                           
+                            OrderedList.Insert(i, map.Units[j]);
+                            placed = true;
+                        }
+                    }
+                    if (!placed)
+                    {
+                        OrderedList.Add(map.Units[j]);
+                    }
+                }
+                map.Units = OrderedList;
             }
         }
     }
@@ -138,10 +216,6 @@ public class DaminionsInitializer : MonoBehaviour
             {
                 CrystalChildren[i].enabled = (lastEnergy - .5f > i);
             }
-
-
-            //ManaSlider.value = MyHero.getUnitStats().currentEnergy / MyHero.getUnitStats().MaxEnergy;
-            // ManaText.text = (int)MyHero.getUnitStats().currentEnergy + "/" + MyHero.getUnitStats().MaxEnergy;
         }
         else if (!MyHero)
         {
@@ -154,6 +228,18 @@ public class DaminionsInitializer : MonoBehaviour
 
     SpawnPointOverride PlayerSpawnOverride;
     SpawnPointOverride EnemySpawnOverride;
+    public Dictionary<int, List<LethalDamageinterface>> SpawnUnitListeners = new Dictionary<int, List<LethalDamageinterface>>();
+
+    public void AddSpawnWatcher(LethalDamageinterface mod, int playerOwner)
+    {
+        SpawnUnitListeners[playerOwner].Add(mod);
+    }
+
+    public void RemoveSpawnWatcher(LethalDamageinterface mod, int playerOwner)
+    {
+            SpawnUnitListeners[playerOwner].Remove(mod);
+    }
+
 
     /// <summary>
     /// This is used when there is a SpawnOverride object in the scene
@@ -166,13 +252,23 @@ public class DaminionsInitializer : MonoBehaviour
             if (PlayerSpawnOverride)
             {
                 PlayerSpawnOverride.myHitContainer.trigger(MyHero.gameObject, man, 0);
-            }
+                PlayerSpawnOverride.ModifyUnit(man);
+            }         
         }
         else
         {
             if (EnemySpawnOverride)
             {
                 EnemySpawnOverride.myHitContainer.trigger(null, man, 0);
+                EnemySpawnOverride.ModifyUnit(man);
+            }
+        }
+
+        foreach (LethalDamageinterface mod in SpawnUnitListeners[man.PlayerOwner])
+        {
+            if (mod != null)
+            {
+                mod.lethalDamageTrigger(man, null);
             }
         }
     }
@@ -195,14 +291,28 @@ public class DaminionsInitializer : MonoBehaviour
         {
             if (PlayerSpawnOverride)
             {
-                return PlayerSpawnOverride.transform.position;
+                if (PlayerSpawnOverride.CheckIfOnScreen())
+                {
+                    return PlayerSpawnOverride.transform.position;
+                }
+                else
+                {
+                    return getScreenMiddle(Vary ? 18 : 0, playerNumber, true);
+                }
             }
         }
         else
         {
             if (EnemySpawnOverride)
             {
-                return EnemySpawnOverride.transform.position;
+                if (EnemySpawnOverride.CheckIfOnScreen())
+                {
+                    return EnemySpawnOverride.transform.position;
+                }
+                else
+                {
+                    return getScreenMiddle(Vary ? 18 : 0, playerNumber, true);
+                }
             }
         }
         return getScreenMiddle(Vary? 18 : 0, playerNumber, true);

@@ -16,7 +16,7 @@ public abstract class IEffect : MonoBehaviour{
 
     public List<EffectTag> VisualEffects;
     List<GameObject> AppliedFX = new List<GameObject>();
-    int channelSource;
+   // int channelSource;
 
     public abstract bool validTarget(GameObject target);
     public abstract void applyTo(GameObject source, UnitManager target);
@@ -27,7 +27,7 @@ public abstract class IEffect : MonoBehaviour{
         if (onTarget)
         {
             BeginEffect();
-            ApplyFX();
+           // ApplyFX();
         }
     }
 
@@ -44,11 +44,11 @@ public abstract class IEffect : MonoBehaviour{
         OnTargetManager = target;
     }
 
-    public Component CopyIEffect(UnitManager toCopyTo, bool CopyToAsTarget)
+    public Component CopyIEffect(UnitManager toCopyTo, bool CopyToAsTarget, out bool AlreadyOnIt)
     {
         System.Type type = this.GetType();
         IEffect copy = null;
-
+        AlreadyOnIt = true;
         if (!CopyToAsTarget) // If we are applying this thing as a source effect, IE giving a unit an ability, (not giving it to them as an effect)
         {
             foreach (OnHitContainer contain in toCopyTo.GetComponentsInChildren<OnHitContainer>())
@@ -57,6 +57,7 @@ public abstract class IEffect : MonoBehaviour{
                 if (copy == null || !copy.onTarget)
                 {
                     copy = (IEffect)contain.gameObject.AddComponent(type);
+                    AlreadyOnIt = false;
                 }
                 copy.SetManagers(contain.myManager,null);
                 copy.onTarget = CopyToAsTarget;
@@ -71,7 +72,7 @@ public abstract class IEffect : MonoBehaviour{
         }
         else
         {
-            bool AlreadyExists = true;
+          
             foreach (Component fect in toCopyTo.gameObject.GetComponents(type))
             {
                 copy = (IEffect)toCopyTo.gameObject.GetComponent(type);
@@ -83,7 +84,8 @@ public abstract class IEffect : MonoBehaviour{
            
             if (copy == null)
             {
-                AlreadyExists = false;
+                AlreadyOnIt = false;
+ 
                 copy = (IEffect)toCopyTo.gameObject.AddComponent(type);             
             }
             copy.enabled = true;
@@ -94,7 +96,7 @@ public abstract class IEffect : MonoBehaviour{
             }
             copy.SetManagers(SourceManager,toCopyTo);
             copy.onTarget = CopyToAsTarget;
-            if (!AlreadyExists)
+            if (!AlreadyOnIt)
             {
                 copy.ApplyFX();
             }

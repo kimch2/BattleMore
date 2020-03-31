@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TriggeredAbility : ActivatedAbility, Modifier, Notify, LethalDamageinterface
+public class TriggeredAbility : ActivatedAbility, Modifier, Notify, KillModifier, LethalDamageinterface 
 {
-    public enum TriggerType { OnSpawn, OnAttack, OnDamaged, OnLethalDamage, OnDeath,
-                            RepeatTimer, OnSpellCast, OnAllyDeath, OnEnemyDeath, OnHealed }
+    public enum TriggerType { OnSpawn, OnAttack, OnDamaged, OnLethalDamage, OnDeath, RepeatTimer,
+        OnSpellCast, OnAllyDeath, OnEnemyDeath, OnHealed, KillEnemy, OnAllySummon }
+
+    [Tooltip("Only used in OnAllyDeath & OnEnemyDeath")]
+    public InvokeGameObject ActivateWithTarget;
 
     [Tooltip("If not checked, this will be a passive ability, Always on")]
     public bool Activatable;
@@ -122,6 +125,15 @@ public class TriggeredAbility : ActivatedAbility, Modifier, Notify, LethalDamage
                 GameManager.main.playerList[1].addActualDeathWatcher(this);
             }
         }
+        else if (triggerType == TriggerType.KillEnemy)
+        {
+            myManager.myStats.killMods.Add(this);
+
+        }
+        else if (triggerType == TriggerType.OnAllySummon)
+        {
+            DaminionsInitializer.main.AddSpawnWatcher(this, myManager.PlayerOwner);
+        }
     }
 
     void StopListening()
@@ -187,6 +199,10 @@ public class TriggeredAbility : ActivatedAbility, Modifier, Notify, LethalDamage
                 GameManager.main.playerList[1].removeActualDeathWatcher(this);
             }
         }
+        else if (triggerType == TriggerType.OnAllySummon)
+        {
+            DaminionsInitializer.main.RemoveSpawnWatcher(this, myManager.PlayerOwner);
+        }
     }
 
     void RepeatedInvoke()
@@ -197,9 +213,8 @@ public class TriggeredAbility : ActivatedAbility, Modifier, Notify, LethalDamage
     /// Used for OnAttack, OnDeath
     public virtual float modify(float damage, GameObject source, DamageTypes.DamageType theType)
     {
-        Debug.Log("Attacking");
-       
         Trigger();
+
 
         if (OnTriggerEffect)
         {
@@ -231,11 +246,17 @@ public class TriggeredAbility : ActivatedAbility, Modifier, Notify, LethalDamage
     }
 
     public virtual bool lethalDamageTrigger(UnitManager unit, GameObject deathSource)
-    {      
+    {
         if (myManager &&  Vector3.Distance( unit.transform.position, myManager.transform.position) < VariableNumber)
-        {         
+        {
             Trigger();
+            ActivateWithTarget.Invoke(unit.gameObject);
         }
         return true;
+    }
+
+    public void incKill()
+    {
+        Trigger();
     }
 }

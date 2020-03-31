@@ -134,24 +134,28 @@ public class AttackMoveState : UnitState {
 
 			}
 
-			if (!attacked) {
-
-	
-				if (myManager.cMover.myspeed == 0) {
-
-					if (EnemyTooClose) {
-						
-						myManager.cMover.resetMoveLocation ( myManager.transform.position - ( enemy.transform.position - myManager.transform.position ).normalized *10);
-					} else {
-				
-						myManager.cMover.resetMoveLocation (enemy.transform.position);
-					}
-				}
-
-				myManager.cMover.move ();
-
-			}
-		} else {
+            if (!attacked)
+            {
+                if (myManager.cMover.myspeed == 0)
+                {
+                    if (EnemyTooClose)
+                    {
+                        myManager.cMover.resetMoveLocation(myManager.transform.position - (enemy.transform.position - myManager.transform.position).normalized * 10);
+                    }
+                    else
+                    {
+                        myManager.cMover.resetMoveLocation(enemy.transform.position);
+                    }
+                }
+                myManager.cMover.move();
+            }
+            else
+            {
+                myManager.cMover.stop();
+            }
+		}
+        else
+        {
 			if (!enemyDead) {
 				if (commandType == MoveType.command) {
 

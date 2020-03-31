@@ -74,7 +74,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/CarbotStuff/DaMinionsMainMenu.unity
     guid: cf058fa396883d448b5d3f8ac9273f9b
-  - enabled: 1
+  - enabled: 0
     path: Assets/CarbotStuff/DaMinionsMap.unity
     guid: f07168dfdab78bf48b39f19f91bbdf89
+  - enabled: 1
+    path: Assets/Scripts/BlankScene.unity
+    guid: 0359b42b685f4e242b340b8c01e49302
   m_configObjects: {}

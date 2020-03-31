@@ -6,7 +6,6 @@ public class Poison : DamagerIeffect
 {
     public float perSecIncrease = 1;
     public float HPPercent;
-    public GameObject effect;
     public float MaxDuration = 15;
     Coroutine currentPoison;
 
@@ -17,7 +16,7 @@ public class Poison : DamagerIeffect
 
     public override void applyTo(GameObject source, UnitManager target)
     {
-        Poison Copy = (Poison)CopyIEffect(target, true);
+        Poison Copy = (Poison)CopyIEffect(target, true, out bool alreadyOnIt);
     }
 
     public override void BeginEffect()

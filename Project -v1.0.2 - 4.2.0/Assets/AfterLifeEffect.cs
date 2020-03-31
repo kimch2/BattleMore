@@ -7,8 +7,7 @@ public class AfterLifeEffect :IEffect, Modifier {
     // Unit will become invulnerable for X seconds when it should have died.
     public float senserTime = 5;
     public float TimeInvulnerable = 10;
-
-
+    public InvokeGameObject OnDeath;
     public override void BeginEffect()
     {      
         OnTargetManager.myStats.addLethalTrigger(this);
@@ -51,6 +50,8 @@ public class AfterLifeEffect :IEffect, Modifier {
         yield return new WaitForSeconds(TimeInvulnerable);       
         OnTargetManager.myStats.otherTags.Remove(UnitTypes.UnitTypeTag.Invulnerable);
         OnTargetManager.myStats.SetTags();
+        Debug.Log("Calling Death invoke");
+        OnDeath.Invoke(this.gameObject);
         OnTargetManager.myStats.kill(this.gameObject);
     }
 
@@ -61,7 +62,9 @@ public class AfterLifeEffect :IEffect, Modifier {
 
     public override void applyTo(GameObject source, UnitManager target)
     {
-        AfterLifeEffect after = (AfterLifeEffect)CopyIEffect(target, true);
+        AfterLifeEffect after = (AfterLifeEffect)CopyIEffect(target, true, out bool alreadyOnIt);
     }
 
 }
+[System.Serializable]
+public class InvokeGameObject : UnityEngine.Events.UnityEvent<GameObject> { }

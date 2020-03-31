@@ -92,6 +92,7 @@ public class OverTimeApplier : VisionTrigger
 
     public void TurnOff()
     {
+        CancelInvoke("TriggerAll");
         foreach (UnitManager man in InVision)
         {
             if (!StacksEffect)
@@ -106,6 +107,7 @@ public class OverTimeApplier : VisionTrigger
             {
                 UnitExitTrigger(man);
             }
+            Debug.Log(man.gameObject + " Loop " + man.cMover.MaxSpeed);
         }
         Destroy(this.gameObject);
     }

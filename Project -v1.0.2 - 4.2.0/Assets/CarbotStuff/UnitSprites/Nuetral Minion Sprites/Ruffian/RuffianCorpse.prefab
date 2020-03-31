@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3003475378369561489}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalPosition: {x: 0, y: 1.5, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 1593301525098145948}
@@ -70,8 +70,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 3286163911610860551, guid: 05ab9efeb97200b45b9d0a64dd6b3de7,
-    type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0104d243d9d6ba84d9fde051a80e4daa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -97,17 +96,31 @@ MonoBehaviour:
   myRenderer: {fileID: 3344256293389374007}
   frameRate: 12
   StartSprites:
-  - {fileID: 3286163911610860551, guid: 05ab9efeb97200b45b9d0a64dd6b3de7, type: 3}
-  - {fileID: 3286163911610860551, guid: bc2649702fb95964ca9688abe4072784, type: 3}
-  - {fileID: 3286163911610860551, guid: 7b7d6fab45392134d95cf1b371d42e51, type: 3}
-  - {fileID: 3286163911610860551, guid: a6b44a81dc58e03468a15adce69f2034, type: 3}
-  - {fileID: 3286163911610860551, guid: 8fc114e8b2a6b8940aeac3e8e1e62efb, type: 3}
-  - {fileID: 3286163911610860551, guid: 9e37c0cbfaacdea4db4dce8abb9c5fb3, type: 3}
-  - {fileID: 3286163911610860551, guid: 3f1f9426b266aee458e3fd2d252e7f1b, type: 3}
-  - {fileID: 3286163911610860551, guid: bce7fc345ba550344bd3b33e8e3b2620, type: 3}
-  - {fileID: 3286163911610860551, guid: cffefea3071eb4b4f8f68463d2832b09, type: 3}
-  LoopSprites:
-  - {fileID: 3286163911610860551, guid: cffefea3071eb4b4f8f68463d2832b09, type: 3}
+  - {fileID: 21300000, guid: 0104d243d9d6ba84d9fde051a80e4daa, type: 3}
+  - {fileID: 21300000, guid: d25a5250373334c4c92e3f1fa3fa48b9, type: 3}
+  - {fileID: 21300000, guid: a7dc9c85db07f1b4aa8d49505436b4a7, type: 3}
+  - {fileID: 21300000, guid: 16f528dc568c73843aa44e3db0d0ec7e, type: 3}
+  - {fileID: 21300000, guid: 69ffe1c105e5b594293b2fc78d9149f2, type: 3}
+  - {fileID: 21300000, guid: 4717cc003b088514381823d596fc2695, type: 3}
+  - {fileID: 21300000, guid: d79dea9c1d929b5449c54c2c7445eb86, type: 3}
+  - {fileID: 21300000, guid: 8bf68d259911b7046bef3f6b1f9caa1a, type: 3}
+  - {fileID: 21300000, guid: 824f86c3d1af47f488a70834c713f5a4, type: 3}
+  - {fileID: 21300000, guid: fdf8d81cc99741249b9a7d7912c1b8e7, type: 3}
+  - {fileID: 21300000, guid: fdf8d81cc99741249b9a7d7912c1b8e7, type: 3}
+  - {fileID: 21300000, guid: fdf8d81cc99741249b9a7d7912c1b8e7, type: 3}
+  - {fileID: 21300000, guid: fdf8d81cc99741249b9a7d7912c1b8e7, type: 3}
+  - {fileID: 21300000, guid: fdf8d81cc99741249b9a7d7912c1b8e7, type: 3}
+  - {fileID: 21300000, guid: fdf8d81cc99741249b9a7d7912c1b8e7, type: 3}
+  - {fileID: 21300000, guid: fdf8d81cc99741249b9a7d7912c1b8e7, type: 3}
+  - {fileID: 21300000, guid: 5c600f9810e7a4543aa314ae4883434d, type: 3}
+  - {fileID: 21300000, guid: 5c600f9810e7a4543aa314ae4883434d, type: 3}
+  - {fileID: 21300000, guid: 5c600f9810e7a4543aa314ae4883434d, type: 3}
+  - {fileID: 21300000, guid: 5c600f9810e7a4543aa314ae4883434d, type: 3}
+  - {fileID: 21300000, guid: dca51697fa04f5e4887c7471fd22f756, type: 3}
+  - {fileID: 21300000, guid: dca51697fa04f5e4887c7471fd22f756, type: 3}
+  - {fileID: 21300000, guid: dca51697fa04f5e4887c7471fd22f756, type: 3}
+  - {fileID: 21300000, guid: dca51697fa04f5e4887c7471fd22f756, type: 3}
+  LoopSprites: []
   Duration: 0
 --- !u!1 &7150057853635262097
 GameObject:

@@ -144,6 +144,7 @@ public class CustomRVO : IMover {
 	public void stop ()
 	{if (controller) {
 			controller.Move (Vector3.zero);
+            myspeed = 0;
 		}
    
 		GetComponent<UnitManager> ().animStop();
@@ -248,6 +249,11 @@ public class CustomRVO : IMover {
 
 	}
 
+    public override void SetMaxSpeed(float m)
+    {
+        MaxSpeed = m;
+        controller.SetMaxSpeed(m);
+    }
 
     bool CheckForPathEnd()
     {

@@ -200,6 +200,7 @@ GameObject:
   - component: {fileID: 261844651912130250}
   - component: {fileID: 8173604377371396701}
   - component: {fileID: 5597619867303064894}
+  - component: {fileID: 5680298165216438724}
   m_Layer: 0
   m_Name: OnHitContainer
   m_TagString: Untagged
@@ -234,7 +235,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toApply: []
-  OnKill:
+  OnKillGeneric:
+    m_PersistentCalls:
+      m_Calls: []
+  onKillWithTarget:
     m_PersistentCalls:
       m_Calls: []
   myManager: {fileID: 0}
@@ -254,6 +258,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24d18037f1167f844bcc02b0b8103d13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EffectName: AfterLife
   onTarget: 0
   VisualEffects:
   - FXObject: {fileID: 2256331201717204681, guid: 898f2ffccb774d0478e4dadf6aa41988,
@@ -261,5 +266,30 @@ MonoBehaviour:
     tagLocation: 0
   senserTime: 5
   TimeInvulnerable: 10
-  VisualEffect: {fileID: 2256331201717204681, guid: 898f2ffccb774d0478e4dadf6aa41988,
-    type: 3}
+  OnDeath:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5680298165216438724}
+        m_MethodName: AddSkullRemote
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &5680298165216438724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1255645883405277150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 855941a9df96a3241975cd865dd42491, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PassiveSkullCollect: 0

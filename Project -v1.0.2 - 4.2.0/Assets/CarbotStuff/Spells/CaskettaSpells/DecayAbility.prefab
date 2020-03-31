@@ -235,7 +235,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toApply: []
-  OnKill:
+  OnKillGeneric:
+    m_PersistentCalls:
+      m_Calls: []
+  onKillWithTarget:
     m_PersistentCalls:
       m_Calls: []
   myManager: {fileID: 0}
@@ -255,6 +258,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa26e9ee12f226349bd8c7b043f8e77a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EffectName: NameMe!
   onTarget: 0
   VisualEffects:
   - FXObject: {fileID: 4757558477695721181, guid: 6fc16d8aaaa3f5e4cb5ea532eb0012b4,
@@ -264,5 +268,4 @@ MonoBehaviour:
   DamageAmount: 0
   perSecIncrease: 0
   HPPercent: 0.05
-  effect: {fileID: 4757558477695721181, guid: 6fc16d8aaaa3f5e4cb5ea532eb0012b4, type: 3}
   MaxDuration: 15

@@ -47,34 +47,38 @@ public class UISetter : MonoBehaviour {
 
 
 	RaceSwapper swapper;
-	// Use this for initialization
-	void Start() {
+    // Use this for initialization
+    void Start() {
 
-		int LevelNum = GameObject.FindObjectOfType<VictoryTrigger>().levelNumber;
-		swapper = GameObject.FindObjectOfType<RaceSwapper>();
-		LevelCompilation comp = ((GameObject)Resources.Load("LevelEditor")).GetComponent<LevelCompilation>();
+        int LevelNum = GameObject.FindObjectOfType<VictoryTrigger>().levelNumber;
+        swapper = GameObject.FindObjectOfType<RaceSwapper>();
+        GameObject LevelEd = ((GameObject)Resources.Load("LevelEditor"));
+        LevelCompilation comp = null;
+        if (LevelEd)
+        {
+            comp = LevelEd.GetComponent<LevelCompilation>();
 
+        
+        if (!comp.MyLevels[LevelNum].UIBarsNUlts.CommandsOpen && CommandMinimize)
+        {
+            CommandMinimize.onClick.Invoke();
+        }
 
-			if (!comp.MyLevels[LevelNum].UIBarsNUlts.CommandsOpen && CommandMinimize)
-			{
-				CommandMinimize.onClick.Invoke();
-			}
+        if (!comp.MyLevels[LevelNum].UIBarsNUlts.LeftBarOpen && LeftMinimize)
+        {
+            LeftMinimize.onClick.Invoke();
+        }
 
-			if (!comp.MyLevels[LevelNum].UIBarsNUlts.LeftBarOpen && LeftMinimize)
-			{
-				LeftMinimize.onClick.Invoke();
-			}
+        if (!comp.MyLevels[LevelNum].UIBarsNUlts.RightBarOpen && RightMinimize)
+        {
+            RightMinimize.onClick.Invoke();
+        }
 
-			if (!comp.MyLevels[LevelNum].UIBarsNUlts.RightBarOpen && RightMinimize)
-			{
-				RightMinimize.onClick.Invoke();
-			}
-
-			if (!comp.MyLevels[LevelNum].UIBarsNUlts.resourcesOpen && ResourceBar)
-			{
-				ResourceBar.SetActive(false);
-			}
-
+        if (!comp.MyLevels[LevelNum].UIBarsNUlts.resourcesOpen && ResourceBar)
+        {
+            ResourceBar.SetActive(false);
+        }
+    }
 			RaceManager racer = GameObject.FindObjectOfType<GameManager>().playerList[0];
 
 		if (swapper == null)
@@ -83,10 +87,10 @@ public class UISetter : MonoBehaviour {
 			bool allTech = PlayerPrefs.GetInt("AllTech", 0) == 1;
 			//Debug.Log("All Tech " + allTech);
 
-			EnableUlt(0, allTech || comp.MyLevels[LevelNum].UIBarsNUlts.UltOneActivated);
-			EnableUlt(1, allTech || comp.MyLevels[LevelNum].UIBarsNUlts.UltTwoActivated);
-			EnableUlt(2, allTech || comp.MyLevels[LevelNum].UIBarsNUlts.UltThreeActivated);
-			EnableUlt(3, allTech || comp.MyLevels[LevelNum].UIBarsNUlts.UltFourActivated);
+			EnableUlt(0, allTech || comp && comp.MyLevels[LevelNum].UIBarsNUlts.UltOneActivated);
+			EnableUlt(1, allTech || comp && comp.MyLevels[LevelNum].UIBarsNUlts.UltTwoActivated);
+			EnableUlt(2, allTech || comp && comp.MyLevels[LevelNum].UIBarsNUlts.UltThreeActivated);
+			EnableUlt(3, allTech || comp && comp.MyLevels[LevelNum].UIBarsNUlts.UltFourActivated);
 		}
 		else
 		{
@@ -95,20 +99,24 @@ public class UISetter : MonoBehaviour {
 				initializeUlt(swapper.Ulty.myUltimates[i], i);
 			}
 		}
+        if (comp)
+        {
+            foreach (Image im in minimapPics)
+            {
+                im.sprite = comp.MyLevels[LevelNum].MinimapPic;
+            }
 
-		foreach (Image im in minimapPics) {
-			im.sprite = comp.MyLevels[LevelNum].MinimapPic;
-		}
+
+            LevelTitle.text = comp.MyLevels[LevelNum].LevelName;
 
 
-		LevelTitle.text = comp.MyLevels[LevelNum].LevelName;
-		startFade(1, true);
-
-		if (comp.MyLevels[LevelNum].ArsenalDisplayTime >= 0)
-		{
-            Invoke("turnOnArsenal", comp.MyLevels[LevelNum].ArsenalDisplayTime);
+            if (comp.MyLevels[LevelNum].ArsenalDisplayTime >= 0)
+            {
+                Invoke("turnOnArsenal", comp.MyLevels[LevelNum].ArsenalDisplayTime);
+            }
         }
-	}
+        startFade(1, true);
+    }
 
 	public void initializeUlt(Ability abil, int index)
 	{

@@ -51,7 +51,8 @@ public class MortarWeapon : IWeapon {
 	}
 
 	protected override GameObject createBullet()
-	{GameObject proj;
+	{
+        GameObject proj;
 		if (turret) {
 			proj = myBulletPool.FastSpawn(turret.transform.rotation * firePoints [originIndex].position + this.gameObject.transform.position, Quaternion.identity);
 		} else {

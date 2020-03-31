@@ -1,5 +1,147 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3266532076633558123
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1656864257887386776}
+  - component: {fileID: 1862224623609474792}
+  - component: {fileID: 6452581270071495151}
+  m_Layer: 0
+  m_Name: SkullOrbiter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1656864257887386776
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3266532076633558123}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.14, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7112058909454167777}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1862224623609474792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3266532076633558123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 789f1a0f6039f9b40bcf6eea6d99f916, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  active: 1
+  speed: 91
+  Yaxis: 0
+  ZAxis: 1
+--- !u!114 &6452581270071495151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3266532076633558123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89f2bc4ecda5ffa458b88ecbf4d6b940, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myRenderer: {fileID: 0}
+--- !u!1 &6542085567943823380
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4137282014137741561}
+  - component: {fileID: 6902348318670055972}
+  m_Layer: 0
+  m_Name: Deathbomb skull_1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4137282014137741561
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6542085567943823380}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.9414673, y: 0.2288475, z: 1.2269592}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7112058909454167777}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &6902348318670055972
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6542085567943823380}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 3286163911610860551, guid: 2282a519582e5ec46b9821f7f2dc29e0,
+    type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 2.56, y: 2.3}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
 --- !u!1 &7112058909454167778
 GameObject:
   m_ObjectHideFlags: 0
@@ -9,8 +151,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7112058909454167777}
-  - component: {fileID: 8731511295435502503}
-  - component: {fileID: 7112058909454167776}
+  - component: {fileID: 4267446635171082555}
+  - component: {fileID: 8310035437371220518}
+  - component: {fileID: 5168840987701319665}
   m_Layer: 0
   m_Name: Skulliosis
   m_TagString: Untagged
@@ -28,11 +171,13 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -489.88242, y: 26.718353, z: 135.9191}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1656864257887386776}
+  - {fileID: 4137282014137741561}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8731511295435502503
+--- !u!114 &4267446635171082555
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,19 +186,49 @@ MonoBehaviour:
   m_GameObject: {fileID: 7112058909454167778}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95cc792f619723c46b19c319c7e01d3a, type: 3}
+  m_Script: {fileID: 11500000, guid: 0c47203ddab5904488d5e6f3747fb7c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toApply: []
-  OnKill:
+  Name: 
+  Descripton: Gain skulls for killing things and landing spells. spawns 10 skellies
+    once 10 stacks have been reached.
+  iconPic: {fileID: 0}
+  myCost: {fileID: 0}
+  continueMoving: 0
+  RequiredUnit: []
+  canAutoCast: 0
+  autocast: 0
+  active: 0
+  maxChargeCount: 0
+  chargeCount: -1
+  soundEffect: {fileID: 0}
+  myHitContainer: {fileID: 0}
+  OnActivate:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4267446635171082555}
+        m_MethodName: GainSkull
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnTurnOff:
     m_PersistentCalls:
       m_Calls: []
-  myManager: {fileID: 0}
-  source: {fileID: 0}
-  playerNumber: 0
-  FriendlyFireRatio: 0
-  AutoAddTriggers: 1
---- !u!114 &7112058909454167776
+  DurationWhenActivated: 0
+  Activatable: 0
+  triggerType: 10
+  VariableNumber: 1
+  OnTriggerEffect: {fileID: 0}
+  CurrentSkullCount: 0
+  SkullOrbiter: {fileID: 3266532076633558123}
+  SKullPrefab: {fileID: 6542085567943823380}
+--- !u!114 &8310035437371220518
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -62,15 +237,44 @@ MonoBehaviour:
   m_GameObject: {fileID: 7112058909454167778}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6308cfa329f060e47b0040d0ae542a2c, type: 3}
+  m_Script: {fileID: 11500000, guid: 685bb5676784ad442830d1342516d3c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EffectName: NameMe!
-  onTarget: 0
-  VisualEffects: []
-  myHitContainer: {fileID: 8731511295435502503}
-  DamageAmount: 0
-  DamageTime: 3
-  toSpawn: Skelly
-  toSpawnObject: {fileID: 2899125463594918715, guid: 6a834b794bfba244fa3da60819856b23,
-    type: 3}
+  Name: Skully
+  Descripton: 
+  iconPic: {fileID: 0}
+  myCost: {fileID: 5168840987701319665}
+  continueMoving: 1
+  RequiredUnit: []
+  canAutoCast: 0
+  autocast: 0
+  active: 1
+  maxChargeCount: 0
+  chargeCount: -1
+  soundEffect: {fileID: 0}
+  myHitContainer: {fileID: 0}
+  ToSpawn: {fileID: 2899125463594918715, guid: 6a834b794bfba244fa3da60819856b23, type: 3}
+  spawnCount: 10
+  SpawnAtScreenEdge: 1
+  MaxUnitCount: 50
+--- !u!114 &5168840987701319665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7112058909454167778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8565709075defc741b27fcdf0b778b1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showCooldown: 0
+  resourceCosts:
+    MyResources: []
+  health: 0
+  energy: 0
+  cooldown: 0
+  cooldownTimer: 0
+  StartsRefreshed: 1
+  UsedFor: 

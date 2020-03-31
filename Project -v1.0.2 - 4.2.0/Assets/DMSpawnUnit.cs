@@ -53,7 +53,7 @@ public class DMSpawnUnit : Ability
                     myManager.Initialize(myManager.PlayerOwner, true, man.getUnitStats().isUnitType(UnitTypes.UnitTypeTag.Structure));
                     if (man.cMover)
                     {
-                         man.GiveOrder(Orders.CreateAttackMove(transform.position + Vector3.right * 75, true));
+                        man.GiveOrder(Orders.CreateAttackMove(transform.position + Vector3.right * 75, true));
                         man.GiveOrder(Orders.CreateAttackMove(transform.position + Vector3.right * 150, true));
                         man.GiveOrder(Orders.CreateAttackMove(transform.position + Vector3.right * 250, true));
                         man.GiveOrder(Orders.CreateAttackMove(transform.position + Vector3.right * 350, true));

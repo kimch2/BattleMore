@@ -40,9 +40,13 @@ public class SimpleAnimator : MonoBehaviour
         }
     }
 
+    
+
     private void OnDisable()
     {
-        myRoutine = null;
+        if (myRoutine != null)
+            StopCoroutine(myRoutine);
+        myRoutine = null;        
     }
 
     IEnumerator animate()

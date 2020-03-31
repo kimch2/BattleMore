@@ -48,7 +48,6 @@ public class PusherProjectile : SkillShotProjectile
 
     public override void OnTriggerEnter(Collider col)
     {
-
         if (col.isTrigger)
         {
             return;
@@ -61,6 +60,12 @@ public class PusherProjectile : SkillShotProjectile
 
             MyHitContainer.trigger(this.gameObject, manage, damage);
             manage.myStats.TakeDamage(damage, Source, damageType, MyHitContainer);
+            if (explosionO)
+            {
+                GameObject explode = (GameObject)Instantiate(explosionO, col.transform.position, Quaternion.identity);
+
+                MyHitContainer.SetOnHitContainer(explode, this.damage, null);
+            }
         }
     }
 }

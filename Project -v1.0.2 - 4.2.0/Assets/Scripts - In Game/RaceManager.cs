@@ -153,8 +153,13 @@ public class RaceManager : MonoBehaviour, ManagerWatcher {
     public void changeRace(RaceInfo.raceType newType)
     {
         myRace = newType;
-        UnitEquivalance RacePacket = ResourceLoader.getMain().getResource("RaceInfoPacket").GetComponent<UnitEquivalance>();
-
+        GameObject packet = ResourceLoader.getMain().getResource("RaceInfoPacket");
+        if (!packet)
+        {
+            return;
+        }
+        UnitEquivalance RacePacket = packet.GetComponent<UnitEquivalance>();
+       
         if (playerNumber == 1)
         {
             if (!IgnoreUlts )

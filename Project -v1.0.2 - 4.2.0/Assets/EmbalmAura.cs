@@ -17,12 +17,13 @@ public class EmbalmAura : DamagerIeffect, Modifier
 
     public override void applyTo(GameObject source, UnitManager target)
     {
-        EmbalmAura Copy = (EmbalmAura)CopyIEffect(target, true);       
+        EmbalmAura Copy = (EmbalmAura)CopyIEffect(target, true, out bool alreadyOnIt);       
     }
 
     public override void BeginEffect()
     {
         Invoke("EndEffect", Duration);
+        OnTargetManager.myStats.addDeathTrigger(this);
     }
 
     public override void EndEffect()

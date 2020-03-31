@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330999135384975399}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.5, z: 0}
+  m_LocalPosition: {x: 0, y: 2.5, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 1}
   m_Children: []
   m_Father: {fileID: 4261819561589642026}
@@ -70,8 +70,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 3286163911610860551, guid: 758a0d8218cfef24a86568b86f568c7c,
-    type: 3}
+  m_Sprite: {fileID: 21300000, guid: f6675bde9391f0042a1fcf3c43888f24, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -95,21 +94,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myRenderer: {fileID: 238869336597080449}
-  frameRate: 12
+  frameRate: 14
   StartSprites:
-  - {fileID: 3286163911610860551, guid: b5b13a368adb4054a860388620d74a5c, type: 3}
-  - {fileID: 3286163911610860551, guid: 7679ee53715df85429974c18225527a3, type: 3}
-  - {fileID: 3286163911610860551, guid: e9c385e685a51e24b8d56846df406db3, type: 3}
-  - {fileID: 3286163911610860551, guid: 1dfee34dac1ae8848a1506bb60c391f9, type: 3}
-  - {fileID: 3286163911610860551, guid: d128b41a164476648941aad0d857afd5, type: 3}
-  - {fileID: 3286163911610860551, guid: e6d935c2efb2df5449fc24af7435142e, type: 3}
-  - {fileID: 3286163911610860551, guid: e0c8f5ca4e28d264d9a0d474883a7a8a, type: 3}
-  - {fileID: 3286163911610860551, guid: c6855618c421e7344b2ec2291250a1f1, type: 3}
-  - {fileID: 3286163911610860551, guid: 527161e0011e60d4d88f73c8a1346dcc, type: 3}
-  - {fileID: 3286163911610860551, guid: fef6910bee382ad4a83a5272111aba2a, type: 3}
-  - {fileID: 3286163911610860551, guid: b847e6ae9445f914cb8401552d100cd7, type: 3}
-  LoopSprites:
-  - {fileID: 3286163911610860551, guid: b847e6ae9445f914cb8401552d100cd7, type: 3}
+  - {fileID: 21300000, guid: f6675bde9391f0042a1fcf3c43888f24, type: 3}
+  - {fileID: 21300000, guid: b1dda5beac06fcd4fad376f6d18a91ea, type: 3}
+  - {fileID: 21300000, guid: 03ffe379c34c84f45ac2852f480be4e0, type: 3}
+  - {fileID: 21300000, guid: 9ac717f832a4f5e40bf8170ef96e3613, type: 3}
+  - {fileID: 21300000, guid: 6add12084a951b240b20aa59ae2ed915, type: 3}
+  - {fileID: 21300000, guid: b6c55afa3f4b7e24991dfb3befcbce34, type: 3}
+  - {fileID: 21300000, guid: d0d68f83d4e9eff4383ed2006c312878, type: 3}
+  - {fileID: 21300000, guid: 53f409d5e42b8e049b2674f792fe5b68, type: 3}
+  - {fileID: 21300000, guid: 53f409d5e42b8e049b2674f792fe5b68, type: 3}
+  - {fileID: 21300000, guid: 53f409d5e42b8e049b2674f792fe5b68, type: 3}
+  - {fileID: 21300000, guid: 53f409d5e42b8e049b2674f792fe5b68, type: 3}
+  - {fileID: 21300000, guid: 53f409d5e42b8e049b2674f792fe5b68, type: 3}
+  - {fileID: 21300000, guid: 53f409d5e42b8e049b2674f792fe5b68, type: 3}
+  - {fileID: 21300000, guid: 53f409d5e42b8e049b2674f792fe5b68, type: 3}
+  - {fileID: 21300000, guid: 53f409d5e42b8e049b2674f792fe5b68, type: 3}
+  - {fileID: 21300000, guid: 89a1a005b7969d04eae8f5dcbcbe3959, type: 3}
+  - {fileID: 21300000, guid: 89a1a005b7969d04eae8f5dcbcbe3959, type: 3}
+  - {fileID: 21300000, guid: 89a1a005b7969d04eae8f5dcbcbe3959, type: 3}
+  - {fileID: 21300000, guid: 89a1a005b7969d04eae8f5dcbcbe3959, type: 3}
+  - {fileID: 21300000, guid: 89a1a005b7969d04eae8f5dcbcbe3959, type: 3}
+  - {fileID: 21300000, guid: 89a1a005b7969d04eae8f5dcbcbe3959, type: 3}
+  - {fileID: 21300000, guid: 89a1a005b7969d04eae8f5dcbcbe3959, type: 3}
+  - {fileID: 21300000, guid: 2dc5f0fd6588cc5429e8a99e28b1e130, type: 3}
+  - {fileID: 21300000, guid: 2dc5f0fd6588cc5429e8a99e28b1e130, type: 3}
+  - {fileID: 21300000, guid: 2dc5f0fd6588cc5429e8a99e28b1e130, type: 3}
+  - {fileID: 21300000, guid: 2dc5f0fd6588cc5429e8a99e28b1e130, type: 3}
+  - {fileID: 21300000, guid: 2dc5f0fd6588cc5429e8a99e28b1e130, type: 3}
+  - {fileID: 21300000, guid: 2dc5f0fd6588cc5429e8a99e28b1e130, type: 3}
+  LoopSprites: []
   Duration: 0
 --- !u!1 &5621502477169282343
 GameObject:
@@ -156,7 +171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4d1d13abbebabb4bbc31a05895f27c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 1.5
+  timer: 2
   showTimer: 0
 --- !u!114 &4477847831368564994
 MonoBehaviour:
@@ -200,7 +215,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6446206953432869063}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8800470076591725113}

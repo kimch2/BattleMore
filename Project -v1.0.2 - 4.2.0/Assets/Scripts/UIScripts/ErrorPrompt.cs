@@ -77,7 +77,8 @@ public class ErrorPrompt : MonoBehaviour {
 	
 
 	public void notEnoughResource(ResourceType resType)
-	{UISoundManager.interfaceClick (false);
+	{
+        UISoundManager.interfaceClick (false);
 		Debug.Log("Printing ");
 		showError( "Not Enough " + resType.ToString(),myVoicePack.getOreLine());
 	} 

@@ -152,25 +152,28 @@ public class VictoryTrigger : MonoBehaviour {
 
 			}
 
-		
-			LevelCompilation myComp = ((GameObject)(Resources.Load<GameObject>("LevelEditor"))).GetComponent<LevelCompilation>();
-			//LevelCompilation.loadGameStatic ().ls [levelNumber].increaseCompCount ();
-			if (!RaceSwapper.main)
-			{
-				myComp.MyLevels[levelNumber].increaseCompCount();
+            GameObject levelEditor = ((GameObject)(Resources.Load<GameObject>("LevelEditor")));
+            if (levelEditor)
+            {
+                LevelCompilation myComp = levelEditor.GetComponent<LevelCompilation>();
+                //LevelCompilation.loadGameStatic ().ls [levelNumber].increaseCompCount ();
+                if (!RaceSwapper.main)
+                {
+                    myComp.MyLevels[levelNumber].increaseCompCount();
 
-				int numTimesWon = PlayerPrefs.GetInt("L" + levelNumber + "Win");
+                    int numTimesWon = PlayerPrefs.GetInt("L" + levelNumber + "Win");
 
-				PlayerPrefs.SetInt("L" + levelNumber + "Win", numTimesWon + 1);
+                    PlayerPrefs.SetInt("L" + levelNumber + "Win", numTimesWon + 1);
 
-				int diff = LevelData.getDifficulty() - 1;
-				if (diff > PlayerPrefs.GetInt("L" + levelNumber + "Dif", -1))
-				{
-					PlayerPrefs.SetInt("L" + levelNumber + "Dif", diff);
-				}
+                    int diff = LevelData.getDifficulty() - 1;
+                    if (diff > PlayerPrefs.GetInt("L" + levelNumber + "Dif", -1))
+                    {
+                        PlayerPrefs.SetInt("L" + levelNumber + "Dif", diff);
+                    }
 
-				GetComponent<AchievementChecker>().EndLevel();
-			}
+                    GetComponent<AchievementChecker>().EndLevel();
+                }
+            }
 			GameObject.FindObjectOfType<MainCamera>().DisableScrolling();
 			UISetter.main.startFade (1.5f, false);
 			StartCoroutine (WinLevel ());
@@ -193,7 +196,28 @@ public class VictoryTrigger : MonoBehaviour {
 
 	IEnumerator WinLevel ()
 	{
-		LevelData.getsaveInfo().ComingFromLevel = true;
+
+        foreach (KeyValuePair<string, List<UnitManager>> pair in GameManager.main.playerList[0].getUnitList())
+        {
+            foreach (UnitManager man in pair.Value)
+            {
+                if (man)
+                {
+                    man.changeState(new VictoryState(man));
+                }
+            }
+        }
+        foreach (KeyValuePair<string, List<UnitManager>> pair in GameManager.main.playerList[1].getUnitList())
+        {
+            foreach (UnitManager man in pair.Value)
+            {
+                if (man)
+                {
+                    man.changeState(new StunState(man));
+                }
+            }
+        }
+        LevelData.getsaveInfo().ComingFromLevel = true;
 		//ExpositionDisplayer.instance.displayText (6, victoryLine, 1);
 		float totalTime = 2;
 

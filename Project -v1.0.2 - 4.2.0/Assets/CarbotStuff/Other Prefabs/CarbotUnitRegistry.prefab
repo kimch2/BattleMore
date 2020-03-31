@@ -120,7 +120,48 @@ MonoBehaviour:
   DefaultFThree: []
   DefaultFFour: []
   myUIImages:
-    toReplace: []
+    toReplace:
+    - {fileID: 3286163911610860551, guid: 4e740e9f25efdde41a4cf5fb97a512e9, type: 3}
+    - {fileID: 3286163911610860551, guid: 6fe33bbffa0b87c4c85b6d343efde54d, type: 3}
+    - {fileID: 3286163911610860551, guid: 283d12ba6dca6b34cbfc187b77685d47, type: 3}
+    - {fileID: 3286163911610860551, guid: 601b329d8bdf4a841af6cf5385cc50ff, type: 3}
+    - {fileID: 3286163911610860551, guid: 4afb8022f5a2c4d499cf5817c4d50288, type: 3}
+    - {fileID: 3286163911610860551, guid: 5ae54aaf076d0bf4f9411a3c2dbc228a, type: 3}
+    - {fileID: 3286163911610860551, guid: 0126f8668cbc7474daf046d6b2f469b1, type: 3}
+    - {fileID: 3286163911610860551, guid: b2b2e067118baea4091dfc6cbcff4e30, type: 3}
+    - {fileID: 3286163911610860551, guid: a891b9d3d904d2a48822c8012843a64e, type: 3}
+    - {fileID: 3286163911610860551, guid: 18ed4f45698981748a804340b743d855, type: 3}
+    - {fileID: 3286163911610860551, guid: 9474bb7ac1b82544284a564acbc12498, type: 3}
+    - {fileID: 3286163911610860551, guid: d12ecc889dd6e4f40a09b7df08a0c787, type: 3}
+    - {fileID: 3286163911610860551, guid: 115d4b34ccce037448ca8dfffbea54ac, type: 3}
+    - {fileID: 3286163911610860551, guid: a0c19942df9919e4dadd1a3ddbc8dec8, type: 3}
+    - {fileID: 3286163911610860551, guid: 583ac587257dfcc42a5f5e8383e178d0, type: 3}
+    - {fileID: 3286163911610860551, guid: 4b3ba419a3a865546bdea083bfd68dbb, type: 3}
+    - {fileID: 3286163911610860551, guid: c63889da322028448999b20282cfb246, type: 3}
+    - {fileID: 3286163911610860551, guid: 6c483d80188c3f04081012cf087fbfc9, type: 3}
+    - {fileID: 3286163911610860551, guid: 85d362adf824eb341bcb47f57c4393f0, type: 3}
+    - {fileID: 3286163911610860551, guid: 76fb77ca3aaa1bf45bcf108433466d0f, type: 3}
+    - {fileID: 3286163911610860551, guid: 1f5132b215b241743bf46f349f9ab815, type: 3}
+    - {fileID: 3286163911610860551, guid: 753f2eccf44e45a4a8ccb9489ef491d8, type: 3}
+    - {fileID: 3286163911610860551, guid: 5ab194480d7c5d54f9b9a1aed1a52115, type: 3}
+    - {fileID: 3286163911610860551, guid: e83ff94e916dde6458c10825187e9219, type: 3}
+    - {fileID: 3286163911610860551, guid: 8270fadfa9944134f8038ab39fb43244, type: 3}
+    - {fileID: 3286163911610860551, guid: bb8e3d2aea875294eab240d42cff9007, type: 3}
+    - {fileID: 3286163911610860551, guid: a8d3902aa72d27345bc0a7c78585f681, type: 3}
+    - {fileID: 3286163911610860551, guid: a8e6d5b453d64094babbb33f84c77ec2, type: 3}
+    - {fileID: 3286163911610860551, guid: 38e8607b1fbeb8f47afb4a3c5228ebd8, type: 3}
+    - {fileID: 3286163911610860551, guid: d0ca8b4223d864a4199a9255ac2c552a, type: 3}
+    - {fileID: 3286163911610860551, guid: e76054469af92e04eb23893665d2b241, type: 3}
+    - {fileID: 3286163911610860551, guid: cdea7c347705e7746b455985c8445174, type: 3}
+    - {fileID: 3286163911610860551, guid: d3415b7e40408494aa81b706372b85e0, type: 3}
+    - {fileID: 3286163911610860551, guid: a51d1a183f3f2f94ab7b8961b6a7048c, type: 3}
+    - {fileID: 3286163911610860551, guid: d127c49a790a785478d8f8987a8bf93a, type: 3}
+    - {fileID: 3286163911610860551, guid: 99daf77fa11717a429b01318b40be54f, type: 3}
+    - {fileID: 3286163911610860551, guid: c60e67b21ea645e499c1b133aeb69c2b, type: 3}
+    - {fileID: 3286163911610860551, guid: de354ecb296bd444883aa9979a01ed46, type: 3}
+    - {fileID: 3286163911610860551, guid: f691ba07ca4954f4080eb606003fc30d, type: 3}
+    - {fileID: 3286163911610860551, guid: 5fb50d4594d88a64b995d94f4f639a42, type: 3}
+    - {fileID: 3286163911610860551, guid: 0e77a5e80adcf3d41b63310c1ca6dc68, type: 3}
     UltBackGround: {fileID: 0}
     FButtonbackgrounds: {fileID: 0}
     BottomLeftPanel: {fileID: 0}

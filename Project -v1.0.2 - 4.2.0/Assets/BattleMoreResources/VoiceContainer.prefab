@@ -1,0 +1,1293 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1000012594371424
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4000011085260786}
+  - component: {fileID: 114000010853791172}
+  - component: {fileID: 114000011600054398}
+  - component: {fileID: 114223858271393584}
+  - component: {fileID: 114794140919018650}
+  - component: {fileID: 114347622841882540}
+  m_Layer: 0
+  m_Name: VoiceContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4000011085260786
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000012594371424}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 559.9112, y: 318.87582, z: -7.879822}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114000010853791172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000012594371424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef0e91ecda30ce640974f59b21eafb29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myVoicePacks:
+  - {fileID: 114000011600054398}
+  - {fileID: 114223858271393584}
+  - {fileID: 114794140919018650}
+  - {fileID: 114347622841882540}
+  LockedVoicePacks:
+  - {fileID: 114000011600054398}
+  - {fileID: 114223858271393584}
+--- !u!114 &114000011600054398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000012594371424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06333274bded42e4189b579c9cdeddab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  voicePackName: Hadrian
+  UnlockNumber: 0
+  packSelected:
+  - {fileID: 8300000, guid: 53366de2a6ba07a4798c06f39463100f, type: 3}
+  - {fileID: 8300000, guid: 6fa91a140ffa5a9418c9b07b9302759a, type: 3}
+  - {fileID: 8300000, guid: 652e697dbc3545c4a83f1762539ae720, type: 3}
+  - {fileID: 8300000, guid: e07678f39b9cd0b4195edb9f36a1dbdd, type: 3}
+  Ore:
+  - {fileID: 8300000, guid: 9fc077bb41b126f469b59d8fd6529863, type: 3}
+  - {fileID: 8300000, guid: a5ccfbcbbdb3cef4cb9dcb6662b5d70c, type: 3}
+  - {fileID: 8300000, guid: 96d007865910a264db1163a8445585f6, type: 3}
+  - {fileID: 8300000, guid: ccae89392728e7c43aa25b9b8b59a359, type: 3}
+  - {fileID: 8300000, guid: 544e2eb260f1e7a42a60aade8f36313c, type: 3}
+  - {fileID: 8300000, guid: 14d6a9e0ef6132c408a616c8fc029e24, type: 3}
+  - {fileID: 8300000, guid: a071a9bcd35fbe643aa183cdacace634, type: 3}
+  - {fileID: 8300000, guid: 4585d85e70ec59e4a91341814a982ee5, type: 3}
+  - {fileID: 8300000, guid: 0588bdbfce40bbc45870aac64ac682c9, type: 3}
+  - {fileID: 8300000, guid: a7d196e4b845b684196b7ddc4a80bb32, type: 3}
+  - {fileID: 8300000, guid: 104dd929c0a748240939d7bcad1bf1b5, type: 3}
+  - {fileID: 8300000, guid: 3b76b49b0f3d7234e80beca557a719d0, type: 3}
+  - {fileID: 8300000, guid: 239020ccc6d1ce24ea38feb40a61deb4, type: 3}
+  supply:
+  - {fileID: 8300000, guid: 408c14e78aadc3047b55abc03f55fc22, type: 3}
+  - {fileID: 8300000, guid: 222a723ee91377945976572f76ec8d2c, type: 3}
+  - {fileID: 8300000, guid: 24faf6eb0a076e34a91826be253d994e, type: 3}
+  - {fileID: 8300000, guid: e211f051e85b4c345864ab59ee67b796, type: 3}
+  - {fileID: 8300000, guid: 0f7f73e8d84e0de43880db82da1b667f, type: 3}
+  - {fileID: 8300000, guid: 46a8b6ce9b282d441853e18f2e3e1098, type: 3}
+  - {fileID: 8300000, guid: d441763aaca795a43bed24b412f1cbf6, type: 3}
+  - {fileID: 8300000, guid: cd1b03d998d046f4da10ccea4b611cee, type: 3}
+  - {fileID: 8300000, guid: b9227fa0c2268c241922fc389212f6a7, type: 3}
+  - {fileID: 8300000, guid: 7d61370e4150a7a4fbd2f9c3801d0600, type: 3}
+  maxSupply:
+  - {fileID: 8300000, guid: 34faaa3a1f492e74cb453963cc882a3c, type: 3}
+  - {fileID: 8300000, guid: 46e39305adc67694f89947a0a9b629c6, type: 3}
+  - {fileID: 8300000, guid: 878417b4f116495458b76844a8954908, type: 3}
+  - {fileID: 8300000, guid: 4bab7cadbe01614409fdec6fe31713f0, type: 3}
+  - {fileID: 8300000, guid: 2d027cd46280e1646b3eb24588139a6f, type: 3}
+  - {fileID: 8300000, guid: 349fc6ee32969f242b0be611b341f234, type: 3}
+  troopsAttacked:
+  - {fileID: 8300000, guid: c658ab48ce26b7c4fb93c5b17249fa4f, type: 3}
+  - {fileID: 8300000, guid: 100587745255eec41be21642480fc81e, type: 3}
+  - {fileID: 8300000, guid: b7f632c9669eda14db14a2af5ec7a4e5, type: 3}
+  - {fileID: 8300000, guid: 6151fd5b3a5bebc4a8d956e33bdcbea0, type: 3}
+  - {fileID: 8300000, guid: 1ddf8a9dfda8659499e3d41c02ed4d81, type: 3}
+  - {fileID: 8300000, guid: e66de1ed37fc8c04bafa478db6985b34, type: 3}
+  - {fileID: 8300000, guid: 735294c445ca13145a910d1678c26494, type: 3}
+  - {fileID: 8300000, guid: ce3639a4977df3845af3bfa032c4ece4, type: 3}
+  - {fileID: 8300000, guid: 8ed3906dab5bd1548a01c03924a98693, type: 3}
+  - {fileID: 8300000, guid: e1b92b43e7920254aa9b10f3313f49d4, type: 3}
+  baseAttacked:
+  - {fileID: 8300000, guid: d88e1a3f52372ed4884e4b5374aee384, type: 3}
+  - {fileID: 8300000, guid: d8ea235165d4bf34d96f1bd163c5eff1, type: 3}
+  - {fileID: 8300000, guid: 5de2238d3baa3f3438f669b0f9d3ff79, type: 3}
+  - {fileID: 8300000, guid: 29d5fa60c0469d64f840ee6cf6c4480f, type: 3}
+  - {fileID: 8300000, guid: 88bf8db11d52f8441b351f9097e3532d, type: 3}
+  - {fileID: 8300000, guid: 0efa952680c80ab4f821d34b502ced0b, type: 3}
+  - {fileID: 8300000, guid: 0eb374809024f784aa6fadddb28f6bbf, type: 3}
+  - {fileID: 8300000, guid: c8d55ec917d7d7446b06f941e60c1024, type: 3}
+  - {fileID: 8300000, guid: 32b79c35b21ae32408b9a9d996bac136, type: 3}
+  - {fileID: 8300000, guid: 27e3c2b1c5bd4c541a2a72052e0be506, type: 3}
+  - {fileID: 8300000, guid: 5805dec214dd960449e6c27a1c11a94e, type: 3}
+  - {fileID: 8300000, guid: fa1716810d80e5e489f781b684ba4863, type: 3}
+  - {fileID: 8300000, guid: ef7c02351ab005e4991b66cc8af81c46, type: 3}
+  - {fileID: 8300000, guid: 43fd75644a3d01d439e935347057d4eb, type: 3}
+  - {fileID: 8300000, guid: eeaad866535396043b787c511248f3e4, type: 3}
+  - {fileID: 8300000, guid: c3ec852cf84767947b69158a05235cdc, type: 3}
+  - {fileID: 8300000, guid: c9a9403583b11dd4cbc27c81d5fc9a6a, type: 3}
+  cooldown:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  buildingPlacement:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  EnemyWave:
+  - {fileID: 8300000, guid: 40a1b6e93fb74c540944dc8073af85ba, type: 3}
+  - {fileID: 8300000, guid: bed4653d26f739b4bbd29b5271c3d011, type: 3}
+  - {fileID: 8300000, guid: 9e85bcd902e630e41b962d138a76226f, type: 3}
+  - {fileID: 8300000, guid: 0eb99d9a74a376f4596d0904b2dd576e, type: 3}
+  - {fileID: 8300000, guid: 9715a9c257cf7cb4d97d785dacdac023, type: 3}
+  - {fileID: 8300000, guid: 8a8ba9234a1e9b2459c256505a069457, type: 3}
+  - {fileID: 8300000, guid: 46bd55f7d244e71459f3fc132b284bb5, type: 3}
+  - {fileID: 8300000, guid: 15116f1bfb436974392912f8006b804c, type: 3}
+  - {fileID: 8300000, guid: 4f89a30d03232594894a96c309badee7, type: 3}
+  - {fileID: 8300000, guid: 9b56445902d08ae40b1ce4a48741f87a, type: 3}
+  EnemyDreadNaughts:
+  - {fileID: 8300000, guid: e06d829468e6afb41bb55edb7e274291, type: 3}
+  - {fileID: 8300000, guid: be718cc8b432e6842a748a70361ab260, type: 3}
+  - {fileID: 8300000, guid: 5e2935a81eb0f254d912658ac7f48f62, type: 3}
+  - {fileID: 8300000, guid: 0c1536af0afffb54d8677fe39505572b, type: 3}
+  - {fileID: 8300000, guid: 8b91244e94e927c4a8a703602a21aa42, type: 3}
+  - {fileID: 8300000, guid: 030d35bd727c0fb479532de021287edf, type: 3}
+  - {fileID: 8300000, guid: 90a1ce2b5b69c4a468e6c5d96476a0b6, type: 3}
+  - {fileID: 8300000, guid: 0dab19bfae453ee4baf4f6b1f86c466b, type: 3}
+  - {fileID: 8300000, guid: f24de2eccd4d2e84c88cd882535d0f7b, type: 3}
+  - {fileID: 8300000, guid: e7f5a8d7411ef6d45a29ab8e1009ebdb, type: 3}
+  EnemyBunnies:
+  - {fileID: 8300000, guid: 4cd2809db0c65f14cb75c270af0d7a74, type: 3}
+  - {fileID: 8300000, guid: 36ee7df9e8d0c884888fead9313641fc, type: 3}
+  - {fileID: 8300000, guid: 6f3dce4fda706bc489ab3e629a3d724a, type: 3}
+  - {fileID: 8300000, guid: 0acd03e8a730442418074400a8b6bf28, type: 3}
+  - {fileID: 8300000, guid: a3e14f8ff5b3ea144b8f4c69cd73e8ce, type: 3}
+  - {fileID: 8300000, guid: c7fb30e246f1d3148837a98f88772702, type: 3}
+  - {fileID: 8300000, guid: d5a3037cd583b054793e9e4e877a0d54, type: 3}
+  - {fileID: 8300000, guid: 2f1df4eee71a8a84f850825e6ad347b9, type: 3}
+  - {fileID: 8300000, guid: 3d326e5386e16e6448017cdf849b6510, type: 3}
+  - {fileID: 8300000, guid: 102cecaf83ee3d2489a7fe6ffbf5845b, type: 3}
+  - {fileID: 8300000, guid: 5d5b11672123d7543a6ffee42cd16754, type: 3}
+  - {fileID: 8300000, guid: cd189d9767d115440b7362b13d8dbd9c, type: 3}
+  - {fileID: 8300000, guid: 1deb73b9a4c22c34b9fc0db6fa967406, type: 3}
+  - {fileID: 8300000, guid: 8d1f53088118b0c4cb2c907dc5f0d7ab, type: 3}
+  - {fileID: 8300000, guid: f1ede3c61c79f2f49bab311069fd1a14, type: 3}
+  - {fileID: 8300000, guid: 30d3e9f1f34ca2e45a311bfa0579428e, type: 3}
+  ResearchFinished:
+  - {fileID: 8300000, guid: c86718e57bba4b44cadbf577959f529e, type: 3}
+  - {fileID: 8300000, guid: d8707fa453275864da922dac49028a90, type: 3}
+  - {fileID: 8300000, guid: 06c362435a7f2d640a9190864399899a, type: 3}
+  - {fileID: 8300000, guid: 9cb33eabc719cdb41a69f79b28ebbd01, type: 3}
+  - {fileID: 8300000, guid: 0afaed358cfa4504aafede3c639358a1, type: 3}
+  - {fileID: 8300000, guid: 5d329136b5247b241b1904dfc536de9e, type: 3}
+  - {fileID: 8300000, guid: b47feab1ed4a3984583ee6f9cf27f6c2, type: 3}
+  - {fileID: 8300000, guid: 5365c92fa27d00648a02968eeb8469bf, type: 3}
+  - {fileID: 8300000, guid: 68aebaaa6c2fe9f499c7cb909c88a5f8, type: 3}
+  OreDepleted:
+  - {fileID: 8300000, guid: 5df1b0a0b5ea95746a99031b13f6edab, type: 3}
+  - {fileID: 8300000, guid: 6a1e35257c56bab47a51027c8bb9d59f, type: 3}
+  - {fileID: 8300000, guid: cebc9fc3f736dca47ba97477a6925d67, type: 3}
+  - {fileID: 8300000, guid: f2f6bdca862d449449c507949e30b9fa, type: 3}
+  - {fileID: 8300000, guid: 895b655d6ab143840a89513d595bc58b, type: 3}
+  - {fileID: 8300000, guid: b65ce04c34432324bb0caa0eb5e7cf4e, type: 3}
+  - {fileID: 8300000, guid: 455c38c277a561a4abf6b8166fe07cd5, type: 3}
+  OreOccupied:
+  - {fileID: 8300000, guid: ed09e4820d096314e92dc8a3ff2e2732, type: 3}
+  - {fileID: 8300000, guid: e80d4e912ab8468468af839284ff3dca, type: 3}
+  - {fileID: 8300000, guid: b1862a075ded28845bf73b436a30205c, type: 3}
+  - {fileID: 8300000, guid: c08fb898cde399645b40de806776a467, type: 3}
+  - {fileID: 8300000, guid: ca66103b8ae1d6d4a805503f16f64ae9, type: 3}
+  - {fileID: 8300000, guid: c7c9d82460a9c2e449b1ea7383191a3e, type: 3}
+  BuildingComplete:
+  - {fileID: 8300000, guid: 02740449d3d60854cabd1cae8439d12b, type: 3}
+  - {fileID: 8300000, guid: e21d4ed2f9c06bc46b7c3b3ec0d76f3b, type: 3}
+  - {fileID: 8300000, guid: f92f26775690f0142ae2dd2aa829d969, type: 3}
+  - {fileID: 8300000, guid: ed8532914e3beb64ab3f8b0f8332dcc0, type: 3}
+  - {fileID: 8300000, guid: c3f0afcaae62fea458333360eb7bcd18, type: 3}
+  - {fileID: 8300000, guid: 4568ac11dfcd1964086c985b55e33e36, type: 3}
+  - {fileID: 8300000, guid: b13eea59204e6774484b48b868e9c9f2, type: 3}
+  - {fileID: 8300000, guid: dc6c17397d231f3448b66ed085418962, type: 3}
+  - {fileID: 8300000, guid: 60b8cc5de7311c6438c140eddf61f9a6, type: 3}
+  - {fileID: 8300000, guid: 105132d0b19589b409450993a7592f41, type: 3}
+  - {fileID: 8300000, guid: 244de0a910939d645af34eb7eda3dc66, type: 3}
+  - {fileID: 8300000, guid: db22594ef540a4248b5614b49d814576, type: 3}
+  UltTwoComp:
+  - {fileID: 8300000, guid: 991a7a3bc4233c140afd8ae17b724e2a, type: 3}
+  - {fileID: 8300000, guid: bc6b84880ba472140a0eb4913348895e, type: 3}
+  - {fileID: 8300000, guid: 361d1fd6d028bf343b069efa537c548e, type: 3}
+  - {fileID: 8300000, guid: 8eda61f82db5b2640bccceae1e24b833, type: 3}
+  - {fileID: 8300000, guid: 508a189ad32c77b48bb220c059eaaf02, type: 3}
+  - {fileID: 8300000, guid: 2fb01e70125ba284ba91da27e8b5ea24, type: 3}
+  - {fileID: 8300000, guid: 56e30813378ed28488f6afb78d47acad, type: 3}
+  UltFourComp:
+  - {fileID: 8300000, guid: 2fc2961c8f1548e4288308d0a54d4d47, type: 3}
+  - {fileID: 8300000, guid: 13b28986d6045594dbf90f9119962226, type: 3}
+  - {fileID: 8300000, guid: ec9abd464d1d67748b5d3b9f51f61294, type: 3}
+  - {fileID: 8300000, guid: 34c9aa2feb3ddeb46a7f8090517b1ae4, type: 3}
+  - {fileID: 8300000, guid: cf1108b13a9039847bd8b7372f8144b5, type: 3}
+  - {fileID: 8300000, guid: 9c89af106f8da9047811fa6d4d4e9496, type: 3}
+  ResearchLines:
+  - ResearchLine: Improved Ammo Level 1 [Q]
+    myClips:
+    - {fileID: 8300000, guid: 70297f737eac51242b8fa0b234360ab7, type: 3}
+    - {fileID: 8300000, guid: ba67ed81d588d8942814c681594429da, type: 3}
+    - {fileID: 8300000, guid: 3db523049dfee1a4eaacbae494e401fd, type: 3}
+    - {fileID: 8300000, guid: c8474ce9fe1561b44bec981a05e3b46b, type: 3}
+  - ResearchLine: Improved Ammo Level 2 [Q]
+    myClips:
+    - {fileID: 8300000, guid: 70297f737eac51242b8fa0b234360ab7, type: 3}
+    - {fileID: 8300000, guid: ba67ed81d588d8942814c681594429da, type: 3}
+    - {fileID: 8300000, guid: 3db523049dfee1a4eaacbae494e401fd, type: 3}
+    - {fileID: 8300000, guid: c8474ce9fe1561b44bec981a05e3b46b, type: 3}
+  - ResearchLine: Improved Ammo Level 3 [Q]
+    myClips:
+    - {fileID: 8300000, guid: 70297f737eac51242b8fa0b234360ab7, type: 3}
+    - {fileID: 8300000, guid: ba67ed81d588d8942814c681594429da, type: 3}
+    - {fileID: 8300000, guid: 3db523049dfee1a4eaacbae494e401fd, type: 3}
+    - {fileID: 8300000, guid: c8474ce9fe1561b44bec981a05e3b46b, type: 3}
+  - ResearchLine: Resonance Coil Level 1 [W]
+    myClips:
+    - {fileID: 8300000, guid: 6efe60356cbdd6c4c9c86c907c074936, type: 3}
+  - ResearchLine: Resonance Coil Level 2 [W]
+    myClips:
+    - {fileID: 8300000, guid: 1ceef1d8a0d594e458572a67e4eb2841, type: 3}
+  - ResearchLine: Pod Packing Level 1  [R]
+    myClips:
+    - {fileID: 8300000, guid: e4c830df19b07c843a9889871c84e566, type: 3}
+    - {fileID: 8300000, guid: 6456f419e718dd64bb9081d954ce132c, type: 3}
+  - ResearchLine: Pod Packing Level 2  [R]
+    myClips:
+    - {fileID: 8300000, guid: 9291b379e066bc445ac2a1bc0c9cf21e, type: 3}
+    - {fileID: 8300000, guid: 867af26313b21084ba33f3e751e4e4cd, type: 3}
+  - ResearchLine: Double Training [R]
+    myClips:
+    - {fileID: 8300000, guid: 8ac19e83b015a084787440df8dc9fac1, type: 3}
+    - {fileID: 8300000, guid: 15094732a1ead29408c16e50db6c141d, type: 3}
+    - {fileID: 8300000, guid: d7c8a1937ff048f40a5dbdf17e0e9a6d, type: 3}
+    - {fileID: 8300000, guid: ca5dd9de875118e46b301230360851fd, type: 3}
+  - ResearchLine: Imbued Aether Level 1 [A]
+    myClips:
+    - {fileID: 8300000, guid: f3c419b82de064a4a90a4a15fbb030ee, type: 3}
+  - ResearchLine: Imbued Aether Level 2 [A]
+    myClips:
+    - {fileID: 8300000, guid: e05606608ee7d484fb5934e178f4d9c9, type: 3}
+  - ResearchLine: Imbued Aether Level 3 [A]
+    myClips:
+    - {fileID: 8300000, guid: b9f1933abc6e0f24d8700b939eef5c00, type: 3}
+  - ResearchLine: Improved Armor Level 1 [S]
+    myClips:
+    - {fileID: 8300000, guid: 49dcb9f58321d084aa77b79ec605ca64, type: 3}
+    - {fileID: 8300000, guid: e21c3c43d39d6b14a80cf048634b0e0b, type: 3}
+  - ResearchLine: Improved Armor Level 2 [S]
+    myClips:
+    - {fileID: 8300000, guid: 49dcb9f58321d084aa77b79ec605ca64, type: 3}
+    - {fileID: 8300000, guid: e21c3c43d39d6b14a80cf048634b0e0b, type: 3}
+  - ResearchLine: Improved Armor Level 3 [S]
+    myClips:
+    - {fileID: 8300000, guid: 960525ebf5b2a1549a70fc1ab59286d0, type: 3}
+    - {fileID: 8300000, guid: ed76a26b41cb2a84bbc8d4f7937dbaee, type: 3}
+  - ResearchLine: Increased Capacity [D]
+    myClips:
+    - {fileID: 8300000, guid: 54bc90fa3a0a8904ca65962fb17a9801, type: 3}
+    - {fileID: 8300000, guid: 8f9232c744f126442b5269dfa74cde99, type: 3}
+  - ResearchLine: Optimized Fabrictaion [F]
+    myClips:
+    - {fileID: 8300000, guid: cb304c514f95f734790a6f6612975a67, type: 3}
+    - {fileID: 8300000, guid: 2115711a1ec440549b4513b102bd2625, type: 3}
+  - ResearchLine: Attuned Relays Level 1 [Z]
+    myClips:
+    - {fileID: 8300000, guid: dc037d7aec852aa41a0f78f1b7da5367, type: 3}
+    - {fileID: 8300000, guid: 7e3a750fb42346f49b210e0ae628a307, type: 3}
+    - {fileID: 8300000, guid: 6d124156294c5b74685798d527685c09, type: 3}
+  - ResearchLine: Attuned Relays Level 2 [Z]
+    myClips:
+    - {fileID: 8300000, guid: dc037d7aec852aa41a0f78f1b7da5367, type: 3}
+    - {fileID: 8300000, guid: 7e3a750fb42346f49b210e0ae628a307, type: 3}
+    - {fileID: 8300000, guid: 6d124156294c5b74685798d527685c09, type: 3}
+  - ResearchLine: Attuned Relays Level 3 [Z]
+    myClips:
+    - {fileID: 8300000, guid: 4bd909f3349d60343a0e826b30a0bad2, type: 3}
+  - ResearchLine: Fusion Welders [X]
+    myClips:
+    - {fileID: 8300000, guid: 5829cebcbca0eea4faeb1dd4085d178c, type: 3}
+    - {fileID: 8300000, guid: 7f60fa282e713b44088ba35337174bbd, type: 3}
+    - {fileID: 8300000, guid: b2a6d54ee0d17184088e871ebfe0bcda, type: 3}
+  - ResearchLine: Charged Augmentors [C]
+    myClips: []
+  - ResearchLine: Solid Core Penetration [Z]
+    myClips:
+    - {fileID: 8300000, guid: 779c8fff231fb72429ae551a43cc2dfd, type: 3}
+    - {fileID: 8300000, guid: 6767eea709da23741bc46bfddac4f041, type: 3}
+  - ResearchLine: Smart Blasts [C]
+    myClips:
+    - {fileID: 8300000, guid: 3a234fd7556a942468067e8aa029eb7a, type: 3}
+    - {fileID: 8300000, guid: 6730aeb8833798441859f85ab83e9c5e, type: 3}
+  - ResearchLine: Hypersonic Inducers [X]
+    myClips:
+    - {fileID: 8300000, guid: d518f1886dbfc0b488e47f726bb54696, type: 3}
+    - {fileID: 8300000, guid: 758884b8ac1df6748bae705f8751ff25, type: 3}
+  StructureLines:
+  - ResearchLine: Aether Core
+    myClips:
+    - {fileID: 8300000, guid: 4005a3a100a7696498031751fe6a16ff, type: 3}
+    - {fileID: 8300000, guid: cc35323340439394984bcc5455825428, type: 3}
+    - {fileID: 8300000, guid: a1b3a629e437da0458557d1398995bf4, type: 3}
+    - {fileID: 8300000, guid: 3ac43d32995f7384382fc0d92260353f, type: 3}
+    - {fileID: 8300000, guid: ac60c393a44fb574690b5ce749a1c021, type: 3}
+    - {fileID: 8300000, guid: 15d682f7612ee7d4f9492f4be0ce056c, type: 3}
+    - {fileID: 8300000, guid: 262593f574d8f2141b8cd1f6a63055cb, type: 3}
+    - {fileID: 8300000, guid: c5fc041d60526fd48b5b5837db8f6d8e, type: 3}
+  - ResearchLine: Armory
+    myClips:
+    - {fileID: 8300000, guid: e4f30e22714b95442babca8069979693, type: 3}
+    - {fileID: 8300000, guid: c3f88bce29217ed429d84679bbf46776, type: 3}
+    - {fileID: 8300000, guid: 18a92dc7e6386f643a1092e0e3d13236, type: 3}
+    - {fileID: 8300000, guid: 338adbdf872992f4889725388bfa20e7, type: 3}
+    - {fileID: 8300000, guid: b6797e69d018a7345a5544d6384e52b2, type: 3}
+    - {fileID: 8300000, guid: 11cb50c1a3f57374e941b6890f64e199, type: 3}
+  - ResearchLine: Construction Yard
+    myClips:
+    - {fileID: 8300000, guid: 36786db31a220f04c98bce7d072b8488, type: 3}
+    - {fileID: 8300000, guid: b5bb5d0a1ad52ba4b8156e80208973d5, type: 3}
+    - {fileID: 8300000, guid: 5c69a71faf687cf47ac5bc149d0503fd, type: 3}
+    - {fileID: 8300000, guid: adba8c4ab6c494246b503469f2b12acc, type: 3}
+    - {fileID: 8300000, guid: f1b29f041b77d5e42a4ea978f712af38, type: 3}
+  - ResearchLine: Aviatrix
+    myClips:
+    - {fileID: 8300000, guid: 046e5ef58a4e41846bf0f09860c84cf0, type: 3}
+    - {fileID: 8300000, guid: 0ac1fd83007ea5044b5bc477d466d64c, type: 3}
+    - {fileID: 8300000, guid: ea1ffc1e57cd84144bcf8062d9d92fcc, type: 3}
+    - {fileID: 8300000, guid: ed2f28e1c1e1d034cb31011e901c93a6, type: 3}
+  - ResearchLine: Engineering Bay
+    myClips:
+    - {fileID: 8300000, guid: 8c24b39593e8d6945bac3e57130fdb6f, type: 3}
+    - {fileID: 8300000, guid: f212e77d4e4033745961905855602380, type: 3}
+    - {fileID: 8300000, guid: 687d7c7cf696e5749967041592606504, type: 3}
+  - ResearchLine: Academy
+    myClips:
+    - {fileID: 8300000, guid: db38e09c74a30a7458609a1b420bcae3, type: 3}
+    - {fileID: 8300000, guid: 12be807c8f7c863488f1ac4f64ad3135, type: 3}
+    - {fileID: 8300000, guid: f887f71e68f590e459c24562342a0192, type: 3}
+    - {fileID: 8300000, guid: 0f5687e50e9e4a14f9b619777346b932, type: 3}
+  - ResearchLine: Flux Array
+    myClips:
+    - {fileID: 8300000, guid: 96d15996e2e2d374aaa7ade54d035a40, type: 3}
+    - {fileID: 8300000, guid: 7fedbd5546a7714408c6ee158d7d549d, type: 3}
+    - {fileID: 8300000, guid: ea936436cafb3024986de8e379ffed65, type: 3}
+    - {fileID: 8300000, guid: 95b21eedc3b0be140bf09a2429bb8d62, type: 3}
+  - ResearchLine: Extractor
+    myClips:
+    - {fileID: 8300000, guid: 7b021d7f9a30ca74eb1fc4ded1e7b8cc, type: 3}
+    - {fileID: 8300000, guid: 84650b1d090edfa4f8f904abf072bd4c, type: 3}
+    - {fileID: 8300000, guid: dc25aecccee3d7046afd637d37f08498, type: 3}
+  - ResearchLine: Purifier
+    myClips:
+    - {fileID: 8300000, guid: 5987422681e6e114495b70c5d6168e33, type: 3}
+--- !u!114 &114223858271393584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000012594371424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06333274bded42e4189b579c9cdeddab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  voicePackName: Jarvis
+  UnlockNumber: 1
+  packSelected:
+  - {fileID: 8300000, guid: 7241b09988524a641bb2962a4c982855, type: 3}
+  - {fileID: 8300000, guid: db8c8ccd92ab5354385683fbc5f8f8cf, type: 3}
+  - {fileID: 8300000, guid: 0620911a28a1cc342a5953b0a21ebcbc, type: 3}
+  - {fileID: 8300000, guid: d4ae184d078896642918047397f7fc9f, type: 3}
+  - {fileID: 8300000, guid: 22597f0f940614f45a9b051cf6f380c3, type: 3}
+  - {fileID: 8300000, guid: a9af7c791799cb14a9a54f9d5498e83d, type: 3}
+  Ore:
+  - {fileID: 8300000, guid: 35cef60ebf7610f439b76b95f3d80580, type: 3}
+  - {fileID: 8300000, guid: bc9bc8b1fa21d654eb610ea7ec24bbef, type: 3}
+  - {fileID: 8300000, guid: a8e0125849f7df343826266e123e1870, type: 3}
+  - {fileID: 8300000, guid: e9bd8ac7b397b7f4f9bcc037cc2c2b34, type: 3}
+  - {fileID: 8300000, guid: 36afb9aaf901c3a468f01be06d50ef03, type: 3}
+  - {fileID: 8300000, guid: bbc9bbfd9acf1a342bb208aad4724113, type: 3}
+  - {fileID: 8300000, guid: 3d1d42aa0987ce24c99c9dbe91eeb621, type: 3}
+  - {fileID: 8300000, guid: 24be11dd477541740b898b4d928f604f, type: 3}
+  - {fileID: 8300000, guid: a1a07a6e15edf1e48a87948779c7ca3e, type: 3}
+  - {fileID: 8300000, guid: 6ac4ea72c6d31654ea45da8131727f70, type: 3}
+  - {fileID: 8300000, guid: 751aa2894f6c027439b51fe431150a50, type: 3}
+  - {fileID: 8300000, guid: 994363f0391246346abba10876f20194, type: 3}
+  - {fileID: 8300000, guid: 1e14a21ca4050f64384e5b89f124ab92, type: 3}
+  supply:
+  - {fileID: 8300000, guid: d98704b89658662459f33ddd34d427b2, type: 3}
+  - {fileID: 8300000, guid: 154a518b35bbe6e4e863e321aa536439, type: 3}
+  - {fileID: 8300000, guid: e6fd062ce1fce5f4da010c2e279722f0, type: 3}
+  - {fileID: 8300000, guid: 362ff8fe92613bd429dc0885fd6d422c, type: 3}
+  - {fileID: 8300000, guid: fa349aa37673ca648a2db79ec59e690c, type: 3}
+  - {fileID: 8300000, guid: 26fbce9fccf2b5144aeab1f45dc3e405, type: 3}
+  - {fileID: 8300000, guid: e8ca7f3415f9b014d91d68d06ddebe3c, type: 3}
+  - {fileID: 8300000, guid: 12dea8e3a934ad9429dc011c1ac2b7fb, type: 3}
+  - {fileID: 8300000, guid: 8b092657f4966b44d9a524769a38ba8f, type: 3}
+  - {fileID: 8300000, guid: f9704cc17024659438228b7afce095fb, type: 3}
+  maxSupply:
+  - {fileID: 8300000, guid: 1f17836e43a5dbe4d944b42c4d9fc8e7, type: 3}
+  - {fileID: 8300000, guid: 918dfdbcf01017e408ef89c8c2dac7e4, type: 3}
+  - {fileID: 8300000, guid: 6a21709a5a20d7c4ab015e45876b0c06, type: 3}
+  - {fileID: 8300000, guid: b57c6ca455cd71e41883253aac31b48d, type: 3}
+  troopsAttacked:
+  - {fileID: 8300000, guid: d11376ee075392d4ab3d75aea2d4a9bc, type: 3}
+  - {fileID: 8300000, guid: 9a08343086366f34bb9183061ab519b3, type: 3}
+  - {fileID: 8300000, guid: 6e55a15e90b3d00439df7262585d2f00, type: 3}
+  - {fileID: 8300000, guid: 915523001cc68184980e4f86896dc948, type: 3}
+  - {fileID: 8300000, guid: 535d4f4927bdac54a89e4382bd21e009, type: 3}
+  - {fileID: 8300000, guid: ef0040c4e8d39d04da45d566947fb560, type: 3}
+  - {fileID: 8300000, guid: 212d597efc10daf4882d8190c6f61e73, type: 3}
+  - {fileID: 8300000, guid: 228d41b5328dfd740906300b2f473142, type: 3}
+  - {fileID: 8300000, guid: a5d4eab2425c11c4f9e5851e786a6e5b, type: 3}
+  - {fileID: 8300000, guid: 3d50df193cd02eb4f87b35d81b4d1bc9, type: 3}
+  - {fileID: 8300000, guid: 9dd0b8db9887afe49ad825b6ff2820ce, type: 3}
+  - {fileID: 8300000, guid: e4dc67f2bc2664244ba818e64d181d2f, type: 3}
+  - {fileID: 8300000, guid: cf248549437f6ec4ea7068114aceee9c, type: 3}
+  - {fileID: 8300000, guid: de8fdda25ff38914f87f1ea384bf6c9f, type: 3}
+  - {fileID: 8300000, guid: eb35994a905803f419eb534cf87e3dc1, type: 3}
+  - {fileID: 8300000, guid: 92962a646691232419bf581635db90f3, type: 3}
+  - {fileID: 8300000, guid: f16f61d88256ca241a15295de19cc3c0, type: 3}
+  baseAttacked:
+  - {fileID: 8300000, guid: 445c9f2c7891c7c4e974a373da8089c6, type: 3}
+  - {fileID: 8300000, guid: 44380ca4a9fe8274aa5362610e222d22, type: 3}
+  - {fileID: 8300000, guid: a53832302dbfe14489ec46c656da9bdc, type: 3}
+  - {fileID: 8300000, guid: bfc0261da9dae1b419932823b7af8ee2, type: 3}
+  - {fileID: 8300000, guid: 3d73e5e1496d70644a0784dcc0c09b07, type: 3}
+  - {fileID: 8300000, guid: ea6570f8f75da0846ac7e247898556c6, type: 3}
+  - {fileID: 8300000, guid: 844409ec8c95b4d4aa03446be756fb10, type: 3}
+  - {fileID: 8300000, guid: 6c06534e94131e645ba825d2abe20ea3, type: 3}
+  - {fileID: 8300000, guid: a503432f0e4ec634aab3051e3a9f8af0, type: 3}
+  - {fileID: 8300000, guid: e208904424d25ec4598466dc901c976f, type: 3}
+  - {fileID: 8300000, guid: ef2b2cf1c9fe60e499d451912dc3cb76, type: 3}
+  - {fileID: 8300000, guid: 8a6d9d0df1fe39f47af81fe7a1baf497, type: 3}
+  cooldown:
+  - {fileID: 8300000, guid: 800e52c31a3223543916d06cb934ddf0, type: 3}
+  - {fileID: 8300000, guid: 343c9afb28275404a99fba935931ac53, type: 3}
+  - {fileID: 8300000, guid: c672154c48ea5a042a14b791e8c0f64d, type: 3}
+  buildingPlacement:
+  - {fileID: 8300000, guid: e17ddf5a1a91b8648948ccb29de36b96, type: 3}
+  - {fileID: 8300000, guid: ea8f74fd805f9c94bac518fc62ad442a, type: 3}
+  - {fileID: 8300000, guid: 201bb8f86d6f1214eb302f87e3dfe9af, type: 3}
+  - {fileID: 8300000, guid: daa430c94b7a2124498d4b3946d87756, type: 3}
+  - {fileID: 8300000, guid: 1953da0f0381139438ecd77570af682b, type: 3}
+  - {fileID: 8300000, guid: 5fa0a65a1348c19469328bb50503c292, type: 3}
+  - {fileID: 8300000, guid: 26ed0e88381039c479463769c69335f4, type: 3}
+  EnemyWave:
+  - {fileID: 8300000, guid: 1007871439e705b4fbd39e28e78383c5, type: 3}
+  - {fileID: 8300000, guid: f2cfc1bcf818f9c428f56396f555887c, type: 3}
+  - {fileID: 8300000, guid: e1986f99e69c77b41b314dba1f1ee2c9, type: 3}
+  - {fileID: 8300000, guid: c5b34f734fd2e884986b30106fa6785a, type: 3}
+  - {fileID: 8300000, guid: 2f06465cf4c4fbf49bf349c94e9483b5, type: 3}
+  - {fileID: 8300000, guid: 24b297ed5478c484bb61ab5215c8e6df, type: 3}
+  - {fileID: 8300000, guid: 0d208c5053458034090f3ff96b572be2, type: 3}
+  - {fileID: 8300000, guid: d1a52495abb72d740a2bddc80827f84f, type: 3}
+  - {fileID: 8300000, guid: 1658467520404f94998eeb2b91e06220, type: 3}
+  - {fileID: 8300000, guid: 929a57c046e07384cac05a43ff06f4c9, type: 3}
+  - {fileID: 8300000, guid: 7fd9ca4d01e2658489c9a8b912cc49c6, type: 3}
+  - {fileID: 8300000, guid: d6c6d68928eae3e4a800d0f9c39b6db1, type: 3}
+  - {fileID: 8300000, guid: cc1d1c305ffd14a4b98e12ac7465a91d, type: 3}
+  - {fileID: 8300000, guid: 1eaf91f883d41044c8a482c3e8e233e4, type: 3}
+  - {fileID: 8300000, guid: 60a94d226b501bc458768865eda65199, type: 3}
+  - {fileID: 8300000, guid: b0ebfdbfbb137ea4d9ecc45b66bd96dd, type: 3}
+  - {fileID: 8300000, guid: 000cde7d24418c349bf16f09433906b1, type: 3}
+  - {fileID: 8300000, guid: edf8feb4937a07c47949300620c278a8, type: 3}
+  - {fileID: 8300000, guid: 7e5b7ad3d10818b49838e4889c5a3c75, type: 3}
+  - {fileID: 8300000, guid: a291b830b30012a46b4ee9904402091a, type: 3}
+  - {fileID: 8300000, guid: dd7a065484c96164aa5f30304207133f, type: 3}
+  - {fileID: 8300000, guid: 4c2453a8ca10c9948b0a20fc7ce5a5e6, type: 3}
+  - {fileID: 8300000, guid: 207b06dfd62e8c64382f036bca9031d7, type: 3}
+  - {fileID: 8300000, guid: de6814c4e81685d449825261022a8f40, type: 3}
+  EnemyDreadNaughts:
+  - {fileID: 8300000, guid: acd4f9bead498304aab1659e260616cd, type: 3}
+  - {fileID: 8300000, guid: 97234f4f170474b42a7d99cec5571cbf, type: 3}
+  - {fileID: 8300000, guid: 9322db96be661fb47aece038ea6acff2, type: 3}
+  - {fileID: 8300000, guid: 4932a848206e03c48b5e8e3cd4788914, type: 3}
+  - {fileID: 8300000, guid: 4ad2f303114f40149b3728af3d949b2a, type: 3}
+  - {fileID: 8300000, guid: 0a8f803846eb77d45bf4ca37f6f001e9, type: 3}
+  EnemyBunnies:
+  - {fileID: 8300000, guid: 7699faae071adda4bb95b2260c1d82ea, type: 3}
+  - {fileID: 8300000, guid: 22810d38d392bd94a8575b408d163327, type: 3}
+  - {fileID: 8300000, guid: 47ecd9721c3335740aafd2f409273027, type: 3}
+  - {fileID: 8300000, guid: 129eda400d1d080448afa8b79775fc70, type: 3}
+  - {fileID: 8300000, guid: 2096edcfb2532f14499022e69e9dc9ee, type: 3}
+  - {fileID: 8300000, guid: 0c95bd3ddf2df0b438089b17ec45c188, type: 3}
+  - {fileID: 8300000, guid: 21744747efaf57047a01775cf6575310, type: 3}
+  - {fileID: 8300000, guid: b0ebfdbfbb137ea4d9ecc45b66bd96dd, type: 3}
+  - {fileID: 8300000, guid: 60a94d226b501bc458768865eda65199, type: 3}
+  - {fileID: 8300000, guid: 929a57c046e07384cac05a43ff06f4c9, type: 3}
+  - {fileID: 8300000, guid: 0d208c5053458034090f3ff96b572be2, type: 3}
+  ResearchFinished:
+  - {fileID: 8300000, guid: 1dfab0e98d04373439aaa6fe7293c9f0, type: 3}
+  - {fileID: 8300000, guid: df6657ed57f42d24c9a5593aab2b5ca2, type: 3}
+  - {fileID: 8300000, guid: b7589a6e26b908146aa045198ee85752, type: 3}
+  - {fileID: 8300000, guid: 0e420b8e02ac965479993f4fff53803d, type: 3}
+  - {fileID: 8300000, guid: fd7cd96a0b53e674c951c97a2d6497ce, type: 3}
+  - {fileID: 8300000, guid: b2a30b87bc6292d44808e679eca63127, type: 3}
+  OreDepleted:
+  - {fileID: 8300000, guid: 2444540b387354048b5108b5e1212a57, type: 3}
+  - {fileID: 8300000, guid: 5a4f7c97577de024abc9bf44ad0b2a1d, type: 3}
+  - {fileID: 8300000, guid: 3c9c63462dd33524eb68f0be94b9c949, type: 3}
+  - {fileID: 8300000, guid: 8d13a8fa80eb24f4f8b3dcda030136c8, type: 3}
+  - {fileID: 8300000, guid: 40b1202707deb7146a8a2262b86f9708, type: 3}
+  OreOccupied:
+  - {fileID: 8300000, guid: ac614e586890cc1499711d333b9c2b92, type: 3}
+  - {fileID: 8300000, guid: cd4304e4c5818ac448b9e6de8b927bae, type: 3}
+  - {fileID: 8300000, guid: 25305a77fd9895043a8a119c143f0b16, type: 3}
+  - {fileID: 8300000, guid: ae3d292280b1c1a4e9e7ac4aad087e01, type: 3}
+  - {fileID: 8300000, guid: fe7e47fa7242b3245a5a40082b928077, type: 3}
+  BuildingComplete:
+  - {fileID: 8300000, guid: 499b8f3adc8763f499936d4b8ace2c55, type: 3}
+  - {fileID: 8300000, guid: 8342ee2962c6fb84da105795b115091b, type: 3}
+  - {fileID: 8300000, guid: 9bb1e396bb77caa4da7beb25106b0dc1, type: 3}
+  - {fileID: 8300000, guid: 73d4146631fd22741be46422ef7e2c43, type: 3}
+  - {fileID: 8300000, guid: 9743c0ca6e3e43140be921305413136a, type: 3}
+  - {fileID: 8300000, guid: 153408e51f7af9e45aa3adc4fae13cc2, type: 3}
+  - {fileID: 8300000, guid: 31baf4b19752bd84e8a63b64d172d7cf, type: 3}
+  - {fileID: 8300000, guid: 1ac3f10ad1a5ba04da599f684cf58c0c, type: 3}
+  - {fileID: 8300000, guid: d38a8b04bbe9316498395a297c7852f8, type: 3}
+  UltTwoComp:
+  - {fileID: 8300000, guid: 4985ca93a84b72840ae91ce75a0b75e1, type: 3}
+  - {fileID: 8300000, guid: 3935b919b5e094048aea2ad4410267e4, type: 3}
+  - {fileID: 8300000, guid: 041ec544f3addf242b698ea151409511, type: 3}
+  - {fileID: 8300000, guid: 2dc9367ee3d706047b49aed99ef62af7, type: 3}
+  - {fileID: 8300000, guid: dc8c32cca38fcb74baa315ff2adf70d8, type: 3}
+  - {fileID: 8300000, guid: 260a24f9fa62b714daab3f7e3ceb4c52, type: 3}
+  UltFourComp:
+  - {fileID: 8300000, guid: 9c02852c926d42746a204bb37acf2a78, type: 3}
+  - {fileID: 8300000, guid: 89cc7c97ccf3f58499e93e813e564f01, type: 3}
+  - {fileID: 8300000, guid: a9f3607676311174ca1b1c49ada8c1bf, type: 3}
+  - {fileID: 8300000, guid: 7a41df6afaa3f9841b5a51b9155c5c19, type: 3}
+  - {fileID: 8300000, guid: b8e3991ae0d64b94bac2acf26a00625c, type: 3}
+  - {fileID: 8300000, guid: 9587ce4fcc33c0546a40e808ff90cf88, type: 3}
+  - {fileID: 8300000, guid: fcf89de247f989441a910995cd36cfbe, type: 3}
+  ResearchLines:
+  - ResearchLine: Improved Ammo Level 1 [Q]
+    myClips:
+    - {fileID: 8300000, guid: 8dceb275f0e9f584593c73f5063ff67a, type: 3}
+    - {fileID: 8300000, guid: 6999b92986228c34d8223eda45010840, type: 3}
+    - {fileID: 8300000, guid: e462d66b4490874419db8e4afd871ec1, type: 3}
+  - ResearchLine: Improved Ammo Level 2 [Q]
+    myClips:
+    - {fileID: 8300000, guid: 8dceb275f0e9f584593c73f5063ff67a, type: 3}
+    - {fileID: 8300000, guid: 6999b92986228c34d8223eda45010840, type: 3}
+    - {fileID: 8300000, guid: e462d66b4490874419db8e4afd871ec1, type: 3}
+  - ResearchLine: Improved Ammo Level 3 [Q]
+    myClips:
+    - {fileID: 8300000, guid: 8dceb275f0e9f584593c73f5063ff67a, type: 3}
+    - {fileID: 8300000, guid: 6999b92986228c34d8223eda45010840, type: 3}
+    - {fileID: 8300000, guid: e462d66b4490874419db8e4afd871ec1, type: 3}
+  - ResearchLine: Resonance Coil Level 1 [W]
+    myClips:
+    - {fileID: 8300000, guid: 7fb62d1f8ea05204ab3a5edb0a336810, type: 3}
+  - ResearchLine: Resonance Coil Level 2 [W]
+    myClips:
+    - {fileID: 8300000, guid: 6c9a083c0b87556468f4d7a2cd53f842, type: 3}
+  - ResearchLine: Improved Armor Level 1 [S]
+    myClips:
+    - {fileID: 8300000, guid: 5f3abe070277ecc4d96fc714d3c6b2e6, type: 3}
+    - {fileID: 8300000, guid: 25d276edb06336741a0ef1a5870b33aa, type: 3}
+  - ResearchLine: Improved Armor Level 2 [S]
+    myClips:
+    - {fileID: 8300000, guid: 5f3abe070277ecc4d96fc714d3c6b2e6, type: 3}
+    - {fileID: 8300000, guid: 25d276edb06336741a0ef1a5870b33aa, type: 3}
+  - ResearchLine: Improved Armor Level 3 [S]
+    myClips:
+    - {fileID: 8300000, guid: 386c28d263499a0478ad35a4993b9f9a, type: 3}
+  - ResearchLine: Imbued Aether Level 1 [A]
+    myClips:
+    - {fileID: 8300000, guid: e0ef1632e0bd8b84cb80e17d37ed9897, type: 3}
+    - {fileID: 8300000, guid: e221333b5d787844c9ab45a8a51acf72, type: 3}
+  - ResearchLine: Imbued Aether Level 2 [A]
+    myClips:
+    - {fileID: 8300000, guid: e0ef1632e0bd8b84cb80e17d37ed9897, type: 3}
+    - {fileID: 8300000, guid: e221333b5d787844c9ab45a8a51acf72, type: 3}
+  - ResearchLine: Imbued Aether Level 3 [A]
+    myClips:
+    - {fileID: 8300000, guid: 61da9016f15cc8b4dbe00a778aed1969, type: 3}
+  - ResearchLine: Fusion Welders [X]
+    myClips:
+    - {fileID: 8300000, guid: ac452c83fc17e1f40b88af422bad7651, type: 3}
+  - ResearchLine: Smart Blasts [C]
+    myClips:
+    - {fileID: 8300000, guid: 82d09e71ed62564429faa77e7f744a7f, type: 3}
+  - ResearchLine: Pod Packing Level 1  [R]
+    myClips:
+    - {fileID: 8300000, guid: 04bad5b74cce1ef498292002bd39e9c2, type: 3}
+  - ResearchLine: Pod Packing Level 2  [R]
+    myClips:
+    - {fileID: 8300000, guid: c1dac19f88cf2c041b21de8f76d3d257, type: 3}
+  StructureLines:
+  - ResearchLine: Aether Core
+    myClips:
+    - {fileID: 8300000, guid: e5e554f9255a88e40b3f3ed20bf53d5f, type: 3}
+    - {fileID: 8300000, guid: cdef810f482d75448a05248547e35594, type: 3}
+    - {fileID: 8300000, guid: c2b15c34a53428340aa92ec307d53312, type: 3}
+    - {fileID: 8300000, guid: 50b363b0c3839f843bdfe896c2da6db3, type: 3}
+    - {fileID: 8300000, guid: 77ccd32aa3097f2458686e6148a3133f, type: 3}
+  - ResearchLine: Armory
+    myClips:
+    - {fileID: 8300000, guid: 14b38b49066f5f541889f279fe8e79dc, type: 3}
+    - {fileID: 8300000, guid: 15bc206a17852b34bad6573ee01eff25, type: 3}
+    - {fileID: 8300000, guid: c065cb9c89e899d4bbee4b1fe1dbb7a1, type: 3}
+    - {fileID: 8300000, guid: e61cd9cd56cf8be48a276c09c067f02e, type: 3}
+  - ResearchLine: Construction Yard
+    myClips:
+    - {fileID: 8300000, guid: e8060900ee30b1945afbaaed351e0ff1, type: 3}
+    - {fileID: 8300000, guid: e658b3e32d6749d4f988093abe4b44df, type: 3}
+    - {fileID: 8300000, guid: 38105c4d5f64176419402ef5c4104843, type: 3}
+  - ResearchLine: Aviatrix
+    myClips:
+    - {fileID: 8300000, guid: 945cb7b01bbb4784a895fbb4cca673c7, type: 3}
+    - {fileID: 8300000, guid: d70bf2940336b0845aeb25c6481831b5, type: 3}
+  - ResearchLine: Engineering Bay
+    myClips:
+    - {fileID: 8300000, guid: e04c8774e96dd8340a8efdd1c3d80bce, type: 3}
+    - {fileID: 8300000, guid: a403864fa97abb14080b6568740affec, type: 3}
+    - {fileID: 8300000, guid: 5dfbe7f010c5b7d4586b7ddd80aefffa, type: 3}
+    - {fileID: 8300000, guid: 0caf83fc5ea240e4f8c9875252637bb7, type: 3}
+  - ResearchLine: Academy
+    myClips:
+    - {fileID: 8300000, guid: e82c1d6149e74a2468df0e0faad5a48b, type: 3}
+  - ResearchLine: Flux Array
+    myClips:
+    - {fileID: 8300000, guid: a9af23eba2813404b8210a87e10cb2b2, type: 3}
+    - {fileID: 8300000, guid: 8a07747638218a04587895b2d80a1f17, type: 3}
+  - ResearchLine: Extractor
+    myClips:
+    - {fileID: 8300000, guid: 6b2e9ebee703d7543a5c0483631db184, type: 3}
+    - {fileID: 8300000, guid: f13118076dc21924997f4854c4923684, type: 3}
+    - {fileID: 8300000, guid: bef85e4f53680134db5c5db791a67b03, type: 3}
+  - ResearchLine: Purifier
+    myClips:
+    - {fileID: 8300000, guid: 5987422681e6e114495b70c5d6168e33, type: 3}
+--- !u!114 &114794140919018650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000012594371424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06333274bded42e4189b579c9cdeddab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  voicePackName: Katrina
+  UnlockNumber: 2
+  packSelected:
+  - {fileID: 8300000, guid: 02b112f5aa1d9f04180c1eaeeda883df, type: 3}
+  - {fileID: 8300000, guid: 60c539fbad3babc4c8a5c2fc2a7640b7, type: 3}
+  - {fileID: 8300000, guid: bf5cfd4d539f973478b3fcc4cf7c4f40, type: 3}
+  - {fileID: 8300000, guid: db1cd8a61bf97a44e8e402d8c889e746, type: 3}
+  - {fileID: 8300000, guid: 54d62b11ffcdbc247b1fd48b4630b254, type: 3}
+  - {fileID: 8300000, guid: c3fcab1447cbbe3418609af31a9f8bd4, type: 3}
+  Ore:
+  - {fileID: 8300000, guid: dc73721fa3d829142a572f71104e5733, type: 3}
+  - {fileID: 8300000, guid: f30e15e1293d91f40a2f424cc47f0aaf, type: 3}
+  - {fileID: 8300000, guid: 544746ce1dcab834799eecb135e2d042, type: 3}
+  - {fileID: 8300000, guid: 45a6df3dc483646479fe6dd443a207cc, type: 3}
+  - {fileID: 8300000, guid: db1c965d79791b041a6fcb128ad03c7b, type: 3}
+  - {fileID: 8300000, guid: f3db4c86b87f9f4418ce17cd28167a90, type: 3}
+  - {fileID: 8300000, guid: e195723f13416c54f870f09bf9345319, type: 3}
+  - {fileID: 8300000, guid: 00930835d098854488dac027643274cd, type: 3}
+  - {fileID: 8300000, guid: 07d5e07ce8b321f47934274ecd6a2db2, type: 3}
+  - {fileID: 8300000, guid: e3b9325d9b185804cb49f4e342b00db1, type: 3}
+  - {fileID: 8300000, guid: 448be6b1678460c45a620d341f9790c6, type: 3}
+  - {fileID: 8300000, guid: 34aee27644a6ddf44a20e3d3e95a98fc, type: 3}
+  - {fileID: 8300000, guid: fa9d5da0b57ddfa4a99563cc23eee35d, type: 3}
+  supply:
+  - {fileID: 8300000, guid: 41a0f59ff2e254b4c98ec606bbd7cb39, type: 3}
+  - {fileID: 8300000, guid: 0e1d3bfff4795be4e8065fec2c1f6a73, type: 3}
+  - {fileID: 8300000, guid: 04c31b863add59b44bb3bc875b6bb892, type: 3}
+  - {fileID: 8300000, guid: 0494c8c87b84a9b4d9f4242b94b3f433, type: 3}
+  - {fileID: 8300000, guid: b6e825f45ddada747a4d54669d226abc, type: 3}
+  maxSupply:
+  - {fileID: 8300000, guid: 6daf9db3a02ddbd4d87fd1dd583b818e, type: 3}
+  - {fileID: 8300000, guid: c9ea88010b605af4b9b224c3df4d7c9b, type: 3}
+  - {fileID: 8300000, guid: fb3b57156810c0a4fbd552e84b03efff, type: 3}
+  troopsAttacked:
+  - {fileID: 8300000, guid: f583fe91263c9154198479f57ce7e607, type: 3}
+  - {fileID: 8300000, guid: cc233fa5ccfa9ab47ae32bf151bfea3c, type: 3}
+  - {fileID: 8300000, guid: 821309356ea09494da43927c4d58ab48, type: 3}
+  - {fileID: 8300000, guid: fc5e09ef485bb224cafa3ece770ec40b, type: 3}
+  - {fileID: 8300000, guid: 89a6a9a68c8d03e4582644ec49b79fd3, type: 3}
+  - {fileID: 8300000, guid: b0fea1d2419174046903f0754e93e24e, type: 3}
+  - {fileID: 8300000, guid: 850469f5c2e1b85419da5f52dabf3d89, type: 3}
+  - {fileID: 8300000, guid: d586d90ee54bd554e94090a476ffb6fc, type: 3}
+  - {fileID: 8300000, guid: 3f29b5aaa99ba01429073fecd1fb9b1b, type: 3}
+  - {fileID: 8300000, guid: 40c0d5ad4b0ee6c48977e98a4feaa2e5, type: 3}
+  - {fileID: 8300000, guid: 2c0043919944bec45a7a4caa4447984e, type: 3}
+  - {fileID: 8300000, guid: c12840324c9225040b90092e43b49288, type: 3}
+  - {fileID: 8300000, guid: 41362ab4ee4f87449893a9d4452b82b9, type: 3}
+  - {fileID: 8300000, guid: 5f1feea14e75337458b18fda1bfb3f91, type: 3}
+  - {fileID: 8300000, guid: 21c91cfa3e1ad604eb9e5ae3bd0c6b83, type: 3}
+  - {fileID: 8300000, guid: 849a7506f56364f4f9846f4cac3795cb, type: 3}
+  - {fileID: 8300000, guid: 1b35bf3ac96bb834da934b00f4ce76b8, type: 3}
+  - {fileID: 8300000, guid: 2a0de8ba2e41060448ce30cf59160af2, type: 3}
+  - {fileID: 8300000, guid: c061b0d8cd850ea45b98ad48906a27de, type: 3}
+  baseAttacked:
+  - {fileID: 8300000, guid: 05a4ecd32dbb1264fb129ebe79e568c2, type: 3}
+  - {fileID: 8300000, guid: 726fadcc8e54282489a6d844119c9ca2, type: 3}
+  - {fileID: 8300000, guid: 5b149ce62481ef248be0a5a19053b397, type: 3}
+  - {fileID: 8300000, guid: 2829a21dbde259e42a6b239f5d3f5de0, type: 3}
+  - {fileID: 8300000, guid: 90b90f18f0c7a484c82a759853a7e7eb, type: 3}
+  - {fileID: 8300000, guid: d211a3cf61fce0a498df0d51d1c7e57a, type: 3}
+  - {fileID: 8300000, guid: 847ab53556f1cba4284473efb5f4cdb4, type: 3}
+  - {fileID: 8300000, guid: 78bf3625f2363a540a6811f8a7009de8, type: 3}
+  - {fileID: 8300000, guid: 8fb23238c8e3ae441ae21ad53dc74199, type: 3}
+  - {fileID: 8300000, guid: 16507d7fbe3934b4dbbc67ebe50038f2, type: 3}
+  - {fileID: 8300000, guid: 0b70bdb5f47403a4c945851727ea1d60, type: 3}
+  - {fileID: 8300000, guid: bc5150ab99de5e749b21efbe12621ca0, type: 3}
+  - {fileID: 8300000, guid: bf794fade1d54ca47bf706a36cfa85ca, type: 3}
+  cooldown:
+  - {fileID: 8300000, guid: 06e0b7e044ccd5b40b2fe866551a0272, type: 3}
+  - {fileID: 8300000, guid: 4710e388aa5afe64688c2ba85d506889, type: 3}
+  - {fileID: 8300000, guid: fb486cda11063dd44b236d8d1ca6b6cd, type: 3}
+  - {fileID: 8300000, guid: 038914b2eae5902439bd8a0834c664a5, type: 3}
+  buildingPlacement:
+  - {fileID: 8300000, guid: a1d14fd11ff3ff14689024de58149ec9, type: 3}
+  - {fileID: 8300000, guid: cb08f7adbbea4b4469aeee9713a62ff8, type: 3}
+  - {fileID: 8300000, guid: 8282bf64d790e9e40b7d1fc8b789a40c, type: 3}
+  - {fileID: 8300000, guid: fc99431b9e4dc3d4a826b17cddb5fad8, type: 3}
+  - {fileID: 8300000, guid: fa524e9d3a501924bbd87047df2b3bab, type: 3}
+  - {fileID: 8300000, guid: 0b69cb911e11a144d986daed5714154c, type: 3}
+  EnemyWave:
+  - {fileID: 8300000, guid: 9667422f3333e0c4bb4a6ca27245b2e3, type: 3}
+  - {fileID: 8300000, guid: 6a044f1509f32154bac0c4b2134f25e5, type: 3}
+  - {fileID: 8300000, guid: 2a16b30c6b64d1f47a23ff0467f25340, type: 3}
+  - {fileID: 8300000, guid: 1c6967b8017f826499dbc8c9bb42536d, type: 3}
+  - {fileID: 8300000, guid: f2d0082db5ae22145aa5250438b4703e, type: 3}
+  - {fileID: 8300000, guid: dc174b297baeed4498b847993690d477, type: 3}
+  - {fileID: 8300000, guid: 8beaa608734f2e0469c2294ee5952de6, type: 3}
+  - {fileID: 8300000, guid: 7d252dd08939ce84585b18e990d50d44, type: 3}
+  - {fileID: 8300000, guid: d98a32c998ea85f4e80717f5c0d652ee, type: 3}
+  - {fileID: 8300000, guid: 37f739415629cb34d87f912d46c33888, type: 3}
+  - {fileID: 8300000, guid: cafe07c12b01b3046a9fa3f0699c27fc, type: 3}
+  - {fileID: 8300000, guid: a39b50118300b864baca3fc473f4033c, type: 3}
+  - {fileID: 8300000, guid: 3b529bac9bf7421458f57b4c8730c6a8, type: 3}
+  - {fileID: 8300000, guid: 0231141e9ed6ff247ac2a5774efc6379, type: 3}
+  - {fileID: 8300000, guid: 48b9b76a3b5a13a478868908a562a8d9, type: 3}
+  - {fileID: 8300000, guid: 6c90733aa33c1324ab853cb90bf9a461, type: 3}
+  - {fileID: 8300000, guid: fc1125f5811a3f84a84a3b4eddb144fa, type: 3}
+  - {fileID: 8300000, guid: 6161ce8581aa43f4fa1a1d6151a3b18e, type: 3}
+  - {fileID: 8300000, guid: e696ef2cb2307cf4fbf673f3a02d5457, type: 3}
+  - {fileID: 8300000, guid: e089a983fbd726046a3d9f085c7ded63, type: 3}
+  - {fileID: 8300000, guid: 2956e6e1a8b92ee4da268b9f423eefa9, type: 3}
+  EnemyDreadNaughts:
+  - {fileID: 8300000, guid: f343eeaae93fe2e468484ac15ef58fbf, type: 3}
+  - {fileID: 8300000, guid: 5cdfea6356911a741884b41fb1d0b773, type: 3}
+  - {fileID: 8300000, guid: c7b6877ddea42fa4d81be832a56cd1f3, type: 3}
+  - {fileID: 8300000, guid: 16afe5e9bd7afa042aace07f62230ca8, type: 3}
+  - {fileID: 8300000, guid: ea9a05ef6645b524e9b7c8afc155ce9f, type: 3}
+  - {fileID: 8300000, guid: 340c6d7ae3afd5649ad83cd311dbdfdc, type: 3}
+  EnemyBunnies:
+  - {fileID: 8300000, guid: 47a3c5bd3d3369e4d932ed6621248bc2, type: 3}
+  - {fileID: 8300000, guid: c2224e311e632194f8a52bdeba925ef4, type: 3}
+  - {fileID: 8300000, guid: db603189beb65824d88c9be342005b83, type: 3}
+  - {fileID: 8300000, guid: 8b6993280f98ca34196c2859dc48df9e, type: 3}
+  - {fileID: 8300000, guid: d5b25abe15edb684b8dfd9f24c8012cc, type: 3}
+  - {fileID: 8300000, guid: c5337c170d6f4d242b7c137dd6f0f60c, type: 3}
+  - {fileID: 8300000, guid: 3719fff1a24656e4f92a07c92526d5ff, type: 3}
+  ResearchFinished:
+  - {fileID: 8300000, guid: 62ea126ec96020b4eaea91d3595b9400, type: 3}
+  - {fileID: 8300000, guid: 31eb64c3985be634bb291f857d4573b9, type: 3}
+  - {fileID: 8300000, guid: 46e90e0f3e624cb48ac7ff84db30a9d2, type: 3}
+  - {fileID: 8300000, guid: b65d1c1118ed74f4892c78c085ce2f8c, type: 3}
+  - {fileID: 8300000, guid: 0a5e5a5d0a42be4459cacb09d5cdd892, type: 3}
+  OreDepleted:
+  - {fileID: 8300000, guid: 8b3ddbbda8ee802499d8513eff105a31, type: 3}
+  - {fileID: 8300000, guid: a3537e4dd9e1fac428b7c287b5588018, type: 3}
+  - {fileID: 8300000, guid: 442e5c20fa19f0f418fa9906988afe13, type: 3}
+  - {fileID: 8300000, guid: 34a8df62db56d154f8124a0eb517f283, type: 3}
+  - {fileID: 8300000, guid: 0c66755ff5306004c921ddf85d2be237, type: 3}
+  OreOccupied:
+  - {fileID: 8300000, guid: 1cd6a7df655ad17469e8c3ada94af3af, type: 3}
+  - {fileID: 8300000, guid: dae85cfb999e08d48905cc2548ae764d, type: 3}
+  - {fileID: 8300000, guid: f8c9c5326ffe6b541b7c3619e163e0a9, type: 3}
+  - {fileID: 8300000, guid: 2ca7e0360a876eb48b5a9f1c6af130c1, type: 3}
+  - {fileID: 8300000, guid: 0b07df3cd4cf7a9448e1bd8a63b0e93b, type: 3}
+  BuildingComplete:
+  - {fileID: 8300000, guid: 89d4598755d37954982331d8742f9111, type: 3}
+  - {fileID: 8300000, guid: 2cea9979b3f34b2458fd3973ce4dec22, type: 3}
+  - {fileID: 8300000, guid: cb234b4757351fe4d9d7303276cc41be, type: 3}
+  - {fileID: 8300000, guid: 0bd9295cd5096a94681d3dd54b259a99, type: 3}
+  - {fileID: 8300000, guid: 49315b2702f7c9b4d82ff0dd2b947daf, type: 3}
+  - {fileID: 8300000, guid: 013d6f978ed1dc84296383d739b621f8, type: 3}
+  UltTwoComp:
+  - {fileID: 8300000, guid: a49030ce95d138244a85b94036468dae, type: 3}
+  - {fileID: 8300000, guid: 2aea822533d02754eb6da5cfffc1a95d, type: 3}
+  - {fileID: 8300000, guid: 521453c99e213ec459ba5be4bdf42eba, type: 3}
+  - {fileID: 8300000, guid: e24b0ad88021bda44ba3eab12e4c67fc, type: 3}
+  - {fileID: 8300000, guid: 0300ec744e262da499832834c0232a9c, type: 3}
+  UltFourComp:
+  - {fileID: 8300000, guid: a8b081b74e9d51d42b7696084892275a, type: 3}
+  - {fileID: 8300000, guid: a9308b330a0d62643a498b95c2fe437c, type: 3}
+  - {fileID: 8300000, guid: f0c39654e87b8ab47b543238e9daad97, type: 3}
+  - {fileID: 8300000, guid: e1f22bca17f332947826fc80e9e5a4db, type: 3}
+  - {fileID: 8300000, guid: 426d8764880f0e9448a3fcf0c9b60a80, type: 3}
+  ResearchLines:
+  - ResearchLine: Improved Ammo Level 1 [Q]
+    myClips:
+    - {fileID: 8300000, guid: ad156b94995c2b7429a4b38969c790a1, type: 3}
+    - {fileID: 8300000, guid: ed838564433fba14ab769c44d942b588, type: 3}
+    - {fileID: 8300000, guid: 06583674d4372254e9fd43f3c76f2dc6, type: 3}
+    - {fileID: 8300000, guid: 53e91e1b205bd8e4b8f417643beea167, type: 3}
+  - ResearchLine: Improved Ammo Level 2 [Q]
+    myClips:
+    - {fileID: 8300000, guid: ad156b94995c2b7429a4b38969c790a1, type: 3}
+    - {fileID: 8300000, guid: ed838564433fba14ab769c44d942b588, type: 3}
+    - {fileID: 8300000, guid: 06583674d4372254e9fd43f3c76f2dc6, type: 3}
+    - {fileID: 8300000, guid: 53e91e1b205bd8e4b8f417643beea167, type: 3}
+  - ResearchLine: Improved Ammo Level 3 [Q]
+    myClips:
+    - {fileID: 8300000, guid: 319b9c1fac41c1646965e798e149f227, type: 3}
+  - ResearchLine: Resonance Coil Level 1 [W]
+    myClips:
+    - {fileID: 8300000, guid: 7eda11d091fb71c4da5662cd9c9396e7, type: 3}
+    - {fileID: 8300000, guid: afcbe03363e193a4885f7b40249ee220, type: 3}
+  - ResearchLine: Resonance Coil Level 2 [W]
+    myClips:
+    - {fileID: 8300000, guid: f1386249e6cd18a458224b234d2d23c4, type: 3}
+    - {fileID: 8300000, guid: dc3cae5678f4b794b8e8c0c299578acc, type: 3}
+  - ResearchLine: Improved Armor Level 1 [S]
+    myClips:
+    - {fileID: 8300000, guid: 4df1107bf090b7641ab017e65f0a898d, type: 3}
+    - {fileID: 8300000, guid: 26cea8296b33c1244bbf793fa2d598f9, type: 3}
+    - {fileID: 8300000, guid: 04977c9ed7cf5c148bfb0693121b62f0, type: 3}
+  - ResearchLine: Improved Armor Level 2 [S]
+    myClips:
+    - {fileID: 8300000, guid: 4df1107bf090b7641ab017e65f0a898d, type: 3}
+    - {fileID: 8300000, guid: 26cea8296b33c1244bbf793fa2d598f9, type: 3}
+    - {fileID: 8300000, guid: 04977c9ed7cf5c148bfb0693121b62f0, type: 3}
+  - ResearchLine: Improved Armor Level 3 [S]
+    myClips:
+    - {fileID: 8300000, guid: 8c52e1a19c30cbd4cad428d9f585a311, type: 3}
+  - ResearchLine: Imbued Aether Level 1 [A]
+    myClips:
+    - {fileID: 8300000, guid: b05ede10b888a2648beb3a737d0f005b, type: 3}
+    - {fileID: 8300000, guid: 5872295b2c2dcf345ab2ad7e44eccc7f, type: 3}
+    - {fileID: 8300000, guid: e6353e9e784d30e489b2a51ae03fd807, type: 3}
+  - ResearchLine: Imbued Aether Level 2 [A]
+    myClips:
+    - {fileID: 8300000, guid: b05ede10b888a2648beb3a737d0f005b, type: 3}
+    - {fileID: 8300000, guid: 5872295b2c2dcf345ab2ad7e44eccc7f, type: 3}
+    - {fileID: 8300000, guid: e6353e9e784d30e489b2a51ae03fd807, type: 3}
+  - ResearchLine: Imbued Aether Level 3 [A]
+    myClips:
+    - {fileID: 8300000, guid: b05ede10b888a2648beb3a737d0f005b, type: 3}
+    - {fileID: 8300000, guid: 5872295b2c2dcf345ab2ad7e44eccc7f, type: 3}
+    - {fileID: 8300000, guid: e6353e9e784d30e489b2a51ae03fd807, type: 3}
+  - ResearchLine: Fusion Welders [X]
+    myClips:
+    - {fileID: 8300000, guid: 2c2938fdac62faf48bef61ef9acebd90, type: 3}
+    - {fileID: 8300000, guid: 3132fb9a2dc7ac0459040c252f69468f, type: 3}
+    - {fileID: 8300000, guid: d22051942eeec744b8c5f6c2eacb4c01, type: 3}
+  - ResearchLine: Smart Blasts [C]
+    myClips:
+    - {fileID: 8300000, guid: b624c293ba92b064087e87d312dcb2bb, type: 3}
+    - {fileID: 8300000, guid: f2e48018060ad5b49982a8e3fdb4703b, type: 3}
+    - {fileID: 8300000, guid: 0a9474999c60d014cb1e0fa5e5c07f34, type: 3}
+  - ResearchLine: Pod Packing Level 1  [R]
+    myClips:
+    - {fileID: 8300000, guid: f1a30c6ed199500418ed897e2226fa78, type: 3}
+    - {fileID: 8300000, guid: e05a5e61ee143b741bb16ec53eb7e015, type: 3}
+    - {fileID: 8300000, guid: 56a285ce1d53c934fabcd38d05f56d7a, type: 3}
+  - ResearchLine: Pod Packing Level 2  [R]
+    myClips:
+    - {fileID: 8300000, guid: f1a30c6ed199500418ed897e2226fa78, type: 3}
+    - {fileID: 8300000, guid: e05a5e61ee143b741bb16ec53eb7e015, type: 3}
+    - {fileID: 8300000, guid: 56a285ce1d53c934fabcd38d05f56d7a, type: 3}
+  - ResearchLine: Double Training [R]
+    myClips:
+    - {fileID: 8300000, guid: 79ecdbba265971a4f92a5265b4808903, type: 3}
+    - {fileID: 8300000, guid: d76acbf579542684992eb394158d9750, type: 3}
+    - {fileID: 8300000, guid: e19b1ad11ec9a3c47a3f10b9cfaac337, type: 3}
+  StructureLines:
+  - ResearchLine: Aether Core
+    myClips:
+    - {fileID: 8300000, guid: eb1c1b991d804464a8a06a364f35f703, type: 3}
+    - {fileID: 8300000, guid: 094fbcf7a2577ce40bc6726ec249959f, type: 3}
+    - {fileID: 8300000, guid: b9b5250d2f654074da81d0fa2193bfe5, type: 3}
+    - {fileID: 8300000, guid: f90112422ced9494cae8c1c0b3b57ae3, type: 3}
+  - ResearchLine: Armory
+    myClips:
+    - {fileID: 8300000, guid: a912d5a4e54d4b4429300c42f1737584, type: 3}
+    - {fileID: 8300000, guid: b378c2ce7825fb74db874fbeed7e9bef, type: 3}
+    - {fileID: 8300000, guid: 43f0abed663d42d419bb903a61b1d5fa, type: 3}
+  - ResearchLine: Construction Yard
+    myClips:
+    - {fileID: 8300000, guid: dcbb3c8f34a8eb349a6411007d5e9f33, type: 3}
+    - {fileID: 8300000, guid: d5483a25dda33044b9a576ecb5cf8bb2, type: 3}
+  - ResearchLine: Aviatrix
+    myClips:
+    - {fileID: 8300000, guid: 4b7d89773642460409e12edd88ac5bea, type: 3}
+    - {fileID: 8300000, guid: 7c9260673f17a9d45848bb0cbcc11171, type: 3}
+    - {fileID: 8300000, guid: 45e9c6428d9a2eb42852384ba5ae83ce, type: 3}
+  - ResearchLine: Engineering Bay
+    myClips:
+    - {fileID: 8300000, guid: 8bb8beaeeb308494bbe4f976f27d05f5, type: 3}
+    - {fileID: 8300000, guid: 3bed6771cf677cc4da5710adcb13f68a, type: 3}
+    - {fileID: 8300000, guid: d157f08cba761724cbcf0133a03a3881, type: 3}
+    - {fileID: 8300000, guid: 3852c257d184d5043840a9499c540459, type: 3}
+  - ResearchLine: Academy
+    myClips:
+    - {fileID: 8300000, guid: 1c13f2b0ed3333040ab720f277595c97, type: 3}
+    - {fileID: 8300000, guid: d971e44e67a231c4db00e7ca292f9ef0, type: 3}
+    - {fileID: 8300000, guid: bcb5a5089eab5164aa0cb96361209ebe, type: 3}
+  - ResearchLine: Flux Array
+    myClips:
+    - {fileID: 8300000, guid: d3bf76ef573a6cc44b6738d4c2a35c07, type: 3}
+    - {fileID: 8300000, guid: f2fe329bc2ddf1940a6aeb21708ff6fd, type: 3}
+    - {fileID: 8300000, guid: 9cde3299df790da459776a6530376081, type: 3}
+    - {fileID: 8300000, guid: e87a958220c289143962defb3e4ae648, type: 3}
+  - ResearchLine: Purifier
+    myClips:
+    - {fileID: 8300000, guid: 5987422681e6e114495b70c5d6168e33, type: 3}
+--- !u!114 &114347622841882540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000012594371424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06333274bded42e4189b579c9cdeddab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  voicePackName: Ludacrus
+  UnlockNumber: 3
+  packSelected:
+  - {fileID: 8300000, guid: 5f59372a5b126dc419f9e842ce70e6fa, type: 3}
+  - {fileID: 8300000, guid: f8cea4fdee230da4db8e2deeb9d7b0f8, type: 3}
+  - {fileID: 8300000, guid: 9bfab79113eedee41a71a20b283d674a, type: 3}
+  - {fileID: 8300000, guid: f1c9c00ae73534147b82489f0e5601ed, type: 3}
+  - {fileID: 8300000, guid: 195d80b1c82ffbd4e8d78d015f613665, type: 3}
+  - {fileID: 8300000, guid: 013be5f26683aa6459a608b7f1e08792, type: 3}
+  - {fileID: 8300000, guid: 9eca3922ef69c24419b4b2cee5c98ae4, type: 3}
+  Ore:
+  - {fileID: 8300000, guid: d996aac633d799f449d97ab68f638702, type: 3}
+  - {fileID: 8300000, guid: 454007fc55b5036459a055d608e93924, type: 3}
+  - {fileID: 8300000, guid: 58ba360195fc0384188513525534700c, type: 3}
+  - {fileID: 8300000, guid: 982acffc113e62d42bc32929903cc3ca, type: 3}
+  - {fileID: 8300000, guid: 68f03381249e1e04fb3d0a2cc707626c, type: 3}
+  - {fileID: 8300000, guid: 575824f1b921ad842bdb3176d3dd78b3, type: 3}
+  - {fileID: 8300000, guid: 71a9077fbb1e9f241b3b4037613d73dd, type: 3}
+  - {fileID: 8300000, guid: 69076dd983deabf428c3914ae6bae9dc, type: 3}
+  - {fileID: 8300000, guid: 5163ebcaa80e3984486ab4577bde41c8, type: 3}
+  - {fileID: 8300000, guid: 63c6df0012bb23f40afe4bda926e36ea, type: 3}
+  - {fileID: 8300000, guid: 425fbef08bd3aa143b4d22385bb69690, type: 3}
+  - {fileID: 8300000, guid: 6bfd6fb2cdf721a448980569aeb1d591, type: 3}
+  - {fileID: 8300000, guid: ce134ff552a81f34481b9a868baf6d02, type: 3}
+  - {fileID: 8300000, guid: e6a768c98102ed642ad0432798f68bc6, type: 3}
+  - {fileID: 8300000, guid: 678c80536d78d014ab8f91b522b57e26, type: 3}
+  - {fileID: 8300000, guid: 5b4f9b46a41968b4895e4e74aeff73c6, type: 3}
+  - {fileID: 8300000, guid: 9edbc8de84158764faf570951c8f09dc, type: 3}
+  supply:
+  - {fileID: 8300000, guid: 4f05831c8a1506d4baeecda15c1c5232, type: 3}
+  - {fileID: 8300000, guid: 8d041024798591a4596e7aba0ddd008f, type: 3}
+  - {fileID: 8300000, guid: 1fb8b305f561d544e9f7f428f4bd021a, type: 3}
+  - {fileID: 8300000, guid: 6048e3640e02865429dd835ffb1bc54a, type: 3}
+  - {fileID: 8300000, guid: 6378df73fac99644a93ec70356c83c53, type: 3}
+  - {fileID: 8300000, guid: 77b658b41adfdd34aac608f467d15bfa, type: 3}
+  - {fileID: 8300000, guid: 3d65edfbfda8b994c97b408193dcec75, type: 3}
+  - {fileID: 8300000, guid: e96eaa249a3d9da4c8bffbb52b2a45bc, type: 3}
+  - {fileID: 8300000, guid: e601b5c9a20f16a46933197e2cfbce7e, type: 3}
+  - {fileID: 8300000, guid: acabfee2a4421db43982a88dc86d0dd2, type: 3}
+  - {fileID: 8300000, guid: 74afe93e18acc1c40bcdeb2bc30728a4, type: 3}
+  - {fileID: 8300000, guid: ab53f7e7605ee4143beaca67337afd2a, type: 3}
+  - {fileID: 8300000, guid: 935d39956dab5e34496d6ce3166014f3, type: 3}
+  - {fileID: 8300000, guid: 5d4046fae6b876e4789f6b1e1a803602, type: 3}
+  - {fileID: 8300000, guid: 34e938e71da6bd641be37865ba5921b8, type: 3}
+  maxSupply:
+  - {fileID: 8300000, guid: 8781186a032b97f43be1140e3cea515b, type: 3}
+  - {fileID: 8300000, guid: 8e86efb12e7222846a894ad0cb7659a1, type: 3}
+  - {fileID: 8300000, guid: 3f31155a4fb40204f95182a61a7b099d, type: 3}
+  - {fileID: 8300000, guid: a3d767053e0f2aa4f80888ed6b101f16, type: 3}
+  troopsAttacked:
+  - {fileID: 8300000, guid: 32fbc854caf6f654690bf638f33bc52a, type: 3}
+  - {fileID: 8300000, guid: 1be2c41c68298a14382e587b818687c1, type: 3}
+  - {fileID: 8300000, guid: 27afdd55d5d8fda47ab4dd8ffa0247fc, type: 3}
+  - {fileID: 8300000, guid: 76dc2954e97d225449ef7494ebd6a560, type: 3}
+  - {fileID: 8300000, guid: ba64437e94f45c647bda978d02577c1d, type: 3}
+  - {fileID: 8300000, guid: 8858214c2e1ccbd44927dd5cf8366a45, type: 3}
+  - {fileID: 8300000, guid: c095932c7b6edd84c88111b22746cdbe, type: 3}
+  - {fileID: 8300000, guid: a9e680773ef68b0429e71e2efe054c4f, type: 3}
+  - {fileID: 8300000, guid: a4b39c7328add584189429f281fd1664, type: 3}
+  - {fileID: 8300000, guid: 4f145f6e9513b7a4e85a7675d0d600a9, type: 3}
+  - {fileID: 8300000, guid: ae4ab69711ea4774eaf6d06d1d15d2cb, type: 3}
+  - {fileID: 8300000, guid: f2e5f21b6e64fa94388954400cb65ce6, type: 3}
+  - {fileID: 8300000, guid: 8f3d39ad23f3102429a1d29c2cc2963b, type: 3}
+  - {fileID: 8300000, guid: b2ca75208ed95c94b9c426e055276972, type: 3}
+  - {fileID: 8300000, guid: 3f03ca68fef443547b96e842346b4b69, type: 3}
+  - {fileID: 8300000, guid: b0dd3efbf19f5394bbf46e2d9bfb47ca, type: 3}
+  - {fileID: 8300000, guid: f72f58080e0609b4da4335b08fb853a5, type: 3}
+  - {fileID: 8300000, guid: bfe5ccbbf353bfc4da93b70251a89899, type: 3}
+  - {fileID: 8300000, guid: e8522eacba91fea4f8e2c8aad8051d07, type: 3}
+  - {fileID: 8300000, guid: 72103917136af004089074ed8654358d, type: 3}
+  baseAttacked:
+  - {fileID: 8300000, guid: 987cbf0379fb0fd4f8f9c909b7ad58e1, type: 3}
+  - {fileID: 8300000, guid: 30006a987b8b0674d952304be7ead63b, type: 3}
+  - {fileID: 8300000, guid: fdab2a6011e46ac48961543cbd438716, type: 3}
+  - {fileID: 8300000, guid: ee2c442bd56e6234e85475c24058aa12, type: 3}
+  - {fileID: 8300000, guid: 08688867f86c6614c99d298a30923776, type: 3}
+  - {fileID: 8300000, guid: dd7aeefa9cb5dca4fa102b7aaa9bde06, type: 3}
+  - {fileID: 8300000, guid: e4ee64a7036e2b4418e9ee8591dbea04, type: 3}
+  - {fileID: 8300000, guid: f97e87c65fa6b5d4a91138db3a58d21d, type: 3}
+  - {fileID: 8300000, guid: d3934895284c1e9448e9e292dae0d187, type: 3}
+  - {fileID: 8300000, guid: 3a0cbd4291e2bf54aa89facaf43d062a, type: 3}
+  - {fileID: 8300000, guid: fb1d4948591251542ac6d368b738e46f, type: 3}
+  - {fileID: 8300000, guid: fbe810f829ecf8847929519324503fff, type: 3}
+  - {fileID: 8300000, guid: aff373150d6b0074299623c8c297d842, type: 3}
+  - {fileID: 8300000, guid: 36c00ae2b9b67754e88b66c2454a7eb1, type: 3}
+  - {fileID: 8300000, guid: a1d8a5614b89e174ba65a64cefceb4d5, type: 3}
+  - {fileID: 8300000, guid: 8238141fd73ee5045bfd663cb0cb2d7e, type: 3}
+  - {fileID: 8300000, guid: a736d6120167a744d967e30737916e46, type: 3}
+  - {fileID: 8300000, guid: 406281e5edb8e16439d42ca63c229263, type: 3}
+  - {fileID: 8300000, guid: 32f7ad811603fa845aa94f98afc01b7c, type: 3}
+  - {fileID: 8300000, guid: 2c7d202a21d54fa48ac7d10c0b9708f3, type: 3}
+  cooldown: []
+  buildingPlacement:
+  - {fileID: 8300000, guid: 9d53c92f30f2670429da0953b3c076ab, type: 3}
+  - {fileID: 8300000, guid: 656a657787c1017449640294e7aa6d47, type: 3}
+  - {fileID: 8300000, guid: be5c3b93fbc22a9419901501665fa832, type: 3}
+  - {fileID: 8300000, guid: 9a425c553c423e841991bb6cb27aa51b, type: 3}
+  - {fileID: 8300000, guid: c8e6eb5c126c4c843a792222348caf41, type: 3}
+  EnemyWave:
+  - {fileID: 8300000, guid: 93aab631e1eb4d84390961a48a8024e5, type: 3}
+  - {fileID: 8300000, guid: 4515294fad3e3b549b4b436bbd60fafc, type: 3}
+  - {fileID: 8300000, guid: 17a6b68e37bc99146a806c2d28f2ba97, type: 3}
+  - {fileID: 8300000, guid: d059284016b0cc24cbd87c723a3f8cf2, type: 3}
+  - {fileID: 8300000, guid: b32e8c360f227c44e91bc4da45db91b5, type: 3}
+  - {fileID: 8300000, guid: 2af07c6c770590a4eacd1680a9b5e8be, type: 3}
+  - {fileID: 8300000, guid: 357476969ab21724fa1833cc07711727, type: 3}
+  - {fileID: 8300000, guid: 6a96b6273824d5943966ab0593b03681, type: 3}
+  - {fileID: 8300000, guid: b2dcc77ae5055344fbb10f01977eeafa, type: 3}
+  - {fileID: 8300000, guid: da24fcb06de516b438b0cd1688c08b87, type: 3}
+  - {fileID: 8300000, guid: 210d0fd13b002f44c8eecc7c9b761377, type: 3}
+  - {fileID: 8300000, guid: 66c529cb2277e494da10ceb9dac337ed, type: 3}
+  - {fileID: 8300000, guid: 49fc7189616d82c44acbdb5a4efc576b, type: 3}
+  EnemyDreadNaughts:
+  - {fileID: 8300000, guid: 014f870fbee2cde41877e37f0a8d7dc2, type: 3}
+  - {fileID: 8300000, guid: b82d3f40bc30e8e43a8c371159f6f1c2, type: 3}
+  - {fileID: 8300000, guid: 6cfbd70dbdfb0464c87c338052ed27b3, type: 3}
+  - {fileID: 8300000, guid: 757d2d69fc95dad4cb5ba1eaf26a6d40, type: 3}
+  - {fileID: 8300000, guid: 93033a678cc92624b9789d1d9bd46003, type: 3}
+  - {fileID: 8300000, guid: 8452be72ed6a1b94381864a565216754, type: 3}
+  - {fileID: 8300000, guid: 17d7817804c418b4f9e1bc1447c6fda7, type: 3}
+  EnemyBunnies:
+  - {fileID: 8300000, guid: 9add263884a77cf4fb92d0a7d4a9f2a8, type: 3}
+  - {fileID: 8300000, guid: d337cb989ed519b4a84e0d1067c4e035, type: 3}
+  - {fileID: 8300000, guid: ac0a1088fa0abb2499cf6ddb435e96ee, type: 3}
+  - {fileID: 8300000, guid: a76c89cfb23e3364f93c5f63e0ba5d21, type: 3}
+  - {fileID: 8300000, guid: 3914236f79108b442970918866a8ce1e, type: 3}
+  - {fileID: 8300000, guid: 5823636acaceb6043ab1df7ae0c3880d, type: 3}
+  - {fileID: 8300000, guid: 59f3619b3e56d174e9d982f4c649dc28, type: 3}
+  - {fileID: 8300000, guid: 67178bbcdfc96fb43b613fba6652a590, type: 3}
+  - {fileID: 8300000, guid: 49c58a6affa81654ca3a32e137d8a089, type: 3}
+  - {fileID: 8300000, guid: 08f98a2b7ce2012479e9115074e1464a, type: 3}
+  ResearchFinished:
+  - {fileID: 8300000, guid: 94cedf904d99f7a49ab0ef3c45b7000f, type: 3}
+  - {fileID: 8300000, guid: ad4b819ae7dca9b4786f3460202363bf, type: 3}
+  - {fileID: 8300000, guid: bf5938b4bd781094d919be42224cd930, type: 3}
+  - {fileID: 8300000, guid: 9ab23c8cacb6e5b4ba704ee523a257c0, type: 3}
+  - {fileID: 8300000, guid: 8b6a5f87367526b48869f20bd5330826, type: 3}
+  - {fileID: 8300000, guid: 8d2b046175473d54ca2f014b9811afd1, type: 3}
+  - {fileID: 8300000, guid: 2444994f0fa4ff14ab24685e9af273bf, type: 3}
+  - {fileID: 8300000, guid: d328dd87d6f5be648a60a298e4d645d6, type: 3}
+  - {fileID: 8300000, guid: 0a3f9f1571ddc5f4cb601373d9bb6153, type: 3}
+  OreDepleted:
+  - {fileID: 8300000, guid: c29de53c64a478e47982fafc7e11d01e, type: 3}
+  - {fileID: 8300000, guid: 743c5458868e1d6408aae10948859131, type: 3}
+  - {fileID: 8300000, guid: b68a76f125c77b845903866a5ae44aa0, type: 3}
+  - {fileID: 8300000, guid: 8fabf35a7c4d2f94893c1fb97035980b, type: 3}
+  - {fileID: 8300000, guid: f287a7e1c90033748bd49e6cd02887ea, type: 3}
+  - {fileID: 8300000, guid: a359533e4b43e304cbd77e8809cc6f4a, type: 3}
+  - {fileID: 8300000, guid: ecd96df80a5b5ba43b3fde7f191efe07, type: 3}
+  - {fileID: 8300000, guid: 9b1be2d678afcdf4fbc8ab859bb8a499, type: 3}
+  OreOccupied:
+  - {fileID: 8300000, guid: 3241ae072cd5b1542ad1042549573227, type: 3}
+  - {fileID: 8300000, guid: 95fd6dc63ef4ecc48967878c8eabf985, type: 3}
+  - {fileID: 8300000, guid: b4daa5851a2d7e24698eab1b2ed4ed70, type: 3}
+  - {fileID: 8300000, guid: cd801891ae8f1ab439134dc40d785d7a, type: 3}
+  - {fileID: 8300000, guid: 334ca34ded5867340b711d5bf5d687e9, type: 3}
+  BuildingComplete:
+  - {fileID: 8300000, guid: f848c9d7c47dcff40af1f0d88fb5b97f, type: 3}
+  - {fileID: 8300000, guid: 94644b30dcadf8e4291a5cf650fb10e2, type: 3}
+  - {fileID: 8300000, guid: cb6a1677ec3754144ade01658a9dc0e4, type: 3}
+  - {fileID: 8300000, guid: 1dd43c0bb3281c944a14faa595c40b40, type: 3}
+  - {fileID: 8300000, guid: f1da7c7320fdbfc49b82c0f178323836, type: 3}
+  - {fileID: 8300000, guid: bfda71e0358181b4abf35e0856985e73, type: 3}
+  - {fileID: 8300000, guid: fb8d6b9e0c624d2428218ec2ba20beee, type: 3}
+  - {fileID: 8300000, guid: ea9c54ba4f82c894fb7a4ab3a5aa18f2, type: 3}
+  - {fileID: 8300000, guid: 3a8c7b6cc4fe70c4eaec60b082ca9ab2, type: 3}
+  UltTwoComp:
+  - {fileID: 8300000, guid: 2440190f8cba89d40a57a7139ba1299f, type: 3}
+  - {fileID: 8300000, guid: dd982331813311c4f8b7ba315e0a1ced, type: 3}
+  - {fileID: 8300000, guid: c7545b1d3b21eb64995efad16b6de4cc, type: 3}
+  - {fileID: 8300000, guid: aa009bee47bbf0049847d458bc8c70b0, type: 3}
+  - {fileID: 8300000, guid: 0c4ba4bf65d7a4743b5afb91868de85f, type: 3}
+  - {fileID: 8300000, guid: 4f73aeb97ed97df42bbe9f9746047116, type: 3}
+  UltFourComp:
+  - {fileID: 8300000, guid: 62c20200dd2ef214faf098a91b798b9b, type: 3}
+  - {fileID: 8300000, guid: 415b434d6f2c7204dab7af3d9a009140, type: 3}
+  - {fileID: 8300000, guid: 615c3fd3e5ada0a439f73f80854a1913, type: 3}
+  - {fileID: 8300000, guid: de051733d31218946aecbaf59f20c800, type: 3}
+  ResearchLines:
+  - ResearchLine: Improved Ammo Level 1 [Q]
+    myClips:
+    - {fileID: 8300000, guid: 9377e8d70c619a74994924b11bc9df1f, type: 3}
+    - {fileID: 8300000, guid: 698e8daa942633a4da55aeb69a25b157, type: 3}
+    - {fileID: 8300000, guid: 6dc669f92fde3d04589a0ae9182b0226, type: 3}
+    - {fileID: 8300000, guid: e2b0b3af77f2920479ce3745edc5bf75, type: 3}
+  - ResearchLine: Improved Ammo Level 2 [Q]
+    myClips:
+    - {fileID: 8300000, guid: 9377e8d70c619a74994924b11bc9df1f, type: 3}
+    - {fileID: 8300000, guid: 698e8daa942633a4da55aeb69a25b157, type: 3}
+    - {fileID: 8300000, guid: 6dc669f92fde3d04589a0ae9182b0226, type: 3}
+    - {fileID: 8300000, guid: e2b0b3af77f2920479ce3745edc5bf75, type: 3}
+  - ResearchLine: Improved Ammo Level 3 [Q]
+    myClips:
+    - {fileID: 8300000, guid: b027e71bfcd49d14abb32b35e0753fc4, type: 3}
+    - {fileID: 8300000, guid: b488f719b42021e48abf4ac645ae37ec, type: 3}
+  - ResearchLine: Resonance Coil Level 1 [W]
+    myClips:
+    - {fileID: 8300000, guid: c735ffa85a4fb934d8129c5f6da57cc0, type: 3}
+    - {fileID: 8300000, guid: 8668d5081e2d3dc49aca16ae1613b06e, type: 3}
+    - {fileID: 8300000, guid: d032147a7adabf84ea18b0ac5e4b0afe, type: 3}
+  - ResearchLine: Resonance Coil Level 2 [W]
+    myClips:
+    - {fileID: 8300000, guid: c735ffa85a4fb934d8129c5f6da57cc0, type: 3}
+    - {fileID: 8300000, guid: 8668d5081e2d3dc49aca16ae1613b06e, type: 3}
+    - {fileID: 8300000, guid: d032147a7adabf84ea18b0ac5e4b0afe, type: 3}
+  - ResearchLine: Improved Armor Level 1 [S]
+    myClips:
+    - {fileID: 8300000, guid: 1c3a3d73a8d93ff42ab18604f0a0c7f1, type: 3}
+    - {fileID: 8300000, guid: bda16b3deed29e94d94c0496ad6c3bf4, type: 3}
+    - {fileID: 8300000, guid: f9d48a8df8841874d86ee7f142b6674c, type: 3}
+    - {fileID: 8300000, guid: e1cfdcf37554adf4da1f7e464e04ae3f, type: 3}
+  - ResearchLine: Improved Armor Level 2 [S]
+    myClips:
+    - {fileID: 8300000, guid: 1c3a3d73a8d93ff42ab18604f0a0c7f1, type: 3}
+    - {fileID: 8300000, guid: bda16b3deed29e94d94c0496ad6c3bf4, type: 3}
+    - {fileID: 8300000, guid: f9d48a8df8841874d86ee7f142b6674c, type: 3}
+    - {fileID: 8300000, guid: e1cfdcf37554adf4da1f7e464e04ae3f, type: 3}
+  - ResearchLine: Improved Armor Level 3 [S]
+    myClips:
+    - {fileID: 8300000, guid: 1c3a3d73a8d93ff42ab18604f0a0c7f1, type: 3}
+    - {fileID: 8300000, guid: bda16b3deed29e94d94c0496ad6c3bf4, type: 3}
+    - {fileID: 8300000, guid: f9d48a8df8841874d86ee7f142b6674c, type: 3}
+    - {fileID: 8300000, guid: e1cfdcf37554adf4da1f7e464e04ae3f, type: 3}
+  - ResearchLine: Imbued Aether Level 1 [A]
+    myClips:
+    - {fileID: 8300000, guid: ff05c2d144e20ce47bce247b0c1412f9, type: 3}
+    - {fileID: 8300000, guid: 3a2ee3f4bf05b8d47bd09f4530fec5c7, type: 3}
+    - {fileID: 8300000, guid: a4f1ad8c7169c5447b540060f4fe0f16, type: 3}
+    - {fileID: 8300000, guid: 7a19dc71ed288ce45800f16f71398e29, type: 3}
+  - ResearchLine: Imbued Aether Level 2 [A]
+    myClips:
+    - {fileID: 8300000, guid: ff05c2d144e20ce47bce247b0c1412f9, type: 3}
+    - {fileID: 8300000, guid: 3a2ee3f4bf05b8d47bd09f4530fec5c7, type: 3}
+    - {fileID: 8300000, guid: a4f1ad8c7169c5447b540060f4fe0f16, type: 3}
+    - {fileID: 8300000, guid: 7a19dc71ed288ce45800f16f71398e29, type: 3}
+  - ResearchLine: Imbued Aether Level 3 [A]
+    myClips:
+    - {fileID: 8300000, guid: ff05c2d144e20ce47bce247b0c1412f9, type: 3}
+    - {fileID: 8300000, guid: 3a2ee3f4bf05b8d47bd09f4530fec5c7, type: 3}
+    - {fileID: 8300000, guid: a4f1ad8c7169c5447b540060f4fe0f16, type: 3}
+    - {fileID: 8300000, guid: 7a19dc71ed288ce45800f16f71398e29, type: 3}
+  - ResearchLine: Fusion Welders [X]
+    myClips:
+    - {fileID: 8300000, guid: f9eb04acd06fd8d4887730b1588f5276, type: 3}
+    - {fileID: 8300000, guid: c167db6ccfd2b49438d7964993b450b8, type: 3}
+    - {fileID: 8300000, guid: e628f5fc9a7f77c4e9f5ca270128eb57, type: 3}
+  - ResearchLine: Smart Blasts [C]
+    myClips:
+    - {fileID: 8300000, guid: 467b5c0114cb1c8408638a456c64129c, type: 3}
+    - {fileID: 8300000, guid: 6664379ab6590424385153372ea8c845, type: 3}
+    - {fileID: 8300000, guid: 8ba094d7c60cd764b8b5225706133e51, type: 3}
+    - {fileID: 8300000, guid: 83fdcce4776dea7429064367d77fba60, type: 3}
+  - ResearchLine: Pod Packing Level 1  [R]
+    myClips:
+    - {fileID: 8300000, guid: 352a2564f7e9c8f42bc4a786e6633b8d, type: 3}
+    - {fileID: 8300000, guid: 74cc4e07b30fb764f8cf8695af53d369, type: 3}
+    - {fileID: 8300000, guid: e3e35d76f7cdb7a4ea37ed141b7f70bc, type: 3}
+    - {fileID: 8300000, guid: 822ea701012d4bb478c1f880f2d60980, type: 3}
+  - ResearchLine: Pod Packing Level 2  [R]
+    myClips:
+    - {fileID: 8300000, guid: 352a2564f7e9c8f42bc4a786e6633b8d, type: 3}
+    - {fileID: 8300000, guid: 74cc4e07b30fb764f8cf8695af53d369, type: 3}
+    - {fileID: 8300000, guid: e3e35d76f7cdb7a4ea37ed141b7f70bc, type: 3}
+    - {fileID: 8300000, guid: 822ea701012d4bb478c1f880f2d60980, type: 3}
+  - ResearchLine: Double Training [R]
+    myClips:
+    - {fileID: 8300000, guid: aa97d08dc96190e498558800ee7a1f0b, type: 3}
+    - {fileID: 8300000, guid: 611e9d822148b494890b6a9aefc43b04, type: 3}
+    - {fileID: 8300000, guid: e3ecfb4645d99084bbe483aa4b34fda4, type: 3}
+  StructureLines:
+  - ResearchLine: Aether Core
+    myClips:
+    - {fileID: 8300000, guid: d1257d3aa97909845bea552c44b1fc55, type: 3}
+    - {fileID: 8300000, guid: e3f9e2034489cd040ac97b2eea616f54, type: 3}
+    - {fileID: 8300000, guid: 423734e9ebec05d42ae45dfab31367ee, type: 3}
+    - {fileID: 8300000, guid: 40484055af2019d48a9119087aee48b0, type: 3}
+    - {fileID: 8300000, guid: 549c921f53897254bb0d31b5f78eb27e, type: 3}
+    - {fileID: 8300000, guid: c4704d76b9b9b2c489134645a77b811e, type: 3}
+    - {fileID: 8300000, guid: 17e0bc25864e7504b9bd7ee81504edb7, type: 3}
+    - {fileID: 8300000, guid: a2895e020d88c334e837c14d626f80ca, type: 3}
+  - ResearchLine: Armory
+    myClips:
+    - {fileID: 8300000, guid: bfe8081ef4205dc45af4ce459b01e72f, type: 3}
+    - {fileID: 8300000, guid: 32ea9544d27a9314d803ab16d0640681, type: 3}
+    - {fileID: 8300000, guid: 1ab6abace37fe4946bdf541a00c2b971, type: 3}
+  - ResearchLine: Construction Yard
+    myClips:
+    - {fileID: 8300000, guid: fca71db47d022b74fac03c09b9759c15, type: 3}
+    - {fileID: 8300000, guid: 0cd10fdab1c76924283cef7fad958421, type: 3}
+    - {fileID: 8300000, guid: 011e4ebfb4f726149acddf2b10ce8e36, type: 3}
+  - ResearchLine: Aviatrix
+    myClips:
+    - {fileID: 8300000, guid: 5dc9eb46238bd5a43bbae1614329f251, type: 3}
+    - {fileID: 8300000, guid: 827b4a2034f5d68428def6faf294b91f, type: 3}
+    - {fileID: 8300000, guid: 1151378f4e6343547830163d28a3b62f, type: 3}
+  - ResearchLine: Engineering Bay
+    myClips:
+    - {fileID: 8300000, guid: 6681308000492e244ba7aecfdc0d80aa, type: 3}
+    - {fileID: 8300000, guid: b3c5b76f7411cb942a0ec968c037a939, type: 3}
+    - {fileID: 8300000, guid: aad4be16af6a9c44bab8a4a086755234, type: 3}
+  - ResearchLine: Academy
+    myClips:
+    - {fileID: 8300000, guid: 3c0781ff4e88e9c4e9740919e72ebdee, type: 3}
+    - {fileID: 8300000, guid: 62d0113d910b99840adfbe8153f3b930, type: 3}
+    - {fileID: 8300000, guid: a0732483c87ab2b42984839af0ce91f1, type: 3}
+    - {fileID: 8300000, guid: 7c3f0795cbb95014b9c475aa501ffd56, type: 3}
+  - ResearchLine: Flux Array
+    myClips:
+    - {fileID: 8300000, guid: f6c14f478298f924b8c7320a0dd55aea, type: 3}
+    - {fileID: 8300000, guid: e2511a0014a26ea4f826c6a183be8f8c, type: 3}
+    - {fileID: 8300000, guid: c7bf3cd3b5637bd4f85cce3d8f888b55, type: 3}
+  - ResearchLine: Extractor
+    myClips:
+    - {fileID: 8300000, guid: 9a97bc15b2333ee4c9b54533c007327f, type: 3}
+    - {fileID: 8300000, guid: 15ea4ddd91f38364f871a85ee4ed67c3, type: 3}
+    - {fileID: 8300000, guid: 72dc726858c38e04eb6df9c71ea7910d, type: 3}
+    - {fileID: 8300000, guid: 104e82f9f460985418c19118d5bec8ea, type: 3}
+  - ResearchLine: Purifier
+    myClips:
+    - {fileID: 8300000, guid: 5987422681e6e114495b70c5d6168e33, type: 3}

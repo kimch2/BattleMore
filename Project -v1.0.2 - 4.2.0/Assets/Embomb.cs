@@ -10,7 +10,7 @@ public class Embomb : DamagerIeffect, Modifier
 
     public override void applyTo(GameObject source, UnitManager target)
     {
-        CopyIEffect(target, true);
+        CopyIEffect(target, true, out bool alreadyOnIt);
     }
 
     public override void BeginEffect()

@@ -36,7 +36,7 @@ public class UndyingArmor :  IEffect, Modifier{
 
     public override void applyTo (GameObject source, UnitManager target)
 	{
-        CopyIEffect(target, true);
+        CopyIEffect(target, true, out bool AlreadyOnIt);
 	}
 
 

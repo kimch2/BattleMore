@@ -201,14 +201,9 @@ public class StatChanger
 
         if (myStats.myManager.cMover)
         {
-            //This will probably break because you also have to set it in the RVOController
-            myStats.myManager.cMover.MaxSpeed = number.ApplyBuffs(myStats.myManager.cMover.initialSpeed);
-			Pathfinding.RVO.RVOController rvo = myStats.gameObject.GetComponent<Pathfinding.RVO.RVOController>();
-			if (rvo)
-			{
-				rvo.maxSpeed = myStats.myManager.cMover.MaxSpeed;
-			}
-            myStats.StatsChanged = true;
+          //  Debug.Log(myStats + " Calling  " + obj);
+           myStats.myManager.cMover.SetMaxSpeed(number.ApplyBuffs(number.baseAmount));
+           myStats.StatsChanged = true;
 		}
 	}
 
@@ -217,14 +212,11 @@ public class StatChanger
 		NumberAlter number = GetNumberAlter("MoveSpeed");
 		number.RemoveBuff(obj);
 		if (myStats.myManager.cMover)
-		{
-			//This will probably break because you also have to set it in the RVOController
-			myStats.myManager.cMover.MaxSpeed = number.ApplyBuffs(myStats.myManager.cMover.initialSpeed);
-			Pathfinding.RVO.RVOController rvo =  myStats.gameObject.GetComponent<Pathfinding.RVO.RVOController>();
-			if (rvo)
-			{
-				rvo.maxSpeed = myStats.myManager.cMover.MaxSpeed;
-			}
+        {
+           // Debug.Log(myStats + " Removing " + obj);
+            myStats.myManager.cMover.SetMaxSpeed(number.ApplyBuffs(number.baseAmount));
+           // Debug.Log("APplying SPeed " + myStats.myManager.cMover.initialSpeed + "   " + myStats.myManager.cMover.MaxSpeed + "  " + myStats.gameObject);
+
             myStats.StatsChanged = true;
         }
 	}
@@ -482,6 +474,7 @@ public class NumberAlter
 			{
 				if (!stackable)
 				{
+                  //  Debug.Log("new one");
                     a.Flat = flat;
                     a.Perc = perc;
 					return;
@@ -490,7 +483,8 @@ public class NumberAlter
 				{
 					a.Flat += flat;
 					a.Perc += perc;
-					return;
+                  //  Debug.Log("Stacking " + a.Perc);
+                    return;
 				}
 			}
 		}
@@ -501,7 +495,6 @@ public class NumberAlter
 			Perc = perc,
 			Source = obj
 		};
-		
 		speedMods.Add(temp);
 
 	}
@@ -514,7 +507,7 @@ public class NumberAlter
 	public void RemoveBuff(Object obj)
 	{
 		speedMods.RemoveAll(item => item.Source = obj);
-	}
+    }
 
 	private float AdjustSpeed(float baseNumber)
 	{
@@ -532,6 +525,7 @@ public class NumberAlter
 		percent = Mathf.Max(.001f, percent);
 		baseNumber *= percent;
 
+      //  Debug.Log("Count " + speedMods.Count + "   "  + percent + "   " + Mathf.Clamp(baseNumber, min, max));
 		return Mathf.Clamp(baseNumber, min, max);
 	}
 
@@ -628,6 +622,7 @@ public class NumberAlter
 			case "MoveSpeed":
 				min = 0;
 				max = 2048;
+                baseAmount = stats.myManager.cMover.initialSpeed;
 				break;
 
 			case "HealthMax":

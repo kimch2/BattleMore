@@ -79,13 +79,14 @@ MonoBehaviour:
   maxChargeCount: 3
   chargeCount: 3
   soundEffect: {fileID: 8300000, guid: 53736cfd59afa614d92cb9f5e964de25, type: 3}
+  myHitContainer: {fileID: 1666427045158114188}
   range: 200
   target: {fileID: 0}
   location: {x: 0, y: 0, z: 0}
   targetArea: {fileID: 21300000, guid: 9dead7b94ebdb144c83e28ac38bed79d, type: 3}
   areaSize: 30
   myTargetType: 0
-  myHitContainer: {fileID: 1666427045158114188}
+  CastFromScreenEdge: 0
   ObjectToSpawn: {fileID: 6815054525647365854, guid: 621d2d93d28425c4684b28cf8c968a16,
     type: 3}
   TagType: 6
@@ -198,6 +199,7 @@ GameObject:
   - component: {fileID: 7344365091414013723}
   - component: {fileID: 1666427045158114188}
   - component: {fileID: 18914910899025470}
+  - component: {fileID: 851146457652612076}
   m_Layer: 0
   m_Name: OnHitContainer
   m_TagString: Untagged
@@ -232,7 +234,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toApply: []
+  OnKill:
+    m_PersistentCalls:
+      m_Calls: []
   myManager: {fileID: 0}
+  source: {fileID: 0}
+  playerNumber: 0
   FriendlyFireRatio: 0
   AutoAddTriggers: 1
 --- !u!114 &18914910899025470
@@ -247,5 +254,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdd2b38231dbb0b49be79ed6b3dcff58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EffectName: NameMe!
   onTarget: 0
+  VisualEffects: []
   sleepTime: 10
+  OnFinishNap:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 851146457652612076}
+        m_MethodName: AddSkullRemote
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &851146457652612076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8584665966842056207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 855941a9df96a3241975cd865dd42491, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PassiveSkullCollect: 0

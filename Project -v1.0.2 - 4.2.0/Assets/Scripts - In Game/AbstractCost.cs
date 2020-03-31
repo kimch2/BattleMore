@@ -221,6 +221,10 @@ public class AbstractCost : MonoBehaviour {
 	}
 
 
+    public void ReduceCurrentCooldown(float amount)
+    {
+        cooldownTimer -= amount;
+    }
 
 	public void resetCoolDown()
 	{cooldownTimer = 0;

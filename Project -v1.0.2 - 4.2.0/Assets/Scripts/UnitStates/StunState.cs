@@ -27,7 +27,7 @@ public class StunState : UnitState {
         myManager.animStop();
         if (myManager.myAnim)
         {
-            myManager.myAnim.Play("Idle");
+            myManager.myAnim.Play("Stun");
         }
     }
 

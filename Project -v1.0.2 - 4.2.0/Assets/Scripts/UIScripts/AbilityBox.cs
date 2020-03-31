@@ -8,7 +8,7 @@ using UnityEngine.EventSystems;
 		private bool pointerInside;
 		// Testing comment for first time sync
 
-		private Canvas toolbox;
+	private Canvas toolbox;
 	public Ability myAbility;
 	CostBox daCostBox;
 

@@ -8,8 +8,8 @@ public class OnHitContainer : MonoBehaviour
 
     public List<Notify> DamageTriggers = new List<Notify>(); // This is for things that specifically need to know how much damage is being dealt, but don't change it.
     public List<IEffect> toApply = new List<IEffect>();
-    public UnityEngine.Events.UnityEvent OnKill;
-
+    public UnityEngine.Events.UnityEvent OnKillGeneric;
+    public InvokeGameObject onKillWithTarget;
 
     public UnitManager myManager;
     [HideInInspector]
@@ -146,7 +146,7 @@ public class OnHitContainer : MonoBehaviour
                     copy.EndEffect();
                 }
             }
-        }
+        }       
     }
 
     public void RemoveNotifier(Component target)
@@ -176,9 +176,11 @@ public class OnHitContainer : MonoBehaviour
         }
     }
 
-    public void UnitKilled()
+    public void UnitKilled(UnitManager manag)
     {
-        OnKill.Invoke();
+        OnKillGeneric.Invoke();
+        onKillWithTarget.Invoke(manag.gameObject);
+
         if (myManager)
         {
             myManager.myStats.upKills();
@@ -213,6 +215,28 @@ public class OnHitContainer : MonoBehaviour
         {
             Timer.myHitContainer = this;
             return true;
+        }
+        else
+        {
+            VisionTrigger vision = spawnedObject.GetComponent<VisionTrigger>();
+            if (vision)
+            {
+                vision.PlayerOwner = myManager.PlayerOwner;
+                if (vision.AppliesToAllies || vision.AppliesToEnemies)
+                {
+                    vision.PlayersToLookFor.Clear();
+                    if (vision.AppliesToAllies)
+                    {
+                        vision.PlayersToLookFor.Add(myManager.PlayerOwner);
+                    }
+                    if (vision.AppliesToEnemies)
+                    {
+                        vision.PlayersToLookFor.Add(myManager.PlayerOwner == 1 ? 2 : 1);
+                    }
+                }
+               
+                return true;
+            }
         }
 
         return false;

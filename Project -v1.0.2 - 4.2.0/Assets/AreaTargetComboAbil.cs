@@ -21,9 +21,7 @@ public class AreaTargetComboAbil : TargetAbility
     }
 
     public override void Activate()
-    {
-   
-    }
+    {}
 
     public override continueOrder canActivate(bool error)
     {

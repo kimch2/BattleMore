@@ -13,7 +13,7 @@ public class MortarProjectile : Projectile {
 	public float indicatorSize;
 	private GameObject myIndiactor;
     protected float yAmount;
-
+    public bool predictive;
     
 
     protected override void Update () {
@@ -52,19 +52,29 @@ public class MortarProjectile : Projectile {
 			TargetIndicator.GetComponentInChildren<Light> ().color = Color.red;
 		}
 
-		Vector3 hitzone = target.transform.position;
+		Vector3 hitzone = target.transform.position;      
 
-		if (inaccuracy > 0) {
+		if (inaccuracy > 0)
+        {
 			hitzone = target.transform.position;
 			float radius = Random.Range (0, inaccuracy);
 			float angle = Random.Range (0, 360);
 
 			hitzone.x += Mathf.Sin (Mathf.Deg2Rad * angle) * radius;
 			hitzone.z += Mathf.Cos (Mathf.Deg2Rad * angle) * radius;
-
-
 		}
-		transform.LookAt (hitzone);
+
+        if (predictive)
+        {
+            IMover mover = target.cMover;
+            if (mover)
+            {
+               // Debug.Log("prediction " + hitzone + "   " + hitzone + (target.transform.forward * mover.myspeed));
+                hitzone += target.transform.forward * mover.myspeed;
+            }
+        }
+
+        transform.LookAt (hitzone);
 		lastLocation = hitzone;
 		distance = Vector3.Distance (hitzone, transform.position);
 		if (TargetIndicator != null) {

@@ -63,5 +63,6 @@ public abstract class IMover: MonoBehaviour {
 		initialSpeed = MaxSpeed;
 
 	}
-	
+    public virtual void SetMaxSpeed(float m)
+    { MaxSpeed = m; }
 }

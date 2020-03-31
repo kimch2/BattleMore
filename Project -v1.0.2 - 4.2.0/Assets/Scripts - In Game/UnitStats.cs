@@ -430,7 +430,7 @@ public class UnitStats : MonoBehaviour {
 		if (health < 1) {
             if (RunLethalDamage(amount))
             {
-                sourceHitContianer.UnitKilled();
+                sourceHitContianer.UnitKilled(myManager);
                 kill(source, sourceHitContianer.myManager);
             }
             else
@@ -618,7 +618,7 @@ public class UnitStats : MonoBehaviour {
 	{
 		veternStat.kills++;
 
-		if (isUnitType(UnitTypes.UnitTypeTag.Turret) && transform.parent) {
+		if (transform.parent && isUnitType(UnitTypes.UnitTypeTag.Turret) ) {
 
 			UnitManager rootMan = transform.parent.GetComponentInParent<UnitManager> ();
 			if (rootMan) {

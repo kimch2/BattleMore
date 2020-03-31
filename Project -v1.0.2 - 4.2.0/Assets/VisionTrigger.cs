@@ -8,7 +8,7 @@ public abstract class VisionTrigger : MonoBehaviour {
     [HideInInspector]
     public int PlayerOwner;
 
-    protected List<int> PlayersToLookFor = new List<int>() {1};
+    public List<int> PlayersToLookFor = new List<int>() {1};
     [HideInInspector]
     public List<UnitManager> InVision;
     public bool CheckForDeaths = false;

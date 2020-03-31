@@ -1,0 +1,144 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7762381519985625304
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5609993279431298472}
+  - component: {fileID: 2734445386136332265}
+  m_Layer: 0
+  m_Name: OceanSprayOnHit
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5609993279431298472
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7762381519985625304}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5493630675261033441}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2734445386136332265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7762381519985625304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95cc792f619723c46b19c319c7e01d3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toApply: []
+  OnKillGeneric:
+    m_PersistentCalls:
+      m_Calls: []
+  onKillWithTarget:
+    m_PersistentCalls:
+      m_Calls: []
+  myManager: {fileID: 0}
+  source: {fileID: 0}
+  playerNumber: 0
+  FriendlyFireRatio: 0
+  AutoAddTriggers: 1
+--- !u!1 &8103689735470539016
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5493630675261033441}
+  - component: {fileID: 8683185040389294560}
+  m_Layer: 0
+  m_Name: OceanSprayAbility
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5493630675261033441
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8103689735470539016}
+  m_LocalRotation: {x: -0, y: -0.99990135, z: -0, w: 0.014049542}
+  m_LocalPosition: {x: -0.6738827, y: 2.1641483, z: -3.8614366}
+  m_LocalScale: {x: 1.0000004, y: 1, z: 1.0000004}
+  m_Children:
+  - {fileID: 5609993279431298472}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8683185040389294560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8103689735470539016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b39f8b2e2269964eb33b465d7395fc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: When allies die or when autoAttacks kills, a bubble is dropped that heals
+    allied minions.
+  Descripton: When allies die or when autoAttacks kills, a bubble is dropped that
+    heals allied minions.
+  iconPic: {fileID: 3286163911610860551, guid: 23af9c74aa9747b49a45fba2de3f47fe, type: 3}
+  myCost: {fileID: 0}
+  continueMoving: 0
+  RequiredUnit: []
+  canAutoCast: 0
+  autocast: 0
+  active: 0
+  maxChargeCount: 0
+  chargeCount: -1
+  soundEffect: {fileID: 0}
+  myHitContainer: {fileID: 2734445386136332265}
+  OnActivate:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTurnOff:
+    m_PersistentCalls:
+      m_Calls: []
+  DurationWhenActivated: 0
+  ActivateWithTarget:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8683185040389294560}
+        m_MethodName: DropItemOnUnit
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  Activatable: 0
+  triggerType: 7
+  VariableNumber: 150
+  OnTriggerEffect: {fileID: 0}
+  thingToDrop: {fileID: 850892373167587861, guid: 763412ef4beb0914abfcb289c7675d20,
+    type: 3}
+  PossibleNumberAmount: 50

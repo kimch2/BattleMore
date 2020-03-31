@@ -57,19 +57,21 @@ MonoBehaviour:
   maxChargeCount: 0
   chargeCount: -1
   soundEffect: {fileID: 0}
+  myHitContainer: {fileID: 2591702982445747992}
   range: 200
   target: {fileID: 0}
   location: {x: 0, y: 0, z: 0}
   targetArea: {fileID: 21300000, guid: 9dead7b94ebdb144c83e28ac38bed79d, type: 3}
   areaSize: 15
   myTargetType: 0
-  myHitContainer: {fileID: 2591702982445747992}
+  CastFromScreenEdge: 0
   Explosion: {fileID: 2224551624543510114, guid: 775639c67397ab243a08f73417d9fa5e,
     type: 3}
   shotCount: 25
   myDamage: 75
   FriendlyFire: 0
   shakeTheCamera: 0
+  timeBetweenShots: 0.087
 --- !u!114 &2830210650078608349
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -135,6 +137,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toApply: []
+  OnKillGeneric:
+    m_PersistentCalls:
+      m_Calls: []
+  onKillWithTarget:
+    m_PersistentCalls:
+      m_Calls: []
   myManager: {fileID: 0}
+  source: {fileID: 0}
+  playerNumber: 0
   FriendlyFireRatio: 0
   AutoAddTriggers: 1

@@ -13,9 +13,11 @@ public class GameTips : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		currentIndex = Random.Range (0, textHold.myTexts [0].myTexts.Count);
-		myText.text =  textHold.myTexts [0].myTexts [currentIndex];
-	
+        if (textHold)
+        {
+            currentIndex = Random.Range(0, textHold.myTexts[0].myTexts.Count);
+            myText.text = textHold.myTexts[0].myTexts[currentIndex];
+        }
 	}
 	
 

@@ -345,7 +345,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   Source: {fileID: 0}
-  sourceInt: 1
   MyHitContainer: {fileID: 0}
   damage: 0
   speed: 48
@@ -360,3 +359,4 @@ MonoBehaviour:
   TargetIndicator: {fileID: 0}
   indicatorPic: {fileID: 0}
   indicatorSize: 0
+  predictive: 1

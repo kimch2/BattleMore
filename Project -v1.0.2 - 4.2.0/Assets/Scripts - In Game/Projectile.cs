@@ -156,13 +156,13 @@ public  class Projectile : MonoBehaviour {
 			return;}
 		
 		if (other.gameObject == target || other.gameObject.transform.IsChildOf(target.transform)|| (Source && Source.transform.IsChildOf(other.transform))) {
-            Debug.Log("Terminating on " + target + "   Source is "); 
+            //Debug.Log("Terminating on " + target + "   Source is "); 
                 Terminate (other.gameObject.GetComponent<UnitManager>());
 		}
 
 		if(Source && (other.gameObject!= Source && !other.gameObject.transform.IsChildOf(Source.transform) &&  (!Source.transform.IsChildOf(other.transform))))
         {
-            Debug.Log("Terminating on " + target + "   Source is " + Source);
+           // Debug.Log("Terminating on " + target + "   Source is " + Source);
             Terminate(null);
         }
 	}

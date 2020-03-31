@@ -67,11 +67,11 @@ public class DeathInjector : DamagerIeffect
         UnitManager manag = source.GetComponent<UnitManager>();
         if (manag && manag.PlayerOwner == target.PlayerOwner) // Gives this ability to friends
         {
-            CopyIEffect(target, false);           
+            CopyIEffect(target, false, out bool alreadyOnIt);           
         }
         else
         {
-            CopyIEffect(target, true);
+            CopyIEffect(target, true, out bool alreadyOnIt);
         }
     }
 }
