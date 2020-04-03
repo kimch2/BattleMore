@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class AttackedTrigger : MonoBehaviour, Modifier
 {
+    //Used to warn the play that this guy is being attacked specifically, like a payload
+
     public List<int> VoiceLines = new List<int>();
     public float TimeBetweenPlaying;
     private float nextActionTime;

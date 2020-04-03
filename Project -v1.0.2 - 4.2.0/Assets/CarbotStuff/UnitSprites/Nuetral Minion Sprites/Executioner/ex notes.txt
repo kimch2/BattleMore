@@ -1,5 +1,0 @@
-1 idle
-11 move
-17 attack
-29 attack hits
-42 death

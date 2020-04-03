@@ -15,7 +15,8 @@ public abstract class TargetAbility : Ability
     public enum targetType { ground, unit, skillShot }
     public targetType myTargetType;
     protected GameObject myIndicator;
-    public bool CastFromScreenEdge;  
+    public bool CastFromScreenEdge;
+    public float ChannelTime;
 
     public bool inRange(Vector3 location)
     {
@@ -65,10 +66,54 @@ public abstract class TargetAbility : Ability
 
             }
             myIndicator.SetActive(true);
-            myIndicator.transform.LookAt(TargetSpot, Vector3.up);
-            
+            myIndicator.transform.LookAt(TargetSpot, Vector3.up);            
         }
     }
+
+
+    public void SpellCastShowIndicator(Vector3 TargetLocation)
+    {// will need to destroy the indicator early if our channel state is interrutped
+        if (myIndicator)
+        {
+           myIndicator = Instantiate(myIndicator, myIndicator.transform.position, myIndicator.transform.rotation, null);
+            //selfDestructTimer timer = ind.AddComponent<selfDestructTimer>();
+            //timer.timer = duration;
+
+        }
+        else
+        {
+            myIndicator = new GameObject("TargetZone");
+            myIndicator.AddComponent<SpriteRenderer>().sprite = targetArea;
+            myIndicator.transform.localScale = Vector3.one * areaSize / 8;
+            myIndicator.transform.eulerAngles = new Vector3(90,0,0);
+            // selfDestructTimer timer = myIndicator.AddComponent<selfDestructTimer>();
+            // timer.timer = duration;
+        }
+        myIndicator.SetActive(true);
+        myIndicator.transform.position = TargetLocation + Vector3.up * 5;
+
+
+        if (AbilityHeatMap.main)
+        {
+            if (myTargetType == targetType.skillShot)
+            {
+                if (CastFromScreenEdge)
+                {
+
+                }
+                else
+                {
+                    AbilityHeatMap.main.AddLine(transform.position, location, areaSize / 2, this, ChannelTime, 100); // Need to add in projectile travel time if thats a thing.
+                }
+            }
+            else
+            {
+                AbilityHeatMap.main.AddCircleWarning(TargetLocation, areaSize / 2, this, ChannelTime, 100); // Need to add in projectile travel time if thats a thing.
+            }
+        }
+
+    }
+
 
     public void DisableSkillShotIndicator()
     {

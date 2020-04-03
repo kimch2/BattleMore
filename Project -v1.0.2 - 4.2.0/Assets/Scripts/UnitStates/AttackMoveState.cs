@@ -102,10 +102,7 @@ public class AttackMoveState : UnitState {
 						}
 						PathingUpdate = 4;
 					}
-
-
 					PathingUpdate--;
-
 				}
 			}
 		}

@@ -88,10 +88,10 @@ public class CinematicCamera : SceneEventTrigger {
 	}
 	public void playScene(int sceneNumber)
 	{
-		trigger (sceneNumber, 0, Vector3.zero, null, true);
+		trigger (sceneNumber, 0, null, true);
 	}
 
-	public override void trigger (int index, float input, Vector3 location, GameObject target, bool doIt){
+	public override void trigger (int index, float input, GameObject target, bool doIt){
 
 		previousGameSpeed = Time.timeScale;
 		Time.timeScale = previousGameSpeed;
@@ -128,7 +128,7 @@ public class CinematicCamera : SceneEventTrigger {
 			Time.timeScale = previousGameSpeed;
 			foreach (SceneEventTrigger trig in myScenes[currentScene].nextTrig) {
 
-				trig.trigger (0, 0, Vector3.zero, null, false);
+				trig.trigger (0, 0, null, false);
 			}
 			myScenes [currentScene].onComplete.Invoke ();
 		

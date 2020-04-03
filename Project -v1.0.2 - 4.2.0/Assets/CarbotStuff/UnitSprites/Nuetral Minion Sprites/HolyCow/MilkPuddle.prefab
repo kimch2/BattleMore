@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1878162722444057473}
   - component: {fileID: 1878162722438636427}
   - component: {fileID: 786720306930507348}
+  - component: {fileID: 6844986583535194273}
   m_Layer: 19
   m_Name: MilkPuddle
   m_TagString: Untagged
@@ -27,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1878162722443075575}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -506.28296, y: 30.096788, z: 143.13928}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 7, y: 7, z: 7}
   m_Children:
   - {fileID: 4288717553843909220}
@@ -67,16 +68,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68fc87ca1a182e344a918ebaee257d59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerNumber: 0
-  AdditionaPlayerNums: 
+  ZoneName: 
+  PlayerOwner: 0
+  PlayersToLookFor: 01000000
   InVision: []
   CheckForDeaths: 0
   AppliesToEnemies: 0
   AppliesToAllies: 1
+  StacksEffect: 0
   myHitContainer: {fileID: 0}
   CantTarget: 
   duration: 5
   RepeatPeriod: 0.5
+--- !u!114 &6844986583535194273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1878162722443075575}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fa0f9f8f87927743854897397c853a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myRenderer: {fileID: 2474316533631833256}
+  frameRate: 16
+  StartSprites:
+  - {fileID: 21300000, guid: bb86db15bc250b749bc066174e9da90a, type: 3}
+  - {fileID: 21300000, guid: 0e6903c84c645644ab0b41da15ee1041, type: 3}
+  - {fileID: 21300000, guid: b22851d88f7b35747837fb7f9534a7af, type: 3}
+  - {fileID: 21300000, guid: ed8adc4699bcba042a5690031bd0c320, type: 3}
+  - {fileID: 21300000, guid: f68757f9bda3d5a49818ca2acd2968b5, type: 3}
+  - {fileID: 21300000, guid: 25fff10d1ca3afe4291fddeb8d6e3459, type: 3}
+  - {fileID: 21300000, guid: 72186f54c3e125b4f808cb4907d0b691, type: 3}
+  - {fileID: 21300000, guid: 65ccc17bac0d2da4aab213e40c6958f6, type: 3}
+  LoopSprites: []
+  Duration: 0
 --- !u!1 &4663546181289225790
 GameObject:
   m_ObjectHideFlags: 0
@@ -87,6 +115,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4288717553843909220}
   - component: {fileID: 2474316533631833256}
+  - component: {fileID: 4934921341114468691}
+  - component: {fileID: 1690414668992347768}
   m_Layer: 19
   m_Name: GameObject
   m_TagString: Untagged
@@ -102,8 +132,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4663546181289225790}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.09, y: 0, z: -0.1}
-  m_LocalScale: {x: 0.3258172, y: 1.2001604, z: 0.4016189}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.6, y: 1.6, z: 1}
   m_Children: []
   m_Father: {fileID: 1878162722443303481}
   m_RootOrder: 0
@@ -146,15 +176,90 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 3286163911610860551, guid: 93e2cf0fe978fd14c8fed3495209c118,
-    type: 3}
+  m_Sprite: {fileID: 21300000, guid: c7dcea75a66a4334db65fe3aa10556a4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 4.635529, y: 2.5140946}
+  m_Size: {x: 2.25, y: 2.25}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &4934921341114468691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4663546181289225790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fa0f9f8f87927743854897397c853a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myRenderer: {fileID: 2474316533631833256}
+  frameRate: 18
+  StartSprites:
+  - {fileID: 21300000, guid: 879d7e297fb484348a4d6470ea150111, type: 3}
+  - {fileID: 21300000, guid: 2619cc20489c08240adc7694693ccd15, type: 3}
+  - {fileID: 21300000, guid: 0e18ce1f488dbc6499ff4c11dbd534df, type: 3}
+  - {fileID: 21300000, guid: 1be8b3ae016f02d4d8fe3624273fff5b, type: 3}
+  - {fileID: 21300000, guid: 85759901bdae6524d86056f46aa89d8d, type: 3}
+  - {fileID: 21300000, guid: 3604d2679499dac408edaabe1acc286f, type: 3}
+  - {fileID: 21300000, guid: 86064fbb8e5a6964bb6d9edbfa86f304, type: 3}
+  - {fileID: 21300000, guid: d9df6b7c53b19a14da217867f1d0aacf, type: 3}
+  - {fileID: 21300000, guid: 98ddd857b363c254a9fde85a8026d9ce, type: 3}
+  - {fileID: 21300000, guid: 1090e1e0a0479f74ab894b0fd15ec9ca, type: 3}
+  - {fileID: 21300000, guid: aa558fd220cb94c42861dac23e0a10d6, type: 3}
+  - {fileID: 21300000, guid: 901e273d280053041a5ef571db166fe1, type: 3}
+  - {fileID: 21300000, guid: c7dcea75a66a4334db65fe3aa10556a4, type: 3}
+  LoopSprites:
+  - {fileID: 21300000, guid: c7dcea75a66a4334db65fe3aa10556a4, type: 3}
+  Duration: 9
+--- !u!114 &1690414668992347768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4663546181289225790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6f88bfd66c895247830de35f064b4d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeDelay: 9
+  player: 1
+  index: 0
+  input: 0
+  target: {fileID: 0}
+  doIt: 0
+  delay: 0
+  OnTrigger:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4934921341114468691}
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6844986583535194273}
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+  myTriggers: []

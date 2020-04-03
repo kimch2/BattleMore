@@ -106,6 +106,7 @@ GameObject:
   - component: {fileID: 7143027083839190367}
   - component: {fileID: 6506621520869736980}
   - component: {fileID: 2706553930773159288}
+  - component: {fileID: 258229262743068935}
   m_Layer: 15
   m_Name: GameObject
   m_TagString: Untagged
@@ -192,3 +193,23 @@ MonoBehaviour:
   LookAtCam: {fileID: 0}
   RandomRotate: 0
   this_t_: {fileID: 0}
+--- !u!114 &258229262743068935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7726784201507793780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fa0f9f8f87927743854897397c853a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myRenderer: {fileID: 0}
+  frameRate: 12
+  StartSprites: []
+  LoopSprites:
+  - {fileID: 21300000, guid: 7546e85c54297104283681e1a31d84d8, type: 3}
+  - {fileID: 21300000, guid: 0faf6b28aec05fd48b16d3eca5848b96, type: 3}
+  - {fileID: 21300000, guid: 874421f97beaa26469f5e4b4d58b3de0, type: 3}
+  Duration: 0

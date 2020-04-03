@@ -207,8 +207,15 @@ public class DaminionsInitializer : MonoBehaviour
         }
     }
 
+
+    float NextEnemyCheckTime;
+    public static bool MarchMode;
+    [Tooltip("The speed untis move at when no enemies are on screen")]
+    public float MarchSpeed = 15;
     private void Update()
     {
+        CheckMarchOrders();
+
         if (MyHero && MyHero.getUnitStats().currentEnergy != lastEnergy)
         {
             lastEnergy = MyHero.getUnitStats().currentEnergy;
@@ -222,8 +229,67 @@ public class DaminionsInitializer : MonoBehaviour
             VictoryTrigger.instance.Lose();
             this.enabled = false;
         }
+
+
     }
 
+
+    void CheckMarchOrders()
+    {
+        if (Time.time > NextEnemyCheckTime)
+        {
+            {
+                //This function might be too slow
+                bool VisibleEnemies = GameManager.main.playerList[1].getAllUnitsOnScreen().Count != 0;
+                if (!VisibleEnemies && !MarchMode)
+                {
+                    NextEnemyCheckTime = Time.time + .5f;
+                    MarchMode = true;
+                    GiveMarchOrder(true);
+                }
+                else if (VisibleEnemies && MarchMode)
+                {
+                    NextEnemyCheckTime = Time.time + 2;
+                    MarchMode = false;
+                    GiveMarchOrder(false);
+                }
+                else
+                {
+                    NextEnemyCheckTime = Time.time + .5f;
+                }
+            }
+        }
+    }
+
+    void GiveMarchOrder(bool MarchOn)
+    {
+        if (MarchOn)
+        {
+            foreach (KeyValuePair<string, List<UnitManager>> unit in GameManager.main.playerList[0].getUnitList())
+            {
+                foreach (UnitManager man in unit.Value)
+                {
+                    if (man.cMover)
+                    {
+                        man.cMover.SetMaxSpeed(MarchSpeed);
+                    }
+                }
+            }
+        }
+        else
+        {
+            foreach (KeyValuePair<string, List<UnitManager>> unit in GameManager.main.playerList[0].getUnitList())
+            {
+                foreach (UnitManager man in unit.Value)
+                {
+                    if (man.cMover)
+                    {
+                        man.cMover.ResetNormalMaxSpeed();
+                    }
+                }
+            }
+        }
+    }
 
 
     SpawnPointOverride PlayerSpawnOverride;
@@ -252,8 +318,12 @@ public class DaminionsInitializer : MonoBehaviour
             if (PlayerSpawnOverride)
             {
                 PlayerSpawnOverride.myHitContainer.trigger(MyHero.gameObject, man, 0);
-                PlayerSpawnOverride.ModifyUnit(man);
-            }         
+                PlayerSpawnOverride.ModifyUnit(man);              
+            }
+            if (MarchMode && man.cMover)
+            {
+                man.cMover.SetMaxSpeed(MarchSpeed *1.3f);
+            }
         }
         else
         {

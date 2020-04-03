@@ -22,11 +22,13 @@ public abstract class IMover: MonoBehaviour {
 	public 	abstract void resetMoveLocation (Transform theTarget);
     [HideInInspector]
     public bool m_lockRotation;
+    public UnitManager myManager;
 
-	void Awake()
+	protected void Awake()
 	{
 		initialSpeed = MaxSpeed;
 		myFogger = GetComponent<FogOfWarUnit> ();
+        myManager = GetComponent<UnitManager>();
 
 	}
 
@@ -64,5 +66,13 @@ public abstract class IMover: MonoBehaviour {
 
 	}
     public virtual void SetMaxSpeed(float m)
-    { MaxSpeed = m; }
+    {
+        MaxSpeed = m;
+    }
+
+    public void ResetNormalMaxSpeed()
+    {
+        myManager.myStats.statChanger.removeMoveSpeed(this);
+    }
+
 }

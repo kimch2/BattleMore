@@ -12,6 +12,7 @@ public class WorldRecharger : MonoBehaviour {
     public List<RoamAI> ToRoam;
 
     public List<List<Notify>> SpellCastNotify = new List<List<Notify>>();
+    List<ChampionAI> champions = new List<ChampionAI>();
 
     public static WorldRecharger main;
 
@@ -145,5 +146,7 @@ public class WorldRecharger : MonoBehaviour {
             toCall.trigger(null,source,null,0);
         }
     }
+
+  
 
 }

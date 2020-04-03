@@ -80,7 +80,7 @@ SpriteRenderer:
   m_Size: {x: 2.3689446, y: 2.5415626}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &8324886342161956959
@@ -98,15 +98,29 @@ MonoBehaviour:
   myRenderer: {fileID: 4483975752081572433}
   frameRate: 12
   StartSprites:
-  - {fileID: 3286163911610860551, guid: aed2aeec734515c4d805f00745be5e92, type: 3}
-  - {fileID: 3286163911610860551, guid: 2c21580ee145a4343ad9af3d05592f0e, type: 3}
-  - {fileID: 3286163911610860551, guid: 970d574c7560474469d0356d949dfd94, type: 3}
-  - {fileID: 3286163911610860551, guid: deb6f92d1fd1f6d4588ffa1c20a70aa2, type: 3}
-  - {fileID: 3286163911610860551, guid: 3977bf024ec4c5f48bce2f9397d76bac, type: 3}
-  - {fileID: 3286163911610860551, guid: 411fb904ce003e8499d3f2d809323415, type: 3}
-  - {fileID: 3286163911610860551, guid: 1261b3a3c10b9aa49b2c90b21e7763a6, type: 3}
-  - {fileID: 3286163911610860551, guid: 325c82d995105ef49a8e8159b0f3a1ca, type: 3}
-  - {fileID: 3286163911610860551, guid: 0e1cce22117973d4c85b2291d3e9a980, type: 3}
+  - {fileID: 21300000, guid: 1528d71a1bf70fb49aebf3ab3938039f, type: 3}
+  - {fileID: 21300000, guid: 1e3b18242a87d2945b7d6f72b5d6685e, type: 3}
+  - {fileID: 21300000, guid: bff6fa83cbe1d824fa984d57c76c8588, type: 3}
+  - {fileID: 21300000, guid: ee8e4c46b4710d648bd88dc0418997e2, type: 3}
+  - {fileID: 21300000, guid: a8dbfe6c6885ade4297981d3df15398e, type: 3}
+  - {fileID: 21300000, guid: e4e031e887375a94d8fc2787a5d27e68, type: 3}
+  - {fileID: 21300000, guid: 2b4b0fdefa51ffe48880071bc10d3d74, type: 3}
+  - {fileID: 21300000, guid: 1358b7bca37b284499e7e4d13d6fe02e, type: 3}
+  - {fileID: 21300000, guid: 4411eb022bfaa844bb58e774573b8f34, type: 3}
+  - {fileID: 21300000, guid: 4411eb022bfaa844bb58e774573b8f34, type: 3}
+  - {fileID: 21300000, guid: 4411eb022bfaa844bb58e774573b8f34, type: 3}
+  - {fileID: 21300000, guid: 4411eb022bfaa844bb58e774573b8f34, type: 3}
+  - {fileID: 21300000, guid: 4411eb022bfaa844bb58e774573b8f34, type: 3}
+  - {fileID: 21300000, guid: 4411eb022bfaa844bb58e774573b8f34, type: 3}
+  - {fileID: 21300000, guid: 178a57626932a7f4abbeaad30faef2e8, type: 3}
+  - {fileID: 21300000, guid: 178a57626932a7f4abbeaad30faef2e8, type: 3}
+  - {fileID: 21300000, guid: 178a57626932a7f4abbeaad30faef2e8, type: 3}
+  - {fileID: 21300000, guid: 178a57626932a7f4abbeaad30faef2e8, type: 3}
+  - {fileID: 21300000, guid: 73be0014c9e92994098cbdf118cdf037, type: 3}
+  - {fileID: 21300000, guid: 73be0014c9e92994098cbdf118cdf037, type: 3}
+  - {fileID: 21300000, guid: 73be0014c9e92994098cbdf118cdf037, type: 3}
+  - {fileID: 21300000, guid: 73be0014c9e92994098cbdf118cdf037, type: 3}
+  - {fileID: 21300000, guid: 73be0014c9e92994098cbdf118cdf037, type: 3}
   LoopSprites: []
   Duration: 0
 --- !u!114 &1993883847136956319
@@ -215,5 +229,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4d1d13abbebabb4bbc31a05895f27c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 1.5
+  timer: 2
   showTimer: 0

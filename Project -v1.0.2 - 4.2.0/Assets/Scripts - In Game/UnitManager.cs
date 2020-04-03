@@ -83,7 +83,11 @@ public class UnitManager : Unit, IOrderable {
         }
 
         if (cMover == null) {
-            cMover = (IMover)gameObject.GetComponent(typeof(IMover));
+            cMover = (IMover)gameObject.GetComponent(typeof(IMover));          
+        }
+        if (cMover)
+        {
+            cMover.myManager = this;
         }
 
 

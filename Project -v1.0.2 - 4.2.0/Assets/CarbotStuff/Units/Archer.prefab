@@ -971,6 +971,7 @@ MonoBehaviour:
   initialSpeed: 0
   myFogger: {fileID: 0}
   m_lockRotation: 0
+  myManager: {fileID: 0}
   repathRate: 1.5
   moveNextDist: 1
 --- !u!114 &2776605538683397682
@@ -1041,7 +1042,7 @@ MonoBehaviour:
   numOfAttacks: 1
   RepeatDelay: 0.06
   baseDamage: 20
-  range: 90
+  range: 65
   turret: {fileID: 0}
   firePoints: []
   damagePoint: 0.75
@@ -1054,7 +1055,7 @@ MonoBehaviour:
   minimumRange: 0
   attackArc: 100
   projectileSpeed: 55
-  prioritizeFarAway: 1
+  prioritizeFarAway: 0
 --- !u!114 &1394852619232180258
 MonoBehaviour:
   m_ObjectHideFlags: 0

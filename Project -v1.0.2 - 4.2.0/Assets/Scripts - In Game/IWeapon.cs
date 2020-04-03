@@ -341,7 +341,6 @@ public class IWeapon : MonoBehaviour {
 
 			proj = createBullet ();
 
-
 			damage = fireTriggers (this.gameObject, proj, target, damage);
 
 			Projectile script = proj.GetComponent<Projectile> ();

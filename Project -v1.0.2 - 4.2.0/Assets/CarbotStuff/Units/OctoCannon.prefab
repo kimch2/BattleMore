@@ -979,7 +979,7 @@ MonoBehaviour:
   damagePoint: 0.2
   AttackDelay: 0.2
   myHitContainer: {fileID: 6150736397262153315}
-  cantAttackTypes: 
+  cantAttackTypes: 0a000000
   extraDamage: []
   projectile: {fileID: 425419951433558034, guid: 06003c3c201df48409d25f8f2f277d70,
     type: 3}
@@ -1517,7 +1517,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toApply: []
-  OnKill:
+  OnKillGeneric:
+    m_PersistentCalls:
+      m_Calls: []
+  onKillWithTarget:
     m_PersistentCalls:
       m_Calls: []
   myManager: {fileID: 3225162869616002239}

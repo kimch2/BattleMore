@@ -95,14 +95,13 @@ GameObject:
   - component: {fileID: 114000013774368626}
   - component: {fileID: 135000010577105124}
   - component: {fileID: 114000014001064082}
-  - component: {fileID: 114000013508021368}
   - component: {fileID: 82000014253969542}
   - component: {fileID: 114000013155553352}
   - component: {fileID: 114000013793472630}
   - component: {fileID: 114000012338169294}
-  - component: {fileID: 114000013395066382}
   - component: {fileID: 135017469830340392}
   - component: {fileID: 5781850776897077545}
+  - component: {fileID: 4581757381202175961}
   m_Layer: 9
   m_Name: BlastDrone
   m_TagString: Enemy
@@ -148,7 +147,7 @@ MonoBehaviour:
   myAnim: {fileID: 95202464277301188}
   cMover: {fileID: 114000013155553352}
   myWeapon:
-  - {fileID: 114000013508021368}
+  - {fileID: 4581757381202175961}
   MultiWeaponAttack: 0
   myStats: {fileID: 114000010316708748}
   visionRange: 80
@@ -288,7 +287,6 @@ MonoBehaviour:
     mySprite: {fileID: 0}
   deathCorpse: {fileID: 0}
   deathEffect: {fileID: 0}
-  takeDamageEffect: {fileID: 0}
   UnitPortrait: {fileID: 0}
   goodBuffs: []
   badBuffs: []
@@ -343,38 +341,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackWhileMoving: 0
---- !u!114 &114000013508021368
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1000011654559442}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b66c07a6a0ae214c8b6ef5cb2d7e8f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Title: Mining Blast
-  myIcon: {fileID: 21300000, guid: 7417496ff2e500e4d9a4bf0cd28e11a2, type: 3}
-  myManager: {fileID: 0}
-  OnHitEffect: {fileID: 0}
-  attackSoundEffect: {fileID: 8300000, guid: 982b1896316155b4fbd2cc5cef6d79a6, type: 3}
-  myAnimator: {fileID: 0}
-  AnimationName: 
-  attackPeriod: 1
-  baseAttackPeriod: 0
-  numOfAttacks: 1
-  RepeatDelay: 0.06
-  baseDamage: 120
-  range: 8
-  turret: {fileID: 0}
-  firePoints: []
-  damagePoint: 0
-  AttackDelay: 0
-  cantAttackTypes: 0a000000
-  extraDamage: []
-  projectile: {fileID: 1000011998560114, guid: f231f528a6f87d6448c9a0e65785c613, type: 3}
 --- !u!82 &82000014253969542
 AudioSource:
   m_ObjectHideFlags: 0
@@ -535,18 +501,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77f586f285b3847808d79083bd19ef1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114000013395066382
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1000011654559442}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9286850862ed9c549aede3c4ed99bd0f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!135 &135017469830340392
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -578,7 +532,41 @@ MonoBehaviour:
   - {fileID: 23338831334452140}
   - {fileID: 23683583840523164}
   - {fileID: 23000010921598050}
+  ColoredSprites: []
   mySkinner: {fileID: 0}
+--- !u!114 &4581757381202175961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000011654559442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96bca76839780a54aab7a098c461d665, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Title: Mining Blast
+  myIcon: {fileID: 21300000, guid: 7417496ff2e500e4d9a4bf0cd28e11a2, type: 3}
+  myManager: {fileID: 114000010891887350}
+  OnHitEffect: {fileID: 0}
+  attackSoundEffect: {fileID: 8300000, guid: 982b1896316155b4fbd2cc5cef6d79a6, type: 3}
+  myAnimator: {fileID: 0}
+  AnimationName: Attack
+  attackPeriod: 1
+  baseAttackPeriod: 0
+  numOfAttacks: 1
+  RepeatDelay: 0
+  baseDamage: 120
+  range: 8
+  turret: {fileID: 0}
+  firePoints: []
+  damagePoint: 0
+  AttackDelay: 0
+  myHitContainer: {fileID: 0}
+  cantAttackTypes: 0a000000
+  extraDamage: []
+  projectile: {fileID: 1000011998560114, guid: f231f528a6f87d6448c9a0e65785c613, type: 3}
 --- !u!1 &1000012185661326
 GameObject:
   m_ObjectHideFlags: 0

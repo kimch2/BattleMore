@@ -23,6 +23,10 @@ public class OverTimeApplier : VisionTrigger
         {
             InvokeRepeating("TriggerAll",RepeatPeriod, RepeatPeriod);
         }
+        if (AbilityHeatMap.main && AppliesToEnemies)
+        {
+            AbilityHeatMap.main.AddCircleWarning(transform.position, GetComponent<SphereCollider>().radius * transform.localScale.x, this, 0, 100);
+        }
     }
 
     private void Start()
@@ -107,8 +111,12 @@ public class OverTimeApplier : VisionTrigger
             {
                 UnitExitTrigger(man);
             }
-            Debug.Log(man.gameObject + " Loop " + man.cMover.MaxSpeed);
         }
+        if (AbilityHeatMap.main && AppliesToEnemies)
+        {
+            AbilityHeatMap.main.RemoveCircleArea(this);
+        }
+
         Destroy(this.gameObject);
     }
 }

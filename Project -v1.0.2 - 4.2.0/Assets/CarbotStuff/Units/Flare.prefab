@@ -343,7 +343,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2503764452949805206}
-  m_LocalRotation: {x: -0, y: -0.46088174, z: -0, w: -0.8874616}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.39, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children:
@@ -384,13 +384,12 @@ GameObject:
   - component: {fileID: 2503764453012492134}
   - component: {fileID: 2503764453012492133}
   - component: {fileID: 2503764453012492132}
-  - component: {fileID: 2503764453012492131}
   - component: {fileID: 2503764453012492130}
   - component: {fileID: 2503764453012492129}
   - component: {fileID: 2503764453012492128}
   - component: {fileID: 2503764453012492142}
   - component: {fileID: 5562630307207205973}
-  - component: {fileID: 2454682260727234656}
+  - component: {fileID: 7962694195534353254}
   m_Layer: 9
   m_Name: Flare
   m_TagString: Enemy
@@ -437,7 +436,7 @@ MonoBehaviour:
   myAnim: {fileID: 8908326764858672845}
   cMover: {fileID: 2503764453012492129}
   myWeapon:
-  - {fileID: 2503764453012492131}
+  - {fileID: 7962694195534353254}
   MultiWeaponAttack: 0
   myStats: {fileID: 2503764453012492135}
   visionRange: 95
@@ -625,41 +624,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackWhileMoving: 0
---- !u!114 &2503764453012492131
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2503764453012492140}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b66c07a6a0ae214c8b6ef5cb2d7e8f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Title: Exploder
-  myIcon: {fileID: 21300000, guid: 26b59e5a237653d4b83214f0ea586275, type: 3}
-  myManager: {fileID: 2503764453012492155}
-  OnHitEffect: {fileID: 0}
-  attackSoundEffect: {fileID: 8300000, guid: 4ae4fe17d19c04e10920bfaca3bd8290, type: 3}
-  myAnimator: {fileID: 0}
-  AnimationName: Attack
-  attackPeriod: 0.333
-  baseAttackPeriod: 0
-  numOfAttacks: 1
-  RepeatDelay: 0.06
-  baseDamage: 4
-  range: 5
-  turret: {fileID: 0}
-  firePoints:
-  - position: {x: -0.2, y: 4.61, z: 0.31}
-    myParticle: {fileID: 0}
-  damagePoint: 0.2
-  AttackDelay: 0.52
-  myHitContainer: {fileID: 2020247532550655502}
-  cantAttackTypes: 
-  extraDamage: []
-  projectile: {fileID: 1000011998560114, guid: f231f528a6f87d6448c9a0e65785c613, type: 3}
 --- !u!82 &2503764453012492130
 AudioSource:
   m_ObjectHideFlags: 0
@@ -774,6 +738,7 @@ MonoBehaviour:
   initialSpeed: 0
   myFogger: {fileID: 0}
   m_lockRotation: 0
+  myManager: {fileID: 0}
   repathRate: 1.5
   moveNextDist: 1
 --- !u!114 &2503764453012492128
@@ -837,7 +802,7 @@ MonoBehaviour:
   ColoredSprites:
   - {fileID: 2975479938891905734}
   mySkinner: {fileID: 0}
---- !u!114 &2454682260727234656
+--- !u!114 &7962694195534353254
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -846,9 +811,31 @@ MonoBehaviour:
   m_GameObject: {fileID: 2503764453012492140}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9286850862ed9c549aede3c4ed99bd0f, type: 3}
+  m_Script: {fileID: 11500000, guid: 96bca76839780a54aab7a098c461d665, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Title: Exploder Weapon
+  myIcon: {fileID: 21300000, guid: c87c729237638234f99706ca72695ad2, type: 3}
+  myManager: {fileID: 2503764453012492155}
+  OnHitEffect: {fileID: 0}
+  attackSoundEffect: {fileID: 0}
+  myAnimator: {fileID: 0}
+  AnimationName: Attack
+  attackPeriod: 1
+  baseAttackPeriod: 0
+  numOfAttacks: 1
+  RepeatDelay: 0.06
+  baseDamage: 25
+  range: 5
+  turret: {fileID: 0}
+  firePoints: []
+  damagePoint: 0
+  AttackDelay: 0
+  myHitContainer: {fileID: 2020247532550655502}
+  cantAttackTypes: 0a000000
+  extraDamage: []
+  projectile: {fileID: 5164414903442694681, guid: c51e1fba41ece764db09f5b4c8f02da9,
+    type: 3}
 --- !u!1 &2503764453210192854
 GameObject:
   m_ObjectHideFlags: 0
@@ -1063,7 +1050,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2503764453404683133}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.54, z: -0.0000030696392}
+  m_LocalPosition: {x: 0, y: 5.340003, z: -0.0000030696392}
   m_LocalScale: {x: 1.0000005, y: 1, z: 1.0000005}
   m_Children:
   - {fileID: 2503764454396640076}
@@ -1195,7 +1182,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2503764453688983068}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 4.4399977, z: -0.0000030696392}
+  m_LocalPosition: {x: 0, y: 6.24, z: -0.0000030696392}
   m_LocalScale: {x: 1.0000005, y: 1, z: 1.0000005}
   m_Children:
   - {fileID: 2503764453210192855}
@@ -1278,7 +1265,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2503764454380906814}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 5.3449965, z: -0.0000030696392}
+  m_LocalPosition: {x: 0, y: 7.1449995, z: -0.0000030696392}
   m_LocalScale: {x: 1.0000005, y: 1, z: 1.0000005}
   m_Children:
   - {fileID: 2503764452925374583}
@@ -1415,7 +1402,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4492227487238964842}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.37, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2503764452949805162}
@@ -1459,13 +1446,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 3286163911610860551, guid: cc80cbf1316c2f84e9e2c5df0daa6d64,
-    type: 3}
+  m_Sprite: {fileID: 21300000, guid: ee6f29aed60434447a413f995ed6955c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2.3689446, y: 2.5415626}
+  m_Size: {x: 0.75, y: 1.25}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -1481,7 +1467,7 @@ Animator:
   m_GameObject: {fileID: 4492227487238964842}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 6b73e1367a084ad419207ecb169d8682, type: 2}
+  m_Controller: {fileID: 9100000, guid: cce3fd0e2d1ba2b4b849887330b5464f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

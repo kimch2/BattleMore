@@ -383,7 +383,7 @@ MonoBehaviour:
   damagePoint: 0.2
   AttackDelay: 0.1
   myHitContainer: {fileID: 5496750462472801043}
-  cantAttackTypes: 
+  cantAttackTypes: 0a000000
   extraDamage: []
   projectile: {fileID: 0}
 --- !u!82 &1410361477267233325
@@ -1517,7 +1517,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toApply: []
-  OnKill:
+  OnKillGeneric:
+    m_PersistentCalls:
+      m_Calls: []
+  onKillWithTarget:
     m_PersistentCalls:
       m_Calls: []
   myManager: {fileID: 1410361477267233332}
@@ -1590,6 +1593,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   DurationWhenActivated: 0
+  ActivateWithTarget:
+    m_PersistentCalls:
+      m_Calls: []
   Activatable: 0
   triggerType: 1
   VariableNumber: 1
@@ -1607,6 +1613,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 550c744d482bf4b44836df6193654658, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EffectName: NameMe!
   onTarget: 1
   VisualEffects: []
   myBuffs:
@@ -1615,7 +1622,6 @@ MonoBehaviour:
     Flat: 400
   Stacks: 0
   Duration: 0
-  ApplyOnStart: 1
   Decays: 0
 --- !u!114 &5846825566125745688
 MonoBehaviour:

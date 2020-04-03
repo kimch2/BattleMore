@@ -44,7 +44,65 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toApply: []
-  OnKill:
+  OnKillGeneric:
+    m_PersistentCalls:
+      m_Calls: []
+  onKillWithTarget:
+    m_PersistentCalls:
+      m_Calls: []
+  myManager: {fileID: 7815806263956882135}
+  source: {fileID: 0}
+  playerNumber: 0
+  FriendlyFireRatio: 0
+  AutoAddTriggers: 1
+--- !u!1 &3423941635571084009
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6423692286560910567}
+  - component: {fileID: 4264504800208425003}
+  m_Layer: 0
+  m_Name: OnHitContainer (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6423692286560910567
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3423941635571084009}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -277.07492, y: 8.901022, z: -386.98447}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8312860947247745277}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4264504800208425003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3423941635571084009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95cc792f619723c46b19c319c7e01d3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toApply: []
+  OnKillGeneric:
+    m_PersistentCalls:
+      m_Calls: []
+  onKillWithTarget:
     m_PersistentCalls:
       m_Calls: []
   myManager: {fileID: 7815806263956882135}
@@ -80,7 +138,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0.99990135, z: -0, w: 0.014049542}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.0000004, y: 1, z: 1.0000004}
-  m_Children: []
+  m_Children:
+  - {fileID: 6423692286560910567}
   m_Father: {fileID: 7815806263956882128}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -108,7 +167,9 @@ MonoBehaviour:
   maxChargeCount: 0
   chargeCount: -1
   soundEffect: {fileID: 0}
-  myHitContainer: {fileID: 0}
+  myHitContainer: {fileID: 4264504800208425003}
+  metaData:
+    AbilityUsage: 
   OnActivate:
     m_PersistentCalls:
       m_Calls:
@@ -123,10 +184,24 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 3848538210575747937}
+        m_MethodName: Play
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Cast
+          m_BoolArgument: 0
+        m_CallState: 2
   OnTurnOff:
     m_PersistentCalls:
       m_Calls: []
   DurationWhenActivated: 0
+  ActivateWithTarget:
+    m_PersistentCalls:
+      m_Calls: []
   Activatable: 0
   triggerType: 7
   VariableNumber: 60
@@ -155,11 +230,14 @@ MonoBehaviour:
   maxChargeCount: 0
   chargeCount: -1
   soundEffect: {fileID: 0}
-  myHitContainer: {fileID: 0}
+  myHitContainer: {fileID: 4264504800208425003}
+  metaData:
+    AbilityUsage: 
   ToSpawn: {fileID: 2899125463594918715, guid: 6a834b794bfba244fa3da60819856b23, type: 3}
   spawnCount: 1
   SpawnAtScreenEdge: 0
   MaxUnitCount: 4
+  SpawnFX: {fileID: 2292522662374537835, guid: 1186ffb5c75c0a449813f0291bf71f57, type: 3}
 --- !u!1 &7815806263522567873
 GameObject:
   m_ObjectHideFlags: 0
@@ -808,8 +886,8 @@ MonoBehaviour:
   firePoints:
   - position: {x: -0.2, y: 4.61, z: 0.31}
     myParticle: {fileID: 0}
-  damagePoint: 1.2
-  AttackDelay: 1.1
+  damagePoint: 0.5
+  AttackDelay: 0.2
   myHitContainer: {fileID: 2669056137960307387}
   cantAttackTypes: 
   extraDamage: []
@@ -929,6 +1007,7 @@ MonoBehaviour:
   initialSpeed: 0
   myFogger: {fileID: 0}
   m_lockRotation: 0
+  myManager: {fileID: 0}
   repathRate: 1.5
   moveNextDist: 1
 --- !u!114 &7815806263956882124
@@ -1556,8 +1635,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8115455722608446406}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 1}
+  m_LocalPosition: {x: 0, y: 4.5, z: 0}
+  m_LocalScale: {x: 4, y: 4, z: 1}
   m_Children: []
   m_Father: {fileID: 7815806263885940166}
   m_RootOrder: 0
@@ -1600,13 +1679,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 3286163911610860551, guid: 667653ef3b4827e468c215db6d5822d1,
-    type: 3}
+  m_Sprite: {fileID: 21300000, guid: 60847c7b88ace024482b90b8ef7fbbb4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2.3689446, y: 2.5415626}
+  m_Size: {x: 1.65, y: 1.5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

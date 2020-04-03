@@ -10,6 +10,7 @@ public class DMSpawnUnit : Ability
     [Tooltip("How many of this unit type are allowed at a time")]
     public int MaxUnitCount = 50;
     List<GameObject> CurrentUnits = new List<GameObject>();
+    public GameObject SpawnFX;
 
     public override void Start() // We have this here so other source can call Start and any of this guy's inheriters will have it called instead
     {
@@ -41,6 +42,10 @@ public class DMSpawnUnit : Ability
                 
                 float offset = (i+1) * 6 - spawnCount * 3 ;
                 GameObject newGuy = GameObject.Instantiate<GameObject>(ToSpawn, getSpawnLocation() + Vector3.forward * offset, Quaternion.identity);// unitMan.CreateInstance(getSpawnLocation() + Vector3.forward * i * 5, myManager.PlayerOwner);
+                if (SpawnFX)
+                {
+                    Instantiate<GameObject>(SpawnFX, newGuy.transform.position, Quaternion.identity);
+                }
                 CurrentUnits.Add(newGuy);
                 foreach (UnitManager man in newGuy.GetComponentsInChildren<UnitManager>())
                 {

@@ -1,9 +1,0 @@
-1 idle
-11 walk
-16 burrow loop
-21 burrow end
-32 attack
-48 unburrow
-59 death
-75 projectile spinny blade
-78 pieces

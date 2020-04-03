@@ -10,8 +10,6 @@ public class ArtilleryBastion  : TargetAbility {
 	public GameObject BasicShell;
 	Coroutine currentCharger;
 
-	public int maxChargeCount = 500;
-
 
     // Use this for initialization
     public override void Start()
@@ -108,15 +106,6 @@ public class ArtilleryBastion  : TargetAbility {
 			Invoke ("WaitForAmmo", .1f);
 		}
 			
-	}
-
-
-	public void changeCharge(int n)
-	{
-		chargeCount += n;
-
-	
-		updateUICommandCard ();
 	}
 
 }

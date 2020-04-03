@@ -35,7 +35,7 @@ public class Objective : SceneEventTrigger {
 	}
 	
 
-	public override void trigger (int index, float input, Vector3 location, GameObject target, bool doIt){
+	public override void trigger (int index, float input, GameObject target, bool doIt){
 		BeginObjective ();
 	}
 
@@ -51,12 +51,12 @@ public class Objective : SceneEventTrigger {
 
 			foreach (SceneEventTrigger trig in myEvents) {
 				if (trig) {
-					trig.trigger (0, 0, Vector3.zero, null, false);
+					trig.trigger (0, 0,  null, false);
 				}
 			}
 
 			if (nextObjective) {
-				nextObjective.trigger (0, 0, Vector3.zero, null, false);
+				nextObjective.trigger (0, 0,  null, false);
 			}
 			VictoryTrigger.instance.CompleteObject (this);
 	

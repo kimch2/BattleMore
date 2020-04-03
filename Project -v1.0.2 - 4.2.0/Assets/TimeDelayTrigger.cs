@@ -9,7 +9,6 @@ public class TimeDelayTrigger : MonoBehaviour {
 
 	public  int index;
 	public  float input;
-	public  Vector3 location;
 	public  GameObject target; 
 	public  bool doIt;
 	public float delay;
@@ -38,7 +37,7 @@ public class TimeDelayTrigger : MonoBehaviour {
 		OnTrigger.Invoke();
 		foreach (SceneEventTrigger trig in myTriggers) {
 			if (trig) {
-				trig.trigger (index, input, location, target, doIt);
+				trig.trigger (index, input, target, doIt);
 			}
 			yield return null;
 		}

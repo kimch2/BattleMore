@@ -49,10 +49,23 @@ public class AbilityFollowState  : UnitState {
 		}
 	}
 
+    bool Channeling = false;
+    float CastTime;
 	// Update is called once per frame
 	override
 	public void Update () {
-		
+
+        if (Channeling)
+        {
+            if (Time.time > CastTime)
+            {
+                myAbility.Cast();
+                WorldRecharger.main.SpellWasCast(myManager.PlayerOwner, myManager.gameObject);
+                myManager.changeState(new DefaultState());
+            }
+            return;
+        }
+
 		if (!target && Follow) {
 			myManager.changeState(new DefaultState());
 			return;
@@ -67,29 +80,39 @@ public class AbilityFollowState  : UnitState {
 		}
 
 	
-		if (!myAbility.inRange (location)) {
-           // Debug.Log("moving");
-		
+		if (!myAbility.inRange (location))
+        {
 			myManager.cMover.move ();
-		} else {
-
-			myAbility.setTarget(location, target);
+		}
+        else
+        {
+            myManager.cMover.stop();
+            myAbility.setTarget(location, target);
 			if (myAbility.canActivate (false).canCast) {
-				myAbility.Cast ();
-                WorldRecharger.main.SpellWasCast(myManager.PlayerOwner, myManager.gameObject);
+                Channeling = true;
+                CastTime = Time.time + myAbility.ChannelTime;
+                
+                myAbility.SpellCastShowIndicator(location);
+                //myAbility.Cast ();
+                //WorldRecharger.main.SpellWasCast(myManager.PlayerOwner, myManager.gameObject);
             }
 		
-			myManager.changeState(new DefaultState());
-			return;
+			//myManager.changeState(new DefaultState());
 
 		}
-		//attack
-
-
 	}
 
 	override
 	public void endState()
 	{
+        if (Channeling)
+        {
+            myAbility.DisableSkillShotIndicator();
+
+            if (AbilityHeatMap.main)
+            {
+                AbilityHeatMap.main.RemoveCircleArea(myAbility); // Need to add in projectile travel time if thats a thing.
+            }
+        }
 	}
 }

@@ -66,7 +66,7 @@ public class TriggeredAbility : ActivatedAbility, Modifier, Notify, KillModifier
         hiddenVariableStored = VariableNumber;
         if (triggerType == TriggerType.RepeatTimer)
         {
-            InvokeRepeating("Trigger", VariableNumber, VariableNumber);
+            InvokeRepeating("RepeatedInvoke", VariableNumber, VariableNumber);
         }
         else if (triggerType == TriggerType.OnDamaged)
         {

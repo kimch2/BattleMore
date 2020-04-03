@@ -1,5 +1,0 @@
-1 idle
-5 move
-10 attack
-17 death
-27 pieces

@@ -1,0 +1,8 @@
+1-12 idle
+13-20 move
+21-30 summon knight minion
+31 knockback
+32-41 stunned
+41-53 victory
+54-62 death
+63-65 decay

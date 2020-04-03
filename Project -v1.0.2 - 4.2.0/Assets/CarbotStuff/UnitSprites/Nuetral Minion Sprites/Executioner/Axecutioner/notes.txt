@@ -1,6 +1,7 @@
 1-10 idle
 11-22 run
 23-52 attack
+	(41-42 cycle frames as he struggles to pick up axe for next attack)
 53 knockback
 54-63 stunned
 64-70 victory

@@ -21,7 +21,6 @@ public class BubbleBurst : TargetAbility
     {
         if (BubbleOwnerMap.ContainsKey(bubble.PlayerOwner))
         {
-            Debug.Log("Adding bubble");
             BubbleOwnerMap[bubble.PlayerOwner].Add(bubble);
         }
     }

@@ -1,0 +1,7 @@
+1-18 idle/move
+19-26 attack
+27 knockback
+28-37 stunned
+38-49 victory
+50-61 death
+62-63 decay

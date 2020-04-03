@@ -24,7 +24,7 @@ public class ObjectiveTrigger : SceneEventTrigger {
 	//}
 	*/
 
-	public override void trigger (int index, float input, Vector3 location, GameObject target, bool doIt){
+	public override void trigger (int index, float input, GameObject target, bool doIt){
 		if (finishObjective && myObj) {
 			myObj.complete ();
 		} else {

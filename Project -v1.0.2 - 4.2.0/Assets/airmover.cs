@@ -23,6 +23,7 @@ public class airmover : IMover {
 	public GameObject FlyingDecal;
 
 	public void Start () {
+
 		myFogger = GetComponent<FogOfWarUnit>();
 		controller = GetComponent<CharacterController>();
 		//Start a new path to the targetPosition, return the result to the OnPathComplete function
@@ -53,7 +54,8 @@ public class airmover : IMover {
 
 	override
 	public void stop()
-	{GetComponent<UnitManager> ().animStop();
+    {
+        myManager.animStop();
 		myspeed = .1f;
 	}
 
@@ -192,7 +194,7 @@ public class airmover : IMover {
 		}
 		//targetPosition = location + Vector3.up * flyerHeight;
 	//Debug.Log ("Target is " + location);
-		GetComponent<UnitManager> ().animMove ();
+		myManager.animMove ();
 		//this.gameObject.transform.LookAt(destination);
 
 

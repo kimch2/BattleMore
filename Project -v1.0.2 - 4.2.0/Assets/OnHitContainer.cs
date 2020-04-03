@@ -216,8 +216,7 @@ public class OnHitContainer : MonoBehaviour
             Timer.myHitContainer = this;
             return true;
         }
-        else
-        {
+
             VisionTrigger vision = spawnedObject.GetComponent<VisionTrigger>();
             if (vision)
             {
@@ -237,7 +236,21 @@ public class OnHitContainer : MonoBehaviour
                
                 return true;
             }
+
+        UnitManager man = spawnedObject.GetComponent<UnitManager>();
+        if (man)
+        {
+            DaminionsInitializer.main.AlterUnit(man);
+            myManager.Initialize(myManager.PlayerOwner, true, man.getUnitStats().isUnitType(UnitTypes.UnitTypeTag.Structure));
+            if (man.cMover)
+            {
+                man.GiveOrder(Orders.CreateAttackMove(transform.position + Vector3.right * 75, true));
+                man.GiveOrder(Orders.CreateAttackMove(transform.position + Vector3.right * 150, true));
+                man.GiveOrder(Orders.CreateAttackMove(transform.position + Vector3.right * 250, true));
+                man.GiveOrder(Orders.CreateAttackMove(transform.position + Vector3.right * 350, true));
+            }
         }
+
 
         return false;
     }

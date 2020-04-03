@@ -40,6 +40,8 @@ public abstract class Ability : MonoBehaviour {
 	protected Selected select;
     Coroutine currentCharger;
     public OnHitContainer myHitContainer;
+    [Tooltip("This information is used when an enemy AI controls this ability")]
+    public AbilityMetaData metaData;
 
     public virtual void Start() // We have this here so other source can call Start and any of this guy's inheriters will have it called instead
 	{
@@ -290,4 +292,28 @@ public abstract class Ability : MonoBehaviour {
             myHitContainer.Detach();
         }
     }
+}
+
+[System.Serializable]
+public class AbilityMetaData
+{
+    public enum MetaAbilityType
+    {
+        proactiveDefense, ReactiveDefense, PostActiveDefense, FriendlyMovement, EnemyMovement, Dash,
+        OffensiveDamage, PostActiveOffense, DamageEnhancer, Summon , None
+    }
+    public List<MetaAbilityType> AbilityUsage = new List<MetaAbilityType>();
+
+
+    // Proactive Defense - Heals
+    // Reactive Defense - Shields, Damage Reducers
+    // PostActive Defense - Cleanses
+    // FriendlyMovement - Increases my speed
+    // EnemyMovement - Decreases enemy speed (also falls in the category of post-Active Offense)
+    // Dash - used to dodge enemy things and close distance
+    // OffensiveDamage - Damaging Abilities
+    // PostActiveOffense - Curses (remove buffs)
+    // DamageEnhancer - increases my damage dealing potential (in dmaage, attack, etc)
+    // Summon - create a unit.
+    // None - used as default thing for code reasons
 }

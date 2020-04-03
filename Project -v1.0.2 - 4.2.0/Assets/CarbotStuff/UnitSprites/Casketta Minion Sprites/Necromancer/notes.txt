@@ -1,0 +1,8 @@
+1-8 idle
+9-16 run
+17-32 summon skelly / victory
+33-38 attack (36 attack launches)
+39 knockback
+40-49 stunned
+50-71 death
+72-73 decay

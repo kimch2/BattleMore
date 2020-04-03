@@ -1,6 +1,0 @@
-1 idle
-7 move
-16 attack
-22 death
-31 knocked back
-32 pieces

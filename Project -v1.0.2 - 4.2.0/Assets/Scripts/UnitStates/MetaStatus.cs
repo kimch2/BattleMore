@@ -336,7 +336,10 @@ public class MetaStatus
             if (cachedStatus[statusType.Stun].Count == 1)
             {
                 myManager.changeState(new StunState(myManager), true, false);
-                TurnOnFX(statusType.Stun);
+                if (duration > .3f)
+                {
+                    TurnOnFX(statusType.Stun);
+                }
             }
         }
         

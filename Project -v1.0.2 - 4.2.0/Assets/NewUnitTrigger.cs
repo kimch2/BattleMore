@@ -7,7 +7,7 @@ public class NewUnitTrigger  : SceneEventTrigger {
 
 
 
-	public override void trigger (int index, float input, Vector3 location, GameObject target, bool doIt){
+	public override void trigger (int index, float input, GameObject target, bool doIt){
 		if (!hasTriggered) {
 			hasTriggered = true;
 		//	Debug.Log ("Triggered");

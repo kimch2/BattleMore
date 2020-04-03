@@ -863,7 +863,7 @@ MonoBehaviour:
   damagePoint: 0.2
   AttackDelay: 0.52
   myHitContainer: {fileID: 2083217673674382816}
-  cantAttackTypes: 
+  cantAttackTypes: 0a000000
   extraDamage: []
   projectile: {fileID: 0}
 --- !u!82 &6166594910967440789

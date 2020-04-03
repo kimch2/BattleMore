@@ -18,7 +18,6 @@ public class CustomRVO : IMover {
 	private int agentID;
 #endif
 
-	UnitManager manager;
 	private bool pathSet;
 	private Vector3 target;
 	private bool canSearchAgain = true;
@@ -54,8 +53,7 @@ public class CustomRVO : IMover {
 	#endif
 
 	public void Awake () {
-
-		manager = GetComponent<UnitManager>();
+        base.Awake();
 		initialSpeed = getMaxSpeed();
 		seeker = GetComponent<Seeker>();
         controller = GetComponent<RVOController>();
@@ -69,8 +67,7 @@ public class CustomRVO : IMover {
 #if RVOImp
 	
 #endif
-		//resetMoveLocation(-transform.position); // + transform.forward * 400);
-		//controller = GetComponent<RVOController>();
+
 
 	}
 
@@ -218,7 +215,7 @@ public class CustomRVO : IMover {
 		//Debug.Log ("Moving " + dir);
 
 		if(controller){
-            manager.animMove();
+            myManager.animMove();
             controller.Move (dir);
         }
 		else{

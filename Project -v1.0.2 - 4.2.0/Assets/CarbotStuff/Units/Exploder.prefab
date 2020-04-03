@@ -44,7 +44,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toApply: []
-  OnKill:
+  OnKillGeneric:
+    m_PersistentCalls:
+      m_Calls: []
+  onKillWithTarget:
     m_PersistentCalls:
       m_Calls: []
   myManager: {fileID: 7254460562425616233}
@@ -126,6 +129,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   DurationWhenActivated: 0
+  ActivateWithTarget:
+    m_PersistentCalls:
+      m_Calls: []
   Activatable: 0
   triggerType: 4
   VariableNumber: 0
@@ -133,6 +139,7 @@ MonoBehaviour:
   thingToDrop: {fileID: 8884228391156602533, guid: a296a55c57fe9ba408bd5c735f24a6f8,
     type: 3}
   PossibleNumberAmount: 75
+  NumberToSpawn: 1
 --- !u!1 &7254460561991201663
 GameObject:
   m_ObjectHideFlags: 0
@@ -786,7 +793,7 @@ MonoBehaviour:
   damagePoint: 0.25
   AttackDelay: 0.35
   myHitContainer: {fileID: 7084422437774467292}
-  cantAttackTypes: 
+  cantAttackTypes: 0a000000
   extraDamage: []
   projectile: {fileID: 0}
 --- !u!82 &7254460562425616240
@@ -1549,7 +1556,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toApply: []
-  OnKill:
+  OnKillGeneric:
+    m_PersistentCalls:
+      m_Calls: []
+  onKillWithTarget:
     m_PersistentCalls:
       m_Calls: []
   myManager: {fileID: 7254460562425616233}

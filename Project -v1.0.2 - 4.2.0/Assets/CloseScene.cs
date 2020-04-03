@@ -13,7 +13,7 @@ public class CloseScene :SceneEventTrigger {
 	
 	}
 
-	public override void trigger (int index, float input, Vector3 location, GameObject target, bool doIt){
+	public override void trigger (int index, float input, GameObject target, bool doIt){
 		this.gameObject.SetActive (false);
 
 	}

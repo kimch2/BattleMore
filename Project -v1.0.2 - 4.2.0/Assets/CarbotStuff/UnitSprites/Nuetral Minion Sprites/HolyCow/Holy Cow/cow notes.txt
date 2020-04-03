@@ -1,0 +1,7 @@
+1-20 idle/running/attack (the milk dropping is also the attack)
+21-31 stunned
+32 knockback
+33-37 victory
+38-47 death
+48-60 milk spawn
+61-68 milk despawn

@@ -7,7 +7,7 @@ public class DeathCubeVulnerable : SceneEventTrigger {
 
 	public List<UnitManager> DeathCubes ;
 	public float vulnerableTime;
-	public override void trigger (int index, float input, Vector3 location, GameObject target, bool doIt){
+	public override void trigger (int index, float input,GameObject target, bool doIt){
 	
 		StartCoroutine (VulnerateDeathCubes());
 	

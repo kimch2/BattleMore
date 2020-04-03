@@ -44,7 +44,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toApply: []
-  OnKill:
+  OnKillGeneric:
+    m_PersistentCalls:
+      m_Calls: []
+  onKillWithTarget:
     m_PersistentCalls:
       m_Calls: []
   myManager: {fileID: 3300769391594791449}
@@ -1249,7 +1252,7 @@ MonoBehaviour:
   damagePoint: 0.2
   AttackDelay: 0.35
   myHitContainer: {fileID: 3935153736685980787}
-  cantAttackTypes: 
+  cantAttackTypes: 0a000000
   extraDamage: []
   projectile: {fileID: 0}
 --- !u!82 &3300769391594791424

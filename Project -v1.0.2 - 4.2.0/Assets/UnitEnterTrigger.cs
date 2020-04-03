@@ -53,7 +53,7 @@ public class UnitEnterTrigger : MonoBehaviour {
 		foreach (SceneEventTrigger trig in myTriggers) {
 			//Debug.Log ("Triggering " + trig);
 			if (trig != null) {
-				trig.trigger (index, input, location, target, doIt);
+				trig.trigger (index, input, target, doIt);
 			}
 		}
 		OnEnter.Invoke ();

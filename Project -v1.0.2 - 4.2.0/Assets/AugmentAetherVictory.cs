@@ -78,7 +78,7 @@ public class AugmentAetherVictory  : Objective {
 	
 			if (counterAttack) {
 				
-				attackTrig.trigger (0, 0, Vector3.zero, null, false);
+				attackTrig.trigger (0, 0, null, false);
 				counterAttack.spawnWave (waveNumber);
 			}
 		}

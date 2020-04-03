@@ -47,10 +47,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ZoneName: OctoInkSplat
   PlayerOwner: 0
+  PlayersToLookFor: 01000000
   InVision: []
   CheckForDeaths: 0
   AppliesToEnemies: 1
-  AppliesToAllies: 1
+  AppliesToAllies: 0
   StacksEffect: 0
   myHitContainer: {fileID: 0}
   CantTarget: 0a000000

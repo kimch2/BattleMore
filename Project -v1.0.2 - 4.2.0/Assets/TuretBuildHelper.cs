@@ -29,7 +29,7 @@ public class TuretBuildHelper :buildTurret{
 				if (helper) {
 					if (!helper.hasTriggered && !HasBuilt) {
 						HasBuilt = true;
-						helper.trigger (0, 0, Vector3.zero, null, false);
+						helper.trigger (0, 0,null, false);
 					}
 				}
 				foreach (Transform obj in this.transform) {

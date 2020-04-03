@@ -44,7 +44,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toApply: []
-  OnKill:
+  OnKillGeneric:
+    m_PersistentCalls:
+      m_Calls: []
+  onKillWithTarget:
     m_PersistentCalls:
       m_Calls: []
   myManager: {fileID: 5636270701877033817}
@@ -964,6 +967,7 @@ MonoBehaviour:
   initialSpeed: 0
   myFogger: {fileID: 0}
   m_lockRotation: 0
+  myManager: {fileID: 0}
   repathRate: 1.5
   moveNextDist: 1
 --- !u!114 &5636270701877033794
@@ -1049,7 +1053,7 @@ MonoBehaviour:
   minimumRange: 20
   attackArc: 180
   projectileSpeed: 40
-  prioritizeFarAway: 0
+  prioritizeFarAway: 1
 --- !u!114 &-6612402152661984733
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1460,7 +1464,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5967480403106394696}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -1, z: 0}
+  m_LocalPosition: {x: 0, y: 3.5, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 5636270701939784776}
@@ -1504,8 +1508,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 3286163911610860551, guid: 33d785957b14cbc4ebeba4ac0316f78a,
-    type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6bb88963f4cf1c9439d7391eb32e7ec2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
