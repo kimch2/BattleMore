@@ -14,7 +14,7 @@ public class OnHitContainer : MonoBehaviour
     public UnitManager myManager;
     [HideInInspector]
     public GameObject source; // Will become null once source unit dies, if it wasn't already (world effect)
-    [HideInInspector]
+    //[HideInInspector]
     public int playerNumber;
     public float FriendlyFireRatio;
 
@@ -23,7 +23,7 @@ public class OnHitContainer : MonoBehaviour
     [Tooltip("Will add all Ieffects and Notify Triggers already attached to this gameobject on Start()")]
     public bool AutoAddTriggers = true;
 
-    private void Awake()
+    private void Start()
     {
         if (!myManager)
         {

@@ -72,7 +72,7 @@ public class TunnelSpawner : Objective,Modifier{
 
 	}
 
-	public float modify(float num, GameObject obj, DamageTypes.DamageType theType)
+	public float modify(float num, GameObject obj, OnHitContainer hitSource, DamageTypes.DamageType theType)
 	{
 		killCount++;
 		description = rawObjectText + "  " + killCount +"/"+bonusKillAmount;

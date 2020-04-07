@@ -15,7 +15,7 @@ public class AbilityHeatMap: MonoBehaviour
     public GameObject lineAreaTemplate;
 
     public bool currentlySafe;
-
+    public bool ShowHeatMap;
 
     private void Awake()
     {
@@ -98,33 +98,41 @@ public class AbilityHeatMap: MonoBehaviour
     /// <param name="priority"></param>
     public void AddCircleWarning(Vector3 location, float radius, Object source, float LandTime, float priority)
     {
-        GameObject icon = Instantiate<GameObject>(circleAreaTemplate);
-        icon.GetComponent<SpriteRenderer>().color = new Color(priority, 0 ,0);
-        icon.transform.localScale = Vector3.one * radius;
-        icon.transform.position = location;
-
+        GameObject icon = null;
+        if (ShowHeatMap)
+        {
+            icon = Instantiate<GameObject>(circleAreaTemplate);
+            icon.GetComponent<SpriteRenderer>().color = new Color(priority, 0, 0);
+            icon.transform.localScale = Vector3.one * radius;
+            icon.transform.position = location;
+        }
         CircleData data = new CircleData(location, radius, source, LandTime, priority, icon);
         dangerZones.Add(data);
     }
 
     public void RemoveArea(Object Source)
     {
-        
-        foreach (DangerZone data in dangerZones.FindAll(item => item.source == Source))
+        if (ShowHeatMap)
         {
-            Destroy(data.icon);
+            foreach (DangerZone data in dangerZones.FindAll(item => item.source == Source))
+            {
+                Destroy(data.icon);
+            }
         }
         dangerZones.RemoveAll(item => item.source == Source);
     }
 
     public void AddLine(Vector3 origin, Vector3 endPoint, float width, Object source, float LandTime, float priority)
     {
-        GameObject icon = Instantiate<GameObject>(lineAreaTemplate);
-        icon.GetComponentInChildren<SpriteRenderer>().color = new Color(priority, 0, 0,.5f);
-        icon.transform.localScale = new Vector3(width,1, Vector3.Distance(origin, endPoint));
-        icon.transform.position = origin ;
-        icon.transform.LookAt(endPoint);
-
+        GameObject icon = null;
+        if (ShowHeatMap)
+        {
+            icon = Instantiate<GameObject>(lineAreaTemplate);
+            icon.GetComponentInChildren<SpriteRenderer>().color = new Color(priority, 0, 0, .5f);
+            icon.transform.localScale = new Vector3(width, 1, Vector3.Distance(origin, endPoint));
+            icon.transform.position = origin;
+            icon.transform.LookAt(endPoint);
+        }
         LineData data = new LineData(origin, endPoint, width, source, LandTime, priority, icon);
         dangerZones.Add(data);
     }
@@ -188,10 +196,13 @@ public class AbilityHeatMap: MonoBehaviour
         {
             StartPoint = newOrigin;
             EndPoint = NewEnd;
-            icon.transform.position = newOrigin;
-            icon.transform.localScale = new Vector3(HalfWidth *2, 1, Vector3.Distance(StartPoint, EndPoint));
-            icon.transform.position = StartPoint;
-            icon.transform.LookAt(EndPoint);
+            if (icon)
+            {
+                icon.transform.position = newOrigin;
+                icon.transform.localScale = new Vector3(HalfWidth * 2, 1, Vector3.Distance(StartPoint, EndPoint));
+                icon.transform.position = StartPoint;
+                icon.transform.LookAt(EndPoint);
+            }
         }
 
         public override bool InDangerZone(Vector3 position, float unitRadius)

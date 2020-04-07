@@ -271,7 +271,7 @@ public class RepairTurret : Ability, Modifier, Addon{
 
 
 
-	public float modify(float damage, GameObject source, DamageTypes.DamageType theType)
+	public float modify(float damage, GameObject source, OnHitContainer hitSource, DamageTypes.DamageType theType)
 	{ 
 
 		Destroy (drone);

@@ -5,7 +5,7 @@ public interface Modifier {
 
 
 
-	float modify(float damage, GameObject source, DamageTypes.DamageType theType);
+	float modify(float damage, GameObject ProjectileOrUnit, OnHitContainer hitSource, DamageTypes.DamageType theType);
 
 
 }

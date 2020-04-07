@@ -154,7 +154,7 @@ public class Augmentor : TargetAbility, Iinteract, Modifier {
 	}
 
 	//Triggers if the attached building dies
-	public float modify(float d, GameObject src, DamageTypes.DamageType theType )
+	public float modify(float d, GameObject src, OnHitContainer hitSource, DamageTypes.DamageType theType )
 	{
 		Unattach ();
         myManager.myStats.kill(null);

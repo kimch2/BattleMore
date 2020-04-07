@@ -15,7 +15,7 @@ public class DeathWinTrigger : MonoBehaviour,Modifier {
 	public BonusObjectiverTimer myObjective;
 
 
-	public float modify(float num, GameObject obj, DamageTypes.DamageType theType)
+	public float modify(float num, GameObject obj, OnHitContainer hitSource, DamageTypes.DamageType theType)
 	{
 		if (myTargetDeath) {
 			myTargetDeath.IDied (this.gameObject);

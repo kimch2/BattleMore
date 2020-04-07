@@ -30,7 +30,7 @@ public class evasiveMenuvers : Ability,Modifier{
 		}
 
 		
-	public float modify(float amount, GameObject src, DamageTypes.DamageType theType)
+	public float modify(float amount, GameObject src, OnHitContainer hitSource, DamageTypes.DamageType theType)
 		{
 		if (theType != DamageTypes.DamageType.Energy) {
 			int rand = Random.Range (0, 100);

@@ -349,6 +349,18 @@ public class DMLevelEditor : MonoBehaviour
 
     }
 
+    public void Play()
+    {
+        PlayerPrefs.SetString("PlayLevel", SaveName.text);
+        Save();
+
+    }
+
+    public void LoadMainMenu()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+    }
+
 }
 
 

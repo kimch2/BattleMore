@@ -28,7 +28,7 @@ public class InversionBarrier : MonoBehaviour, Modifier{
 		Invoke ("TurnOff",duration);
 	}
 		
-	public float modify(float amount, GameObject src, DamageTypes.DamageType theType)
+	public float modify(float amount, GameObject src, OnHitContainer hitSource, DamageTypes.DamageType theType)
 	{	
 
 		float AmountReduced = Mathf.Min (amount, HP);

@@ -772,7 +772,7 @@ MonoBehaviour:
   currentEnergy: 0
   EnergyRegenPerSec: 0
   EnergyRegenPerHalf: 0
-  Icon: {fileID: 21300000, guid: d7d2d2ac07ab574428e8f4d069ee83b0, type: 3}
+  Icon: {fileID: 21300000, guid: b7e5bda415470414f94befe280e1e7cb, type: 3}
   supply: 1
   attackPriority: 3
   DefensePriority: 0
@@ -814,7 +814,7 @@ MonoBehaviour:
   deathCorpse: {fileID: 568684361832296044, guid: 463c7c6e43a674c46b4a5b9c93f8c63d,
     type: 3}
   deathEffect: {fileID: 0}
-  UnitPortrait: {fileID: 21300000, guid: d7d2d2ac07ab574428e8f4d069ee83b0, type: 3}
+  UnitPortrait: {fileID: 21300000, guid: b7e5bda415470414f94befe280e1e7cb, type: 3}
   goodBuffs: []
   badBuffs: []
 --- !u!143 &494265798218600514
@@ -945,7 +945,7 @@ MonoBehaviour:
   - position: {x: -0.2, y: 4.61, z: 0.31}
     myParticle: {fileID: 0}
   damagePoint: 4
-  AttackDelay: 0.8
+  AttackDelay: 0.75
   myHitContainer: {fileID: 10719971703187445}
   cantAttackTypes: 0a000000
   extraDamage: []
@@ -1128,7 +1128,7 @@ MonoBehaviour:
   ColoredSprites:
   - {fileID: 950210745873556989}
   mySkinner: {fileID: 0}
-  HueThreshold: {x: 0, y: 0.05}
+  HueThreshold: {x: 0, y: 0.05, z: 0}
 --- !u!1 &494265798254441558
 GameObject:
   m_ObjectHideFlags: 0

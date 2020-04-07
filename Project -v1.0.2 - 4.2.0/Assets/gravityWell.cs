@@ -31,7 +31,7 @@ public class gravityWell : MonoBehaviour, Modifier {
 
 	List<AreaDamage> toCleanUp = new List<AreaDamage>();
 
-	public float modify (float amount, GameObject source, DamageTypes.DamageType theType){
+	public float modify (float amount, GameObject source, OnHitContainer hitSource, DamageTypes.DamageType theType){
 	//	Debug.Log ("Modifying damage " + theType);
 		if (theType == DamageTypes.DamageType.Energy) {
 			return 0;

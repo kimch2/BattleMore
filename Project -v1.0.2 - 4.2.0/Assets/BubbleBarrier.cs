@@ -24,7 +24,7 @@ public class BubbleBarrier : IEffect, Modifier
         base.EndEffect();
     }
 
-    public float modify(float damage, GameObject source, DamageTypes.DamageType theType)
+    public float modify(float damage, GameObject source, OnHitContainer hitSource, DamageTypes.DamageType theType)
     {
         DamageRecieved += damage;
         if (DamageRecieved > DamagePerBubble)

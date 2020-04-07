@@ -392,7 +392,7 @@ MonoBehaviour:
   currentEnergy: 0
   EnergyRegenPerSec: 0
   EnergyRegenPerHalf: 0
-  Icon: {fileID: 21300000, guid: bff64fa45b44f9b40827bad1e303046b, type: 3}
+  Icon: {fileID: 21300000, guid: b67756ce24e02d94bbc06dad8a423917, type: 3}
   supply: 2
   attackPriority: 3
   DefensePriority: 0
@@ -434,7 +434,7 @@ MonoBehaviour:
   deathCorpse: {fileID: 469692105211038340, guid: 21d6c84585cabb94cbc843df1f138818,
     type: 3}
   deathEffect: {fileID: 0}
-  UnitPortrait: {fileID: 21300000, guid: bff64fa45b44f9b40827bad1e303046b, type: 3}
+  UnitPortrait: {fileID: 21300000, guid: b67756ce24e02d94bbc06dad8a423917, type: 3}
   goodBuffs: []
   badBuffs: []
 --- !u!114 &8481013731944333461

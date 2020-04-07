@@ -405,7 +405,7 @@ public class UnitStats : MonoBehaviour {
         if (type != DamageTypes.DamageType.True) {
             for(int i = damageModifiers.Count -1; i >-1; i--) { 
 				if (damageModifiers[i]  != null) {
-					amount = damageModifiers[i].modify (amount, source, type);
+					amount = damageModifiers[i].modify (amount, source, sourceHitContianer, type);
 					if (amount <= 0) {
 						return 0;
 						}
@@ -533,7 +533,7 @@ public class UnitStats : MonoBehaviour {
 			deathTriggers.RemoveAll (item => item == null);
 			for (int i = deathTriggers.Count - 1; i > -1; i--) {
 				if (deathTriggers [i] != null) {
-					deathTriggers [i].modify (0, deathSource, DamageTypes.DamageType.Regular);
+					deathTriggers [i].modify (0, deathSource,null, DamageTypes.DamageType.Regular);
 				}
 			}
 			
@@ -634,7 +634,7 @@ public class UnitStats : MonoBehaviour {
     {
         for (int i = LethalTriggers.Count - 1; i >= 0; i--)
         { 
-            if (LethalTriggers[i].modify(damage, null, DamageTypes.DamageType.Regular) > 0)
+            if (LethalTriggers[i].modify(damage, null,null, DamageTypes.DamageType.Regular) > 0)
             {
                 return false;
             }
@@ -730,7 +730,7 @@ public class UnitStats : MonoBehaviour {
 		float amount = 0;
 
 		foreach (Modifier mod in EnergyModifiers) {
-			n = mod.modify (n, this.gameObject, DamageTypes.DamageType.Regular);
+			n = mod.modify (n, this.gameObject,null, DamageTypes.DamageType.Regular);
 		}
 
 		if (n > 0 ) {
@@ -779,7 +779,7 @@ public class UnitStats : MonoBehaviour {
         foreach (Modifier mod in HealModifiers) {
 			if (mod != null)
 			{
-				n = mod.modify(n, null, type);
+				n = mod.modify(n, null,null, type);
 			}
 		}
 		

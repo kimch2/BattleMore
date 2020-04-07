@@ -211,11 +211,13 @@ public class TriggeredAbility : ActivatedAbility, Modifier, Notify, KillModifier
     }
 
     /// Used for OnAttack, OnDeath
-    public virtual float modify(float damage, GameObject source, DamageTypes.DamageType theType)
+    public virtual float modify(float damage, GameObject source, OnHitContainer hitSource, DamageTypes.DamageType theType)
     {
         Trigger();
-
-
+        if (hitSource.myManager)
+        {
+            ActivateWithTarget.Invoke(hitSource.myManager.gameObject);
+        }
         if (OnTriggerEffect)
         {
             Instantiate<GameObject>(OnTriggerEffect, myManager.transform.position +myManager.transform.forward*2, Quaternion.identity);

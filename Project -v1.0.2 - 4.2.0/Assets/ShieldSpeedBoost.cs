@@ -55,7 +55,7 @@ public class ShieldSpeedBoost : Buff,Modifier,Notify {
 	Coroutine inCombat = null;
 	float lastCombatTime;
 
-	public float modify(float amount, GameObject src, DamageTypes.DamageType theType)
+	public float modify(float amount, GameObject src, OnHitContainer hitSource, DamageTypes.DamageType theType)
 	{
 		checkCombat ();
 		return amount;

@@ -150,7 +150,7 @@ MonoBehaviour:
   onKillWithTarget:
     m_PersistentCalls:
       m_Calls: []
-  myManager: {fileID: 9125053377235848859}
+  myManager: {fileID: 0}
   source: {fileID: 0}
   playerNumber: 0
   FriendlyFireRatio: 0
@@ -788,7 +788,7 @@ MonoBehaviour:
   currentEnergy: 0
   EnergyRegenPerSec: 0
   EnergyRegenPerHalf: 0
-  Icon: {fileID: 21300000, guid: 877ae62372f984742961a3cf66874435, type: 3}
+  Icon: {fileID: 21300000, guid: b4b8b2e6380d0c84b8fd5cf83725d7e3, type: 3}
   supply: 2
   attackPriority: 3
   DefensePriority: 0
@@ -830,7 +830,7 @@ MonoBehaviour:
   deathCorpse: {fileID: 3124498379490404671, guid: 6a72283d0fb1bd64fbeef1342fd030fb,
     type: 3}
   deathEffect: {fileID: 0}
-  UnitPortrait: {fileID: 21300000, guid: 877ae62372f984742961a3cf66874435, type: 3}
+  UnitPortrait: {fileID: 21300000, guid: b4b8b2e6380d0c84b8fd5cf83725d7e3, type: 3}
   goodBuffs: []
   badBuffs: []
 --- !u!114 &9125053377235848838
@@ -994,7 +994,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myspeed: 0
   acceleration: 40
-  MaxSpeed: 17
+  MaxSpeed: 14
   initialSpeed: 0
   myFogger: {fileID: 0}
   m_lockRotation: 0
@@ -1014,7 +1014,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 2.5
-  maxSpeed: 17
+  maxSpeed: 14
   height: 1
   locked: 0
   lockWhenNotMoving: 1
@@ -1100,7 +1100,7 @@ MonoBehaviour:
   ColoredSprites:
   - {fileID: 8455116939954731814}
   mySkinner: {fileID: 0}
-  HueThreshold: {x: 0, y: 0.05}
+  HueThreshold: {x: 0, y: 0.05, z: 0}
 --- !u!1 &9125053377264107926
 GameObject:
   m_ObjectHideFlags: 0

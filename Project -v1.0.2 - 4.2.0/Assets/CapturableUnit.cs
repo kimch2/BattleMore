@@ -14,7 +14,7 @@ public class CapturableUnit : MonoBehaviour, Modifier  {
 	// Set the Vision Range in the Unitmanger 5 more than what it should be,
 
 
-	public float modify(float damage, GameObject source, DamageTypes.DamageType theType)
+	public float modify(float damage, GameObject source, OnHitContainer hitSource, DamageTypes.DamageType theType)
 	{
 		if (source) {
 			UnitManager sourceManage = source.GetComponent<UnitManager> ();

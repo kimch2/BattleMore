@@ -28,7 +28,7 @@ public class ExplodeOnDeath : IEffect, Modifier {
         OnTargetManager.myStats.removeDeathTrigger(this);
     }
 
-    public float modify(float damage, GameObject source, DamageTypes.DamageType theType) {
+    public float modify(float damage, GameObject source, OnHitContainer hitSource, DamageTypes.DamageType theType) {
 
 		
 		if (myDamage == 0)

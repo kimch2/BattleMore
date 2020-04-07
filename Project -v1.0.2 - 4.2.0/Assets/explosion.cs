@@ -16,7 +16,7 @@ public class explosion : MonoBehaviour {
     [Tooltip("The time between the spawn of this object (and the above effect) and when the damage is applied")]
     public float DamageDelay = .01f;
 	float friendlyAmount;
-	float sizeSquared;
+	protected float sizeSquared;
 	public IWeapon.bonusDamage[] extraDamage;
     public OnHitContainer MyHitContainer;
     [Tooltip("This will apply to all if this list is empty")]
@@ -34,7 +34,7 @@ public class explosion : MonoBehaviour {
                 obj.SendMessage("setOwner", MyHitContainer.playerNumber, SendMessageOptions.DontRequireReceiver);
             }
 		}
-
+        //yield return null;
         yield return new WaitForSeconds(DamageDelay);
 		sizeSquared = maxSize;
 		FindTargets();
@@ -73,7 +73,7 @@ public class explosion : MonoBehaviour {
     }
 
 
-    void FindTargets()
+    protected virtual void FindTargets()
     {
         float TempDamageAmount =0;
 
@@ -125,10 +125,10 @@ public class explosion : MonoBehaviour {
     }
 
 
-	float getDistance(UnitManager unit)
+	protected float getDistance(UnitManager unit)
 	{
-		if (UseYFOrDetection) {
-			return new Vector2(unit.transform.position.x - transform.position.x, unit.transform.position.z - transform.position.z).sqrMagnitude;
+		if (!UseYFOrDetection) {
+            return new Vector2(unit.transform.position.x - transform.position.x, unit.transform.position.z - transform.position.z).sqrMagnitude;
 		}
 		else {
 		    return (unit.transform.position - transform.position).sqrMagnitude;
@@ -136,7 +136,7 @@ public class explosion : MonoBehaviour {
 	}
 
 	
-	void DealDamage(UnitManager manager, float baseAmount)
+	protected void DealDamage(UnitManager manager, float baseAmount)
 	{
 		UnitStats stats = manager.myStats;
 

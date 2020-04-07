@@ -19,7 +19,7 @@ public class TimerFreezer : MonoBehaviour, Modifier
 
 
 
-	public float modify(float amount, GameObject src, DamageTypes.DamageType theType)
+	public float modify(float amount, GameObject src, OnHitContainer hitSource, DamageTypes.DamageType theType)
 	{
 		lastAttackTime = Time.time + 6;
 		if (bleederCo == null)

@@ -36,7 +36,7 @@ public class ActivatableShield : Ability,Modifier {
 
 	float lastShieldEffect;
 
-	public float modify(float amount, GameObject src, DamageTypes.DamageType theType)
+	public float modify(float amount, GameObject src, OnHitContainer hitSource, DamageTypes.DamageType theType)
 	{
 		if (turnedOn) {
 			if (myStats.currentEnergy > 0) {

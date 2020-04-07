@@ -125,6 +125,11 @@ public class DaminionsInitializer : MonoBehaviour
             }
         }
 
+        string LoadCustom = PlayerPrefs.GetString("PlayLevel");
+        if (LoadCustom != "" && System.IO.File.Exists(Application.dataPath + "/" + LoadCustom + ".dmm"))
+        {
+            LoadFileName = LoadCustom;
+        }
 
         if (LoadFileName != "")
         {
@@ -162,6 +167,7 @@ public class DaminionsInitializer : MonoBehaviour
             {
                 GameObject obj = new GameObject();
                 obj.AddComponent<SpriteRenderer>().sprite = AllScenery.Find(item => item.name == data.spriteName);
+                obj.GetComponent<SpriteRenderer>().sortingOrder = -1;
                 obj.transform.position = data.pos + CarbotCamera.singleton.LeftSide;
                 obj.transform.rotation = data.rot;
                 obj.transform.localScale = data.scale;

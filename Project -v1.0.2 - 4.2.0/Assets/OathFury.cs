@@ -39,7 +39,7 @@ public class OathFury : Ability, Modifier, Notify {
 
 	}
 
-	public float modify(float damage, GameObject source, DamageTypes.DamageType theType)
+	public float modify(float damage, GameObject source, OnHitContainer hitSource, DamageTypes.DamageType theType)
 	{
 
 		myStealer.percentage = initialLifeSteal + (1 - (myStats.health / myStats.Maxhealth));

@@ -40,7 +40,7 @@ public class TurretMount : MonoBehaviour, Modifier {
 	}
 
 
-	public float modify(float damage, GameObject source, DamageTypes.DamageType theType)
+	public float modify(float damage, GameObject source, OnHitContainer hitSource, DamageTypes.DamageType theType)
 	{
 		if (turret)
 		{

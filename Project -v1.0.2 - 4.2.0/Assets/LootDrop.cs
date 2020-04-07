@@ -12,7 +12,7 @@ public class LootDrop : MonoBehaviour,Modifier {
 
 	}
 
-	public float modify (float a, GameObject deathSource, DamageTypes.DamageType theType){
+	public float modify (float a, GameObject deathSource, OnHitContainer hitSource, DamageTypes.DamageType theType){
 
 		if (Loot) {
 			

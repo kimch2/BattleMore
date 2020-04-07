@@ -248,24 +248,28 @@ public class ChampionAI : MonoBehaviour
 
     public Vector3 FindSafePerpendicular(UnitManager target)
     {
-        // Tries to find a safe perpendicular zone to run to, if not, it does concentric circles
-        Vector3 targetDirection = (target.transform.position - transform.position).normalized;
-        Vector3 PerpdicularDir = Quaternion.Euler(0, 90, 0) * targetDirection;
         float MaxRunDistance = myManager.cMover.MaxSpeed * 1.5f;
 
-        for (float i = 4; i < MaxRunDistance; i++)
+        // Tries to find a safe perpendicular zone to run to, if not, it does concentric circles
+        if (target)
         {
-            Vector3 RightPos = transform.position + PerpdicularDir * i;
-            if (AbilityHeatMap.main.IsSafe(RightPos, this))
+            Vector3 targetDirection = (target.transform.position - transform.position).normalized;
+            Vector3 PerpdicularDir = Quaternion.Euler(0, 90, 0) * targetDirection;
+
+            for (float i = 4; i < MaxRunDistance; i++)
             {
-                return RightPos;
-            }
-            else
-            {
-                Vector3 LeftPos = transform.position - PerpdicularDir * i;
-                if (AbilityHeatMap.main.IsSafe(LeftPos, this))
+                Vector3 RightPos = transform.position + PerpdicularDir * i;
+                if (AbilityHeatMap.main.IsSafe(RightPos, this))
                 {
-                    return LeftPos;
+                    return RightPos;
+                }
+                else
+                {
+                    Vector3 LeftPos = transform.position - PerpdicularDir * i;
+                    if (AbilityHeatMap.main.IsSafe(LeftPos, this))
+                    {
+                        return LeftPos;
+                    }
                 }
             }
         }

@@ -94,7 +94,7 @@ public class GatlingGun :  Ability,Notify, Modifier {
 
 
 
-	public float modify(float damage, GameObject source, DamageTypes.DamageType theType)
+	public float modify(float damage, GameObject source, OnHitContainer hitSource, DamageTypes.DamageType theType)
 	{ 
 		
 		if (myWeapon.myManager.myWeapon.Contains(myWeapon)) {

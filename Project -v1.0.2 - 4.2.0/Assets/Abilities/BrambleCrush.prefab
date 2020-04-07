@@ -57,6 +57,9 @@ MonoBehaviour:
   maxChargeCount: 0
   chargeCount: -1
   soundEffect: {fileID: 0}
+  myHitContainer: {fileID: 2399327193486215064}
+  metaData:
+    AbilityUsage: 
   OnActivate:
     m_PersistentCalls:
       m_Calls:
@@ -75,6 +78,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   DurationWhenActivated: 0
+  ActivateWithTarget:
+    m_PersistentCalls:
+      m_Calls: []
   Activatable: 0
   triggerType: 2
   VariableNumber: 0
@@ -139,7 +145,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toApply: []
-  OnKill:
+  OnKillGeneric:
+    m_PersistentCalls:
+      m_Calls: []
+  onKillWithTarget:
     m_PersistentCalls:
       m_Calls: []
   myManager: {fileID: 0}

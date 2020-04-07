@@ -103,7 +103,7 @@ public class DayexaShield : Ability,Modifier , Notify{
 	float lastShieldEffect;
 	float StartRechargeTime;
 
-	public float modify(float amount, GameObject src, DamageTypes.DamageType theType)
+	public float modify(float amount, GameObject src, OnHitContainer hitSource, DamageTypes.DamageType theType)
 	{
 		
 		 if (myStats.currentEnergy > 0) {

@@ -22,7 +22,7 @@ public class AfterLifeEffect :IEffect, Modifier {
         OnTargetManager.myStats.removeLethalTrigger(this);
     }
 
-    public float modify(float damage, GameObject source, DamageTypes.DamageType theType)
+    public float modify(float damage, GameObject source, OnHitContainer hitSource, DamageTypes.DamageType theType)
     {
         OnTargetManager.myStats.otherTags.Add(UnitTypes.UnitTypeTag.Invulnerable);
         OnTargetManager.myStats.SetTags();

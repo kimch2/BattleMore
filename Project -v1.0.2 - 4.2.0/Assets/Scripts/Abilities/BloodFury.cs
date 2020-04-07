@@ -21,12 +21,6 @@ public class BloodFury : MonoBehaviour, Modifier, Notify {
 	
 	}
 
-	// Update is called once per frame
-	void Update () {
-
-	}
-
-
 
 
 	public float trigger(GameObject source, GameObject projectile,UnitManager target, float damage)
@@ -36,7 +30,7 @@ public class BloodFury : MonoBehaviour, Modifier, Notify {
 		return damage;
 	}
 
-	public float modify(float damage, GameObject source, DamageTypes.DamageType theType)
+	public float modify(float damage, GameObject source, OnHitContainer hitSource, DamageTypes.DamageType theType)
 	{
 
 		//myMover.removeSpeedBuff (this);

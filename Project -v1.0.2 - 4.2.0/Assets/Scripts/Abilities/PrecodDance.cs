@@ -31,7 +31,7 @@ public class PrecodDance : Ability, Modifier
 	}
 
 
-	public float modify(float amount, GameObject src, DamageTypes.DamageType theType)
+	public float modify(float amount, GameObject src, OnHitContainer hitSource, DamageTypes.DamageType theType)
 	{
 
 		if (nextDodgeTime > Time.time)

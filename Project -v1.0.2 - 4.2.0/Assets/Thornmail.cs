@@ -10,6 +10,13 @@ public class Thornmail : DamagerMonoBehavior{
 	public bool canHitAir;
 	public float Range = 25;
 
+    public void AttackEnemy(GameObject target)
+    {
+        if (Vector3.Distance(target.transform.position, myHitContainer.myManager.transform.position) <= Range)
+        {
+            target.GetComponent<UnitStats>().TakeDamage(damagePerHit, this.gameObject, DamageTypes.DamageType.Regular, myHitContainer);
+        }
+    }
 
     public void AttackEnemies()
     {

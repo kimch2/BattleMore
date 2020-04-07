@@ -243,4 +243,8 @@ public class DMCollectionManager : MonoBehaviour
         PlayerPrefs.SetInt("ControlHero", tog.isOn ? 1:0);
     }
 
+    public void LoadEditor()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(2);
+    }
 }

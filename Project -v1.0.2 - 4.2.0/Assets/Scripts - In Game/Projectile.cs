@@ -11,7 +11,7 @@ public  class Projectile : MonoBehaviour {
     public GameObject Source;
 
     //protected VeteranStats vetSource;
-    [HideInInspector]
+    //[HideInInspector]
     public OnHitContainer MyHitContainer;
 
     public float damage;

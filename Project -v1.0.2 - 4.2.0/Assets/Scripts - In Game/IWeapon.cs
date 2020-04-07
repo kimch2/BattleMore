@@ -356,12 +356,15 @@ public class IWeapon : MonoBehaviour {
 			}
 		} else {
 
-			damage = fireTriggers (this.gameObject, proj, target, damage);
-            myHitContainer.trigger(null, target, damage); 
-			if (damage > 0) {
-                damage = target.myStats.TakeDamage(damage, this.gameObject, DamageTypes.DamageType.Regular, myHitContainer);
+            if (Vector3.Distance(target.transform.position, myManager.transform.position) - target.CharController.radius < range * 1.6f)
+            {
+                damage = fireTriggers(this.gameObject, proj, target, damage);
+                myHitContainer.trigger(null, target, damage);
+                if (damage > 0)
+                {
+                    damage = target.myStats.TakeDamage(damage, myManager.gameObject, DamageTypes.DamageType.Regular, myHitContainer);
+                }
             }
-
 		}
 	}
 

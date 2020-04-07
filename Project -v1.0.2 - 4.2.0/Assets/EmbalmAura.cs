@@ -32,7 +32,7 @@ public class EmbalmAura : DamagerIeffect, Modifier
         OnTargetManager.myStats.removeDeathTrigger(this);
     }
 
-    public float modify(float damage, GameObject source, DamageTypes.DamageType theType)
+    public float modify(float damage, GameObject source, OnHitContainer hitSource, DamageTypes.DamageType theType)
     {
         GameObject obj = Instantiate<GameObject>(Exploder, OnTargetManager.transform.position, Quaternion.identity);
         myHitContainer.SetOnHitContainer(obj, DamageAmount, null);

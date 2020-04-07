@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class PusherProjectile : SkillShotProjectile
 {
-    List<UnitManager> ToPush = new List<UnitManager>();
-
+    public List<UnitManager> ToPush = new List<UnitManager>();
     protected override void Update()
+    {
+    }
+    protected void LateUpdate()
     {
         if (currentDistance > TotalRange)
         {
@@ -41,8 +43,9 @@ public class PusherProjectile : SkillShotProjectile
         {
             if (man)
             {
-                man.cMover.move();
-                man.transform.position += forward;//.Translate(forward, Space.World);
+               // man.cMover.move();
+                man.transform.position += Vector3.right * Time.deltaTime * speed;// forward;//.Translate(forward, Space.World);
+                man.transform.position += Vector3.down * Time.deltaTime * speed;
             }
         }
     }
@@ -62,7 +65,7 @@ public class PusherProjectile : SkillShotProjectile
             if (!ToPush.Contains(manage))
             {
                 ToPush.Add(manage);
-                manage.metaStatus.Root(MyHitContainer.myManager, this, false);
+                //manage.metaStatus.Root(MyHitContainer.myManager, this, false);
                 MyHitContainer.trigger(this.gameObject, manage, damage);
                 manage.myStats.TakeDamage(damage, Source, damageType, MyHitContainer);
                 if (explosionO)
@@ -75,14 +78,14 @@ public class PusherProjectile : SkillShotProjectile
     }
 
 
-    public void OnDespawn()
+    public override void OnDespawn()
     {
         base.OnDespawn();
         foreach (UnitManager man in ToPush)
         {
             if (man)
             {
-                man.metaStatus.UnRoot(this);
+               // man.metaStatus.UnRoot(this);
             }
         }
     }

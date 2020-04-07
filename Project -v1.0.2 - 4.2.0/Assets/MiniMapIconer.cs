@@ -65,7 +65,7 @@ public class MiniMapIconer : MonoBehaviour, Modifier {
 
 
 
-	public float modify ( float amount,GameObject deathSource, DamageTypes.DamageType typ)
+	public float modify ( float amount,GameObject deathSource, OnHitContainer hitSource, DamageTypes.DamageType typ)
 	{
 		OnDisable ();
 

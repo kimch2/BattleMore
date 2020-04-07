@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Arrow Volley
   Descripton: Rain down a volley of arrows on a location
-  iconPic: {fileID: 3286163911610860551, guid: 583ac587257dfcc42a5f5e8383e178d0, type: 3}
+  iconPic: {fileID: 21300000, guid: c88e47022d8bf7e49a857275207c5f19, type: 3}
   myCost: {fileID: 2830210650078608349}
   continueMoving: 1
   RequiredUnit: []

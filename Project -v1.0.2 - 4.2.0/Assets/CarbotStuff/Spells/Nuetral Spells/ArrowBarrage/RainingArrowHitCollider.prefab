@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2817276424731174559}
   - component: {fileID: 2817276424736885235}
+  - component: {fileID: 5598527499309251121}
   m_Layer: 19
   m_Name: RainingArrowHitCollider
   m_TagString: Untagged
@@ -43,7 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f89bf2b44f707544fb7e345bff99bd4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sourceInt: 1
   particleEff: {fileID: 0}
   damageAmount: 45
   type: 0
@@ -55,3 +55,15 @@ MonoBehaviour:
   PlayersToApplyTo: 
   AppliesToEnemy: 1
   AppliesToAlly: 0
+--- !u!114 &5598527499309251121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2817276424730760989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a793ab95bb278f4b87a492dbd64ccc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

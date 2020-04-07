@@ -33,7 +33,7 @@ public class KineticBarrier : DamagerMonoBehavior, Modifier{
 		Invoke ("TurnOff",duration);
 	}
 
-	public float modify(float amount, GameObject src, DamageTypes.DamageType theType)
+	public float modify(float amount, GameObject src, OnHitContainer hitSource, DamageTypes.DamageType theType)
 	{	
 		float AmountReduced = Mathf.Min (amount, HP);
 		HP -= AmountReduced;

@@ -30,7 +30,7 @@ public class SoulBond : TargetAbility, Modifier{
 
 
 
-	public float modify(float amount, GameObject src, DamageTypes.DamageType theType)
+	public float modify(float amount, GameObject src, OnHitContainer hitSource, DamageTypes.DamageType theType)
 	{
 		float reduceBy = 0;
 		if (!AugmentAttach.myAugment && brother) {
