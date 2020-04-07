@@ -49,6 +49,7 @@ public class DaminionsInitializer : MonoBehaviour
 
         }
         MyHero = hero.GetComponent<UnitManager>();
+        MyHero.Initialize(1, false,false);
         myCam.setHero(hero);
         Invoke("SelectHero", .1f);
 

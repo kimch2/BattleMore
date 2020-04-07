@@ -19,7 +19,7 @@ public class DMCollectionManager : MonoBehaviour
     public UnityEngine.UI.Toggle ControllableTog;
 
     public static List<GameObject> ChosenUnits = new List<GameObject>() { null,null,null,null};
-    public static List<GameObject> ChosenAbilities = new List<GameObject>() { null, null };
+    public static List<GameObject> ChosenAbilities = new List<GameObject>() { null, null, null };
 
     public List<DMAssigner> SelectedUnits;
     public List<DMAssigner> SelectedAbility;
