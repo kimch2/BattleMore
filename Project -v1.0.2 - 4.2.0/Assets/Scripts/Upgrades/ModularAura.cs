@@ -85,8 +85,20 @@ public class ModularAura : IEffect
     }
 
 
-    public void ApplyBuff(UnitManager manager,float percentage) // percenetage being used when an effect decays over time
+    public void ApplyBuff(UnitManager manager, float percentage) // percenetage being used when an effect decays over time
     {
+        if (!manager)
+        {
+            Debug.Log("No manager");
+        }
+        if (!manager.myStats)
+        {
+            Debug.Log("No Stats");
+        }
+        if (manager.myStats.statChanger == null)
+        {
+            Debug.Log("No statchanger");
+        }
 
         foreach (AuraNumber buff in myBuffs)
         {

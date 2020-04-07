@@ -44,7 +44,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toApply: []
-  OnKill:
+  OnKillGeneric:
+    m_PersistentCalls:
+      m_Calls: []
+  onKillWithTarget:
     m_PersistentCalls:
       m_Calls: []
   myManager: {fileID: 6992310045717813795}
@@ -447,7 +450,7 @@ MonoBehaviour:
   currentEnergy: 0
   EnergyRegenPerSec: 0
   EnergyRegenPerHalf: 0
-  Icon: {fileID: 21300000, guid: 7abe330153422eb4a9b3aade17d50a91, type: 3}
+  Icon: {fileID: 3286163911610860551, guid: 3be8ae166fe08a3498a757d74abf7f4e, type: 3}
   supply: 1
   attackPriority: 3
   DefensePriority: 0
@@ -692,6 +695,7 @@ MonoBehaviour:
   initialSpeed: 0
   myFogger: {fileID: 0}
   m_lockRotation: 0
+  myManager: {fileID: 0}
   repathRate: 1.5
   moveNextDist: 1
 --- !u!114 &6992310045717813816
@@ -755,6 +759,7 @@ MonoBehaviour:
   ColoredSprites:
   - {fileID: 7709462503538519966}
   mySkinner: {fileID: 0}
+  HueThreshold: {x: 0, y: 0.05}
 --- !u!1 &6992310045756527918
 GameObject:
   m_ObjectHideFlags: 0
@@ -1469,7 +1474,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toApply: []
-  OnKill:
+  OnKillGeneric:
+    m_PersistentCalls:
+      m_Calls: []
+  onKillWithTarget:
     m_PersistentCalls:
       m_Calls: []
   myManager: {fileID: 6992310045717813795}
@@ -1489,6 +1497,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 550c744d482bf4b44836df6193654658, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EffectName: NameMe!
   onTarget: 0
   VisualEffects: []
   myBuffs:
@@ -1500,7 +1509,6 @@ MonoBehaviour:
     Flat: 0
   Stacks: 0
   Duration: 0
-  ApplyOnStart: 0
   Decays: 0
 --- !u!114 &7311890312888131541
 MonoBehaviour:
@@ -1514,12 +1522,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68fc87ca1a182e344a918ebaee257d59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerNumber: 1
-  AdditionaPlayerNums: 
+  ZoneName: 
+  PlayerOwner: 0
+  PlayersToLookFor: 01000000
   InVision: []
   CheckForDeaths: 0
   AppliesToEnemies: 0
   AppliesToAllies: 1
+  StacksEffect: 0
   myHitContainer: {fileID: 9117742418726224822}
   CantTarget: 
   duration: 0
@@ -1613,7 +1623,7 @@ Transform:
   m_GameObject: {fileID: 9070563461283926834}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 1}
+  m_LocalScale: {x: 6, y: 6, z: 1}
   m_Children: []
   m_Father: {fileID: 6992310045781941554}
   m_RootOrder: 0

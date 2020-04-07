@@ -26,8 +26,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 857897096165384145}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.5, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 1}
+  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalScale: {x: 6, y: 6, z: 1}
   m_Children: []
   m_Father: {fileID: 1661666932766265809}
   m_RootOrder: 0
@@ -1286,6 +1286,7 @@ MonoBehaviour:
   initialSpeed: 0
   myFogger: {fileID: 0}
   m_lockRotation: 0
+  myManager: {fileID: 0}
   repathRate: 1.5
   moveNextDist: 1
 --- !u!114 &1661666932704040667
@@ -1349,6 +1350,7 @@ MonoBehaviour:
   ColoredSprites:
   - {fileID: 2088336489500566397}
   mySkinner: {fileID: 0}
+  HueThreshold: {x: 0, y: 0.05}
 --- !u!1 &1661666932724013517
 GameObject:
   m_ObjectHideFlags: 0

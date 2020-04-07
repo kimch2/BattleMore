@@ -23,7 +23,7 @@ public class OnHitContainer : MonoBehaviour
     [Tooltip("Will add all Ieffects and Notify Triggers already attached to this gameobject on Start()")]
     public bool AutoAddTriggers = true;
 
-    private void Start()
+    private void Awake()
     {
         if (!myManager)
         {

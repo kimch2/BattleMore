@@ -500,6 +500,7 @@ MonoBehaviour:
   initialSpeed: 0
   myFogger: {fileID: 0}
   m_lockRotation: 0
+  myManager: {fileID: 0}
   repathRate: 1.5
   moveNextDist: 1
 --- !u!114 &1410361477267233327
@@ -563,6 +564,7 @@ MonoBehaviour:
   ColoredSprites:
   - {fileID: 1758290577831767945}
   mySkinner: {fileID: 0}
+  HueThreshold: {x: 0, y: 0.05}
 --- !u!1 &1410361477330968025
 GameObject:
   m_ObjectHideFlags: 0
@@ -1553,6 +1555,8 @@ MonoBehaviour:
   chargeCount: -1
   soundEffect: {fileID: 0}
   myHitContainer: {fileID: 0}
+  metaData:
+    AbilityUsage: 
   OnActivate:
     m_PersistentCalls:
       m_Calls:

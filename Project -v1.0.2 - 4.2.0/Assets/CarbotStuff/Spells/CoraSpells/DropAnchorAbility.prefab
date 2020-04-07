@@ -45,7 +45,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toApply: []
-  OnKill:
+  OnKillGeneric:
+    m_PersistentCalls:
+      m_Calls: []
+  onKillWithTarget:
     m_PersistentCalls:
       m_Calls: []
   myManager: {fileID: 0}
@@ -147,6 +150,8 @@ MonoBehaviour:
   chargeCount: 3
   soundEffect: {fileID: 0}
   myHitContainer: {fileID: 7291152584644399498}
+  metaData:
+    AbilityUsage: 0400000006000000
   range: 100
   target: {fileID: 0}
   location: {x: 0, y: 0, z: 0}
@@ -154,6 +159,7 @@ MonoBehaviour:
   areaSize: 30
   myTargetType: 0
   CastFromScreenEdge: 0
+  ChannelTime: 0
   ObjectToSpawn: {fileID: 5164414903442694681, guid: c51e1fba41ece764db09f5b4c8f02da9,
     type: 3}
   TagType: 0

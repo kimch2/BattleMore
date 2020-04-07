@@ -51,6 +51,12 @@ public class DaminionsInitializer : MonoBehaviour
         MyHero = hero.GetComponent<UnitManager>();
         myCam.setHero(hero);
         Invoke("SelectHero", .1f);
+
+        if (Time.time > 1)
+        {
+            ControllableHero = PlayerPrefs.GetInt("ControlHero") == 1;
+        }
+
         if (!ControllableHero)
         {
             InvokeRepeating("GiveOrder", 2, 1.5f);

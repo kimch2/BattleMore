@@ -60,18 +60,21 @@ MonoBehaviour:
   chargeCount: 3
   soundEffect: {fileID: 0}
   myHitContainer: {fileID: 4262156856287949555}
-  range: 120
+  metaData:
+    AbilityUsage: 06000000
+  range: 100
   target: {fileID: 0}
   location: {x: 0, y: 0, z: 0}
   targetArea: {fileID: 21300000, guid: aed5a9665c22a6046bc95b6269dbc544, type: 3}
   areaSize: 5
   myTargetType: 2
   CastFromScreenEdge: 1
+  ChannelTime: 0
   SkillShotProjectile:
     NumOfShots: 12
     SpreadAngle: 12
     SpreadRandomness: 0.5
-    timeBetweenShots: 0.03
+    timeBetweenShots: 0.04
     SkillShotPrefabs:
     - {fileID: 6747855988861954716, guid: 0c3c75da0f7478e4599516a22a587ef8, type: 3}
     randomPrefabSelection: 0
@@ -92,7 +95,7 @@ MonoBehaviour:
   resourceCosts:
     MyResources: []
   health: 0
-  energy: 2
+  energy: 0
   cooldown: 9
   cooldownTimer: 0
   StartsRefreshed: 1

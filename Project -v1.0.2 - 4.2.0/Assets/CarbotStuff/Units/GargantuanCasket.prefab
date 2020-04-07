@@ -1287,7 +1287,6 @@ MonoBehaviour:
   player: 1
   index: 0
   input: 0
-  location: {x: 0, y: 0, z: 0}
   target: {fileID: 0}
   doIt: 0
   delay: 0
@@ -1344,7 +1343,7 @@ Transform:
   m_GameObject: {fileID: 8815827211487550253}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -1.5, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 6, y: 6, z: 2}
   m_Children: []
   m_Father: {fileID: 7399605208952411437}
   m_RootOrder: 0

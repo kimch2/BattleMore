@@ -49,7 +49,7 @@ MonoBehaviour:
   resourceCosts:
     MyResources: []
   health: 0
-  energy: 2
+  energy: 0
   cooldown: 0
   cooldownTimer: 0
   StartsRefreshed: 1
@@ -80,6 +80,9 @@ MonoBehaviour:
   maxChargeCount: 0
   chargeCount: -1
   soundEffect: {fileID: 0}
+  myHitContainer: {fileID: 0}
+  metaData:
+    AbilityUsage: 
   range: 500
   target: {fileID: 0}
   location: {x: 0, y: 0, z: 0}
@@ -87,7 +90,8 @@ MonoBehaviour:
     type: 3}
   areaSize: 10
   myTargetType: 0
-  myHitContainer: {fileID: 0}
+  CastFromScreenEdge: 0
+  ChannelTime: 0
   ToSpawn: {fileID: 3732330866544374659, guid: 46f5a6957500bf941bf1ecfa02b62854, type: 3}
   spawnCount: 1
 --- !u!82 &47494996060547308

@@ -66,7 +66,7 @@ public class CarbotCamera : MainCamera
                 Vector2 ScreenPoint = myCamera.WorldToScreenPoint(HeroToFollow.transform.position);
 
                 float prev = MaxXDistance;
-                if (ScreenPoint.x > Screen.width /2.5f)
+                if (ScreenPoint.x > Screen.width /2f)
                 {
                     CurrentSpeed += acceleration * Time.deltaTime;
                     CurrentSpeed = Mathf.Min(CurrentSpeed, topSpeed);

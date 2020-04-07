@@ -165,7 +165,7 @@ Transform:
   m_GameObject: {fileID: 7591429146384796057}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 2, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 1}
+  m_LocalScale: {x: 6, y: 6, z: 1}
   m_Children: []
   m_Father: {fileID: 8481013732009117593}
   m_RootOrder: 0
@@ -392,7 +392,7 @@ MonoBehaviour:
   currentEnergy: 0
   EnergyRegenPerSec: 0
   EnergyRegenPerHalf: 0
-  Icon: {fileID: 3286163911610860551, guid: ad99359232b04ac4995aac4055d1e7c1, type: 3}
+  Icon: {fileID: 21300000, guid: bff64fa45b44f9b40827bad1e303046b, type: 3}
   supply: 2
   attackPriority: 3
   DefensePriority: 0
@@ -434,8 +434,7 @@ MonoBehaviour:
   deathCorpse: {fileID: 469692105211038340, guid: 21d6c84585cabb94cbc843df1f138818,
     type: 3}
   deathEffect: {fileID: 0}
-  UnitPortrait: {fileID: 3286163911610860551, guid: 9efd8373005643741a2a9f2cae86dbfb,
-    type: 3}
+  UnitPortrait: {fileID: 21300000, guid: bff64fa45b44f9b40827bad1e303046b, type: 3}
   goodBuffs: []
   badBuffs: []
 --- !u!114 &8481013731944333461
@@ -703,6 +702,7 @@ MonoBehaviour:
   ColoredSprites:
   - {fileID: 9099156576689468725}
   mySkinner: {fileID: 0}
+  HueThreshold: {x: 0, y: 1, z: 0.2}
 --- !u!1 &8481013731966439301
 GameObject:
   m_ObjectHideFlags: 0

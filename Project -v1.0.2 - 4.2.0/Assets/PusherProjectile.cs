@@ -31,15 +31,18 @@ public class PusherProjectile : SkillShotProjectile
                 gameObject.transform.position = newPos;
             }
         }
-
-        gameObject.transform.Translate(Vector3.forward * speed * Time.deltaTime, Space.Self);
+        Vector3 forward = transform.forward * speed * Time.deltaTime;
+   
+        gameObject.transform.Translate(forward, Space.World);
         currentDistance += speed * Time.deltaTime;
 
+        forward.y = -10 * Time.deltaTime; // this is due to a weird bug where the RVOcontroller pushes the guy up into the air
         foreach (UnitManager man in ToPush)
         {
             if (man)
             {
-                man.transform.Translate( transform.forward * speed * Time.deltaTime, Space.World);
+                man.cMover.move();
+                man.transform.position += forward;//.Translate(forward, Space.World);
             }
         }
     }
@@ -56,15 +59,30 @@ public class PusherProjectile : SkillShotProjectile
         UnitManager manage = col.GetComponent<UnitManager>();
         if (manage && manage.PlayerOwner != MyHitContainer.playerNumber)// && manage.PlayerOwner != 3)
         {
-            ToPush.Add(manage);
-
-            MyHitContainer.trigger(this.gameObject, manage, damage);
-            manage.myStats.TakeDamage(damage, Source, damageType, MyHitContainer);
-            if (explosionO)
+            if (!ToPush.Contains(manage))
             {
-                GameObject explode = (GameObject)Instantiate(explosionO, col.transform.position, Quaternion.identity);
+                ToPush.Add(manage);
+                manage.metaStatus.Root(MyHitContainer.myManager, this, false);
+                MyHitContainer.trigger(this.gameObject, manage, damage);
+                manage.myStats.TakeDamage(damage, Source, damageType, MyHitContainer);
+                if (explosionO)
+                {
+                    GameObject explode = (GameObject)Instantiate(explosionO, col.transform.position, Quaternion.identity);
+                    MyHitContainer.SetOnHitContainer(explode, this.damage, null);
+                }
+            }
+        }
+    }
 
-                MyHitContainer.SetOnHitContainer(explode, this.damage, null);
+
+    public void OnDespawn()
+    {
+        base.OnDespawn();
+        foreach (UnitManager man in ToPush)
+        {
+            if (man)
+            {
+                man.metaStatus.UnRoot(this);
             }
         }
     }

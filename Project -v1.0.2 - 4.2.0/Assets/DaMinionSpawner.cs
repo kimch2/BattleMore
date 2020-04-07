@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class DaMinionSpawner : MonoBehaviour
 {
-
-
     public List<GameObject> TypesToSpawn;
     public float firstSpawn = 20;
     public float spawnRate = 5;
@@ -17,6 +15,11 @@ public class DaMinionSpawner : MonoBehaviour
 
     [Tooltip("This is based on where the progress on the level is (the bar at the top)")]
     public AnimationCurve spawnCurve;
+
+    private void OnDisable()
+    {
+        CancelInvoke("SpawnEnemy");
+    }
 
     private void Start()
     {

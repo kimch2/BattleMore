@@ -11,7 +11,7 @@ public class HeroEffector : TriggeredAbility
     {
         foreach (Ability ab in DaminionsInitializer.main.MyHero.abilityList)
         {
-            Debug.Log("Reducing " + ab.Name + "  " +  ab.myCost.cooldownTimer);
+          
             if (ab.myCost )
             {
                 ab.myCost.cooldownTimer -= amount;

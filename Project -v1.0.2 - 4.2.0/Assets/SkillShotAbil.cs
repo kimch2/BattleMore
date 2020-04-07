@@ -98,7 +98,14 @@ public class SkillShotAbil : TargetAbility
         if (CastFromScreenEdge)
         {
             LastTargetLocation = location;
-            direction = Vector3.right; // SHould be left if we are moving from the right side  
+            if (myManager.PlayerOwner == 1)
+            {
+                direction = Vector3.right; // SHould be left if we are moving from the right side  
+            }
+            else
+            {
+                direction = Vector3.left; // Will need to fix this when we have levels where you go backwards.           
+            }
         }
         else
         {
@@ -201,6 +208,8 @@ public class SkillShotAbil : TargetAbility
         }
         else
         {
+            myIndicator.transform.parent = myManager.transform;
+            myIndicator.transform.localPosition = Vector3.zero;
             myIndicator.transform.LookAt(TargetSpot, Vector3.up);
         }
     }

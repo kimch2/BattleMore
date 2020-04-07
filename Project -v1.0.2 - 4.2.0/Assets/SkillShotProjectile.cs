@@ -31,6 +31,7 @@ public class SkillShotProjectile  : Projectile {
         {
             Terminate(null);
             Lean.LeanPool.Despawn(this.gameObject, 0);
+            return;
             //Destroy (this.gameObject);
         }
 
@@ -59,6 +60,11 @@ public class SkillShotProjectile  : Projectile {
         gameObject.transform.Translate(Vector3.forward * speed * Time.deltaTime, Space.Self);
 
         currentDistance += speed * Time.deltaTime;
+
+        if (AbilityHeatMap.main)
+        {
+            AbilityHeatMap.main.UpdateLine(transform.position - transform.forward * 7, transform.position + transform.forward * (TotalRange - currentDistance),  this);
+        }
     }
 
 
@@ -67,9 +73,14 @@ public class SkillShotProjectile  : Projectile {
       
     }
 
-    public void OnDespawn()
+    public virtual void OnDespawn()
     {
         currentDistance = -3;
+        if (AbilityHeatMap.main)
+        {
+            AbilityHeatMap.main.RemoveArea(this);
+        }
+
     }
 
     public void setTarget(Vector3 Location)
@@ -86,6 +97,13 @@ public class SkillShotProjectile  : Projectile {
 
         distance = Vector3.Distance(this.gameObject.transform.position, lastLocation);
         gameObject.transform.LookAt(lastLocation);
+
+
+        if (AbilityHeatMap.main)
+        {
+            Vector3 direction = (lastLocation - transform.position).normalized;
+            AbilityHeatMap.main.AddLine(transform.position, transform.position + direction * TotalRange, GetComponent<BoxCollider>().size.x, this, 1, 50);
+        }
     }
 
 

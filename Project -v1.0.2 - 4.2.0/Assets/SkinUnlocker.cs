@@ -13,6 +13,9 @@ public class SkinUnlocker : MonoBehaviour {
 	public SkinColorManager mySkinner;
 	bool setFalse;
 
+    [Tooltip("X and Y are min and Max, Z is the Natural Offset to account for different base colors.")]
+    public Vector3 HueThreshold = new Vector3(0,.05f, 0);
+
     public void SetSource(int i)
     {      
         Owner = i;
@@ -55,6 +58,10 @@ public class SkinUnlocker : MonoBehaviour {
         for (int i = 0; i < ColoredSprites.Count; i++)
         {
             ColoredSprites[i].material = mySkinner.getSpriteMaterial();
+            ColoredSprites[i].material.SetFloat("_HSVRangeMin", HueThreshold.x);
+            ColoredSprites[i].material.SetFloat("_HSVRangeMax", HueThreshold.y);
+            float m = ColoredSprites[i].material.GetVector("_HSVAAdjust").x;
+            ColoredSprites[i].material.SetVector("_HSVAAdjust", new Vector4(m + HueThreshold.z, 0, 0, 0));
         }
     }
 

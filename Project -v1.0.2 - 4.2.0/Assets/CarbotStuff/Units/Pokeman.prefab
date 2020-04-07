@@ -965,6 +965,7 @@ MonoBehaviour:
   ColoredSprites:
   - {fileID: 2455967746065647192}
   mySkinner: {fileID: 0}
+  HueThreshold: {x: 0, y: 0.05}
 --- !u!114 &3161498567422194432
 MonoBehaviour:
   m_ObjectHideFlags: 0

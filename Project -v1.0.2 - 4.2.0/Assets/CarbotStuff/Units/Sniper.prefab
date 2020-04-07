@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 7082475749286840202}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 3, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 1}
+  m_LocalScale: {x: 6, y: 6, z: 1}
   m_Children: []
   m_Father: {fileID: 9125053377305282954}
   m_RootOrder: 0
@@ -656,6 +656,7 @@ GameObject:
   - component: {fileID: 9125053377235848832}
   - component: {fileID: 9125053377235848846}
   - component: {fileID: 9125053377235848845}
+  - component: {fileID: 6148881700119334805}
   m_Layer: 9
   m_Name: Sniper
   m_TagString: Enemy
@@ -1068,7 +1069,7 @@ MonoBehaviour:
   numOfAttacks: 1
   RepeatDelay: 0.06
   baseDamage: 35
-  range: 100
+  range: 80
   turret: {fileID: 0}
   firePoints: []
   damagePoint: 1
@@ -1082,6 +1083,24 @@ MonoBehaviour:
   attackArc: 100
   projectileSpeed: 100
   prioritizeFarAway: 1
+--- !u!114 &6148881700119334805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9125053377235848844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83e132145817800418281bc8ca6c37e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mySkins: []
+  ColoredSkins: []
+  ColoredSprites:
+  - {fileID: 8455116939954731814}
+  mySkinner: {fileID: 0}
+  HueThreshold: {x: 0, y: 0.05}
 --- !u!1 &9125053377264107926
 GameObject:
   m_ObjectHideFlags: 0

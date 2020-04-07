@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class ChampionAI : MonoBehaviour
 {
+    enum CurrentState { Dodging, MovingToAttack, Attacking, MovingToCast, Casting}
+    enum MetaStates { Normal, Shielded}
+
     [HideInInspector]
     public UnitManager myManager;
     UnitStats myStats;
@@ -38,6 +41,8 @@ public class ChampionAI : MonoBehaviour
         AbilityHeatMap.main.AddChampionListener(this);
     }
 
+    float NextSpellCastTime;
+    float[] LastSpellCastTime = new float[8];
     float nextUpdateTime;
     private void Update()
     {
@@ -53,38 +58,56 @@ public class ChampionAI : MonoBehaviour
             //Debug.Log("Checking " + currentTarget);
             if (currentTarget)
             {
+                if (Time.time > NextSpellCastTime)
+                {
+                    Ability ab = null;
+                    if (Random.value < .5f)
+                    {
+                        ab = GetDamageAbility();
+                    }
+                    else
+                    {
+                        ab = GetSummonAbility();
+                    }
+                    if (ab)
+                    {
+                        StopAllCoroutines();
+                        currentActionItem = StartCoroutine(CastSpell(currentTarget.transform.position, currentTarget.gameObject, myManager.abilityList.IndexOf(ab), ReactionTime));
+                        NextSpellCastTime = Time.time + Random.Range(2, 4);
+                        return;
+                    }
+        
+                }
+
+
+
                 if (myManager.myWeapon[0].inRange(currentTarget))
                 {
-                    Debug.Log("Attacking");
                     StopAllCoroutines();
-                    currentActionItem = StartCoroutine(AttackTarget(currentTarget, ReactionTime));
+                    //currentActionItem = StartCoroutine(AttackTarget(currentTarget, ReactionTime));
                     myManager.GiveOrder(Orders.CreateAttackOrder(currentTarget.gameObject));
                 }
                 else
-                {
-                    
+                {                   
                     Vector3 Direction = (currentTarget.transform.position - transform.position).normalized * 4;
                     Vector3 ToCheck = transform.position + Direction;
-
+                    // This causes the champion to jitter in their movement, need to fix
                     if (AbilityHeatMap.main.IsSafe(ToCheck, this))
                     {
-                        Debug.Log("Moving forward");
                         StopAllCoroutines();
                         currentActionItem = StartCoroutine(MoveToSpot(ToCheck, ReactionTime));
                         return;
                     }
-                    ToCheck = transform.position + Quaternion.Euler(0, 45, 0) * Direction;
+                    ToCheck = transform.position + Quaternion.Euler(0, 55, 0) * Direction;
                     if (AbilityHeatMap.main.IsSafe(ToCheck, this))
                     {
-                        Debug.Log("Moving 45");
                         StopAllCoroutines();
                         currentActionItem = StartCoroutine(MoveToSpot(ToCheck, ReactionTime));
                         return;
                     }
-                    ToCheck = transform.position + Quaternion.Euler(0, -45, 0) * Direction;
+                    ToCheck = transform.position + Quaternion.Euler(0, -55, 0) * Direction;
                     if (AbilityHeatMap.main.IsSafe(ToCheck, this))
                     {
-                        Debug.Log("Moving -45");
                         StopAllCoroutines();
                         currentActionItem = StartCoroutine(MoveToSpot(ToCheck, ReactionTime));
                         return;
@@ -93,6 +116,9 @@ public class ChampionAI : MonoBehaviour
             }
         } 
     }
+
+
+
 
     Vector3 AlterWithAccuracy(Vector3 TargetSpot, float leewayTime, out float TimeTaken)
     {
@@ -155,7 +181,6 @@ public class ChampionAI : MonoBehaviour
                     targetPriority = priorityScore;
                     Best = manag;
                 }
-
             }
         }
         return Best;
@@ -165,46 +190,99 @@ public class ChampionAI : MonoBehaviour
 
     public void InSafeZone()
     {
-        InDanger = false;
+        InDanger = 0;
     }
 
-    bool InDanger;
+    int InDanger;
     public void InDangerZone(List<AbilityHeatMap.DangerZone> MyZones)
     {
-        if (!InDanger) { 
-            InDanger = true;
-
-            //Debug.Log("NOw in danger zone");
-            for (float j = 4; j < 40; j += 4)
+        if (InDanger  != MyZones.Count)
+        {
+            InDanger = MyZones.Count;
+            if (InDanger > 0)
             {
-                for (float i = 0; i < 360; i += 36)
+                /*
+                //Debug.Log("NOw in danger zone");
+                for (float j = 4; j < 40; j += 4)
                 {
-                    Vector3 toCheck = transform.position + Quaternion.Euler(0, i, 0) * (Vector3.forward * j);
-                    if (AbilityHeatMap.main.IsSafe(MyZones, toCheck, this))
+                    for (float i = 0; i < 360; i += 36)
                     {
-                        Ability movementAb;
-                        bool CanRun = CanRunAway(toCheck, 10, Vector3.Distance(transform.position, toCheck), out movementAb);
-                        if (CanRun)
+                        Vector3 toCheck = transform.position + Quaternion.Euler(0, i, 0) * (Vector3.forward * j);
+                        if (AbilityHeatMap.main.IsSafe(MyZones, toCheck, this))
                         {
-                            if (movementAb)
+                            Ability movementAb;
+                            bool CanRun = CanRunAway(toCheck, 10, Vector3.Distance(transform.position, toCheck), out movementAb);
+                            if (CanRun)
                             {
-                                myManager.UseAbility(myManager.abilityList.IndexOf(movementAb), false);
+                                if (movementAb)
+                                {
+                                    myManager.UseAbility(myManager.abilityList.IndexOf(movementAb), false);
+                                }
+                                StopAllCoroutines();
+                                currentActionItem = StartCoroutine(MoveToSpot(toCheck, ReactionTime));
                             }
-                            StopAllCoroutines();
-                            currentActionItem = StartCoroutine(MoveToSpot(toCheck, ReactionTime));
+                            return;
                         }
-                        return;
+                    }
+                }     */
+
+                Ability Ab = CanBlock();
+                if (Ab != null)
+                {
+                    StopAllCoroutines();
+                    currentActionItem = StartCoroutine(CastSpell(transform.position, this.gameObject, myManager.abilityList.IndexOf(Ab), ReactionTime));
+                }
+                else
+                {
+                    Vector3 safeZone = FindSafePerpendicular(currentTarget);
+                    if (transform.position != safeZone)
+                    {
+                        StopAllCoroutines();
+                        currentActionItem = StartCoroutine(MoveToSpot(safeZone, ReactionTime));
                     }
                 }
             }
-            
         }
     }
 
-    public void ReactToLine(Vector3 OriginPoint, Vector3 EndPoint, float width, float TimeTilStrike)
-    {
 
+    public Vector3 FindSafePerpendicular(UnitManager target)
+    {
+        // Tries to find a safe perpendicular zone to run to, if not, it does concentric circles
+        Vector3 targetDirection = (target.transform.position - transform.position).normalized;
+        Vector3 PerpdicularDir = Quaternion.Euler(0, 90, 0) * targetDirection;
+        float MaxRunDistance = myManager.cMover.MaxSpeed * 1.5f;
+
+        for (float i = 4; i < MaxRunDistance; i++)
+        {
+            Vector3 RightPos = transform.position + PerpdicularDir * i;
+            if (AbilityHeatMap.main.IsSafe(RightPos, this))
+            {
+                return RightPos;
+            }
+            else
+            {
+                Vector3 LeftPos = transform.position - PerpdicularDir * i;
+                if (AbilityHeatMap.main.IsSafe(LeftPos, this))
+                {
+                    return LeftPos;
+                }
+            }
+        }
+        for (float j = 4; j < MaxRunDistance; j += 5)
+        {
+            for (float i = 0; i < 360; i += 45)
+            {
+                Vector3 toCheck = transform.position + Quaternion.Euler(0, i, 0) * (Vector3.forward * j);
+                if (AbilityHeatMap.main.IsSafe(toCheck, this))
+                {                                      
+                    return toCheck;
+                }
+            }
+        }
+        return transform.position;
     }
+
 
     public void SeeCircleWarningZone(Vector3 point, float TimeTilStrike, float radius)
     {
@@ -233,7 +311,7 @@ public class ChampionAI : MonoBehaviour
         Ability movementAb;
         bool CanRun = CanRunAway(ToRunTo, TimeTilStrike, distanceToRun, out movementAb);
 
-        Ability BlockAb = CanBlockOrEscape(ToRunTo, TimeTilStrike);
+        Ability BlockAb = CanBlock();
         if (BlockAb && Random.value > .5f)
         {
             Debug.Log("Casting escape ability");
@@ -249,7 +327,6 @@ public class ChampionAI : MonoBehaviour
                 }
                 StopAllCoroutines();
                 currentActionItem = StartCoroutine(MoveToSpot(ToRunTo, ReactionTime));
-
             }
         }
     }
@@ -278,14 +355,13 @@ public class ChampionAI : MonoBehaviour
         return false;  //Can't possibly run away
     }
 
-    Ability CanBlockOrEscape(Vector3 optimalMoveLocation, float TimeTilStrike)
+    Ability CanBlock()
     {
         foreach (Ability ab in myManager.abilityList)
         {
             if (ab.chargeCount > 0 || (ab.myCost && ab.myCost.canActivate(ab)))
             {
-                if (ab.metaData.AbilityUsage.Contains(AbilityMetaData.MetaAbilityType.Dash) ||
-                    ab.metaData.AbilityUsage.Contains(AbilityMetaData.MetaAbilityType.ReactiveDefense))
+                if (ab.metaData.AbilityUsage.Contains(AbilityMetaData.MetaAbilityType.ReactiveDefense))
                 {
                     return ab;
                 }
@@ -294,10 +370,45 @@ public class ChampionAI : MonoBehaviour
         return null;
     }
 
-    // ========================= GIVE ORDER
+    public Ability GetDamageAbility()
+    {
+        int index = 0;
+        foreach (Ability ab in myManager.abilityList)
+        {
+            if ((ab.chargeCount > 0 || (ab.myCost && ab.myCost.canActivate(ab))) && LastSpellCastTime[index] + 6 < Time.time  )
+            {
+                if (ab.metaData.AbilityUsage.Contains(AbilityMetaData.MetaAbilityType.OffensiveDamage))
+                {
+                    return ab;
+                }
+            }
+            index++;
+        }
+        return null;
+    }
+
+    public Ability GetSummonAbility()
+    {
+        int index = 0;
+        foreach (Ability ab in myManager.abilityList)
+        {
+            if ((ab.chargeCount > 0 || (ab.myCost && ab.myCost.canActivate(ab))) && LastSpellCastTime[index] + 6 < Time.time)
+            {
+                if (ab.metaData.AbilityUsage.Contains(AbilityMetaData.MetaAbilityType.Summon))
+                {
+                    return ab;
+                }
+            }
+            index++;
+        }
+        return null;
+    }
+
+    // ========================= GIVE ORDER ======================================================
 
     IEnumerator CastSpell(Vector3 location, GameObject target,int abilityIndex, float decisionTime)
     {
+        LastSpellCastTime[abilityIndex] = Time.time;
         yield return new WaitForSeconds(ReactionTime + decisionTime);
         if (myManager.abilityList[abilityIndex].canActivate(false).canCast)
         {

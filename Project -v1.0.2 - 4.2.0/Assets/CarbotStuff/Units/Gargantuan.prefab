@@ -1369,6 +1369,7 @@ MonoBehaviour:
   initialSpeed: 0
   myFogger: {fileID: 0}
   m_lockRotation: 0
+  myManager: {fileID: 0}
   repathRate: 1.5
   moveNextDist: 1
 --- !u!114 &3300769391594791426
@@ -1432,6 +1433,7 @@ MonoBehaviour:
   ColoredSprites:
   - {fileID: 2754690016058922916}
   mySkinner: {fileID: 0}
+  HueThreshold: {x: 0, y: 1, z: 0.2}
 --- !u!1 &3541520208146328328
 GameObject:
   m_ObjectHideFlags: 0
@@ -1459,7 +1461,7 @@ Transform:
   m_GameObject: {fileID: 3541520208146328328}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -1.5, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 6, y: 6, z: 2}
   m_Children: []
   m_Father: {fileID: 3300769391521621256}
   m_RootOrder: 0

@@ -111,7 +111,7 @@ public class AbilityFollowState  : UnitState {
 
             if (AbilityHeatMap.main)
             {
-                AbilityHeatMap.main.RemoveCircleArea(myAbility); // Need to add in projectile travel time if thats a thing.
+                AbilityHeatMap.main.RemoveArea(myAbility); // Need to add in projectile travel time if thats a thing.
             }
         }
 	}

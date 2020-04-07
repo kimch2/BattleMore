@@ -58,13 +58,16 @@ MonoBehaviour:
   chargeCount: -1
   soundEffect: {fileID: 0}
   myHitContainer: {fileID: 2591702982445747992}
+  metaData:
+    AbilityUsage: 06000000
   range: 200
   target: {fileID: 0}
   location: {x: 0, y: 0, z: 0}
   targetArea: {fileID: 21300000, guid: 9dead7b94ebdb144c83e28ac38bed79d, type: 3}
   areaSize: 15
   myTargetType: 0
-  CastFromScreenEdge: 0
+  CastFromScreenEdge: 1
+  ChannelTime: 0
   Explosion: {fileID: 2224551624543510114, guid: 775639c67397ab243a08f73417d9fa5e,
     type: 3}
   shotCount: 25
@@ -88,7 +91,7 @@ MonoBehaviour:
   resourceCosts:
     MyResources: []
   health: 0
-  energy: 2
+  energy: 0
   cooldown: 10
   cooldownTimer: 0
   StartsRefreshed: 1

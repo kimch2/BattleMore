@@ -129,6 +129,8 @@ MonoBehaviour:
   chargeCount: 9
   soundEffect: {fileID: 0}
   myHitContainer: {fileID: 7064385412111321642}
+  metaData:
+    AbilityUsage: 06000000
   range: 65
   target: {fileID: 0}
   location: {x: 0, y: 0, z: 0}
@@ -136,6 +138,7 @@ MonoBehaviour:
   areaSize: 10
   myTargetType: 2
   CastFromScreenEdge: 0
+  ChannelTime: 0
   SkillShotProjectile:
     NumOfShots: 1
     SpreadAngle: 1
@@ -161,7 +164,7 @@ MonoBehaviour:
   resourceCosts:
     MyResources: []
   health: 0
-  energy: 3
+  energy: 0
   cooldown: 2
   cooldownTimer: 0
   StartsRefreshed: 1

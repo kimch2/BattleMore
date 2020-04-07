@@ -70,6 +70,15 @@ public class DMLevelEditor : MonoBehaviour
             myCamera.transform.Translate(Vector3.right * Time.deltaTime * 45);
         }
 
+        if (Input.GetAxis("Mouse ScrollWheel") > 0f) // forward
+        {
+            SceneryScale.value += .04f;
+        }
+        else if (Input.GetAxis("Mouse ScrollWheel") < 0f) // backwards
+        {
+            SceneryScale.value -= .04f;
+        }
+
 
         if (!ToPlace)
         {

@@ -14,6 +14,7 @@ public class AbilityHeatMap: MonoBehaviour
     public GameObject circleAreaTemplate;
     public GameObject lineAreaTemplate;
 
+    public bool currentlySafe;
 
 
     private void Awake()
@@ -25,6 +26,11 @@ public class AbilityHeatMap: MonoBehaviour
     {
         foreach (ChampionAI ai in AIListeners)
         {
+            if (!ai)
+            {
+                continue;
+            }
+
             List<DangerZone> Zones = new List<DangerZone>();
             foreach (DangerZone zone in dangerZones)
             {
@@ -35,11 +41,12 @@ public class AbilityHeatMap: MonoBehaviour
             }
             if (Zones.Count > 0)
             {
-               // Debug.Log("In zones!");
+                currentlySafe = false;
                 ai.InDangerZone(Zones);
             }
             else
             {
+                currentlySafe = true;
                 ai.InSafeZone();
             }
         }
@@ -100,7 +107,7 @@ public class AbilityHeatMap: MonoBehaviour
         dangerZones.Add(data);
     }
 
-    public void RemoveCircleArea(Object Source)
+    public void RemoveArea(Object Source)
     {
         
         foreach (DangerZone data in dangerZones.FindAll(item => item.source == Source))
@@ -113,12 +120,19 @@ public class AbilityHeatMap: MonoBehaviour
     public void AddLine(Vector3 origin, Vector3 endPoint, float width, Object source, float LandTime, float priority)
     {
         GameObject icon = Instantiate<GameObject>(lineAreaTemplate);
-        icon.GetComponent<SpriteRenderer>().color = new Color(priority, 0, 0);
-        icon.transform.localScale = new Vector3(Vector3.Distance(origin, endPoint), width);
-        icon.transform.position = (origin + endPoint) /2;
+        icon.GetComponentInChildren<SpriteRenderer>().color = new Color(priority, 0, 0,.5f);
+        icon.transform.localScale = new Vector3(width,1, Vector3.Distance(origin, endPoint));
+        icon.transform.position = origin ;
+        icon.transform.LookAt(endPoint);
 
         LineData data = new LineData(origin, endPoint, width, source, LandTime, priority, icon);
         dangerZones.Add(data);
+    }
+
+    public void UpdateLine(Vector3 origin, Vector3 endPoint, Object Source)
+    {
+        DangerZone z = dangerZones.Find(item => item.source == Source);
+        ((LineData)z).update(origin, endPoint);
     }
 
 
@@ -157,11 +171,11 @@ public class AbilityHeatMap: MonoBehaviour
         public Vector3 StartPoint;
         public Vector3 EndPoint;
         public Vector3 TravelSpeed;
-        public float width;
+        public float HalfWidth;
 
         public LineData(Vector3 origin, Vector3 endPoint, float Width, Object source, float landTime, float priority, GameObject icon)
         {
-            width = Width;
+            HalfWidth = Width/2;
             StartPoint = origin;
             EndPoint = endPoint;
             this.source = source;
@@ -170,9 +184,19 @@ public class AbilityHeatMap: MonoBehaviour
             this.icon = icon;
         }
 
+        public void update(Vector3 newOrigin, Vector3 NewEnd)
+        {
+            StartPoint = newOrigin;
+            EndPoint = NewEnd;
+            icon.transform.position = newOrigin;
+            icon.transform.localScale = new Vector3(HalfWidth *2, 1, Vector3.Distance(StartPoint, EndPoint));
+            icon.transform.position = StartPoint;
+            icon.transform.LookAt(EndPoint);
+        }
+
         public override bool InDangerZone(Vector3 position, float unitRadius)
         {
-            return Vector3.Distance(ClosestPointOnLineSegment(position), position) + unitRadius < width;
+            return Vector3.Distance(ClosestPointOnLineSegment(position), position) - unitRadius < HalfWidth;
         }
 
         Vector3 ClosestPointOnLineSegment(Vector3 point)

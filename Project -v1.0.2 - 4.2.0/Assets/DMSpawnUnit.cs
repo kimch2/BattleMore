@@ -55,7 +55,7 @@ public class DMSpawnUnit : Ability
                     }
                     man.myStats.supply = 1;
                     DaminionsInitializer.main.AlterUnit(man);
-                    myManager.Initialize(myManager.PlayerOwner, true, man.getUnitStats().isUnitType(UnitTypes.UnitTypeTag.Structure));
+                    man.Initialize(myManager.PlayerOwner, true, man.getUnitStats().isUnitType(UnitTypes.UnitTypeTag.Structure));
                     if (man.cMover)
                     {
                         man.GiveOrder(Orders.CreateAttackMove(transform.position + Vector3.right * 75, true));

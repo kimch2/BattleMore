@@ -153,6 +153,10 @@ public class CustomRVO : IMover {
         controller.enableRotation = !LockIt;
     }
 
+    public void ExternalMove(Vector3 direction)
+    {
+
+    }
 
 	override 
 	public bool Move()

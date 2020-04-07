@@ -16,6 +16,7 @@ public class DMCollectionManager : MonoBehaviour
     public Transform SelectedRelicsArea;
     public int SceneNumber;
     public static GameObject ChosenHero;
+    public UnityEngine.UI.Toggle ControllableTog;
 
     public static List<GameObject> ChosenUnits = new List<GameObject>() { null,null,null,null};
     public static List<GameObject> ChosenAbilities = new List<GameObject>() { null, null };
@@ -43,6 +44,8 @@ public class DMCollectionManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
+
+        ControllableTog.isOn = PlayerPrefs.GetInt("ControlHero") == 1;
     }
 
     public static void AssignUnit(int i, GameObject choice)
@@ -233,6 +236,11 @@ public class DMCollectionManager : MonoBehaviour
     void UpdateUnitCards()
     {
 
+    }
+
+    public void SetHeroController(UnityEngine.UI.Toggle tog)
+    {
+        PlayerPrefs.SetInt("ControlHero", tog.isOn ? 1:0);
     }
 
 }

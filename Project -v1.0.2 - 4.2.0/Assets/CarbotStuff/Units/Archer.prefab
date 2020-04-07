@@ -584,14 +584,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2776605538619138500}
-  m_LocalRotation: {x: 0, y: 0.46174863, z: 0, w: 0.8870109}
-  m_LocalPosition: {x: 0, y: -1.64, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1842654200971220463}
   m_Father: {fileID: 2776605538683397678}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 55, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2776605538619138362
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1042,7 +1042,7 @@ MonoBehaviour:
   numOfAttacks: 1
   RepeatDelay: 0.06
   baseDamage: 20
-  range: 65
+  range: 55
   turret: {fileID: 0}
   firePoints: []
   damagePoint: 0.75
@@ -1073,6 +1073,7 @@ MonoBehaviour:
   ColoredSprites:
   - {fileID: 3277586690375914388}
   mySkinner: {fileID: 0}
+  HueThreshold: {x: 0, y: 0.05}
 --- !u!1 &2776605538742978971
 GameObject:
   m_ObjectHideFlags: 0
@@ -1398,8 +1399,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4206588133984939832}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.5, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 1}
+  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalScale: {x: 6, y: 6, z: 1}
   m_Children: []
   m_Father: {fileID: 2776605538619138360}
   m_RootOrder: 0

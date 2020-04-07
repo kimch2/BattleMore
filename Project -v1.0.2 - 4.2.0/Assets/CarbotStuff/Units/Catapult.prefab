@@ -1071,6 +1071,7 @@ MonoBehaviour:
   ColoredSprites:
   - {fileID: 5029432177833463524}
   mySkinner: {fileID: 0}
+  HueThreshold: {x: 0, y: 0.05}
 --- !u!1 &5636270701913781332
 GameObject:
   m_ObjectHideFlags: 0
@@ -1465,7 +1466,7 @@ Transform:
   m_GameObject: {fileID: 5967480403106394696}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 3.5, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 1}
+  m_LocalScale: {x: 6, y: 6, z: 1}
   m_Children: []
   m_Father: {fileID: 5636270701939784776}
   m_RootOrder: 0

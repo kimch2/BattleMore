@@ -114,7 +114,7 @@ public class OverTimeApplier : VisionTrigger
         }
         if (AbilityHeatMap.main && AppliesToEnemies)
         {
-            AbilityHeatMap.main.RemoveCircleArea(this);
+            AbilityHeatMap.main.RemoveArea(this);
         }
 
         Destroy(this.gameObject);

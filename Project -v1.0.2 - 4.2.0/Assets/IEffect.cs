@@ -22,10 +22,19 @@ public abstract class IEffect : MonoBehaviour{
     public abstract void applyTo(GameObject source, UnitManager target);
     public abstract void BeginEffect(); // this gets called on the copied components
 
-    protected void Start()
+    protected void Awake()
     {
         if (onTarget)
         {
+            if (!OnTargetManager)
+            {
+                OnTargetManager = GetComponent<UnitManager>();
+            }
+            if (!OnTargetManager)
+            {
+                OnTargetManager = GetComponentInParent<UnitManager>();
+            }
+
             BeginEffect();
            // ApplyFX();
         }

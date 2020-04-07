@@ -284,10 +284,8 @@ public class Page  {
             {
                 if (rts.abilityList[X] is TargetAbility)
                     {
-
-                    TargetAbility ab = ((TargetAbility)rts.abilityList[X]);
-                        ab.DisableSkillShotIndicator();
-                        
+                        TargetAbility ab = ((TargetAbility)rts.abilityList[X]);
+                        ab.DisableSkillShotIndicator();                        
                     }                
             }
             catch (System.Exception e)

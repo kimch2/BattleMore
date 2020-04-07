@@ -50,7 +50,7 @@ MonoBehaviour:
   resourceCosts:
     MyResources: []
   health: 0
-  energy: 3
+  energy: 0
   cooldown: 5
   cooldownTimer: 0
   StartsRefreshed: 1
@@ -80,6 +80,8 @@ MonoBehaviour:
   chargeCount: 3
   soundEffect: {fileID: 0}
   myHitContainer: {fileID: 6893765881297706002}
+  metaData:
+    AbilityUsage: 
   range: 200
   target: {fileID: 0}
   location: {x: 0, y: 0, z: 0}
@@ -87,6 +89,7 @@ MonoBehaviour:
   areaSize: 30
   myTargetType: 0
   CastFromScreenEdge: 0
+  ChannelTime: 0
   ObjectToSpawn: {fileID: 3778431271380070427, guid: 71c58067a0c64c84f8418d2d66c1e003,
     type: 3}
   TagType: 6
@@ -233,7 +236,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toApply: []
-  OnKill:
+  OnKillGeneric:
+    m_PersistentCalls:
+      m_Calls: []
+  onKillWithTarget:
     m_PersistentCalls:
       m_Calls: []
   myManager: {fileID: 0}
@@ -253,6 +259,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 550c744d482bf4b44836df6193654658, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EffectName: NameMe!
   onTarget: 0
   VisualEffects:
   - FXObject: {fileID: 2150544201110466808, guid: 02c9304216cdc614cb67305577364964,
@@ -264,5 +271,4 @@ MonoBehaviour:
     Flat: 2
   Stacks: 0
   Duration: 0
-  ApplyOnStart: 0
   Decays: 0

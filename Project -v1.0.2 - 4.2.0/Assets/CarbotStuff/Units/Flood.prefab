@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 2520269404402678590}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 1}
+  m_LocalScale: {x: 6, y: 6, z: 1}
   m_Children: []
   m_Father: {fileID: 4472490268510778686}
   m_RootOrder: 0
@@ -1407,6 +1407,7 @@ MonoBehaviour:
   initialSpeed: 0
   myFogger: {fileID: 0}
   m_lockRotation: 0
+  myManager: {fileID: 0}
   repathRate: 1.5
   moveNextDist: 1
 --- !u!114 &4472490268572283444
@@ -1513,7 +1514,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toApply: []
-  OnKill:
+  OnKillGeneric:
+    m_PersistentCalls:
+      m_Calls: []
+  onKillWithTarget:
     m_PersistentCalls:
       m_Calls: []
   myManager: {fileID: 4472490268572283439}

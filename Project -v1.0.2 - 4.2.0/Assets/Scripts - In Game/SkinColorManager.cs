@@ -83,6 +83,7 @@ public class SkinColorManager : MonoBehaviour
 
     public Material getSpriteMaterial()
     {
+
         return alteredSpriteMaterial;
     }
 
