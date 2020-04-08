@@ -1,0 +1,8 @@
+1-12 idle
+13-28 attack
+29-56 death
+57-60 casket phase (loop)
+61-72 revive
+73-82 stunned
+83-84 victory
+85-92 casket death

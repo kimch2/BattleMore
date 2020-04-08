@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2520269404402678590}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 2, z: 0}
   m_LocalScale: {x: 6, y: 6, z: 1}
   m_Children: []
   m_Father: {fileID: 4472490268510778686}
@@ -70,8 +70,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 3286163911610860551, guid: be18aaf816f57d84bb365fda578b5729,
-    type: 3}
+  m_Sprite: {fileID: 21300000, guid: 83da299a5c061ba4dbf8c3481558568d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1153,15 +1152,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UnitDescription: Water the breaks into smaller waters.
   isHero: 0
-  Maxhealth: 200
-  health: 200
+  Maxhealth: 100
+  health: 100
   HealthRegenPerSec: 0
   HealthRegenPerHalf: 0
   MaxEnergy: 0
   currentEnergy: 0
   EnergyRegenPerSec: 0
   EnergyRegenPerHalf: 0
-  Icon: {fileID: 21300000, guid: 5e386784bf235c0499b1e0e3906e0e08, type: 3}
+  Icon: {fileID: 21300000, guid: 83da299a5c061ba4dbf8c3481558568d, type: 3}
   supply: 2
   attackPriority: 3
   DefensePriority: 0
@@ -1203,7 +1202,7 @@ MonoBehaviour:
   deathCorpse: {fileID: 1926782534260316677, guid: 655e420cd8a967d42802237342da9263,
     type: 3}
   deathEffect: {fileID: 0}
-  UnitPortrait: {fileID: 21300000, guid: 5e386784bf235c0499b1e0e3906e0e08, type: 3}
+  UnitPortrait: {fileID: 21300000, guid: 83da299a5c061ba4dbf8c3481558568d, type: 3}
   goodBuffs: []
   badBuffs: []
 --- !u!114 &4472490268572283442
@@ -1280,8 +1279,8 @@ MonoBehaviour:
   baseAttackPeriod: 0
   numOfAttacks: 1
   RepeatDelay: 0.06
-  baseDamage: 4
-  range: 40
+  baseDamage: 8
+  range: 10
   turret: {fileID: 0}
   firePoints:
   - position: {x: -0.2, y: 4.61, z: 0.31}

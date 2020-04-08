@@ -159,7 +159,7 @@ public class DaminionsInitializer : MonoBehaviour
                 }
             }
             
-            map = JsonUtility.FromJson<DaminionMap>(System.IO.File.ReadAllText("Assets/" + fileName + ".dmm"));
+            map = JsonUtility.FromJson<DaminionMap>(System.IO.File.ReadAllText(Application.dataPath + "/" + fileName + ".dmm"));
             CarbotCamera.singleton.RightSide = CarbotCamera.singleton.LeftSide + Vector3.right * map.MapLength;
             VictoryZone.transform.position = CarbotCamera.singleton.RightSide;
 

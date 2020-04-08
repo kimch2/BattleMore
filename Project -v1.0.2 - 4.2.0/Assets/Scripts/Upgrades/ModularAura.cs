@@ -87,19 +87,12 @@ public class ModularAura : IEffect
 
     public void ApplyBuff(UnitManager manager, float percentage) // percenetage being used when an effect decays over time
     {
-        if (!manager)
-        {
-            Debug.Log("No manager");
-        }
-        if (!manager.myStats)
-        {
-            Debug.Log("No Stats");
-        }
-        if (manager.myStats.statChanger == null)
-        {
-            Debug.Log("No statchanger");
-        }
 
+        bool friendly =true;
+        if (SourceManager && SourceManager.PlayerOwner != manager.PlayerOwner)
+        {
+            friendly = false;
+        }
         foreach (AuraNumber buff in myBuffs)
         {
             float flat = buff.Flat * percentage;
@@ -107,47 +100,49 @@ public class ModularAura : IEffect
             switch (buff.buffType)
             {
                 case StatChanger.BuffType.Armor:
-                    manager.myStats.statChanger.changeArmor(perc,flat, this, SourceManager.PlayerOwner == manager.PlayerOwner,  Stacks);
+                    manager.myStats.statChanger.changeArmor(perc,flat, this, friendly,  Stacks);
                     break;
 
                 case StatChanger.BuffType.AttackSpeed:
-                    manager.myStats.statChanger.changeAttackSpeed(perc, flat, this, SourceManager.PlayerOwner == manager.PlayerOwner, Stacks);
+                    manager.myStats.statChanger.changeAttackSpeed(perc, flat, this, friendly, Stacks);
                     break;
 
                 case StatChanger.BuffType.Damage:
-                    manager.myStats.statChanger.changeWeaponDamage(perc, flat, this, SourceManager.PlayerOwner == manager.PlayerOwner, Stacks);
+                    Debug.Log("Adding damage " + flat);
+                    manager.myStats.statChanger.changeWeaponDamage(perc, flat, this, friendly, Stacks);
+                    Debug.Log("After damage " + manager.myWeapon[0].baseDamage + "  " + manager.myWeapon[0].Title);
                     break;
 
                 case StatChanger.BuffType.Energy:
-                    manager.myStats.statChanger.changeEnergyMax(perc, flat, this, SourceManager.PlayerOwner == manager.PlayerOwner, Stacks);
+                    manager.myStats.statChanger.changeEnergyMax(perc, flat, this, friendly, Stacks);
                     break;
 
                 case StatChanger.BuffType.EnergyRegen:
-                    manager.myStats.statChanger.changeEnergyRegen(perc, flat, this, SourceManager.PlayerOwner == manager.PlayerOwner, Stacks);
+                    manager.myStats.statChanger.changeEnergyRegen(perc, flat, this, friendly, Stacks);
                     break;
 
                 case StatChanger.BuffType.HP:
-                    manager.myStats.statChanger.changeHealthMax(perc, flat, this, SourceManager.PlayerOwner == manager.PlayerOwner, Stacks);
+                    manager.myStats.statChanger.changeHealthMax(perc, flat, this, friendly, Stacks);
                     break;
 
                 case StatChanger.BuffType.HPRegen:
-                    manager.myStats.statChanger.changeHealthRegen(perc, flat, this, SourceManager.PlayerOwner == manager.PlayerOwner, Stacks);
+                    manager.myStats.statChanger.changeHealthRegen(perc, flat, this, friendly, Stacks);
                     break;
 
                 case StatChanger.BuffType.MoveSpeed:
-                    manager.myStats.statChanger.changeMoveSpeed(perc, flat, this, SourceManager.PlayerOwner == manager.PlayerOwner, Stacks);
+                    manager.myStats.statChanger.changeMoveSpeed(perc, flat, this, friendly, Stacks);
                     break;
 
                 case StatChanger.BuffType.Cooldown:
-                    manager.myStats.statChanger.changeCooldown(perc, flat, this, SourceManager.PlayerOwner == manager.PlayerOwner, Stacks);
+                    manager.myStats.statChanger.changeCooldown(perc, flat, this, friendly, Stacks);
                     break;
 
                 case StatChanger.BuffType.Range:
-                    manager.myStats.statChanger.changeWeaponRange(perc, flat, this, SourceManager.PlayerOwner == manager.PlayerOwner, Stacks);
+                    manager.myStats.statChanger.changeWeaponRange(perc, flat, this, friendly, Stacks);
                     break;
 
                 case StatChanger.BuffType.Priority: // TAUNT - Should this go through the Meta-status class???
-                    manager.myStats.statChanger.changeAttackPriority(perc, flat, this, SourceManager.PlayerOwner == manager.PlayerOwner, Stacks);
+                    manager.myStats.statChanger.changeAttackPriority(perc, flat, this, friendly, Stacks);
                     break;
             }
         }
@@ -169,6 +164,7 @@ public class ModularAura : IEffect
                     break;
 
                 case StatChanger.BuffType.Damage:
+                    Debug.Log("removing damage");
                     manager.myStats.statChanger.removeWeaponDamage(this);
                     break;
 

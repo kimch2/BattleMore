@@ -116,8 +116,10 @@ public class StatChanger
 			}
 			else
 			{
+
 				weap.baseDamage = number.ApplyBuffs(weap.getInitialDamage());
-			}
+                Debug.Log("Applying " + weap.Title + "  " + weap.baseDamage);
+            }
 		}
 	}
 

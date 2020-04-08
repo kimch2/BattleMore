@@ -65,7 +65,7 @@ public class DMLevelEditor : MonoBehaviour
         {
             myCamera.transform.Translate(Vector3.left * Time.deltaTime * 45);
         }
-        else if (Input.mousePosition.x > Screen.width - 1 && myCamera.transform.position.x < LeftBound.position.x + mapData.MapLength)
+        else if (Input.mousePosition.x > Screen.width - 5 && myCamera.transform.position.x < LeftBound.position.x + mapData.MapLength)
         {
             myCamera.transform.Translate(Vector3.right * Time.deltaTime * 45);
         }
@@ -273,8 +273,8 @@ public class DMLevelEditor : MonoBehaviour
     public void LoadFile()
     {
         ClearMap();
-
-        string inputJson = System.IO.File.ReadAllText("Assets/"+SaveName.text + ".dmm");
+        string inputJson = System.IO.File.ReadAllText(Application.dataPath + "/" + SaveName.text + ".dmm");
+        //string inputJson = System.IO.File.ReadAllText("Assets/"+SaveName.text + ".dmm");
         mapData = JsonUtility.FromJson<DaminionMap>(inputJson);
 
         foreach (UnitData data in mapData.Units)
@@ -308,7 +308,9 @@ public class DMLevelEditor : MonoBehaviour
             //Debug.Log("Saving");
             string jsonString = JsonUtility.ToJson(mapData);
             string name = SaveName.text;
-            System.IO.File.WriteAllText("Assets/" +name + ".dmm", jsonString);
+            //System.IO.File.WriteAllText("Assets/" +name + ".dmm", jsonString);
+            //Debug.Log("Save File path: " + Application.dataPath);
+            System.IO.File.WriteAllText(Application.dataPath + "/"+ name + ".dmm", jsonString);
             updateInputField();
         }
     }
@@ -320,6 +322,7 @@ public class DMLevelEditor : MonoBehaviour
             Destroy(obj);
         }
         LoadSceneButtons.Clear();
+       // Debug.Log("Update File path: " + Application.dataPath);
         foreach (string file in System.IO.Directory.GetFiles(Application.dataPath,"*.dmm"))
         {
             
@@ -334,7 +337,8 @@ public class DMLevelEditor : MonoBehaviour
 
     public void DeleteFile()
     {
-       System.IO.File.Delete(Application.dataPath + "/" + SaveName.text + ".dmm");
+        //Debug.Log("Update File path: " + Application.dataPath);
+        System.IO.File.Delete(Application.dataPath + "/" + SaveName.text + ".dmm");
 #if UNITY_EDITOR
         UnityEditor.AssetDatabase.Refresh();
 #endif

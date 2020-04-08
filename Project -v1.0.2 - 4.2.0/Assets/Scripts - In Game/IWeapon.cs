@@ -257,12 +257,12 @@ public class IWeapon : MonoBehaviour {
         myManager.metaStatus.UnRoot(this); // WIll this break with things with turrets??? (instead of having a coroutine that unroots it)
 	}
 
-	public void attack(UnitManager target, UnitManager toStun)
+	public void attack(UnitManager target, UnitManager toRoot)
 	{
 		offCooldown = false;
         
-		if (toStun && damagePoint > 0) {
-			toStun.metaStatus.Root(toStun, this, true, damagePoint);
+		if (toRoot && damagePoint > 0) {
+            toRoot.metaStatus.Root(toRoot, this, true, damagePoint);
 		}
 		for (int i = 0; i < numOfAttacks; i++) {
 			StartCoroutine( Fire ((i * RepeatDelay + AttackDelay), target));
@@ -305,16 +305,14 @@ public class IWeapon : MonoBehaviour {
 			if (originIndex ==firePoints.Count) {
 				originIndex = 0;}
 
-
-
 			if (target == null) {
 				myManager.cleanEnemy ();
 			}
 
-			if (attackSoundEffect && audioSrc) {
-				
+			if (attackSoundEffect && audioSrc)
+            {				
 				audioSrc.pitch = ((float)Random.Range (7, 12) / 10);
-					SoundManager.PlayOneShotSound(audioSrc, attackSoundEffect);
+				SoundManager.PlayOneShotSound(audioSrc, attackSoundEffect);
 			}
 
 			if (OnHitEffect) {

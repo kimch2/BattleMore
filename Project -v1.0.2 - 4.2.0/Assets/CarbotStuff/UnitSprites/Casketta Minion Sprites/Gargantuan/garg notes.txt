@@ -1,4 +1,0 @@
-1 move
-13 attack
-29 death
-52 pieces

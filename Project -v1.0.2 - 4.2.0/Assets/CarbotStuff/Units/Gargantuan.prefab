@@ -1232,25 +1232,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b66c07a6a0ae214c8b6ef5cb2d7e8f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Title: Bow n Arrow
+  Title: Smacky Hands
   myIcon: {fileID: 21300000, guid: 26b59e5a237653d4b83214f0ea586275, type: 3}
   myManager: {fileID: 3300769391594791449}
   OnHitEffect: {fileID: 0}
   attackSoundEffect: {fileID: 8300000, guid: 72de2a353cacc46d3aad1d65f2599d2a, type: 3}
   myAnimator: {fileID: 0}
   AnimationName: Attack
-  attackPeriod: 2
+  attackPeriod: 3
   baseAttackPeriod: 0
-  numOfAttacks: 1
-  RepeatDelay: 0.06
-  baseDamage: 40
-  range: 10
+  numOfAttacks: 2
+  RepeatDelay: 0.5
+  baseDamage: 20
+  range: 9
   turret: {fileID: 0}
   firePoints:
   - position: {x: -0.2, y: 4.61, z: 0.31}
     myParticle: {fileID: 0}
   damagePoint: 0.2
-  AttackDelay: 0.35
+  AttackDelay: 0.33
   myHitContainer: {fileID: 3935153736685980787}
   cantAttackTypes: 0a000000
   extraDamage: []
@@ -1460,7 +1460,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3541520208146328328}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.5, z: 0}
+  m_LocalPosition: {x: 0, y: 5, z: 0}
   m_LocalScale: {x: 6, y: 6, z: 2}
   m_Children: []
   m_Father: {fileID: 3300769391521621256}
@@ -1504,8 +1504,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 3286163911610860551, guid: c98b06d959c392c41bb2b79582074543,
-    type: 3}
+  m_Sprite: {fileID: 21300000, guid: c71a0252e3502a84485d0ddc152ca9ac, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

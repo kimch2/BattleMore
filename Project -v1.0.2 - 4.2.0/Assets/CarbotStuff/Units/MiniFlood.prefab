@@ -82,7 +82,7 @@ Transform:
   m_GameObject: {fileID: 665097860386701910}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -0.477, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 1572415300563225686}
   m_RootOrder: 0
@@ -125,13 +125,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 3286163911610860551, guid: be18aaf816f57d84bb365fda578b5729,
-    type: 3}
+  m_Sprite: {fileID: 21300000, guid: 83da299a5c061ba4dbf8c3481558568d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2.3689446, y: 2.5415626}
+  m_Size: {x: 2.65, y: 2.55}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -299,10 +298,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dece396e027e0343a65824dadc28c78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UnitDescription: Water the breaks into smaller waters.
+  UnitDescription: Smaller Flood
   isHero: 0
-  Maxhealth: 100
-  health: 100
+  Maxhealth: 50
+  health: 50
   HealthRegenPerSec: 0
   HealthRegenPerHalf: 0
   MaxEnergy: 0
@@ -428,8 +427,8 @@ MonoBehaviour:
   baseAttackPeriod: 0
   numOfAttacks: 1
   RepeatDelay: 0.06
-  baseDamage: 2
-  range: 20
+  baseDamage: 4
+  range: 8
   turret: {fileID: 0}
   firePoints:
   - position: {x: -0.2, y: 4.61, z: 0.31}
@@ -646,7 +645,7 @@ Transform:
   m_GameObject: {fileID: 1572415300563225770}
   m_LocalRotation: {x: -0, y: -0.46088174, z: -0, w: -0.8874616}
   m_LocalPosition: {x: 0, y: 0.39, z: 0}
-  m_LocalScale: {x: 3.5, y: 3.5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3082792420890785921}
   m_Father: {fileID: 1572415300491037504}
